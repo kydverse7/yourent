@@ -1,0 +1,28 @@
+// Barrel export — tous les modèles Mongoose
+export { Vehicle } from './Vehicle';
+export { Client } from './Client';
+export { Reservation } from './Reservation';
+export { Location } from './Location';
+export { Payment } from './Payment';
+export { EtatDesLieux } from './EtatDesLieux';
+export { Maintenance } from './Maintenance';
+export { Expense } from './Expense';
+export { User } from './User';
+export { Agence } from './Agence';
+export { AuditLog } from './AuditLog';
+export { DocumentSequence } from './DocumentSequence';
+export { Notification } from './Notification';
+
+export type { IVehicle } from './Vehicle';
+export type { IClient } from './Client';
+export type { IReservation } from './Reservation';
+export type { ILocation } from './Location';
+export type { IPayment } from './Payment';
+export type { IEtatDesLieux } from './EtatDesLieux';
+export type { IMaintenance } from './Maintenance';
+export type { IExpense } from './Expense';
+export type { IUser } from './User';
+export type { IAgence } from './Agence';
+export type { IAuditLog } from './AuditLog';
+export type { IDocumentSequence } from './DocumentSequence';
+export type { INotification } from './Notification';

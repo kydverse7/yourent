@@ -38,4 +38,17 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# temp images/assets at root (not in public/)
+/*.glb
+/*.webp
+/*.jpg
+/*.jpeg
+/*.png
+
+# build logs & temp scripts
+build_log.txt
+analyse-yourent-ma.md
+fix-hero.cjs
+refactor.js
 next-env.d.ts
