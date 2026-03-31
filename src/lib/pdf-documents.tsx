@@ -82,19 +82,24 @@ export type InvoicePdfData = {
   paiementModeLabel?: string;
 };
 
+export type FreeVehicleEntry = {
+  label: string;
+  immatriculation?: string;
+  carburant?: string;
+  boite?: string;
+  nbJours: number;
+  tarifJour: number;
+  debutAt?: Date;
+  finAt?: Date;
+};
+
 export type FreeDocumentPdfData = {
   title: string;
   reference: string;
   createdAt: Date;
   agency: AgencyData;
   client: ClientData;
-  vehicle: VehicleData;
-  period: {
-    debutAt?: Date;
-    finAt?: Date;
-  };
-  nbJours: number;
-  tarifJour: number;
+  vehicles: FreeVehicleEntry[];
   lines: FinanceLine[];
   totalMontant: number;
   remise?: number;
@@ -440,22 +445,26 @@ export function FreeDocumentPdfDocument({ data }: { data: FreeDocumentPdfData })
             {data.client.documentLabel && <Text style={styles.bodyText}>{data.client.documentLabel}</Text>}
           </View>
           <View style={styles.card}>
-            <Text style={styles.sectionTitle}>Véhicule</Text>
-            <Text style={styles.bodyText}>{data.vehicle.label}</Text>
-            <Text style={styles.bodyText}>Immatriculation: {data.vehicle.immatriculation || '—'}</Text>
-            <Text style={styles.bodyText}>Carburant: {data.vehicle.carburant || '—'}</Text>
-            <Text style={styles.bodyText}>Boîte: {data.vehicle.boite || '—'}</Text>
+            <Text style={styles.sectionTitle}>{data.vehicles.length > 1 ? 'Véhicules' : 'Véhicule'}</Text>
+            {data.vehicles.map((v, i) => (
+              <View key={String(i)}>
+                <Text style={styles.bodyText}>{v.label}{v.immatriculation ? ` — ${v.immatriculation}` : ''}</Text>
+              </View>
+            ))}
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Période de location</Text>
-          <View style={styles.card}>
-            <View style={styles.row}><Text style={styles.rowLabel}>Début</Text><Text style={styles.rowValue}>{formatDateValue(data.period.debutAt)}</Text></View>
-            <View style={styles.row}><Text style={styles.rowLabel}>Fin</Text><Text style={styles.rowValue}>{formatDateValue(data.period.finAt)}</Text></View>
-            <View style={styles.row}><Text style={styles.rowLabel}>Durée</Text><Text style={styles.rowValue}>{data.nbJours} jour{data.nbJours > 1 ? 's' : ''}</Text></View>
-            <View style={styles.row}><Text style={styles.rowLabel}>Tarif journalier</Text><Text style={styles.rowValue}>{formatCurrencyValue(data.tarifJour, devise)}</Text></View>
-          </View>
+          <Text style={styles.sectionTitle}>{data.vehicles.length > 1 ? 'Véhicules & Périodes' : 'Période de location'}</Text>
+          {data.vehicles.map((v, i) => (
+            <View key={String(i)} style={{ ...styles.card, marginBottom: data.vehicles.length > 1 ? 6 : 0 }}>
+              {data.vehicles.length > 1 && <Text style={{ ...styles.bodyText, fontFamily: 'Helvetica-Bold', marginBottom: 4 }}>{v.label}</Text>}
+              <View style={styles.row}><Text style={styles.rowLabel}>Début</Text><Text style={styles.rowValue}>{formatDateValue(v.debutAt)}</Text></View>
+              <View style={styles.row}><Text style={styles.rowLabel}>Fin</Text><Text style={styles.rowValue}>{formatDateValue(v.finAt)}</Text></View>
+              <View style={styles.row}><Text style={styles.rowLabel}>Durée</Text><Text style={styles.rowValue}>{v.nbJours} jour{v.nbJours > 1 ? 's' : ''}</Text></View>
+              <View style={styles.row}><Text style={styles.rowLabel}>Tarif journalier</Text><Text style={styles.rowValue}>{formatCurrencyValue(v.tarifJour, devise)}</Text></View>
+            </View>
+          ))}
         </View>
 
         <View style={styles.section}>

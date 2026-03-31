@@ -35,25 +35,28 @@ type OptionLine = {
   prix: number;
 };
 
-type FormData = {
-  documentType: 'facture' | 'devis';
-  clientId: string;
+type VehicleEntry = {
   vehicleId: string;
   debutAt: string;
   finAt: string;
   tarifJour: number;
+};
+
+type FormData = {
+  documentType: 'facture' | 'devis';
+  clientId: string;
+  vehicles: VehicleEntry[];
   options: OptionLine[];
   remise: number;
   notes: string;
 };
 
+const emptyVehicleEntry: VehicleEntry = { vehicleId: '', debutAt: '', finAt: '', tarifJour: 0 };
+
 const defaultForm: FormData = {
   documentType: 'facture',
   clientId: '',
-  vehicleId: '',
-  debutAt: '',
-  finAt: '',
-  tarifJour: 0,
+  vehicles: [{ ...emptyVehicleEntry }],
   options: [],
   remise: 0,
   notes: '',
@@ -95,28 +98,50 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
   const vehicles = vehiclesData ?? [];
 
   const selectedClient = clients.find((c) => c._id === form.clientId);
-  const selectedVehicle = vehicles.find((v) => v._id === form.vehicleId);
 
-  const nbJours = useMemo(() => {
-    if (!form.debutAt || !form.finAt) return 0;
-    const d1 = new Date(form.debutAt);
-    const d2 = new Date(form.finAt);
-    return Math.max(1, Math.ceil((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24)));
-  }, [form.debutAt, form.finAt]);
+  const vehicleNbJours = useMemo(() => {
+    return form.vehicles.map((entry) => {
+      if (!entry.debutAt || !entry.finAt) return 0;
+      const d1 = new Date(entry.debutAt);
+      const d2 = new Date(entry.finAt);
+      return Math.max(1, Math.ceil((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24)));
+    });
+  }, [form.vehicles]);
 
   const totals = useMemo(() => {
-    const locationBase = form.tarifJour * nbJours;
+    let locationTotal = 0;
+    for (let i = 0; i < form.vehicles.length; i++) {
+      locationTotal += form.vehicles[i].tarifJour * vehicleNbJours[i];
+    }
     const optionsTotal = form.options.reduce((sum, o) => sum + Number(o.prix || 0), 0);
-    const brut = locationBase + optionsTotal;
+    const brut = locationTotal + optionsTotal;
     const net = Math.max(0, brut - form.remise);
-    return { locationBase, optionsTotal, brut, net };
-  }, [form.tarifJour, nbJours, form.options, form.remise]);
+    return { locationTotal, optionsTotal, brut, net };
+  }, [form.vehicles, vehicleNbJours, form.options, form.remise]);
 
-  const handleVehicleChange = useCallback((vehicleId: string) => {
+  const updateVehicleEntry = useCallback((index: number, field: keyof VehicleEntry, value: string | number) => {
+    setForm((prev) => ({
+      ...prev,
+      vehicles: prev.vehicles.map((entry, i) => (i === index ? { ...entry, [field]: value } : entry)),
+    }));
+  }, []);
+
+  const handleVehicleSelect = useCallback((index: number, vehicleId: string) => {
     const vehicle = vehicles.find((v) => v._id === vehicleId);
     const tarif = Number(vehicle?.tarifParJour ?? vehicle?.tarifJour ?? 0);
-    setForm((prev) => ({ ...prev, vehicleId, tarifJour: tarif }));
+    setForm((prev) => ({
+      ...prev,
+      vehicles: prev.vehicles.map((entry, i) => (i === index ? { ...entry, vehicleId, tarifJour: tarif } : entry)),
+    }));
   }, [vehicles]);
+
+  const addVehicleEntry = useCallback(() => {
+    setForm((prev) => ({ ...prev, vehicles: [...prev.vehicles, { ...emptyVehicleEntry }] }));
+  }, []);
+
+  const removeVehicleEntry = useCallback((index: number) => {
+    setForm((prev) => ({ ...prev, vehicles: prev.vehicles.filter((_, i) => i !== index) }));
+  }, []);
 
   const addOption = useCallback(() => {
     setForm((prev) => ({ ...prev, options: [...prev.options, { nom: '', prix: 0 }] }));
@@ -139,10 +164,17 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...form,
-          tarifJour: Number(form.tarifJour),
+          documentType: form.documentType,
+          clientId: form.clientId,
+          vehicles: form.vehicles.map((v) => ({
+            vehicleId: v.vehicleId,
+            debutAt: v.debutAt,
+            finAt: v.finAt,
+            tarifJour: Number(v.tarifJour),
+          })),
           remise: Number(form.remise),
           options: form.options.filter((o) => o.nom.trim()).map((o) => ({ nom: o.nom, prix: Number(o.prix) })),
+          notes: form.notes || undefined,
         }),
       });
       const payload = await res.json();
@@ -163,7 +195,7 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
     onClose();
   };
 
-  const canSubmit = form.clientId && form.vehicleId && form.debutAt && form.finAt && form.tarifJour > 0 && nbJours > 0;
+  const canSubmit = form.clientId && form.vehicles.length > 0 && form.vehicles.every((v, i) => v.vehicleId && v.debutAt && v.finAt && v.tarifJour > 0 && vehicleNbJours[i] > 0);
 
   if (!open) return null;
 
@@ -211,87 +243,110 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
             </div>
           </div>
 
-          {/* Client & Véhicule */}
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <Select
-                label="Client"
-                value={form.clientId}
-                onChange={(e) => setForm((prev) => ({ ...prev, clientId: e.target.value }))}
-              >
-                <option value="">Choisir un client</option>
-                {clients.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.prenom ? `${c.prenom} ${c.nom}` : c.nom} {c.telephone ? `· ${c.telephone}` : ''}
-                  </option>
-                ))}
-              </Select>
-              {selectedClient && (
-                <div className="mt-2 flex items-center gap-2 text-xs text-cream-muted">
-                  <User className="h-3.5 w-3.5 text-gold" />
-                  <span>{selectedClient.prenom ? `${selectedClient.prenom} ${selectedClient.nom}` : selectedClient.nom}</span>
-                  {selectedClient.type && <Badge variant="muted">{selectedClient.type}</Badge>}
-                </div>
-              )}
-            </div>
-
-            <div>
-              <Select
-                label="Véhicule"
-                value={form.vehicleId}
-                onChange={(e) => handleVehicleChange(e.target.value)}
-              >
-                <option value="">Choisir un véhicule</option>
-                {vehicles.map((v) => (
-                  <option key={v._id} value={v._id}>
-                    {v.marque} {v.modele} — {v.immatriculation}
-                  </option>
-                ))}
-              </Select>
-              {selectedVehicle && (
-                <div className="mt-2 flex items-center gap-2 text-xs text-cream-muted">
-                  <Car className="h-3.5 w-3.5 text-gold" />
-                  <span>{selectedVehicle.marque} {selectedVehicle.modele}</span>
-                  {selectedVehicle.categorie && <Badge variant="muted">{selectedVehicle.categorie}</Badge>}
-                </div>
-              )}
-            </div>
+          {/* Client */}
+          <div>
+            <Select
+              label="Client"
+              value={form.clientId}
+              onChange={(e) => setForm((prev) => ({ ...prev, clientId: e.target.value }))}
+            >
+              <option value="">Choisir un client</option>
+              {clients.map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.prenom ? `${c.prenom} ${c.nom}` : c.nom} {c.telephone ? `· ${c.telephone}` : ''}
+                </option>
+              ))}
+            </Select>
+            {selectedClient && (
+              <div className="mt-2 flex items-center gap-2 text-xs text-cream-muted">
+                <User className="h-3.5 w-3.5 text-gold" />
+                <span>{selectedClient.prenom ? `${selectedClient.prenom} ${selectedClient.nom}` : selectedClient.nom}</span>
+                {selectedClient.type && <Badge variant="muted">{selectedClient.type}</Badge>}
+              </div>
+            )}
           </div>
 
-          {/* Dates & Tarif */}
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Input
-              type="date"
-              label="Date début"
-              value={form.debutAt}
-              onChange={(e) => setForm((prev) => ({ ...prev, debutAt: e.target.value }))}
-              leftIcon={<Calendar className="h-4 w-4" />}
-            />
-            <Input
-              type="date"
-              label="Date fin"
-              value={form.finAt}
-              min={form.debutAt || undefined}
-              onChange={(e) => setForm((prev) => ({ ...prev, finAt: e.target.value }))}
-              leftIcon={<Calendar className="h-4 w-4" />}
-            />
-            <Input
-              type="number"
-              label="Tarif / jour (MAD)"
-              value={form.tarifJour || ''}
-              min={0}
-              onChange={(e) => setForm((prev) => ({ ...prev, tarifJour: Number(e.target.value) }))}
-            />
-          </div>
-
-          {nbJours > 0 && (
-            <div className="rounded-2xl border border-gold/10 bg-gold/5 px-4 py-3 text-sm text-cream">
-              <span className="font-semibold text-gold">{nbJours}</span> jour{nbJours > 1 ? 's' : ''} de location
-              {form.tarifJour > 0 && (
-                <> · base: <span className="font-semibold text-gold">{formatCurrency(totals.locationBase)}</span></>
-              )}
+          {/* Véhicules */}
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-cream-muted">
+                Véhicule{form.vehicles.length > 1 ? 's' : ''}
+              </p>
+              <Button variant="ghost" size="sm" onClick={addVehicleEntry}>
+                <Plus className="h-3.5 w-3.5" /> Ajouter un véhicule
+              </Button>
             </div>
-          )}
+            <div className="space-y-4">
+              {form.vehicles.map((entry, vi) => {
+                const selectedVehicle = vehicles.find((v) => v._id === entry.vehicleId);
+                const nj = vehicleNbJours[vi];
+                return (
+                  <div key={vi} className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-cream-muted">
+                        <Car className="h-3.5 w-3.5 text-gold" />
+                        Véhicule {form.vehicles.length > 1 ? vi + 1 : ''}
+                      </div>
+                      {form.vehicles.length > 1 && (
+                        <Button variant="ghost" size="icon" onClick={() => removeVehicleEntry(vi)} className="shrink-0 text-red-400 hover:text-red-300 h-7 w-7">
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
+                    </div>
+                    <Select
+                      value={entry.vehicleId}
+                      onChange={(e) => handleVehicleSelect(vi, e.target.value)}
+                    >
+                      <option value="">Choisir un véhicule</option>
+                      {vehicles.map((v) => (
+                        <option key={v._id} value={v._id}>
+                          {v.marque} {v.modele} — {v.immatriculation}
+                        </option>
+                      ))}
+                    </Select>
+                    {selectedVehicle && (
+                      <div className="flex items-center gap-2 text-xs text-cream-muted">
+                        <span>{selectedVehicle.marque} {selectedVehicle.modele}</span>
+                        {selectedVehicle.categorie && <Badge variant="muted">{selectedVehicle.categorie}</Badge>}
+                      </div>
+                    )}
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <Input
+                        type="date"
+                        label="Date début"
+                        value={entry.debutAt}
+                        onChange={(e) => updateVehicleEntry(vi, 'debutAt', e.target.value)}
+                        leftIcon={<Calendar className="h-4 w-4" />}
+                      />
+                      <Input
+                        type="date"
+                        label="Date fin"
+                        value={entry.finAt}
+                        min={entry.debutAt || undefined}
+                        onChange={(e) => updateVehicleEntry(vi, 'finAt', e.target.value)}
+                        leftIcon={<Calendar className="h-4 w-4" />}
+                      />
+                      <Input
+                        type="number"
+                        label="Tarif / jour (MAD)"
+                        value={entry.tarifJour || ''}
+                        min={0}
+                        onChange={(e) => updateVehicleEntry(vi, 'tarifJour', Number(e.target.value))}
+                      />
+                    </div>
+                    {nj > 0 && (
+                      <div className="rounded-xl border border-gold/10 bg-gold/5 px-3 py-2 text-xs text-cream">
+                        <span className="font-semibold text-gold">{nj}</span> jour{nj > 1 ? 's' : ''}
+                        {entry.tarifJour > 0 && (
+                          <> · <span className="font-semibold text-gold">{formatCurrency(entry.tarifJour * nj)}</span></>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           {/* Options supplémentaires */}
           <div>
@@ -353,10 +408,17 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
             <div className="rounded-2xl border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent p-5">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-gold">Récapitulatif</p>
               <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between text-cream-muted">
-                  <span>Location ({nbJours}j × {formatCurrency(form.tarifJour)})</span>
-                  <span className="text-cream">{formatCurrency(totals.locationBase)}</span>
-                </div>
+                {form.vehicles.map((entry, vi) => {
+                  const veh = vehicles.find((v) => v._id === entry.vehicleId);
+                  const nj = vehicleNbJours[vi];
+                  const label = veh ? `${veh.marque} ${veh.modele}` : 'Véhicule';
+                  return (
+                    <div key={vi} className="flex justify-between text-cream-muted">
+                      <span>Location {label} ({nj}j × {formatCurrency(entry.tarifJour)})</span>
+                      <span className="text-cream">{formatCurrency(entry.tarifJour * nj)}</span>
+                    </div>
+                  );
+                })}
                 {form.options.filter((o) => o.nom.trim() && o.prix > 0).map((opt, i) => (
                   <div key={i} className="flex justify-between text-cream-muted">
                     <span>Option · {opt.nom}</span>

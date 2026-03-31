@@ -118,7 +118,7 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
       totalMontant: Number(reservation.prix?.totalEstime ?? 0),
       tarifJour: Number(reservation.prix?.parJour ?? 0),
       options: [
-        { label: 'Location', montant: Number(reservation.prix?.totalEstime ?? 0) - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
+        { label: `Location ${buildVehicleData(reservation.vehicle).label}`, montant: Number(reservation.prix?.totalEstime ?? 0) - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
         ...(reservation.optionsSupplementaires ?? []).map((item: any) => ({
           label: `Option · ${item.nom}`,
           montant: Number(item.prix ?? 0),
@@ -215,8 +215,11 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
     const totalMontant = Number(reservation.prix?.totalEstime ?? 0);
     const paiementDominant = payments[0]?.type;
 
+    const vehicleLabel = `${reservation.vehicle?.marque ?? ''} ${reservation.vehicle?.modele ?? ''}`.trim();
+    const nbJoursRes = Math.max(1, Math.ceil((new Date(reservation.finAt).getTime() - new Date(reservation.debutAt).getTime()) / (1000 * 60 * 60 * 24)));
+
     const lines = [
-      { label: 'Location', montant: totalMontant - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
+      { label: `Location ${vehicleLabel} (${nbJoursRes} jour${nbJoursRes > 1 ? 's' : ''})`, montant: totalMontant - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
       ...(reservation.optionsSupplementaires ?? []).map((item: any) => ({ label: `Option · ${item.nom}`, montant: Number(item.prix ?? 0) })),
       ...(reservation.prix?.remise ? [{ label: 'Remise commerciale', montant: -Math.abs(Number(reservation.prix.remise)) }] : []),
     ].filter((item) => item.montant !== 0);
@@ -263,8 +266,13 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
   const montantPaye = payments.reduce((sum, item) => sum + Number(item.montant ?? 0), 0);
   const totalMontant = Number(location.montantTotal ?? 0);
   const paiementDominant = payments[0]?.type;
+
+  const vehicleLabelLoc = `${location.vehicle?.marque ?? ''} ${location.vehicle?.modele ?? ''}`.trim();
+  const finDateLoc = location.finReelleAt ?? location.finPrevueAt;
+  const nbJoursLoc = finDateLoc && location.debutAt ? Math.max(1, Math.ceil((new Date(finDateLoc).getTime() - new Date(location.debutAt).getTime()) / (1000 * 60 * 60 * 24))) : 0;
+
   const lines = [
-    { label: 'Location', montant: totalMontant - ((reservation?.optionsSupplementaires ?? []) as any[]).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
+    { label: `Location ${vehicleLabelLoc}${nbJoursLoc > 0 ? ` (${nbJoursLoc} jour${nbJoursLoc > 1 ? 's' : ''})` : ''}`, montant: totalMontant - ((reservation?.optionsSupplementaires ?? []) as any[]).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
     ...(((reservation?.optionsSupplementaires ?? []) as any[]).map((item) => ({ label: `Option · ${item.nom}`, montant: Number(item.prix ?? 0) }))),
     ...(location.fraisKmSupp ? [{ label: 'Frais kilométriques', montant: Number(location.fraisKmSupp) }] : []),
   ].filter((item) => item.montant !== 0);
