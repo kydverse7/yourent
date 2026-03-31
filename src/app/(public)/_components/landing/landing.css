@@ -823,13 +823,17 @@
 .eco-name-links {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.25rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.eco-name-links::-webkit-scrollbar { display: none; }
 
 @media (min-width: 640px) {
-  .eco-name-links { gap: 0.5rem; }
+  .eco-name-links { gap: 0.5rem; justify-content: center; }
 }
 
 .eco-name-link {
@@ -843,6 +847,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 640px) {

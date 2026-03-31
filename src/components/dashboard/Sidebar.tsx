@@ -20,7 +20,6 @@ import {
   ChevronRight,
   LogOut,
   Settings,
-  Sparkles,
   X,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
@@ -118,20 +117,6 @@ export default function Sidebar({ userRole = 'agent' }: SidebarProps) {
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
           </button>
         </div>
-
-        {!collapsed && (
-          <div className="px-4 pt-5">
-            <div className="lux-panel-muted flex items-start gap-3 p-3">
-              <div className="rounded-2xl border border-gold/20 bg-gold/10 p-2 text-gold">
-                <Sparkles className="h-4 w-4" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-cream">Cockpit agence</p>
-                <p className="text-xs text-cream-faint">Pilotage chic, rapide et ultra lisible.</p>
-              </div>
-            </div>
-          </div>
-        )}
 
         <nav className="flex-1 space-y-1 overflow-y-auto overflow-x-hidden px-3 py-5">
           {filteredItems.map((item) => {

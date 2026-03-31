@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
-import { resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { getVehicleDisplayPrice, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
 import { ChevronLeft, Sparkles } from 'lucide-react';
 import { VehicleModelView } from './_components/VehicleModelView';
 
@@ -47,7 +47,14 @@ async function getModelVariants(modelSlug: string) {
       featuredPhoto: v.backgroundPhoto ?? v.photoModele ?? v.photos?.[0] ?? null,
       tarifJour: pricing.tarifJour,
       tarifJour10Plus: pricing.tarifJour10Plus,
+      displayTarifJour: getVehicleDisplayPrice(v),
     };
+  }).sort((a, b) => {
+    if (a.displayTarifJour !== b.displayTarifJour) {
+      return a.displayTarifJour - b.displayTarifJour;
+    }
+
+    return a.tarifJour - b.tarifJour;
   });
 }
 
@@ -57,7 +64,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!variants || variants.length === 0) return { title: '404' };
 
   const { marque, modele } = variants[0];
-  const minTarif = Math.min(...variants.map((v) => v.tarifJour));
+  const displayPrices = variants.map((v) => v.displayTarifJour).filter((price) => price > 0);
+  const minTarif = displayPrices.length > 0 ? Math.min(...displayPrices) : 0;
   const count = variants.length;
 
   return {
@@ -81,6 +89,8 @@ export default async function VehicleModelPage({ params }: Props) {
   if (!variants || variants.length === 0) notFound();
 
   const { marque, modele, categorie, carburant, transmission, places } = variants[0];
+  const displayPrices = variants.map((variant) => variant.displayTarifJour).filter((price) => price > 0);
+  const modelMinTarif = displayPrices.length > 0 ? Math.min(...displayPrices) : 0;
 
   return (
     <div className="lux-container py-8 md:py-10">
@@ -102,6 +112,7 @@ export default async function VehicleModelPage({ params }: Props) {
       <VehicleModelView
         variants={variants}
         modelSlug={slug}
+        modelMinTarif={modelMinTarif}
         marque={marque}
         modele={modele}
         categorie={categorie}

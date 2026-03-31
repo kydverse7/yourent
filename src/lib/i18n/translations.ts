@@ -1,4 +1,4 @@
-export type Locale = 'fr' | 'en';
+export type Locale = 'fr' | 'en' | 'ar';
 
 const fr: Record<string, string> = {
   /* ── Nav / Layout ────────────────────────── */
@@ -20,6 +20,48 @@ const fr: Record<string, string> = {
   /* ── Hero ─────────────────────────────────── */
   'hero.badge': 'Minimum 3 jours',
   'hero.cta': 'Explorer le catalogue',
+  'hero.delivery': 'Livraison aéroport & Casablanca',
+  'hero.cars': 'Voitures',
+  'hero.available': 'disponibles',
+  'hero.subline': 'Location de voitures de luxe à Casablanca',
+  'hero.pageTitle': 'Location de voitures à Casablanca — Yourent, agence de location auto au Maroc',
+
+  /* ── Brand Slider ─────────────────────────── */
+  'brand.eyebrow': 'notre flotte de luxe',
+  'brand.book': 'Réserver',
+  'brand.comingSoon': 'Collection à venir.',
+
+  /* ── Contact ──────────────────────────────── */
+  'contact.eyebrow': 'Casablanca, Maroc',
+  'contact.title': 'Agence location voitures',
+  'contact.titleGold': 'Casablanca',
+  'contact.subtitle': 'Notre agence au cœur de Casablanca vous accueille pour une expérience sur-mesure — du choix du véhicule à la remise des clés.',
+  'contact.imgAlt': 'Vue aérienne de Casablanca, Maroc — Yourent location de voitures',
+  'contact.followUs': 'Suivez-nous',
+  'contact.directions': 'Itinéraire',
+  'contact.address': 'Adresse',
+  'contact.phone': 'Téléphone',
+  'contact.email': 'Email',
+  'contact.hours': 'Horaires',
+  'contact.hoursValue': 'Lun – Dim · 8h – 22h',
+  'contact.hoursSub': '7j/7 — Livraison 24h',
+  'contact.addressSub': '20100 Casablanca, Maroc',
+  'contact.statVehicles': 'Véhicules',
+  'contact.statClients': 'Clients satisfaits',
+  'contact.statGoogle': 'Avis Google',
+  'contact.mapName': 'Yourent Casablanca',
+
+  /* ── Aria Labels ──────────────────────────── */
+  'aria.menuOpen': 'Ouvrir le menu',
+  'aria.menuClose': 'Fermer le menu',
+  'aria.whatsapp': 'Contacter via WhatsApp',
+  'aria.langSelect': 'Choisir la langue',
+  'aria.footerNav': 'Liens du pied de page',
+  'aria.mainNav': 'Navigation principale',
+  'aria.ecoNav': 'Sélection rapide de véhicule',
+  'aria.prevVehicle': 'Véhicule précédent',
+  'aria.nextVehicle': 'Véhicule suivant',
+  'aria.goToVehicle': 'Aller au véhicule',
 
   /* ── Signature ────────────────────────────── */
   'signature.eyebrow': 'Notre collection berline à louer',
@@ -41,9 +83,9 @@ const fr: Record<string, string> = {
     "Livraison incluse dans tout Casablanca et à l\u2019aéroport Mohammed\u00a0V.",
   'why.delivery.stat': '0 DH',
   'why.delivery.label': 'frais de livraison',
-  'why.insurance.title': 'Assurance tous risques',
+  'why.insurance.title': 'Assurance franchise tout risque',
   'why.insurance.desc':
-    'Tous nos véhicules sont couverts par une assurance complète tous risques.',
+    'Tous nos véhicules sont couverts par une assurance franchise tout risque.',
   'why.insurance.stat': '%',
   'why.insurance.label': 'de couverture',
   'why.fleet.title': 'Flotte récente',
@@ -92,9 +134,9 @@ const fr: Record<string, string> = {
   'faq.q3': 'Quelle est la durée minimum de location ?',
   'faq.a3':
     "La durée minimum est de 3\u00a0jours. Pour les locations longue durée (11\u00a0jours et plus), vous bénéficiez automatiquement d\u2019un tarif préférentiel.",
-  'faq.q4': 'Comment fonctionne la caution ?',
+  'faq.q4': 'Comment fonctionne le dépôt de garantie ?',
   'faq.a4':
-    "Une caution est demandée au départ, par chèque ou espèces, dont le montant varie selon le véhicule. Elle est intégralement restituée au retour du véhicule en bon état.",
+    "Un dépôt de garantie est demandé au départ, par chèque ou espèces, dont le montant varie selon le véhicule. Il est intégralement restitué au retour du véhicule en bon état.",
   'faq.q5': "Que se passe-t-il en cas de panne ou d\u2019accident ?",
   'faq.a5':
     "Tous nos véhicules sont assurés tous risques. En cas de panne, notre assistance 24h/7j vous envoie un remplacement dans les plus brefs délais. En cas d\u2019accident, notre équipe vous accompagne dans toutes les démarches.",
@@ -131,6 +173,43 @@ const fr: Record<string, string> = {
   'cat.loading': 'Chargement…',
   'cat.retry': 'Réessayer',
   'cat.places': 'places',
+
+  /* ── Model Detail ──────────────────────────── */
+  'model.variants': '{count} véhicule{s} disponible{s} — choisissez le vôtre',
+  'model.eyebrow': 'Sélection signature',
+  'model.places': 'places',
+  'model.priceFrom': 'Tarif à partir de',
+  'model.perDay': '/jour',
+  'model.minDuration': 'Location minimale : 3 jours',
+  'model.service': 'Standard service',
+  'model.serviceDesc': 'Assistance et préparation premium',
+  'model.longDuration': 'Tarif avantageux appliqué automatiquement au-delà de 10 jours.',
+  'model.reservation': 'Demande de réservation',
+  'model.contactMsg': 'Nous vous recontactons rapidement avec validation, disponibilité finale et modalités de départ.',
+
+  /* ── Reservation Form ─────────────────────── */
+  'form.startDate': 'Date de début *',
+  'form.endDate': 'Date de fin *',
+  'form.days': 'jour{s}',
+  'form.estimate': 'Estimation',
+  'form.exDeposit': '(hors dépôt de garantie)',
+  'form.longRate': 'Tarif longue durée appliqué automatiquement.',
+  'form.minDays': 'La location minimale est de {count} jours.',
+  'form.firstName': 'Prénom *',
+  'form.lastName': 'Nom *',
+  'form.phone': 'Téléphone *',
+  'form.email': 'Email',
+  'form.emailOptional': 'optionnel',
+  'form.notes': 'Notes / Demandes spéciales',
+  'form.notesPlaceholder': 'Informations complémentaires...',
+  'form.submit': 'Envoyer ma demande de réservation',
+  'form.submitting': 'Envoi en cours...',
+  'form.required': 'Veuillez remplir tous les champs obligatoires',
+  'form.minDaysError': 'La durée minimale est de {count} jours',
+  'form.success': 'Demande envoyée ! Nous vous contacterons dans les plus brefs délais.',
+  'form.error': 'Erreur lors de la réservation',
+  'form.networkError': 'Erreur réseau. Réessayez dans quelques instants.',
+  'form.confirm': 'Notre équipe vous contactera pour confirmer votre réservation.',
 };
 
 const en: Record<string, string> = {
@@ -153,6 +232,48 @@ const en: Record<string, string> = {
   /* ── Hero ─────────────────────────────────── */
   'hero.badge': 'Minimum 3 days',
   'hero.cta': 'Explore our fleet',
+  'hero.delivery': 'Airport & Casablanca delivery',
+  'hero.cars': 'Cars',
+  'hero.available': 'available',
+  'hero.subline': 'Luxury car rental in Casablanca',
+  'hero.pageTitle': 'Car rental in Casablanca — Yourent, car hire agency in Morocco',
+
+  /* ── Brand Slider ─────────────────────────── */
+  'brand.eyebrow': 'our luxury fleet',
+  'brand.book': 'Book now',
+  'brand.comingSoon': 'Coming soon.',
+
+  /* ── Contact ──────────────────────────────── */
+  'contact.eyebrow': 'Casablanca, Morocco',
+  'contact.title': 'Car rental agency',
+  'contact.titleGold': 'Casablanca',
+  'contact.subtitle': 'Our agency in the heart of Casablanca welcomes you for a tailor-made experience — from choosing the vehicle to handing over the keys.',
+  'contact.imgAlt': 'Aerial view of Casablanca, Morocco — Yourent car rental',
+  'contact.followUs': 'Follow us',
+  'contact.directions': 'Directions',
+  'contact.address': 'Address',
+  'contact.phone': 'Phone',
+  'contact.email': 'Email',
+  'contact.hours': 'Hours',
+  'contact.hoursValue': 'Mon – Sun · 8am – 10pm',
+  'contact.hoursSub': '7 days a week — 24h delivery',
+  'contact.addressSub': '20100 Casablanca, Morocco',
+  'contact.statVehicles': 'Vehicles',
+  'contact.statClients': 'Happy clients',
+  'contact.statGoogle': 'Google Reviews',
+  'contact.mapName': 'Yourent Casablanca',
+
+  /* ── Aria Labels ──────────────────────────── */
+  'aria.menuOpen': 'Open menu',
+  'aria.menuClose': 'Close menu',
+  'aria.whatsapp': 'Contact via WhatsApp',
+  'aria.langSelect': 'Select language',
+  'aria.footerNav': 'Footer links',
+  'aria.mainNav': 'Main navigation',
+  'aria.ecoNav': 'Quick vehicle selection',
+  'aria.prevVehicle': 'Previous vehicle',
+  'aria.nextVehicle': 'Next vehicle',
+  'aria.goToVehicle': 'Go to vehicle',
 
   /* ── Signature ────────────────────────────── */
   'signature.eyebrow': 'Our premium sedan collection',
@@ -264,9 +385,258 @@ const en: Record<string, string> = {
   'cat.loading': 'Loading…',
   'cat.retry': 'Retry',
   'cat.places': 'seats',
+
+  /* ── Model Detail ──────────────────────────── */
+  'model.variants': '{count} vehicle{s} available — choose yours',
+  'model.eyebrow': 'Signature selection',
+  'model.places': 'seats',
+  'model.priceFrom': 'Starting from',
+  'model.perDay': '/day',
+  'model.minDuration': 'Minimum rental: 3 days',
+  'model.service': 'Standard service',
+  'model.serviceDesc': 'Assistance and premium preparation',
+  'model.longDuration': 'Preferential rate applied automatically beyond 10 days.',
+  'model.reservation': 'Reservation request',
+  'model.contactMsg': 'We will get back to you shortly with confirmation, final availability and pick-up details.',
+
+  /* ── Reservation Form ─────────────────────── */
+  'form.startDate': 'Start date *',
+  'form.endDate': 'End date *',
+  'form.days': 'day{s}',
+  'form.estimate': 'Estimate',
+  'form.exDeposit': '(exc. deposit)',
+  'form.longRate': 'Long-term rate applied automatically.',
+  'form.minDays': 'Minimum rental is {count} days.',
+  'form.firstName': 'First name *',
+  'form.lastName': 'Last name *',
+  'form.phone': 'Phone *',
+  'form.email': 'Email',
+  'form.emailOptional': 'optional',
+  'form.notes': 'Notes / Special requests',
+  'form.notesPlaceholder': 'Additional information...',
+  'form.submit': 'Send reservation request',
+  'form.submitting': 'Sending...',
+  'form.required': 'Please fill in all required fields',
+  'form.minDaysError': 'Minimum duration is {count} days',
+  'form.success': 'Request sent! We will contact you shortly.',
+  'form.error': 'Error during reservation',
+  'form.networkError': 'Network error. Please try again later.',
+  'form.confirm': 'Our team will contact you to confirm your reservation.',
 };
 
-export const translations: Record<Locale, Record<string, string>> = { fr, en };
+const ar: Record<string, string> = {
+  /* ── Nav / Layout ────────────────────────── */
+  'nav.home': 'الرئيسية',
+  'nav.catalogue': 'تأجير السيارات',
+  'nav.contact': 'اتصل بنا',
+  'nav.agency': 'فضاء الوكالة',
+  'nav.concierge': 'خدمة الكونسيرج 7/7',
+  'nav.book': 'احجز الآن',
+
+  /* ── Footer ─────────────────────────────── */
+  'footer.desc':
+    'وكالة تأجير سيارات في الدار البيضاء، المغرب. سيارات سيدان، SUV، فاخرة واقتصادية — توصيل لمطار محمد الخامس، حجز عبر الإنترنت 7/7.',
+  'footer.catalogue': 'كتالوج السيارات',
+  'footer.contact': 'تواصل معنا',
+  'footer.seo':
+    'تأجير سيارات الدار البيضاء · تأجير سيارات المغرب · تأجير SUV الدار البيضاء · تأجير سيدان الدار البيضاء · تأجير سيارات فاخرة المغرب · Rent car Casablanca · تأجير سيارات مطار محمد الخامس · يورنت الدار البيضاء',
+
+  /* ── Hero ─────────────────────────────────── */
+  'hero.badge': '3 أيام كحد أدنى',
+  'hero.cta': 'تصفح الكتالوج',
+  'hero.delivery': 'التوصيل للمطار والدار البيضاء',
+  'hero.cars': 'سيارة',
+  'hero.available': 'متاحة',
+  'hero.subline': 'تأجير سيارات فاخرة في الدار البيضاء',
+  'hero.pageTitle': 'تأجير سيارات في الدار البيضاء — يورنت، وكالة تأجير سيارات في المغرب',
+
+  /* ── Brand Slider ─────────────────────────── */
+  'brand.eyebrow': 'أسطولنا الفاخر',
+  'brand.book': 'احجز',
+  'brand.comingSoon': 'قريبًا.',
+
+  /* ── Contact ──────────────────────────────── */
+  'contact.eyebrow': 'الدار البيضاء، المغرب',
+  'contact.title': 'وكالة تأجير سيارات',
+  'contact.titleGold': 'الدار البيضاء',
+  'contact.subtitle': 'وكالتنا في قلب الدار البيضاء ترحب بكم لتجربة مخصصة — من اختيار السيارة إلى تسليم المفاتيح.',
+  'contact.imgAlt': 'منظر جوي للدار البيضاء، المغرب — يورنت لتأجير السيارات',
+  'contact.followUs': 'تابعونا',
+  'contact.directions': 'الاتجاهات',
+  'contact.address': 'العنوان',
+  'contact.phone': 'الهاتف',
+  'contact.email': 'البريد الإلكتروني',
+  'contact.hours': 'أوقات العمل',
+  'contact.hoursValue': 'الاثنين – الأحد · 8ص – 10م',
+  'contact.hoursSub': '7/7 — توصيل 24 ساعة',
+  'contact.addressSub': '20100 الدار البيضاء، المغرب',
+  'contact.statVehicles': 'سيارة',
+  'contact.statClients': 'عملاء راضون',
+  'contact.statGoogle': 'تقييمات Google',
+  'contact.mapName': 'يورنت الدار البيضاء',
+
+  /* ── Aria Labels ──────────────────────────── */
+  'aria.menuOpen': 'فتح القائمة',
+  'aria.menuClose': 'إغلاق القائمة',
+  'aria.whatsapp': 'تواصل عبر واتساب',
+  'aria.langSelect': 'اختيار اللغة',
+  'aria.footerNav': 'روابط التذييل',
+  'aria.mainNav': 'التنقل الرئيسي',
+  'aria.ecoNav': 'اختيار سريع للسيارة',
+  'aria.prevVehicle': 'السيارة السابقة',
+  'aria.nextVehicle': 'السيارة التالية',
+  'aria.goToVehicle': 'انتقل إلى السيارة',
+
+  /* ── Signature ────────────────────────────── */
+  'signature.eyebrow': 'مجموعتنا من السيدان للتأجير',
+  'signature.title': 'تأجير سيارات سيدان فاخرة في الدار البيضاء',
+  'signature.subtitle':
+    'تشكيلة فاخرة مختارة للوصول المميز، والإقامات الراقية، والمناسبات التي تستحق التميز.',
+  'signature.cta': 'عرض الكتالوج الكامل',
+  'signature.book': 'احجز',
+  'signature.from': 'ابتداءً من',
+  'signature.perDay': '/ يوم',
+
+  /* ── Why YouRent ──────────────────────────── */
+  'why.eyebrow': 'لماذا يورنت',
+  'why.title': 'التميّز في خدمة تنقّلاتك',
+  'why.subtitle':
+    'كل تفصيل مصمم ليجعل تأجيرك بسيطًا وفاخرًا وبدون أي ضغوط.',
+  'why.delivery.title': 'توصيل مجاني',
+  'why.delivery.desc':
+    'التوصيل مشمول في جميع أنحاء الدار البيضاء وإلى مطار محمد\u00a0الخامس.',
+  'why.delivery.stat': '0 DH',
+  'why.delivery.label': 'رسوم التوصيل',
+  'why.insurance.title': 'تأمين شامل بدون تحمل',
+  'why.insurance.desc':
+    'جميع سياراتنا مغطاة بتأمين شامل بدون تحمل.',
+  'why.insurance.stat': '%',
+  'why.insurance.label': 'تغطية',
+  'why.fleet.title': 'أسطول حديث',
+  'why.fleet.desc':
+    'يتم تجديد أسطولنا بانتظام لراحتك وسلامتك.',
+  'why.fleet.stat': '+',
+  'why.fleet.label': 'سيارة',
+  'why.assistance.title': 'مساعدة 24/7',
+  'why.assistance.desc':
+    'فريقنا متاح ليلًا ونهارًا لمرافقتك.',
+  'why.assistance.stat': '24/7',
+  'why.assistance.label': 'التوفر',
+
+  /* ── Economic ─────────────────────────────── */
+  'eco.eyebrow': 'سيارات اقتصادية للتأجير',
+  'eco.title': 'تأجير سيارات بأسعار مناسبة في الدار البيضاء',
+  'eco.subtitle':
+    'فعّالة ومتينة ومُعتنى بها تمامًا — تشكيلتنا الاقتصادية توصلك لأي مكان، بدون تنازل.',
+  'eco.cta': 'عرض أسطولنا',
+  'eco.book': 'احجز الآن',
+
+  /* ── Process ──────────────────────────────── */
+  'process.eyebrow': 'احجز سيارتك عبر الإنترنت',
+  'process.title': 'استأجر في 3 خطوات، التوصيل مشمول',
+  'process.s1.title': 'اختر من الكتالوج',
+  'process.s1.body':
+    'تصفح تشكيلتنا من السيارات الفاخرة المتوفرة في الدار البيضاء.',
+  'process.s2.title': 'اطلب سيارتك عبر الإنترنت',
+  'process.s2.body':
+    'احجز ببضع نقرات، ثم يؤكد فريقنا معك التوفر والتفاصيل.',
+  'process.s3.title': 'استلم السيارة',
+  'process.s3.body':
+    'التوصيل لفندقك أو المطار أو عنوانك المفضل. 7\u00a0أيام في الأسبوع.',
+
+  /* ── FAQ ──────────────────────────────────── */
+  'faq.eyebrow': 'أسئلة شائعة',
+  'faq.title': 'كل ما تحتاج معرفته قبل الحجز',
+  'faq.subtitle':
+    'إجابات على الأسئلة الأكثر شيوعًا من عملائنا في الدار البيضاء.',
+  'faq.q1': 'ما هي الوثائق المطلوبة لتأجير سيارة؟',
+  'faq.a1':
+    'تحتاج فقط إلى هوية سارية المفعول (بطاقة وطنية أو جواز سفر)، ورخصة قيادة لأكثر من سنتين، وإثبات عنوان. بالنسبة للسياح الأجانب، تُقبل رخصة القيادة الدولية.',
+  'faq.q2': 'هل توصيل السيارة مشمول في السعر؟',
+  'faq.a2':
+    'نعم، التوصيل مشمول في جميع أنحاء الدار البيضاء. كما نوفر التوصيل إلى مطار محمد\u00a0الخامس والمحمدية مقابل رسوم إضافية بسيطة.',
+  'faq.q3': 'ما هي المدة الدنيا للتأجير؟',
+  'faq.a3':
+    'المدة الدنيا هي 3\u00a0أيام. بالنسبة للتأجير الطويل (11\u00a0يومًا فأكثر)، تستفيد تلقائيًا من سعر تفضيلي.',
+  'faq.q4': 'كيف يعمل نظام وديعة الضمان؟',
+  'faq.a4':
+    'يُطلب ضمان عند الاستلام، عبر شيك أو نقدًا، ويختلف المبلغ حسب السيارة. يُسترد بالكامل عند إرجاع السيارة بحالة جيدة.',
+  'faq.q5': 'ماذا يحدث في حالة عطل أو حادث؟',
+  'faq.a5':
+    'جميع سياراتنا مؤمّنة بتأمين شامل. في حالة عطل، ترسل خدمة المساعدة 24/7 سيارة بديلة في أسرع وقت. في حالة حادث، يرافقك فريقنا في جميع الإجراءات.',
+  'faq.q6': 'هل يمكنني تعديل أو إلغاء حجزي؟',
+  'faq.a6':
+    'يمكن تعديل أو إلغاء أي حجز مجانًا حتى 24\u00a0ساعة قبل موعد الاستلام. بعد ذلك، قد تُطبق رسوم إلغاء.',
+
+  /* ── Final CTA ────────────────────────────── */
+  'cta.eyebrow': 'احجز سيارتك في المغرب',
+  'cta.title': 'تأجير سيارتك في الدار البيضاء بانتظارك',
+  'cta.explore': 'تصفح الكتالوج',
+  'cta.whatsapp': 'تحدث مع الكونسيرج',
+
+  /* ── Catalogue ────────────────────────────── */
+  'cat.eyebrow': 'مجموعة مختارة',
+  'cat.title': 'الكتالوج',
+  'cat.subtitle':
+    '{count} طراز متاح في تشكيلة فاخرة مصممة لكل استخدام.',
+  'cat.allBrands': 'جميع العلامات',
+  'cat.allTypes': 'الكل',
+  'cat.search': 'ابحث عن سيارة…',
+  'cat.sortDefault': 'السعر: من الأقل',
+  'cat.sortDesc': 'السعر: من الأعلى',
+  'cat.sortName': 'الاسم أ–ي',
+  'cat.perDay': '/يوم · 3\u00a0أيام كحد أدنى',
+  'cat.seeOptions': 'عرض الخيارات',
+  'cat.bookNow': 'احجز',
+  'cat.dispo': 'متاح',
+  'cat.empty': 'لا توجد سيارات متاحة حاليًا.',
+  'cat.emptyHint': 'عد قريبًا أو تواصل معنا مباشرة.',
+  'cat.models': 'طراز معروض',
+  'cat.end': 'نهاية الكتالوج',
+  'cat.scroll': 'مرر للأسفل لعرض المزيد',
+  'cat.loading': 'جارٍ التحميل…',
+  'cat.retry': 'إعادة المحاولة',
+  'cat.places': 'مقاعد',
+
+  /* ── Model Detail ──────────────────────────── */
+  'model.variants': '{count} سيارة متاحة — اختر ما يناسبك',
+  'model.eyebrow': 'تشكيلة مميزة',
+  'model.places': 'مقاعد',
+  'model.priceFrom': 'ابتداءً من',
+  'model.perDay': '/يوم',
+  'model.minDuration': 'الحد الأدنى للتأجير: 3 أيام',
+  'model.service': 'الخدمة القياسية',
+  'model.serviceDesc': 'مساعدة وتحضير فاخر',
+  'model.longDuration': 'يُطبّق سعر تفضيلي تلقائيًا لأكثر من 10 أيام.',
+  'model.reservation': 'طلب حجز',
+  'model.contactMsg': 'سنعاود الاتصال بك سريعًا مع التأكيد والتوفر النهائي وتفاصيل الاستلام.',
+
+  /* ── Reservation Form ─────────────────────── */
+  'form.startDate': 'تاريخ البداية *',
+  'form.endDate': 'تاريخ النهاية *',
+  'form.days': 'يوم',
+  'form.estimate': 'التقدير',
+  'form.exDeposit': '(بدون الضمان)',
+  'form.longRate': 'يُطبّق سعر المدة الطويلة تلقائيًا.',
+  'form.minDays': 'الحد الأدنى للتأجير هو {count} أيام.',
+  'form.firstName': 'الاسم الأول *',
+  'form.lastName': 'اسم العائلة *',
+  'form.phone': 'الهاتف *',
+  'form.email': 'البريد الإلكتروني',
+  'form.emailOptional': 'اختياري',
+  'form.notes': 'ملاحظات / طلبات خاصة',
+  'form.notesPlaceholder': 'معلومات إضافية...',
+  'form.submit': 'إرسال طلب الحجز',
+  'form.submitting': 'جارٍ الإرسال...',
+  'form.required': 'يرجى ملء جميع الحقول المطلوبة',
+  'form.minDaysError': 'المدة الدنيا هي {count} أيام',
+  'form.success': 'تم إرسال الطلب! سنتواصل معك في أقرب وقت.',
+  'form.error': 'خطأ أثناء الحجز',
+  'form.networkError': 'خطأ في الشبكة. حاول مرة أخرى لاحقًا.',
+  'form.confirm': 'سيتواصل فريقنا معك لتأكيد حجزك.',
+};
+
+export const translations: Record<Locale, Record<string, string>> = { fr, en, ar };
 
 /** Translate a key for a given locale (server-safe). */
 export function t(locale: Locale, key: string): string {

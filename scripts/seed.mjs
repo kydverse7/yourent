@@ -12,9 +12,13 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();
+
+const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 if (!MONGODB_URI) {
@@ -66,6 +70,8 @@ const VehicleSchema = new mongoose.Schema({
   statut: String,
   slug: String,
   photos: [String],
+  backgroundPhoto: String,
+  photoModele: String,
   description: String,
   tarifParJour: Number,
   tarifParJour10Plus: Number,
@@ -152,6 +158,58 @@ const fleetList = [
   ['T-ROC', '48018-T-6'],
   ['T-ROC', '48019-T-6'],
 ];
+
+const modelPhotoMap = {
+  'AUDI Q3': ['/audi-q3.png'],
+  A3: ['/audi a3.png'],
+  'CLIO 4': ['/clio-4.png'],
+  DUSTER: ['/dacia-duster.png'],
+  'FIAT 500': ['/fiat 500.png'],
+  'FIAT 500 CABRIOLET': ['/fiat-500 cc.png'],
+  CORSA: ['/opel-corsa.png'],
+  COROLLA: ['/toyota-corolla.png'],
+  'GOLF 8': ['/golf 8.png'],
+  'MERCEDES C 220': ['/c-220.png'],
+  'MERCEDES E 220': ['/E-220.png'],
+  'MERCEDES CLA': ['/CLA.png'],
+  'PORCHE MACAN': ['/porshe-macan.png'],
+  'RANGE EVOQUE': ['/ranger-evoque.png'],
+  'RANGE SPORT': ['/range rover sport.png'],
+  TIGUAN: ['/tiguain.png'],
+  TOUAREG: ['/touareg-v.png'],
+  'T-ROC': ['/t-roc.png'],
+};
+
+function isPublicAsset(assetPath) {
+  if (!assetPath || typeof assetPath !== 'string') return false;
+
+  const normalized = assetPath.replace(/\\/g, '/');
+  if (!normalized.startsWith('/')) return false;
+
+  const resolved = path.resolve(PUBLIC_DIR, normalized.slice(1));
+  if (!resolved.startsWith(PUBLIC_DIR)) return false;
+
+  return fs.existsSync(resolved) && fs.statSync(resolved).isFile();
+}
+
+function withAssetVersion(assetPath) {
+  const normalized = assetPath.replace(/\\/g, '/');
+  const resolved = path.resolve(PUBLIC_DIR, normalized.slice(1));
+  const stat = fs.statSync(resolved);
+  const version = Math.floor(stat.mtimeMs);
+
+  return `${normalized}?v=${version}`;
+}
+
+function resolvePublicAssets(assetPaths = []) {
+  return [
+    ...new Set(
+      assetPaths
+        .filter(isPublicAsset)
+        .map(withAssetVersion),
+    ),
+  ];
+}
 
 function normalizeVehicle(label) {
   const normalized = label.trim().toUpperCase();
@@ -263,6 +321,51 @@ function buildVariantMeta(label, duplicateIndex) {
   };
 }
 
+function buildPricingMeta(label) {
+  const normalized = label.trim().toUpperCase();
+
+  const pricePresets = {
+    'AUDI Q3': { standard: 1100, tenPlus: 980, fifteenPlus: 930, thirtyPlus: 880, caution: 12000 },
+    A3: { standard: 850, tenPlus: 760, fifteenPlus: 720, thirtyPlus: 680, caution: 10000 },
+    'CLIO 4': { standard: 260, tenPlus: 230, fifteenPlus: 215, thirtyPlus: 200, caution: 5000 },
+    DUSTER: { standard: 380, tenPlus: 340, fifteenPlus: 320, thirtyPlus: 300, caution: 6000 },
+    'FIAT 500': { standard: 320, tenPlus: 290, fifteenPlus: 270, thirtyPlus: 250, caution: 5000 },
+    'FIAT 500 CABRIOLET': { standard: 550, tenPlus: 500, fifteenPlus: 470, thirtyPlus: 430, caution: 7000 },
+    CORSA: { standard: 280, tenPlus: 250, fifteenPlus: 235, thirtyPlus: 220, caution: 5000 },
+    COROLLA: { standard: 500, tenPlus: 450, fifteenPlus: 420, thirtyPlus: 390, caution: 7000 },
+    'GOLF 8': { standard: 650, tenPlus: 590, fifteenPlus: 560, thirtyPlus: 520, caution: 8000 },
+    'MERCEDES C 220': { standard: 1200, tenPlus: 1080, fifteenPlus: 1020, thirtyPlus: 960, caution: 15000 },
+    'MERCEDES E 220': { standard: 1500, tenPlus: 1360, fifteenPlus: 1290, thirtyPlus: 1220, caution: 18000 },
+    'MERCEDES CLA': { standard: 1350, tenPlus: 1220, fifteenPlus: 1160, thirtyPlus: 1090, caution: 16000 },
+    'PORCHE MACAN': { standard: 2500, tenPlus: 2280, fifteenPlus: 2160, thirtyPlus: 2050, caution: 25000 },
+    'RANGE EVOQUE': { standard: 1850, tenPlus: 1680, fifteenPlus: 1590, thirtyPlus: 1490, caution: 20000 },
+    'RANGE SPORT': { standard: 2600, tenPlus: 2380, fifteenPlus: 2260, thirtyPlus: 2140, caution: 28000 },
+    TIGUAN: { standard: 900, tenPlus: 820, fifteenPlus: 780, thirtyPlus: 740, caution: 10000 },
+    TOUAREG: { standard: 1600, tenPlus: 1460, fifteenPlus: 1390, thirtyPlus: 1320, caution: 18000 },
+    'T-ROC': { standard: 720, tenPlus: 650, fifteenPlus: 620, thirtyPlus: 580, caution: 8000 },
+  };
+
+  return pricePresets[normalized] ?? {
+    standard: 300,
+    tenPlus: 270,
+    fifteenPlus: 255,
+    thirtyPlus: 240,
+    caution: 5000,
+  };
+}
+
+function resolveVehiclePhotos(label) {
+  const normalized = label.trim().toUpperCase();
+  const photos = resolvePublicAssets(modelPhotoMap[normalized] ?? []);
+  const featuredPhoto = photos[0] ?? null;
+
+  return {
+    photos,
+    backgroundPhoto: featuredPhoto,
+    photoModele: featuredPhoto,
+  };
+}
+
 const agenceExistante = await Agence.findOne();
 if (!agenceExistante) {
   await Agence.create({
@@ -316,6 +419,8 @@ const vehiclesToInsert = fleetList.map(([label, immatriculation], index) => {
   const duplicateIndex = duplicateCounters.get(label) ?? 0;
   duplicateCounters.set(label, duplicateIndex + 1);
   const variant = buildVariantMeta(label, duplicateIndex);
+  const pricing = buildPricingMeta(label);
+  const photoMeta = resolveVehiclePhotos(label);
   const slugBase = slugify(`${preset.marque}-${preset.modele}-${immatriculation}`);
 
   return {
@@ -332,13 +437,15 @@ const vehiclesToInsert = fleetList.map(([label, immatriculation], index) => {
     options: [],
     statut: 'disponible',
     slug: `${slugBase}-${index + 1}`,
-    photos: [],
+    photos: photoMeta.photos,
+    backgroundPhoto: photoMeta.backgroundPhoto,
+    photoModele: photoMeta.photoModele,
     description: `${preset.marque} ${preset.modele}`,
-    tarifParJour: 0,
-    tarifParJour10Plus: 0,
-    tarifParJour15Plus: 0,
-    tarifParJour30Plus: 0,
-    cautionDefaut: 0,
+    tarifParJour: pricing.standard,
+    tarifParJour10Plus: pricing.tenPlus,
+    tarifParJour15Plus: pricing.fifteenPlus,
+    tarifParJour30Plus: pricing.thirtyPlus,
+    cautionDefaut: pricing.caution,
     isPublic: true,
   };
 });

@@ -9,9 +9,8 @@ import { rateLimit } from '@/lib/rateLimit';
 
 function normalizeVehiclePayload(body: Record<string, unknown>) {
   const tarifParJour = Number(body.tarifParJour ?? body.tarifJour ?? 0);
-  const tarifParJour10Plus = Number(
-    body.tarifParJour10Plus ?? body.tarifJour10Plus ?? body.tarifParJour15Plus ?? body.tarifJour15Plus ?? 0
-  );
+  const rawTarif10 = body.tarifParJour10Plus ?? body.tarifJour10Plus ?? body.tarifParJour15Plus ?? body.tarifJour15Plus;
+  const tarifParJour10Plus = rawTarif10 !== undefined ? Number(rawTarif10) : 0;
 
   return {
     ...body,
@@ -19,7 +18,7 @@ function normalizeVehiclePayload(body: Record<string, unknown>) {
     ...(body.boite !== undefined || body.transmission !== undefined ? { boite: body.boite ?? body.transmission } : {}),
     ...(body.tarifParJour !== undefined || body.tarifJour !== undefined ? { tarifParJour } : {}),
     ...(body.tarifParJour10Plus !== undefined || body.tarifJour10Plus !== undefined || body.tarifParJour15Plus !== undefined || body.tarifJour15Plus !== undefined
-      ? { tarifParJour10Plus: tarifParJour10Plus || tarifParJour }
+      ? { tarifParJour10Plus }
       : {}),
     ...(body.cautionDefaut !== undefined || body.cautionMontant !== undefined
       ? { cautionDefaut: Number(body.cautionDefaut ?? body.cautionMontant ?? 0) }
@@ -94,16 +93,27 @@ export async function PUT(req: NextRequest, { params }: Ctx) {
   try { body = await req.json(); }
   catch { return apiError('Corps JSON invalide', 400); }
 
-  const parsed = vehicleUpdateSchema.safeParse(normalizeVehiclePayload(body as Record<string, unknown>));
+  const normalized = normalizeVehiclePayload(body as Record<string, unknown>);
+  const parsed = vehicleUpdateSchema.safeParse(normalized);
   if (!parsed.success) return apiError('Données invalides', 422, parsed.error.flatten());
+
+  // Only keep fields that were explicitly provided in the request.
+  // Zod .partial() with .default(0) fills missing fields with 0,
+  // which would reset tarifs/caution when only one field is edited.
+  const providedKeys = new Set(Object.keys(normalized));
+  const updateData = Object.fromEntries(
+    Object.entries(parsed.data as Record<string, unknown>).filter(
+      ([k, v]) => v !== undefined && providedKeys.has(k),
+    ),
+  );
 
   const before = await Vehicle.findById(id).lean();
   if (!before) return apiError('Véhicule introuvable', 404);
 
-  const updated = await Vehicle.findByIdAndUpdate(id, parsed.data, { new: true, runValidators: true }).lean();
+  const updated = await Vehicle.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }).lean();
 
   // Propagate photoModele to all siblings (same marque + modèle)
-  if (parsed.data.photoModele !== undefined && updated) {
+  if (updateData.photoModele !== undefined && updated) {
     const u = updated as any;
     await Vehicle.updateMany(
       { marque: u.marque, modele: u.modele, _id: { $ne: u._id } },

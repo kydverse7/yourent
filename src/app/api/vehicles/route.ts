@@ -10,16 +10,15 @@ import { rateLimit } from '@/lib/rateLimit';
 
 function normalizeVehiclePayload(body: Record<string, unknown>) {
   const tarifParJour = Number(body.tarifParJour ?? body.tarifJour ?? 0);
-  const tarifParJour10Plus = Number(
-    body.tarifParJour10Plus ?? body.tarifJour10Plus ?? body.tarifParJour15Plus ?? body.tarifJour15Plus ?? 0
-  );
+  const rawTarif10 = body.tarifParJour10Plus ?? body.tarifJour10Plus ?? body.tarifParJour15Plus ?? body.tarifJour15Plus;
+  const tarifParJour10Plus = rawTarif10 !== undefined ? Number(rawTarif10) : 0;
 
   return {
     ...body,
     categorie: body.categorie ?? body.type,
     boite: body.boite ?? body.transmission,
     tarifParJour,
-    tarifParJour10Plus: tarifParJour10Plus || tarifParJour,
+    tarifParJour10Plus,
     cautionDefaut: Number(body.cautionDefaut ?? body.cautionMontant ?? 0),
     isPublic: body.isPublic ?? body.afficheSurSite ?? true,
     alerts: body.alerts ?? {

@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -22,7 +23,9 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 function readCookie(): Locale {
   if (typeof document === 'undefined') return 'fr';
   const m = document.cookie.match(/(?:^|; )locale=(\w+)/);
-  return (m?.[1] === 'en' ? 'en' : 'fr');
+  const v = m?.[1];
+  if (v === 'en' || v === 'ar') return v;
+  return 'fr';
 }
 
 function writeCookie(l: Locale) {
@@ -30,7 +33,13 @@ function writeCookie(l: Locale) {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(readCookie);
+  // Always start with 'fr' to match SSR, then sync from cookie after mount.
+  const [locale, setLocaleState] = useState<Locale>('fr');
+
+  useEffect(() => {
+    const saved = readCookie();
+    if (saved !== 'fr') setLocaleState(saved);
+  }, []);
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);

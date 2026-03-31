@@ -53,7 +53,7 @@ function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
 
 export function LandingFaqSection() {
   const { t } = useLocale();
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const items = Array.from({ length: FAQ_COUNT }, (_, i) => ({
     q: t(`faq.q${i + 1}`),
@@ -69,8 +69,8 @@ export function LandingFaqSection() {
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('faq.eyebrow')}
           </span>
-          <h2 className="lux-title-sm mt-4">{t('faq.title')}</h2>
-          <p className="lux-subtitle mx-auto mt-3">
+          <h2 className="lux-title-sm mt-4 whitespace-nowrap text-[clamp(1.2rem,4vw,2.8rem)]">{t('faq.title')}</h2>
+          <p className="lux-subtitle mx-auto mt-3 max-w-[48ch] text-center">
             {t('faq.subtitle')}
           </p>
         </ScrollReveal>

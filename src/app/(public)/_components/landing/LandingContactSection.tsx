@@ -14,6 +14,7 @@ import {
   Star,
   Send,
 } from 'lucide-react';
+import { useLocale } from '@/lib/i18n';
 import { SOCIALS } from './constants';
 import {
   motion,
@@ -36,40 +37,6 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 const GOOGLE_MAPS_LINK =
   'https://www.google.com/maps/search/N%C2%B025+Rue+Ibnou+Mounir+20100+Casablanca';
-
-const CONTACT_ITEMS = [
-  {
-    icon: MapPin,
-    label: 'Adresse',
-    value: 'N°25 Rue Ibnou Mounir',
-    sub: '20100 Casablanca, Maroc',
-    href: GOOGLE_MAPS_LINK,
-  },
-  {
-    icon: Phone,
-    label: 'Téléphone',
-    value: '+212 6 61 23 45 67',
-    href: 'tel:+212661234567',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'contact@yourent.ma',
-    href: 'mailto:contact@yourent.ma',
-  },
-  {
-    icon: Clock,
-    label: 'Horaires',
-    value: 'Lun – Dim · 8h – 22h',
-    sub: '7j/7 — Livraison 24h',
-  },
-];
-
-const STATS = [
-  { number: '60+', label: 'Véhicules', icon: null },
-  { number: '5K+', label: 'Clients satisfaits', icon: null },
-  { number: '4.9', label: 'Avis Google', icon: Star },
-];
 
 /* ── SVG Filigrane that draws on scroll ── */
 function FiligraneSVG() {
@@ -120,7 +87,42 @@ function FiligraneSVG() {
 }
 
 export function LandingContactSection() {
+  const { t } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
+
+  const CONTACT_ITEMS = [
+    {
+      icon: MapPin,
+      label: t('contact.address'),
+      value: 'N°25 Rue Ibnou Mounir',
+      sub: t('contact.addressSub'),
+      href: GOOGLE_MAPS_LINK,
+    },
+    {
+      icon: Phone,
+      label: t('contact.phone'),
+      value: '+212 6 61 23 45 67',
+      href: 'tel:+212661234567',
+    },
+    {
+      icon: Mail,
+      label: t('contact.email'),
+      value: 'contact@yourent.ma',
+      href: 'mailto:contact@yourent.ma',
+    },
+    {
+      icon: Clock,
+      label: t('contact.hours'),
+      value: t('contact.hoursValue'),
+      sub: t('contact.hoursSub'),
+    },
+  ];
+
+  const STATS = [
+    { number: '60+', label: t('contact.statVehicles'), icon: null },
+    { number: '5K+', label: t('contact.statClients'), icon: null },
+    { number: '4.9', label: t('contact.statGoogle'), icon: Star },
+  ];
 
   return (
     <section ref={sectionRef} className="ct-section">
@@ -129,7 +131,7 @@ export function LandingContactSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/image-casablanca.jpg"
-          alt="Vue aérienne de Casablanca, Maroc — Yourent location de voitures"
+          alt={t('contact.imgAlt')}
           className="ct-parallax-img"
           loading="lazy"
         />
@@ -149,7 +151,7 @@ export function LandingContactSection() {
           <span className="ct-eyebrow-pill">
             <span className="ct-eyebrow-dot" />
             <MapPin className="h-3 w-3" />
-            Casablanca, Maroc
+            {t('contact.eyebrow')}
           </span>
         </ScrollReveal>
 
@@ -157,8 +159,8 @@ export function LandingContactSection() {
         <ScrollReveal variants={blurFade} className="ct-title-block">
           <div className="ct-title-row">
             <h2 className="ct-main-title">
-              <span className="ct-main-title-light">Agence location voitures </span>
-              <span className="ct-main-title-gold">Casablanca</span>
+              <span className="ct-main-title-light">{t('contact.title')} </span>
+              <span className="ct-main-title-gold">{t('contact.titleGold')}</span>
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -185,8 +187,7 @@ export function LandingContactSection() {
             />
           </div>
           <p className="ct-main-subtitle">
-            Notre agence au cœur de Casablanca vous accueille pour une
-            expérience sur-mesure — du choix du véhicule à la remise des clés.
+            {t('contact.subtitle')}
           </p>
         </ScrollReveal>
 
@@ -273,7 +274,7 @@ export function LandingContactSection() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
             >
-              <span className="ct-social-label">Suivez-nous</span>
+              <span className="ct-social-label">{t('contact.followUs')}</span>
               <div className="ct-social-icons">
                 {SOCIALS.map(({ label, href, icon }) => {
                   const Icon = ICON_MAP[icon];
@@ -313,13 +314,13 @@ export function LandingContactSection() {
                 <div className="ct-map-info-left">
                   <div className="ct-map-pulse" />
                   <div>
-                    <p className="ct-map-name">Yourent Casablanca</p>
+                    <p className="ct-map-name">{t('contact.mapName')}</p>
                     <p className="ct-map-addr">N°25 Rue Ibnou Mounir, 20100</p>
                   </div>
                 </div>
                 <div className="ct-map-btns">
                   <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noreferrer" className="ct-map-btn-primary">
-                    Itinéraire <ArrowRight className="h-3.5 w-3.5" />
+                    {t('contact.directions')} <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                   <a href="https://wa.me/212661234567" target="_blank" rel="noreferrer" className="ct-map-btn-outline">
                     <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
@@ -334,7 +335,7 @@ export function LandingContactSection() {
                   className="ct-map-iframe"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Yourent Casablanca"
+                  title={t('contact.mapName')}
                   allowFullScreen
                 />
                 {/* Gold corner accents */}

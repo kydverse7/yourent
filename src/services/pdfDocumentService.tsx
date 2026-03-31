@@ -134,7 +134,7 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
     };
 
     const buffer = await renderToBuffer(<ContractPdfDocument data={data} />);
-    const uploaded = await uploadToCloudinary(buffer, 'contracts/generated', `contract-reservation-${reservation._id}-${Date.now()}`, { resourceType: 'raw' });
+    const uploaded = await uploadToCloudinary(buffer, 'contracts/generated', `contract-reservation-${reservation._id}-${Date.now()}.pdf`, { resourceType: 'raw' });
 
     await syncLinkedDocument('contract', { reservationId: entityId }, { number: contractNumber, url: uploaded.url });
     const updated = await Reservation.findById(entityId).lean();
@@ -181,7 +181,7 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
   };
 
   const buffer = await renderToBuffer(<ContractPdfDocument data={data} />);
-  const uploaded = await uploadToCloudinary(buffer, 'contracts/generated', `contract-location-${location._id}-${Date.now()}`, { resourceType: 'raw' });
+  const uploaded = await uploadToCloudinary(buffer, 'contracts/generated', `contract-location-${location._id}-${Date.now()}.pdf`, { resourceType: 'raw' });
 
   await syncLinkedDocument(
     'contract',
@@ -242,7 +242,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
     };
 
     const buffer = await renderToBuffer(<InvoicePdfDocument data={data} />);
-    const uploaded = await uploadToCloudinary(buffer, 'invoices/generated', `invoice-reservation-${reservation._id}-${Date.now()}`, { resourceType: 'raw' });
+    const uploaded = await uploadToCloudinary(buffer, 'invoices/generated', `invoice-reservation-${reservation._id}-${Date.now()}.pdf`, { resourceType: 'raw' });
 
     await syncLinkedDocument('invoice', { reservationId: entityId }, { number: invoiceNumber, url: uploaded.url });
     const updated = await Reservation.findById(entityId).lean();
@@ -290,7 +290,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
   };
 
   const buffer = await renderToBuffer(<InvoicePdfDocument data={data} />);
-  const uploaded = await uploadToCloudinary(buffer, 'invoices/generated', `invoice-location-${location._id}-${Date.now()}`, { resourceType: 'raw' });
+  const uploaded = await uploadToCloudinary(buffer, 'invoices/generated', `invoice-location-${location._id}-${Date.now()}.pdf`, { resourceType: 'raw' });
 
   await syncLinkedDocument(
     'invoice',

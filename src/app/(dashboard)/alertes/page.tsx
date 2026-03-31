@@ -236,7 +236,7 @@ export default function AlertesPage() {
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
         <div className="lux-panel-muted p-5">
           <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Alertes actives</p>
           <p className="mt-2 text-2xl font-semibold text-cream">{stats.total}</p>

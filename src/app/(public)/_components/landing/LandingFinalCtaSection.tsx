@@ -10,8 +10,6 @@ import {
   StaggerContainer,
 } from './motion';
 
-const year = new Date().getFullYear();
-
 /**
  * Final CTA block.
  */
@@ -64,11 +62,6 @@ export function LandingFinalCtaSection() {
           </StaggerContainer>
         </div>
       </ScrollReveal>
-
-      {/* ── Copyright ── */}
-      <p className="mt-10 text-center text-xs text-cream-faint">
-        © {year} Yourent — Casablanca, Maroc
-      </p>
     </section>
   );
 }

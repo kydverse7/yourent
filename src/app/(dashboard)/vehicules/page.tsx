@@ -109,8 +109,7 @@ export default function VehiculesPage() {
             className="flex-1"
           />
         </div>
-        <div className="flex gap-2">
-          {['', 'disponible', 'loue', 'maintenance'].map((s) => (
+        <div className="flex flex-wrap gap-2">{['', 'disponible', 'loue', 'en_maintenance', 'reserve'].map((s) => (
             <button
               key={s}
               onClick={() => setFilters({ statut: s, page: 1 })}

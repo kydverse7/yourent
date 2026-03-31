@@ -366,8 +366,7 @@ export default function DepensesPage() {
       <DataTable columns={columns} data={expenses} isLoading={isLoading} emptyText="Aucune dépense trouvée." />
 
       {total > 20 && (
-        <div className="flex items-center justify-between text-sm text-cream-muted">
-          <span>Page {page} · {Math.ceil(total / 20)} pages</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-cream-muted"><span>Page {page} · {Math.ceil(total / 20)} pages</span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((current) => current - 1)}>Précédent</Button>
             <Button variant="outline" size="sm" disabled={page >= Math.ceil(total / 20)} onClick={() => setPage((current) => current + 1)}>Suivant</Button>

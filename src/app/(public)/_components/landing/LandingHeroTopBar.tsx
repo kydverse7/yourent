@@ -7,6 +7,7 @@ import {
   MapPin,
   MessageCircle,
 } from 'lucide-react';
+import { useLocale } from '@/lib/i18n';
 import { SOCIALS } from './constants';
 import { motion, stagger, staggerItem } from './motion';
 
@@ -18,6 +19,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 /* ── Animated SVG counter ── */
 function FleetCounter() {
+  const { t } = useLocale();
   const TARGET = 60;
   const [count, setCount] = useState(0);
 
@@ -103,8 +105,8 @@ function FleetCounter() {
       </div>
 
       <div className="hero-fleet-label">
-        <span className="hero-fleet-label-main">Voitures</span>
-        <span className="hero-fleet-label-sub">disponibles</span>
+        <span className="hero-fleet-label-main">{t('hero.cars')}</span>
+        <span className="hero-fleet-label-sub">{t('hero.available')}</span>
       </div>
     </motion.div>
   );
@@ -114,6 +116,7 @@ function FleetCounter() {
  * Top bar of the hero: eyebrow text + fleet counter + social icons.
  */
 export function LandingHeroTopBar() {
+  const { t } = useLocale();
   return (
     <div className="shrink-0 px-4 pt-3 md:px-8 md:pt-5">
       <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:items-center sm:text-left">
@@ -124,7 +127,7 @@ export function LandingHeroTopBar() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <MapPin className="h-3 w-3 text-[#c9a84c]" />
-          Livraison aéroport &amp; Casablanca
+          {t('hero.delivery')}
         </motion.span>
 
         {/* ── Fleet counter ── */}

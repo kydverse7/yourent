@@ -66,7 +66,7 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
 
       {/* ── Quick-select name links ── */}
       <ScrollReveal variants={blurFade} className="mb-8">
-        <nav className="eco-name-links" aria-label="Sélection rapide de véhicule">
+        <nav className="eco-name-links" aria-label={t('aria.ecoNav')}>
           {vehicles.map((v, i) => (
             <button
               key={v._id}
@@ -159,10 +159,10 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
 
                       {vehicle.tarifJour > 0 && (
                         <div className="eco-card-price-col">
-                          <p className="eco-card-price-label">À partir de</p>
+                          <p className="eco-card-price-label">{t('signature.from')}</p>
                           <p className="eco-card-price">
                             {formatCurrency(vehicle.tarifJour)}
-                            <span className="eco-card-price-unit"> /jour</span>
+                            <span className="eco-card-price-unit"> {t('signature.perDay')}</span>
                           </p>
                         </div>
                       )}
@@ -194,7 +194,7 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
 
           {/* ── Nav arrows + dots ── */}
           <div className="eco-carousel-nav">
-            <button onClick={prev} className="eco-nav-btn" aria-label="Véhicule précédent">
+            <button onClick={prev} className="eco-nav-btn" aria-label={t('aria.prevVehicle')}>
               <ChevronLeft className="h-5 w-5" />
             </button>
 
@@ -204,12 +204,12 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
                   key={i}
                   onClick={() => setActive(i)}
                   className={`eco-dot${i === active ? ' eco-dot-active' : ''}`}
-                  aria-label={`Aller au véhicule ${i + 1}`}
+                  aria-label={`${t('aria.goToVehicle')} ${i + 1}`}
                 />
               ))}
             </div>
 
-            <button onClick={next} className="eco-nav-btn" aria-label="Véhicule suivant">
+            <button onClick={next} className="eco-nav-btn" aria-label={t('aria.nextVehicle')}>
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>

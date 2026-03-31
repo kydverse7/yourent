@@ -11,6 +11,7 @@ import { FileSignature, Plus, Sparkles, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Badge, Button, Input, Select } from '@/components/ui';
 import { DataTable } from '@/components/ui/DataTable';
+import { buildPdfViewerUrl } from '@/lib/utils';
 
 type ReservationOption = {
   _id: string;
@@ -235,7 +236,7 @@ export default function ContratsPage() {
       cell: ({ row }) => (
         <div className="flex flex-wrap gap-2">
           {row.original.contratPdfUrl ? (
-            <a href={row.original.contratPdfUrl} target="_blank" rel="noreferrer" className="text-sm text-gold hover:text-gold-light">
+            <a href={buildPdfViewerUrl(row.original.contratPdfUrl, `${row.original.contratNumero ?? 'contrat'}.pdf`)} target="_blank" rel="noreferrer" className="text-sm text-gold hover:text-gold-light">
               Ouvrir PDF
             </a>
           ) : (
@@ -349,7 +350,7 @@ export default function ContratsPage() {
             </label>
 
             {form.contratPdfUrl && (
-              <a href={form.contratPdfUrl} target="_blank" rel="noreferrer" className="text-sm text-cream-muted hover:text-cream">
+              <a href={buildPdfViewerUrl(form.contratPdfUrl, `${(selectedOption as ReservationOption | LocationOption | undefined)?.contratNumero ?? 'contrat'}.pdf`)} target="_blank" rel="noreferrer" className="text-sm text-cream-muted hover:text-cream">
                 Prévisualiser le PDF
               </a>
             )}
@@ -407,8 +408,7 @@ export default function ContratsPage() {
       <DataTable columns={columns} data={contracts} isLoading={isLoading} emptyText="Aucun contrat trouvé." />
 
       {total > 20 && (
-        <div className="flex items-center justify-between text-sm text-cream-muted">
-          <span>Page {page} · {Math.ceil(total / 20)} pages</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-cream-muted"><span>Page {page} · {Math.ceil(total / 20)} pages</span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((current) => current - 1)}>Précédent</Button>
             <Button variant="outline" size="sm" disabled={page >= Math.ceil(total / 20)} onClick={() => setPage((current) => current + 1)}>Suivant</Button>

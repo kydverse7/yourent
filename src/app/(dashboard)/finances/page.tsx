@@ -101,19 +101,19 @@ export default function FinancesPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <input
             type="date"
             value={filters.from}
             onChange={(e) => setFilters({ from: e.target.value })}
-            className="input-gold h-11 w-auto min-w-[150px] px-3 text-sm"
+            className="input-gold h-11 w-auto min-w-0 flex-1 sm:flex-none sm:min-w-[150px] px-3 text-sm"
           />
           <span className="text-cream-muted">→</span>
           <input
             type="date"
             value={filters.to}
             onChange={(e) => setFilters({ to: e.target.value })}
-            className="input-gold h-11 w-auto min-w-[150px] px-3 text-sm"
+            className="input-gold h-11 w-auto min-w-0 flex-1 sm:flex-none sm:min-w-[150px] px-3 text-sm"
           />
         </div>
       </div>

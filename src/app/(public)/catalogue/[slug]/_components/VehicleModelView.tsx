@@ -12,6 +12,7 @@ import {
   CircleDot,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
+import { useLocale } from '@/lib/i18n';
 import PublicReservationForm from './PublicReservationForm';
 
 type Variant = {
@@ -32,11 +33,13 @@ type Variant = {
   featuredPhoto: string | null;
   tarifJour: number;
   tarifJour10Plus: number;
+  displayTarifJour: number;
 };
 
 type Props = {
   variants: Variant[];
   modelSlug: string;
+  modelMinTarif: number;
   marque: string;
   modele: string;
   categorie: string;
@@ -48,6 +51,7 @@ type Props = {
 export function VehicleModelView({
   variants,
   modelSlug,
+  modelMinTarif,
   marque,
   modele,
   categorie,
@@ -57,6 +61,7 @@ export function VehicleModelView({
 }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const selected = variants[selectedIdx];
+  const { t, tp } = useLocale();
 
   return (
     <div className="lux-grid-phi items-start">
@@ -111,7 +116,7 @@ export function VehicleModelView({
         {variants.length > 1 && (
           <div className="lux-panel p-5 md:p-6">
             <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-gold">
-              {variants.length} véhicules disponibles — choisissez le vôtre
+              {tp('model.variants', variants.length)}
             </h2>
             <div className="flex flex-col gap-2">
               {variants.map((v, i) => (
@@ -140,7 +145,7 @@ export function VehicleModelView({
                     </span>
                   </div>
                   <span className="whitespace-nowrap text-sm font-bold text-gold">
-                    {formatCurrency(v.tarifJour)}/j
+                    {formatCurrency(v.displayTarifJour)}/j
                   </span>
                 </button>
               ))}
@@ -151,7 +156,7 @@ export function VehicleModelView({
         {/* Vehicle info */}
         <div className="lux-panel p-6 md:p-7">
           <div className="space-y-3">
-            <span className="lux-eyebrow">Sélection signature</span>
+            <span className="lux-eyebrow">{t('model.eyebrow')}</span>
             <h1 className="lux-title-sm">
               {marque} {modele}
             </h1>
@@ -165,7 +170,7 @@ export function VehicleModelView({
 
           <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-cream-muted">
             <span className="flex items-center gap-1.5">
-              <Users className="h-4 w-4 text-gold" /> {places} places
+              <Users className="h-4 w-4 text-gold" /> {places} {t('model.places')}
             </span>
             <span className="flex items-center gap-1.5">
               <Fuel className="h-4 w-4 text-gold" /> {carburant}
@@ -178,28 +183,27 @@ export function VehicleModelView({
           <div className="mt-7 grid gap-3 sm:grid-cols-2">
             <div className="lux-panel-muted p-5">
               <p className="text-xs uppercase tracking-[0.18em] text-cream-faint">
-                Tarif à partir de
+                {t('model.priceFrom')}
               </p>
               <p className="mt-2 text-3xl font-bold text-gold">
-                {formatCurrency(selected.tarifJour)}
+                {formatCurrency(modelMinTarif)}
                 <span className="text-base font-normal text-cream-muted">
-                  /jour
+                  {t('model.perDay')}
                 </span>
               </p>
               <p className="mt-2 text-xs text-cream-faint">
-                Location minimale : 3 jours
+                {t('model.minDuration')}
               </p>
             </div>
             <div className="lux-panel-muted p-5">
               <p className="text-xs uppercase tracking-[0.18em] text-cream-faint">
-                Standard service
+                {t('model.service')}
               </p>
               <p className="mt-2 flex items-center gap-2 text-sm font-medium text-cream">
-                <ShieldCheck className="h-4 w-4 text-gold" /> Assistance et
-                préparation premium
+                <ShieldCheck className="h-4 w-4 text-gold" /> {t('model.serviceDesc')}
               </p>
               <p className="mt-2 text-xs text-cream-faint">
-                Tarif avantageux appliqué automatiquement au-delà de 10 jours.
+                {t('model.longDuration')}
               </p>
             </div>
           </div>
@@ -217,7 +221,7 @@ export function VehicleModelView({
         <div className="mb-6 flex items-center justify-between gap-3">
           <div>
             <h2 className="flex items-center gap-2 text-lg font-semibold text-cream">
-              <Calendar className="h-4 w-4 text-gold" /> Demande de réservation
+              <Calendar className="h-4 w-4 text-gold" /> {t('model.reservation')}
             </h2>
             <p className="mt-1 text-sm text-cream-faint">
               {marque} {modele}
@@ -229,8 +233,7 @@ export function VehicleModelView({
         </div>
 
         <div className="mb-5 rounded-2xl border border-gold/15 bg-gold/5 p-4 text-sm text-cream-muted">
-          Nous vous recontactons rapidement avec validation, disponibilité
-          finale et modalités de départ.
+          {t('model.contactMsg')}
         </div>
 
         <PublicReservationForm

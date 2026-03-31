@@ -66,8 +66,13 @@ export function resolveVehiclePricing(vehicle: VehiclePricingSource | null | und
 
   return {
     tarifJour,
-    tarifJour10Plus: tarifJour10Plus || tarifJour,
+    tarifJour10Plus,
   };
+}
+
+export function getVehicleDisplayPrice(vehicle: VehiclePricingSource | null | undefined): number {
+  const { tarifJour } = resolveVehiclePricing(vehicle);
+  return Number.isFinite(tarifJour) && tarifJour > 0 ? tarifJour : 0;
 }
 
 export function calcPalier(nbJours: number): TarifPalier {
@@ -83,6 +88,16 @@ export function calcTarifTotal(
   const palier = calcPalier(nbJours);
   const tarifJour = palier === '10Plus' ? (tarifParJour10Plus || tarifParJour) : tarifParJour;
   return { palier, tarifJour, total: tarifJour * nbJours };
+}
+
+export function buildPdfViewerUrl(sourceUrl: string, fileName = 'document.pdf'): string {
+  const trimmedName = fileName.trim();
+  const safeName = trimmedName.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/-+/g, '-');
+  const normalizedName = (safeName || 'document').toLowerCase().endsWith('.pdf')
+    ? (safeName || 'document.pdf')
+    : `${safeName || 'document'}.pdf`;
+
+  return `/api/documents/open?url=${encodeURIComponent(sourceUrl)}&name=${encodeURIComponent(normalizedName)}`;
 }
 
 // ===== ALERTES MAINTENANCE =====

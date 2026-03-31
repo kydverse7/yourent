@@ -7,11 +7,12 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { useSearchParams } from 'next/navigation';
 import type { ColumnDef } from '@tanstack/react-table';
-import { Plus, Receipt, Sparkles, Upload } from 'lucide-react';
+import { FileText, Plus, Receipt, Sparkles, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Badge, Button, Input, Select } from '@/components/ui';
 import { DataTable } from '@/components/ui/DataTable';
-import { formatCurrency } from '@/lib/utils';
+import { buildPdfViewerUrl, formatCurrency } from '@/lib/utils';
+import CreateInvoiceModal from '@/components/modals/CreateInvoiceModal';
 
 type ReservationOption = {
   _id: string;
@@ -68,6 +69,7 @@ export default function FacturesPage() {
   const qc = useQueryClient();
   const searchParams = useSearchParams();
   const [showForm, setShowForm] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [scopeFilter, setScopeFilter] = useState('');
   const [missingOnly, setMissingOnly] = useState(false);
   const [page, setPage] = useState(1);
@@ -233,7 +235,7 @@ export default function FacturesPage() {
       cell: ({ row }) => (
         <div className="flex flex-wrap gap-2">
           {row.original.facturePdfUrl ? (
-            <a href={row.original.facturePdfUrl} target="_blank" rel="noreferrer" className="text-sm text-gold hover:text-gold-light">
+            <a href={buildPdfViewerUrl(row.original.facturePdfUrl, `${row.original.factureNumero ?? 'facture'}.pdf`)} target="_blank" rel="noreferrer" className="text-sm text-gold hover:text-gold-light">
               Ouvrir PDF
             </a>
           ) : (
@@ -259,10 +261,16 @@ export default function FacturesPage() {
             Suivi des factures PDF sur les réservations confirmées et les locations actives ou clôturées.
           </p>
         </div>
-        <Button variant="gold" onClick={() => setShowForm((value) => !value)}>
-          <Plus className="h-4 w-4" />
-          {showForm ? 'Fermer' : 'Ajouter une facture'}
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="gold" onClick={() => setShowCreateModal(true)}>
+            <FileText className="h-4 w-4" />
+            Créer facture / devis
+          </Button>
+          <Button variant="outline" onClick={() => setShowForm((value) => !value)}>
+            <Plus className="h-4 w-4" />
+            {showForm ? 'Fermer' : 'Rattacher un PDF'}
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -345,7 +353,7 @@ export default function FacturesPage() {
             </label>
 
             {form.facturePdfUrl && (
-              <a href={form.facturePdfUrl} target="_blank" rel="noreferrer" className="text-sm text-cream-muted hover:text-cream">
+              <a href={buildPdfViewerUrl(form.facturePdfUrl, `${(selectedOption as ReservationOption | LocationOption | undefined)?.factureNumero ?? 'facture'}.pdf`)} target="_blank" rel="noreferrer" className="text-sm text-cream-muted hover:text-cream">
                 Prévisualiser le PDF
               </a>
             )}
@@ -401,14 +409,15 @@ export default function FacturesPage() {
       <DataTable columns={columns} data={invoices} isLoading={isLoading} emptyText="Aucune facture trouvée." />
 
       {total > 20 && (
-        <div className="flex items-center justify-between text-sm text-cream-muted">
-          <span>Page {page} · {Math.ceil(total / 20)} pages</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-cream-muted"><span>Page {page} · {Math.ceil(total / 20)} pages</span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((current) => current - 1)}>Précédent</Button>
             <Button variant="outline" size="sm" disabled={page >= Math.ceil(total / 20)} onClick={() => setPage((current) => current + 1)}>Suivant</Button>
           </div>
         </div>
       )}
+
+      <CreateInvoiceModal open={showCreateModal} onClose={() => setShowCreateModal(false)} />
     </div>
   );
 }

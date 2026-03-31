@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bell, Search, ChevronRight, Sparkles, CalendarDays, Menu } from 'lucide-react';
+import { Bell, Search, ChevronRight, CalendarDays, Menu } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
 
@@ -79,9 +79,6 @@ export default function Header({ userName = 'Utilisateur', userRole = 'agent', u
           </button>
           <div className="min-w-0 space-y-2">
           <div className="hidden items-center gap-3 md:flex">
-            <span className="lux-eyebrow">
-              <Sparkles className="h-3.5 w-3.5" /> cockpit raffiné
-            </span>
             <span className="flex items-center gap-2 text-xs text-cream-faint">
               <CalendarDays className="h-3.5 w-3.5 text-gold" />
               {today}

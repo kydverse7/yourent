@@ -19,16 +19,6 @@ export default function DashboardPage() {
           Tableau de bord de votre agence — données en temps réel
         </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div className="lux-panel-muted px-4 py-3">
-            <p className="text-xs uppercase tracking-[0.18em] text-cream-faint">Style</p>
-            <p className="mt-1 text-sm font-medium text-cream">Cockpit noir & or homogène</p>
-          </div>
-          <div className="lux-panel-muted px-4 py-3">
-            <p className="text-xs uppercase tracking-[0.18em] text-cream-faint">Rythme</p>
-            <p className="mt-1 text-sm font-medium text-cream">Pilotage instantané</p>
-          </div>
-        </div>
       </div>
 
       <Suspense

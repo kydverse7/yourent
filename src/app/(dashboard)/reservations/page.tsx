@@ -182,7 +182,7 @@ export default function ReservationsPage() {
       header: '',
       enableSorting: false,
       cell: ({ row }) => (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {row.original.statut === 'en_attente' && (
             <>
               <Button
@@ -231,8 +231,7 @@ export default function ReservationsPage() {
         </div>
       </div>
 
-      {/* Onglets En cours / Historique */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={() => switchTab('actives')}
           className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all ${
@@ -275,8 +274,7 @@ export default function ReservationsPage() {
       <DataTable columns={columns} data={reservations} isLoading={isLoading} emptyText="Aucune réservation." />
 
       {total > 20 && (
-        <div className="flex items-center justify-between text-sm text-cream-muted">
-          <span>Page {filters.page} · {Math.ceil(total / 20)} pages</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-cream-muted"><span>Page {filters.page} · {Math.ceil(total / 20)} pages</span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={filters.page <= 1} onClick={() => setFilters({ page: filters.page - 1 })}>Précédent</Button>
             <Button variant="outline" size="sm" disabled={filters.page >= Math.ceil(total / 20)} onClick={() => setFilters({ page: filters.page + 1 })}>Suivant</Button>

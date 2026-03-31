@@ -28,14 +28,14 @@ export function LandingBrandTabs({
   const brightRgb = `${Math.min(255, ar + 50)},${Math.min(255, ag + 50)},${Math.min(255, ab + 50)}`;
 
   return (
-    <div className="relative z-40 flex shrink-0 items-center gap-2 overflow-x-auto px-4 pb-6 md:justify-center md:px-6 md:pb-9 scrollbar-hide">
+    <div className="relative z-40 flex shrink-0 flex-nowrap items-center gap-2 overflow-x-auto px-4 pb-6 md:justify-center md:px-6 md:pb-9 scrollbar-hide">
       {items.map((b, i) => {
         const isActive = i === brandIndex;
         return (
           <motion.button
             key={b.brand}
             onClick={() => onTabSelect(i)}
-            className={`lp-tab-btn${isActive ? ' active' : ''} pointer-events-auto`}
+            className={`lp-tab-btn${isActive ? ' active' : ''} pointer-events-auto shrink-0`}
             style={
               isActive
                 ? {

@@ -82,6 +82,25 @@ export type InvoicePdfData = {
   paiementModeLabel?: string;
 };
 
+export type FreeDocumentPdfData = {
+  title: string;
+  reference: string;
+  createdAt: Date;
+  agency: AgencyData;
+  client: ClientData;
+  vehicle: VehicleData;
+  period: {
+    debutAt?: Date;
+    finAt?: Date;
+  };
+  nbJours: number;
+  tarifJour: number;
+  lines: FinanceLine[];
+  totalMontant: number;
+  remise?: number;
+  notes?: string;
+};
+
 const styles = StyleSheet.create({
   page: {
     paddingTop: 32,
@@ -397,6 +416,82 @@ export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
 
         <Text style={styles.footer}>
           Facture générée automatiquement par Yourent · Les cautions sont exclues des montants facturés.
+        </Text>
+      </Page>
+    </Document>
+  );
+}
+
+export function FreeDocumentPdfDocument({ data }: { data: FreeDocumentPdfData }) {
+  const devise = data.agency.devise ?? 'MAD';
+
+  return (
+    <Document title={data.title} author={data.agency.nom}>
+      <Page size="A4" style={styles.page}>
+        <AgencyHeader agency={data.agency} title={data.title} reference={data.reference} createdAt={data.createdAt} />
+
+        <View style={styles.grid}>
+          <View style={styles.card}>
+            <Text style={styles.sectionTitle}>Client</Text>
+            <Text style={styles.bodyText}>{data.client.nomComplet}</Text>
+            <Text style={styles.bodyText}>{data.client.telephone || '—'}</Text>
+            <Text style={styles.bodyText}>{data.client.email || '—'}</Text>
+            <Text style={styles.bodyText}>{[data.client.adresse, data.client.ville].filter(Boolean).join(', ') || '—'}</Text>
+            {data.client.documentLabel && <Text style={styles.bodyText}>{data.client.documentLabel}</Text>}
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.sectionTitle}>Véhicule</Text>
+            <Text style={styles.bodyText}>{data.vehicle.label}</Text>
+            <Text style={styles.bodyText}>Immatriculation: {data.vehicle.immatriculation || '—'}</Text>
+            <Text style={styles.bodyText}>Carburant: {data.vehicle.carburant || '—'}</Text>
+            <Text style={styles.bodyText}>Boîte: {data.vehicle.boite || '—'}</Text>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Période de location</Text>
+          <View style={styles.card}>
+            <View style={styles.row}><Text style={styles.rowLabel}>Début</Text><Text style={styles.rowValue}>{formatDateValue(data.period.debutAt)}</Text></View>
+            <View style={styles.row}><Text style={styles.rowLabel}>Fin</Text><Text style={styles.rowValue}>{formatDateValue(data.period.finAt)}</Text></View>
+            <View style={styles.row}><Text style={styles.rowLabel}>Durée</Text><Text style={styles.rowValue}>{data.nbJours} jour{data.nbJours > 1 ? 's' : ''}</Text></View>
+            <View style={styles.row}><Text style={styles.rowLabel}>Tarif journalier</Text><Text style={styles.rowValue}>{formatCurrencyValue(data.tarifJour, devise)}</Text></View>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Détail</Text>
+          <View style={styles.table}>
+            <View style={styles.tableHeader}>
+              <Text style={styles.colWide}>Libellé</Text>
+              <Text style={styles.colNarrow}>Montant</Text>
+            </View>
+            {data.lines.map((line, index) => (
+              <View key={`${line.label}-${index}`} style={styles.tableRow}>
+                <Text style={styles.colWide}>{line.label}</Text>
+                <Text style={styles.colNarrow}>{formatCurrencyValue(line.montant, devise)}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.totalBox}>
+            {data.remise ? (
+              <View style={styles.row}><Text style={styles.rowLabel}>Remise</Text><Text style={styles.rowValue}>-{formatCurrencyValue(data.remise, devise)}</Text></View>
+            ) : null}
+            <View style={styles.row}><Text style={styles.rowLabel}>Total</Text><Text style={{ ...styles.rowValue, fontSize: 13 }}>{formatCurrencyValue(data.totalMontant, devise)}</Text></View>
+          </View>
+        </View>
+
+        {data.notes ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Notes</Text>
+            <View style={styles.card}>
+              <Text style={styles.bodyText}>{data.notes}</Text>
+            </View>
+          </View>
+        ) : null}
+
+        <Text style={styles.footer}>
+          Document généré par Yourent · {data.title === 'Devis' ? 'Ce devis est valable 30 jours à compter de sa date d\'émission.' : 'Les cautions sont exclues des montants facturés.'}
         </Text>
       </Page>
     </Document>

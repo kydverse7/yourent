@@ -3,11 +3,11 @@ import { Location } from '@/models/Location';
 import { Reservation } from '@/models/Reservation';
 
 type EntityType = 'reservation' | 'location';
-type DocumentType = 'contract' | 'invoice';
+type DocumentType = 'contract' | 'invoice' | 'quote';
 
 type DocumentConfig = {
   prefix: string;
-  field: 'contratNumero' | 'factureNumero';
+  field: 'contratNumero' | 'factureNumero' | '';
 };
 
 const DOCUMENT_CONFIG: Record<DocumentType, DocumentConfig> = {
@@ -18,6 +18,10 @@ const DOCUMENT_CONFIG: Record<DocumentType, DocumentConfig> = {
   invoice: {
     prefix: 'FAC',
     field: 'factureNumero',
+  },
+  quote: {
+    prefix: 'DEV',
+    field: '',
   },
 };
 
@@ -100,4 +104,10 @@ export async function ensureDocumentNumberForEntity(
   }
 
   throw new Error('Impossible d’attribuer un numéro de document');
+}
+export async function generateStandaloneDocumentNumber(
+  documentType: DocumentType,
+  issuedAt = new Date()
+) {
+  return generateNextDocumentNumber(documentType, issuedAt);
 }

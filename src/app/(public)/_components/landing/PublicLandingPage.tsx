@@ -64,7 +64,7 @@ export function PublicLandingPage({
   return (
     <div className="flex flex-col pt-5 pb-10">
       {/* ═══ Hero + Slider ═══ */}
-      <div ref={wrapperRef} className="relative w-full">
+      <div ref={wrapperRef} className="relative w-full flex flex-col gap-[40px]">
         <LandingHeroSection ref={heroRef} />
         <LandingBrandSliderSection
           items={items}

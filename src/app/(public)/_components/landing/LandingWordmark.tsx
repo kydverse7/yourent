@@ -1,9 +1,13 @@
+'use client';
+
 import { motion } from './motion';
+import { useLocale } from '@/lib/i18n';
 
 /**
  * Animated SVG wordmark with stroke-draw + fill reveal.
  */
 export function LandingWordmark() {
+  const { t } = useLocale();
   return (
     <motion.div
       className="flex shrink-0 flex-col items-center px-4 pb-0 pt-2 md:pt-4"
@@ -45,11 +49,11 @@ export function LandingWordmark() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
       >
-        Location de voitures de luxe à Casablanca
+        {t('hero.subline')}
       </motion.p>
       {/* sr-only h1 for SEO — invisible but read by crawlers & screen readers */}
       <h1 className="sr-only">
-        Location de voitures à Casablanca — Yourent, agence de location auto au Maroc
+        {t('hero.pageTitle')}
       </h1>
     </motion.div>
   );

@@ -27,6 +27,8 @@ export const revalidate = 120;
 
 const PAGE_SIZE = 9;
 
+
+
 function buildFilterUrl(
   current: Record<string, string>,
   key: string,
@@ -62,7 +64,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           modele: { $first: '$modele' },
           count: { $sum: 1 },
           countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
-          minTarifRaw: { $min: { $cond: [{ $gt: ['$tarifParJour', 0] }, '$tarifParJour', 999999999] } },
+          firstTarifParJour: { $first: '$tarifParJour' },
           categorie: { $first: '$categorie' },
           places: { $first: '$places' },
           carburant: { $first: '$carburant' },
@@ -72,7 +74,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
         },
       },
-      { $sort: { minTarifRaw: 1 } },
+      { $sort: { firstTarifParJour: 1 } },
     ]),
     Vehicle.aggregate([
       { $match: matchFilter },
@@ -93,7 +95,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
     modele: g.modele,
     count: g.count,
     countDispo: g.countDispo,
-    minTarif: g.minTarifRaw >= 999999999 ? 0 : g.minTarifRaw,
+    minTarif: g.firstTarifParJour > 0 ? g.firstTarifParJour : 0,
     categorie: g.categorie,
     places: g.places,
     carburant: g.carburant,

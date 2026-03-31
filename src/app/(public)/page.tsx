@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
-import { resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { getVehicleDisplayPrice, toModelSlug } from '@/lib/utils';
 import { PublicLandingPage } from './_components/landing';
 
 type SliderBrandData = {
@@ -79,7 +79,7 @@ const SIGNATURE_TARGETS = [
 
 const ECONOMIC_TARGETS = [
   { marque: 'fiat', modele: '500' },
-  { marque: 'fiat', modele: '500' },
+  { marque: 'fiat', modele: '500 cabriolet' },
   { marque: 'opel', modele: 'corsa' },
   { marque: 'dacia', modele: 'duster' },
 ];
@@ -109,8 +109,6 @@ async function fetchPublicHomeVehicles(): Promise<HomeVehicle[]> {
     .lean();
 
   return (vehicles as VehicleRecord[]).map((vehicle) => {
-    const pricing = resolveVehiclePricing(vehicle);
-
     return {
       _id: vehicle._id.toString(),
       marque: vehicle.marque,
@@ -118,7 +116,7 @@ async function fetchPublicHomeVehicles(): Promise<HomeVehicle[]> {
       annee: vehicle.annee,
       type: vehicle.type ?? vehicle.categorie ?? 'signature',
       slug: toModelSlug(vehicle.marque, vehicle.modele),
-      tarifJour: pricing.tarifJour,
+      tarifJour: getVehicleDisplayPrice(vehicle),
       featuredPhoto: vehicle.backgroundPhoto ?? vehicle.photoModele ?? vehicle.photos?.[0] ?? null,
       norm: `${vehicle.marque} ${vehicle.modele}`.toLowerCase(),
     };
@@ -133,18 +131,14 @@ function pickBestMatch(matches: HomeVehicle[]) {
     ?? matches.find((item) => item.tarifJour > 0)
     ?? matches[0];
 
-  const prices = matches.map((item) => item.tarifJour).filter((price) => price > 0);
-  const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
-
-  return {
-    ...best,
-    tarifJour: best.tarifJour > 0 ? best.tarifJour : minPrice,
-  };
+  return best;
 }
 
 function buildSliderBrands(vehicles: HomeVehicle[]): SliderBrandData[] {
   return SLIDER_PREFERRED.map((brand, index) => {
-    const found = vehicles.find((vehicle) => vehicle.norm.includes(brand));
+    const found = pickBestMatch(
+      vehicles.filter((vehicle) => vehicle.norm.includes(brand)),
+    );
 
     return {
       brand: SLIDER_DISPLAY[index],

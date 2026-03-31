@@ -14,19 +14,19 @@ describe('formatCurrency', () => {
 
 describe('calcTarifTotal', () => {
   it('calcule le prix pour 3 jours à 200 MAD', () => {
-    const result = calcTarifTotal(3, 200, 0, 0);
+    const result = calcTarifTotal(3, 200);
     expect(result.total).toBe(600);
   });
 
-  it('applique le palier 15+ jours', () => {
-    const result = calcTarifTotal(16, 300, 250, 200);
-    expect(result.palier).toBe('15Plus');
+  it('applique le palier 10+ jours', () => {
+    const result = calcTarifTotal(16, 300, 250);
+    expect(result.palier).toBe('10Plus');
     expect(result.tarifJour).toBe(250);
   });
 
-  it('applique le palier 30+ jours', () => {
-    const result = calcTarifTotal(31, 300, 250, 200);
-    expect(result.palier).toBe('30Plus');
+  it('applique le palier 10+ pour 31 jours aussi', () => {
+    const result = calcTarifTotal(31, 300, 200);
+    expect(result.palier).toBe('10Plus');
     expect(result.tarifJour).toBe(200);
   });
 });
@@ -36,12 +36,12 @@ describe('calcPalier', () => {
     expect(calcPalier(5)).toBe('standard');
   });
 
-  it('retourne "15Plus" pour >= 15 jours', () => {
-    expect(calcPalier(15)).toBe('15Plus');
+  it('retourne "10Plus" pour >= 15 jours', () => {
+    expect(calcPalier(15)).toBe('10Plus');
   });
 
-  it('retourne "30Plus" pour >= 30 jours', () => {
-    expect(calcPalier(30)).toBe('30Plus');
+  it('retourne "10Plus" pour >= 30 jours aussi', () => {
+    expect(calcPalier(30)).toBe('10Plus');
   });
 });
 

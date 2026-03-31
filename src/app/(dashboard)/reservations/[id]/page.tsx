@@ -5,7 +5,7 @@ import { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, CheckCircle2, FileSignature, Receipt, XCircle, Sparkles } from 'lucide-react';
 import { Badge, Button, Skeleton } from '@/components/ui';
-import { formatCurrency, formatDateTime } from '@/lib/utils';
+import { buildPdfViewerUrl, formatCurrency, formatDateTime } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
 import toast from 'react-hot-toast';
 
@@ -216,7 +216,7 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
                 </Button>
               </Link>
               {reservation.contratPdfUrl && (
-                <a href={reservation.contratPdfUrl} target="_blank" rel="noreferrer">
+                <a href={buildPdfViewerUrl(reservation.contratPdfUrl, `${reservation.contratNumero ?? 'contrat'}.pdf`)} target="_blank" rel="noreferrer">
                   <Button variant="secondary" size="sm">Ouvrir le PDF</Button>
                 </a>
               )}
@@ -242,7 +242,7 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
                 </Button>
               </Link>
               {reservation.facturePdfUrl && (
-                <a href={reservation.facturePdfUrl} target="_blank" rel="noreferrer">
+                <a href={buildPdfViewerUrl(reservation.facturePdfUrl, `${reservation.factureNumero ?? 'facture'}.pdf`)} target="_blank" rel="noreferrer">
                   <Button variant="secondary" size="sm">Ouvrir le PDF</Button>
                 </a>
               )}

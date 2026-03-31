@@ -9,6 +9,17 @@ const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf
 const IMAGE_MAX_BYTES = 5 * 1024 * 1024; // 5 Mo
 const PDF_MAX_BYTES = 10 * 1024 * 1024; // 10 Mo
 
+function buildPdfPublicId(fileName: string): string {
+  const baseName = fileName
+    .replace(/\.[^.]+$/, '')
+    .trim()
+    .replace(/[^a-zA-Z0-9_-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  return `${baseName || 'document'}-${Date.now()}.pdf`;
+}
+
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return apiError('Non autorisé', 401);
@@ -40,9 +51,15 @@ export async function POST(req: NextRequest) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
+  const isPdf = file.type === 'application/pdf';
 
   try {
-    const { url, publicId } = await uploadToCloudinary(buffer, folder);
+    const { url, publicId } = await uploadToCloudinary(
+      buffer,
+      folder,
+      isPdf ? buildPdfPublicId(file.name) : undefined,
+      isPdf ? { resourceType: 'raw' } : undefined,
+    );
     return apiSuccess({ url, publicId });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Erreur upload Cloudinary';

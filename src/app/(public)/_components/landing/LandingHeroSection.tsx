@@ -1,5 +1,5 @@
-import { forwardRef, Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import { forwardRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLocale } from '@/lib/i18n';
@@ -10,7 +10,6 @@ import {
   motion,
   fadeDown,
   blurFade,
-  fadeUp,
   stagger,
   staggerItem,
 } from './motion';
@@ -32,12 +31,6 @@ function BrandMarquee() {
   );
 }
 
-/* ─── Lazy-load model-viewer CE ── */
-const ModelViewer = dynamic(
-  () => import('@google/model-viewer').then(() => ({ default: () => null })),
-  { ssr: false },
-);
-
 /* ─── Hero section ──────────────────────────────────── */
 export const LandingHeroSection = forwardRef<HTMLDivElement>(
   function LandingHeroSection(_props, ref) {
@@ -45,7 +38,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
     return (
       <section
         ref={ref}
-        className="relative z-10 mb-12 flex h-[calc(100svh-100px)] min-h-[500px] sm:min-h-[600px] w-full flex-col justify-between px-3 pt-2 md:px-5 md:pt-3 lg:px-6 md:h-[calc(100vh-100px)] md:min-h-0"
+        className="relative z-10 flex h-auto min-h-0 w-full flex-col px-3 pt-2 md:px-5 md:pt-3 lg:px-6"
       >
         {/* ── hero panel background ── */}
         <motion.div
@@ -81,57 +74,50 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
           <LandingWordmark />
         </motion.div>
 
-        {/* ── 3D Model — spinning below subtitle ── */}
+        {/* ── Macan hero photo — futuristic reveal ── */}
         <motion.div
-          className="relative z-20 mx-auto mt-2 w-full max-w-md md:max-w-lg"
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
+          className="relative z-20 mx-auto mt-4 w-full max-w-sm sm:max-w-md md:max-w-xl"
+          initial={{ opacity: 0, scale: 0.88, y: 40, filter: 'blur(18px) brightness(1.6)' }}
+          animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px) brightness(1)' }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
         >
-          <Suspense fallback={null}>
-            <ModelViewer />
-            {/* @ts-ignore — model-viewer CE */}
-            <model-viewer
-              src="/models/porsche_macan.glb"
-              alt="Yourent — Location voiture Casablanca"
-              auto-rotate
-              auto-rotate-delay={0}
-              rotation-per-second="36deg"
-              camera-orbit="45deg 65deg 105%"
-              interaction-prompt="none"
-              disable-zoom
-              disable-pan
-              disable-tap
-              style={{
-                width: '100%',
-                height: '280px',
-                ['--poster-color' as string]: 'transparent',
-              }}
-              environment-image="neutral"
-              shadow-intensity="0.4"
-              exposure="0.9"
+          {/* glow behind the car */}
+          <motion.div
+            className="absolute inset-0 -z-10 rounded-full"
+            style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 60%, rgba(201,168,76,0.22), transparent 70%)' }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1.15 }}
+            transition={{ duration: 1.4, ease: 'easeOut', delay: 0.9 }}
+          />
+          <div className="relative aspect-[16/9] w-full drop-shadow-[0_24px_60px_rgba(201,168,76,0.18)]">
+            <Image
+              src="/porshe-macan.png?v=2"
+              alt="Porsche Macan — Yourent Location Casablanca"
+              fill
+              priority
+              className="object-contain"
+              sizes="(max-width: 640px) 90vw, (max-width: 768px) 70vw, 540px"
             />
-          </Suspense>
+          </div>
         </motion.div>
 
-        {/* spacer — push bottom content down */}
-        <div className="flex-1" />
+
 
         {/* ── bottom pills + marquee — staggered slide-up ── */}
         <motion.div
-          className="relative z-40 flex shrink-0 flex-col items-center gap-4 px-4 pb-5 md:px-6 md:pb-8"
+          className="relative z-40 flex shrink-0 flex-col items-center gap-4 px-4 pb-5 pt-6 md:px-6 md:pb-8 md:pt-0"
           variants={stagger(0.15, 0.8)}
           initial="hidden"
           animate="visible"
         >
           <motion.div variants={staggerItem} className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#f3d98a] bg-gradient-to-br from-[#f6e29b] via-[#d8b24f] to-[#b98724] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#000000] shadow-[0_14px_34px_rgba(201,168,76,0.28)]">
-              <Sparkles className="h-3 w-3 text-[#000000]" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#f3d98a] bg-gradient-to-br from-[#f6e29b] via-[#d8b24f] to-[#b98724] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-black shadow-[0_14px_34px_rgba(201,168,76,0.28)]">
+              <Sparkles className="h-3 w-3 text-black" />
               {t('hero.badge')}
             </span>
             <Link
               href="/catalogue"
-              style={{ color: '#000000' }}
+              style={{ color: '#120f09' }}
               className="inline-flex items-center gap-2 rounded-full border border-[#f3d98a] bg-gradient-to-br from-[#f6e29b] via-[#d8b24f] to-[#b98724] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-black shadow-[0_14px_34px_rgba(201,168,76,0.28)] transition-transform duration-200 hover:-translate-y-0.5 pointer-events-auto"
             >
               {t('hero.cta')} <ArrowRight className="h-3 w-3 text-black" />

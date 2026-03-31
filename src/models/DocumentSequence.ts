@@ -1,7 +1,7 @@
 import { Schema, model, models, Document } from 'mongoose';
 
 export interface IDocumentSequence extends Document {
-  documentType: 'contract' | 'invoice';
+  documentType: 'contract' | 'invoice' | 'quote';
   period: string;
   lastValue: number;
   createdAt: Date;
@@ -12,7 +12,7 @@ const DocumentSequenceSchema = new Schema<IDocumentSequence>(
   {
     documentType: {
       type: String,
-      enum: ['contract', 'invoice'],
+      enum: ['contract', 'invoice', 'quote'],
       required: true,
       index: true,
     },
