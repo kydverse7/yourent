@@ -27,7 +27,7 @@ export function LandingSignatureCollectionSection({
   const { t } = useLocale();
   return (
     <section className="lux-container py-16 md:py-24">
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+      <div className="mb-10 flex flex-wrap items-center justify-center gap-6 text-center md:items-end md:justify-between md:text-left">
         <ScrollReveal variants={slideLeft} className="space-y-3">
           <span className="lux-eyebrow">{t('signature.eyebrow')}</span>
           <h2 className="lux-title-sm max-w-[20ch]">
