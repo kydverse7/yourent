@@ -164,7 +164,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             </div>
 
             <a
-              href="tel:+212600000000"
+              href="tel:+212661234567"
               className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:text-cream lg:flex"
             >
               <PhoneCall className="h-4 w-4 text-gold" /> {t('nav.concierge')}
@@ -242,7 +242,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
 
       {/* ── WhatsApp floating button — always visible, bottom-right ── */}
       <motion.a
-        href="https://wa.me/212600000000"
+        href="https://wa.me/212661234567"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform hover:scale-110"
@@ -286,8 +286,8 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             >
               <Link href="/" className="text-cream-muted transition-colors hover:text-cream">{t('nav.home')}</Link>
               <Link href="/catalogue" className="text-cream-muted transition-colors hover:text-cream">{t('footer.catalogue')}</Link>
-              <a href="tel:+212600000000" className="text-cream-muted transition-colors hover:text-cream">{t('footer.contact')}</a>
-              <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" className="text-cream-muted transition-colors hover:text-cream">WhatsApp</a>
+              <a href="tel:+212661234567" className="text-cream-muted transition-colors hover:text-cream">{t('footer.contact')}</a>
+              <a href="https://wa.me/212661234567" target="_blank" rel="noopener noreferrer" className="text-cream-muted transition-colors hover:text-cream">WhatsApp</a>
             </motion.nav>
           </div>
 

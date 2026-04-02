@@ -216,7 +216,7 @@ export default async function PublicHomePage() {
     image: 'https://yourent.ma/image-casablanca.jpg',
     description:
       'Agence de location de voitures à Casablanca, Maroc. Berlines, SUV, voitures de luxe et économiques. Réservation en ligne 7j/7.',
-    telephone: '+212600000000',
+    telephone: '+212661234567',
     email: 'contact@yourent.ma',
     address: {
       '@type': 'PostalAddress',
