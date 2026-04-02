@@ -56,7 +56,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
   const [groups, countResult, brands] = await Promise.all([
     Vehicle.aggregate([
       { $match: matchFilter },
-      { $sort: { tarifParJour: 1 } },
+      { $sort: { tarifParJour: -1 } },
       {
         $group: {
           _id: { marque: '$marque', modele: '$modele' },
@@ -74,7 +74,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
         },
       },
-      { $sort: { firstTarifParJour: 1 } },
+      { $sort: { firstTarifParJour: -1 } },
     ]),
     Vehicle.aggregate([
       { $match: matchFilter },
@@ -116,8 +116,6 @@ export default async function CataloguePage({
   const locale = (cookieStore.get('locale')?.value === 'en' ? 'en' : 'fr') as Locale;
   const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params);
 
-  const types = ['economique', 'berline', 'suv', 'premium', 'utilitaire'];
-
   return (
     <div className="lux-container py-8 md:py-10">
       <div className="lux-page-head mb-8">
@@ -137,7 +135,7 @@ export default async function CataloguePage({
       <div className="sticky top-20 z-20 -mx-2 rounded-2xl bg-noir-root/80 px-2 py-3 backdrop-blur-xl sm:-mx-0 sm:px-0">
         {/* Brand filter */}
         {brands.length > 1 && (
-          <div className="lux-filter-bar mb-3">
+          <div className="lux-filter-bar">
             <Link
               href={buildFilterUrl(params, 'marque', undefined)}
               className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
@@ -163,33 +161,6 @@ export default async function CataloguePage({
             ))}
           </div>
         )}
-
-        {/* Type filter */}
-        <div className="lux-filter-bar">
-          <Link
-            href={buildFilterUrl(params, 'type', undefined)}
-            className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-              !params.type
-                ? 'bg-gold text-noir-root'
-                : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
-            }`}
-          >
-            {tr(locale, 'cat.allTypes')}
-          </Link>
-          {types.map((t) => (
-            <Link
-              key={t}
-              href={buildFilterUrl(params, 'type', t)}
-              className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] capitalize transition-colors ${
-                params.type === t
-                  ? 'bg-gold text-noir-root'
-                  : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
-              }`}
-            >
-              {t}
-            </Link>
-          ))}
-        </div>
       </div>
 
       <div className="mt-6">
