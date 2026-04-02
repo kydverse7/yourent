@@ -9,6 +9,7 @@ import {
   motion,
   AnimatePresence,
   brandInfoVariants,
+  carSlideVariants,
   fadeUp,
   fadeDown,
   ScrollReveal,
@@ -104,10 +105,11 @@ export function LandingBrandSliderSection({
             <motion.div
               key={active.brand + '-photo'}
               className="pointer-events-none relative z-30 w-[85%] max-w-[420px] md:w-[48%] md:max-w-[540px]"
-              initial={{ opacity: 0, x: isRtl ? 40 : -40, scale: 0.92 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: isRtl ? -40 : 40, scale: 0.92 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              variants={carSlideVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              style={{ perspective: 1200 }}
             >
               <div className="relative aspect-[16/9] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <Image

@@ -340,7 +340,8 @@
 .lp-marquee-track {
   display: flex;
   width: max-content;
-  animation: lpMarquee 26s linear infinite;
+  animation: lpMarquee 32s linear infinite;
+  direction: ltr;
 }
 
 .lp-marquee-item {

@@ -139,7 +139,7 @@ export function LandingHeroTopBar() {
           initial="hidden"
           animate="visible"
         >
-          {SOCIALS.map(({ label, href, icon }) => {
+          {SOCIALS.filter(s => s.icon !== 'WhatsApp').map(({ label, href, icon }) => {
             const Icon = ICON_MAP[icon];
             if (icon === 'TikTok') {
               return (

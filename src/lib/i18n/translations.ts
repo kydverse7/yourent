@@ -3,7 +3,9 @@ export type Locale = 'fr' | 'en' | 'ar';
 const fr: Record<string, string> = {
   /* ── Nav / Layout ────────────────────────── */
   'nav.home': 'Accueil',
-  'nav.catalogue': 'Location voitures',
+  'nav.catalogue': 'Nos véhicules',
+  'nav.process': 'Comment ça marche',
+  'nav.faq': 'FAQ',
   'nav.contact': 'Contact',
   'nav.agency': 'Espace agence',
   'nav.concierge': 'Concierge 7j/7',
@@ -215,7 +217,9 @@ const fr: Record<string, string> = {
 const en: Record<string, string> = {
   /* ── Nav / Layout ────────────────────────── */
   'nav.home': 'Home',
-  'nav.catalogue': 'Car Rental',
+  'nav.catalogue': 'Our Vehicles',
+  'nav.process': 'How It Works',
+  'nav.faq': 'FAQ',
   'nav.contact': 'Contact',
   'nav.agency': 'Agency Portal',
   'nav.concierge': 'Concierge 24/7',
@@ -427,7 +431,9 @@ const en: Record<string, string> = {
 const ar: Record<string, string> = {
   /* ── Nav / Layout ────────────────────────── */
   'nav.home': 'الرئيسية',
-  'nav.catalogue': 'تأجير السيارات',
+  'nav.catalogue': 'سياراتنا',
+  'nav.process': 'كيف يعمل',
+  'nav.faq': 'الأسئلة الشائعة',
   'nav.contact': 'اتصل بنا',
   'nav.agency': 'فضاء الوكالة',
   'nav.concierge': 'خدمة الكونسيرج 7/7',

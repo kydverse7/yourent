@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { toModelSlug } from '@/lib/utils';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { t as tr, tp, type Locale } from '@/lib/i18n';
 import { CatalogueInfiniteGrid } from './_components/CatalogueInfiniteGrid';
 
@@ -130,12 +130,7 @@ export default async function CataloguePage({
             {tp(locale, 'cat.subtitle', total)}
           </p>
         </div>
-        <Link
-          href="/login"
-          className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-cream transition-colors hover:border-gold/20 hover:text-gold"
-        >
-          {tr(locale, 'nav.agency')} <ArrowRight className="h-4 w-4" />
-        </Link>
+
       </div>
 
       {/* ── Sticky filter bar ── */}

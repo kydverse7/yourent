@@ -11,9 +11,9 @@ export function LandingWordmark() {
   return (
     <motion.div
       className="flex shrink-0 flex-col items-center px-4 pb-0 pt-2 md:pt-4"
-      initial={{ opacity: 0, scale: 0.9, filter: 'blur(16px)' }}
-      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
       <svg viewBox="0 0 1200 200" className="lp-wordmark" aria-label="Yourent">
         <defs>
@@ -47,7 +47,7 @@ export function LandingWordmark() {
         className="lp-subline mt-2 md:mt-3"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.9 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
       >
         {t('hero.subline')}
       </motion.p>

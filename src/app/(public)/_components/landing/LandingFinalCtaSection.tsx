@@ -4,17 +4,18 @@ import { useLocale } from '@/lib/i18n';
 import {
   motion,
   scaleUp,
-  fadeUp,
+  popIn,
+  tiltUp,
   staggerItem,
   ScrollReveal,
   StaggerContainer,
 } from './motion';
 
 /**
- * Final CTA block.
+ * Final CTA block + copyright.
  */
 export function LandingFinalCtaSection() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   return (
     <section className="lux-container pb-24">
       <ScrollReveal variants={scaleUp} viewport={{ once: true, amount: 0.25 }}>
@@ -22,7 +23,7 @@ export function LandingFinalCtaSection() {
           <div className="lp-cta-glow" aria-hidden="true" />
           <motion.span
             className="lux-eyebrow relative z-10"
-            variants={fadeUp}
+            variants={popIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -31,10 +32,10 @@ export function LandingFinalCtaSection() {
           </motion.span>
           <motion.h2
             className="lux-title-sm relative z-10 max-w-[22ch]"
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            variants={tiltUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
             {t('cta.title')}
           </motion.h2>
@@ -62,6 +63,10 @@ export function LandingFinalCtaSection() {
           </StaggerContainer>
         </div>
       </ScrollReveal>
+
+      <p className="mt-10 text-center text-sm text-cream-faint">
+        © {new Date().getFullYear()} Yourent — Casablanca, {locale === 'ar' ? 'المغرب' : locale === 'fr' ? 'Maroc' : 'Morocco'}
+      </p>
     </section>
   );
 }

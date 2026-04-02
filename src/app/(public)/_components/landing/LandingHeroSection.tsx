@@ -8,11 +8,12 @@ import { LandingWordmark } from './LandingWordmark';
 import { MARQUEE_BRANDS } from './constants';
 import {
   motion,
-  fadeDown,
-  blurFade,
-  stagger,
+  heroBase,
   staggerItem,
 } from './motion';
+
+const LOADER_DURATION = 2.8; // must match YourentLoader DURATION_MS
+const hero = heroBase(LOADER_DURATION + 0.1);
 
 /* ─── Brand marquee ─────────────────────────────────── */
 function BrandMarquee() {
@@ -43,9 +44,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
         {/* ── hero panel background ── */}
         <motion.div
           className="absolute inset-x-3 md:inset-x-5 lg:inset-x-6 top-0 bottom-0 -z-10 rounded-[32px] border border-[rgba(201,168,76,0.12)] lp-hero-bg overflow-hidden"
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          {...hero.bg}
         >
           <div className="lp-hero-top-glow" aria-hidden="true" />
           <div className="lp-hero-sweep" aria-hidden="true" />
@@ -56,20 +55,14 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
 
         {/* ── Top bar — slides down ── */}
         <motion.div
-          variants={fadeDown}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.2 }}
+          {...hero.topBar}
         >
           <LandingHeroTopBar />
         </motion.div>
 
         {/* ── Wordmark — blur reveal ── */}
         <motion.div
-          variants={blurFade}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.5 }}
+          {...hero.wordmark}
         >
           <LandingWordmark />
         </motion.div>
@@ -77,17 +70,13 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
         {/* ── Macan hero photo — futuristic reveal ── */}
         <motion.div
           className="relative z-20 mx-auto mt-4 w-full max-w-sm sm:max-w-md md:max-w-xl"
-          initial={{ opacity: 0, scale: 0.88, y: 40, filter: 'blur(18px) brightness(1.6)' }}
-          animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px) brightness(1)' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
+          {...hero.car}
         >
           {/* glow behind the car */}
           <motion.div
             className="absolute inset-0 -z-10 rounded-full"
             style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 60%, rgba(201,168,76,0.22), transparent 70%)' }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1.15 }}
-            transition={{ duration: 1.4, ease: 'easeOut', delay: 0.9 }}
+            {...hero.carGlow}
           />
           <div className="relative aspect-[16/9] w-full drop-shadow-[0_24px_60px_rgba(201,168,76,0.18)]">
             <Image
@@ -106,7 +95,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
         {/* ── bottom pills + marquee — staggered slide-up ── */}
         <motion.div
           className="relative z-40 flex shrink-0 flex-col items-center gap-4 px-4 pb-5 pt-6 md:px-6 md:pb-8 md:pt-0"
-          variants={stagger(0.15, 0.8)}
+          variants={hero.pills(0.15)}
           initial="hidden"
           animate="visible"
         >

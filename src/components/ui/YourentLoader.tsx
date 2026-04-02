@@ -10,17 +10,14 @@ import { motion, AnimatePresence } from 'framer-motion';
    Shows once per session (sessionStorage gate).
 ───────────────────────────────────────────────────────── */
 
-const SESSION_KEY = 'yourent-intro-seen';
 const DURATION_MS = 2800;
 
 export function YourentLoader() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (sessionStorage.getItem(SESSION_KEY)) return;
-    setVisible(true);
     document.body.style.overflow = 'hidden';
 
     const start = Date.now();
@@ -34,7 +31,6 @@ export function YourentLoader() {
 
     const timer = setTimeout(() => {
       setVisible(false);
-      sessionStorage.setItem(SESSION_KEY, '1');
       document.body.style.overflow = '';
     }, DURATION_MS);
 

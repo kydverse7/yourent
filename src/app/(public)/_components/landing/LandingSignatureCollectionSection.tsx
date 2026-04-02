@@ -7,7 +7,7 @@ import {
   motion,
   ScrollReveal,
   StaggerContainer,
-  staggerScale,
+  staggerCard,
   fadeUp,
   slideLeft,
   slideRight,
@@ -50,7 +50,7 @@ export function LandingSignatureCollectionSection({
         viewport={{ once: true, amount: 0.1 }}
       >
         {vehicles.map((vehicle, i) => (
-          <motion.div key={vehicle._id} variants={staggerScale}>
+          <motion.div key={vehicle._id} variants={staggerCard} style={{ perspective: 1000 }}>
             <Link
               href={`/catalogue/${vehicle.slug}`}
               className="group lux-panel block overflow-hidden transition-transform duration-300 hover:-translate-y-1"

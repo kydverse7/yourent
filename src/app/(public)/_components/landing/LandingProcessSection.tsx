@@ -3,9 +3,10 @@ import {
   motion,
   ScrollReveal,
   StaggerContainer,
-  staggerItem,
+  staggerCard,
   blurFade,
   drawLine,
+  popIn,
 } from './motion';
 
 const STEP_KEYS = ['s1', 's2', 's3'] as const;
@@ -13,7 +14,7 @@ const STEP_KEYS = ['s1', 's2', 's3'] as const;
 export function LandingProcessSection() {
   const { t } = useLocale();
   return (
-    <section className="lux-container pb-20 md:pb-28">
+    <section id="process" className="lux-container pb-20 md:pb-28 scroll-mt-24">
       <div className="lp-process">
         <ScrollReveal variants={blurFade} className="mb-12 text-center">
           <span className="lux-eyebrow">{t('process.eyebrow')}</span>
@@ -35,13 +36,13 @@ export function LandingProcessSection() {
           viewport={{ once: true, amount: 0.15 }}
         >
           {STEP_KEYS.map((key, i) => (
-            <motion.div key={key} className="lp-step" variants={staggerItem}>
+            <motion.div key={key} className="lp-step" variants={staggerCard} style={{ perspective: 1000 }}>
               <motion.span
                 className="lp-step-num"
-                initial={{ scale: 0.5, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
+                variants={popIn}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               >
                 {String(i + 1).padStart(2, '0')}
               </motion.span>

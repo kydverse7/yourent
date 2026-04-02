@@ -7,8 +7,8 @@ import {
   motion,
   ScrollReveal,
   StaggerContainer,
-  staggerItem,
-  blurFade,
+  staggerCard,
+  tiltUp,
 } from './motion';
 
 /* ── φ = 1.618 — golden ratio design notes ──
@@ -125,7 +125,7 @@ export function LandingWhySection() {
         <div className="pointer-events-none absolute inset-x-0 -top-px h-48 rounded-t-[28px] bg-[radial-gradient(ellipse_61.8%_38.2%_at_50%_0%,rgba(201,168,76,0.10),transparent)]" />
 
         {/* ── Header — left aligned ── */}
-        <ScrollReveal variants={blurFade} className="relative mb-10 md:mb-14">
+        <ScrollReveal variants={tiltUp} className="relative mb-10 md:mb-14">
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('why.eyebrow')}
           </span>
@@ -146,7 +146,8 @@ export function LandingWhySection() {
             return (
               <motion.div
                 key={i}
-                variants={staggerItem}
+                variants={staggerCard}
+                style={{ perspective: 1000 }}
                 className="group relative flex flex-col items-center rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all hover:border-[#c9a84c]/15 hover:bg-white/[0.04] md:p-8"
               >
                 {/* Icon — φ² = 48 px */}

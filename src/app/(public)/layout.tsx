@@ -62,11 +62,12 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
 
   const currentLang = LANGUAGES.find((l) => l.code === locale) ?? LANGUAGES[0];
 
-  const NAV_ITEMS = [
+  const NAV_ITEMS: { href: string; key: string; isExternal?: boolean; isAnchor?: boolean }[] = [
     { href: '/', key: 'nav.home' },
     { href: '/catalogue', key: 'nav.catalogue' },
-    { href: 'tel:+212600000000', key: 'nav.contact', isExternal: true },
-    { href: '/login', key: 'nav.agency' },
+    { href: '/#process', key: 'nav.process', isAnchor: true },
+    { href: '/#faq', key: 'nav.faq', isAnchor: true },
+    { href: '/#contact', key: 'nav.contact', isAnchor: true },
   ];
 
   return (
@@ -98,9 +99,9 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* ── Desktop nav ── */}
-          <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-6 text-sm text-cream-muted md:flex lg:gap-8">
-            {NAV_ITEMS.map(({ href, key, isExternal }, i) => {
-              const Comp = isExternal ? 'a' : Link;
+          <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-5 text-sm text-cream-muted md:flex lg:gap-7">
+            {NAV_ITEMS.map(({ href, key, isExternal, isAnchor }, i) => {
+              const Comp = isExternal || isAnchor ? 'a' : Link;
               return (
                 <motion.span
                   key={key}
@@ -108,7 +109,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 + i * 0.07, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Comp href={href} className="transition-colors hover:text-cream">
+                  <Comp href={href} className="transition-colors hover:text-gold">
                     {t(key)}
                   </Comp>
                 </motion.span>
@@ -188,26 +189,35 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-[50] flex flex-col bg-noir-root/95 backdrop-blur-2xl pt-24 md:hidden"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[50] flex flex-col bg-noir-root/95 backdrop-blur-2xl md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <nav className="flex flex-col items-center gap-6 px-6">
-              {NAV_ITEMS.map(({ href, key, isExternal }, i) => {
-                const Comp = isExternal ? 'a' : Link;
+            {/* Close button — fixed top-right, large & gold */}
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-6 right-5 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-gold/40 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
+              aria-label={t('aria.menuClose')}
+            >
+              <X className="h-7 w-7" strokeWidth={2.5} />
+            </button>
+
+            <nav className="flex flex-1 flex-col items-center justify-center gap-7 px-6">
+              {NAV_ITEMS.map(({ href, key, isExternal, isAnchor }, i) => {
+                const Comp = isExternal || isAnchor ? 'a' : Link;
                 return (
                   <motion.div
                     key={key}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.08 + i * 0.08, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Comp
                       href={href}
                       onClick={() => setMenuOpen(false)}
-                      className="text-xl font-semibold text-cream-muted transition-colors hover:text-gold"
+                      className="text-2xl font-semibold tracking-wide text-cream-muted transition-colors hover:text-gold"
                     >
                       {t(key)}
                     </Comp>
@@ -215,12 +225,12 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                 );
               })}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, duration: 0.4 }}
+                transition={{ delay: 0.4, duration: 0.45 }}
               >
-                <Link href="/catalogue" onClick={() => setMenuOpen(false)} className="btn-gold mt-4">
-                  {t('nav.book')} <ArrowUpRight className="h-4 w-4" />
+                <Link href="/catalogue" onClick={() => setMenuOpen(false)} className="btn-gold mt-4 text-lg px-8 py-3">
+                  {t('nav.book')} <ArrowUpRight className="h-5 w-5" />
                 </Link>
               </motion.div>
             </nav>
@@ -244,6 +254,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
         <WhatsAppIcon className="h-6 w-6" />
       </motion.a>
 
+      {pathname !== '/' && (
       <motion.footer
         className="border-t border-white/5 py-10"
         initial={{ opacity: 0 }}
@@ -290,6 +301,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </motion.footer>
+      )}
     </div>
   );
 }

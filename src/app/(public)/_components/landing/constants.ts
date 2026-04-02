@@ -27,8 +27,9 @@ export const DISPLAY_BRANDS = [
 /* ─────────── Marquee (hero) — generic brand names ─── */
 
 export const MARQUEE_BRANDS = [
-  'Porsche', 'Mercedes', 'Range Rover',
-  'Audi', 'Volkswagen', 'Dacia', 'BMW',
+  'Porsche', 'Range Rover', 'Mercedes', 'BMW',
+  'Audi', 'Volkswagen', 'Peugeot', 'Toyota',
+  'Fiat', 'Opel', 'Renault', 'Dacia',
 ] as const;
 
 /* ─────────── Social links ─────────── */

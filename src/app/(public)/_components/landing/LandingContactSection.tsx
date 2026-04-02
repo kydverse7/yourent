@@ -20,11 +20,11 @@ import {
   motion,
   ScrollReveal,
   fadeUp,
-  blurFade,
+  tiltUp,
   slideLeft,
   slideRight,
   stagger,
-  staggerItem,
+  staggerCard,
   useScroll,
   useTransform,
 } from './motion';
@@ -125,7 +125,7 @@ export function LandingContactSection() {
   ];
 
   return (
-    <section ref={sectionRef} className="ct-section">
+    <section id="contact" ref={sectionRef} className="ct-section scroll-mt-24">
       {/* ═══ Parallax background image ═══ */}
       <div className="ct-parallax-wrap" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -156,7 +156,7 @@ export function LandingContactSection() {
         </ScrollReveal>
 
         {/* ── Title block ── */}
-        <ScrollReveal variants={blurFade} className="ct-title-block">
+        <ScrollReveal variants={tiltUp} className="ct-title-block">
           <div className="ct-title-row">
             <h2 className="ct-main-title">
               <span className="ct-main-title-light">{t('contact.title')} </span>
@@ -200,7 +200,7 @@ export function LandingContactSection() {
           viewport={{ once: true, amount: 0.5 }}
         >
           {STATS.map((s, i) => (
-            <motion.div key={s.label} className="ct-strip-stat" variants={staggerItem}>
+            <motion.div key={s.label} className="ct-strip-stat" variants={staggerCard}>
               <span className="ct-strip-num">
                 {s.number}
                 {s.icon && <Star className="h-3.5 w-3.5 fill-[#c9a84c] text-[#c9a84c] inline ml-1 -mt-0.5" />}
@@ -248,7 +248,7 @@ export function LandingContactSection() {
                 );
 
                 return (
-                  <motion.div key={item.label} variants={staggerItem}>
+                  <motion.div key={item.label} variants={staggerCard}>
                     {item.href ? (
                       <a
                         href={item.href}
@@ -286,7 +286,7 @@ export function LandingContactSection() {
                       rel="noreferrer"
                       aria-label={label}
                       className="ct-social-icon"
-                      variants={staggerItem}
+                      variants={staggerCard}
                       whileHover={{ scale: 1.15, y: -3 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 14 }}
                     >
