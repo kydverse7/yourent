@@ -1,9 +1,9 @@
 import NextAuth, { type DefaultSession } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
-import { connectDB } from './db';
-import { User } from '@/models/User';
 import { z } from 'zod';
+
+// Dynamic imports to avoid Edge Runtime errors in middleware
+// (mongoose & bcryptjs are Node.js-only and crash on Edge)
 
 // Extension du type Session pour inclure les champs custom
 declare module 'next-auth' {
@@ -39,6 +39,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) return null;
+
+        const [{ connectDB }, { User }, bcrypt] = await Promise.all([
+          import('./db'),
+          import('@/models/User'),
+          import('bcryptjs'),
+        ]);
 
         await connectDB();
         // select('+passwordHash') car passwordHash est exclu par défaut
