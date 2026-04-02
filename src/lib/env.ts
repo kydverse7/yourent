@@ -13,18 +13,18 @@ const envSchema = z.object({
   CLOUDINARY_API_KEY: z.string().min(1),
   CLOUDINARY_API_SECRET: z.string().min(1),
 
-  // Resend
-  RESEND_API_KEY: z.string().min(1),
+  // Resend (optional — notifications disabled if missing)
+  RESEND_API_KEY: z.string().optional(),
 
-  // Twilio
-  TWILIO_ACCOUNT_SID: z.string().min(1),
-  TWILIO_AUTH_TOKEN: z.string().min(1),
-  TWILIO_PHONE_NUMBER: z.string().min(1),
-  TWILIO_WHATSAPP_NUMBER: z.string().min(1),
+  // Twilio (optional — SMS/WhatsApp disabled if missing)
+  TWILIO_ACCOUNT_SID: z.string().optional(),
+  TWILIO_AUTH_TOKEN: z.string().optional(),
+  TWILIO_PHONE_NUMBER: z.string().optional(),
+  TWILIO_WHATSAPP_NUMBER: z.string().optional(),
 
-  // Upstash Redis
-  UPSTASH_REDIS_REST_URL: z.string().url(),
-  UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
+  // Upstash Redis (optional — rate-limiting disabled if missing)
+  UPSTASH_REDIS_REST_URL: z.string().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
 
   // App
   NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
