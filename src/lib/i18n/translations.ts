@@ -69,7 +69,7 @@ const fr: Record<string, string> = {
   'signature.eyebrow': 'Notre collection berline à louer',
   'signature.title': 'Location de berlines premium à Casablanca',
   'signature.subtitle':
-    "Une sélection premium pensée pour les arrivées qui comptent, les séjours haut de gamme et les usages à forte valeur d\u2019image.",
+    "Une sélection premium pensée pour les arrivées qui comptent, les séjours haut de gamme et les usages à forte valeur d’image.",
   'signature.cta': 'Voir tout le catalogue',
   'signature.book': 'Réserver',
   'signature.from': 'À partir de',
@@ -77,12 +77,12 @@ const fr: Record<string, string> = {
 
   /* ── Why YouRent ──────────────────────────── */
   'why.eyebrow': 'Pourquoi YouRent',
-  'why.title': "L\u2019excellence au service de votre mobilité",
+  'why.title': "L’excellence au service de votre mobilité",
   'why.subtitle':
     'Chaque détail est pensé pour que votre location soit simple, premium et sans stress.',
   'why.delivery.title': 'Livraison gratuite',
   'why.delivery.desc':
-    "Livraison incluse dans tout Casablanca et à l\u2019aéroport Mohammed\u00a0V.",
+    "Livraison incluse dans tout Casablanca et à l’aéroport Mohammed V.",
   'why.delivery.stat': '0 DH',
   'why.delivery.label': 'frais de livraison',
   'why.insurance.title': 'Assurance franchise tout risque',
@@ -120,7 +120,7 @@ const fr: Record<string, string> = {
     'Réservez en quelques clics, puis notre équipe confirme avec vous la disponibilité et les modalités.',
   'process.s3.title': 'Recevoir le véhicule',
   'process.s3.body':
-    "Livraison à votre hôtel, à l\u2019aéroport ou à l\u2019adresse de votre choix. 7j/7.",
+    "Livraison à votre hôtel, à l’aéroport ou à l’adresse de votre choix. 7j/7.",
 
   /* ── FAQ ──────────────────────────────────── */
   'faq.eyebrow': 'questions fréquentes',
@@ -129,22 +129,22 @@ const fr: Record<string, string> = {
     'Les réponses aux questions les plus posées par nos clients à Casablanca.',
   'faq.q1': 'Quels documents faut-il pour louer un véhicule ?',
   'faq.a1':
-    "Il suffit d\u2019une pièce d\u2019identité valide (CIN ou passeport), d\u2019un permis de conduire de plus de 2\u00a0ans et d\u2019un justificatif de domicile. Pour les touristes étrangers, le permis international est accepté.",
+    "Il suffit d’une pièce d’identité valide (CIN ou passeport), d’un permis de conduire de plus de 2 ans et d’un justificatif de domicile. Pour les touristes étrangers, le permis international est accepté.",
   'faq.q2': 'La livraison du véhicule est-elle incluse ?',
   'faq.a2':
-    "Oui, la livraison est incluse dans tout Casablanca. Nous proposons également la livraison à l\u2019aéroport Mohammed\u00a0V et à Mohammedia moyennant un léger supplément.",
+    "Oui, la livraison est incluse dans tout Casablanca. Nous proposons également la livraison à l’aéroport Mohammed V et à Mohammedia moyennant un léger supplément.",
   'faq.q3': 'Quelle est la durée minimum de location ?',
   'faq.a3':
-    "La durée minimum est de 3\u00a0jours. Pour les locations longue durée (11\u00a0jours et plus), vous bénéficiez automatiquement d\u2019un tarif préférentiel.",
+    "La durée minimum est de 3 jours. Pour les locations longue durée (11 jours et plus), vous bénéficiez automatiquement d’un tarif préférentiel.",
   'faq.q4': 'Comment fonctionne le dépôt de garantie ?',
   'faq.a4':
     "Un dépôt de garantie est demandé au départ, par chèque ou espèces, dont le montant varie selon le véhicule. Il est intégralement restitué au retour du véhicule en bon état.",
-  'faq.q5': "Que se passe-t-il en cas de panne ou d\u2019accident ?",
+  'faq.q5': "Que se passe-t-il en cas de panne ou d’accident ?",
   'faq.a5':
-    "Tous nos véhicules sont assurés tous risques. En cas de panne, notre assistance 24h/7j vous envoie un remplacement dans les plus brefs délais. En cas d\u2019accident, notre équipe vous accompagne dans toutes les démarches.",
+    "Tous nos véhicules sont assurés tous risques. En cas de panne, notre assistance 24h/7j vous envoie un remplacement dans les plus brefs délais. En cas d’accident, notre équipe vous accompagne dans toutes les démarches.",
   'faq.q6': 'Puis-je modifier ou annuler ma réservation ?',
   'faq.a6':
-    "Toute réservation peut être modifiée ou annulée sans frais jusqu\u2019à 24\u00a0h avant la date de prise en charge. Au-delà, des frais d\u2019annulation peuvent s\u2019appliquer.",
+    "Toute réservation peut être modifiée ou annulée sans frais jusqu’à 24 h avant la date de prise en charge. Au-delà, des frais d’annulation peuvent s’appliquer.",
 
   /* ── Final CTA ────────────────────────────── */
   'cta.eyebrow': 'Réservez votre voiture au Maroc',
@@ -163,7 +163,7 @@ const fr: Record<string, string> = {
   'cat.sortDefault': 'Prix croissant',
   'cat.sortDesc': 'Prix décroissant',
   'cat.sortName': 'Nom A–Z',
-  'cat.perDay': '/jour · min 3\u00a0jours',
+  'cat.perDay': '/jour · min 3 jours',
   'cat.seeOptions': 'Voir les options',
   'cat.bookNow': 'Réserver',
   'cat.dispo': 'dispo',
@@ -227,7 +227,7 @@ const en: Record<string, string> = {
 
   /* ── Footer ─────────────────────────────── */
   'footer.desc':
-    'Car rental agency in Casablanca, Morocco. Sedans, SUVs, luxury & economy cars — Mohammed\u00a0V airport delivery, online booking 24/7.',
+    'Car rental agency in Casablanca, Morocco. Sedans, SUVs, luxury & economy cars — Mohammed V airport delivery, online booking 24/7.',
   'footer.catalogue': 'Car Catalogue',
   'footer.contact': 'Contact us',
   'footer.seo':
@@ -296,7 +296,7 @@ const en: Record<string, string> = {
     'Every detail is designed to make your rental simple, premium and stress-free.',
   'why.delivery.title': 'Free Delivery',
   'why.delivery.desc':
-    'Complimentary delivery across Casablanca and Mohammed\u00a0V Airport.',
+    'Complimentary delivery across Casablanca and Mohammed V Airport.',
   'why.delivery.stat': '0 MAD',
   'why.delivery.label': 'delivery fees',
   'why.insurance.title': 'Full Insurance',
@@ -334,7 +334,7 @@ const en: Record<string, string> = {
     'Book in a few clicks, then our team confirms availability and details with you.',
   'process.s3.title': 'Receive your vehicle',
   'process.s3.body':
-    'Delivery to your hotel, airport or address of choice. 7\u00a0days a week.',
+    'Delivery to your hotel, airport or address of choice. 7 days a week.',
 
   /* ── FAQ ──────────────────────────────────── */
   'faq.eyebrow': 'frequently asked questions',
@@ -343,13 +343,13 @@ const en: Record<string, string> = {
     'Answers to the most common questions from our clients in Casablanca.',
   'faq.q1': 'What documents do I need to rent a vehicle?',
   'faq.a1':
-    'You need a valid ID (national ID or passport), a driving licence held for at least 2\u00a0years, and proof of address. For foreign tourists, an international driving permit is accepted.',
+    'You need a valid ID (national ID or passport), a driving licence held for at least 2 years, and proof of address. For foreign tourists, an international driving permit is accepted.',
   'faq.q2': 'Is vehicle delivery included?',
   'faq.a2':
-    'Yes, delivery is included throughout Casablanca. We also offer delivery to Mohammed\u00a0V Airport and Mohammedia for a small additional fee.',
+    'Yes, delivery is included throughout Casablanca. We also offer delivery to Mohammed V Airport and Mohammedia for a small additional fee.',
   'faq.q3': 'What is the minimum rental duration?',
   'faq.a3':
-    'The minimum duration is 3\u00a0days. For long-term rentals (11\u00a0days or more), you automatically benefit from a preferential rate.',
+    'The minimum duration is 3 days. For long-term rentals (11 days or more), you automatically benefit from a preferential rate.',
   'faq.q4': 'How does the security deposit work?',
   'faq.a4':
     'A deposit is required at pick-up, by cheque or cash — the amount varies depending on the vehicle. It is fully refunded when the vehicle is returned in good condition.',
@@ -358,7 +358,7 @@ const en: Record<string, string> = {
     'All our vehicles are fully insured. In case of breakdown, our 24/7 assistance sends a replacement as soon as possible. In case of an accident, our team supports you through all procedures.',
   'faq.q6': 'Can I modify or cancel my reservation?',
   'faq.a6':
-    'Any reservation can be modified or cancelled free of charge up to 24\u00a0hours before the pick-up date. After that, cancellation fees may apply.',
+    'Any reservation can be modified or cancelled free of charge up to 24 hours before the pick-up date. After that, cancellation fees may apply.',
 
   /* ── Final CTA ────────────────────────────── */
   'cta.eyebrow': 'Book your car in Morocco',
@@ -377,7 +377,7 @@ const en: Record<string, string> = {
   'cat.sortDefault': 'Price: Low to High',
   'cat.sortDesc': 'Price: High to Low',
   'cat.sortName': 'Name A–Z',
-  'cat.perDay': '/day · min 3\u00a0days',
+  'cat.perDay': '/day · min 3 days',
   'cat.seeOptions': 'See options',
   'cat.bookNow': 'Book now',
   'cat.dispo': 'available',
@@ -510,7 +510,7 @@ const ar: Record<string, string> = {
     'كل تفصيل مصمم ليجعل تأجيرك بسيطًا وفاخرًا وبدون أي ضغوط.',
   'why.delivery.title': 'توصيل مجاني',
   'why.delivery.desc':
-    'التوصيل مشمول في جميع أنحاء الدار البيضاء وإلى مطار محمد\u00a0الخامس.',
+    'التوصيل مشمول في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس.',
   'why.delivery.stat': '0 DH',
   'why.delivery.label': 'رسوم التوصيل',
   'why.insurance.title': 'تأمين شامل بدون تحمل',
@@ -548,7 +548,7 @@ const ar: Record<string, string> = {
     'احجز ببضع نقرات، ثم يؤكد فريقنا معك التوفر والتفاصيل.',
   'process.s3.title': 'استلم السيارة',
   'process.s3.body':
-    'التوصيل لفندقك أو المطار أو عنوانك المفضل. 7\u00a0أيام في الأسبوع.',
+    'التوصيل لفندقك أو المطار أو عنوانك المفضل. 7 أيام في الأسبوع.',
 
   /* ── FAQ ──────────────────────────────────── */
   'faq.eyebrow': 'أسئلة شائعة',
@@ -560,10 +560,10 @@ const ar: Record<string, string> = {
     'تحتاج فقط إلى هوية سارية المفعول (بطاقة وطنية أو جواز سفر)، ورخصة قيادة لأكثر من سنتين، وإثبات عنوان. بالنسبة للسياح الأجانب، تُقبل رخصة القيادة الدولية.',
   'faq.q2': 'هل توصيل السيارة مشمول في السعر؟',
   'faq.a2':
-    'نعم، التوصيل مشمول في جميع أنحاء الدار البيضاء. كما نوفر التوصيل إلى مطار محمد\u00a0الخامس والمحمدية مقابل رسوم إضافية بسيطة.',
+    'نعم، التوصيل مشمول في جميع أنحاء الدار البيضاء. كما نوفر التوصيل إلى مطار محمد الخامس والمحمدية مقابل رسوم إضافية بسيطة.',
   'faq.q3': 'ما هي المدة الدنيا للتأجير؟',
   'faq.a3':
-    'المدة الدنيا هي 3\u00a0أيام. بالنسبة للتأجير الطويل (11\u00a0يومًا فأكثر)، تستفيد تلقائيًا من سعر تفضيلي.',
+    'المدة الدنيا هي 3 أيام. بالنسبة للتأجير الطويل (11 يومًا فأكثر)، تستفيد تلقائيًا من سعر تفضيلي.',
   'faq.q4': 'كيف يعمل نظام وديعة الضمان؟',
   'faq.a4':
     'يُطلب ضمان عند الاستلام، عبر شيك أو نقدًا، ويختلف المبلغ حسب السيارة. يُسترد بالكامل عند إرجاع السيارة بحالة جيدة.',
@@ -572,7 +572,7 @@ const ar: Record<string, string> = {
     'جميع سياراتنا مؤمّنة بتأمين شامل. في حالة عطل، ترسل خدمة المساعدة 24/7 سيارة بديلة في أسرع وقت. في حالة حادث، يرافقك فريقنا في جميع الإجراءات.',
   'faq.q6': 'هل يمكنني تعديل أو إلغاء حجزي؟',
   'faq.a6':
-    'يمكن تعديل أو إلغاء أي حجز مجانًا حتى 24\u00a0ساعة قبل موعد الاستلام. بعد ذلك، قد تُطبق رسوم إلغاء.',
+    'يمكن تعديل أو إلغاء أي حجز مجانًا حتى 24 ساعة قبل موعد الاستلام. بعد ذلك، قد تُطبق رسوم إلغاء.',
 
   /* ── Final CTA ────────────────────────────── */
   'cta.eyebrow': 'احجز سيارتك في المغرب',
@@ -591,7 +591,7 @@ const ar: Record<string, string> = {
   'cat.sortDefault': 'السعر: من الأقل',
   'cat.sortDesc': 'السعر: من الأعلى',
   'cat.sortName': 'الاسم أ–ي',
-  'cat.perDay': '/يوم · 3\u00a0أيام كحد أدنى',
+  'cat.perDay': '/يوم · 3 أيام كحد أدنى',
   'cat.seeOptions': 'عرض الخيارات',
   'cat.bookNow': 'احجز',
   'cat.dispo': 'متاح',

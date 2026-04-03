@@ -87,15 +87,15 @@ type Step = 1 | 2 | 3 | 4;
 /* ──────── helpers ──────── */
 
 function getClientName(c: ClientItem | null | undefined) {
-  if (!c) return '\u2014';
-  return `${c.prenom ?? ''} ${c.nom ?? ''}`.trim() || '\u2014';
+  if (!c) return '—';
+  return `${c.prenom ?? ''} ${c.nom ?? ''}`.trim() || '—';
 }
 
 function getReservationClientName(r: ReservationListItem) {
   if (r.clientInline)
     return `${r.clientInline.prenom ?? ''} ${r.clientInline.nom ?? ''}`.trim();
   return (
-    `${r.client?.prenom ?? ''} ${r.client?.nom ?? ''}`.trim() || '\u2014'
+    `${r.client?.prenom ?? ''} ${r.client?.nom ?? ''}`.trim() || '—'
   );
 }
 
@@ -113,7 +113,7 @@ function calcNbJoursLocal(debut: string, fin: string) {
 
 const STEPS = [
   { n: 1, label: 'Client' },
-  { n: 2, label: 'V\u00e9hicule' },
+  { n: 2, label: 'Véhicule' },
   { n: 3, label: 'Dates & km' },
   { n: 4, label: 'Caution & confirmation' },
 ] as const;
@@ -176,7 +176,7 @@ function InlineClientForm({
     mutationFn: async () => {
       const e: Record<string, string> = {};
       if (!form.nom.trim()) e.nom = 'Nom requis';
-      if (!form.telephone.trim()) e.telephone = 'T\u00e9l\u00e9phone requis';
+      if (!form.telephone.trim()) e.telephone = 'Téléphone requis';
       setErrors(e);
       if (Object.keys(e).length > 0) throw new Error('Champs manquants');
 
@@ -190,7 +190,7 @@ function InlineClientForm({
       return data.data as ClientItem;
     },
     onSuccess: (client) => {
-      toast.success('Client cr\u00e9\u00e9');
+      toast.success('Client créé');
       onCreated(client);
     },
     onError: (err: Error) => {
@@ -202,7 +202,7 @@ function InlineClientForm({
     <div className="space-y-4 rounded-2xl border border-gold/15 bg-gold/5 p-5">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-gold">
-          Cr\u00e9er un nouveau client
+          Créer un nouveau client
         </h3>
         <Button variant="ghost" size="sm" onClick={onCancel}>
           Annuler
@@ -224,12 +224,12 @@ function InlineClientForm({
           error={errors.nom}
         />
         <Input
-          label="Pr\u00e9nom"
+          label="Prénom"
           value={form.prenom}
           onChange={(e) => set({ prenom: e.target.value })}
         />
         <Input
-          label="T\u00e9l\u00e9phone *"
+          label="Téléphone *"
           value={form.telephone}
           onChange={(e) => set({ telephone: e.target.value })}
           error={errors.telephone}
@@ -254,10 +254,10 @@ function InlineClientForm({
         >
           <option value="cin">CIN</option>
           <option value="passeport">Passeport</option>
-          <option value="titre_sejour">Titre de s\u00e9jour</option>
+          <option value="titre_sejour">Titre de séjour</option>
         </Select>
         <Input
-          label="N\u00b0 document"
+          label="N° document"
           value={form.documentNumber}
           onChange={(e) => set({ documentNumber: e.target.value })}
         />
@@ -270,7 +270,7 @@ function InlineClientForm({
           disabled={mutation.isPending}
         >
           <UserPlus className="h-3.5 w-3.5" />
-          {mutation.isPending ? 'Cr\u00e9ation\u2026' : 'Cr\u00e9er & s\u00e9lectionner'}
+          {mutation.isPending ? 'Création…' : 'Créer & sélectionner'}
         </Button>
       </div>
     </div>
@@ -409,7 +409,7 @@ export default function NouvelleLocationPage() {
   const createDirect = useMutation({
     mutationFn: async () => {
       if (!selectedClient) throw new Error('Client requis');
-      if (!selectedVehicle) throw new Error('V\u00e9hicule requis');
+      if (!selectedVehicle) throw new Error('Véhicule requis');
       if (!debutAt || !finPrevueAt) throw new Error('Dates requises');
 
       const cautionPayload =
@@ -437,11 +437,11 @@ export default function NouvelleLocationPage() {
         }),
       });
       const payload = await res.json();
-      if (!res.ok) throw new Error(payload.error ?? 'Erreur cr\u00e9ation');
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur création');
       return payload.data;
     },
     onSuccess: (loc) => {
-      toast.success('Location d\u00e9marr\u00e9e');
+      toast.success('Location démarrée');
       qc.invalidateQueries({ queryKey: ['locations'] });
       qc.invalidateQueries({ queryKey: ['vehicles'] });
       router.push(`/locations/${loc._id}`);
@@ -453,11 +453,11 @@ export default function NouvelleLocationPage() {
   const createFromReservation = useMutation({
     mutationFn: async () => {
       if (!selectedReservation)
-        throw new Error('Aucune r\u00e9servation');
+        throw new Error('Aucune réservation');
       if (!selectedReservation.client?._id)
-        throw new Error('R\u00e9servation sans client');
+        throw new Error('Réservation sans client');
       if (!selectedReservation.vehicule?._id)
-        throw new Error('R\u00e9servation sans v\u00e9hicule');
+        throw new Error('Réservation sans véhicule');
 
       const resCaution =
         selectedReservation.vehicule.cautionMontant ??
@@ -488,11 +488,11 @@ export default function NouvelleLocationPage() {
         }),
       });
       const payload = await res.json();
-      if (!res.ok) throw new Error(payload.error ?? 'Erreur cr\u00e9ation');
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur création');
       return payload.data;
     },
     onSuccess: (loc) => {
-      toast.success('Location d\u00e9marr\u00e9e');
+      toast.success('Location démarrée');
       qc.invalidateQueries({ queryKey: ['locations'] });
       qc.invalidateQueries({ queryKey: ['reservations'] });
       router.push(`/locations/${loc._id}`);
@@ -508,13 +508,13 @@ export default function NouvelleLocationPage() {
       <div className="lux-page-head">
         <div>
           <span className="lux-eyebrow mb-3">
-            <Sparkles className="h-3.5 w-3.5" /> d\u00e9marrage de contrat
+            <Sparkles className="h-3.5 w-3.5" /> démarrage de contrat
           </span>
           <h1 className="text-3xl font-bold text-cream">Nouvelle location</h1>
           <p className="mt-2 text-sm text-cream-muted">
             {mode === 'direct'
-              ? 'Cr\u00e9ez une location directement en choisissant un client et un v\u00e9hicule.'
-              : 'Transformez une r\u00e9servation confirm\u00e9e en location active.'}
+              ? 'Créez une location directement en choisissant un client et un véhicule.'
+              : 'Transformez une réservation confirmée en location active.'}
           </p>
         </div>
         <Link href="/locations">
@@ -544,7 +544,7 @@ export default function NouvelleLocationPage() {
               : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
           }`}
         >
-          Depuis r\u00e9servation
+          Depuis réservation
         </button>
       </div>
 
@@ -561,7 +561,7 @@ export default function NouvelleLocationPage() {
                   <User className="h-5 w-5 text-gold" /> Choisir un client
                 </h2>
                 <p className="mt-1 text-sm text-cream-muted">
-                  Recherchez un client existant ou cr\u00e9ez-en un nouveau.
+                  Recherchez un client existant ou créez-en un nouveau.
                 </p>
               </div>
 
@@ -570,7 +570,7 @@ export default function NouvelleLocationPage() {
                   <div className="flex gap-3">
                     <div className="flex-1">
                       <Input
-                        placeholder="Rechercher par nom, t\u00e9l\u00e9phone, email\u2026"
+                        placeholder="Rechercher par nom, téléphone, email…"
                         value={clientSearch}
                         onChange={(e) => setClientSearch(e.target.value)}
                         leftIcon={<Search className="h-4 w-4" />}
@@ -593,7 +593,7 @@ export default function NouvelleLocationPage() {
                     </div>
                   ) : clients.length === 0 ? (
                     <p className="text-sm text-cream-muted py-6 text-center">
-                      Aucun client trouv\u00e9.
+                      Aucun client trouvé.
                     </p>
                   ) : (
                     <div className="max-h-80 overflow-y-auto space-y-2 pr-1">
@@ -616,7 +616,7 @@ export default function NouvelleLocationPage() {
                             </p>
                             <p className="text-xs text-cream-muted">
                               {c.telephone}
-                              {c.email ? ` \u00b7 ${c.email}` : ''}
+                              {c.email ? ` · ${c.email}` : ''}
                             </p>
                           </div>
                           {c.documentNumber && (
@@ -649,7 +649,7 @@ export default function NouvelleLocationPage() {
                 <div className="flex items-center justify-between rounded-2xl border border-gold/15 bg-gold/5 p-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-gold/70">
-                      Client s\u00e9lectionn\u00e9
+                      Client sélectionné
                     </p>
                     <p className="mt-1 text-sm font-semibold text-cream">
                       {getClientName(selectedClient)}
@@ -676,11 +676,11 @@ export default function NouvelleLocationPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold text-cream flex items-center gap-2">
-                    <Car className="h-5 w-5 text-gold" /> Choisir un v\u00e9hicule
+                    <Car className="h-5 w-5 text-gold" /> Choisir un véhicule
                     disponible
                   </h2>
                   <p className="mt-1 text-sm text-cream-muted">
-                    Seuls les v\u00e9hicules disponibles sont propos\u00e9s.
+                    Seuls les véhicules disponibles sont proposés.
                   </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => setStep(1)}>
@@ -696,7 +696,7 @@ export default function NouvelleLocationPage() {
                 </div>
               ) : vehicleGroups.length === 0 ? (
                 <p className="text-sm text-cream-muted py-6 text-center">
-                  Aucun v\u00e9hicule disponible.
+                  Aucun véhicule disponible.
                 </p>
               ) : (
                 <div className="max-h-[28rem] overflow-y-auto space-y-2 pr-1">
@@ -739,7 +739,7 @@ export default function NouvelleLocationPage() {
                                 {v.marque} {v.modele}
                               </p>
                               <p className="mt-0.5 text-xs text-cream-muted">
-                                {v.immatriculation} \u00b7 {v.annee ?? ''} \u00b7{' '}
+                                {v.immatriculation} · {v.annee ?? ''} ·{' '}
                                 {(v.kilometrage ?? 0).toLocaleString('fr-FR')}{' '}
                                 km
                               </p>
@@ -771,10 +771,10 @@ export default function NouvelleLocationPage() {
                 <div className="flex items-center justify-between rounded-2xl border border-gold/15 bg-gold/5 p-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-gold/70">
-                      V\u00e9hicule s\u00e9lectionn\u00e9
+                      Véhicule sélectionné
                     </p>
                     <p className="mt-1 text-sm font-semibold text-cream">
-                      {selectedVehicle.marque} {selectedVehicle.modele} \u2014{' '}
+                      {selectedVehicle.marque} {selectedVehicle.modele} —{' '}
                       {selectedVehicle.immatriculation}
                     </p>
                   </div>
@@ -796,32 +796,32 @@ export default function NouvelleLocationPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold text-cream">
-                    P\u00e9riode & kilom\u00e9trage
+                    Période & kilométrage
                   </h2>
                   <p className="mt-1 text-sm text-cream-muted">
-                    D\u00e9finissez les dates de d\u00e9but et fin pr\u00e9vue de la location.
+                    Définissez les dates de début et fin prévue de la location.
                   </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => setStep(2)}>
-                  <ArrowLeft className="h-3.5 w-3.5" /> V\u00e9hicule
+                  <ArrowLeft className="h-3.5 w-3.5" /> Véhicule
                 </Button>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <Input
-                  label="Date de d\u00e9but"
+                  label="Date de début"
                   type="datetime-local"
                   value={debutAt}
                   onChange={(e) => setDebutAt(e.target.value)}
                 />
                 <Input
-                  label="Date de fin pr\u00e9vue"
+                  label="Date de fin prévue"
                   type="datetime-local"
                   value={finPrevueAt}
                   onChange={(e) => setFinPrevueAt(e.target.value)}
                 />
                 <Input
-                  label="Kilom\u00e9trage d\u00e9part"
+                  label="Kilométrage départ"
                   type="number"
                   min={0}
                   value={kmDepart}
@@ -833,7 +833,7 @@ export default function NouvelleLocationPage() {
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                      Dur\u00e9e
+                      Durée
                     </p>
                     <p className="mt-2 text-lg font-semibold text-cream">
                       {nbJours} jour{nbJours > 1 ? 's' : ''}
@@ -854,7 +854,7 @@ export default function NouvelleLocationPage() {
                   </div>
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                      Total estim\u00e9
+                      Total estimé
                     </p>
                     <p className="mt-2 text-lg font-semibold text-gold">
                       {formatCurrency(montantTotal)}
@@ -883,14 +883,14 @@ export default function NouvelleLocationPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold text-cream">
-                    Caution & r\u00e9capitulatif
+                    Caution & récapitulatif
                   </h2>
                   <p className="mt-1 text-sm text-cream-muted">
-                    V\u00e9rifiez les informations et confirmez le d\u00e9marrage.
+                    Vérifiez les informations et confirmez le démarrage.
                   </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => setStep(3)}>
-                  <ArrowLeft className="h-3.5 w-3.5" /> P\u00e9riode
+                  <ArrowLeft className="h-3.5 w-3.5" /> Période
                 </Button>
               </div>
 
@@ -909,7 +909,7 @@ export default function NouvelleLocationPage() {
                 </div>
                 <div className="lux-panel-muted p-4">
                   <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                    V\u00e9hicule
+                    Véhicule
                   </p>
                   <p className="mt-2 text-sm font-medium text-cream">
                     {selectedVehicle?.marque} {selectedVehicle?.modele}
@@ -920,13 +920,13 @@ export default function NouvelleLocationPage() {
                 </div>
                 <div className="lux-panel-muted p-4">
                   <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                    P\u00e9riode
+                    Période
                   </p>
                   <p className="mt-2 text-sm text-cream">
                     {formatDateTime(debutAt)}
                   </p>
                   <p className="text-sm text-cream">
-                    {'\u2192'} {formatDateTime(finPrevueAt)}
+                    {'→'} {formatDateTime(finPrevueAt)}
                   </p>
                   <p className="mt-1 text-xs text-cream-muted">
                     {nbJours} jour{nbJours > 1 ? 's' : ''}
@@ -961,15 +961,15 @@ export default function NouvelleLocationPage() {
                         setCautionType(e.target.value as CautionType)
                       }
                     >
-                      <option value="cheque">Ch\u00e8que</option>
+                      <option value="cheque">Chèque</option>
                       <option value="carte_empreinte">
                         Empreinte carte (TPE agence)
                       </option>
-                      <option value="cash">Esp\u00e8ces</option>
+                      <option value="cash">Espèces</option>
                     </Select>
                     {cautionType === 'cheque' ? (
                       <Input
-                        label="R\u00e9f\u00e9rence ch\u00e8que"
+                        label="Référence chèque"
                         value={cautionReference}
                         onChange={(e) => setCautionReference(e.target.value)}
                         placeholder="Ex: 123456"
@@ -977,8 +977,8 @@ export default function NouvelleLocationPage() {
                     ) : (
                       <div className="rounded-2xl border border-gold/10 bg-gold/5 p-4 text-sm text-cream-muted flex items-center">
                         {cautionType === 'carte_empreinte'
-                          ? "Empreinte carte : op\u00e9ration r\u00e9alis\u00e9e \u00e0 l'agence via le TPE."
-                          : "Esp\u00e8ces : aucun justificatif requis au d\u00e9marrage."}
+                          ? "Empreinte carte : opération réalisée à l'agence via le TPE."
+                          : "Espèces : aucun justificatif requis au démarrage."}
                       </div>
                     )}
                   </div>
@@ -987,18 +987,18 @@ export default function NouvelleLocationPage() {
 
               {/* Actions list */}
               <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 text-sm text-cream-muted">
-                <p>La cr\u00e9ation va :</p>
+                <p>La création va :</p>
                 <ul className="mt-2 list-disc space-y-1 pl-5">
-                  <li>cr\u00e9er la location active</li>
-                  <li>passer le v\u00e9hicule en statut lou\u00e9</li>
-                  <li>g\u00e9n\u00e9rer le contrat (sur la fiche location)</li>
+                  <li>créer la location active</li>
+                  <li>passer le véhicule en statut loué</li>
+                  <li>générer le contrat (sur la fiche location)</li>
                 </ul>
               </div>
 
               {cautionReferenceMissing && (
                 <div className="rounded-2xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
-                  Merci de renseigner la r\u00e9f\u00e9rence du ch\u00e8que avant de
-                  d\u00e9marrer la location.
+                  Merci de renseigner la référence du chèque avant de
+                  démarrer la location.
                 </div>
               )}
 
@@ -1009,8 +1009,8 @@ export default function NouvelleLocationPage() {
                   onClick={() => createDirect.mutate()}
                 >
                   {createDirect.isPending
-                    ? 'Cr\u00e9ation\u2026'
-                    : 'D\u00e9marrer la location'}
+                    ? 'Création…'
+                    : 'Démarrer la location'}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
@@ -1025,11 +1025,11 @@ export default function NouvelleLocationPage() {
           <section className="lux-panel p-6 md:p-7 space-y-5">
             <div>
               <h2 className="text-lg font-semibold text-cream">
-                R\u00e9servation \u00e0 d\u00e9marrer
+                Réservation à démarrer
               </h2>
               <p className="mt-1 text-sm text-cream-muted">
-                Seules les r\u00e9servations confirm\u00e9es et non encore converties sont
-                propos\u00e9es.
+                Seules les réservations confirmées et non encore converties sont
+                proposées.
               </p>
             </div>
 
@@ -1037,17 +1037,17 @@ export default function NouvelleLocationPage() {
               <Skeleton className="h-12 w-full" />
             ) : availableReservations.length === 0 ? (
               <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 text-sm text-cream-muted">
-                Aucune r\u00e9servation confirm\u00e9e disponible.
+                Aucune réservation confirmée disponible.
               </div>
             ) : (
               <Select
-                label="R\u00e9servation confirm\u00e9e"
+                label="Réservation confirmée"
                 value={selectedReservationId}
                 onChange={(e) => setSelectedReservationId(e.target.value)}
               >
                 {availableReservations.map((item) => (
                   <option key={item._id} value={item._id}>
-                    {getReservationClientName(item)} {'\u2014'}{' '}
+                    {getReservationClientName(item)} {'—'}{' '}
                     {item.vehicule?.marque} {item.vehicule?.modele}
                   </option>
                 ))}
@@ -1066,12 +1066,12 @@ export default function NouvelleLocationPage() {
                   <p className="mt-1 text-xs text-cream-muted">
                     {selectedReservation.client?.telephone ??
                       selectedReservation.clientInline?.telephone ??
-                      'Sans t\u00e9l\u00e9phone'}
+                      'Sans téléphone'}
                   </p>
                 </div>
                 <div className="lux-panel-muted p-4">
                   <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                    V\u00e9hicule
+                    Véhicule
                   </p>
                   <p className="mt-2 text-sm text-cream">
                     {selectedReservation.vehicule?.marque}{' '}
@@ -1083,13 +1083,13 @@ export default function NouvelleLocationPage() {
                 </div>
                 <div className="lux-panel-muted p-4">
                   <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                    P\u00e9riode
+                    Période
                   </p>
                   <p className="mt-2 text-sm text-cream">
                     {formatDateTime(selectedReservation.debutAt)}
                   </p>
                   <p className="mt-1 text-sm text-cream">
-                    {'\u2192'} {formatDateTime(selectedReservation.finAt)}
+                    {'→'} {formatDateTime(selectedReservation.finAt)}
                   </p>
                 </div>
               </div>
@@ -1100,11 +1100,11 @@ export default function NouvelleLocationPage() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 className="text-lg font-semibold text-cream">
-                  Pr\u00e9visualisation
+                  Prévisualisation
                 </h2>
                 <p className="mt-1 text-sm text-cream-muted">
-                  Le dossier location sera cr\u00e9\u00e9 avec les montants de la
-                  r\u00e9servation.
+                  Le dossier location sera créé avec les montants de la
+                  réservation.
                 </p>
               </div>
               <CheckCircle2 className="h-5 w-5 text-gold" />
@@ -1112,7 +1112,7 @@ export default function NouvelleLocationPage() {
 
             {!selectedReservation ? (
               <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 text-sm text-cream-muted">
-                S\u00e9lectionnez une r\u00e9servation.
+                Sélectionnez une réservation.
               </div>
             ) : (
               <div className="space-y-4">
@@ -1143,7 +1143,7 @@ export default function NouvelleLocationPage() {
                   </div>
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                      D\u00e9j\u00e0 encaiss\u00e9
+                      Déjà encaissé
                     </p>
                     <p className="mt-2 text-lg font-semibold text-green-300">
                       {formatCurrency(selectedReservation.montantPaye ?? 0)}
@@ -1151,7 +1151,7 @@ export default function NouvelleLocationPage() {
                   </div>
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
-                      Reste \u00e0 payer
+                      Reste à payer
                     </p>
                     <p className="mt-2 text-lg font-semibold text-amber-300">
                       {formatCurrency(
@@ -1172,15 +1172,15 @@ export default function NouvelleLocationPage() {
                       setCautionType(e.target.value as CautionType)
                     }
                   >
-                    <option value="cheque">Ch\u00e8que</option>
+                    <option value="cheque">Chèque</option>
                     <option value="carte_empreinte">
                       Empreinte carte (TPE agence)
                     </option>
-                    <option value="cash">Esp\u00e8ces</option>
+                    <option value="cash">Espèces</option>
                   </Select>
                   {cautionType === 'cheque' ? (
                     <Input
-                      label="R\u00e9f\u00e9rence ch\u00e8que"
+                      label="Référence chèque"
                       value={cautionReference}
                       onChange={(e) => setCautionReference(e.target.value)}
                       placeholder="Ex: 123456"
@@ -1188,8 +1188,8 @@ export default function NouvelleLocationPage() {
                   ) : (
                     <div className="rounded-2xl border border-gold/10 bg-gold/5 p-4 text-sm text-cream-muted flex items-center">
                       {cautionType === 'carte_empreinte'
-                        ? "Empreinte carte : op\u00e9ration r\u00e9alis\u00e9e \u00e0 l'agence via le TPE."
-                        : "Esp\u00e8ces : aucun justificatif requis au d\u00e9marrage."}
+                        ? "Empreinte carte : opération réalisée à l'agence via le TPE."
+                        : "Espèces : aucun justificatif requis au démarrage."}
                     </div>
                   )}
                 </div>
@@ -1204,8 +1204,8 @@ export default function NouvelleLocationPage() {
                     onClick={() => createFromReservation.mutate()}
                   >
                     {createFromReservation.isPending
-                      ? 'Cr\u00e9ation\u2026'
-                      : 'D\u00e9marrer la location'}
+                      ? 'Création…'
+                      : 'Démarrer la location'}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>

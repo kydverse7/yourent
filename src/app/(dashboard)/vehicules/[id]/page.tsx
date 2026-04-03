@@ -456,11 +456,11 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
       {/* Photo modèle — appliquée à tous les véhicules de même marque + modèle */}
       <section className="bg-noir-card border border-gold/10 rounded-xl p-5">
         <div className="mb-4">
-          <h2 className="text-sm font-semibold text-gold uppercase tracking-wider">Photo mod\u00e8le</h2>
+          <h2 className="text-sm font-semibold text-gold uppercase tracking-wider">Photo modèle</h2>
           <p className="mt-1 text-xs text-cream-muted">
-            Cette photo sera utilis\u00e9e par d\u00e9faut pour tous les{' '}
+            Cette photo sera utilisée par défaut pour tous les{' '}
             <span className="font-medium text-cream">{vehicle.marque} {vehicle.modele}</span>.
-            Elle sert de photo de secours quand un v\u00e9hicule n&apos;a pas de photo produit propre.
+            Elle sert de photo de secours quand un véhicule n&apos;a pas de photo produit propre.
           </p>
         </div>
 
@@ -470,7 +470,7 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={String(form.photoModele ?? vehicle.photoModele)}
-                alt="Photo mod\u00e8le"
+                alt="Photo modèle"
                 className="w-full h-full object-cover"
               />
               <button
@@ -479,7 +479,7 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
                   update({ photoModele: '' } as any);
                 }}
                 className="absolute top-1.5 right-1.5 h-7 w-7 flex items-center justify-center rounded-full bg-black/55 text-white hover:bg-red-500 transition-colors"
-                aria-label="Supprimer la photo mod\u00e8le"
+                aria-label="Supprimer la photo modèle"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
@@ -506,14 +506,14 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
                   }
                   const d = await r.json();
                   update({ photoModele: d.data.url } as any);
-                  toast.success('Photo mod\u00e8le ajout\u00e9e');
+                  toast.success('Photo modèle ajoutée');
                   e.target.value = '';
                 }}
               />
             </label>
           )}
           <div className="text-xs text-cream-faint max-w-xs">
-            La mise \u00e0 jour de cette photo sera propag\u00e9e \u00e0 tous les v\u00e9hicules{' '}
+            La mise à jour de cette photo sera propagée à tous les véhicules{' '}
             <span className="font-medium text-cream">{vehicle.marque} {vehicle.modele}</span>{' '}
             lors de l&apos;enregistrement.
           </div>
