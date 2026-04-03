@@ -105,8 +105,13 @@ function getVehiclePhoto(v: VehicleItem) {
 
 function calcNbJoursLocal(debut: string, fin: string) {
   if (!debut || !fin) return 0;
-  const diff = new Date(fin).getTime() - new Date(debut).getTime();
-  return Math.max(1, Math.ceil(diff / 86400000));
+  const d = new Date(debut);
+  const f = new Date(fin);
+  // Nombre de jours calendaires (ex: 3 avril → 6 avril = 3 jours)
+  const startDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const endDay = new Date(f.getFullYear(), f.getMonth(), f.getDate());
+  const diff = endDay.getTime() - startDay.getTime();
+  return Math.max(1, Math.round(diff / 86400000));
 }
 
 /* ──────── Stepper ──────── */
