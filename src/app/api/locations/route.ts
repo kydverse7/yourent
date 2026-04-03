@@ -58,6 +58,7 @@ const locationSchema = z.object({
   caution: cautionPriseSchema.optional(),
   notes: z.string().optional(),
   mode: z.enum(['reservation', 'direct']).optional(),
+  retroactive: z.boolean().optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -119,7 +120,8 @@ export async function POST(req: NextRequest) {
   // Vérifier disponibilité du véhicule
   const vehicule = await Vehicle.findById(vehicleId);
   if (!vehicule) return apiError('Véhicule introuvable', 404);
-  if (vehicule.statut !== 'disponible') return apiError('Véhicule non disponible', 409);
+  const isRetroactive = parsed.data.retroactive === true && new Date(parsed.data.finPrevueAt) < new Date();
+  if (!isRetroactive && vehicule.statut !== 'disponible') return apiError('Véhicule non disponible', 409);
 
   // Vérifier client
   const clientDoc = await Client.findById(parsed.data.client).lean();
@@ -139,8 +141,9 @@ export async function POST(req: NextRequest) {
       client: parsed.data.client,
       debutAt: parsed.data.debutAt,
       finPrevueAt: parsed.data.finPrevueAt,
+      ...(isRetroactive ? { finReelleAt: parsed.data.finPrevueAt } : {}),
       kmDepart: parsed.data.kmDepart,
-      statut: 'en_cours',
+      statut: isRetroactive ? 'terminee' : 'en_cours',
       caution: parsed.data.caution,
       tarifJour: pricing.tarifJour,
       nbJours,
@@ -153,7 +156,9 @@ export async function POST(req: NextRequest) {
       paiementStatut: 'en_attente',
     });
 
-    await Vehicle.findByIdAndUpdate(vehicleId, { statut: 'loue' });
+    if (!isRetroactive) {
+      await Vehicle.findByIdAndUpdate(vehicleId, { statut: 'loue' });
+    }
     await recomputeClientStats(String(parsed.data.client));
 
     await auditLog({

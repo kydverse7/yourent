@@ -331,7 +331,7 @@ export default function NouvelleLocationPage() {
   const { data: vehiclesData, isLoading: loadingVehicles } = useQuery({
     queryKey: ['vehicles-available'],
     queryFn: async () => {
-      const res = await fetch('/api/vehicles?statut=disponible&grouped=true');
+      const res = await fetch('/api/vehicles?grouped=true');
       const payload = await res.json();
       if (!res.ok) throw new Error(payload.error ?? 'Erreur');
       return payload.data as {
@@ -381,6 +381,8 @@ export default function NouvelleLocationPage() {
   );
 
   /* ════════ COMPUTED ════════ */
+
+  const isRetroactive = !!(finPrevueAt && new Date(finPrevueAt) < new Date());
 
   const nbJours = calcNbJoursLocal(debutAt, finPrevueAt);
   const tarifJour = selectedVehicle
@@ -433,6 +435,7 @@ export default function NouvelleLocationPage() {
           finPrevueAt: new Date(finPrevueAt).toISOString(),
           kmDepart: Number(kmDepart) || 0,
           mode: 'direct',
+          ...(isRetroactive ? { retroactive: true } : {}),
           ...(cautionPayload ? { caution: cautionPayload } : {}),
         }),
       });
@@ -441,7 +444,7 @@ export default function NouvelleLocationPage() {
       return payload.data;
     },
     onSuccess: (loc) => {
-      toast.success('Location démarrée');
+      toast.success(isRetroactive ? 'Location rétroactive enregistrée' : 'Location démarrée');
       qc.invalidateQueries({ queryKey: ['locations'] });
       qc.invalidateQueries({ queryKey: ['vehicles'] });
       router.push(`/locations/${loc._id}`);
@@ -701,11 +704,10 @@ export default function NouvelleLocationPage() {
               ) : (
                 <div className="max-h-[28rem] overflow-y-auto space-y-2 pr-1">
                   {vehicleGroups.map((group) =>
-                    group.vehicles
-                      .filter((v) => v.statut === 'disponible')
-                      .map((v) => {
+                    group.vehicles.map((v) => {
                         const photo = getVehiclePhoto(v);
                         const isSelected = selectedVehicle?._id === v._id;
+                        const indisponible = v.statut !== 'disponible';
                         return (
                           <button
                             key={v._id}
@@ -717,7 +719,7 @@ export default function NouvelleLocationPage() {
                               isSelected
                                 ? 'border border-gold/30 bg-gold/10'
                                 : 'border border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
-                            }`}
+                            } ${indisponible ? 'opacity-60' : ''}`}
                           >
                             <div className="shrink-0">
                               {photo ? (
@@ -748,6 +750,11 @@ export default function NouvelleLocationPage() {
                               <p className="text-sm font-semibold text-gold">
                                 {formatCurrency(v.tarifJour ?? 0)}/j
                               </p>
+                              {indisponible && (
+                                <p className="text-[10px] font-medium text-amber-400">
+                                  {v.statut === 'loue' ? 'Loué' : v.statut === 'maintenance' ? 'Maintenance' : v.statut}
+                                </p>
+                              )}
                               {(v.tarifJour10Plus ?? 0) > 0 &&
                                 (v.tarifJour10Plus ?? 0) !==
                                   (v.tarifJour ?? 0) && (
@@ -829,6 +836,12 @@ export default function NouvelleLocationPage() {
                 />
               </div>
 
+              {isRetroactive && (
+                <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+                  <strong>Location rétroactive</strong> — Les dates sont dans le passé. La location sera enregistrée avec le statut <em>terminée</em>.
+                </div>
+              )}
+
               {debutAt && finPrevueAt && selectedVehicle && (
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="lux-panel-muted p-4">
@@ -886,7 +899,7 @@ export default function NouvelleLocationPage() {
                     Caution & récapitulatif
                   </h2>
                   <p className="mt-1 text-sm text-cream-muted">
-                    Vérifiez les informations et confirmez le démarrage.
+                    Vérifiez les informations et confirmez{isRetroactive ? ' l\'enregistrement' : ' le démarrage'}.
                   </p>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => setStep(3)}>
@@ -1010,7 +1023,7 @@ export default function NouvelleLocationPage() {
                 >
                   {createDirect.isPending
                     ? 'Création…'
-                    : 'Démarrer la location'}
+                    : isRetroactive ? 'Enregistrer la location' : 'Démarrer la location'}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
