@@ -30,19 +30,87 @@ function buildAgencyData(agency: any) {
   };
 }
 
+function documentTypeLabel(value?: string) {
+  switch (value) {
+    case 'cin':
+      return 'CIN';
+    case 'passeport':
+      return 'Passeport';
+    case 'titre_sejour':
+      return 'Titre de séjour';
+    default:
+      return undefined;
+  }
+}
+
+function carburantLabel(value?: string) {
+  switch (value) {
+    case 'diesel':
+      return 'Diesel';
+    case 'essence':
+      return 'Essence';
+    case 'hybride':
+      return 'Hybride';
+    case 'electrique':
+      return 'Électrique';
+    default:
+      return value;
+  }
+}
+
+function boiteLabel(value?: string) {
+  switch (value) {
+    case 'automatique':
+      return 'Automatique';
+    case 'manuelle':
+      return 'Manuelle';
+    default:
+      return value;
+  }
+}
+
+function cautionTypeLabel(value?: string) {
+  switch (value) {
+    case 'cheque':
+      return 'Chèque';
+    case 'carte_empreinte':
+      return 'Empreinte carte';
+    case 'cash':
+      return 'Espèces';
+    default:
+      return undefined;
+  }
+}
+
+function calcContractDays(debut?: Date, fin?: Date) {
+  if (!debut || !fin) return 1;
+  const start = new Date(debut.getFullYear(), debut.getMonth(), debut.getDate());
+  const end = new Date(fin.getFullYear(), fin.getMonth(), fin.getDate());
+  return Math.max(1, Math.round((end.getTime() - start.getTime()) / 86400000));
+}
+
 function buildClientData(client: any, clientInline?: any) {
   return {
     nomComplet: client
       ? `${client.prenom ?? ''} ${client.nom ?? ''}`.trim()
       : `${clientInline?.prenom ?? ''} ${clientInline?.nom ?? ''}`.trim() || 'Client non renseigné',
+    nom: client?.nom ?? clientInline?.nom,
+    prenom: client?.prenom ?? clientInline?.prenom,
     telephone: client?.telephone ?? clientInline?.telephone,
     email: client?.email ?? clientInline?.email,
     adresse: client?.adresse,
     ville: client?.ville,
+    dateNaissance: client?.dateNaissance,
+    lieuNaissance: client?.ville,
+    nationalite: client?.nationalite,
     documentLabel: client?.documentType || client?.documentNumber
       ? `${client.documentType ?? 'Document'} ${client.documentNumber ? `· ${client.documentNumber}` : ''}`.trim()
       : undefined,
+    documentTypeLabel: documentTypeLabel(client?.documentType),
+    documentNumber: client?.documentNumber,
+    documentExpireLe: client?.documentExpireLe,
     permisNumero: client?.permisNumero,
+    permisDelivreLe: client?.permisDelivreLe,
   };
 }
 
@@ -50,9 +118,11 @@ function buildVehicleData(vehicle: any) {
   return {
     label: `${vehicle?.marque ?? ''} ${vehicle?.modele ?? ''}`.trim() || 'Véhicule',
     immatriculation: vehicle?.immatriculation,
-    carburant: vehicle?.carburant,
-    boite: vehicle?.boite,
+    carburant: carburantLabel(vehicle?.carburant),
+    boite: boiteLabel(vehicle?.boite),
     kilometrage: vehicle?.kilometrage,
+    assuranceNumero: vehicle?.contrats?.assuranceNumero,
+    assuranceExpireLe: vehicle?.contrats?.assuranceExpireLe ?? vehicle?.alerts?.assuranceExpireLe,
   };
 }
 
@@ -115,18 +185,34 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
         lieuRetour: reservation.lieuRetour,
       },
       cautionMontant: reservation.caution?.montant ?? reservation.vehicle?.cautionDefaut ?? 0,
+      franchiseLabel: '10% de la valeur du véhicule',
       totalMontant: Number(reservation.prix?.totalEstime ?? 0),
       tarifJour: Number(reservation.prix?.parJour ?? 0),
+      nbJours: calcContractDays(reservation.debutAt, reservation.finAt),
+      montantPaye: Number(reservation.montantPaye ?? 0),
+      montantRestant: Number(reservation.montantRestant ?? 0),
+      modePaiementLabel: paymentTypeLabel(reservation.typePaiement),
       options: [
-        { label: `Location ${buildVehicleData(reservation.vehicle).label}`, montant: Number(reservation.prix?.totalEstime ?? 0) - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
+        {
+          label: `Location ${buildVehicleData(reservation.vehicle).label}`,
+          montant:
+            Number(reservation.prix?.totalEstime ?? 0)
+            - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0)
+            + Number(reservation.prix?.remise ?? 0),
+        },
         ...(reservation.optionsSupplementaires ?? []).map((item: any) => ({
           label: `Option · ${item.nom}`,
           montant: Number(item.prix ?? 0),
         })),
+        ...(reservation.prix?.remise
+          ? [{ label: 'Remise', montant: -Math.abs(Number(reservation.prix.remise ?? 0)) }]
+          : []),
       ].filter((item) => item.montant !== 0),
       notes: reservation.notes,
       conducteurSecondaire: reservation.conducteurSecondaire
         ? {
+            nom: reservation.conducteurSecondaire.nom,
+            prenom: reservation.conducteurSecondaire.prenom,
             nomComplet: `${reservation.conducteurSecondaire.prenom ?? ''} ${reservation.conducteurSecondaire.nom ?? ''}`.trim(),
             permisNumero: reservation.conducteurSecondaire.permisNumero,
           }
@@ -162,18 +248,36 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
       lieuRetour: reservation?.lieuRetour,
     },
     cautionMontant: location.caution?.montant ?? location.vehicle?.cautionDefaut ?? 0,
+    cautionTypeLabel: cautionTypeLabel(location.caution?.typePrise),
+    cautionReference: location.caution?.referenceDoc,
+    franchiseLabel: '10% de la valeur du véhicule',
     totalMontant: Number(location.montantTotal ?? 0),
-    tarifJour: Number(reservation?.prix?.parJour ?? 0),
+    tarifJour: Number(location.tarifJour ?? reservation?.prix?.parJour ?? 0),
+    nbJours: Number(location.nbJours ?? calcContractDays(location.debutAt, location.finPrevueAt)),
+    montantPaye: Number(location.montantPaye ?? 0),
+    montantRestant: Number(location.montantRestant ?? 0),
+    modePaiementLabel: paymentTypeLabel(reservation?.typePaiement),
     options: [
-      { label: 'Location', montant: Number(location.montantTotal ?? 0) - (reservation?.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
+      {
+        label: 'Location',
+        montant:
+          Number(location.montantTotal ?? 0)
+          - (reservation?.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0)
+          + Number(reservation?.prix?.remise ?? location.remise ?? 0),
+      },
       ...((reservation?.optionsSupplementaires ?? []) as any[]).map((item) => ({
         label: `Option · ${item.nom}`,
         montant: Number(item.prix ?? 0),
       })),
+      ...(reservation?.prix?.remise || location.remise
+        ? [{ label: 'Remise', montant: -Math.abs(Number(reservation?.prix?.remise ?? location.remise ?? 0)) }]
+        : []),
     ].filter((item) => item.montant !== 0),
     notes: reservation?.notes,
     conducteurSecondaire: reservation?.conducteurSecondaire
       ? {
+          nom: reservation.conducteurSecondaire.nom,
+          prenom: reservation.conducteurSecondaire.prenom,
           nomComplet: `${reservation.conducteurSecondaire.prenom ?? ''} ${reservation.conducteurSecondaire.nom ?? ''}`.trim(),
           permisNumero: reservation.conducteurSecondaire.permisNumero,
         }
