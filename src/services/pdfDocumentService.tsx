@@ -17,6 +17,7 @@ function formatObjectIdSuffix(id: unknown) {
 function buildAgencyData(agency: any) {
   return {
     nom: agency?.nom ?? 'Yourent',
+    logoUrl: agency?.logoUrl ?? 'https://yourent.ma/logo-yourent.png',
     adresse: agency?.adresse,
     ville: agency?.ville,
     pays: agency?.pays ?? 'Maroc',
@@ -320,7 +321,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
     const paiementDominant = payments[0]?.type;
 
     const vehicleLabel = `${reservation.vehicle?.marque ?? ''} ${reservation.vehicle?.modele ?? ''}`.trim();
-    const nbJoursRes = Math.max(1, Math.ceil((new Date(reservation.finAt).getTime() - new Date(reservation.debutAt).getTime()) / (1000 * 60 * 60 * 24)));
+    const nbJoursRes = calcContractDays(reservation.debutAt, reservation.finAt);
 
     const lines = [
       { label: `Location ${vehicleLabel} (${nbJoursRes} jour${nbJoursRes > 1 ? 's' : ''})`, montant: totalMontant - (reservation.optionsSupplementaires ?? []).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
@@ -373,7 +374,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
 
   const vehicleLabelLoc = `${location.vehicle?.marque ?? ''} ${location.vehicle?.modele ?? ''}`.trim();
   const finDateLoc = location.finReelleAt ?? location.finPrevueAt;
-  const nbJoursLoc = finDateLoc && location.debutAt ? Math.max(1, Math.ceil((new Date(finDateLoc).getTime() - new Date(location.debutAt).getTime()) / (1000 * 60 * 60 * 24))) : 0;
+  const nbJoursLoc = finDateLoc && location.debutAt ? calcContractDays(location.debutAt, finDateLoc) : 0;
 
   const lines = [
     { label: `Location ${vehicleLabelLoc}${nbJoursLoc > 0 ? ` (${nbJoursLoc} jour${nbJoursLoc > 1 ? 's' : ''})` : ''}`, montant: totalMontant - ((reservation?.optionsSupplementaires ?? []) as any[]).reduce((sum: number, item: any) => sum + Number(item.prix ?? 0), 0) },
