@@ -9,6 +9,7 @@ import { uploadToCloudinary } from '@/lib/cloudinary';
 import { Client } from '@/models/Client';
 import { Vehicle } from '@/models/Vehicle';
 import { Agence } from '@/models/Agence';
+import { GeneratedDocument } from '@/models/GeneratedDocument';
 import { FreeDocumentPdfDocument, type FreeDocumentPdfData } from '@/lib/pdf-documents';
 import { generateStandaloneDocumentNumber } from '@/services/documentNumberService';
 import { auditLog } from '@/services/auditService';
@@ -164,6 +165,27 @@ export async function POST(req: NextRequest) {
     const folder = isQuote ? 'quotes/generated' : 'invoices/generated';
     const publicId = `${isQuote ? 'quote' : 'invoice'}-free-${Date.now()}.pdf`;
     const uploaded = await uploadToCloudinary(buffer, folder, publicId, { resourceType: 'raw' });
+
+    await GeneratedDocument.create({
+      reference,
+      documentType,
+      client: (client as any)._id,
+      clientSnapshot: {
+        nomComplet: clientData.nomComplet,
+        telephone: clientData.telephone,
+        email: clientData.email,
+      },
+      vehicles: pdfVehicles.map((vehicle, index) => ({
+        vehicle: vehicleEntries[index]?.vehicleId,
+        label: vehicle.label,
+        immatriculation: vehicle.immatriculation,
+      })),
+      pdfUrl: uploaded.url,
+      totalMontant,
+      devise: agency.devise,
+      notes,
+      createdBy: session.user.id,
+    });
 
     await auditLog({
       action: 'create',

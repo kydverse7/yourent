@@ -3,12 +3,26 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, ExternalLink, Save, ShieldCheck, Trash2, Upload, UserCheck, UserX } from 'lucide-react';
+import { ArrowLeft, Save, Trash2, UserCheck, UserX } from 'lucide-react';
 import Link from 'next/link';
 import { Button, Input, Select, Badge, Skeleton } from '@/components/ui';
+import { ClientDocumentUploadCard } from '@/components/clients/ClientDocumentUploadCard';
 import { useUIStore } from '@/stores/uiStore';
 import toast from 'react-hot-toast';
 import { use } from 'react';
+
+const documentUploadItems = [
+  { key: 'cinRectoUrl', label: 'Carte nationale / document recto' },
+  { key: 'cinVersoUrl', label: 'Carte nationale / document verso' },
+  { key: 'permisRectoUrl', label: 'Permis recto' },
+  { key: 'permisVersoUrl', label: 'Permis verso' },
+] as const;
+
+function formatDateInputValue(value: unknown) {
+  if (!value) return '';
+  const date = new Date(String(value));
+  return Number.isNaN(date.getTime()) ? '' : date.toISOString().split('T')[0];
+}
 
 export default function ClientDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -321,63 +335,24 @@ export default function ClientDetailPage({ params }: { params: Promise<{ id: str
               <label className="text-xs text-cream-muted">Expire le</label>
               <Input
                 type="date"
-                value={client.documentExpireLe ? new Date(client.documentExpireLe).toISOString().split('T')[0] : ''}
+                value={formatDateInputValue(val('documentExpireLe'))}
                 onChange={(e) => update({ documentExpireLe: e.target.value })}
               />
             </div>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
-            {[
-              { key: 'cinRectoUrl', label: 'CIN / document recto' },
-              { key: 'cinVersoUrl', label: 'CIN / document verso' },
-              { key: 'permisRectoUrl', label: 'Permis recto' },
-              { key: 'permisVersoUrl', label: 'Permis verso' },
-            ].map((item) => {
-              const url = String(val(item.key) || '');
-              const isUploading = uploadingField === item.key;
-
-              return (
-                <div key={item.key} className="rounded-xl border border-gold/10 bg-noir-root/60 p-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-gold" />
-                    <p className="text-sm font-medium text-cream">{item.label}</p>
-                  </div>
-
-                  {url ? (
-                    <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-gold hover:text-gold-light">
-                      <ExternalLink className="w-4 h-4" /> Ouvrir le document
-                    </a>
-                  ) : (
-                    <p className="text-xs text-cream-muted">Aucun fichier rattaché.</p>
-                  )}
-
-                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-gold/20 bg-gold/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-gold hover:bg-gold/10">
-                    <Upload className="w-4 h-4" />
-                    {isUploading ? 'Upload...' : 'Ajouter fichier'}
-                    <input
-                      type="file"
-                      accept="image/*,application/pdf"
-                      className="hidden"
-                      disabled={isUploading}
-                      onChange={async (e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-                        await uploadDocument(item.key, file);
-                        e.target.value = '';
-                      }}
-                    />
-                  </label>
-
-                  <Input
-                    label="URL manuelle"
-                    value={url}
-                    onChange={(e) => update({ [item.key]: e.target.value })}
-                    placeholder="https://..."
-                  />
-                </div>
-              );
-            })}
+            {documentUploadItems.map((item) => (
+              <ClientDocumentUploadCard
+                key={item.key}
+                label={item.label}
+                value={String(val(item.key) || '')}
+                uploading={uploadingField === item.key}
+                helperText="Prise de photo disponible sur mobile pour ajouter rapidement la pièce."
+                onUpload={(file) => uploadDocument(item.key, file)}
+                onValueChange={(value) => update({ [item.key]: value })}
+              />
+            ))}
           </div>
 
           <div className="border-t border-gold/10 pt-3 space-y-3">
@@ -388,10 +363,22 @@ export default function ClientDetailPage({ params }: { params: Promise<{ id: str
                 <Input value={String(val('permisNumero') || '')} onChange={(e) => update({ permisNumero: e.target.value })} />
               </div>
               <div className="space-y-1">
+                <label className="text-xs text-cream-muted">Catégorie</label>
+                <Input value={String(val('permisCategorie') || '')} onChange={(e) => update({ permisCategorie: e.target.value })} placeholder="B, C..." />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs text-cream-muted">Délivré le</label>
+                <Input
+                  type="date"
+                  value={formatDateInputValue(val('permisDelivreLe'))}
+                  onChange={(e) => update({ permisDelivreLe: e.target.value })}
+                />
+              </div>
+              <div className="space-y-1">
                 <label className="text-xs text-cream-muted">Expire le</label>
                 <Input
                   type="date"
-                  value={client.permisExpireLe ? new Date(client.permisExpireLe).toISOString().split('T')[0] : ''}
+                  value={formatDateInputValue(val('permisExpireLe'))}
                   onChange={(e) => update({ permisExpireLe: e.target.value })}
                 />
               </div>

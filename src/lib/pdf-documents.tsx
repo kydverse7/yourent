@@ -556,77 +556,114 @@ const contractStyles = StyleSheet.create({
 
 const invoiceStyles = StyleSheet.create({
   page: {
-    paddingTop: 16,
-    paddingBottom: 18,
-    paddingHorizontal: 16,
-    fontSize: 8.2,
+    paddingTop: 20,
+    paddingBottom: 22,
+    paddingHorizontal: 18,
+    fontSize: 8.3,
     color: '#111827',
     fontFamily: 'Helvetica',
-    lineHeight: 1.18,
+    lineHeight: 1.24,
   },
   frame: {
     borderWidth: 1,
     borderColor: '#1f2937',
-    padding: 8,
+    padding: 10,
   },
   headerBand: {
     borderWidth: 1,
     borderColor: '#d4af37',
     backgroundColor: '#fbf5df',
-    padding: 8,
-    marginBottom: 6,
+    padding: 12,
+    marginBottom: 10,
   },
   headerRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
   brandSide: {
-    flex: 1.05,
+    flex: 1,
+    paddingRight: 12,
+    justifyContent: 'center',
+  },
+  brandTopRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   logoWrap: {
-    width: 42,
-    height: 42,
+    width: 48,
+    height: 48,
     borderWidth: 1,
     borderColor: '#d4af37',
-    borderRadius: 10,
+    borderRadius: 12,
     backgroundColor: '#fff8e8',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    marginRight: 8,
+    marginRight: 10,
   },
   logo: {
-    width: 34,
-    height: 34,
+    width: 38,
+    height: 38,
     objectFit: 'contain',
   },
   brandTextWrap: {
     flex: 1,
   },
   agencyName: {
-    fontSize: 15,
+    fontSize: 16.5,
     fontWeight: 700,
     color: '#8b6a16',
     textTransform: 'uppercase',
   },
   agencyMeta: {
-    fontSize: 7.1,
+    fontSize: 7.4,
     color: '#4b5563',
-    marginTop: 1,
+    marginTop: 3,
+    lineHeight: 1.32,
   },
-  centerHead: {
-    flex: 1.1,
-    alignItems: 'center',
-    paddingHorizontal: 6,
+  agencyLegal: {
+    fontSize: 7.2,
+    color: '#374151',
+    marginTop: 4,
+    lineHeight: 1.28,
+  },
+  metaCard: {
+    width: 152,
+    borderWidth: 1,
+    borderColor: '#111827',
+    backgroundColor: '#fffaf0',
+    paddingVertical: 8,
+    paddingHorizontal: 9,
+    justifyContent: 'center',
+  },
+  metaLabel: {
+    fontSize: 6.7,
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    color: '#6b7280',
+    marginBottom: 2,
+  },
+  metaValue: {
+    fontSize: 10.2,
+    fontWeight: 700,
+    color: '#111827',
+    marginBottom: 4,
+  },
+  headerDivider: {
+    borderTopWidth: 1,
+    borderTopColor: '#e7d8a6',
+    marginTop: 10,
+    paddingTop: 10,
+  },
+  titleBlock: {
+    alignItems: 'flex-start',
   },
   titlePill: {
     backgroundColor: '#111827',
     borderRadius: 999,
     paddingVertical: 3,
-    paddingHorizontal: 8,
-    marginBottom: 4,
+    paddingHorizontal: 9,
+    marginBottom: 5,
   },
   titlePillText: {
     color: '#fbf5df',
@@ -635,166 +672,212 @@ const invoiceStyles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   docTitle: {
-    fontSize: 16,
+    fontSize: 19.5,
     fontWeight: 700,
     textTransform: 'uppercase',
     color: '#111827',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   docSubtitle: {
-    marginTop: 2,
-    fontSize: 7.1,
-    textAlign: 'center',
+    marginTop: 4,
+    fontSize: 8,
+    textAlign: 'left',
     color: '#6b7280',
   },
-  metaSide: {
-    width: 134,
-    alignItems: 'flex-end',
+  summaryRow: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  summaryCard: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#e7d8a6',
+    backgroundColor: '#fffdf7',
+    paddingVertical: 6,
+    paddingHorizontal: 7,
+  },
+  summaryCardSpaced: {
+    flex: 1,
+    marginLeft: 6,
+    borderWidth: 1,
+    borderColor: '#e7d8a6',
+    backgroundColor: '#fffdf7',
+    paddingVertical: 6,
+    paddingHorizontal: 7,
+  },
+  summaryLabel: {
+    fontSize: 6.8,
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    color: '#6b7280',
+  },
+  summaryValue: {
+    fontSize: 8.7,
+    fontWeight: 700,
+    color: '#111827',
+    marginTop: 3,
+    lineHeight: 1.26,
+  },
+  summarySubtext: {
+    fontSize: 7,
+    color: '#6b7280',
+    marginTop: 2,
+    lineHeight: 1.28,
   },
   metaText: {
     fontSize: 7.2,
     color: '#374151',
     marginTop: 2,
-    textAlign: 'right',
+    lineHeight: 1.28,
   },
   row: {
     flexDirection: 'row',
-    marginTop: 6,
+    marginTop: 8,
   },
   leftCol: {
     flex: 1,
   },
   rightCol: {
     flex: 1,
-    marginLeft: 6,
+    marginLeft: 8,
   },
   box: {
     borderWidth: 1,
     borderColor: '#d4af37',
     backgroundColor: '#fffdf7',
-    padding: 6,
+    padding: 8,
   },
   boxTitle: {
-    fontSize: 9.3,
+    fontSize: 9.6,
     fontWeight: 700,
     color: '#8b6a16',
     textAlign: 'center',
     textTransform: 'uppercase',
-    marginBottom: 4,
-    paddingBottom: 3,
+    marginBottom: 6,
+    paddingBottom: 4,
     borderBottomWidth: 1,
     borderBottomColor: '#efe3ba',
   },
   fieldRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 3,
+    marginBottom: 4,
   },
   fieldLabel: {
-    width: 82,
+    width: 76,
     fontSize: 7.1,
     color: '#4b5563',
     paddingTop: 1,
   },
   fieldValue: {
     flex: 1,
-    fontSize: 7.9,
+    fontSize: 8.1,
     borderBottomWidth: 0.8,
     borderBottomColor: '#cbd5e1',
-    minHeight: 10,
-    paddingBottom: 1,
+    minHeight: 11,
+    paddingBottom: 2,
   },
   detailBox: {
     borderWidth: 1,
     borderColor: '#d4af37',
     backgroundColor: '#fffdf7',
-    padding: 6,
-    marginTop: 6,
+    padding: 8,
+    marginTop: 8,
   },
   detailHeader: {
     flexDirection: 'row',
     backgroundColor: '#f8f1dc',
     borderWidth: 1,
     borderColor: '#d4af37',
-    paddingVertical: 5,
-    paddingHorizontal: 6,
-    marginTop: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    marginTop: 6,
   },
   detailRow: {
     flexDirection: 'row',
     borderBottomWidth: 0.8,
     borderBottomColor: '#e5e7eb',
-    paddingVertical: 5,
-    paddingHorizontal: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
   },
   descCol: {
     flex: 1,
-    fontSize: 7.5,
+    fontSize: 7.8,
     color: '#111827',
-    paddingRight: 8,
+    paddingRight: 10,
   },
   amountCol: {
-    width: 92,
-    fontSize: 7.8,
+    width: 100,
+    fontSize: 8.1,
     textAlign: 'right',
     fontWeight: 700,
     color: '#111827',
   },
   totalsWrap: {
     flexDirection: 'row',
-    marginTop: 6,
+    marginTop: 8,
   },
   totalsSpacer: {
     flex: 1,
   },
   totalsBox: {
-    width: 220,
+    width: 238,
     borderWidth: 1,
     borderColor: '#111827',
     backgroundColor: '#f8f1dc',
-    padding: 6,
+    padding: 8,
   },
   totalRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 3,
+    borderBottomWidth: 0.8,
+    borderBottomColor: '#e5e7eb',
+    paddingBottom: 3,
+    marginBottom: 4,
+  },
+  totalRowLast: {
+    borderBottomWidth: 0,
+    paddingBottom: 0,
+    marginBottom: 0,
   },
   totalLabel: {
-    fontSize: 8,
+    fontSize: 8.1,
     fontWeight: 700,
     textTransform: 'uppercase',
     color: '#111827',
   },
   totalValue: {
-    fontSize: 8.8,
+    fontSize: 9.2,
     fontWeight: 700,
     color: '#8b6a16',
     textAlign: 'right',
   },
   noteBar: {
-    marginTop: 6,
+    marginTop: 8,
     borderWidth: 1,
     borderColor: '#111827',
     backgroundColor: '#111827',
-    paddingVertical: 5,
-    paddingHorizontal: 8,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
   },
   noteText: {
-    fontSize: 7.2,
+    fontSize: 7.3,
     textAlign: 'center',
     fontWeight: 700,
     color: '#f9fafb',
+    lineHeight: 1.28,
   },
   footer: {
-    marginTop: 5,
+    marginTop: 8,
     borderTopWidth: 1,
     borderTopColor: '#d1d5db',
-    paddingTop: 4,
+    paddingTop: 6,
   },
   footerText: {
-    fontSize: 7,
+    fontSize: 7.2,
     textAlign: 'center',
     color: '#6b7280',
+    lineHeight: 1.28,
   },
 });
 
@@ -1076,6 +1159,17 @@ export function ContractPdfDocument({ data }: { data: ContractPdfData }) {
 
 export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
   const devise = data.agency.devise ?? 'MAD';
+  const agencyLocation = [data.agency.adresse, data.agency.ville, data.agency.pays]
+    .filter(Boolean)
+    .join(', ') || 'Agence de location';
+  const agencyContact = [data.agency.telephone, data.agency.email, data.agency.siteWeb]
+    .filter(Boolean)
+    .join(' · ') || 'Coordonnées agence à compléter';
+  const agencyLegal = [
+    data.agency.ice ? `ICE ${data.agency.ice}` : '',
+    data.agency.rc ? `RC ${data.agency.rc}` : '',
+  ].filter(Boolean).join(' · ');
+  const periodLabel = `${formatContractDateValue(data.period.debutAt)} → ${formatContractDateValue(data.period.finAt)}`;
   const footerText = [data.agency.adresse, data.agency.ville, data.agency.telephone, data.agency.email]
     .filter(Boolean)
     .join(' · ');
@@ -1087,29 +1181,50 @@ export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
           <View style={invoiceStyles.headerBand}>
             <View style={invoiceStyles.headerRow}>
               <View style={invoiceStyles.brandSide}>
-                <View style={invoiceStyles.logoWrap}>
-                  {data.agency.logoUrl ? <Image src={data.agency.logoUrl} style={invoiceStyles.logo} /> : null}
-                </View>
-                <View style={invoiceStyles.brandTextWrap}>
-                  <Text style={invoiceStyles.agencyName}>{data.agency.nom}</Text>
-                  <Text style={invoiceStyles.agencyMeta}>{[data.agency.adresse, data.agency.ville].filter(Boolean).join(', ') || 'Agence de location'}</Text>
-                  <Text style={invoiceStyles.agencyMeta}>{[data.agency.telephone, data.agency.email].filter(Boolean).join(' · ') || 'Coordonnées agence à compléter'}</Text>
+                <View style={invoiceStyles.brandTopRow}>
+                  <View style={invoiceStyles.logoWrap}>
+                    {data.agency.logoUrl ? <Image src={data.agency.logoUrl} style={invoiceStyles.logo} /> : null}
+                  </View>
+                  <View style={invoiceStyles.brandTextWrap}>
+                    <Text style={invoiceStyles.agencyName}>{data.agency.nom}</Text>
+                    <Text style={invoiceStyles.agencyMeta}>{agencyLocation}</Text>
+                    <Text style={invoiceStyles.agencyMeta}>{agencyContact}</Text>
+                    {agencyLegal ? <Text style={invoiceStyles.agencyLegal}>{agencyLegal}</Text> : null}
+                  </View>
                 </View>
               </View>
 
-              <View style={invoiceStyles.centerHead}>
+              <View style={invoiceStyles.metaCard}>
+                <Text style={invoiceStyles.metaLabel}>Facture</Text>
+                <Text style={invoiceStyles.metaValue}>{data.reference}</Text>
+                <Text style={invoiceStyles.metaText}>Émise le {formatContractDateValue(data.createdAt)}</Text>
+                <Text style={invoiceStyles.metaText}>Statut: {printableValue(data.statut)}</Text>
+              </View>
+            </View>
+
+            <View style={invoiceStyles.headerDivider}>
+              <View style={invoiceStyles.titleBlock}>
                 <View style={invoiceStyles.titlePill}>
                   <Text style={invoiceStyles.titlePillText}>Document comptable</Text>
                 </View>
                 <Text style={invoiceStyles.docTitle}>Facture</Text>
-                <Text style={invoiceStyles.docSubtitle}>Synthèse claire des prestations et du solde client</Text>
+                <Text style={invoiceStyles.docSubtitle}>Présentation claire des prestations facturées, des règlements encaissés et du solde client.</Text>
               </View>
 
-              <View style={invoiceStyles.metaSide}>
-                <Text style={invoiceStyles.metaText}>Réf: {data.reference}</Text>
-                <Text style={invoiceStyles.metaText}>Émise le: {formatContractDateValue(data.createdAt)}</Text>
-                <Text style={invoiceStyles.metaText}>Dossier: {data.dossierLabel}</Text>
-                <Text style={invoiceStyles.metaText}>Statut: {data.statut || '—'}</Text>
+              <View style={invoiceStyles.summaryRow}>
+                <View style={invoiceStyles.summaryCard}>
+                  <Text style={invoiceStyles.summaryLabel}>Dossier</Text>
+                  <Text style={invoiceStyles.summaryValue}>{printableValue(data.dossierLabel)}</Text>
+                </View>
+                <View style={invoiceStyles.summaryCardSpaced}>
+                  <Text style={invoiceStyles.summaryLabel}>Période</Text>
+                  <Text style={invoiceStyles.summaryValue}>{periodLabel}</Text>
+                </View>
+                <View style={invoiceStyles.summaryCardSpaced}>
+                  <Text style={invoiceStyles.summaryLabel}>Solde client</Text>
+                  <Text style={invoiceStyles.summaryValue}>{formatCurrencyValue(data.montantRestant, devise)}</Text>
+                  <Text style={invoiceStyles.summarySubtext}>Mode dominant: {printableValue(data.paiementModeLabel)}</Text>
+                </View>
               </View>
             </View>
           </View>
@@ -1200,7 +1315,7 @@ export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
                   <Text style={invoiceStyles.totalLabel}>Reste à payer</Text>
                   <Text style={invoiceStyles.totalValue}>{formatCurrencyValue(data.montantRestant, devise)}</Text>
                 </View>
-                <View style={invoiceStyles.totalRow}>
+                <View style={[invoiceStyles.totalRow, invoiceStyles.totalRowLast]}>
                   <Text style={invoiceStyles.totalLabel}>Mode dominant</Text>
                   <Text style={invoiceStyles.totalValue}>{printableValue(data.paiementModeLabel)}</Text>
                 </View>

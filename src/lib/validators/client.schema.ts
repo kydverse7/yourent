@@ -6,32 +6,48 @@ const marocPhone = z.string().regex(
   'Format téléphone Maroc invalide (ex: +212661234567)'
 );
 
+const emptyStringToUndefined = (value: unknown) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed === '' ? undefined : trimmed;
+};
+
+const optionalString = (max: number) => z.preprocess(emptyStringToUndefined, z.string().max(max).optional());
+const optionalEmail = z.preprocess(emptyStringToUndefined, z.string().email('Email invalide').optional());
+const optionalPhone = z.preprocess(emptyStringToUndefined, marocPhone.optional());
+const optionalDate = z.preprocess((value) => (value === '' || value === null ? undefined : value), z.coerce.date().optional());
+const optionalUrl = z.preprocess(emptyStringToUndefined, z.string().url().optional());
+const optionalDocumentType = z.preprocess(
+  emptyStringToUndefined,
+  z.enum(['cin', 'passeport', 'titre_sejour']).optional(),
+);
+
 export const clientSchema = z.object({
   type: z.enum(['particulier', 'entreprise']),
   nom: z.string().min(1, 'Nom requis').max(100),
-  prenom: z.string().max(100).optional(),
-  email: z.string().email('Email invalide').optional().or(z.literal('')),
+  prenom: optionalString(100),
+  email: optionalEmail,
   telephone: marocPhone,
-  whatsapp: marocPhone.optional().or(z.literal('')),
-  adresse: z.string().max(200).optional(),
-  ville: z.string().max(100).optional(),
-  dateNaissance: z.coerce.date().optional(),
-  nationalite: z.string().max(50).optional(),
-  documentType: z.enum(['cin', 'passeport', 'titre_sejour']).optional(),
-  documentNumber: z.string().max(50).optional(),
-  documentExpireLe: z.coerce.date().optional(),
-  cinRectoUrl: z.string().url().optional(),
-  cinVersoUrl: z.string().url().optional(),
-  permisNumero: z.string().max(50).optional(),
-  permisCategorie: z.string().max(10).optional(),
-  permisDelivreLe: z.coerce.date().optional(),
-  permisExpireLe: z.coerce.date().optional(),
-  permisRectoUrl: z.string().url().optional(),
-  permisVersoUrl: z.string().url().optional(),
-  entrepriseNom: z.string().max(200).optional(),
-  entrepriseRC: z.string().max(50).optional(),
-  entrepriseSiret: z.string().max(50).optional(),
-  notesInternes: z.string().max(2000).optional(),
+  whatsapp: optionalPhone,
+  adresse: optionalString(200),
+  ville: optionalString(100),
+  dateNaissance: optionalDate,
+  nationalite: optionalString(50),
+  documentType: optionalDocumentType,
+  documentNumber: optionalString(50),
+  documentExpireLe: optionalDate,
+  cinRectoUrl: optionalUrl,
+  cinVersoUrl: optionalUrl,
+  permisNumero: optionalString(50),
+  permisCategorie: optionalString(10),
+  permisDelivreLe: optionalDate,
+  permisExpireLe: optionalDate,
+  permisRectoUrl: optionalUrl,
+  permisVersoUrl: optionalUrl,
+  entrepriseNom: optionalString(200),
+  entrepriseRC: optionalString(50),
+  entrepriseSiret: optionalString(50),
+  notesInternes: optionalString(2000),
   vip: z.boolean().default(false),
   remiseHabituels: z.number().min(0).max(100).default(0),
 });

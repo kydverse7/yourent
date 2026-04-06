@@ -2,9 +2,15 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { X, FileText, Plus, Trash2, Download, Car, User, Calendar, Receipt } from 'lucide-react';
+import { X, Copy, FileText, Mail, MessageCircle, Plus, Trash2, Download, Car, User, Calendar, Receipt } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Button, Input, Select, Badge } from '@/components/ui';
+import {
+  buildDocumentEmailSubject,
+  buildDocumentShareMessage,
+  buildMailtoShareUrl,
+  buildWhatsAppShareUrl,
+} from '@/lib/documentShare';
 import { buildPdfViewerUrl, formatCurrency } from '@/lib/utils';
 
 type ClientOption = {
@@ -12,6 +18,7 @@ type ClientOption = {
   nom: string;
   prenom?: string;
   telephone?: string;
+  whatsapp?: string;
   email?: string;
   type?: string;
 };
@@ -67,10 +74,20 @@ interface CreateInvoiceModalProps {
   onClose: () => void;
 }
 
+type GeneratedDocumentState = {
+  url: string;
+  reference: string;
+  documentType: 'facture' | 'devis';
+  totalMontant: number;
+  clientLabel?: string;
+  clientEmail?: string;
+  clientPhone?: string;
+};
+
 export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModalProps) {
   const qc = useQueryClient();
   const [form, setForm] = useState<FormData>(defaultForm);
-  const [generatedUrl, setGeneratedUrl] = useState<string | null>(null);
+  const [generatedDocument, setGeneratedDocument] = useState<GeneratedDocumentState | null>(null);
 
   const { data: clientsData } = useQuery({
     queryKey: ['clients-select-all'],
@@ -158,6 +175,57 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
     }));
   }, []);
 
+  const copyDocumentLink = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success('Lien du document copié');
+    } catch {
+      toast.error('Copie du lien impossible');
+    }
+  };
+
+  const openShareUrl = (url: string | null, errorMessage: string) => {
+    if (!url) {
+      toast.error(errorMessage);
+      return;
+    }
+
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const shareGeneratedByEmail = () => {
+    if (!generatedDocument) return;
+
+    const mailtoUrl = buildMailtoShareUrl(
+      generatedDocument.clientEmail,
+      buildDocumentEmailSubject(generatedDocument.documentType, generatedDocument.reference),
+      buildDocumentShareMessage({
+        documentType: generatedDocument.documentType,
+        reference: generatedDocument.reference,
+        url: generatedDocument.url,
+        clientLabel: generatedDocument.clientLabel,
+      })
+    );
+
+    openShareUrl(mailtoUrl, 'Email client manquant');
+  };
+
+  const shareGeneratedByWhatsApp = () => {
+    if (!generatedDocument) return;
+
+    const whatsappUrl = buildWhatsAppShareUrl(
+      generatedDocument.clientPhone,
+      buildDocumentShareMessage({
+        documentType: generatedDocument.documentType,
+        reference: generatedDocument.reference,
+        url: generatedDocument.url,
+        clientLabel: generatedDocument.clientLabel,
+      })
+    );
+
+    openShareUrl(whatsappUrl, 'Numéro WhatsApp client manquant');
+  };
+
   const generateMutation = useMutation({
     mutationFn: async () => {
       const res = await fetch('/api/invoices/create-document', {
@@ -183,15 +251,24 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
     },
     onSuccess: (data) => {
       toast.success(`${data.documentType === 'devis' ? 'Devis' : 'Facture'} ${data.reference} généré(e)`);
-      setGeneratedUrl(data.url);
+      setGeneratedDocument({
+        url: data.url,
+        reference: data.reference,
+        documentType: data.documentType === 'devis' ? 'devis' : 'facture',
+        totalMontant: data.totalMontant,
+        clientLabel: selectedClient ? (selectedClient.prenom ? `${selectedClient.prenom} ${selectedClient.nom}` : selectedClient.nom) : undefined,
+        clientEmail: selectedClient?.email,
+        clientPhone: selectedClient?.whatsapp ?? selectedClient?.telephone,
+      });
       qc.invalidateQueries({ queryKey: ['invoices'] });
+      qc.invalidateQueries({ queryKey: ['generated-documents'] });
     },
     onError: (error: Error) => toast.error(error.message),
   });
 
   const handleClose = () => {
     setForm(defaultForm);
-    setGeneratedUrl(null);
+    setGeneratedDocument(null);
     onClose();
   };
 
@@ -440,18 +517,47 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
           )}
 
           {/* Lien de téléchargement */}
-          {generatedUrl && (
+          {generatedDocument && (
             <div className="rounded-2xl border border-green-400/20 bg-green-400/5 p-4 text-center">
               <p className="mb-2 text-sm font-semibold text-green-400">Document généré avec succès !</p>
-              <a
-                href={buildPdfViewerUrl(generatedUrl, `${form.documentType === 'devis' ? 'devis' : 'facture'}.pdf`)}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl bg-gold-gradient px-5 py-2.5 text-sm font-semibold text-black shadow-gold hover:brightness-110 transition-all"
-              >
-                <Download className="h-4 w-4" />
-                Télécharger le PDF
-              </a>
+              <p className="mb-4 text-xs text-cream-muted">
+                Vous pourrez aussi le retrouver ensuite dans la section Documents générés de la page Factures.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <a
+                  href={buildPdfViewerUrl(generatedDocument.url, `${generatedDocument.reference}.pdf`)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-gold-gradient px-5 py-2.5 text-sm font-semibold text-black shadow-gold hover:brightness-110 transition-all"
+                >
+                  <Download className="h-4 w-4" />
+                  Ouvrir le PDF
+                </a>
+                <button
+                  type="button"
+                  onClick={() => copyDocumentLink(generatedDocument.url)}
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-cream hover:bg-white/[0.08]"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copier le lien
+                </button>
+                <button
+                  type="button"
+                  onClick={shareGeneratedByEmail}
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-cream hover:bg-white/[0.08]"
+                >
+                  <Mail className="h-4 w-4" />
+                  Email
+                </button>
+                <button
+                  type="button"
+                  onClick={shareGeneratedByWhatsApp}
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-cream hover:bg-white/[0.08]"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -463,7 +569,7 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
             variant="gold"
             disabled={!canSubmit || generateMutation.isPending}
             onClick={() => {
-              setGeneratedUrl(null);
+              setGeneratedDocument(null);
               generateMutation.mutate();
             }}
           >

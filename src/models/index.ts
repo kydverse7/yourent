@@ -12,6 +12,7 @@ export { Agence } from './Agence';
 export { AuditLog } from './AuditLog';
 export { DocumentSequence } from './DocumentSequence';
 export { Notification } from './Notification';
+export { GeneratedDocument } from './GeneratedDocument';
 
 export type { IVehicle } from './Vehicle';
 export type { IClient } from './Client';
@@ -26,3 +27,4 @@ export type { IAgence } from './Agence';
 export type { IAuditLog } from './AuditLog';
 export type { IDocumentSequence } from './DocumentSequence';
 export type { INotification } from './Notification';
+export type { IGeneratedDocument } from './GeneratedDocument';
