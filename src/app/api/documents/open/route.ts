@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { auth } from '@/lib/auth';
 import { apiError } from '@/lib/apiHelpers';
+import { getSignedCloudinaryRawDownloadUrl } from '@/lib/cloudinary';
 import { rateLimit } from '@/lib/rateLimit';
 
 function sanitizeFileName(input: string | null): string {
@@ -39,7 +40,9 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const upstream = await fetch(sourceUrl, {
+    const resolvedSourceUrl = getSignedCloudinaryRawDownloadUrl(sourceUrl) ?? sourceUrl;
+
+    const upstream = await fetch(resolvedSourceUrl, {
       cache: 'no-store',
       redirect: 'follow',
     });

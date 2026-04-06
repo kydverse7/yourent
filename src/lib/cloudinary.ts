@@ -47,4 +47,27 @@ export async function deleteFromCloudinary(publicId: string): Promise<void> {
   await cloudinary.uploader.destroy(publicId);
 }
 
+export function getSignedCloudinaryRawDownloadUrl(sourceUrl: string): string | null {
+  try {
+    const parsed = new URL(sourceUrl);
+    if (parsed.hostname !== 'res.cloudinary.com') return null;
+
+    const marker = '/raw/upload/';
+    const markerIndex = parsed.pathname.indexOf(marker);
+    if (markerIndex === -1) return null;
+
+    let publicId = parsed.pathname.slice(markerIndex + marker.length);
+    publicId = publicId.replace(/^v\d+\//, '');
+    if (!publicId) return null;
+
+    return cloudinary.utils.private_download_url(publicId, '', {
+      resource_type: 'raw',
+      type: 'upload',
+      attachment: false,
+    });
+  } catch {
+    return null;
+  }
+}
+
 export { cloudinary };
