@@ -150,7 +150,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                         onClick={() => { setLocale(lang.code); setLangOpen(false); }}
                         className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                           locale === lang.code
-                            ? 'bg-gold/10 text-gold'
+                            ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold'
                             : 'text-cream-muted hover:bg-white/5 hover:text-cream'
                         }`}
                       >

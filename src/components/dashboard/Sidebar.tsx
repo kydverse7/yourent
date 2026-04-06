@@ -132,12 +132,12 @@ export default function Sidebar({ userRole = 'agent' }: SidebarProps) {
                 className={cn(
                   'group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium transition-all duration-150',
                   active
-                    ? 'border border-gold/20 bg-gold/10 text-cream shadow-gold'
+                    ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
                     : 'border border-transparent text-cream-muted hover:border-white/5 hover:bg-white/5 hover:text-cream',
                   collapsed && 'justify-center px-2'
                 )}
               >
-                <span className={cn('shrink-0 rounded-xl p-2 transition-colors', active ? 'bg-gold/10 text-gold' : 'text-cream-faint group-hover:text-gold')}>
+                <span className={cn('shrink-0 rounded-xl p-2 transition-colors', active ? 'bg-white/15 text-noir-root' : 'text-cream-faint group-hover:text-gold')}>
                   {item.icon}
                 </span>
                 {!collapsed && (
@@ -204,11 +204,11 @@ export default function Sidebar({ userRole = 'agent' }: SidebarProps) {
                     className={cn(
                       'group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium transition-all duration-150',
                       active
-                        ? 'border border-gold/20 bg-gold/10 text-cream shadow-gold'
+                        ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
                         : 'border border-transparent text-cream-muted hover:border-white/5 hover:bg-white/5 hover:text-cream'
                     )}
                   >
-                    <span className={cn('shrink-0 rounded-xl p-2 transition-colors', active ? 'bg-gold/10 text-gold' : 'text-cream-faint group-hover:text-gold')}>
+                    <span className={cn('shrink-0 rounded-xl p-2 transition-colors', active ? 'bg-white/15 text-noir-root' : 'text-cream-faint group-hover:text-gold')}>
                       {item.icon}
                     </span>
                     <span className="truncate">{item.label}</span>

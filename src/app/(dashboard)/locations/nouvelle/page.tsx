@@ -538,7 +538,7 @@ export default function NouvelleLocationPage() {
           onClick={() => setMode('direct')}
           className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
             mode === 'direct'
-              ? 'bg-gold text-noir-root'
+              ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
               : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
           }`}
         >
@@ -548,7 +548,7 @@ export default function NouvelleLocationPage() {
           onClick={() => setMode('reservation')}
           className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
             mode === 'reservation'
-              ? 'bg-gold text-noir-root'
+              ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
               : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
           }`}
         >
@@ -611,7 +611,7 @@ export default function NouvelleLocationPage() {
                           onClick={() => setSelectedClient(c)}
                           className={`flex w-full items-center gap-4 rounded-xl px-4 py-3 text-left transition-all ${
                             selectedClient?._id === c._id
-                              ? 'border border-gold/30 bg-gold/10'
+                              ? 'border border-gold/30 bg-gold/15 shadow-gold'
                               : 'border border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
                           }`}
                         >
@@ -654,7 +654,7 @@ export default function NouvelleLocationPage() {
               )}
 
               {selectedClient && !showNewClient && (
-                <div className="flex items-center justify-between rounded-2xl border border-gold/15 bg-gold/5 p-4">
+                <div className="flex items-center justify-between rounded-2xl border border-gold/30 bg-gold/15 p-4 shadow-gold">
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-gold/70">
                       Client sélectionné
@@ -722,7 +722,7 @@ export default function NouvelleLocationPage() {
                             }}
                             className={`flex w-full items-center gap-4 rounded-xl px-4 py-3 text-left transition-all ${
                               isSelected
-                                ? 'border border-gold/30 bg-gold/10'
+                                ? 'border border-gold/30 bg-gold/15 shadow-gold'
                                 : 'border border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
                             } ${indisponible ? 'opacity-60' : ''}`}
                           >
@@ -780,7 +780,7 @@ export default function NouvelleLocationPage() {
               )}
 
               {selectedVehicle && (
-                <div className="flex items-center justify-between rounded-2xl border border-gold/15 bg-gold/5 p-4">
+                <div className="flex items-center justify-between rounded-2xl border border-gold/30 bg-gold/15 p-4 shadow-gold">
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-gold/70">
                       Véhicule sélectionné

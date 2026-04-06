@@ -232,7 +232,7 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
                   onClick={() => setForm((prev) => ({ ...prev, documentType: type }))}
                   className={`flex-1 rounded-2xl border px-4 py-3.5 text-sm font-semibold transition-all ${
                     form.documentType === type
-                      ? 'border-gold bg-gold/10 text-gold shadow-[0_0_12px_rgba(212,175,55,0.1)]'
+                      ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
                       : 'border-white/8 bg-white/[0.03] text-cream-muted hover:border-white/15 hover:text-cream'
                   }`}
                 >

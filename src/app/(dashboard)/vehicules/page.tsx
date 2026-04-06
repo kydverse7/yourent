@@ -200,7 +200,7 @@ export default function VehiculesPage() {
                         onClick={() => setSelectedVehicleIdx((prev) => ({ ...prev, [key]: idx }))}
                         className={`flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium transition-all ${
                           selectedIdx === idx
-                            ? 'border border-gold/30 bg-gold/10 text-gold'
+                            ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
                             : 'border border-transparent text-cream-muted hover:bg-white/5 hover:text-cream'
                         }`}
                       >

@@ -375,7 +375,7 @@ export default function EtatsDesLieuxPage() {
           </div>
 
           {selectedLocation && (
-            <div className="mt-4 rounded-2xl border border-gold/10 bg-gold/5 p-4 text-sm text-cream-muted">
+            <div className="mt-4 rounded-2xl border border-gold/30 bg-gold/15 p-4 text-sm text-cream-muted shadow-gold">
               <p className="font-medium text-cream">
                 {(selectedLocation.vehicle ?? selectedLocation.vehicule)?.marque} {(selectedLocation.vehicle ?? selectedLocation.vehicule)?.modele}
               </p>

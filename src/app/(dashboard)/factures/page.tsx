@@ -316,7 +316,7 @@ export default function FacturesPage() {
           </div>
 
           {selectedOption && (
-            <div className="mt-4 rounded-2xl border border-gold/10 bg-gold/5 p-4 text-sm text-cream-muted">
+            <div className="mt-4 rounded-2xl border border-gold/30 bg-gold/15 p-4 text-sm text-cream-muted shadow-gold">
               <p className="font-medium text-cream">Dossier sélectionné</p>
               <p className="mt-1">
                 Statut {selectedOption.statut} · montant {formatCurrency(form.entityType === 'reservation' ? Number((selectedOption as ReservationOption).prix?.totalEstime ?? 0) : Number((selectedOption as LocationOption).montantTotal ?? 0))}

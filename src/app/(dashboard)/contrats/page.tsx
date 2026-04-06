@@ -313,7 +313,7 @@ export default function ContratsPage() {
           </div>
 
           {selectedOption && (
-            <div className="mt-4 rounded-2xl border border-gold/10 bg-gold/5 p-4 text-sm text-cream-muted">
+            <div className="mt-4 rounded-2xl border border-gold/30 bg-gold/15 p-4 text-sm text-cream-muted shadow-gold">
               <p className="font-medium text-cream">Dossier sélectionné</p>
               <p className="mt-1">
                 Statut {selectedOption.statut} · contrat {selectedOption.contratPdfUrl ? 'déjà présent' : 'absent'}

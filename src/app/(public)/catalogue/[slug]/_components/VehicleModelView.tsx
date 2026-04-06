@@ -126,7 +126,7 @@ export function VehicleModelView({
                   onClick={() => setSelectedIdx(i)}
                   className={`flex items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-all ${
                     i === selectedIdx
-                      ? 'border-gold/40 bg-gold/10'
+                      ? 'border-gold/30 bg-gold/15 shadow-gold'
                       : 'border-white/8 bg-white/[0.02] hover:border-white/15'
                   }`}
                 >

@@ -1,4 +1,5 @@
-﻿@import "tailwindcss";
+﻿@config "../../tailwind.config.ts";
+@import "tailwindcss";
 
 :root {
   --gold: #c9a84c;
@@ -211,6 +212,68 @@ a {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Compatibility layer for legacy theme utility classes used across the app. */
+.bg-gold { background-color: #c9a84c; }
+.bg-gold-gradient {
+  background-color: #c9a84c;
+  background-image: linear-gradient(135deg, #f3e0a9 0%, #c9a84c 35%, #9b7b2e 100%);
+}
+.bg-gold-200 { background-color: rgba(201, 168, 76, 0.15); }
+.bg-gold\/5 { background-color: rgba(201, 168, 76, 0.05); }
+.bg-gold\/10 { background-color: rgba(201, 168, 76, 0.1); }
+.bg-gold\/15 { background-color: rgba(201, 168, 76, 0.15); }
+.bg-gold\/20 { background-color: rgba(201, 168, 76, 0.2); }
+
+.border-gold { border-color: #c9a84c; }
+.border-gold-400 { border-color: rgba(201, 168, 76, 0.4); }
+.border-gold\/10 { border-color: rgba(201, 168, 76, 0.1); }
+.border-gold\/15 { border-color: rgba(201, 168, 76, 0.15); }
+.border-gold\/20 { border-color: rgba(201, 168, 76, 0.2); }
+.border-gold\/25 { border-color: rgba(201, 168, 76, 0.25); }
+.border-gold\/30 { border-color: rgba(201, 168, 76, 0.3); }
+.border-gold\/40 { border-color: rgba(201, 168, 76, 0.4); }
+
+.text-gold { color: #c9a84c; }
+.text-gold-light { color: #e8c97a; }
+.text-gold\/80 { color: rgba(201, 168, 76, 0.8); }
+.text-gold\/70 { color: rgba(201, 168, 76, 0.7); }
+.text-gold\/60 { color: rgba(201, 168, 76, 0.6); }
+.text-gold\/40 { color: rgba(201, 168, 76, 0.4); }
+.text-gold\/20 { color: rgba(201, 168, 76, 0.2); }
+.text-noir-root { color: #0a0a0a; }
+
+.bg-noir-root { background-color: #0a0a0a; }
+.bg-noir-card { background-color: #111111; }
+.bg-noir-sidebar { background-color: #0d0d0d; }
+.bg-noir-root\/60 { background-color: rgba(10, 10, 10, 0.6); }
+.bg-noir-root\/70 { background-color: rgba(10, 10, 10, 0.7); }
+.bg-noir-root\/80 { background-color: rgba(10, 10, 10, 0.8); }
+.bg-noir-root\/95 { background-color: rgba(10, 10, 10, 0.95); }
+.bg-noir-sidebar\/90 { background-color: rgba(13, 13, 13, 0.9); }
+.bg-noir-sidebar\/95 { background-color: rgba(13, 13, 13, 0.95); }
+
+.text-cream { color: #f5f0e8; }
+.text-cream-muted { color: #a89880; }
+.text-cream-faint { color: #6b5e4e; }
+
+.shadow-gold { box-shadow: 0 0 20px rgba(201, 168, 76, 0.2); }
+.shadow-gold-md { box-shadow: 0 0 30px rgba(201, 168, 76, 0.25); }
+.shadow-gold-lg { box-shadow: 0 0 40px rgba(201, 168, 76, 0.4); }
+.shadow-gold-xl { box-shadow: 0 0 80px rgba(201, 168, 76, 0.15); }
+.shadow-card-hover { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 168, 76, 0.08); }
+
+.hover\:bg-gold\/10:hover { background-color: rgba(201, 168, 76, 0.1); }
+.hover\:bg-gold\/20:hover { background-color: rgba(201, 168, 76, 0.2); }
+.hover\:border-gold\/20:hover { border-color: rgba(201, 168, 76, 0.2); }
+.hover\:border-gold\/40:hover { border-color: rgba(201, 168, 76, 0.4); }
+.hover\:text-gold:hover { color: #c9a84c; }
+.hover\:text-gold-light:hover { color: #e8c97a; }
+.hover\:shadow-gold:hover { box-shadow: 0 0 20px rgba(201, 168, 76, 0.2); }
+.hover\:shadow-gold-md:hover { box-shadow: 0 0 30px rgba(201, 168, 76, 0.25); }
+
+.focus\:border-gold\/30:focus { border-color: rgba(201, 168, 76, 0.3); }
+.focus\:border-gold\/40:focus { border-color: rgba(201, 168, 76, 0.4); }
 
 .input-gold {
   width: 100%;

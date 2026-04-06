@@ -236,7 +236,7 @@ export default function ReservationsPage() {
           onClick={() => switchTab('actives')}
           className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all ${
             tab === 'actives'
-              ? 'border border-gold/30 bg-gold/10 text-gold shadow-gold'
+              ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
               : 'border border-white/5 bg-white/[0.02] text-cream-muted hover:bg-white/5 hover:text-cream'
           }`}
         >
@@ -246,7 +246,7 @@ export default function ReservationsPage() {
           onClick={() => switchTab('historique')}
           className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all ${
             tab === 'historique'
-              ? 'border border-gold/30 bg-gold/10 text-gold shadow-gold'
+              ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold hover:brightness-110'
               : 'border border-white/5 bg-white/[0.02] text-cream-muted hover:bg-white/5 hover:text-cream'
           }`}
         >
