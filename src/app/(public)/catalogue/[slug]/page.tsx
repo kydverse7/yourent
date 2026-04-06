@@ -13,11 +13,10 @@ async function getModelVariants(modelSlug: string) {
   await connectDB();
   const vehicles = await Vehicle.find({
     actif: { $ne: false },
-    statut: 'disponible',
     isPublic: { $ne: false },
   })
     .select(
-      'marque modele annee couleur kilometrage immatriculation carburant boite places categorie options description photos backgroundPhoto photoModele slug tarifParJour tarifParJour10Plus tarifParJour15Plus tarifParJour30Plus',
+      'marque modele annee couleur kilometrage immatriculation carburant boite places categorie options description photos backgroundPhoto photoModele slug statut tarifParJour tarifParJour10Plus tarifParJour15Plus tarifParJour30Plus',
     )
     .sort({ tarifParJour: 1 })
     .lean();
