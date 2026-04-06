@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { useSearchParams } from 'next/navigation';
 import type { ColumnDef } from '@tanstack/react-table';
-import { ClipboardCheck, Plus, Sparkles } from 'lucide-react';
+import { Camera, ClipboardCheck, Plus, Sparkles, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Badge, Button, Input, Select } from '@/components/ui';
 import { DataTable } from '@/components/ui/DataTable';
@@ -72,17 +73,10 @@ const defaultForm = {
   proprete: '',
   signePar: '',
   signatureDataUrl: '',
-  photosText: '',
+  photos: [] as string[],
   schemaPointsText: '[]',
   remarques: '',
 };
-
-function parseMultilineUrls(value: string) {
-  return value
-    .split(/\r?\n|,/)
-    .map((item) => item.trim())
-    .filter(Boolean);
-}
 
 function parseSchemaPoints(value: string): SchemaPoint[] {
   if (!value.trim()) return [];
@@ -114,6 +108,37 @@ export default function EtatsDesLieuxPage() {
   const [momentFilter, setMomentFilter] = useState('');
   const [page, setPage] = useState(1);
   const [form, setForm] = useState(defaultForm);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handlePhotoFiles = useCallback(async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    const newUrls: string[] = [];
+    for (const file of Array.from(files)) {
+      try {
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('folder', 'etat-des-lieux');
+        const res = await fetch('/api/upload', { method: 'POST', body: fd });
+        const payload = await res.json();
+        if (!res.ok) throw new Error(payload.error ?? 'Erreur upload');
+        newUrls.push(payload.data.url);
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : 'Erreur upload photo');
+      }
+    }
+    if (newUrls.length > 0) {
+      setForm((prev) => ({ ...prev, photos: [...prev.photos, ...newUrls] }));
+      toast.success(`${newUrls.length} photo${newUrls.length > 1 ? 's' : ''} ajoutée${newUrls.length > 1 ? 's' : ''}`);
+    }
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }, []);
+
+  const removePhoto = useCallback((index: number) => {
+    setForm((prev) => ({ ...prev, photos: prev.photos.filter((_, i) => i !== index) }));
+  }, []);
 
   useEffect(() => {
     const locationId = searchParams.get('location') ?? '';
@@ -194,7 +219,7 @@ export default function EtatsDesLieuxPage() {
           remarques: form.remarques || undefined,
           signePar: form.signePar || undefined,
           signatureDataUrl: form.signatureDataUrl || undefined,
-          photos: parseMultilineUrls(form.photosText),
+          photos: form.photos,
           schemaPoints,
         }),
       });
@@ -362,14 +387,48 @@ export default function EtatsDesLieuxPage() {
 
           <div className="mt-4 grid gap-4 xl:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-cream-muted">Photos (une URL par ligne)</label>
-              <textarea
-                value={form.photosText}
-                onChange={(e) => setForm((prev) => ({ ...prev, photosText: e.target.value }))}
-                rows={4}
-                className="w-full rounded-xl border border-gold/10 bg-noir-card px-4 py-3 text-sm text-cream placeholder:text-cream-muted/50 focus:border-gold/40 focus:outline-none"
-                placeholder="https://.../photo-1.jpg"
+              <label className="mb-1.5 block text-sm font-medium text-cream-muted">Photos</label>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                capture="environment"
+                multiple
+                className="hidden"
+                onChange={(e) => handlePhotoFiles(e.target.files)}
               />
+              <div className="flex flex-wrap gap-3">
+                {form.photos.map((url, i) => (
+                  <div key={url} className="group relative h-24 w-24 overflow-hidden rounded-xl border border-gold/15">
+                    <Image src={url} alt={`Photo ${i + 1}`} fill className="object-cover" sizes="96px" />
+                    <button
+                      type="button"
+                      onClick={() => removePhoto(i)}
+                      className="absolute right-1 top-1 rounded-full bg-black/70 p-1 opacity-0 transition-opacity group-hover:opacity-100"
+                    >
+                      <X className="h-3 w-3 text-red-400" />
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="flex h-24 w-24 flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-gold/20 bg-gold/5 text-gold/60 transition-colors hover:border-gold/40 hover:text-gold disabled:opacity-50"
+                >
+                  {uploading ? (
+                    <span className="text-xs animate-pulse">Upload…</span>
+                  ) : (
+                    <>
+                      <Camera className="h-5 w-5" />
+                      <span className="text-[10px] font-medium uppercase tracking-wider">Photo</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="mt-2 text-[11px] text-cream-faint">
+                Prenez des photos directement avec l'appareil photo ou importez depuis la galerie.
+              </p>
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium text-cream-muted">Points schéma (JSON)</label>
