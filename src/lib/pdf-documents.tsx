@@ -261,172 +261,214 @@ const styles = StyleSheet.create({
 
 const contractStyles = StyleSheet.create({
   page: {
-    paddingTop: 20,
-    paddingBottom: 26,
-    paddingHorizontal: 20,
-    fontSize: 9,
+    paddingTop: 14,
+    paddingBottom: 16,
+    paddingHorizontal: 16,
+    fontSize: 8.2,
     color: '#111827',
     fontFamily: 'Helvetica',
-    lineHeight: 1.25,
+    lineHeight: 1.18,
   },
   frame: {
     borderWidth: 1,
-    borderColor: '#111827',
-    padding: 10,
+    borderColor: '#1f2937',
+    padding: 8,
+  },
+  headerBand: {
+    borderWidth: 1,
+    borderColor: '#d4af37',
+    backgroundColor: '#fbf5df',
+    padding: 8,
+    marginBottom: 6,
   },
   topHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 8,
-    paddingBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: '#111827',
   },
   agencyBlock: {
-    width: '34%',
+    flex: 1.05,
+    paddingRight: 8,
   },
   titleBlock: {
-    width: '36%',
+    flex: 1.15,
     alignItems: 'center',
+    paddingHorizontal: 4,
   },
   metaBlock: {
-    width: '30%',
+    width: 126,
     alignItems: 'flex-end',
   },
   agencyName: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 700,
+    color: '#8b6a16',
     textTransform: 'uppercase',
   },
   agencyMeta: {
-    fontSize: 8,
+    fontSize: 7.2,
+    color: '#4b5563',
     marginTop: 1,
   },
-  contractTitle: {
-    fontSize: 18,
+  titlePill: {
+    backgroundColor: '#111827',
+    borderRadius: 999,
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+    marginBottom: 4,
+  },
+  titlePillText: {
+    color: '#fbf5df',
+    fontSize: 7.1,
     fontWeight: 700,
     textTransform: 'uppercase',
+  },
+  contractTitle: {
+    fontSize: 16,
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    color: '#111827',
     textAlign: 'center',
   },
   contractSubtitle: {
-    marginTop: 3,
-    fontSize: 8,
+    marginTop: 2,
+    fontSize: 7.1,
     textAlign: 'center',
+    color: '#6b7280',
   },
   metaText: {
-    fontSize: 8,
+    fontSize: 7.2,
+    color: '#374151',
     marginTop: 2,
     textAlign: 'right',
   },
   row: {
     flexDirection: 'row',
-    gap: 8,
-    marginTop: 8,
+    marginTop: 6,
   },
-  halfBox: {
+  halfColumn: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#111827',
-    padding: 7,
-    minHeight: 125,
   },
-  vehicleBox: {
-    flex: 1.28,
-    borderWidth: 1,
-    borderColor: '#111827',
-    padding: 7,
-    minHeight: 152,
+  rightColumn: {
+    flex: 1,
+    marginLeft: 6,
   },
-  sideBox: {
-    flex: 0.92,
+  vehicleColumn: {
+    flex: 1.24,
+  },
+  infoColumn: {
+    flex: 0.86,
+    marginLeft: 6,
+  },
+  box: {
     borderWidth: 1,
-    borderColor: '#111827',
-    padding: 7,
-    minHeight: 152,
+    borderColor: '#d4af37',
+    backgroundColor: '#fffdf7',
+    padding: 6,
+  },
+  compactBox: {
+    borderWidth: 1,
+    borderColor: '#d4af37',
+    backgroundColor: '#fffdf7',
+    padding: 6,
   },
   fullBox: {
     borderWidth: 1,
-    borderColor: '#111827',
-    padding: 7,
-    marginTop: 8,
+    borderColor: '#d4af37',
+    backgroundColor: '#fffdf7',
+    padding: 6,
+    marginTop: 6,
   },
   boxTitle: {
-    fontSize: 12,
+    fontSize: 9.4,
     fontWeight: 700,
     textAlign: 'center',
     textTransform: 'uppercase',
-    marginBottom: 5,
+    color: '#8b6a16',
+    marginBottom: 4,
+    paddingBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: '#efe3ba',
   },
   fieldRow: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginBottom: 4,
+    alignItems: 'flex-start',
+    marginBottom: 3,
   },
   fieldLabel: {
-    width: 104,
-    fontSize: 8.5,
+    width: 86,
+    fontSize: 7.1,
+    color: '#4b5563',
+    paddingTop: 1,
   },
   fieldValue: {
     flex: 1,
-    fontSize: 8.5,
+    fontSize: 7.9,
     borderBottomWidth: 0.8,
-    borderBottomColor: '#9ca3af',
-    minHeight: 11,
+    borderBottomColor: '#cbd5e1',
+    minHeight: 10,
     paddingBottom: 1,
   },
   twinFields: {
     flexDirection: 'row',
-    gap: 8,
   },
   twinField: {
     flex: 1,
   },
-  smallLabel: {
-    fontSize: 8,
-    marginBottom: 2,
+  twinFieldSpaced: {
+    flex: 1,
+    marginLeft: 6,
   },
   emphasisText: {
-    fontSize: 11,
+    fontSize: 8.7,
     fontWeight: 700,
-    marginTop: 4,
+    color: '#111827',
+    marginTop: 2,
+    marginBottom: 4,
   },
   noteText: {
-    fontSize: 8,
-    marginTop: 3,
+    fontSize: 7.2,
+    color: '#374151',
+    marginTop: 2,
   },
   splitBlock: {
     flexDirection: 'row',
-    gap: 12,
     marginTop: 4,
   },
   splitCol: {
     flex: 1,
   },
+  splitColSpaced: {
+    flex: 1,
+    marginLeft: 8,
+  },
   financialLine: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     borderBottomWidth: 0.8,
     borderBottomColor: '#d1d5db',
     paddingBottom: 2,
-    marginBottom: 4,
-    minHeight: 14,
+    marginBottom: 3,
+    minHeight: 12,
   },
   financialLabel: {
-    fontSize: 8.5,
-    maxWidth: '65%',
+    flex: 1,
+    fontSize: 7.3,
+    color: '#374151',
+    paddingRight: 6,
   },
   financialValue: {
-    fontSize: 8.5,
+    width: 88,
+    fontSize: 7.6,
     fontWeight: 700,
     textAlign: 'right',
+    color: '#111827',
   },
   totalBanner: {
-    marginTop: 6,
+    marginTop: 4,
     borderWidth: 1,
     borderColor: '#111827',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#f8f1dc',
     padding: 6,
   },
   totalBannerRow: {
@@ -435,61 +477,79 @@ const contractStyles = StyleSheet.create({
     marginBottom: 2,
   },
   totalBannerLabel: {
-    fontSize: 9,
+    fontSize: 8,
     fontWeight: 700,
     textTransform: 'uppercase',
+    color: '#111827',
   },
   totalBannerValue: {
-    fontSize: 10,
+    fontSize: 8.8,
     fontWeight: 700,
+    color: '#8b6a16',
   },
   signaturesRow: {
     flexDirection: 'row',
-    gap: 8,
-    marginTop: 8,
+    marginTop: 6,
   },
   signatureBox: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#111827',
-    minHeight: 102,
-    padding: 7,
+    borderColor: '#d4af37',
+    backgroundColor: '#fffdf7',
+    minHeight: 74,
+    padding: 6,
+    justifyContent: 'space-between',
+  },
+  signatureBoxSpaced: {
+    flex: 1,
+    marginLeft: 6,
+    borderWidth: 1,
+    borderColor: '#d4af37',
+    backgroundColor: '#fffdf7',
+    minHeight: 74,
+    padding: 6,
     justifyContent: 'space-between',
   },
   signatureTitle: {
-    fontSize: 9,
+    fontSize: 8,
     fontWeight: 700,
     textTransform: 'uppercase',
+    color: '#111827',
   },
   signatureHint: {
-    fontSize: 8,
+    fontSize: 7,
+    color: '#6b7280',
+    marginTop: 3,
   },
   signatureLine: {
     borderBottomWidth: 0.8,
     borderBottomColor: '#9ca3af',
-    height: 30,
+    height: 22,
   },
   legalBand: {
-    marginTop: 8,
+    marginTop: 6,
     borderWidth: 1,
     borderColor: '#111827',
+    backgroundColor: '#111827',
     paddingVertical: 5,
     paddingHorizontal: 8,
   },
   legalText: {
-    fontSize: 8.5,
+    fontSize: 7.2,
     textAlign: 'center',
     fontWeight: 700,
+    color: '#f9fafb',
   },
   footer: {
-    marginTop: 8,
+    marginTop: 5,
     borderTopWidth: 1,
-    borderTopColor: '#111827',
-    paddingTop: 6,
+    borderTopColor: '#d1d5db',
+    paddingTop: 4,
   },
   footerText: {
-    fontSize: 8,
+    fontSize: 7,
     textAlign: 'center',
+    color: '#6b7280',
   },
 });
 
@@ -580,90 +640,101 @@ export function ContractPdfDocument({ data }: { data: ContractPdfData }) {
     <Document title={data.title} author={data.agency.nom}>
       <Page size="A4" style={contractStyles.page}>
         <View style={contractStyles.frame}>
-          <View style={contractStyles.topHeader}>
-            <View style={contractStyles.agencyBlock}>
-              <Text style={contractStyles.agencyName}>{data.agency.nom}</Text>
-              <Text style={contractStyles.agencyMeta}>{[data.agency.adresse, data.agency.ville].filter(Boolean).join(', ') || 'Agence de location'}</Text>
-              <Text style={contractStyles.agencyMeta}>{[data.agency.telephone, data.agency.email].filter(Boolean).join(' · ') || 'Coordonnées agence à compléter'}</Text>
-            </View>
-            <View style={contractStyles.titleBlock}>
-              <Text style={contractStyles.contractTitle}>Contrat de Location</Text>
-              <Text style={contractStyles.contractSubtitle}>Contrat généré automatiquement à partir du dossier client et véhicule</Text>
-            </View>
-            <View style={contractStyles.metaBlock}>
-              <Text style={contractStyles.metaText}>Référence: {data.reference}</Text>
-              <Text style={contractStyles.metaText}>Émis le: {formatContractDateValue(data.createdAt)}</Text>
-              <Text style={contractStyles.metaText}>Client: {data.client.nomComplet}</Text>
+          <View style={contractStyles.headerBand}>
+            <View style={contractStyles.topHeader}>
+              <View style={contractStyles.agencyBlock}>
+                <Text style={contractStyles.agencyName}>{data.agency.nom}</Text>
+                <Text style={contractStyles.agencyMeta}>{[data.agency.adresse, data.agency.ville].filter(Boolean).join(', ') || 'Agence de location'}</Text>
+                <Text style={contractStyles.agencyMeta}>{[data.agency.telephone, data.agency.email].filter(Boolean).join(' · ') || 'Coordonnées agence à compléter'}</Text>
+              </View>
+              <View style={contractStyles.titleBlock}>
+                <View style={contractStyles.titlePill}>
+                  <Text style={contractStyles.titlePillText}>Document contractuel</Text>
+                </View>
+                <Text style={contractStyles.contractTitle}>Contrat de location</Text>
+                <Text style={contractStyles.contractSubtitle}>Mise en page compacte, claire et prête à imprimer</Text>
+              </View>
+              <View style={contractStyles.metaBlock}>
+                <Text style={contractStyles.metaText}>Réf: {data.reference}</Text>
+                <Text style={contractStyles.metaText}>Date: {formatContractDateValue(data.createdAt)}</Text>
+                <Text style={contractStyles.metaText}>Client: {data.client.nomComplet}</Text>
+              </View>
             </View>
           </View>
 
           <View style={contractStyles.row}>
-            <View style={contractStyles.halfBox}>
-              <Text style={contractStyles.boxTitle}>Locataire</Text>
-              <ContractField label="Nom du client" value={data.client.nom} />
-              <ContractField label="Prénom" value={data.client.prenom} />
-              <ContractField label="Date de naissance" value={formatContractDateValue(data.client.dateNaissance)} />
-              <ContractField label="Lieu de naissance" value={data.client.lieuNaissance} />
-              <ContractField label="Nationalité" value={data.client.nationalite} />
-              <ContractField label="Adresse" value={[data.client.adresse, data.client.ville].filter(Boolean).join(', ')} />
-              <ContractField label="Permis de conduire" value={data.client.permisNumero} />
-              <ContractField label="Délivré le" value={formatContractDateValue(data.client.permisDelivreLe)} />
-              <ContractField label="Document" value={clientDocument} />
+            <View style={contractStyles.halfColumn}>
+              <View style={contractStyles.box}>
+                <Text style={contractStyles.boxTitle}>Locataire</Text>
+                <ContractField label="Nom" value={data.client.nom} />
+                <ContractField label="Prénom" value={data.client.prenom} />
+                <ContractField label="Naissance" value={formatContractDateValue(data.client.dateNaissance)} />
+                <ContractField label="Lieu" value={data.client.lieuNaissance} />
+                <ContractField label="Nationalité" value={data.client.nationalite} />
+                <ContractField label="Téléphone" value={data.client.telephone} />
+                <ContractField label="Adresse" value={[data.client.adresse, data.client.ville].filter(Boolean).join(', ')} />
+                <ContractField label="Permis" value={data.client.permisNumero} />
+                <ContractField label="Document" value={clientDocument} />
+              </View>
             </View>
 
-            <View style={contractStyles.halfBox}>
-              <Text style={contractStyles.boxTitle}>Autre conducteur</Text>
-              <ContractField label="Nom et prénom" value={data.conducteurSecondaire?.nomComplet} />
-              <ContractField label="Permis de conduire" value={data.conducteurSecondaire?.permisNumero} />
-              <ContractField label="Délivré le" value={formatContractDateValue(data.conducteurSecondaire?.permisDelivreLe)} />
-              <ContractField label="Pièce d'identité" value="—" />
-              <ContractField label="Téléphone" value="—" />
-              <ContractField label="Observations" value={data.notes} />
+            <View style={contractStyles.rightColumn}>
+              <View style={contractStyles.box}>
+                <Text style={contractStyles.boxTitle}>Autre conducteur</Text>
+                <ContractField label="Nom complet" value={data.conducteurSecondaire?.nomComplet} />
+                <ContractField label="Permis" value={data.conducteurSecondaire?.permisNumero} />
+                <ContractField label="Délivré le" value={formatContractDateValue(data.conducteurSecondaire?.permisDelivreLe)} />
+                <ContractField label="Pièce" value="—" />
+                <ContractField label="Téléphone" value="—" />
+                <ContractField label="Observations" value={data.notes} />
+              </View>
             </View>
           </View>
 
           <View style={contractStyles.row}>
-            <View style={contractStyles.vehicleBox}>
-              <Text style={contractStyles.boxTitle}>Véhicule</Text>
-              <ContractField label="Véhicule" value={data.vehicle.label} />
-              <ContractField label="Matricule" value={data.vehicle.immatriculation} />
-              <View style={contractStyles.twinFields}>
-                <View style={contractStyles.twinField}>
-                  <ContractField label="Date départ" value={formatContractDateValue(data.period.debutAt)} />
+            <View style={contractStyles.vehicleColumn}>
+              <View style={contractStyles.box}>
+                <Text style={contractStyles.boxTitle}>Véhicule</Text>
+                <ContractField label="Modèle" value={data.vehicle.label} />
+                <ContractField label="Matricule" value={data.vehicle.immatriculation} />
+                <View style={contractStyles.twinFields}>
+                  <View style={contractStyles.twinField}>
+                    <ContractField label="Date départ" value={formatContractDateValue(data.period.debutAt)} />
+                  </View>
+                  <View style={contractStyles.twinFieldSpaced}>
+                    <ContractField label="Heure" value={formatTimeValue(data.period.heureDepart, data.period.debutAt)} />
+                  </View>
                 </View>
-                <View style={contractStyles.twinField}>
-                  <ContractField label="Heure départ" value={formatTimeValue(data.period.heureDepart, data.period.debutAt)} />
+                <ContractField label="Lieu départ" value={data.period.lieuDepart || 'Casablanca'} />
+                <ContractField label="KM départ" value={formatNumberValue(data.vehicle.kilometrage)} />
+                <View style={contractStyles.twinFields}>
+                  <View style={contractStyles.twinField}>
+                    <ContractField label="Date retour" value={formatContractDateValue(data.period.finAt)} />
+                  </View>
+                  <View style={contractStyles.twinFieldSpaced}>
+                    <ContractField label="Heure" value={formatTimeValue(data.period.heureRetour, data.period.finAt)} />
+                  </View>
                 </View>
+                <ContractField label="Lieu retour" value={data.period.lieuRetour || 'Casablanca'} />
+                <ContractField label="KM retour" value="—" />
               </View>
-              <ContractField label="Lieu départ" value={data.period.lieuDepart || 'Casablanca'} />
-              <ContractField label="KM départ" value={formatNumberValue(data.vehicle.kilometrage)} />
-              <View style={contractStyles.twinFields}>
-                <View style={contractStyles.twinField}>
-                  <ContractField label="Date retour" value={formatContractDateValue(data.period.finAt)} />
-                </View>
-                <View style={contractStyles.twinField}>
-                  <ContractField label="Heure retour" value={formatTimeValue(data.period.heureRetour, data.period.finAt)} />
-                </View>
-              </View>
-              <ContractField label="Lieu retour" value={data.period.lieuRetour || 'Casablanca'} />
-              <ContractField label="KM retour" value="—" />
-              <ContractField label="Prolongations" value="—" />
             </View>
 
-            <View style={contractStyles.sideBox}>
-              <Text style={contractStyles.boxTitle}>Informations</Text>
-              <Text style={contractStyles.emphasisText}>Franchise: {data.franchiseLabel || 'Selon conditions agence'}</Text>
-              <Text style={contractStyles.noteText}>GSM agence: {printableValue(data.agency.telephone)}</Text>
-              <Text style={contractStyles.noteText}>Tél client: {printableValue(data.client.telephone)}</Text>
-              <Text style={contractStyles.noteText}>Carburant: {printableValue(data.vehicle.carburant)}</Text>
-              <Text style={contractStyles.noteText}>Boîte: {printableValue(data.vehicle.boite)}</Text>
-              <Text style={contractStyles.noteText}>Assurance N°: {printableValue(data.vehicle.assuranceNumero)}</Text>
-              <Text style={contractStyles.noteText}>Expire le: {formatContractDateValue(data.vehicle.assuranceExpireLe)}</Text>
-              <Text style={contractStyles.noteText}>Caution: {formatCurrencyValue(data.cautionMontant || 0, devise)}</Text>
-              <Text style={contractStyles.noteText}>Mode de paiement: {printableValue(data.modePaiementLabel)}</Text>
-              {data.cautionTypeLabel ? <Text style={contractStyles.noteText}>Type de caution: {data.cautionTypeLabel}</Text> : null}
-              {data.cautionReference ? <Text style={contractStyles.noteText}>Référence: {data.cautionReference}</Text> : null}
-              <Text style={contractStyles.noteText}>Divers: {printableValue(data.notes)}</Text>
+            <View style={contractStyles.infoColumn}>
+              <View style={contractStyles.compactBox}>
+                <Text style={contractStyles.boxTitle}>Informations</Text>
+                <Text style={contractStyles.emphasisText}>Franchise: {data.franchiseLabel || 'Selon conditions agence'}</Text>
+                <Text style={contractStyles.noteText}>GSM agence: {printableValue(data.agency.telephone)}</Text>
+                <Text style={contractStyles.noteText}>Tél client: {printableValue(data.client.telephone)}</Text>
+                <Text style={contractStyles.noteText}>Carburant: {printableValue(data.vehicle.carburant)}</Text>
+                <Text style={contractStyles.noteText}>Boîte: {printableValue(data.vehicle.boite)}</Text>
+                <Text style={contractStyles.noteText}>Assurance: {printableValue(data.vehicle.assuranceNumero)}</Text>
+                <Text style={contractStyles.noteText}>Expire le: {formatContractDateValue(data.vehicle.assuranceExpireLe)}</Text>
+                <Text style={contractStyles.noteText}>Caution: {formatCurrencyValue(data.cautionMontant || 0, devise)}</Text>
+                <Text style={contractStyles.noteText}>Paiement: {printableValue(data.modePaiementLabel)}</Text>
+                {data.cautionTypeLabel ? <Text style={contractStyles.noteText}>Type caution: {data.cautionTypeLabel}</Text> : null}
+                {data.cautionReference ? <Text style={contractStyles.noteText}>Référence: {data.cautionReference}</Text> : null}
+              </View>
             </View>
           </View>
 
@@ -697,7 +768,7 @@ export function ContractPdfDocument({ data }: { data: ContractPdfData }) {
                 </View>
               </View>
 
-              <View style={contractStyles.splitCol}>
+              <View style={contractStyles.splitColSpaced}>
                 {lines.map((line, index) => (
                   <View key={`${line.label}-${index}`} style={contractStyles.financialLine}>
                     <Text style={contractStyles.financialLabel}>{line.label}</Text>
@@ -737,7 +808,7 @@ export function ContractPdfDocument({ data }: { data: ContractPdfData }) {
               <Text style={contractStyles.signatureHint}>Valider après vérification des pièces, dates et kilométrage.</Text>
               <View style={contractStyles.signatureLine} />
             </View>
-            <View style={contractStyles.signatureBox}>
+            <View style={contractStyles.signatureBoxSpaced}>
               <Text style={contractStyles.signatureTitle}>Signature du client</Text>
               <Text style={contractStyles.signatureHint}>Je reconnais avoir lu et accepté les conditions de location et l’état du véhicule.</Text>
               <View style={contractStyles.signatureLine} />
