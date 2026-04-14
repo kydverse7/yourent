@@ -81,5 +81,5 @@ export const COLORS = {
 } as const;
 
 // Contact agence (public)
-export const PHONE_NUMBER = '+212661234567';
+export const PHONE_NUMBER = '+212669641381';
 export const WHATSAPP_URL = `https://wa.me/${PHONE_NUMBER.replace('+', '')}`;

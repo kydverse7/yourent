@@ -30,6 +30,7 @@ const envSchema = z.object({
   GREEN_API_ID_INSTANCE: z.string().optional(),
   GREEN_API_TOKEN: z.string().optional(),
   GREEN_API_NOTIFY_PHONE: z.string().optional(),
+  GREEN_API_NOTIFY_CHAT_ID: z.string().optional(),
 
   // App
   NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),

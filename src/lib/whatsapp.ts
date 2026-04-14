@@ -2,37 +2,37 @@
  * WhatsApp notification via Green API
  * Docs: https://green-api.com/en/docs/api/sending/SendMessage/
  *
- * Envoie un message texte à un numéro WhatsApp.
+ * Envoie les notifications dans le groupe "Yourent Résa".
  * Échoue silencieusement (log only) pour ne pas bloquer le flux principal.
  */
 
 const ID_INSTANCE = process.env.GREEN_API_ID_INSTANCE;
 const API_TOKEN = process.env.GREEN_API_TOKEN;
-const NOTIFY_PHONE = process.env.GREEN_API_NOTIFY_PHONE;
+const NOTIFY_CHAT_ID = process.env.GREEN_API_NOTIFY_CHAT_ID;
 
 function isConfigured(): boolean {
-  return !!(ID_INSTANCE && API_TOKEN && NOTIFY_PHONE);
+  return !!(ID_INSTANCE && API_TOKEN && NOTIFY_CHAT_ID);
 }
 
 /**
  * Envoie un message WhatsApp via Green API.
  * @param message — texte du message (supporte le formatage WhatsApp : *gras*, _italique_)
- * @param phone — numéro destinataire (défaut = NOTIFY_PHONE de l'agence)
+ * @param chatId — ID du chat destinataire (défaut = groupe Yourent Résa)
  */
-export async function sendWhatsApp(message: string, phone?: string): Promise<boolean> {
+export async function sendWhatsApp(message: string, chatId?: string): Promise<boolean> {
   if (!isConfigured()) {
     console.warn('[WhatsApp] Green API non configurée — notification ignorée');
     return false;
   }
 
-  const chatId = `${phone ?? NOTIFY_PHONE}@c.us`;
+  const targetChatId = chatId ?? NOTIFY_CHAT_ID!;
   const url = `https://api.green-api.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
 
   try {
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chatId, message }),
+      body: JSON.stringify({ chatId: targetChatId, message }),
       signal: AbortSignal.timeout(10_000),
     });
 

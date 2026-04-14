@@ -101,8 +101,8 @@ export function LandingContactSection() {
     {
       icon: Phone,
       label: t('contact.phone'),
-      value: '+212 6 61 23 45 67',
-      href: 'tel:+212661234567',
+      value: '+212 6 69 64 13 81',
+      href: 'tel:+212669641381',
     },
     {
       icon: Mail,
