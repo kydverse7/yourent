@@ -101,8 +101,8 @@ export function LandingContactSection() {
     {
       icon: Phone,
       label: t('contact.phone'),
-      value: '+212 6 69 64 13 81',
-      href: 'tel:+212669641381',
+      value: '+212 6 61 23 62 31',
+      href: 'tel:+212661236231',
     },
     {
       icon: Mail,
@@ -322,7 +322,7 @@ export function LandingContactSection() {
                   <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noreferrer" className="ct-map-btn-primary">
                     {t('contact.directions')} <ArrowRight className="h-3.5 w-3.5" />
                   </a>
-                  <a href="https://wa.me/212661234567" target="_blank" rel="noreferrer" className="ct-map-btn-outline">
+                  <a href="https://wa.me/212661236231" target="_blank" rel="noreferrer" className="ct-map-btn-outline">
                     <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                   </a>
                 </div>

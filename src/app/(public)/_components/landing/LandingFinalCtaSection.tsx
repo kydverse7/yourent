@@ -52,7 +52,7 @@ export function LandingFinalCtaSection() {
             </motion.div>
             <motion.div variants={staggerItem}>
               <a
-                href="https://wa.me/212661234567"
+                href="https://wa.me/212661236231"
                 target="_blank"
                 rel="noreferrer"
                 className="lp-pill-btn text-sm"

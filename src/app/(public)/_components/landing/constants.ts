@@ -38,7 +38,7 @@ export const SOCIALS = [
   { label: 'Instagram', href: 'https://instagram.com/yourent.ma',  icon: 'Instagram' as const },
   { label: 'Facebook',  href: 'https://facebook.com/yourent.ma',   icon: 'Facebook'  as const },
   { label: 'TikTok',    href: 'https://tiktok.com/@yourent.ma',    icon: 'TikTok'    as const },
-  { label: 'WhatsApp',  href: 'https://wa.me/212661234567',        icon: 'WhatsApp'  as const },
+  { label: 'WhatsApp',  href: 'https://wa.me/212661236231',        icon: 'WhatsApp'  as const },
 ] as const;
 
 /* ─────────── Process steps ─────────── */
