@@ -8,6 +8,7 @@ import { apiError, apiPaginated, apiSuccess } from '@/lib/apiHelpers';
 import { calcNbJours, calcTarifTotal, parsePaginationParams, resolveVehiclePricing } from '@/lib/utils';
 import { auditLog } from '@/services/auditService';
 import { rateLimit } from '@/lib/rateLimit';
+import { notifyNewReservation } from '@/lib/whatsapp';
 
 function serializeReservation(reservation: any) {
   if (!reservation) return reservation;
@@ -99,6 +100,17 @@ export async function POST(req: NextRequest) {
       },
       montantRestant: pricing.total + optionsTotal,
     });
+
+    // Notification WhatsApp asynchrone (ne bloque pas la réponse)
+    notifyNewReservation({
+      clientName: `${data.prenom ?? ''} ${data.nom}`.trim(),
+      clientPhone: data.telephone,
+      vehicleName: `${(vehicle as any).marque} ${(vehicle as any).modele}`,
+      debutAt: data.debutAt,
+      finAt: data.finAt,
+      totalEstime: pricing.total + optionsTotal,
+    }).catch(() => {});
+
     return apiSuccess({ id: reservation._id, message: 'Demande de réservation reçue' }, 201);
   }
 
