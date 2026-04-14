@@ -155,10 +155,9 @@ a {
 
 .lux-subtitle {
   max-width: 62ch;
-  margin: auto;
-  text-align: center;
   color: var(--text-secondary);
   font-size: clamp(1rem, 1.2vw, 1.12rem);
+  text-align: inherit;
 }
 
 .lux-eyebrow {
@@ -423,10 +422,7 @@ a {
     border-radius: 28px;
   }
 }
-.lux-page-head .lux-subtitle {
-  text-align: start;
-  margin: 0;
-}
+
 
 .lux-filter-bar {
   display: flex;

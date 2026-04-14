@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 120;
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 24;
 
 
 
@@ -74,7 +74,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
         },
       },
-      { $sort: { firstTarifParJour: -1 } },
+      { $sort: { firstTarifParJour: 1 } },
       { $limit: PAGE_SIZE },
     ]),
     Vehicle.aggregate([
