@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_Arabic } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -17,8 +17,18 @@ const notoArabic = Noto_Sans_Arabic({
   weight: ['400', '500', '600', '700', '800'],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+    { media: '(prefers-color-scheme: light)', color: '#0A0A0A' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://yourent.ma'),
+  manifest: '/manifest.json',
   title: {
     template: '%s | Yourent — Location de voitures au Maroc',
     default: 'Yourent — Location de voitures à Casablanca & au Maroc',
@@ -48,6 +58,18 @@ export const metadata: Metadata = {
     description:
       'Louez la voiture idéale à Casablanca : berlines, SUV, voitures économiques et de luxe. Livraison aéroport Mohammed V, réservation en ligne.',
     url: 'https://yourent.ma',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Yourent — Location de voitures à Casablanca, Maroc',
+      },
+    ],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo-yourent.png',
   },
   twitter: {
     card: 'summary_large_image',

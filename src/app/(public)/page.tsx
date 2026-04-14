@@ -193,10 +193,15 @@ const getPublicHomeData = unstable_cache(
   async () => {
     const vehicles = await fetchPublicHomeVehicles();
 
+    const newArrival = pickBestMatch(
+      vehicles.filter((v) => v.norm.includes('kia') && v.norm.includes('sorento')),
+    );
+
     return {
       signatureVehicles: buildSignatureVehicles(vehicles),
       sliderBrands: buildSliderBrands(vehicles),
       economicVehicles: buildEconomicVehicles(vehicles),
+      newArrivalVehicle: newArrival ? (({ norm: _n, ...rest }) => rest)(newArrival) : null,
     };
   },
   ['public-home-data'],
@@ -204,7 +209,7 @@ const getPublicHomeData = unstable_cache(
 );
 
 export default async function PublicHomePage() {
-  const { signatureVehicles, sliderBrands, economicVehicles } = await getPublicHomeData();
+  const { signatureVehicles, sliderBrands, economicVehicles, newArrivalVehicle } = await getPublicHomeData();
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -301,6 +306,7 @@ export default async function PublicHomePage() {
         signatureVehicles={signatureVehicles}
         sliderBrands={sliderBrands}
         economicVehicles={economicVehicles}
+        newArrivalVehicle={newArrivalVehicle}
       />
     </>
   );

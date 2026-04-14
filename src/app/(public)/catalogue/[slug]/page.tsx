@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { connectDB } from '@/lib/db';
@@ -9,7 +10,7 @@ import { VehicleModelView } from './_components/VehicleModelView';
 
 type Props = { params: Promise<{ slug: string }> };
 
-async function getModelVariants(modelSlug: string) {
+const getModelVariants = cache(async (modelSlug: string) => {
   await connectDB();
   const vehicles = await Vehicle.find({
     actif: { $ne: false },
@@ -55,7 +56,7 @@ async function getModelVariants(modelSlug: string) {
 
     return a.tarifJour - b.tarifJour;
   });
-}
+});
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -93,6 +94,28 @@ export default async function VehicleModelPage({ params }: Props) {
 
   return (
     <div className="lux-container py-8 md:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: `${marque} ${modele} — Location`,
+            description: `Louez une ${marque} ${modele} à Casablanca dès ${modelMinTarif} MAD/jour.`,
+            url: `https://yourent.ma/catalogue/${slug}`,
+            image: variants[0].featuredPhoto || undefined,
+            brand: { '@type': 'Brand', name: marque },
+            category: categorie,
+            offers: {
+              '@type': 'AggregateOffer',
+              priceCurrency: 'MAD',
+              lowPrice: modelMinTarif,
+              offerCount: variants.length,
+              availability: 'https://schema.org/InStock',
+            },
+          }),
+        }}
+      />
       <div className="mb-6 flex items-center justify-between gap-3">
         <Link
           href="/catalogue"

@@ -75,6 +75,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
         },
       },
       { $sort: { firstTarifParJour: -1 } },
+      { $limit: PAGE_SIZE },
     ]),
     Vehicle.aggregate([
       { $match: matchFilter },
@@ -103,7 +104,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
     featuredPhoto: g.backgroundPhoto ?? g.photoModele ?? g.firstPhoto ?? null,
   }));
 
-  return { vehicles, total, hasNext: false, brands: brands.sort() };
+  return { vehicles, total, hasNext: total > PAGE_SIZE, brands: brands.sort() };
 }
 
 export default async function CataloguePage({
@@ -118,6 +119,37 @@ export default async function CataloguePage({
 
   return (
     <div className="lux-container py-8 md:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'OfferCatalog',
+            name: 'Catalogue de véhicules à louer — Yourent',
+            description: 'Parcourez notre catalogue de voitures à louer à Casablanca.',
+            url: 'https://yourent.ma/catalogue',
+            numberOfItems: total,
+            itemListElement: vehicles.slice(0, 20).map((v, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              item: {
+                '@type': 'Car',
+                name: `${v.marque} ${v.modele}`,
+                url: `https://yourent.ma/catalogue/${v.modelSlug}`,
+                image: v.featuredPhoto || undefined,
+                offers: {
+                  '@type': 'Offer',
+                  priceCurrency: 'MAD',
+                  price: v.minTarif,
+                  availability: v.countDispo > 0
+                    ? 'https://schema.org/InStock'
+                    : 'https://schema.org/OutOfStock',
+                },
+              },
+            })),
+          }),
+        }}
+      />
       <div className="lux-page-head mb-8">
         <div className="space-y-2">
           <span className="lux-eyebrow">
@@ -138,7 +170,7 @@ export default async function CataloguePage({
           <div className="lux-filter-bar">
             <Link
               href={buildFilterUrl(params, 'marque', undefined)}
-              className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
+              className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
                 !params.marque
                   ? 'bg-gold text-noir-root'
                   : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
@@ -150,7 +182,7 @@ export default async function CataloguePage({
               <Link
                 key={brand}
                 href={buildFilterUrl(params, 'marque', brand)}
-                className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
                   params.marque === brand
                     ? 'bg-gold text-noir-root'
                     : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'

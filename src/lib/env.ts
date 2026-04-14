@@ -26,6 +26,11 @@ const envSchema = z.object({
   UPSTASH_REDIS_REST_URL: z.string().optional(),
   UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
 
+  // Green API (optional — WhatsApp notifications disabled if missing)
+  GREEN_API_ID_INSTANCE: z.string().optional(),
+  GREEN_API_TOKEN: z.string().optional(),
+  GREEN_API_NOTIFY_PHONE: z.string().optional(),
+
   // App
   NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
   NEXT_PUBLIC_APP_NAME: z.string().default('Yourent'),

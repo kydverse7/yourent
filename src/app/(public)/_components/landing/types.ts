@@ -28,6 +28,7 @@ export type PublicLandingPageProps = {
   signatureVehicles: LandingVehicle[];
   sliderBrands: SliderBrandData[];
   economicVehicles: LandingVehicle[];
+  newArrivalVehicle?: LandingVehicle | null;
 };
 
 export type MorphProgress = {

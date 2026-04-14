@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -40,6 +40,25 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
   const next = useCallback(
     () => setActive((i) => (i + 1) % count),
     [count],
+  );
+
+  /* ── Touch / swipe handling ── */
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      const dy = e.changedTouches[0].clientY - touchStartY.current;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx < 0) next();
+        else prev();
+      }
+    },
+    [next, prev],
   );
 
   if (count === 0) return null;
@@ -91,7 +110,11 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
       <ScrollReveal variants={blurFade}>
         <div className="eco-carousel">
           {/* ── Stacked horizontal cards ── */}
-          <div className="eco-carousel-stage">
+          <div
+            className="eco-carousel-stage"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {vehicles.map((vehicle, i) => {
               const offset = (i - active + count) % count;
               const pos =

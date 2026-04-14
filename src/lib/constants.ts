@@ -79,3 +79,7 @@ export const COLORS = {
   red: '#F87171',
   blue: '#60A5FA',
 } as const;
+
+// Contact agence (public)
+export const PHONE_NUMBER = '+212661234567';
+export const WHATSAPP_URL = `https://wa.me/${PHONE_NUMBER.replace('+', '')}`;

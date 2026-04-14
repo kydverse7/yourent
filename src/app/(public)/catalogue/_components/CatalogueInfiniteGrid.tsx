@@ -154,12 +154,12 @@ export function CatalogueInfiniteGrid({
             className="w-full rounded-xl border border-white/8 bg-white/5 py-2.5 pl-10 pr-4 text-sm text-cream placeholder:text-cream-muted/50 outline-none transition-all focus:border-gold/30 focus:ring-1 focus:ring-gold/20"
           />
         </div>
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <ArrowUpDown className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream-muted" />
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-            className="cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 pl-9 pr-8 text-xs font-semibold uppercase tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream"
+            className="w-full cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 pl-9 pr-8 text-xs font-semibold uppercase tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream [&>option]:bg-noir-root [&>option]:text-cream"
           >
             <option value="price-asc">{t('cat.sortDefault')}</option>
             <option value="price-desc">{t('cat.sortDesc')}</option>
@@ -181,6 +181,7 @@ export function CatalogueInfiniteGrid({
                   src={v.featuredPhoto}
                   alt={`${v.marque} ${v.modele} à louer à Casablanca`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
@@ -188,12 +189,12 @@ export function CatalogueInfiniteGrid({
                   🚗
                 </div>
               )}
-              <div className="absolute left-4 top-4 flex items-center gap-2">
-                <span className="rounded-full border border-gold/20 bg-black/35 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-gold capitalize">
+              <div className="absolute left-3 top-3 flex flex-wrap items-center gap-1.5 max-w-[calc(100%-1.5rem)] sm:left-4 sm:top-4 sm:gap-2">
+                <span className="rounded-full border border-gold/20 bg-black/35 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold capitalize sm:px-3 sm:py-1 sm:text-[11px]">
                   {v.categorie}
                 </span>
                 {v.count > 1 && (
-                  <span className="flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-2.5 py-1 text-[11px] font-semibold text-cream">
+                  <span className="flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-cream sm:px-2.5 sm:py-1 sm:text-[11px]">
                     <Car className="h-3 w-3" /> {v.countDispo}/{v.count} {t('cat.dispo')}
                   </span>
                 )}

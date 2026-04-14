@@ -75,8 +75,13 @@ const fr: Record<string, string> = {
   'signature.from': 'À partir de',
   'signature.perDay': '/ jour',
 
-  /* ── Why YouRent ──────────────────────────── */
-  'why.eyebrow': 'Pourquoi YouRent',
+  /* ── Nouvel Arrivage ──────────────────────── */
+  'newArrival.eyebrow': 'Nouvel arrivage',
+  'newArrival.title': 'Découvrez notre dernière acquisition',
+  'newArrival.subtitle': 'Le Kia Sorento 2026 rejoint notre flotte — puissance, confort et élégance.',
+  'newArrival.cta': 'Réserver maintenant',
+  'newArrival.from': 'À partir de',
+  'newArrival.perDay': '/ jour',
   'why.title': "L’excellence au service de votre mobilité",
   'why.subtitle':
     'Chaque détail est pensé pour que votre location soit simple, premium et sans stress.',
@@ -212,6 +217,13 @@ const fr: Record<string, string> = {
   'form.error': 'Erreur lors de la réservation',
   'form.networkError': 'Erreur réseau. Réessayez dans quelques instants.',
   'form.confirm': 'Notre équipe vous contactera pour confirmer votre réservation.',
+
+  /* ── Confirmation page ────────────────────────── */
+  'confirmation.eyebrow': 'Confirmation envoyée',
+  'confirmation.title': 'Demande reçue avec succès',
+  'confirmation.desc': 'Votre demande de réservation a bien été enregistrée. Notre équipe va l\'examiner et vous contactera dans les plus brefs délais pour confirmer votre location.',
+  'confirmation.help': 'Besoin d\'aide ?',
+  'confirmation.backCatalogue': 'Retour au catalogue',
 };
 
 const en: Record<string, string> = {
@@ -288,6 +300,14 @@ const en: Record<string, string> = {
   'signature.book': 'Book now',
   'signature.from': 'Starting from',
   'signature.perDay': '/ day',
+
+  /* ── New Arrival ──────────────────────────── */
+  'newArrival.eyebrow': 'New arrival',
+  'newArrival.title': 'Discover our latest addition',
+  'newArrival.subtitle': 'The 2026 Kia Sorento joins our fleet — power, comfort and elegance.',
+  'newArrival.cta': 'Book now',
+  'newArrival.from': 'Starting from',
+  'newArrival.perDay': '/ day',
 
   /* ── Why YouRent ──────────────────────────── */
   'why.eyebrow': 'Why YouRent',
@@ -426,6 +446,13 @@ const en: Record<string, string> = {
   'form.error': 'Error during reservation',
   'form.networkError': 'Network error. Please try again later.',
   'form.confirm': 'Our team will contact you to confirm your reservation.',
+
+  /* ── Confirmation page ────────────────────────── */
+  'confirmation.eyebrow': 'Confirmation sent',
+  'confirmation.title': 'Request received successfully',
+  'confirmation.desc': 'Your reservation request has been registered. Our team will review it and contact you shortly to confirm your rental.',
+  'confirmation.help': 'Need help?',
+  'confirmation.backCatalogue': 'Back to catalogue',
 };
 
 const ar: Record<string, string> = {
@@ -502,6 +529,14 @@ const ar: Record<string, string> = {
   'signature.book': 'احجز',
   'signature.from': 'ابتداءً من',
   'signature.perDay': '/ يوم',
+
+  /* ── وصول جديد ─────────────────────────── */
+  'newArrival.eyebrow': 'وصول جديد',
+  'newArrival.title': 'اكتشف أحدث إضافة لأسطولنا',
+  'newArrival.subtitle': 'كيا سورينتو 2026 ينضم إلى أسطولنا — قوة وراحة وأناقة.',
+  'newArrival.cta': 'احجز الآن',
+  'newArrival.from': 'ابتداءً من',
+  'newArrival.perDay': '/ يوم',
 
   /* ── Why YouRent ──────────────────────────── */
   'why.eyebrow': 'لماذا يورنت',
@@ -640,6 +675,13 @@ const ar: Record<string, string> = {
   'form.error': 'خطأ أثناء الحجز',
   'form.networkError': 'خطأ في الشبكة. حاول مرة أخرى لاحقًا.',
   'form.confirm': 'سيتواصل فريقنا معك لتأكيد حجزك.',
+
+  /* ── Confirmation page ────────────────────────── */
+  'confirmation.eyebrow': 'تم إرسال التأكيد',
+  'confirmation.title': 'تم استلام الطلب بنجاح',
+  'confirmation.desc': 'تم تسجيل طلب الحجز الخاص بك. سيقوم فريقنا بمراجعته والتواصل معك في أقرب وقت لتأكيد الإيجار.',
+  'confirmation.help': 'تحتاج مساعدة؟',
+  'confirmation.backCatalogue': 'العودة إلى المعرض',
 };
 
 export const translations: Record<Locale, Record<string, string>> = { fr, en, ar };

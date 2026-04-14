@@ -29,7 +29,7 @@ export const DISPLAY_BRANDS = [
 export const MARQUEE_BRANDS = [
   'Porsche', 'Range Rover', 'Mercedes', 'BMW',
   'Audi', 'Volkswagen', 'Peugeot', 'Toyota',
-  'Fiat', 'Opel', 'Renault', 'Dacia',
+  'Fiat', 'Opel', 'Kia', 'Dacia',
 ] as const;
 
 /* ─────────── Social links ─────────── */

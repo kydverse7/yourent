@@ -75,6 +75,7 @@ export function VehicleModelView({
                 src={selected.featuredPhoto}
                 alt={`${marque} ${modele} — location Casablanca`}
                 fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"
               />
             ) : (
@@ -105,7 +106,7 @@ export function VehicleModelView({
                     key={i}
                     className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-white/8 bg-noir-card"
                   >
-                    <Image src={photo} alt="" fill className="object-cover" />
+                    <Image src={photo} alt="" fill sizes="112px" className="object-cover" />
                   </div>
                 ))}
             </div>

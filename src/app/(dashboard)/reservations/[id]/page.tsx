@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle2, FileSignature, Receipt, XCircle, Sparkles } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, FileSignature, MessageCircle, Receipt, XCircle, Sparkles } from 'lucide-react';
 import { Badge, Button, Skeleton } from '@/components/ui';
 import { buildPdfViewerUrl, formatCurrency, formatDateTime } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
@@ -157,6 +157,18 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Fin</p>
               <p className="mt-2 text-sm text-cream">{formatDateTime(reservation.finAt)}</p>
             </div>
+            {reservation.heureDepart && (
+              <div className="lux-panel-muted p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Heure d'arrivée</p>
+                <p className="mt-2 text-sm text-cream">{reservation.heureDepart}</p>
+              </div>
+            )}
+            {reservation.heureRetour && (
+              <div className="lux-panel-muted p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Heure de retour</p>
+                <p className="mt-2 text-sm text-cream">{reservation.heureRetour}</p>
+              </div>
+            )}
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Montant estimé</p>
               <p className="mt-2 text-sm font-semibold text-gold">{formatCurrency(reservation.prix?.totalEstime ?? reservation.tarifTotal ?? 0)}</p>
@@ -190,6 +202,17 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
               <p><span className="text-cream">Téléphone :</span> {reservation.clientInline?.telephone ?? reservation.client?.telephone ?? '—'}</p>
               <p><span className="text-cream">Email :</span> {reservation.clientInline?.email ?? reservation.client?.email ?? '—'}</p>
             </div>
+            {(reservation.clientInline?.telephone ?? reservation.client?.telephone) && (
+              <a
+                href={`https://wa.me/${(reservation.clientInline?.telephone ?? reservation.client?.telephone).replace(/[\s\-().+]/g, '').replace(/^0/, '212')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#25D366]/15 border border-[#25D366]/25 px-4 py-2 text-sm font-medium text-[#25D366] hover:bg-[#25D366]/25 transition-colors"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Contacter sur WhatsApp
+              </a>
+            )}
           </section>
 
           <section className="lux-panel-muted p-5">

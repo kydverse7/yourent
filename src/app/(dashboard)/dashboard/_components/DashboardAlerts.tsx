@@ -158,7 +158,7 @@ export default async function DashboardAlerts() {
                   {r.clientInline?.prenom ?? ''} {r.clientInline?.nom ?? r.client?.prenom ?? ''}
                 </p>
                 <p className="text-xs text-cream-muted">
-                  {(r.vehicle as any)?.marque} {(r.vehicle as any)?.modele} · {new Date(r.debutAt).toLocaleDateString('fr-MA')}
+                  {(r.vehicle as any)?.marque} {(r.vehicle as any)?.modele} · {new Date(r.debutAt).toLocaleDateString('fr-MA')}{r.heureDepart ? ` à ${r.heureDepart}` : ''}
                 </p>
               </div>
               <span className="text-xs text-gold whitespace-nowrap">{(r.prix?.totalEstime ?? 0).toLocaleString('fr-MA')} MAD</span>

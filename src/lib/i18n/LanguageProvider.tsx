@@ -32,9 +32,14 @@ function writeCookie(l: Locale) {
   document.cookie = `locale=${l};path=/;max-age=${365 * 24 * 60 * 60};samesite=lax`;
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Always start with 'fr' to match SSR, then sync from cookie after mount.
-  const [locale, setLocaleState] = useState<Locale>('fr');
+export function LanguageProvider({
+  children,
+  initialLocale,
+}: {
+  children: ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? 'fr');
 
   useEffect(() => {
     const saved = readCookie();

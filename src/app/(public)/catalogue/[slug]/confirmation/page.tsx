@@ -1,14 +1,25 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import { CheckCircle, Phone, Mail, ArrowRight } from 'lucide-react';
 import { connectDB } from '@/lib/db';
 import { Agence } from '@/models/Agence';
+import { t as tr, type Locale } from '@/lib/i18n';
 
-export const metadata: Metadata = { title: 'Demande reçue — Yourent' };
+export const metadata: Metadata = {
+  title: 'Demande reçue — Yourent',
+  robots: { index: false, follow: false },
+};
 
 export default async function ConfirmationPage() {
   await connectDB();
-  const agence = await Agence.findOne().select('telephone email').lean() as any;
+  const [agence, cookieStore] = await Promise.all([
+    Agence.findOne().select('telephone email').lean() as any,
+    cookies(),
+  ]);
+  const locale = (['en', 'ar'].includes(cookieStore.get('locale')?.value ?? '')
+    ? cookieStore.get('locale')!.value
+    : 'fr') as Locale;
 
   return (
     <div className="lux-container flex min-h-[70vh] items-center justify-center py-12">
@@ -17,15 +28,14 @@ export default async function ConfirmationPage() {
           <CheckCircle className="w-10 h-10 text-gold" />
         </div>
 
-        <span className="lux-eyebrow mb-5">Confirmation envoyée</span>
-        <h1 className="mb-3 text-3xl font-bold text-cream md:text-4xl">Demande reçue avec succès</h1>
+        <span className="lux-eyebrow mb-5">{tr(locale, 'confirmation.eyebrow')}</span>
+        <h1 className="mb-3 text-3xl font-bold text-cream md:text-4xl">{tr(locale, 'confirmation.title')}</h1>
         <p className="mx-auto mb-8 max-w-xl text-cream-muted">
-          Votre demande de réservation a bien été enregistrée. Notre équipe va l'examiner et vous
-          contactera dans les plus brefs délais pour confirmer votre location.
+          {tr(locale, 'confirmation.desc')}
         </p>
 
         <div className="mb-8 rounded-[24px] border border-white/8 bg-white/[0.03] p-6">
-          <p className="text-cream text-sm font-semibold mb-4">Besoin d'aide ?</p>
+          <p className="text-cream text-sm font-semibold mb-4">{tr(locale, 'confirmation.help')}</p>
           <div className="space-y-3">
             {agence?.telephone && (
               <a
@@ -50,7 +60,7 @@ export default async function ConfirmationPage() {
           href="/catalogue"
           className="btn-gold"
         >
-          Retour au catalogue <ArrowRight className="h-4 w-4" />
+          {tr(locale, 'confirmation.backCatalogue')} <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </div>

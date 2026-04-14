@@ -15,6 +15,7 @@ import { LandingEconomicFleetSection } from './LandingEconomicFleetSection';
 import { LandingContactSection } from './LandingContactSection';
 import { LandingFaqSection } from './LandingFaqSection';
 import { LandingWhySection } from './LandingWhySection';
+import { LandingNewArrivalSection } from './LandingNewArrivalSection';
 import type { PublicLandingPageProps, SliderBrandData } from './types';
 
 /* ═══════════════════════════════════════════════════════════
@@ -26,6 +27,7 @@ export function PublicLandingPage({
   signatureVehicles,
   sliderBrands,
   economicVehicles,
+  newArrivalVehicle,
 }: PublicLandingPageProps) {
   /* ── Derived data ── */
   const items: SliderBrandData[] = useMemo(
@@ -80,6 +82,9 @@ export function PublicLandingPage({
 
       {/* ═══ Signature collection ═══ */}
       <LandingSignatureCollectionSection vehicles={cardVehicles} />
+
+      {/* ═══ Nouvel Arrivage ═══ */}
+      <LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} />
 
       {/* ═══ Why YouRent — golden ratio + animated counters ═══ */}
       <LandingWhySection />
