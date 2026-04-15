@@ -32,7 +32,7 @@ export async function sendWhatsApp(message: string, to?: string): Promise<boolea
     return false;
   }
 
-  const url = `https://7103.api.greenapi.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
+  const url = `https://api.green-api.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
 
   try {
     const res = await fetch(url, {
