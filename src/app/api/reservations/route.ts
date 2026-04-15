@@ -103,8 +103,8 @@ export async function POST(req: NextRequest) {
       montantRestant: pricing.total + optionsTotal,
     });
 
-    // Notification WhatsApp asynchrone (ne bloque pas la réponse)
-    notifyNewReservation({
+    // Notification WhatsApp (await nécessaire en serverless sinon Vercel kill le process)
+    await notifyNewReservation({
       clientName: `${data.prenom ?? ''} ${data.nom}`.trim(),
       clientPhone: data.telephone,
       vehicleName: `${(vehicle as any).marque} ${(vehicle as any).modele}`,
