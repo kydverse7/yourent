@@ -9,6 +9,23 @@ import { useLocale } from '@/lib/i18n';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
+const INDICATIFS = [
+  { code: '+212', label: '🇲🇦 +212', country: 'Maroc' },
+  { code: '+33', label: '🇫🇷 +33', country: 'France' },
+  { code: '+34', label: '🇪🇸 +34', country: 'Espagne' },
+  { code: '+39', label: '🇮🇹 +39', country: 'Italie' },
+  { code: '+44', label: '🇬🇧 +44', country: 'UK' },
+  { code: '+49', label: '🇩🇪 +49', country: 'Allemagne' },
+  { code: '+31', label: '🇳🇱 +31', country: 'Pays-Bas' },
+  { code: '+32', label: '🇧🇪 +32', country: 'Belgique' },
+  { code: '+41', label: '🇨🇭 +41', country: 'Suisse' },
+  { code: '+1', label: '🇺🇸 +1', country: 'USA/Canada' },
+  { code: '+966', label: '🇸🇦 +966', country: 'Arabie S.' },
+  { code: '+971', label: '🇦🇪 +971', country: 'EAU' },
+  { code: '+216', label: '🇹🇳 +216', country: 'Tunisie' },
+  { code: '+213', label: '🇩🇿 +213', country: 'Algérie' },
+];
+
 interface Props {
   vehiculeId: string;
   vehiculeSlug: string;
@@ -21,12 +38,15 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
   const router = useRouter();
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
+  const [whatsappSame, setWhatsappSame] = useState(true);
   const [form, setForm] = useState({
     debutAt: '',
     finAt: '',
     prenom: '',
     nom: '',
+    indicatif: '+212',
     telephone: '',
+    whatsapp: '',
     email: '',
     notes: '',
     website: '', // honeypot anti-bot
@@ -62,6 +82,8 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
     setLoading(true);
     try {
       const normalizedPhone = form.telephone.replace(/[\s().-]/g, '');
+      const fullPhone = form.indicatif + normalizedPhone.replace(/^\+?\d{1,3}/, (m) => normalizedPhone.startsWith('+') || normalizedPhone.startsWith('0') ? '' : '');
+      const whatsappNumber = whatsappSame ? fullPhone : form.indicatif + form.whatsapp.replace(/[\s().-]/g, '');
 
       const res = await fetch('/api/reservations', {
         method: 'POST',
@@ -72,7 +94,9 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           finAt: new Date(form.finAt).toISOString(),
           prenom: form.prenom,
           nom: form.nom,
+          indicatif: form.indicatif,
           telephone: normalizedPhone,
+          whatsapp: whatsappNumber,
           email: form.email,
           optionsSupplementaires: [],
           website: form.website,
@@ -149,7 +173,67 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
         <Input label={t('form.firstName')} value={form.prenom} onChange={handleChange('prenom')} required />
         <Input label={t('form.lastName')} value={form.nom} onChange={handleChange('nom')} required />
       </div>
-      <Input label={t('form.phone')} type="tel" value={form.telephone} onChange={handleChange('telephone')} placeholder="+212 6XX XXX XXX" required />
+      {/* Téléphone avec indicatif */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium text-cream-muted">{t('form.phone')}</label>
+        <div className="flex gap-2">
+          <select
+            value={form.indicatif}
+            onChange={(e) => setForm((prev) => ({ ...prev, indicatif: e.target.value }))}
+            className="input-gold w-[130px] shrink-0 cursor-pointer"
+          >
+            {INDICATIFS.map((ind) => (
+              <option key={ind.code} value={ind.code}>{ind.label}</option>
+            ))}
+          </select>
+          <input
+            type="tel"
+            value={form.telephone}
+            onChange={handleChange('telephone')}
+            placeholder="6XX XXX XXX"
+            required
+            className="input-gold flex-1"
+          />
+        </div>
+      </div>
+
+      {/* WhatsApp */}
+      <div className="space-y-2">
+        <label className="flex items-center gap-2 cursor-pointer text-sm text-cream-muted">
+          <input
+            type="checkbox"
+            checked={whatsappSame}
+            onChange={(e) => setWhatsappSame(e.target.checked)}
+            className="rounded border-gold/30 bg-noir-card text-gold focus:ring-gold/40"
+          />
+          {t('form.whatsappSame')}
+        </label>
+        {!whatsappSame && (
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-medium text-cream-muted">{t('form.whatsapp')}</label>
+            <div className="flex gap-2">
+              <select
+                value={form.indicatif}
+                onChange={(e) => setForm((prev) => ({ ...prev, indicatif: e.target.value }))}
+                className="input-gold w-[130px] shrink-0 cursor-pointer"
+              >
+                {INDICATIFS.map((ind) => (
+                  <option key={ind.code} value={ind.code}>{ind.label}</option>
+                ))}
+              </select>
+              <input
+                type="tel"
+                value={form.whatsapp}
+                onChange={handleChange('whatsapp')}
+                placeholder="6XX XXX XXX"
+                required
+                className="input-gold flex-1"
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
       <Input label={t('form.email')} type="email" value={form.email} onChange={handleChange('email')} placeholder={t('form.emailOptional')} />
 
       <div>

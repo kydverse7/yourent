@@ -56,6 +56,10 @@ const locationSchema = z.object({
   finPrevueAt: z.string().datetime(),
   kmDepart: z.number().min(0),
   caution: cautionPriseSchema.optional(),
+  intermediaire: z.object({
+    nom: z.string().min(1).max(100),
+    telephone: z.string().max(20).optional().or(z.literal('')),
+  }).optional(),
   notes: z.string().optional(),
   mode: z.enum(['reservation', 'direct']).optional(),
   retroactive: z.boolean().optional(),
@@ -81,7 +85,7 @@ export async function GET(req: NextRequest) {
 
   const [items, total] = await Promise.all([
     Location.find(filter)
-      .select('vehicle client reservation debutAt finPrevueAt finReelleAt statut tarifJour nbJours palier remise optionsTotal montantTotal montantPaye montantRestant caution contratNumero factureNumero contratPdfUrl facturePdfUrl etatDesLieuxAvantId etatDesLieuxApresId createdAt')
+      .select('vehicle client reservation debutAt finPrevueAt finReelleAt statut tarifJour nbJours palier remise optionsTotal montantTotal montantPaye montantRestant caution contratNumero factureNumero contratPdfUrl facturePdfUrl etatDesLieuxAvantId etatDesLieuxApresId intermediaire createdAt')
       .populate('vehicle', 'marque modele immatriculation kilometrage')
       .populate('client', 'prenom nom telephone')
       .populate('reservation', 'prix')
@@ -145,6 +149,7 @@ export async function POST(req: NextRequest) {
       kmDepart: parsed.data.kmDepart,
       statut: isRetroactive ? 'terminee' : 'en_cours',
       caution: parsed.data.caution,
+      ...(parsed.data.intermediaire ? { intermediaire: parsed.data.intermediaire } : {}),
       tarifJour: pricing.tarifJour,
       nbJours,
       palier: pricing.palier,
@@ -203,6 +208,7 @@ export async function POST(req: NextRequest) {
     kmDepart: parsed.data.kmDepart,
     statut: 'en_cours',
     caution: parsed.data.caution,
+    ...(parsed.data.intermediaire ? { intermediaire: parsed.data.intermediaire } : {}),
     tarifJour: pricing.tarifJour,
     nbJours,
     palier: pricing.palier,

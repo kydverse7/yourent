@@ -4,6 +4,7 @@ export interface ILocation extends Document {
   reservation?: Types.ObjectId;
   vehicle: Types.ObjectId;
   client: Types.ObjectId;
+  intermediaire?: { nom: string; telephone: string };
   statut: 'en_cours' | 'terminee' | 'annulee';
   debutAt: Date;
   finPrevueAt: Date;
@@ -55,6 +56,10 @@ const LocationSchema = new Schema<ILocation>(
     reservation: { type: Schema.Types.ObjectId, ref: 'Reservation' },
     vehicle: { type: Schema.Types.ObjectId, ref: 'Vehicle', required: true, index: true },
     client: { type: Schema.Types.ObjectId, ref: 'Client', required: true, index: true },
+    intermediaire: {
+      nom: { type: String, trim: true },
+      telephone: { type: String, trim: true },
+    },
     statut: {
       type: String,
       enum: ['en_cours', 'terminee', 'annulee'],

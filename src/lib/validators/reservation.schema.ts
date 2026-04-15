@@ -66,10 +66,12 @@ export const publicReservationSchema = z.object({
   vehicleSlug: z.string().min(1),
   nom: z.string().min(2, 'Nom requis').max(100),
   prenom: z.string().min(2, 'Prénom requis').max(100),
+  indicatif: z.string().regex(/^\+\d{1,4}$/, 'Indicatif invalide').default('+212'),
   telephone: z
     .string()
     .transform((value) => value.replace(/[\s().-]/g, ''))
-    .refine((value) => /^(\+212|0)(6|7)\d{8}$/.test(value), 'Téléphone Maroc invalide'),
+    .refine((value) => /^\d{8,15}$/.test(value), 'Numéro de téléphone invalide'),
+  whatsapp: z.string().max(20).optional().or(z.literal('')),
   email: z.string().email('Email invalide').optional().or(z.literal('')),
   debutAt: z.coerce.date(),
   finAt: z.coerce.date(),

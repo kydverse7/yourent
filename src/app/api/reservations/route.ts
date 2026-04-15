@@ -85,6 +85,8 @@ export async function POST(req: NextRequest) {
         nom: data.nom,
         prenom: data.prenom,
         telephone: data.telephone,
+        indicatif: data.indicatif,
+        whatsapp: data.whatsapp,
         email: data.email,
       },
       debutAt: data.debutAt,

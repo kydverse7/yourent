@@ -312,6 +312,11 @@ export default function NouvelleLocationPage() {
   const [cautionType, setCautionType] = useState<CautionType>('cheque');
   const [cautionReference, setCautionReference] = useState('');
 
+  /* ── intermediaire ── */
+  const [hasIntermediaire, setHasIntermediaire] = useState(false);
+  const [intermediaireNom, setIntermediaireNom] = useState('');
+  const [intermediaireTel, setIntermediaireTel] = useState('');
+
   /* ── reservation-mode state ── */
   const [selectedReservationId, setSelectedReservationId] = useState(
     reservationParam ?? '',
@@ -442,6 +447,9 @@ export default function NouvelleLocationPage() {
           mode: 'direct',
           ...(isRetroactive ? { retroactive: true } : {}),
           ...(cautionPayload ? { caution: cautionPayload } : {}),
+          ...(hasIntermediaire && intermediaireNom.trim()
+            ? { intermediaire: { nom: intermediaireNom.trim(), telephone: intermediaireTel.trim() } }
+            : {}),
         }),
       });
       const payload = await res.json();
@@ -493,6 +501,9 @@ export default function NouvelleLocationPage() {
           finPrevueAt: selectedReservation.finAt,
           kmDepart: selectedReservation.vehicule.kilometrage ?? 0,
           ...(cautionPayload ? { caution: cautionPayload } : {}),
+          ...(hasIntermediaire && intermediaireNom.trim()
+            ? { intermediaire: { nom: intermediaireNom.trim(), telephone: intermediaireTel.trim() } }
+            : {}),
         }),
       });
       const payload = await res.json();
@@ -1013,6 +1024,36 @@ export default function NouvelleLocationPage() {
                 </ul>
               </div>
 
+              {/* Intermédiaire */}
+              <div className="space-y-3">
+                <label className="flex items-center gap-2 cursor-pointer text-sm text-cream">
+                  <input
+                    type="checkbox"
+                    checked={hasIntermediaire}
+                    onChange={(e) => setHasIntermediaire(e.target.checked)}
+                    className="rounded border-gold/30 bg-noir-card text-gold focus:ring-gold/40"
+                  />
+                  Ajouter un intermédiaire
+                </label>
+                {hasIntermediaire && (
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <Input
+                      label="Nom de l'intermédiaire"
+                      value={intermediaireNom}
+                      onChange={(e) => setIntermediaireNom(e.target.value)}
+                      placeholder="Nom complet"
+                    />
+                    <Input
+                      label="Téléphone intermédiaire"
+                      type="tel"
+                      value={intermediaireTel}
+                      onChange={(e) => setIntermediaireTel(e.target.value)}
+                      placeholder="+212 6XX XXX XXX"
+                    />
+                  </div>
+                )}
+              </div>
+
               {cautionReferenceMissing && (
                 <div className="rounded-2xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
                   Merci de renseigner la référence du chèque avant de
@@ -1208,6 +1249,36 @@ export default function NouvelleLocationPage() {
                       {cautionType === 'carte_empreinte'
                         ? "Empreinte carte : opération réalisée à l'agence via le TPE."
                         : "Espèces : aucun justificatif requis au démarrage."}
+                    </div>
+                  )}
+                </div>
+
+                {/* Intermédiaire (reservation mode) */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm text-cream">
+                    <input
+                      type="checkbox"
+                      checked={hasIntermediaire}
+                      onChange={(e) => setHasIntermediaire(e.target.checked)}
+                      className="rounded border-gold/30 bg-noir-card text-gold focus:ring-gold/40"
+                    />
+                    Ajouter un intermédiaire
+                  </label>
+                  {hasIntermediaire && (
+                    <div className="grid gap-3 md:grid-cols-2">
+                      <Input
+                        label="Nom de l'intermédiaire"
+                        value={intermediaireNom}
+                        onChange={(e) => setIntermediaireNom(e.target.value)}
+                        placeholder="Nom complet"
+                      />
+                      <Input
+                        label="Téléphone intermédiaire"
+                        type="tel"
+                        value={intermediaireTel}
+                        onChange={(e) => setIntermediaireTel(e.target.value)}
+                        placeholder="+212 6XX XXX XXX"
+                      />
                     </div>
                   )}
                 </div>

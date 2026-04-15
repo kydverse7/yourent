@@ -3,7 +3,7 @@ import { Schema, model, models, Document, Types } from 'mongoose';
 export interface IReservation extends Document {
   vehicle: Types.ObjectId;
   client?: Types.ObjectId;
-  clientInline?: { nom: string; prenom?: string; telephone: string; email?: string };
+  clientInline?: { nom: string; prenom?: string; telephone: string; indicatif?: string; whatsapp?: string; email?: string };
   createdBy?: Types.ObjectId;
   canal: 'interne' | 'public' | 'telephonique';
   statut: 'en_attente' | 'confirmee' | 'refusee' | 'en_cours' | 'terminee' | 'annulee';
@@ -48,6 +48,8 @@ const ReservationSchema = new Schema<IReservation>(
       nom: String,
       prenom: String,
       telephone: String,
+      indicatif: String,
+      whatsapp: String,
       email: String,
     },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
