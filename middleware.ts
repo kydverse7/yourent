@@ -17,6 +17,7 @@ export default auth((req) => {
     pathname.startsWith('/login') ||
     pathname.startsWith('/api/auth') ||
     pathname.startsWith('/api/public') ||
+    pathname.startsWith('/api/whatsapp/webhook') ||
     pathname === '/';
 
   // Rediriger /login → /dashboard si déjà connecté

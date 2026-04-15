@@ -1,38 +1,47 @@
 /**
  * WhatsApp notification via Green API
- * Docs: https://green-api.com/en/docs/api/sending/SendMessage/
+ * Docs: https://green-api.com/docs/api/
  *
- * Envoie les notifications dans le groupe "Yourent Résa".
  * Échoue silencieusement (log only) pour ne pas bloquer le flux principal.
  */
 
 const ID_INSTANCE = process.env.GREEN_API_ID_INSTANCE;
 const API_TOKEN = process.env.GREEN_API_TOKEN;
-const NOTIFY_CHAT_ID = process.env.GREEN_API_NOTIFY_CHAT_ID;
+const NOTIFY_PHONE = process.env.GREEN_API_NOTIFY_PHONE; // numéro admin (format international sans +)
+const NOTIFY_CHAT_ID = process.env.GREEN_API_NOTIFY_CHAT_ID; // chat ID du groupe (optionnel)
 
 function isConfigured(): boolean {
-  return !!(ID_INSTANCE && API_TOKEN && NOTIFY_CHAT_ID);
+  return !!(ID_INSTANCE && API_TOKEN);
 }
 
 /**
- * Envoie un message WhatsApp via Green API.
- * @param message — texte du message (supporte le formatage WhatsApp : *gras*, _italique_)
- * @param chatId — ID du chat destinataire (défaut = groupe Yourent Résa)
+ * Envoie un message texte WhatsApp via Green API.
+ * Si chatId est fourni, envoie au groupe. Sinon envoie au numéro individuel.
  */
-export async function sendWhatsApp(message: string, chatId?: string): Promise<boolean> {
+export async function sendWhatsApp(message: string, to?: string): Promise<boolean> {
   if (!isConfigured()) {
     console.warn('[WhatsApp] Green API non configurée — notification ignorée');
     return false;
   }
 
-  const targetChatId = chatId ?? NOTIFY_CHAT_ID!;
-  const url = `https://api.green-api.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
+  const chatId = to ? `${to.replace(/\+/g, '')}@c.us` : NOTIFY_CHAT_ID;
+  const recipient = chatId ?? (NOTIFY_PHONE ? `${NOTIFY_PHONE}@c.us` : null);
+
+  if (!recipient) {
+    console.warn('[WhatsApp] Aucun destinataire configuré — notification ignorée');
+    return false;
+  }
+
+  const url = `https://7103.api.greenapi.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
 
   try {
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chatId: targetChatId, message }),
+      body: JSON.stringify({
+        chatId: recipient,
+        message,
+      }),
       signal: AbortSignal.timeout(10_000),
     });
 
@@ -42,12 +51,19 @@ export async function sendWhatsApp(message: string, chatId?: string): Promise<bo
       return false;
     }
 
-    console.log('[WhatsApp] Message envoyé avec succès');
+    console.log('[WhatsApp] Message envoyé avec succès via Green API');
     return true;
   } catch (err) {
     console.error('[WhatsApp] Échec envoi:', err);
     return false;
   }
+}
+
+/**
+ * Envoie un message WhatsApp à un client (numéro individuel).
+ */
+export async function sendWhatsAppToClient(to: string, message: string): Promise<boolean> {
+  return sendWhatsApp(message, to);
 }
 
 /**

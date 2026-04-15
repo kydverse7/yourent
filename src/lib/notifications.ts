@@ -2,6 +2,7 @@ import { Resend } from 'resend';
 import twilio from 'twilio';
 import { connectDB } from '@/lib/db';
 import { Notification } from '@/models/Notification';
+import { sendWhatsAppToClient } from '@/lib/whatsapp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -118,17 +119,9 @@ async function sendSMS(to: string, body: string): Promise<boolean> {
 }
 
 async function sendWhatsApp(to: string, body: string): Promise<boolean> {
-  if (!twilioClient) {
-    console.warn('[WhatsApp] Client Twilio non configuré');
-    return false;
-  }
   try {
-    const whatsappTo = `whatsapp:${to.startsWith('+') ? to : `+${to}`}`;
-    const msg = await twilioClient.messages.create({
-      body,
-      from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER!}`,
-      to: whatsappTo,
-    });
+    const success = await sendWhatsAppToClient(to, body);
+    if (!success) return false;
 
     await connectDB();
     await Notification.create({
@@ -136,7 +129,6 @@ async function sendWhatsApp(to: string, body: string): Promise<boolean> {
       type: 'autre',
       corps: body,
       statut: 'envoyee',
-      externalId: msg.sid,
       recipientPhone: to,
     });
 

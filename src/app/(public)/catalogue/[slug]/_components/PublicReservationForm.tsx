@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Button } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { addDays } from 'date-fns';
 import { MIN_RESERVATION_DAYS } from '@/lib/constants';
 import { calcNbJours, calcTarifTotal, formatCurrency } from '@/lib/utils';
@@ -25,6 +25,13 @@ const INDICATIFS = [
   { code: '+216', label: '🇹🇳 +216', country: 'Tunisie' },
   { code: '+213', label: '🇩🇿 +213', country: 'Algérie' },
 ];
+
+/* ── Styles réutilisables pour les champs du formulaire ── */
+const fieldBase =
+  'w-full h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 text-[#f7f1e8] text-[0.95rem] placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
+const selectBase =
+  'h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 text-[#f7f1e8] text-sm appearance-none cursor-pointer transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
+const labelBase = 'block text-sm font-medium text-[#b9a88f] mb-1.5';
 
 interface Props {
   vehiculeId: string;
@@ -59,9 +66,8 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
   const pricing = nbJours > 0 ? calcTarifTotal(nbJours, tarifJour, tarifJour10Plus) : null;
   const total = pricing?.total ?? 0;
 
-  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
-  };
+  const set = (field: string, value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,63 +130,88 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot — caché avec CSS, jamais rempli par un humain */}
+    <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Honeypot — caché, jamais rempli par un humain */}
       <div className="sr-only" aria-hidden="true">
-        <input tabIndex={-1} name="website" value={form.website} onChange={handleChange('website')} autoComplete="off" />
+        <input tabIndex={-1} name="website" value={form.website} onChange={(e) => set('website', e.target.value)} autoComplete="off" />
       </div>
 
-      {/* Dates */}
+      {/* ── Dates ── */}
       <div className="grid grid-cols-2 gap-3">
-        <Input
-          label={t('form.startDate')}
-          type="date"
-          value={form.debutAt}
-          onChange={handleChange('debutAt')}
-          min={new Date().toISOString().split('T')[0]}
-          required
-        />
-        <Input
-          label={t('form.endDate')}
-          type="date"
-          value={form.finAt}
-          onChange={handleChange('finAt')}
-          min={form.debutAt ? addDays(new Date(form.debutAt), MIN_RESERVATION_DAYS).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
-          required
-        />
+        <div>
+          <label className={labelBase}>{t('form.startDate')}</label>
+          <input
+            type="date"
+            value={form.debutAt}
+            onChange={(e) => set('debutAt', e.target.value)}
+            min={new Date().toISOString().split('T')[0]}
+            required
+            className={fieldBase}
+          />
+        </div>
+        <div>
+          <label className={labelBase}>{t('form.endDate')}</label>
+          <input
+            type="date"
+            value={form.finAt}
+            onChange={(e) => set('finAt', e.target.value)}
+            min={form.debutAt ? addDays(new Date(form.debutAt), MIN_RESERVATION_DAYS).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
+            required
+            className={fieldBase}
+          />
+        </div>
       </div>
 
-      {/* Estimation tarif */}
+      {/* ── Estimation tarif ── */}
       {nbJours > 0 && (
-        <div className="p-3 bg-gold/5 border border-gold/20 rounded-lg text-sm">
-          <span className="text-cream-muted">{nbJours} {t('form.days').replace(/\{s\}/g, nbJours > 1 ? 's' : '')} · {t('form.estimate')} : </span>
-          <span className="text-gold font-bold">{formatCurrency(total)}</span>
-          <span className="text-cream-muted text-xs"> {t('form.exDeposit')}</span>
+        <div className="rounded-xl border border-[rgba(201,168,76,0.2)] bg-[rgba(201,168,76,0.06)] p-3.5 text-sm">
+          <span className="text-[#b9a88f]">{nbJours} {t('form.days').replace(/\{s\}/g, nbJours > 1 ? 's' : '')} · {t('form.estimate')} : </span>
+          <span className="text-[#c9a84c] font-bold text-base">{formatCurrency(total)}</span>
+          <span className="text-[#b9a88f] text-xs ml-1">{t('form.exDeposit')}</span>
           {pricing?.palier === '10Plus' && (
-            <div className="mt-1 text-xs text-gold/80">{t('form.longRate')}</div>
+            <div className="mt-1 text-xs text-[#c9a84c]/80">{t('form.longRate')}</div>
           )}
         </div>
       )}
 
       {form.debutAt && form.finAt && nbJours < MIN_RESERVATION_DAYS && (
-        <div className="rounded-lg border border-amber-400/30 bg-amber-400/10 p-3 text-xs text-amber-200">
+        <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 p-3 text-xs text-amber-200">
           {t('form.minDays').replace('{count}', String(MIN_RESERVATION_DAYS))}
         </div>
       )}
 
-      {/* Infos client */}
+      {/* ── Nom / Prénom ── */}
       <div className="grid grid-cols-2 gap-3">
-        <Input label={t('form.firstName')} value={form.prenom} onChange={handleChange('prenom')} required />
-        <Input label={t('form.lastName')} value={form.nom} onChange={handleChange('nom')} required />
+        <div>
+          <label className={labelBase}>{t('form.firstName')}</label>
+          <input
+            type="text"
+            value={form.prenom}
+            onChange={(e) => set('prenom', e.target.value)}
+            required
+            className={fieldBase}
+          />
+        </div>
+        <div>
+          <label className={labelBase}>{t('form.lastName')}</label>
+          <input
+            type="text"
+            value={form.nom}
+            onChange={(e) => set('nom', e.target.value)}
+            required
+            className={fieldBase}
+          />
+        </div>
       </div>
-      {/* Téléphone avec indicatif */}
-      <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium text-cream-muted">{t('form.phone')}</label>
+
+      {/* ── Téléphone avec indicatif ── */}
+      <div>
+        <label className={labelBase}>{t('form.phone')}</label>
         <div className="flex gap-2">
           <select
             value={form.indicatif}
-            onChange={(e) => setForm((prev) => ({ ...prev, indicatif: e.target.value }))}
-            className="input-gold w-[130px] shrink-0 cursor-pointer"
+            onChange={(e) => set('indicatif', e.target.value)}
+            className={`${selectBase} w-[130px] shrink-0`}
           >
             {INDICATIFS.map((ind) => (
               <option key={ind.code} value={ind.code}>{ind.label}</option>
@@ -189,33 +220,33 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           <input
             type="tel"
             value={form.telephone}
-            onChange={handleChange('telephone')}
+            onChange={(e) => set('telephone', e.target.value)}
             placeholder="6XX XXX XXX"
             required
-            className="input-gold flex-1"
+            className={`${fieldBase} flex-1`}
           />
         </div>
       </div>
 
-      {/* WhatsApp */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 cursor-pointer text-sm text-cream-muted">
+      {/* ── WhatsApp ── */}
+      <div className="space-y-3">
+        <label className="flex items-center gap-2.5 cursor-pointer text-sm text-[#b9a88f]">
           <input
             type="checkbox"
             checked={whatsappSame}
             onChange={(e) => setWhatsappSame(e.target.checked)}
-            className="rounded border-gold/30 bg-noir-card text-gold focus:ring-gold/40"
+            className="h-4 w-4 rounded border-[rgba(201,168,76,0.3)] bg-[rgba(255,255,255,0.06)] text-[#c9a84c] focus:ring-[rgba(201,168,76,0.35)] focus:ring-offset-0"
           />
           {t('form.whatsappSame')}
         </label>
         {!whatsappSame && (
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-cream-muted">{t('form.whatsapp')}</label>
+          <div>
+            <label className={labelBase}>{t('form.whatsapp')}</label>
             <div className="flex gap-2">
               <select
                 value={form.indicatif}
-                onChange={(e) => setForm((prev) => ({ ...prev, indicatif: e.target.value }))}
-                className="input-gold w-[130px] shrink-0 cursor-pointer"
+                onChange={(e) => set('indicatif', e.target.value)}
+                className={`${selectBase} w-[130px] shrink-0`}
               >
                 {INDICATIFS.map((ind) => (
                   <option key={ind.code} value={ind.code}>{ind.label}</option>
@@ -224,34 +255,46 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
               <input
                 type="tel"
                 value={form.whatsapp}
-                onChange={handleChange('whatsapp')}
+                onChange={(e) => set('whatsapp', e.target.value)}
                 placeholder="6XX XXX XXX"
                 required
-                className="input-gold flex-1"
+                className={`${fieldBase} flex-1`}
               />
             </div>
           </div>
         )}
       </div>
 
-      <Input label={t('form.email')} type="email" value={form.email} onChange={handleChange('email')} placeholder={t('form.emailOptional')} />
-
+      {/* ── Email ── */}
       <div>
-        <label className="block text-xs text-cream-muted mb-1.5">{t('form.notes')}</label>
+        <label className={labelBase}>{t('form.email')}</label>
+        <input
+          type="email"
+          value={form.email}
+          onChange={(e) => set('email', e.target.value)}
+          placeholder={t('form.emailOptional')}
+          className={fieldBase}
+        />
+      </div>
+
+      {/* ── Notes ── */}
+      <div>
+        <label className={labelBase}>{t('form.notes')}</label>
         <textarea
           value={form.notes}
-          onChange={handleChange('notes')}
+          onChange={(e) => set('notes', e.target.value)}
           rows={3}
-          className="w-full bg-noir-card border border-gold/10 rounded-xl px-4 py-3 text-cream text-sm placeholder:text-cream-muted/50 focus:outline-none focus:border-gold/40 resize-none"
+          className="w-full rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 py-3 text-[#f7f1e8] text-sm placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] resize-none"
           placeholder={t('form.notesPlaceholder')}
         />
       </div>
 
+      {/* ── Submit ── */}
       <Button type="submit" variant="gold" size="lg" loading={loading} className="w-full">
         {loading ? t('form.submitting') : t('form.submit')}
       </Button>
 
-      <p className="text-center text-xs text-cream-muted">
+      <p className="text-center text-xs text-[#b9a88f]">
         {t('form.confirm')}
       </p>
     </form>
