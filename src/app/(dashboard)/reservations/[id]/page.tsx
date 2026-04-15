@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle2, FileSignature, MessageCircle, Receipt, XCircle, Sparkles } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, FileSignature, MessageCircle, Receipt, XCircle, Sparkles, Clock } from 'lucide-react';
 import { Badge, Button, Skeleton } from '@/components/ui';
 import { buildPdfViewerUrl, formatCurrency, formatDateTime } from '@/lib/utils';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { useUIStore } from '@/stores/uiStore';
 import toast from 'react-hot-toast';
 
@@ -108,6 +110,17 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
     ? `${reservation.clientInline.prenom} ${reservation.clientInline.nom}`
     : `${reservation.client?.prenom ?? ''} ${reservation.client?.nom ?? ''}`.trim();
 
+  const clientPhone = reservation.clientInline?.telephone ?? reservation.client?.telephone;
+  const indicatif = (reservation.clientInline?.indicatif ?? '+212').replace('+', '');
+  const cleanPhone = clientPhone ? clientPhone.replace(/[\s().\-]/g, '').replace(/^0/, '') : '';
+  const fullPhone = cleanPhone ? indicatif + cleanPhone : '';
+
+  const vehicleName = `${reservation.vehicule?.marque ?? ''} ${reservation.vehicule?.modele ?? ''}`.trim();
+  const whatsappMsg = fullPhone
+    ? `Bonjour ${clientName},\n\nSuite à votre demande de réservation sur Yourent :\n\n🚘 Véhicule : ${vehicleName}\n📅 Du ${formatDateTime(reservation.debutAt)} au ${formatDateTime(reservation.finAt)}\n💰 Montant estimé : ${formatCurrency(reservation.prix?.totalEstime ?? reservation.tarifTotal ?? 0)}\n\nPouvez-vous confirmer votre réservation ?\n\nMerci,\nYourent`
+    : '';
+  const whatsappUrl = fullPhone ? `https://wa.me/${fullPhone}?text=${encodeURIComponent(whatsappMsg)}` : null;
+
   return (
     <div className="space-y-6">
       <div className="lux-page-head">
@@ -148,6 +161,17 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <section className="lux-panel p-6 md:p-7">
           <h2 className="mb-5 text-lg font-semibold text-cream">Détails de la demande</h2>
+
+          {reservation.createdAt && (
+            <div className="mb-5 flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-2.5 text-sm">
+              <Clock className="h-4 w-4 text-gold" />
+              <span className="text-cream-muted">Demande reçue le</span>
+              <span className="text-cream font-medium">
+                {format(new Date(reservation.createdAt), "dd MMMM yyyy 'à' HH:mm", { locale: fr })}
+              </span>
+            </div>
+          )}
+
           <div className="grid gap-4 md:grid-cols-2">
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Début</p>
@@ -204,10 +228,10 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
             </div>
             {(reservation.clientInline?.telephone ?? reservation.client?.telephone) && (
               <a
-                href={`https://wa.me/${(reservation.clientInline?.telephone ?? reservation.client?.telephone).replace(/[\s\-().+]/g, '').replace(/^0/, '212')}`}
+                href={whatsappUrl ?? '#'}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#25D366]/15 border border-[#25D366]/25 px-4 py-2 text-sm font-medium text-[#25D366] hover:bg-[#25D366]/25 transition-colors"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#25D366]/15 border border-[#25D366]/25 px-4 py-2.5 text-sm font-medium text-[#25D366] hover:bg-[#25D366]/25 transition-colors"
               >
                 <MessageCircle className="h-4 w-4" />
                 Contacter sur WhatsApp

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Clock, CheckCircle, XCircle, Sparkles, History, Zap } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, Sparkles, History, Zap, MessageCircle } from 'lucide-react';
 import { keepPreviousData, useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useFilterStore } from '@/stores/filterStore';
 import { useUIStore } from '@/stores/uiStore';
@@ -18,9 +18,10 @@ interface Reservation {
   _id: string;
   vehicule: { marque: string; modele: string; immatriculation: string };
   client?: { prenom: string; nom: string };
-  clientInline?: { prenom: string; nom: string; telephone: string; email: string };
+  clientInline?: { prenom: string; nom: string; telephone: string; indicatif?: string; email: string };
   debutAt: string;
   finAt: string;
+  createdAt: string;
   statut: string;
   tarifTotal: number;
   montantPaye?: number;
@@ -28,6 +29,23 @@ interface Reservation {
   paiementStatut?: string;
   canal: string;
   location?: string | null;
+}
+
+function buildWhatsAppUrl(row: Reservation) {
+  const client = row.clientInline ?? row.client;
+  if (!client) return null;
+  const phone = row.clientInline?.telephone;
+  if (!phone) return null;
+  const indicatif = (row.clientInline?.indicatif ?? '+212').replace('+', '');
+  const cleanPhone = phone.replace(/[\s().\-]/g, '').replace(/^0/, '');
+  const fullPhone = indicatif + cleanPhone;
+  const vehicleName = `${row.vehicule?.marque ?? ''} ${row.vehicule?.modele ?? ''}`.trim();
+  const clientName = `${row.clientInline?.prenom ?? (row.client as any)?.prenom ?? ''} ${row.clientInline?.nom ?? (row.client as any)?.nom ?? ''}`.trim();
+  const debut = format(new Date(row.debutAt), 'dd/MM/yyyy', { locale: fr });
+  const fin = format(new Date(row.finAt), 'dd/MM/yyyy', { locale: fr });
+  const montant = formatCurrency(row.tarifTotal);
+  const msg = `Bonjour ${clientName},\n\nSuite à votre demande de réservation sur Yourent :\n\n🚘 Véhicule : ${vehicleName}\n📅 Du ${debut} au ${fin}\n💰 Montant : ${montant}\n\nPouvez-vous confirmer votre réservation ?\n\nMerci,\nYourent`;
+  return `https://wa.me/${fullPhone}?text=${encodeURIComponent(msg)}`;
 }
 
 const statutColors: Record<string, string> = {
@@ -123,6 +141,19 @@ export default function ReservationsPage() {
       ),
     },
     {
+      accessorKey: 'createdAt',
+      header: 'Reçue le',
+      cell: ({ getValue }) => {
+        const d = new Date(getValue<string>());
+        return (
+          <div className="text-xs">
+            <span className="text-cream-muted">{format(d, 'dd MMM yyyy', { locale: fr })}</span>
+            <span className="ml-1 text-cream-faint">{format(d, 'HH:mm')}</span>
+          </div>
+        );
+      },
+    },
+    {
       accessorKey: 'debutAt',
       header: 'Début',
       cell: ({ getValue }) => (
@@ -211,6 +242,17 @@ export default function ReservationsPage() {
               <Button variant="secondary" size="sm">Démarrer</Button>
             </Link>
           )}
+          {(() => {
+            const waUrl = buildWhatsAppUrl(row.original);
+            if (!waUrl) return null;
+            return (
+              <a href={waUrl} target="_blank" rel="noreferrer">
+                <Button variant="outline" size="sm" className="!border-[#25D366]/30 !text-[#25D366] hover:!bg-[#25D366]/10">
+                  <MessageCircle className="w-3 h-3" />
+                </Button>
+              </a>
+            );
+          })()}
           <Link href={`/reservations/${row.original._id}`}>
             <Button variant="ghost" size="sm">Voir</Button>
           </Link>
