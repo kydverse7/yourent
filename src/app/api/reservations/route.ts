@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     // Notification WhatsApp (await nécessaire en serverless sinon Vercel kill le process)
     await notifyNewReservation({
       clientName: `${data.prenom ?? ''} ${data.nom}`.trim(),
-      clientPhone: data.telephone,
+      clientPhone: `${data.indicatif ?? '+212'} ${data.telephone}`,
       vehicleName: `${(vehicle as any).marque} ${(vehicle as any).modele}`,
       debutAt: data.debutAt,
       finAt: data.finAt,
