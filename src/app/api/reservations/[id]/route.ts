@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { auth } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import { Reservation } from '@/models/Reservation';
@@ -124,6 +125,10 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     after: updated,
     changes: diff(before, updated),
   });
+
+  // Invalider le cache dashboard pour que les KPI et alertes se mettent à jour instantanément
+  revalidateTag('dashboard-stats');
+  revalidateTag('dashboard-alerts');
 
   return apiSuccess(serializeReservation(updated));
 }
