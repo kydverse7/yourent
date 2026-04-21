@@ -17,6 +17,7 @@ import {
   UserPlus,
 } from 'lucide-react';
 import { Badge, Button, Input, Select, Skeleton } from '@/components/ui';
+import { ClientDocumentUploadCard } from '@/components/clients/ClientDocumentUploadCard';
 import { formatCurrency, formatDateTime } from '@/lib/utils';
 import toast from 'react-hot-toast';
 
@@ -103,6 +104,13 @@ function getVehiclePhoto(v: VehicleItem) {
   return v.backgroundPhoto || v.photoModele || v.photos?.[0] || null;
 }
 
+const clientDocumentUploadFields = [
+  { key: 'cinRectoUrl', label: 'Carte nationale / document recto' },
+  { key: 'cinVersoUrl', label: 'Carte nationale / document verso' },
+  { key: 'permisRectoUrl', label: 'Permis recto' },
+  { key: 'permisVersoUrl', label: 'Permis verso' },
+] as const;
+
 function calcNbJoursLocal(debut: string, fin: string) {
   if (!debut || !fin) return 0;
   const d = new Date(debut);
@@ -170,12 +178,44 @@ function InlineClientForm({
     email: '',
     documentType: 'cin' as 'cin' | 'passeport' | 'titre_sejour',
     documentNumber: '',
+    documentExpireLe: '',
     ville: '',
+    permisNumero: '',
+    permisCategorie: '',
+    permisDelivreLe: '',
+    permisExpireLe: '',
+    cinRectoUrl: '',
+    cinVersoUrl: '',
+    permisRectoUrl: '',
+    permisVersoUrl: '',
+    vip: false,
+    remiseHabituels: 0,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [uploadingField, setUploadingField] = useState<string | null>(null);
 
   const set = (p: Partial<typeof form>) =>
     setForm((prev) => ({ ...prev, ...p }));
+
+  const uploadDocument = async (field: keyof typeof form, file: File) => {
+    try {
+      setUploadingField(String(field));
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('folder', 'clients');
+
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const payload = await res.json();
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur upload document');
+
+      set({ [field]: payload.data.url } as Partial<typeof form>);
+      toast.success('Pièce ajoutée, elle sera enregistrée avec le client');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Erreur upload');
+    } finally {
+      setUploadingField(null);
+    }
+  };
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -213,7 +253,7 @@ function InlineClientForm({
           Annuler
         </Button>
       </div>
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <Select
           label="Type"
           value={form.type}
@@ -222,6 +262,11 @@ function InlineClientForm({
           <option value="particulier">Particulier</option>
           <option value="entreprise">Entreprise</option>
         </Select>
+        <Input
+          label="Ville"
+          value={form.ville}
+          onChange={(e) => set({ ville: e.target.value })}
+        />
         <Input
           label="Nom *"
           value={form.nom}
@@ -242,14 +287,14 @@ function InlineClientForm({
         />
         <Input
           label="Email"
+          type="email"
           value={form.email}
           onChange={(e) => set({ email: e.target.value })}
+          placeholder="optionnel"
         />
-        <Input
-          label="Ville"
-          value={form.ville}
-          onChange={(e) => set({ ville: e.target.value })}
-        />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
         <Select
           label="Type de document"
           value={form.documentType}
@@ -262,11 +307,78 @@ function InlineClientForm({
           <option value="titre_sejour">Titre de séjour</option>
         </Select>
         <Input
-          label="N° document"
+          label="Numéro de document"
           value={form.documentNumber}
           onChange={(e) => set({ documentNumber: e.target.value })}
         />
+        <Input
+          label="Expiration du document"
+          type="date"
+          value={form.documentExpireLe}
+          onChange={(e) => set({ documentExpireLe: e.target.value })}
+        />
       </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Input
+          label="N° permis"
+          value={form.permisNumero}
+          onChange={(e) => set({ permisNumero: e.target.value })}
+        />
+        <Input
+          label="Catégorie"
+          value={form.permisCategorie}
+          onChange={(e) => set({ permisCategorie: e.target.value })}
+          placeholder="B, C..."
+        />
+        <Input
+          label="Délivré le"
+          type="date"
+          value={form.permisDelivreLe}
+          onChange={(e) => set({ permisDelivreLe: e.target.value })}
+        />
+        <Input
+          label="Expire le"
+          type="date"
+          value={form.permisExpireLe}
+          onChange={(e) => set({ permisExpireLe: e.target.value })}
+        />
+        <Input
+          label="Remise habituelle (%)"
+          type="number"
+          min={0}
+          max={100}
+          value={String(form.remiseHabituels)}
+          onChange={(e) => set({ remiseHabituels: Number(e.target.value || 0) })}
+        />
+        <div className="rounded-2xl border border-gold/10 bg-noir-root/50 px-4 py-3">
+          <p className="text-sm font-medium text-cream">Profil VIP</p>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={form.vip}
+            onClick={() => set({ vip: !form.vip })}
+            className={`mt-3 relative h-6 w-11 rounded-full transition-colors ${form.vip ? 'bg-gold' : 'bg-noir-root border border-gold/20'}`}
+          >
+            <span className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${form.vip ? 'translate-x-6' : 'translate-x-1'}`} />
+          </button>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {clientDocumentUploadFields.map((item) => (
+          <ClientDocumentUploadCard
+            key={item.key}
+            label={item.label}
+            value={form[item.key]}
+            uploading={uploadingField === item.key}
+            helperText="La capture photo ouvre directement l'appareil photo sur mobile."
+            onUpload={(file) => uploadDocument(item.key, file)}
+            onValueChange={(value) => set({ [item.key]: value } as Partial<typeof form>)}
+          />
+        ))}
+      </div>
+
       <div className="flex justify-end">
         <Button
           variant="gold"
