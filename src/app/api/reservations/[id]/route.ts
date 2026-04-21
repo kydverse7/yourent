@@ -127,8 +127,8 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
   });
 
   // Invalider le cache dashboard pour que les KPI et alertes se mettent à jour instantanément
-  revalidateTag('dashboard-stats');
-  revalidateTag('dashboard-alerts');
+  revalidateTag('dashboard-stats', 'max');
+  revalidateTag('dashboard-alerts', 'max');
 
   return apiSuccess(serializeReservation(updated));
 }
