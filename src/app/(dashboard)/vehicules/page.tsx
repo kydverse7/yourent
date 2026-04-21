@@ -275,6 +275,11 @@ export default function VehiculesPage() {
 
                       {/* Actions */}
                       <div className="flex flex-col gap-2 self-start">
+                        <Link
+                          href={`/vehicules/nouveau?marque=${encodeURIComponent(group.marque)}&modele=${encodeURIComponent(group.modele)}&type=${encodeURIComponent(group.type ?? selected.type ?? 'berline')}`}
+                        >
+                          <Button variant="secondary" size="sm" className="w-full">Ajouter à ce modèle</Button>
+                        </Link>
                         <Link href={`/vehicules/${selected._id}`}>
                           <Button variant="gold" size="sm" className="w-full">Fiche complète</Button>
                         </Link>

@@ -128,7 +128,7 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
       return res.json();
     },
     onSuccess: () => {
-      toast.success('Véhicule archivé');
+      toast.success('Véhicule supprimé définitivement');
       qc.invalidateQueries({ queryKey: ['vehicles'] });
       router.push('/vehicules');
     },
@@ -208,8 +208,8 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
             className="text-red-400 hover:bg-red-500/10"
             onClick={() =>
               openConfirmModal({
-                title: 'Archiver ce véhicule ?',
-                description: `${vehicle.marque} ${vehicle.modele} sera masqué du système.`,
+                title: 'Supprimer ce véhicule ?',
+                description: `${vehicle.marque} ${vehicle.modele} sera supprimé définitivement du système.`,
                 onConfirm: () => deleteMutation.mutate(),
               })
             }

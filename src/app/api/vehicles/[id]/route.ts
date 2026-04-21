@@ -145,8 +145,39 @@ export async function DELETE(_req: NextRequest, { params }: Ctx) {
   const vehicle = await Vehicle.findById(id).lean();
   if (!vehicle) return apiError('Véhicule introuvable', 404);
 
-  // Soft delete
-  await Vehicle.findByIdAndUpdate(id, { actif: false });
+  const [Reservation, Location, Maintenance, EtatDesLieux, Expense, GeneratedDocument] = await Promise.all([
+    import('@/models/Reservation').then((m) => m.Reservation),
+    import('@/models/Location').then((m) => m.Location),
+    import('@/models/Maintenance').then((m) => m.Maintenance),
+    import('@/models/EtatDesLieux').then((m) => m.EtatDesLieux),
+    import('@/models/Expense').then((m) => m.Expense),
+    import('@/models/GeneratedDocument').then((m) => m.GeneratedDocument),
+  ]);
+
+  const [reservationsCount, locationsCount, maintenancesCount, etatsCount, expensesCount, documentsCount] = await Promise.all([
+    Reservation.countDocuments({ vehicle: id }),
+    Location.countDocuments({ vehicle: id }),
+    Maintenance.countDocuments({ vehicle: id }),
+    EtatDesLieux.countDocuments({ vehicle: id }),
+    Expense.countDocuments({ vehicleId: id }),
+    GeneratedDocument.countDocuments({ 'relatedEntity.vehicle': id }),
+  ]);
+
+  const refs = [
+    { label: 'réservation(s)', count: reservationsCount },
+    { label: 'location(s)', count: locationsCount },
+    { label: 'maintenance(s)', count: maintenancesCount },
+    { label: 'état(s) des lieux', count: etatsCount },
+    { label: 'dépense(s)', count: expensesCount },
+    { label: 'document(s) généré(s)', count: documentsCount },
+  ].filter((r) => r.count > 0);
+
+  if (refs.length > 0) {
+    const details = refs.map((r) => `${r.count} ${r.label}`).join(', ');
+    return apiError(`Suppression impossible: ce véhicule est lié à ${details}.`, 409);
+  }
+
+  await Vehicle.findByIdAndDelete(id);
 
   await auditLog({
     action: 'delete',
@@ -156,5 +187,5 @@ export async function DELETE(_req: NextRequest, { params }: Ctx) {
     before: vehicle,
   });
 
-  return apiSuccess({ message: 'Véhicule archivé' });
+  return apiSuccess({ message: 'Véhicule supprimé définitivement' });
 }

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
@@ -40,8 +40,21 @@ const DEFAULTS: VehicleCreateForm = {
 
 export default function NouveauVehiculePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const qc = useQueryClient();
-  const [form, setForm] = useState<VehicleCreateForm>(DEFAULTS);
+  const initialForm = useMemo<VehicleCreateForm>(() => {
+    const marque = (searchParams.get('marque') ?? '').trim();
+    const modele = (searchParams.get('modele') ?? '').trim();
+    const type = (searchParams.get('type') ?? '').trim();
+
+    return {
+      ...DEFAULTS,
+      ...(marque ? { marque } : {}),
+      ...(modele ? { modele } : {}),
+      ...(type ? { type } : {}),
+    };
+  }, [searchParams]);
+  const [form, setForm] = useState<VehicleCreateForm>(initialForm);
   const [errors, setErrors] = useState<Partial<Record<keyof VehicleCreateForm, string>>>({});
 
   const set = (f: Partial<VehicleCreateForm>) => setForm((p) => ({ ...p, ...f }));
@@ -93,7 +106,11 @@ export default function NouveauVehiculePage() {
         </Link>
         <div>
           <h1 className="text-2xl font-bold text-cream">Nouveau véhicule</h1>
-          <p className="text-sm text-cream-muted">Remplissez les informations du véhicule</p>
+          <p className="text-sm text-cream-muted">
+            {form.marque && form.modele
+              ? `Ajout d'un véhicule au modèle ${form.marque} ${form.modele}`
+              : 'Remplissez les informations du véhicule'}
+          </p>
         </div>
       </div>
 
