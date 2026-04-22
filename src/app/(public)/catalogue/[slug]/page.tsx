@@ -48,6 +48,7 @@ const getModelVariants = cache(async (modelSlug: string) => {
       tarifJour: pricing.tarifJour,
       tarifJour10Plus: pricing.tarifJour10Plus,
       displayTarifJour: getVehicleDisplayPrice(v),
+      isAvailable: v.statut === 'disponible',
     };
   }).sort((a, b) => {
     if (a.displayTarifJour !== b.displayTarifJour) {
@@ -91,29 +92,65 @@ export default async function VehicleModelPage({ params }: Props) {
   const { marque, modele, categorie, carburant, transmission, places } = variants[0];
   const displayPrices = variants.map((variant) => variant.displayTarifJour).filter((price) => price > 0);
   const modelMinTarif = displayPrices.length > 0 ? Math.min(...displayPrices) : 0;
+  const availableCount = variants.filter((variant) => variant.isAvailable).length;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Product',
+        '@id': `https://yourent.ma/catalogue/${slug}#vehicle`,
+        name: `${marque} ${modele} — Location`,
+        description: `Louez une ${marque} ${modele} à Casablanca dès ${modelMinTarif} MAD/jour.`,
+        url: `https://yourent.ma/catalogue/${slug}`,
+        image: variants[0].featuredPhoto || undefined,
+        brand: { '@type': 'Brand', name: marque },
+        category: categorie,
+        fuelType: carburant,
+        vehicleTransmission: transmission,
+        seatingCapacity: places,
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'MAD',
+          lowPrice: modelMinTarif,
+          offerCount: availableCount > 0 ? availableCount : variants.length,
+          availability: availableCount > 0
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `https://yourent.ma/catalogue/${slug}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Accueil',
+            item: 'https://yourent.ma',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Catalogue',
+            item: 'https://yourent.ma/catalogue',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: `${marque} ${modele}`,
+            item: `https://yourent.ma/catalogue/${slug}`,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="lux-container py-8 md:py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Product',
-            name: `${marque} ${modele} — Location`,
-            description: `Louez une ${marque} ${modele} à Casablanca dès ${modelMinTarif} MAD/jour.`,
-            url: `https://yourent.ma/catalogue/${slug}`,
-            image: variants[0].featuredPhoto || undefined,
-            brand: { '@type': 'Brand', name: marque },
-            category: categorie,
-            offers: {
-              '@type': 'AggregateOffer',
-              priceCurrency: 'MAD',
-              lowPrice: modelMinTarif,
-              offerCount: variants.length,
-              availability: 'https://schema.org/InStock',
-            },
-          }),
+          __html: JSON.stringify(structuredData),
         }}
       />
       <div className="mb-6 flex items-center justify-between gap-3">

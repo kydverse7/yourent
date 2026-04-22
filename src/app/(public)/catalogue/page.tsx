@@ -116,38 +116,62 @@ export default async function CataloguePage({
   const cookieStore = await cookies();
   const locale = (cookieStore.get('locale')?.value === 'en' ? 'en' : 'fr') as Locale;
   const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params);
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'OfferCatalog',
+        '@id': 'https://yourent.ma/catalogue#catalog',
+        name: `${tr(locale, 'cat.title')} — Yourent`,
+        description: tp(locale, 'cat.subtitle', total),
+        url: 'https://yourent.ma/catalogue',
+        numberOfItems: total,
+        itemListElement: vehicles.slice(0, 20).map((v, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'Car',
+            name: `${v.marque} ${v.modele}`,
+            url: `https://yourent.ma/catalogue/${v.modelSlug}`,
+            image: v.featuredPhoto || undefined,
+            offers: {
+              '@type': 'Offer',
+              priceCurrency: 'MAD',
+              price: v.minTarif,
+              availability: v.countDispo > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+            },
+          },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://yourent.ma/catalogue#breadcrumb',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: tr(locale, 'nav.home'),
+            item: 'https://yourent.ma',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: tr(locale, 'cat.title'),
+            item: 'https://yourent.ma/catalogue',
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="lux-container py-8 md:py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'OfferCatalog',
-            name: 'Catalogue de véhicules à louer — Yourent',
-            description: 'Parcourez notre catalogue de voitures à louer à Casablanca.',
-            url: 'https://yourent.ma/catalogue',
-            numberOfItems: total,
-            itemListElement: vehicles.slice(0, 20).map((v, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              item: {
-                '@type': 'Car',
-                name: `${v.marque} ${v.modele}`,
-                url: `https://yourent.ma/catalogue/${v.modelSlug}`,
-                image: v.featuredPhoto || undefined,
-                offers: {
-                  '@type': 'Offer',
-                  priceCurrency: 'MAD',
-                  price: v.minTarif,
-                  availability: v.countDispo > 0
-                    ? 'https://schema.org/InStock'
-                    : 'https://schema.org/OutOfStock',
-                },
-              },
-            })),
-          }),
+          __html: JSON.stringify(structuredData),
         }}
       />
       <div className="lux-page-head mb-8">

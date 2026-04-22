@@ -3,6 +3,7 @@ import { unstable_cache } from 'next/cache';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { getVehicleDisplayPrice, toModelSlug } from '@/lib/utils';
+import { t as tr, type Locale } from '@/lib/i18n';
 import { PublicLandingPage } from './_components/landing';
 
 type SliderBrandData = {
@@ -100,6 +101,8 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 300;
+
+const SCHEMA_LOCALE: Locale = 'fr';
 
 async function fetchPublicHomeVehicles(): Promise<HomeVehicle[]> {
   await connectDB();
@@ -211,88 +214,121 @@ const getPublicHomeData = unstable_cache(
 export default async function PublicHomePage() {
   const { signatureVehicles, sliderBrands, economicVehicles, newArrivalVehicle } = await getPublicHomeData();
 
+  const faqItems = Array.from({ length: 6 }, (_, index) => ({
+    question: tr(SCHEMA_LOCALE, `faq.q${index + 1}`),
+    answer: tr(SCHEMA_LOCALE, `faq.a${index + 1}`),
+  }));
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': ['CarRental', 'LocalBusiness'],
-    name: 'Yourent',
-    alternateName: 'Yourent Location de Voitures',
-    url: 'https://yourent.ma',
-    logo: 'https://yourent.ma/logo-yourent.png',
-    image: 'https://yourent.ma/image-casablanca.jpg',
-    description:
-      'Agence de location de voitures à Casablanca, Maroc. Berlines, SUV, voitures de luxe et économiques. Réservation en ligne 7j/7.',
-    telephone: '+212661236231',
-    email: 'contact@yourent.ma',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Casablanca',
-      addressLocality: 'Casablanca',
-      addressRegion: 'Casablanca-Settat',
-      postalCode: '20000',
-      addressCountry: 'MA',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 33.5813104,
-      longitude: -7.6351741,
-    },
-    openingHoursSpecification: [
+    '@graph': [
       {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: [
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-          'Sunday',
-        ],
-        opens: '08:00',
-        closes: '20:00',
+        '@type': 'WebSite',
+        '@id': 'https://yourent.ma/#website',
+        url: 'https://yourent.ma',
+        name: 'Yourent',
+        inLanguage: SCHEMA_LOCALE,
       },
-    ],
-    priceRange: '200 MAD - 3000 MAD / jour',
-    currenciesAccepted: 'MAD',
-    paymentAccepted: 'Cash, Carte bancaire, Virement',
-    areaServed: [
-      { '@type': 'City', name: 'Casablanca' },
-      { '@type': 'Country', name: 'Maroc' },
-    ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Flotte de véhicules à louer',
-      itemListElement: [
-        {
-          '@type': 'OfferCatalog',
-          name: 'Voitures de luxe',
-          description:
-            'Location de voitures de luxe à Casablanca : Porsche, Range Rover, Mercedes, Audi.',
+      {
+        '@type': ['CarRental', 'LocalBusiness'],
+        '@id': 'https://yourent.ma/#localbusiness',
+        name: 'Yourent',
+        alternateName: 'Yourent Location de Voitures',
+        url: 'https://yourent.ma',
+        logo: 'https://yourent.ma/logo-yourent.png',
+        image: 'https://yourent.ma/image-casablanca.jpg',
+        description: tr(SCHEMA_LOCALE, 'footer.desc'),
+        telephone: '+212661236231',
+        email: 'contact@yourent.ma',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'N°25 Rue Ibnou Mounir',
+          addressLocality: 'Casablanca',
+          addressRegion: 'Casablanca-Settat',
+          postalCode: '20100',
+          addressCountry: 'MA',
         },
-        {
-          '@type': 'OfferCatalog',
-          name: 'Voitures économiques',
-          description:
-            'Location de voitures économiques à Casablanca : Fiat, Opel, Dacia à partir de 200 DH/jour.',
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 33.5813104,
+          longitude: -7.6351741,
         },
-        {
+        hasMap: 'https://www.google.com/maps/search/N%C2%B025+Rue+Ibnou+Mounir+20100+Casablanca',
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ],
+            opens: '08:00',
+            closes: '22:00',
+          },
+        ],
+        priceRange: '300 MAD - 3000 MAD / jour',
+        currenciesAccepted: 'MAD',
+        paymentAccepted: 'Cash, Carte bancaire, Virement',
+        areaServed: [
+          { '@type': 'City', name: 'Casablanca' },
+          { '@type': 'Country', name: 'Maroc' },
+        ],
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+212661236231',
+            contactType: 'customer service',
+            areaServed: 'MA',
+            availableLanguage: ['fr', 'en', 'ar'],
+          },
+        ],
+        hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'SUV et berlines',
-          description:
-            'SUV et berlines à louer à Casablanca : Volkswagen Tiguan, T-Roc, Golf, Toyota Corolla.',
+          name: 'Flotte de véhicules à louer',
+          itemListElement: [
+            {
+              '@type': 'OfferCatalog',
+              name: 'Voitures de luxe',
+              description:
+                'Location de voitures de luxe à Casablanca : Porsche, Range Rover, Mercedes, Audi.',
+            },
+            {
+              '@type': 'OfferCatalog',
+              name: 'Voitures économiques',
+              description:
+                'Location de voitures économiques à Casablanca : Fiat, Opel, Dacia à partir de 300 DH/jour.',
+            },
+            {
+              '@type': 'OfferCatalog',
+              name: 'SUV et berlines',
+              description:
+                'SUV et berlines à louer à Casablanca : Volkswagen Tiguan, T-Roc, Golf, Toyota Corolla.',
+            },
+          ],
         },
-      ],
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      bestRating: '5',
-      reviewCount: '150',
-    },
-    sameAs: [
-      'https://www.instagram.com/yourent.ma',
-      'https://www.facebook.com/yourent.ma',
-      'https://www.tiktok.com/@yourent.ma',
+        sameAs: [
+          'https://www.instagram.com/yourent.ma',
+          'https://www.facebook.com/yourent.ma',
+          'https://www.tiktok.com/@yourent.ma',
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://yourent.ma/#faq',
+        inLanguage: SCHEMA_LOCALE,
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
     ],
   };
 

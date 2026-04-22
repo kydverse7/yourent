@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,7 +10,8 @@ import { motion, AnimatePresence } from 'framer-motion';
    Shows once per session (sessionStorage gate).
 ───────────────────────────────────────────────────────── */
 
-const DURATION_MS = 2800;
+const DURATION_MS = 1200;
+const SESSION_KEY = 'yourent-loader-shown';
 
 export function YourentLoader() {
   const [visible, setVisible] = useState(true);
@@ -18,23 +19,34 @@ export function YourentLoader() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    const alreadyShown = window.sessionStorage.getItem(SESSION_KEY) === '1';
+    if (alreadyShown) {
+      setVisible(false);
+      setProgress(1);
+      return;
+    }
+
     document.body.style.overflow = 'hidden';
 
     const start = Date.now();
+    let rafId = 0;
     const raf = () => {
       const elapsed = Date.now() - start;
       const pct = Math.min(elapsed / DURATION_MS, 1);
       setProgress(pct);
-      if (pct < 1) requestAnimationFrame(raf);
+      if (pct < 1) rafId = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     const timer = setTimeout(() => {
+      window.sessionStorage.setItem(SESSION_KEY, '1');
       setVisible(false);
       document.body.style.overflow = '';
     }, DURATION_MS);
 
     return () => {
+      cancelAnimationFrame(rafId);
       clearTimeout(timer);
       document.body.style.overflow = '';
     };
@@ -75,14 +87,15 @@ export function YourentLoader() {
 
           {/* ── scanner line ── */}
           <motion.div
-            className="pointer-events-none absolute inset-x-0"
+            className="pointer-events-none absolute inset-x-0 top-0"
             style={{
               height: '1px',
               background: 'linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.5) 30%, rgba(255,248,210,0.8) 50%, rgba(201,168,76,0.5) 70%, transparent 100%)',
               boxShadow: '0 0 16px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.15)',
+              willChange: 'transform',
             }}
-            initial={{ top: '0%' }}
-            animate={{ top: ['0%', '100%', '0%'] }}
+            initial={{ y: '0vh' }}
+            animate={{ y: ['0vh', '100vh', '0vh'] }}
             transition={{ duration: 3, ease: 'linear', repeat: Infinity }}
           />
 
@@ -137,6 +150,7 @@ export function YourentLoader() {
                 fill
                 className="object-contain p-1.5"
                 sizes="80px"
+                quality={65}
                 priority
               />
             </div>

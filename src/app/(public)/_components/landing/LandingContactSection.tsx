@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import {
   MapPin,
   Phone,
@@ -162,10 +163,12 @@ export function LandingContactSection() {
               <span className="ct-main-title-light">{t('contact.title')} </span>
               <span className="ct-main-title-gold">{t('contact.titleGold')}</span>
             </h2>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/new-award-trip-advisor.png"
               alt="TripAdvisor Award"
+              width={176}
+              height={154}
+              sizes="(max-width: 479px) 48px, (max-width: 767px) 56px, 72px"
               className="ct-tripadvisor-badge"
             />
           </div>
@@ -199,7 +202,7 @@ export function LandingContactSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
         >
-          {STATS.map((s, i) => (
+          {STATS.map((s) => (
             <motion.div key={s.label} className="ct-strip-stat" variants={staggerCard}>
               <span className="ct-strip-num">
                 {s.number}

@@ -164,17 +164,6 @@
   inset: 4% 3% 7%;
 }
 
-/* 3D model — rendered at native resolution, no oversample */
-.lp-model-direct {
-  position: absolute;
-  inset: 0;
-}
-
-.lp-model-direct model-viewer {
-  --poster-color: transparent;
-  display: block;
-}
-
 /* image slide — clean contain */
 .lp-image-inner {
   overflow: hidden;

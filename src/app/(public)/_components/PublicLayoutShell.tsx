@@ -100,7 +100,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                 fill
                 className="object-contain p-1"
                 sizes="48px"
-                priority
+                quality={65}
               />
             </motion.div>
           </Link>

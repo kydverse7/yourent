@@ -16,12 +16,6 @@ export type SliderBrandData = {
   vehicle: LandingVehicle | null;
 };
 
-export type SliderMediaType = '3d' | 'image';
-
-export type SliderItem = SliderBrandData & {
-  mediaType: SliderMediaType;
-};
-
 export type BrandAmbientColor = [r: number, g: number, b: number];
 
 export type PublicLandingPageProps = {

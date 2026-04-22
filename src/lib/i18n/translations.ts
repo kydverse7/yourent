@@ -82,6 +82,7 @@ const fr: Record<string, string> = {
   'newArrival.cta': 'Réserver maintenant',
   'newArrival.from': 'À partir de',
   'newArrival.perDay': '/ jour',
+  'why.eyebrow': 'Pourquoi Yourent',
   'why.title': "L’excellence au service de votre mobilité",
   'why.subtitle':
     'Chaque détail est pensé pour que votre location soit simple, premium et sans stress.',
