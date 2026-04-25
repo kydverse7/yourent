@@ -43,24 +43,30 @@ export function CatalogueInfiniteGrid({
   limit,
 }: Props) {
   const { t, tp } = useLocale();
+  const queryKey = `${type ?? ''}|${marque ?? ''}|${limit}`;
   const [vehicles, setVehicles] = useState(initialVehicles);
   const [page, setPage] = useState(initialPage);
   const [hasNext, setHasNext] = useState(initialHasNext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const activeQueryKeyRef = useRef(queryKey);
+  const requestSeqRef = useRef(0);
 
   /* ── Search & sort (client-side) ── */
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<SortOrder>('price-asc');
 
   useEffect(() => {
+    // Invalidate any in-flight request from previous filters.
+    activeQueryKeyRef.current = queryKey;
+    requestSeqRef.current += 1;
     setVehicles(initialVehicles);
     setPage(initialPage);
     setHasNext(initialHasNext);
     setIsLoading(false);
     setError(null);
-  }, [initialHasNext, initialPage, initialVehicles]);
+  }, [initialHasNext, initialPage, initialVehicles, queryKey]);
 
   /* Filtered + sorted vehicles */
   const displayVehicles = useMemo(() => {
@@ -92,6 +98,9 @@ export function CatalogueInfiniteGrid({
     setIsLoading(true);
     setError(null);
 
+    const requestKey = activeQueryKeyRef.current;
+    const requestSeq = ++requestSeqRef.current;
+
     try {
       const params = new URLSearchParams({
         page: String(page + 1),
@@ -111,6 +120,13 @@ export function CatalogueInfiniteGrid({
       const nextHasNext = Boolean(payload?.meta?.hasNext);
       const nextPage = Number(payload?.meta?.page ?? page + 1);
 
+      if (
+        activeQueryKeyRef.current !== requestKey
+        || requestSeqRef.current !== requestSeq
+      ) {
+        return;
+      }
+
       setVehicles((current) => {
         const existingSlugs = new Set(current.map((item) => item.modelSlug));
         const unique = nextVehicles.filter(
@@ -121,8 +137,20 @@ export function CatalogueInfiniteGrid({
       setHasNext(nextHasNext);
       setPage(nextPage);
     } catch (err) {
+      if (
+        activeQueryKeyRef.current !== requestKey
+        || requestSeqRef.current !== requestSeq
+      ) {
+        return;
+      }
       setError(err instanceof Error ? err.message : 'Une erreur est survenue.');
     } finally {
+      if (
+        activeQueryKeyRef.current !== requestKey
+        || requestSeqRef.current !== requestSeq
+      ) {
+        return;
+      }
       setIsLoading(false);
     }
   }, [hasNext, isLoading, limit, page, type, marque]);
