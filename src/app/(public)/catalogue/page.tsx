@@ -27,6 +27,19 @@ export const revalidate = 120;
 
 const PAGE_SIZE = 24;
 
+type BrandOption = {
+  value: string;
+  label: string;
+};
+
+function normalizeFilterValue(value?: string): string {
+  return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 
 
 function buildFilterUrl(
@@ -50,18 +63,34 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
     actif: { $ne: false },
     isPublic: { $ne: false },
   };
-  if (searchParams.type) matchFilter.categorie = searchParams.type;
-  if (searchParams.marque) matchFilter.marque = searchParams.marque;
+  if (searchParams.type?.trim()) matchFilter.categorie = searchParams.type.trim();
 
-  const [groups, countResult, brands] = await Promise.all([
+  const normalizedMarque = normalizeFilterValue(searchParams.marque);
+  if (normalizedMarque) {
+    matchFilter.marque = {
+      $regex: `^\\s*${escapeRegExp(normalizedMarque)}\\s*$`,
+      $options: 'i',
+    };
+  }
+
+  const [groups, countResult, brandGroups] = await Promise.all([
     Vehicle.aggregate([
       { $match: matchFilter },
+      {
+        $addFields: {
+          marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
+          modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
+          marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
+          modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
+        },
+      },
+      { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
       { $sort: { tarifParJour: -1 } },
       {
         $group: {
-          _id: { marque: '$marque', modele: '$modele' },
-          marque: { $first: '$marque' },
-          modele: { $first: '$modele' },
+          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
+          marque: { $first: '$marqueDisplay' },
+          modele: { $first: '$modeleDisplay' },
           count: { $sum: 1 },
           countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
           firstTarifParJour: { $first: '$tarifParJour' },
@@ -79,16 +108,45 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
     ]),
     Vehicle.aggregate([
       { $match: matchFilter },
-      { $group: { _id: { marque: '$marque', modele: '$modele' } } },
+      {
+        $addFields: {
+          marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
+          modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
+        },
+      },
+      { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
+      { $group: { _id: { marque: '$marqueNorm', modele: '$modeleNorm' } } },
       { $count: 'total' },
     ]),
-    Vehicle.distinct('marque', {
-      actif: { $ne: false },
-      isPublic: { $ne: false },
-    }),
+    Vehicle.aggregate([
+      {
+        $match: {
+          actif: { $ne: false },
+          isPublic: { $ne: false },
+        },
+      },
+      {
+        $project: {
+          brandTrim: { $trim: { input: { $ifNull: ['$marque', ''] } } },
+        },
+      },
+      { $match: { brandTrim: { $ne: '' } } },
+      {
+        $group: {
+          _id: { $toLower: '$brandTrim' },
+          label: { $first: '$brandTrim' },
+        },
+      },
+    ]),
   ]);
 
   const total = countResult[0]?.total ?? 0;
+  const brands: BrandOption[] = brandGroups
+    .map((brand: { _id: string; label: string }) => ({
+      value: normalizeFilterValue(brand._id),
+      label: brand.label,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 
   const vehicles = groups.map((g: any) => ({
     modelSlug: toModelSlug(g.marque, g.modele),
@@ -113,6 +171,7 @@ export default async function CataloguePage({
   searchParams: Promise<Record<string, string>>;
 }) {
   const params = await searchParams;
+  const selectedMarque = normalizeFilterValue(params.marque);
   const cookieStore = await cookies();
   const locale = (cookieStore.get('locale')?.value === 'en' ? 'en' : 'fr') as Locale;
   const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params);
@@ -195,7 +254,7 @@ export default async function CataloguePage({
             <Link
               href={buildFilterUrl(params, 'marque', undefined)}
               className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                !params.marque
+                !selectedMarque
                   ? 'bg-gold text-noir-root'
                   : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
               }`}
@@ -204,15 +263,15 @@ export default async function CataloguePage({
             </Link>
             {brands.map((brand) => (
               <Link
-                key={brand}
-                href={buildFilterUrl(params, 'marque', brand)}
+                key={brand.value}
+                href={buildFilterUrl(params, 'marque', brand.value)}
                 className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                  params.marque === brand
+                  selectedMarque === brand.value
                     ? 'bg-gold text-noir-root'
                     : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
                 }`}
               >
-                {brand}
+                {brand.label}
               </Link>
             ))}
           </div>
@@ -232,7 +291,7 @@ export default async function CataloguePage({
             initialHasNext={hasNext}
             total={total}
             type={params.type}
-            marque={params.marque}
+            marque={selectedMarque || undefined}
             limit={PAGE_SIZE}
           />
         )}

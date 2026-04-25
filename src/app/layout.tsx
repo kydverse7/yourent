@@ -101,7 +101,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${inter.variable} ${notoArabic.variable}`}>
-      <body className="min-h-screen antialiased bg-noir-root text-cream">
+      <body suppressHydrationWarning className="min-h-screen antialiased bg-noir-root text-cream">
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-17463963038"

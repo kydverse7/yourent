@@ -5,6 +5,14 @@ import { apiPaginated } from '@/lib/apiHelpers';
 import { parsePaginationParams, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
 import { rateLimit } from '@/lib/rateLimit';
 
+function normalizeFilterValue(value: string | null): string {
+  return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 // Catalogue public — pas d'auth requise
 export async function GET(req: NextRequest) {
   const limited = await rateLimit('general', req.headers.get('x-forwarded-for') ?? 'anonymous');
@@ -20,13 +28,18 @@ export async function GET(req: NextRequest) {
     isPublic: { $ne: false },
   };
 
-  const type = searchParams.get('type');
+  const type = searchParams.get('type')?.trim();
   if (type) filter.categorie = type;
 
-  const marque = searchParams.get('marque');
-  if (marque) filter.marque = marque;
+  const marque = normalizeFilterValue(searchParams.get('marque'));
+  if (marque) {
+    filter.marque = {
+      $regex: `^\\s*${escapeRegExp(marque)}\\s*$`,
+      $options: 'i',
+    };
+  }
 
-  const q = searchParams.get('q');
+  const q = searchParams.get('q')?.trim();
   if (q) filter.$text = { $search: q };
 
   const grouped = searchParams.get('grouped') === 'true';
@@ -35,12 +48,21 @@ export async function GET(req: NextRequest) {
     const [groups, countResult] = await Promise.all([
       Vehicle.aggregate([
         { $match: filter },
+        {
+          $addFields: {
+            marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
+            modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
+            marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
+            modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
+          },
+        },
+        { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
         { $sort: { tarifParJour: 1 } },
         {
           $group: {
-            _id: { marque: '$marque', modele: '$modele' },
-            marque: { $first: '$marque' },
-            modele: { $first: '$modele' },
+            _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
+            marque: { $first: '$marqueDisplay' },
+            modele: { $first: '$modeleDisplay' },
             count: { $sum: 1 },
             countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
             firstTarifParJour: { $first: '$tarifParJour' },
@@ -59,7 +81,14 @@ export async function GET(req: NextRequest) {
       ]),
       Vehicle.aggregate([
         { $match: filter },
-        { $group: { _id: { marque: '$marque', modele: '$modele' } } },
+        {
+          $addFields: {
+            marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
+            modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
+          },
+        },
+        { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
+        { $group: { _id: { marque: '$marqueNorm', modele: '$modeleNorm' } } },
         { $count: 'total' },
       ]),
     ]);
