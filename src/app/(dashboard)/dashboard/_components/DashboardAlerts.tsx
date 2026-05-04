@@ -6,6 +6,7 @@ import { Reservation } from '@/models/Reservation';
 import { buildActiveVehicleAlerts } from '@/lib/vehicle-alerts';
 import { AlertTriangle, Clock, Wrench, Shield } from 'lucide-react';
 import Link from 'next/link';
+import DashboardWhatsAppSummaryButton from './DashboardWhatsAppSummaryButton';
 
 const getCachedDashboardAlerts = unstable_cache(
   async () => {
@@ -53,10 +54,13 @@ export default async function DashboardAlerts() {
   return (
     <div className="grid md:grid-cols-2 gap-6">
       <div className="lux-panel p-5 md:p-6">
-        <h2 className="text-cream font-semibold mb-4 flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-gold" />
-          Alertes urgentes
-        </h2>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-cream font-semibold flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-gold" />
+            Alertes urgentes
+          </h2>
+          <DashboardWhatsAppSummaryButton />
+        </div>
 
         {!hasAlerts && (
           <p className="text-cream-muted text-sm">Aucune alerte — tout est en ordre ✓</p>
