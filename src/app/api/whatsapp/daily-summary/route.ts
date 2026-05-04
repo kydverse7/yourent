@@ -95,34 +95,41 @@ async function buildDailySummaryMessage(now: Date): Promise<{ message: string; e
 
   const todayKey = dayKey(now);
   const dueToday = enCours.filter((loc) => dayKey(loc.finPrevueAt) === todayKey);
+  const overdue = enCours.filter((loc) => {
+    if (!loc.finPrevueAt) return false;
+    return new Date(loc.finPrevueAt).getTime() < now.getTime() && dayKey(loc.finPrevueAt) !== todayKey;
+  });
 
   const lines: string[] = [
     `📊 *Point locations — ${formatDate(now)}*`,
     `🚗 Locations en cours : *${enCours.length}*`,
     `🔁 Retours prévus aujourd'hui : *${dueToday.length}*`,
+    `⏰ Retards à ce jour : *${overdue.length}*`,
     '',
   ];
 
-  if (dueToday.length === 0) {
-    lines.push('✅ Aucun retour prévu aujourd\'hui.');
+  if (enCours.length === 0) {
+    lines.push('✅ Aucune voiture en location actuellement.');
   } else {
-    lines.push('📋 *Clients à contacter (retours du jour)*');
+    lines.push('📋 *Voitures non encore retournées*');
 
-    const maxRows = 25;
-    dueToday.slice(0, maxRows).forEach((loc, idx) => {
+    enCours.forEach((loc, idx) => {
       const vehicle = `${loc.vehicle?.marque ?? ''} ${loc.vehicle?.modele ?? ''}`.trim() || 'Véhicule';
       const immat = (loc.vehicle?.immatriculation ?? '').trim();
       const clientName = `${loc.client?.prenom ?? ''} ${loc.client?.nom ?? ''}`.trim() || 'Client';
       const phone = normalizePhone(loc.client?.whatsapp) || normalizePhone(loc.client?.telephone) || 'Non renseigné';
+      const retourDate = loc.finPrevueAt ? formatDate(new Date(loc.finPrevueAt)) : '--/--/----';
       const retourHeure = formatTime(loc.finPrevueAt);
+      const status = dayKey(loc.finPrevueAt) === todayKey
+        ? '🟠 Retour aujourd\'hui'
+        : loc.finPrevueAt && new Date(loc.finPrevueAt).getTime() < now.getTime()
+          ? '🔴 En retard'
+          : '';
 
-      lines.push(`${idx + 1}. 🚘 ${vehicle}${immat ? ` (${immat})` : ''}`);
-      lines.push(`   👤 ${clientName} | 📞 ${phone} | 🕒 ${retourHeure}`);
+      lines.push(`${idx + 1}. ${status ? `${status} — ` : ''}🚘 ${vehicle}${immat ? ` (${immat})` : ''}`);
+      lines.push(`   👤 ${clientName} | 📞 ${phone}`);
+      lines.push(`   📅 Retour prévu: ${retourDate} | 🕒 ${retourHeure}`);
     });
-
-    if (dueToday.length > maxRows) {
-      lines.push(`… et ${dueToday.length - maxRows} autre(s) retour(s).`);
-    }
   }
 
   lines.push('');
