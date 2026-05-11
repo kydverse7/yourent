@@ -35,7 +35,11 @@ export default function DashboardWhatsAppSummaryButton() {
         cache: 'no-store',
       });
 
-      const payload = (await res.json().catch(() => ({}))) as SummaryResponse;
+      const clone = res.clone();
+      const payload = (await res.json().catch(async () => {
+        const rawText = await clone.text().catch(() => '');
+        return rawText ? { error: rawText.slice(0, 240) } : {};
+      })) as SummaryResponse;
 
       if (!res.ok || !payload?.data?.sent) {
         const message = [

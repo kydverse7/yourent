@@ -164,82 +164,94 @@ async function buildDailySummaryMessage(now: Date): Promise<{ message: string; e
 }
 
 async function handle(req: NextRequest) {
-  const session = await auth();
-  const cronAuthorized = isCronAuthorized(req);
-  const isScheduledRequest = cronAuthorized && req.method === 'GET';
+  try {
+    const session = await auth();
+    const cronAuthorized = isCronAuthorized(req);
+    const isScheduledRequest = cronAuthorized && req.method === 'GET';
 
-  if (!session && !cronAuthorized) {
-    return apiError('Non autorisé', 401);
-  }
+    if (!session && !cronAuthorized) {
+      return apiError('Non autorisé', 401);
+    }
 
-  if (session && session.user.status === 'suspended') {
-    return apiError('Compte suspendu', 403);
-  }
+    if (session?.user?.status === 'suspended') {
+      return apiError('Compte suspendu', 403);
+    }
 
-  const now = new Date();
+    const now = new Date();
 
-  if (isScheduledRequest && !isScheduledDispatchTime(now)) {
+    if (isScheduledRequest && !isScheduledDispatchTime(now)) {
+      return apiSuccess({
+        sent: false,
+        skipped: true,
+        reason: 'outside_casablanca_schedule',
+        date: formatDate(now),
+        localHour: casablancaHour(now),
+      });
+    }
+
+    const summary = await buildDailySummaryMessage(now);
+    const configStatus = getWhatsAppConfigStatus();
+    const target = configStatus.hasNotifyChatId ? 'group' : configStatus.hasNotifyPhone ? 'phone' : null;
+
+    if (!configStatus.hasIdInstance || !configStatus.hasApiToken) {
+      return apiError('Green API non configurée sur ce déploiement: ajoutez GREEN_API_ID_INSTANCE et GREEN_API_TOKEN sur Vercel', 500, {
+        enCours: summary.enCours,
+        retoursToday: summary.retoursToday,
+        config: configStatus,
+      });
+    }
+
+    if (!target) {
+      return apiError('Aucun destinataire WhatsApp configuré: ajoutez GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE sur Vercel', 500, {
+        enCours: summary.enCours,
+        retoursToday: summary.retoursToday,
+        config: configStatus,
+      });
+    }
+
+    const sendResult = await sendWhatsAppDetailed(summary.message);
+
+    if (!sendResult.ok) {
+      const responseSnippet = sendResult.responseText
+        ? sendResult.responseText.replace(/\s+/g, ' ').slice(0, 180)
+        : undefined;
+
+      return apiError(
+        [
+          sendResult.error || `Échec envoi WhatsApp (${target === 'group' ? 'groupe' : 'numéro admin'})`,
+          responseSnippet,
+        ].filter(Boolean).join(' — '),
+        500,
+        {
+          enCours: summary.enCours,
+          retoursToday: summary.retoursToday,
+          target,
+          recipient: sendResult.recipient,
+          config: sendResult.config,
+          status: sendResult.status,
+        },
+      );
+    }
+
     return apiSuccess({
-      sent: false,
-      skipped: true,
-      reason: 'outside_casablanca_schedule',
+      sent: true,
+      enCours: summary.enCours,
+      retoursToday: summary.retoursToday,
       date: formatDate(now),
-      localHour: casablancaHour(now),
+      target,
+      recipient: sendResult.recipient,
     });
-  }
-
-  const summary = await buildDailySummaryMessage(now);
-  const configStatus = getWhatsAppConfigStatus();
-  const target = configStatus.hasNotifyChatId ? 'group' : configStatus.hasNotifyPhone ? 'phone' : null;
-
-  if (!configStatus.hasIdInstance || !configStatus.hasApiToken) {
-    return apiError('Green API non configurée sur ce déploiement: ajoutez GREEN_API_ID_INSTANCE et GREEN_API_TOKEN sur Vercel', 500, {
-      enCours: summary.enCours,
-      retoursToday: summary.retoursToday,
-      config: configStatus,
-    });
-  }
-
-  if (!target) {
-    return apiError('Aucun destinataire WhatsApp configuré: ajoutez GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE sur Vercel', 500, {
-      enCours: summary.enCours,
-      retoursToday: summary.retoursToday,
-      config: configStatus,
-    });
-  }
-
-  const sendResult = await sendWhatsAppDetailed(summary.message);
-
-  if (!sendResult.ok) {
-    const responseSnippet = sendResult.responseText
-      ? sendResult.responseText.replace(/\s+/g, ' ').slice(0, 180)
-      : undefined;
+  } catch (error) {
+    console.error('[WhatsApp daily-summary] Unhandled error:', error);
 
     return apiError(
-      [
-        sendResult.error || `Échec envoi WhatsApp (${target === 'group' ? 'groupe' : 'numéro admin'})`,
-        responseSnippet,
-      ].filter(Boolean).join(' — '),
+      error instanceof Error ? error.message : 'Erreur interne serveur pendant l’envoi WhatsApp',
       500,
       {
-      enCours: summary.enCours,
-      retoursToday: summary.retoursToday,
-      target,
-        recipient: sendResult.recipient,
-        config: sendResult.config,
-        status: sendResult.status,
+        unhandled: true,
       },
     );
   }
-
-  return apiSuccess({
-    sent: true,
-    enCours: summary.enCours,
-    retoursToday: summary.retoursToday,
-    date: formatDate(now),
-    target,
-    recipient: sendResult.recipient,
-  });
 }
 
 export async function GET(req: NextRequest) {
