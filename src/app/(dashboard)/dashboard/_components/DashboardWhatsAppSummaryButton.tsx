@@ -13,6 +13,10 @@ type SummaryResponse = {
     date?: string;
   };
   error?: string;
+  details?: {
+    status?: number;
+    target?: string;
+  };
 };
 
 export default function DashboardWhatsAppSummaryButton() {
@@ -34,7 +38,10 @@ export default function DashboardWhatsAppSummaryButton() {
       const payload = (await res.json().catch(() => ({}))) as SummaryResponse;
 
       if (!res.ok || !payload?.data?.sent) {
-        const message = payload?.error || 'Échec de l’envoi WhatsApp';
+        const message = [
+          payload?.error || 'Échec de l’envoi WhatsApp',
+          payload?.details?.status ? `(HTTP ${payload.details.status})` : '',
+        ].filter(Boolean).join(' ');
         throw new Error(message);
       }
 

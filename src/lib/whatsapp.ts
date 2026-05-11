@@ -5,14 +5,52 @@
  * Échoue silencieusement (log only) pour ne pas bloquer le flux principal.
  */
 
-const ID_INSTANCE = process.env.GREEN_API_ID_INSTANCE;
-const API_TOKEN = process.env.GREEN_API_TOKEN;
-const NOTIFY_PHONE = process.env.GREEN_API_NOTIFY_PHONE; // numéro admin (format international sans +)
-const NOTIFY_CHAT_ID = process.env.GREEN_API_NOTIFY_CHAT_ID; // chat ID du groupe (optionnel)
 const MAX_WHATSAPP_MESSAGE_LENGTH = 3200;
 
-function isConfigured(): boolean {
-  return !!(ID_INSTANCE && API_TOKEN);
+type WhatsAppRuntimeConfig = {
+  idInstance: string;
+  apiToken: string;
+  notifyPhone: string;
+  notifyChatId: string;
+};
+
+export type WhatsAppConfigStatus = {
+  hasIdInstance: boolean;
+  hasApiToken: boolean;
+  hasNotifyPhone: boolean;
+  hasNotifyChatId: boolean;
+};
+
+export type WhatsAppSendResult = {
+  ok: boolean;
+  recipient: string | null;
+  config: WhatsAppConfigStatus;
+  status?: number;
+  error?: string;
+  responseText?: string;
+};
+
+function readConfig(): WhatsAppRuntimeConfig {
+  return {
+    idInstance: (process.env.GREEN_API_ID_INSTANCE ?? '').trim(),
+    apiToken: (process.env.GREEN_API_TOKEN ?? '').trim(),
+    notifyPhone: (process.env.GREEN_API_NOTIFY_PHONE ?? '').trim(),
+    notifyChatId: (process.env.GREEN_API_NOTIFY_CHAT_ID ?? '').trim(),
+  };
+}
+
+export function getWhatsAppConfigStatus(): WhatsAppConfigStatus {
+  const config = readConfig();
+  return {
+    hasIdInstance: !!config.idInstance,
+    hasApiToken: !!config.apiToken,
+    hasNotifyPhone: !!config.notifyPhone,
+    hasNotifyChatId: !!config.notifyChatId,
+  };
+}
+
+function isConfigured(config: WhatsAppRuntimeConfig): boolean {
+  return !!(config.idInstance && config.apiToken);
 }
 
 function normalizePhoneChatId(phone: string): string {
@@ -26,9 +64,9 @@ function normalizeGroupChatId(chatId: string): string {
   return `${value}@g.us`;
 }
 
-function resolveDefaultRecipient(): string | null {
-  if (NOTIFY_CHAT_ID?.trim()) return normalizeGroupChatId(NOTIFY_CHAT_ID);
-  if (NOTIFY_PHONE?.trim()) return normalizePhoneChatId(NOTIFY_PHONE);
+function resolveDefaultRecipient(config: WhatsAppRuntimeConfig): string | null {
+  if (config.notifyChatId) return normalizeGroupChatId(config.notifyChatId);
+  if (config.notifyPhone) return normalizePhoneChatId(config.notifyPhone);
   return null;
 }
 
@@ -65,8 +103,13 @@ function chunkMessage(message: string): string[] {
   return chunks;
 }
 
-async function sendWhatsAppChunk(recipient: string, message: string): Promise<boolean> {
-  const url = `https://api.green-api.com/waInstance${ID_INSTANCE}/sendMessage/${API_TOKEN}`;
+async function sendWhatsAppChunk(
+  config: WhatsAppRuntimeConfig,
+  recipient: string,
+  message: string,
+): Promise<WhatsAppSendResult> {
+  const url = `https://api.green-api.com/waInstance${config.idInstance}/sendMessage/${config.apiToken}`;
+  const status = getWhatsAppConfigStatus();
 
   try {
     const res = await fetch(url, {
@@ -82,14 +125,80 @@ async function sendWhatsAppChunk(recipient: string, message: string): Promise<bo
     if (!res.ok) {
       const text = await res.text();
       console.error(`[WhatsApp] Erreur ${res.status}: ${text}`);
-      return false;
+      return {
+        ok: false,
+        recipient,
+        config: status,
+        status: res.status,
+        error: `Green API ${res.status}`,
+        responseText: text.slice(0, 400),
+      };
     }
 
-    return true;
+    return {
+      ok: true,
+      recipient,
+      config: status,
+      status: res.status,
+    };
   } catch (err) {
     console.error('[WhatsApp] Échec envoi:', err);
-    return false;
+    return {
+      ok: false,
+      recipient,
+      config: status,
+      error: err instanceof Error ? err.message : 'Erreur réseau Green API',
+    };
   }
+}
+
+export async function sendWhatsAppDetailed(message: string, to?: string): Promise<WhatsAppSendResult> {
+  const config = readConfig();
+  const status = getWhatsAppConfigStatus();
+
+  if (!isConfigured(config)) {
+    console.warn('[WhatsApp] Green API non configurée — notification ignorée');
+    return {
+      ok: false,
+      recipient: null,
+      config: status,
+      error: 'Variables Green API manquantes: GREEN_API_ID_INSTANCE ou GREEN_API_TOKEN',
+    };
+  }
+
+  const recipient = to ? normalizePhoneChatId(to) : resolveDefaultRecipient(config);
+
+  if (!recipient) {
+    console.warn('[WhatsApp] Aucun destinataire configuré — notification ignorée');
+    return {
+      ok: false,
+      recipient: null,
+      config: status,
+      error: 'Aucun destinataire configuré: GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE',
+    };
+  }
+
+  const chunks = chunkMessage(message);
+  if (chunks.length === 0) {
+    console.warn('[WhatsApp] Message vide — notification ignorée');
+    return {
+      ok: false,
+      recipient,
+      config: status,
+      error: 'Message WhatsApp vide',
+    };
+  }
+
+  for (const chunk of chunks) {
+    const result = await sendWhatsAppChunk(config, recipient, chunk);
+    if (!result.ok) return result;
+  }
+
+  return {
+    ok: true,
+    recipient,
+    config: status,
+  };
 }
 
 /**
@@ -97,27 +206,10 @@ async function sendWhatsAppChunk(recipient: string, message: string): Promise<bo
  * Si chatId est fourni, envoie au groupe. Sinon envoie au numéro individuel.
  */
 export async function sendWhatsApp(message: string, to?: string): Promise<boolean> {
-  if (!isConfigured()) {
-    console.warn('[WhatsApp] Green API non configurée — notification ignorée');
+  const result = await sendWhatsAppDetailed(message, to);
+  if (!result.ok) {
+    console.error('[WhatsApp] Envoi échoué:', result);
     return false;
-  }
-
-  const recipient = to ? normalizePhoneChatId(to) : resolveDefaultRecipient();
-
-  if (!recipient) {
-    console.warn('[WhatsApp] Aucun destinataire configuré — notification ignorée');
-    return false;
-  }
-
-  const chunks = chunkMessage(message);
-  if (chunks.length === 0) {
-    console.warn('[WhatsApp] Message vide — notification ignorée');
-    return false;
-  }
-
-  for (const chunk of chunks) {
-    const ok = await sendWhatsAppChunk(recipient, chunk);
-    if (!ok) return false;
   }
 
   console.log('[WhatsApp] Message envoyé avec succès via Green API');
@@ -135,17 +227,19 @@ export async function sendWhatsAppToClient(to: string, message: string): Promise
  * Envoie un message au groupe WhatsApp configuré (GREEN_API_NOTIFY_CHAT_ID).
  */
 export async function sendWhatsAppToGroup(message: string): Promise<boolean> {
-  if (!isConfigured()) {
+  const config = readConfig();
+
+  if (!isConfigured(config)) {
     console.warn('[WhatsApp] Green API non configurée — notification ignorée');
     return false;
   }
 
-  if (!NOTIFY_CHAT_ID?.trim()) {
+  if (!config.notifyChatId) {
     console.warn('[WhatsApp] GREEN_API_NOTIFY_CHAT_ID manquant — envoi groupe ignoré');
     return false;
   }
 
-  const recipient = normalizeGroupChatId(NOTIFY_CHAT_ID);
+  const recipient = normalizeGroupChatId(config.notifyChatId);
   const chunks = chunkMessage(message);
   if (chunks.length === 0) {
     console.warn('[WhatsApp] Message vide — notification ignorée');
@@ -153,8 +247,8 @@ export async function sendWhatsAppToGroup(message: string): Promise<boolean> {
   }
 
   for (const chunk of chunks) {
-    const ok = await sendWhatsAppChunk(recipient, chunk);
-    if (!ok) return false;
+    const result = await sendWhatsAppChunk(config, recipient, chunk);
+    if (!result.ok) return false;
   }
 
   console.log('[WhatsApp] Message groupe envoyé avec succès via Green API');

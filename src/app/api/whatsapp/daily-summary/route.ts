@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { apiError, apiSuccess } from '@/lib/apiHelpers';
 import { connectDB } from '@/lib/db';
 import { Location } from '@/models/Location';
-import { sendWhatsApp } from '@/lib/whatsapp';
+import { getWhatsAppConfigStatus, sendWhatsAppDetailed } from '@/lib/whatsapp';
 
 type LeanLocation = {
   debutAt?: Date | string;
@@ -189,25 +189,47 @@ async function handle(req: NextRequest) {
   }
 
   const summary = await buildDailySummaryMessage(now);
-  const hasGroupRecipient = !!process.env.GREEN_API_NOTIFY_CHAT_ID?.trim();
-  const hasPhoneRecipient = !!process.env.GREEN_API_NOTIFY_PHONE?.trim();
-  const target = hasGroupRecipient ? 'group' : hasPhoneRecipient ? 'phone' : null;
+  const configStatus = getWhatsAppConfigStatus();
+  const target = configStatus.hasNotifyChatId ? 'group' : configStatus.hasNotifyPhone ? 'phone' : null;
 
-  if (!target) {
-    return apiError('Aucun destinataire WhatsApp configuré (GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE)', 500, {
+  if (!configStatus.hasIdInstance || !configStatus.hasApiToken) {
+    return apiError('Green API non configurée sur ce déploiement: ajoutez GREEN_API_ID_INSTANCE et GREEN_API_TOKEN sur Vercel', 500, {
       enCours: summary.enCours,
       retoursToday: summary.retoursToday,
+      config: configStatus,
     });
   }
 
-  const sent = await sendWhatsApp(summary.message);
+  if (!target) {
+    return apiError('Aucun destinataire WhatsApp configuré: ajoutez GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE sur Vercel', 500, {
+      enCours: summary.enCours,
+      retoursToday: summary.retoursToday,
+      config: configStatus,
+    });
+  }
 
-  if (!sent) {
-    return apiError(`Échec envoi WhatsApp (${target === 'group' ? 'groupe' : 'numéro admin'})`, 500, {
+  const sendResult = await sendWhatsAppDetailed(summary.message);
+
+  if (!sendResult.ok) {
+    const responseSnippet = sendResult.responseText
+      ? sendResult.responseText.replace(/\s+/g, ' ').slice(0, 180)
+      : undefined;
+
+    return apiError(
+      [
+        sendResult.error || `Échec envoi WhatsApp (${target === 'group' ? 'groupe' : 'numéro admin'})`,
+        responseSnippet,
+      ].filter(Boolean).join(' — '),
+      500,
+      {
       enCours: summary.enCours,
       retoursToday: summary.retoursToday,
       target,
-    });
+        recipient: sendResult.recipient,
+        config: sendResult.config,
+        status: sendResult.status,
+      },
+    );
   }
 
   return apiSuccess({
@@ -216,6 +238,7 @@ async function handle(req: NextRequest) {
     retoursToday: summary.retoursToday,
     date: formatDate(now),
     target,
+    recipient: sendResult.recipient,
   });
 }
 
