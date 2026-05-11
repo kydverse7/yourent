@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { apiError, apiSuccess } from '@/lib/apiHelpers';
 import { connectDB } from '@/lib/db';
 import { Location } from '@/models/Location';
-import { sendWhatsAppToGroup } from '@/lib/whatsapp';
+import { sendWhatsApp } from '@/lib/whatsapp';
 
 type LeanLocation = {
   debutAt?: Date | string;
@@ -42,6 +42,14 @@ const TIME_FORMATTER = new Intl.DateTimeFormat('fr-MA', {
   hour12: false,
 });
 
+const HOUR_FORMATTER = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Africa/Casablanca',
+  hour: '2-digit',
+  hour12: false,
+});
+
+const SCHEDULED_LOCAL_HOURS = new Set([7, 19]);
+
 function dayKey(value: Date | string | undefined): string {
   if (!value) return '';
   const d = new Date(value);
@@ -58,6 +66,14 @@ function formatTime(value: Date | string | undefined): string {
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return '--:--';
   return TIME_FORMATTER.format(d);
+}
+
+function casablancaHour(value: Date): number {
+  return Number(HOUR_FORMATTER.format(value));
+}
+
+function isScheduledDispatchTime(value: Date): boolean {
+  return SCHEDULED_LOCAL_HOURS.has(casablancaHour(value));
 }
 
 function normalizePhone(value?: string): string {
@@ -99,6 +115,7 @@ async function buildDailySummaryMessage(now: Date): Promise<{ message: string; e
     if (!loc.finPrevueAt) return false;
     return new Date(loc.finPrevueAt).getTime() < now.getTime() && dayKey(loc.finPrevueAt) !== todayKey;
   });
+  const urgentReturns = [...overdue, ...dueToday];
 
   const lines: string[] = [
     `📊 *Point locations — ${formatDate(now)}*`,
@@ -111,9 +128,13 @@ async function buildDailySummaryMessage(now: Date): Promise<{ message: string; e
   if (enCours.length === 0) {
     lines.push('✅ Aucune voiture en location actuellement.');
   } else {
-    lines.push('📋 *Voitures non encore retournées*');
+    lines.push('📋 *Voitures à suivre aujourd\'hui*');
 
-    enCours.forEach((loc, idx) => {
+    if (urgentReturns.length === 0) {
+      lines.push('✅ Aucun retard ni retour prévu aujourd\'hui.');
+    }
+
+    urgentReturns.forEach((loc, idx) => {
       const vehicle = `${loc.vehicle?.marque ?? ''} ${loc.vehicle?.modele ?? ''}`.trim() || 'Véhicule';
       const immat = (loc.vehicle?.immatriculation ?? '').trim();
       const clientName = `${loc.client?.prenom ?? ''} ${loc.client?.nom ?? ''}`.trim() || 'Client';
@@ -145,6 +166,7 @@ async function buildDailySummaryMessage(now: Date): Promise<{ message: string; e
 async function handle(req: NextRequest) {
   const session = await auth();
   const cronAuthorized = isCronAuthorized(req);
+  const isScheduledRequest = cronAuthorized && req.method === 'GET';
 
   if (!session && !cronAuthorized) {
     return apiError('Non autorisé', 401);
@@ -155,21 +177,36 @@ async function handle(req: NextRequest) {
   }
 
   const now = new Date();
-  const summary = await buildDailySummaryMessage(now);
 
-  if (!process.env.GREEN_API_NOTIFY_CHAT_ID?.trim()) {
-    return apiError('GREEN_API_NOTIFY_CHAT_ID manquant (groupe WhatsApp non configuré)', 500, {
+  if (isScheduledRequest && !isScheduledDispatchTime(now)) {
+    return apiSuccess({
+      sent: false,
+      skipped: true,
+      reason: 'outside_casablanca_schedule',
+      date: formatDate(now),
+      localHour: casablancaHour(now),
+    });
+  }
+
+  const summary = await buildDailySummaryMessage(now);
+  const hasGroupRecipient = !!process.env.GREEN_API_NOTIFY_CHAT_ID?.trim();
+  const hasPhoneRecipient = !!process.env.GREEN_API_NOTIFY_PHONE?.trim();
+  const target = hasGroupRecipient ? 'group' : hasPhoneRecipient ? 'phone' : null;
+
+  if (!target) {
+    return apiError('Aucun destinataire WhatsApp configuré (GREEN_API_NOTIFY_CHAT_ID ou GREEN_API_NOTIFY_PHONE)', 500, {
       enCours: summary.enCours,
       retoursToday: summary.retoursToday,
     });
   }
 
-  const sent = await sendWhatsAppToGroup(summary.message);
+  const sent = await sendWhatsApp(summary.message);
 
   if (!sent) {
-    return apiError('Échec envoi WhatsApp groupe (vérifiez GREEN_API_* et GREEN_API_NOTIFY_CHAT_ID)', 500, {
+    return apiError(`Échec envoi WhatsApp (${target === 'group' ? 'groupe' : 'numéro admin'})`, 500, {
       enCours: summary.enCours,
       retoursToday: summary.retoursToday,
+      target,
     });
   }
 
@@ -178,6 +215,7 @@ async function handle(req: NextRequest) {
     enCours: summary.enCours,
     retoursToday: summary.retoursToday,
     date: formatDate(now),
+    target,
   });
 }
 
