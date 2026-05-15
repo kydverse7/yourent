@@ -4,10 +4,11 @@ import { useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ExternalLink, Plus, Receipt, Sparkles, Upload } from 'lucide-react';
+import { ExternalLink, Pencil, Plus, Receipt, Sparkles, Trash2, Upload } from 'lucide-react';
 import { Badge, Button, Input, Select } from '@/components/ui';
 import { DataTable } from '@/components/ui/DataTable';
 import { formatCurrency } from '@/lib/utils';
+import { useUIStore } from '@/stores/uiStore';
 import type { ColumnDef } from '@tanstack/react-table';
 import toast from 'react-hot-toast';
 
@@ -67,11 +68,51 @@ const defaultForm = {
 
 export default function DepensesPage() {
   const qc = useQueryClient();
+  const openConfirmModal = useUIStore((s) => s.openConfirmModal);
   const [showForm, setShowForm] = useState(false);
+  const [editingExpenseId, setEditingExpenseId] = useState<string | null>(null);
   const [typeFilter, setTypeFilter] = useState('');
   const [page, setPage] = useState(1);
   const [form, setForm] = useState(defaultForm);
   const [uploading, setUploading] = useState(false);
+
+  const resetForm = () => {
+    setForm(defaultForm);
+    setEditingExpenseId(null);
+    setShowForm(false);
+  };
+
+  const openEditForm = (expense: ExpenseRow) => {
+    setForm({
+      type: expense.type,
+      montant: String(expense.montant ?? ''),
+      date: expense.date ? expense.date.slice(0, 10) : defaultForm.date,
+      note: expense.note ?? '',
+      vehicleId: expense.vehicleId?._id ?? '',
+      fournisseur: expense.fournisseur ?? '',
+      factureUrl: expense.factureUrl ?? '',
+      isRecurring: Boolean(expense.isRecurring),
+      recurrenceFrequency: expense.recurrenceFrequency ?? 'yearly',
+      recurrenceNextDate: expense.recurrenceNextDate ? expense.recurrenceNextDate.slice(0, 10) : '',
+      recurrenceLabel: expense.recurrenceLabel ?? '',
+    });
+    setEditingExpenseId(expense._id);
+    setShowForm(true);
+  };
+
+  const buildExpensePayload = () => ({
+    type: form.type,
+    montant: Number(form.montant || 0),
+    date: form.date,
+    note: form.note || undefined,
+    vehicleId: form.vehicleId || undefined,
+    fournisseur: form.fournisseur || undefined,
+    factureUrl: form.factureUrl || undefined,
+    isRecurring: form.isRecurring,
+    recurrenceFrequency: form.isRecurring ? form.recurrenceFrequency : undefined,
+    recurrenceNextDate: form.isRecurring && form.recurrenceNextDate ? form.recurrenceNextDate : undefined,
+    recurrenceLabel: form.isRecurring ? form.recurrenceLabel || undefined : undefined,
+  });
 
   const uploadDocument = async (file: File) => {
     const fd = new FormData();
@@ -107,7 +148,7 @@ export default function DepensesPage() {
     placeholderData: keepPreviousData,
   });
 
-  const expenses: ExpenseRow[] = data?.data ?? [];
+  const expenses = useMemo<ExpenseRow[]>(() => data?.data ?? [], [data?.data]);
   const total: number = data?.meta?.total ?? 0;
   const vehicles = vehiclesData ?? [];
 
@@ -118,19 +159,7 @@ export default function DepensesPage() {
       const res = await fetch('/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: form.type,
-          montant: Number(form.montant || 0),
-          date: form.date,
-          note: form.note || undefined,
-          vehicleId: form.vehicleId || undefined,
-          fournisseur: form.fournisseur || undefined,
-          factureUrl: form.factureUrl || undefined,
-          isRecurring: form.isRecurring,
-          recurrenceFrequency: form.isRecurring ? form.recurrenceFrequency : undefined,
-          recurrenceNextDate: form.isRecurring && form.recurrenceNextDate ? form.recurrenceNextDate : undefined,
-          recurrenceLabel: form.isRecurring ? form.recurrenceLabel || undefined : undefined,
-        }),
+        body: JSON.stringify(buildExpensePayload()),
       });
       const payload = await res.json();
       if (!res.ok) throw new Error(payload.error ?? 'Erreur création dépense');
@@ -138,14 +167,54 @@ export default function DepensesPage() {
     },
     onSuccess: () => {
       toast.success('Dépense enregistrée');
-      setForm(defaultForm);
-      setShowForm(false);
+      resetForm();
       qc.invalidateQueries({ queryKey: ['expenses'] });
       qc.invalidateQueries({ queryKey: ['finances'] });
       qc.invalidateQueries({ queryKey: ['dashboard'] });
     },
     onError: (error: Error) => toast.error(error.message),
   });
+
+  const updateMutation = useMutation({
+    mutationFn: async () => {
+      if (!editingExpenseId) throw new Error('Aucune dépense sélectionnée');
+      const res = await fetch(`/api/expenses/${editingExpenseId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildExpensePayload()),
+      });
+      const payload = await res.json();
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur modification dépense');
+      return payload.data as ExpenseRow;
+    },
+    onSuccess: () => {
+      toast.success('Dépense modifiée');
+      resetForm();
+      qc.invalidateQueries({ queryKey: ['expenses'] });
+      qc.invalidateQueries({ queryKey: ['finances'] });
+      qc.invalidateQueries({ queryKey: ['dashboard'] });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (expenseId: string) => {
+      const res = await fetch(`/api/expenses/${expenseId}`, { method: 'DELETE' });
+      const payload = await res.json();
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur suppression dépense');
+      return payload.data as { message: string };
+    },
+    onSuccess: (_data, expenseId) => {
+      toast.success('Dépense supprimée');
+      if (editingExpenseId === expenseId) resetForm();
+      qc.invalidateQueries({ queryKey: ['expenses'] });
+      qc.invalidateQueries({ queryKey: ['finances'] });
+      qc.invalidateQueries({ queryKey: ['dashboard'] });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const isSaving = createMutation.isPending || updateMutation.isPending;
 
   const columns: ColumnDef<ExpenseRow>[] = [
     {
@@ -213,6 +282,40 @@ export default function DepensesPage() {
         </div>
       ) : <span className="text-xs text-cream-muted">—</span>,
     },
+    {
+      id: 'actions',
+      header: 'Actions',
+      enableSorting: false,
+      cell: ({ row }) => (
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 rounded-xl"
+            aria-label="Modifier la dépense"
+            title="Modifier"
+            onClick={() => openEditForm(row.original)}
+          >
+            <Pencil className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 rounded-xl text-red-400 hover:bg-red-500/10"
+            aria-label="Supprimer la dépense"
+            title="Supprimer"
+            disabled={deleteMutation.isPending}
+            onClick={() => openConfirmModal({
+              title: 'Supprimer cette dépense ?',
+              description: `${TYPE_OPTIONS.find((item) => item.value === row.original.type)?.label ?? row.original.type} de ${formatCurrency(row.original.montant)} sera supprimée définitivement.`,
+              onConfirm: () => deleteMutation.mutate(row.original._id),
+            })}
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -223,9 +326,9 @@ export default function DepensesPage() {
             <Sparkles className="h-3.5 w-3.5" /> coûts & achats
           </span>
           <h1 className="text-3xl font-bold text-cream">Dépenses</h1>
-          <p className="mt-2 text-sm text-cream-muted">Saisie des frais d'exploitation, atelier, consommables et charges agence.</p>
+          <p className="mt-2 text-sm text-cream-muted">Saisie des frais d&apos;exploitation, atelier, consommables et charges agence.</p>
         </div>
-        <Button variant="gold" onClick={() => setShowForm((value) => !value)}>
+        <Button variant="gold" onClick={() => (showForm ? resetForm() : setShowForm(true))}>
           <Plus className="h-4 w-4" />
           {showForm ? 'Fermer' : 'Nouvelle dépense'}
         </Button>
@@ -250,7 +353,7 @@ export default function DepensesPage() {
         <div className="lux-panel p-6 md:p-7">
           <div className="mb-5 flex items-center gap-3">
             <Receipt className="h-5 w-5 text-gold" />
-            <h2 className="text-lg font-semibold text-cream">Enregistrer une dépense</h2>
+            <h2 className="text-lg font-semibold text-cream">{editingExpenseId ? 'Modifier la dépense' : 'Enregistrer une dépense'}</h2>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -336,9 +439,18 @@ export default function DepensesPage() {
             />
           </div>
 
-          <div className="mt-5 flex justify-end">
-            <Button variant="gold" disabled={!form.montant || createMutation.isPending || uploading} onClick={() => createMutation.mutate()}>
-              {createMutation.isPending ? 'Enregistrement...' : 'Enregistrer'}
+          <div className="mt-5 flex justify-end gap-3">
+            {editingExpenseId && (
+              <Button variant="outline" disabled={isSaving} onClick={resetForm}>
+                Annuler
+              </Button>
+            )}
+            <Button
+              variant="gold"
+              disabled={!form.montant || isSaving || uploading}
+              onClick={() => (editingExpenseId ? updateMutation.mutate() : createMutation.mutate())}
+            >
+              {isSaving ? 'Enregistrement...' : editingExpenseId ? 'Modifier' : 'Enregistrer'}
             </Button>
           </div>
         </div>
