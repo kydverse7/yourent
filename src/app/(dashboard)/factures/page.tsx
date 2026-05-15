@@ -73,6 +73,7 @@ type GeneratedDocumentRow = {
 
 const defaultForm = {
   entityType: 'reservation' as 'reservation' | 'location',
+  invoiceIssuer: 'yourent' as 'yourent' | 'kma',
   entityId: '',
   facturePdfUrl: '',
 };
@@ -155,7 +156,7 @@ export default function FacturesPage() {
     placeholderData: keepPreviousData,
   });
 
-  const invoices: InvoiceRow[] = data?.data ?? [];
+  const invoices = useMemo<InvoiceRow[]>(() => data?.data ?? [], [data?.data]);
   const total: number = data?.meta?.total ?? 0;
   const generatedDocuments: GeneratedDocumentRow[] = generatedData?.data ?? [];
   const generatedTotal: number = generatedData?.meta?.total ?? 0;
@@ -260,7 +261,7 @@ export default function FacturesPage() {
       const res = await fetch('/api/invoices/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entityType: form.entityType, entityId: form.entityId }),
+        body: JSON.stringify({ entityType: form.entityType, entityId: form.entityId, invoiceIssuer: form.invoiceIssuer }),
       });
       const payload = await res.json();
       if (!res.ok) throw new Error(payload.error ?? 'Erreur génération facture');
@@ -410,7 +411,7 @@ export default function FacturesPage() {
           </span>
           <h1 className="text-3xl font-bold text-cream">Factures</h1>
           <p className="mt-2 text-sm text-cream-muted">
-            Suivi des factures rattachées et des devis ou factures libres générés depuis l'agence.
+            Suivi des factures rattachées et des devis ou factures libres générés depuis l&apos;agence.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -455,6 +456,10 @@ export default function FacturesPage() {
             <Select label="Type de dossier" value={form.entityType} onChange={(e) => setForm((prev) => ({ ...prev, entityType: e.target.value as 'reservation' | 'location', entityId: '' }))}>
               <option value="reservation">Réservation</option>
               <option value="location">Location</option>
+            </Select>
+            <Select label="Société de facturation" value={form.invoiceIssuer} onChange={(e) => setForm((prev) => ({ ...prev, invoiceIssuer: e.target.value as 'yourent' | 'kma' }))}>
+              <option value="yourent">Société 1 - Yourent</option>
+              <option value="kma">KMA - IF 66147203</option>
             </Select>
             <Select label="Dossier" value={form.entityId} onChange={(e) => setForm((prev) => ({ ...prev, entityId: e.target.value }))}>
               <option value="">Choisir un dossier</option>

@@ -2,6 +2,8 @@ import { Document, Image, Page, StyleSheet, Text, View } from '@react-pdf/render
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
+/* eslint-disable jsx-a11y/alt-text */
+
 type AgencyData = {
   nom: string;
   logoUrl?: string;
@@ -13,6 +15,7 @@ type AgencyData = {
   siteWeb?: string;
   ice?: string;
   rc?: string;
+  fiscalId?: string;
   devise?: string;
   conditionsGenerales?: string;
 };
@@ -50,6 +53,8 @@ type FinanceLine = {
   label: string;
   montant: number;
 };
+
+export type InvoiceIssuer = 'yourent' | 'kma';
 
 export type ContractPdfData = {
   title: string;
@@ -91,6 +96,7 @@ export type InvoicePdfData = {
   title: string;
   reference: string;
   createdAt: Date;
+  invoiceIssuer?: InvoiceIssuer;
   agency: AgencyData;
   client: ClientData;
   vehicle: VehicleData;
@@ -122,6 +128,7 @@ export type FreeDocumentPdfData = {
   title: string;
   reference: string;
   createdAt: Date;
+  invoiceIssuer?: InvoiceIssuer;
   agency: AgencyData;
   client: ClientData;
   vehicles: FreeVehicleEntry[];
@@ -259,6 +266,366 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+const kmaInvoiceStyles = StyleSheet.create({
+  page: {
+    paddingTop: 28,
+    paddingBottom: 48,
+    paddingHorizontal: 34,
+    fontSize: 9,
+    color: '#172033',
+    fontFamily: 'Helvetica',
+    lineHeight: 1.32,
+    backgroundColor: '#f8fafc',
+  },
+  topBand: {
+    backgroundColor: '#0f766e',
+    borderRadius: 12,
+    paddingVertical: 18,
+    paddingHorizontal: 18,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  brandMark: {
+    width: 58,
+    height: 58,
+    borderRadius: 16,
+    backgroundColor: '#ccfbf1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  brandMarkText: {
+    fontSize: 18,
+    fontWeight: 700,
+    color: '#0f766e',
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  agencyName: {
+    fontSize: 23,
+    fontWeight: 700,
+    color: '#ffffff',
+    textTransform: 'uppercase',
+  },
+  agencyMeta: {
+    marginTop: 4,
+    fontSize: 8.5,
+    color: '#d9fffb',
+  },
+  docBox: {
+    width: 168,
+    borderRadius: 12,
+    backgroundColor: '#ffffff',
+    padding: 12,
+  },
+  docLabel: {
+    fontSize: 8,
+    color: '#64748b',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+  },
+  docTitle: {
+    marginTop: 4,
+    fontSize: 18,
+    color: '#0f172a',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+  },
+  docRef: {
+    marginTop: 6,
+    fontSize: 9.4,
+    color: '#0f766e',
+    fontWeight: 700,
+  },
+  dateText: {
+    marginTop: 3,
+    fontSize: 8.4,
+    color: '#475569',
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    marginTop: 14,
+  },
+  summaryCard: {
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#dbeafe',
+    padding: 11,
+  },
+  summaryCardSpaced: {
+    flex: 1,
+    marginLeft: 8,
+    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#dbeafe',
+    padding: 11,
+  },
+  cardLabel: {
+    fontSize: 7.4,
+    color: '#64748b',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    marginBottom: 5,
+  },
+  cardValue: {
+    fontSize: 9.6,
+    color: '#172033',
+    fontWeight: 700,
+  },
+  cardMeta: {
+    marginTop: 3,
+    fontSize: 8,
+    color: '#64748b',
+  },
+  section: {
+    marginTop: 14,
+  },
+  sectionTitle: {
+    fontSize: 9.2,
+    color: '#0f766e',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    marginBottom: 7,
+  },
+  table: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    backgroundColor: '#ffffff',
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#0f172a',
+    paddingVertical: 9,
+    paddingHorizontal: 11,
+  },
+  tableHeaderText: {
+    color: '#ffffff',
+    fontSize: 8.2,
+    fontWeight: 700,
+    textTransform: 'uppercase',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingHorizontal: 11,
+    borderTopWidth: 1,
+    borderTopColor: '#e2e8f0',
+  },
+  descCol: {
+    flex: 1,
+    paddingRight: 10,
+  },
+  amountCol: {
+    width: 104,
+    textAlign: 'right',
+  },
+  totalPanel: {
+    marginTop: 12,
+    marginLeft: 'auto',
+    width: 250,
+    borderRadius: 12,
+    backgroundColor: '#ecfeff',
+    borderWidth: 1,
+    borderColor: '#67e8f9',
+    padding: 12,
+  },
+  totalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  totalLabel: {
+    fontSize: 8.4,
+    color: '#334155',
+    fontWeight: 700,
+  },
+  totalValue: {
+    fontSize: 9.2,
+    color: '#0f766e',
+    fontWeight: 700,
+    textAlign: 'right',
+  },
+  totalGrandLabel: {
+    fontSize: 10,
+    color: '#0f172a',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+  },
+  totalGrandValue: {
+    fontSize: 12,
+    color: '#0f766e',
+    fontWeight: 700,
+    textAlign: 'right',
+  },
+  notesBox: {
+    marginTop: 12,
+    borderRadius: 10,
+    backgroundColor: '#f1f5f9',
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    padding: 10,
+  },
+  notesText: {
+    fontSize: 8.3,
+    color: '#334155',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 22,
+    left: 34,
+    right: 34,
+    borderTopWidth: 1,
+    borderTopColor: '#94a3b8',
+    paddingTop: 8,
+  },
+  footerText: {
+    fontSize: 8,
+    color: '#475569',
+    textAlign: 'center',
+  },
+});
+
+type KmaLayoutData = {
+  title: string;
+  reference: string;
+  createdAt: Date;
+  agency: AgencyData;
+  client: ClientData;
+  dossierLabel: string;
+  vehicleLabel: string;
+  periodLabel: string;
+  lines: FinanceLine[];
+  totalMontant: number;
+  montantPaye?: number;
+  montantRestant?: number;
+  paiementModeLabel?: string;
+  notes?: string;
+};
+
+function getKmaAgency(baseAgency: AgencyData): AgencyData {
+  return {
+    nom: 'KMA',
+    pays: 'Maroc',
+    fiscalId: '66147203',
+    devise: baseAgency.devise ?? 'MAD',
+  };
+}
+
+function getInvoiceAgency(baseAgency: AgencyData, issuer?: InvoiceIssuer) {
+  return issuer === 'kma' ? getKmaAgency(baseAgency) : baseAgency;
+}
+
+function KmaInvoiceLayout({ data }: { data: KmaLayoutData }) {
+  const devise = data.agency.devise ?? 'MAD';
+  const companyInfo = [data.agency.nom, data.agency.fiscalId ? `IF: ${data.agency.fiscalId}` : '', data.agency.pays]
+    .filter(Boolean)
+    .join(' · ');
+  const footerInfo = [companyInfo, data.agency.telephone, data.agency.email, data.agency.siteWeb]
+    .filter(Boolean)
+    .join(' · ');
+
+  return (
+    <Document title={data.title} author={data.agency.nom}>
+      <Page size="A4" style={kmaInvoiceStyles.page}>
+        <View style={kmaInvoiceStyles.topBand}>
+          <View style={kmaInvoiceStyles.brandRow}>
+            <View style={kmaInvoiceStyles.brandMark}>
+              <Text style={kmaInvoiceStyles.brandMarkText}>KMA</Text>
+            </View>
+            <View>
+              <Text style={kmaInvoiceStyles.agencyName}>{data.agency.nom}</Text>
+              <Text style={kmaInvoiceStyles.agencyMeta}>Facturation professionnelle · Location de véhicules</Text>
+              <Text style={kmaInvoiceStyles.agencyMeta}>{companyInfo}</Text>
+            </View>
+          </View>
+
+          <View style={kmaInvoiceStyles.docBox}>
+            <Text style={kmaInvoiceStyles.docLabel}>Document</Text>
+            <Text style={kmaInvoiceStyles.docTitle}>{data.title}</Text>
+            <Text style={kmaInvoiceStyles.docRef}>{data.reference}</Text>
+            <Text style={kmaInvoiceStyles.dateText}>Émis le {formatContractDateValue(data.createdAt)}</Text>
+          </View>
+        </View>
+
+        <View style={kmaInvoiceStyles.summaryRow}>
+          <View style={kmaInvoiceStyles.summaryCard}>
+            <Text style={kmaInvoiceStyles.cardLabel}>Facturé à</Text>
+            <Text style={kmaInvoiceStyles.cardValue}>{printableValue(data.client.nomComplet)}</Text>
+            <Text style={kmaInvoiceStyles.cardMeta}>{printableValue(data.client.telephone)}</Text>
+            <Text style={kmaInvoiceStyles.cardMeta}>{printableValue(data.client.email)}</Text>
+          </View>
+          <View style={kmaInvoiceStyles.summaryCardSpaced}>
+            <Text style={kmaInvoiceStyles.cardLabel}>Dossier</Text>
+            <Text style={kmaInvoiceStyles.cardValue}>{printableValue(data.dossierLabel)}</Text>
+            <Text style={kmaInvoiceStyles.cardMeta}>{printableValue(data.vehicleLabel)}</Text>
+            <Text style={kmaInvoiceStyles.cardMeta}>{data.periodLabel}</Text>
+          </View>
+          <View style={kmaInvoiceStyles.summaryCardSpaced}>
+            <Text style={kmaInvoiceStyles.cardLabel}>Solde</Text>
+            <Text style={kmaInvoiceStyles.cardValue}>{formatCurrencyValue(data.montantRestant ?? data.totalMontant, devise)}</Text>
+            <Text style={kmaInvoiceStyles.cardMeta}>Paiement: {printableValue(data.paiementModeLabel)}</Text>
+          </View>
+        </View>
+
+        <View style={kmaInvoiceStyles.section}>
+          <Text style={kmaInvoiceStyles.sectionTitle}>Détail de facturation</Text>
+          <View style={kmaInvoiceStyles.table}>
+            <View style={kmaInvoiceStyles.tableHeader}>
+              <Text style={[kmaInvoiceStyles.tableHeaderText, kmaInvoiceStyles.descCol]}>Libellé</Text>
+              <Text style={[kmaInvoiceStyles.tableHeaderText, kmaInvoiceStyles.amountCol]}>Montant</Text>
+            </View>
+            {data.lines.map((line, index) => (
+              <View key={`${line.label}-${index}`} style={kmaInvoiceStyles.tableRow}>
+                <Text style={kmaInvoiceStyles.descCol}>{line.label}</Text>
+                <Text style={kmaInvoiceStyles.amountCol}>{formatCurrencyValue(line.montant, devise)}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={kmaInvoiceStyles.totalPanel}>
+            {typeof data.montantPaye === 'number' ? (
+              <View style={kmaInvoiceStyles.totalRow}>
+                <Text style={kmaInvoiceStyles.totalLabel}>Montant payé</Text>
+                <Text style={kmaInvoiceStyles.totalValue}>{formatCurrencyValue(data.montantPaye, devise)}</Text>
+              </View>
+            ) : null}
+            {typeof data.montantRestant === 'number' ? (
+              <View style={kmaInvoiceStyles.totalRow}>
+                <Text style={kmaInvoiceStyles.totalLabel}>Reste à payer</Text>
+                <Text style={kmaInvoiceStyles.totalValue}>{formatCurrencyValue(data.montantRestant, devise)}</Text>
+              </View>
+            ) : null}
+            <View style={kmaInvoiceStyles.totalRow}>
+              <Text style={kmaInvoiceStyles.totalGrandLabel}>Total</Text>
+              <Text style={kmaInvoiceStyles.totalGrandValue}>{formatCurrencyValue(data.totalMontant, devise)}</Text>
+            </View>
+          </View>
+        </View>
+
+        {data.notes ? (
+          <View style={kmaInvoiceStyles.notesBox}>
+            <Text style={kmaInvoiceStyles.notesText}>{data.notes}</Text>
+          </View>
+        ) : null}
+
+        <View style={kmaInvoiceStyles.footer}>
+          <Text style={kmaInvoiceStyles.footerText}>{footerInfo || 'KMA · IF: 66147203'}</Text>
+          <Text style={kmaInvoiceStyles.footerText}>Merci pour votre confiance.</Text>
+        </View>
+      </Page>
+    </Document>
+  );
+}
 
 const contractStyles = StyleSheet.create({
   page: {
@@ -1158,24 +1525,49 @@ export function ContractPdfDocument({ data }: { data: ContractPdfData }) {
 }
 
 export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
-  const devise = data.agency.devise ?? 'MAD';
-  const agencyLocation = [data.agency.adresse, data.agency.ville, data.agency.pays]
+  const agency = getInvoiceAgency(data.agency, data.invoiceIssuer);
+  const periodLabel = `${formatContractDateValue(data.period.debutAt)} → ${formatContractDateValue(data.period.finAt)}`;
+
+  if (data.invoiceIssuer === 'kma') {
+    return (
+      <KmaInvoiceLayout
+        data={{
+          title: data.title,
+          reference: data.reference,
+          createdAt: data.createdAt,
+          agency,
+          client: data.client,
+          dossierLabel: data.dossierLabel,
+          vehicleLabel: data.vehicle.immatriculation ? `${data.vehicle.label} - ${data.vehicle.immatriculation}` : data.vehicle.label,
+          periodLabel,
+          lines: data.lines,
+          totalMontant: data.totalMontant,
+          montantPaye: data.montantPaye,
+          montantRestant: data.montantRestant,
+          paiementModeLabel: data.paiementModeLabel,
+        }}
+      />
+    );
+  }
+
+  const devise = agency.devise ?? 'MAD';
+  const agencyLocation = [agency.adresse, agency.ville, agency.pays]
     .filter(Boolean)
     .join(', ') || 'Agence de location';
-  const agencyContact = [data.agency.telephone, data.agency.email, data.agency.siteWeb]
+  const agencyContact = [agency.telephone, agency.email, agency.siteWeb]
     .filter(Boolean)
     .join(' · ') || 'Coordonnées agence à compléter';
   const agencyLegal = [
-    data.agency.ice ? `ICE ${data.agency.ice}` : '',
-    data.agency.rc ? `RC ${data.agency.rc}` : '',
+    agency.ice ? `ICE ${agency.ice}` : '',
+    agency.rc ? `RC ${agency.rc}` : '',
+    agency.fiscalId ? `IF ${agency.fiscalId}` : '',
   ].filter(Boolean).join(' · ');
-  const periodLabel = `${formatContractDateValue(data.period.debutAt)} → ${formatContractDateValue(data.period.finAt)}`;
-  const footerText = [data.agency.adresse, data.agency.ville, data.agency.telephone, data.agency.email]
+  const footerText = [agency.adresse, agency.ville, agency.telephone, agency.email]
     .filter(Boolean)
     .join(' · ');
 
   return (
-    <Document title={data.title} author={data.agency.nom}>
+    <Document title={data.title} author={agency.nom}>
       <Page size="A4" style={invoiceStyles.page}>
         <View style={invoiceStyles.frame}>
           <View style={invoiceStyles.headerBand}>
@@ -1183,10 +1575,10 @@ export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
               <View style={invoiceStyles.brandSide}>
                 <View style={invoiceStyles.brandTopRow}>
                   <View style={invoiceStyles.logoWrap}>
-                    {data.agency.logoUrl ? <Image src={data.agency.logoUrl} style={invoiceStyles.logo} /> : null}
+                    {agency.logoUrl ? <Image src={agency.logoUrl} style={invoiceStyles.logo} /> : null}
                   </View>
                   <View style={invoiceStyles.brandTextWrap}>
-                    <Text style={invoiceStyles.agencyName}>{data.agency.nom}</Text>
+                    <Text style={invoiceStyles.agencyName}>{agency.nom}</Text>
                     <Text style={invoiceStyles.agencyMeta}>{agencyLocation}</Text>
                     <Text style={invoiceStyles.agencyMeta}>{agencyContact}</Text>
                     {agencyLegal ? <Text style={invoiceStyles.agencyLegal}>{agencyLegal}</Text> : null}
@@ -1338,12 +1730,40 @@ export function InvoicePdfDocument({ data }: { data: InvoicePdfData }) {
 }
 
 export function FreeDocumentPdfDocument({ data }: { data: FreeDocumentPdfData }) {
-  const devise = data.agency.devise ?? 'MAD';
+  const agency = getInvoiceAgency(data.agency, data.invoiceIssuer);
+  const devise = agency.devise ?? 'MAD';
+
+  if (data.invoiceIssuer === 'kma') {
+    const vehicleLabel = data.vehicles
+      .map((vehicle) => vehicle.immatriculation ? `${vehicle.label} - ${vehicle.immatriculation}` : vehicle.label)
+      .join(' / ');
+    const periodLabel = data.vehicles
+      .map((vehicle) => `${formatContractDateValue(vehicle.debutAt)} → ${formatContractDateValue(vehicle.finAt)}`)
+      .join(' / ');
+
+    return (
+      <KmaInvoiceLayout
+        data={{
+          title: data.title,
+          reference: data.reference,
+          createdAt: data.createdAt,
+          agency,
+          client: data.client,
+          dossierLabel: data.vehicles.length > 1 ? `${data.vehicles.length} véhicules` : 'Facture libre',
+          vehicleLabel,
+          periodLabel,
+          lines: data.lines,
+          totalMontant: data.totalMontant,
+          notes: data.notes,
+        }}
+      />
+    );
+  }
 
   return (
-    <Document title={data.title} author={data.agency.nom}>
+    <Document title={data.title} author={agency.nom}>
       <Page size="A4" style={styles.page}>
-        <AgencyHeader agency={data.agency} title={data.title} reference={data.reference} createdAt={data.createdAt} />
+        <AgencyHeader agency={agency} title={data.title} reference={data.reference} createdAt={data.createdAt} />
 
         <View style={styles.grid}>
           <View style={styles.card}>

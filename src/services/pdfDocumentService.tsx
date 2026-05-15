@@ -5,7 +5,7 @@ import { Location } from '@/models/Location';
 import { Payment } from '@/models/Payment';
 import { Reservation } from '@/models/Reservation';
 import { uploadToCloudinary } from '@/lib/cloudinary';
-import { ContractPdfDocument, InvoicePdfDocument, type ContractPdfData, type InvoicePdfData } from '@/lib/pdf-documents';
+import { ContractPdfDocument, InvoicePdfDocument, type ContractPdfData, type InvoiceIssuer, type InvoicePdfData } from '@/lib/pdf-documents';
 import { ensureDocumentNumberForEntity } from '@/services/documentNumberService';
 import { getLinkedDossier, syncLinkedDocument } from './documentLinkService';
 
@@ -297,10 +297,10 @@ export async function generateContractPdfForEntity(entityType: 'reservation' | '
   return { url: uploaded.url, document: updated };
 }
 
-export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'location', entityId: string) {
+export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'location', entityId: string, invoiceIssuer: InvoiceIssuer = 'yourent') {
   const dossier = await getLinkedDossier(entityType, entityId);
   if (dossier.canonicalEntityType === 'location' && dossier.canonicalEntityId !== entityId) {
-    return generateInvoicePdfForEntity('location', dossier.canonicalEntityId);
+    return generateInvoicePdfForEntity('location', dossier.canonicalEntityId, invoiceIssuer);
   }
 
   const agency = await getAgencySingleton();
@@ -333,6 +333,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
       title: 'Facture',
       reference: invoiceNumber,
       createdAt: new Date(),
+      invoiceIssuer,
       agency,
       client: buildClientData(reservation.client, reservation.clientInline),
       vehicle: buildVehicleData(reservation.vehicle),
@@ -386,6 +387,7 @@ export async function generateInvoicePdfForEntity(entityType: 'reservation' | 'l
     title: 'Facture',
     reference: invoiceNumber,
     createdAt: new Date(),
+    invoiceIssuer,
     agency,
     client: buildClientData(location.client),
     vehicle: buildVehicleData(location.vehicle),

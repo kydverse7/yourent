@@ -51,6 +51,7 @@ type VehicleEntry = {
 
 type FormData = {
   documentType: 'facture' | 'devis';
+  invoiceIssuer: 'yourent' | 'kma';
   clientId: string;
   vehicles: VehicleEntry[];
   options: OptionLine[];
@@ -62,6 +63,7 @@ const emptyVehicleEntry: VehicleEntry = { vehicleId: '', debutAt: '', finAt: '',
 
 const defaultForm: FormData = {
   documentType: 'facture',
+  invoiceIssuer: 'yourent',
   clientId: '',
   vehicles: [{ ...emptyVehicleEntry }],
   options: [],
@@ -112,7 +114,7 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
   });
 
   const clients = clientsData ?? [];
-  const vehicles = vehiclesData ?? [];
+  const vehicles = useMemo<VehicleOption[]>(() => vehiclesData ?? [], [vehiclesData]);
 
   const selectedClient = clients.find((c) => c._id === form.clientId);
 
@@ -233,6 +235,7 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           documentType: form.documentType,
+          invoiceIssuer: form.invoiceIssuer,
           clientId: form.clientId,
           vehicles: form.vehicles.map((v) => ({
             vehicleId: v.vehicleId,
@@ -315,6 +318,31 @@ export default function CreateInvoiceModal({ open, onClose }: CreateInvoiceModal
                 >
                   <FileText className="mx-auto mb-1.5 h-5 w-5" />
                   {type === 'facture' ? 'Facture' : 'Devis'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Société */}
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-cream-muted">Société de facturation</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {([
+                { value: 'yourent', label: 'Yourent', hint: 'Modèle société 1' },
+                { value: 'kma', label: 'KMA', hint: 'Modèle moderne · IF 66147203' },
+              ] as const).map((issuer) => (
+                <button
+                  key={issuer.value}
+                  type="button"
+                  onClick={() => setForm((prev) => ({ ...prev, invoiceIssuer: issuer.value }))}
+                  className={`rounded-2xl border px-4 py-3 text-left transition-all ${
+                    form.invoiceIssuer === issuer.value
+                      ? 'border-gold/40 bg-gold/10 text-cream shadow-gold'
+                      : 'border-white/8 bg-white/[0.03] text-cream-muted hover:border-white/15 hover:text-cream'
+                  }`}
+                >
+                  <span className="block text-sm font-semibold">{issuer.label}</span>
+                  <span className="mt-1 block text-xs text-cream-muted">{issuer.hint}</span>
                 </button>
               ))}
             </div>

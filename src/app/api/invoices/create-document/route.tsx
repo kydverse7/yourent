@@ -28,6 +28,7 @@ const vehicleEntrySchema = z.object({
 
 const createDocumentSchema = z.object({
   documentType: z.enum(['facture', 'devis']),
+  invoiceIssuer: z.enum(['yourent', 'kma']).default('yourent'),
   clientId: z.string().min(1, 'Client requis'),
   vehicles: z.array(vehicleEntrySchema).min(1, 'Au moins un véhicule requis'),
   options: z.array(optionLineSchema).default([]),
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
   const parsed = createDocumentSchema.safeParse(body);
   if (!parsed.success) return apiError('Données invalides', 422, parsed.error.flatten());
 
-  const { documentType, clientId, vehicles: vehicleEntries, options, remise, notes } = parsed.data;
+  const { documentType, invoiceIssuer, clientId, vehicles: vehicleEntries, options, remise, notes } = parsed.data;
 
   try {
     const [client, agencySingleton] = await Promise.all([
@@ -152,6 +153,7 @@ export async function POST(req: NextRequest) {
       title: isQuote ? 'Devis' : 'Facture',
       reference,
       createdAt: new Date(),
+      invoiceIssuer,
       agency,
       client: clientData,
       vehicles: pdfVehicles,
@@ -195,6 +197,7 @@ export async function POST(req: NextRequest) {
       after: {
         reference,
         documentType,
+        invoiceIssuer,
         clientId,
         vehicleIds: vehicleIds,
         totalMontant,

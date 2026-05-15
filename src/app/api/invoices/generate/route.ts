@@ -10,6 +10,7 @@ import { generateInvoicePdfForEntity } from '@/services/pdfDocumentService';
 const generateSchema = z.object({
   entityType: z.enum(['reservation', 'location']),
   entityId: z.string().min(1, 'Dossier requis'),
+  invoiceIssuer: z.enum(['yourent', 'kma']).default('yourent'),
 });
 
 export async function POST(req: NextRequest) {
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) return apiError('Données invalides', 422, parsed.error.flatten());
 
   try {
-    const result = await generateInvoicePdfForEntity(parsed.data.entityType, parsed.data.entityId);
+    const result = await generateInvoicePdfForEntity(parsed.data.entityType, parsed.data.entityId, parsed.data.invoiceIssuer);
 
     await auditLog({
       action: 'update',
