@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ExternalLink, Pencil, Plus, Receipt, Sparkles, Trash2, Upload } from 'lucide-react';
+import { ExternalLink, Pencil, Plus, Receipt, Search, Sparkles, Trash2, Upload, X } from 'lucide-react';
 import { Badge, Button, Input, Select } from '@/components/ui';
 import { DataTable } from '@/components/ui/DataTable';
 import { formatCurrency } from '@/lib/utils';
@@ -66,6 +66,8 @@ const defaultForm = {
   recurrenceLabel: '',
 };
 
+const formatVehicleLabel = (vehicle: VehicleOption) => `${vehicle.marque} ${vehicle.modele} - ${vehicle.immatriculation}`;
+
 export default function DepensesPage() {
   const qc = useQueryClient();
   const openConfirmModal = useUIStore((s) => s.openConfirmModal);
@@ -74,15 +76,23 @@ export default function DepensesPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [page, setPage] = useState(1);
   const [form, setForm] = useState(defaultForm);
+  const [vehicleSearch, setVehicleSearch] = useState('');
+  const [vehicleMenuOpen, setVehicleMenuOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
 
   const resetForm = () => {
     setForm(defaultForm);
+    setVehicleSearch('');
+    setVehicleMenuOpen(false);
     setEditingExpenseId(null);
     setShowForm(false);
   };
 
   const openEditForm = (expense: ExpenseRow) => {
+    const selectedVehicle = expense.vehicleId
+      ? `${expense.vehicleId.marque} ${expense.vehicleId.modele} - ${expense.vehicleId.immatriculation}`
+      : '';
+
     setForm({
       type: expense.type,
       montant: String(expense.montant ?? ''),
@@ -96,6 +106,8 @@ export default function DepensesPage() {
       recurrenceNextDate: expense.recurrenceNextDate ? expense.recurrenceNextDate.slice(0, 10) : '',
       recurrenceLabel: expense.recurrenceLabel ?? '',
     });
+    setVehicleSearch(selectedVehicle);
+    setVehicleMenuOpen(false);
     setEditingExpenseId(expense._id);
     setShowForm(true);
   };
@@ -150,7 +162,15 @@ export default function DepensesPage() {
 
   const expenses = useMemo<ExpenseRow[]>(() => data?.data ?? [], [data?.data]);
   const total: number = data?.meta?.total ?? 0;
-  const vehicles = vehiclesData ?? [];
+  const vehicles = useMemo<VehicleOption[]>(() => vehiclesData ?? [], [vehiclesData]);
+  const selectedVehicle = vehicles.find((vehicle) => vehicle._id === form.vehicleId);
+  const vehicleQuery = vehicleSearch.trim().toLowerCase();
+  const filteredVehicles = useMemo(() => {
+    if (!vehicleQuery) return vehicles.slice(0, 8);
+    return vehicles
+      .filter((vehicle) => `${vehicle.marque} ${vehicle.modele} ${vehicle.immatriculation}`.toLowerCase().includes(vehicleQuery))
+      .slice(0, 8);
+  }, [vehicleQuery, vehicles]);
 
   const totalCost = useMemo(() => expenses.reduce((sum, item) => sum + Number(item.montant ?? 0), 0), [expenses]);
 
@@ -364,12 +384,85 @@ export default function DepensesPage() {
             </Select>
             <Input label="Montant (MAD)" type="number" min={0} step={10} value={form.montant} onChange={(e) => setForm((prev) => ({ ...prev, montant: e.target.value }))} />
             <Input label="Date" type="date" value={form.date} onChange={(e) => setForm((prev) => ({ ...prev, date: e.target.value }))} />
-            <Select label="Véhicule (optionnel)" value={form.vehicleId} onChange={(e) => setForm((prev) => ({ ...prev, vehicleId: e.target.value }))}>
-              <option value="">Aucun véhicule</option>
-              {vehicles.map((vehicle) => (
-                <option key={vehicle._id} value={vehicle._id}>{vehicle.marque} {vehicle.modele} — {vehicle.immatriculation}</option>
-              ))}
-            </Select>
+            <div className="relative flex flex-col gap-1.5">
+              <label htmlFor="expense-vehicle-search" className="text-sm font-medium text-cream-muted">
+                Véhicule (optionnel)
+              </label>
+              <div className="relative">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-faint" />
+                <input
+                  id="expense-vehicle-search"
+                  value={vehicleSearch}
+                  onFocus={() => setVehicleMenuOpen(true)}
+                  onBlur={() => setVehicleMenuOpen(false)}
+                  onChange={(e) => {
+                    setVehicleSearch(e.target.value);
+                    setVehicleMenuOpen(true);
+                    if (form.vehicleId) setForm((prev) => ({ ...prev, vehicleId: '' }));
+                  }}
+                  className="input-gold pl-10 pr-10"
+                  placeholder="Rechercher marque, modèle, immat..."
+                  autoComplete="off"
+                />
+                {(vehicleSearch || form.vehicleId) && (
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-cream-faint transition-colors hover:text-cream"
+                    aria-label="Effacer le véhicule"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => {
+                      setVehicleSearch('');
+                      setVehicleMenuOpen(false);
+                      setForm((prev) => ({ ...prev, vehicleId: '' }));
+                    }}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+
+              {vehicleMenuOpen && (
+                <div className="absolute left-0 right-0 top-full z-30 mt-2 max-h-64 overflow-y-auto rounded-xl border border-gold/15 bg-noir-card p-1 shadow-2xl">
+                  <button
+                    type="button"
+                    className={`w-full rounded-lg px-3 py-2 text-left text-sm transition-colors ${!form.vehicleId ? 'bg-gold/10 text-gold' : 'text-cream-muted hover:bg-white/5 hover:text-cream'}`}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => {
+                      setForm((prev) => ({ ...prev, vehicleId: '' }));
+                      setVehicleSearch('');
+                      setVehicleMenuOpen(false);
+                    }}
+                  >
+                    Aucun véhicule
+                  </button>
+
+                  {filteredVehicles.map((vehicle) => (
+                    <button
+                      key={vehicle._id}
+                      type="button"
+                      className={`w-full rounded-lg px-3 py-2 text-left transition-colors ${vehicle._id === form.vehicleId ? 'bg-gold/10 text-gold' : 'text-cream-muted hover:bg-white/5 hover:text-cream'}`}
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => {
+                        setForm((prev) => ({ ...prev, vehicleId: vehicle._id }));
+                        setVehicleSearch(formatVehicleLabel(vehicle));
+                        setVehicleMenuOpen(false);
+                      }}
+                    >
+                      <span className="block text-sm font-medium text-cream">{vehicle.marque} {vehicle.modele}</span>
+                      <span className="block text-xs text-cream-muted">{vehicle.immatriculation}</span>
+                    </button>
+                  ))}
+
+                  {filteredVehicles.length === 0 && (
+                    <div className="px-3 py-3 text-sm text-cream-muted">Aucun véhicule trouvé</div>
+                  )}
+                </div>
+              )}
+
+              {selectedVehicle && !vehicleMenuOpen && (
+                <p className="text-xs text-cream-muted">Sélectionné: {formatVehicleLabel(selectedVehicle)}</p>
+              )}
+            </div>
             <Input label="Fournisseur" value={form.fournisseur} onChange={(e) => setForm((prev) => ({ ...prev, fournisseur: e.target.value }))} />
             <Input label="URL facture (optionnel)" value={form.factureUrl} onChange={(e) => setForm((prev) => ({ ...prev, factureUrl: e.target.value }))} />
           </div>
