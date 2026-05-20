@@ -32,6 +32,24 @@ type BrandOption = {
   label: string;
 };
 
+type CatalogueMatchFilter = Record<string, unknown>;
+
+type GroupedVehicleRow = {
+  marque: string;
+  modele: string;
+  count: number;
+  countDispo: number;
+  firstTarifParJour: number;
+  firstCautionDefaut: number;
+  categorie?: string;
+  places?: number;
+  carburant?: string;
+  boite?: string;
+  backgroundPhoto?: string | null;
+  photoModele?: string | null;
+  firstPhoto?: string | null;
+};
+
 function normalizeFilterValue(value?: string): string {
   return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
 }
@@ -59,7 +77,7 @@ function buildFilterUrl(
 async function getGroupedVehicles(searchParams: Record<string, string>) {
   await connectDB();
 
-  const matchFilter: Record<string, any> = {
+  const matchFilter: CatalogueMatchFilter = {
     actif: { $ne: false },
     isPublic: { $ne: false },
   };
@@ -82,10 +100,13 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
           marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
           modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
+          availabilityRank: { $cond: [{ $eq: ['$statut', 'disponible'] }, 0, 1] },
+          tarifParJourSafe: { $ifNull: ['$tarifParJour', 0] },
+          cautionDefautSafe: { $ifNull: ['$cautionDefaut', 0] },
         },
       },
       { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-      { $sort: { tarifParJour: -1 } },
+      { $sort: { availabilityRank: 1, tarifParJourSafe: 1 } },
       {
         $group: {
           _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
@@ -93,7 +114,8 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           modele: { $first: '$modeleDisplay' },
           count: { $sum: 1 },
           countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
-          firstTarifParJour: { $first: '$tarifParJour' },
+          firstTarifParJour: { $first: '$tarifParJourSafe' },
+          firstCautionDefaut: { $first: '$cautionDefautSafe' },
           categorie: { $first: '$categorie' },
           places: { $first: '$places' },
           carburant: { $first: '$carburant' },
@@ -103,6 +125,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
         },
       },
+      { $match: { countDispo: { $gt: 0 } } },
       { $sort: { firstTarifParJour: 1 } },
       { $limit: PAGE_SIZE },
     ]),
@@ -115,7 +138,13 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
         },
       },
       { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-      { $group: { _id: { marque: '$marqueNorm', modele: '$modeleNorm' } } },
+      {
+        $group: {
+          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
+          countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
+        },
+      },
+      { $match: { countDispo: { $gt: 0 } } },
       { $count: 'total' },
     ]),
     Vehicle.aggregate([
@@ -148,13 +177,14 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
     }))
     .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 
-  const vehicles = groups.map((g: any) => ({
+  const vehicles = (groups as GroupedVehicleRow[]).map((g) => ({
     modelSlug: toModelSlug(g.marque, g.modele),
     marque: g.marque,
     modele: g.modele,
     count: g.count,
     countDispo: g.countDispo,
     minTarif: g.firstTarifParJour > 0 ? g.firstTarifParJour : 0,
+    minCaution: g.firstCautionDefaut > 0 ? g.firstCautionDefaut : 0,
     categorie: g.categorie,
     places: g.places,
     carburant: g.carburant,

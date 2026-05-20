@@ -16,6 +16,7 @@ type GroupedVehicle = {
   count: number;
   countDispo: number;
   minTarif: number;
+  minCaution?: number;
   categorie?: string;
   places?: number;
   carburant?: string;
@@ -251,11 +252,18 @@ export function CatalogueInfiniteGrid({
                 )}
               </div>
 
-              <div className="mt-5 flex items-center justify-between">
-                <span className="text-xl font-bold text-gold">
-                  {formatCurrency(v.minTarif)}
-                  <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
-                </span>
+              <div className="mt-5 flex items-end justify-between gap-4">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-xl font-bold text-gold">
+                    {formatCurrency(v.minTarif)}
+                    <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
+                  </span>
+                  {v.minCaution && v.minCaution > 0 && (
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-cream-muted">
+                      {t('cat.depositFrom')} <span className="text-cream">{formatCurrency(v.minCaution)}</span>
+                    </span>
+                  )}
+                </div>
                 <span className="inline-flex items-center gap-2 text-sm font-semibold text-cream transition-colors group-hover:text-gold">
                   {v.count > 1 ? t('cat.seeOptions') : t('cat.bookNow')}{' '}
                   <ArrowRight className="h-4 w-4" />

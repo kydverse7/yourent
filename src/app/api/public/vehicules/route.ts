@@ -13,6 +13,42 @@ function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+type PublicVehiclesFilter = Record<string, unknown>;
+
+type GroupedVehicleRow = {
+  marque: string;
+  modele: string;
+  count: number;
+  countDispo: number;
+  firstTarifParJour: number;
+  firstCautionDefaut: number;
+  categorie?: string;
+  places?: number;
+  carburant?: string;
+  boite?: string;
+  backgroundPhoto?: string | null;
+  photoModele?: string | null;
+  firstPhoto?: string | null;
+};
+
+type PublicVehicleRow = {
+  _id: string;
+  type?: string;
+  categorie?: string;
+  transmission?: string;
+  boite?: string;
+  tarifParJour?: number;
+  tarifParJour10Plus?: number;
+  tarifParJour15Plus?: number;
+  tarifParJour30Plus?: number;
+  tarifJour?: number;
+  tarifJour10Plus?: number;
+  backgroundPhoto?: string | null;
+  photoModele?: string | null;
+  photos?: string[];
+  [key: string]: unknown;
+};
+
 // Catalogue public — pas d'auth requise
 export async function GET(req: NextRequest) {
   const limited = await rateLimit('general', req.headers.get('x-forwarded-for') ?? 'anonymous');
@@ -23,7 +59,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const { page, limit, skip } = parsePaginationParams(searchParams);
 
-  const filter: Record<string, any> = {
+  const filter: PublicVehiclesFilter = {
     actif: { $ne: false },
     isPublic: { $ne: false },
   };
@@ -54,10 +90,13 @@ export async function GET(req: NextRequest) {
             modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
             marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
             modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
+            availabilityRank: { $cond: [{ $eq: ['$statut', 'disponible'] }, 0, 1] },
+            tarifParJourSafe: { $ifNull: ['$tarifParJour', 0] },
+            cautionDefautSafe: { $ifNull: ['$cautionDefaut', 0] },
           },
         },
         { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-        { $sort: { tarifParJour: 1 } },
+        { $sort: { availabilityRank: 1, tarifParJourSafe: 1 } },
         {
           $group: {
             _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
@@ -65,7 +104,8 @@ export async function GET(req: NextRequest) {
             modele: { $first: '$modeleDisplay' },
             count: { $sum: 1 },
             countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
-            firstTarifParJour: { $first: '$tarifParJour' },
+            firstTarifParJour: { $first: '$tarifParJourSafe' },
+            firstCautionDefaut: { $first: '$cautionDefautSafe' },
             categorie: { $first: '$categorie' },
             places: { $first: '$places' },
             carburant: { $first: '$carburant' },
@@ -75,6 +115,7 @@ export async function GET(req: NextRequest) {
             firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
           },
         },
+        { $match: { countDispo: { $gt: 0 } } },
         { $sort: { firstTarifParJour: 1 } },
         { $skip: skip },
         { $limit: limit },
@@ -88,7 +129,13 @@ export async function GET(req: NextRequest) {
           },
         },
         { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-        { $group: { _id: { marque: '$marqueNorm', modele: '$modeleNorm' } } },
+        {
+          $group: {
+            _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
+            countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
+          },
+        },
+        { $match: { countDispo: { $gt: 0 } } },
         { $count: 'total' },
       ]),
     ]);
@@ -96,13 +143,14 @@ export async function GET(req: NextRequest) {
     const total = countResult[0]?.total ?? 0;
 
     return apiPaginated(
-      groups.map((g: any) => ({
+      (groups as GroupedVehicleRow[]).map((g) => ({
         modelSlug: toModelSlug(g.marque, g.modele),
         marque: g.marque,
         modele: g.modele,
         count: g.count,
         countDispo: g.countDispo,
         minTarif: g.firstTarifParJour > 0 ? g.firstTarifParJour : 0,
+        minCaution: g.firstCautionDefaut > 0 ? g.firstCautionDefaut : 0,
         categorie: g.categorie,
         places: g.places,
         carburant: g.carburant,
@@ -120,12 +168,12 @@ export async function GET(req: NextRequest) {
       .sort({ tarifParJour: 1 })
       .skip(skip)
       .limit(limit)
-      .lean(),
+      .lean<PublicVehicleRow[]>(),
     Vehicle.countDocuments(filter),
   ]);
 
   return apiPaginated(
-    items.map((item: any) => {
+    items.map((item) => {
       const pricing = resolveVehiclePricing(item);
       return {
         ...item,

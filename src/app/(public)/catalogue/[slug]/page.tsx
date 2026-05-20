@@ -10,6 +10,30 @@ import { VehicleModelView } from './_components/VehicleModelView';
 
 type Props = { params: Promise<{ slug: string }> };
 
+type VehicleModelRow = {
+  _id: string;
+  slug: string;
+  marque: string;
+  modele: string;
+  annee?: number;
+  couleur?: string;
+  kilometrage?: number;
+  carburant: string;
+  boite: string;
+  places: number;
+  categorie: string;
+  options?: string[];
+  description?: string;
+  photos?: string[];
+  backgroundPhoto?: string | null;
+  photoModele?: string | null;
+  statut: 'disponible' | 'loue' | 'reserve' | 'maintenance';
+  tarifParJour?: number;
+  tarifParJour10Plus?: number;
+  tarifParJour15Plus?: number;
+  tarifParJour30Plus?: number;
+};
+
 const getModelVariants = cache(async (modelSlug: string) => {
   await connectDB();
   const vehicles = await Vehicle.find({
@@ -20,14 +44,14 @@ const getModelVariants = cache(async (modelSlug: string) => {
       'marque modele annee couleur kilometrage immatriculation carburant boite places categorie options description photos backgroundPhoto photoModele slug statut tarifParJour tarifParJour10Plus tarifParJour15Plus tarifParJour30Plus',
     )
     .sort({ tarifParJour: 1 })
-    .lean();
+    .lean<VehicleModelRow[]>();
 
   const matching = vehicles.filter(
-    (v: any) => toModelSlug(v.marque, v.modele) === modelSlug,
+    (v) => toModelSlug(v.marque, v.modele) === modelSlug && v.statut === 'disponible',
   );
   if (matching.length === 0) return null;
 
-  return matching.map((v: any) => {
+  return matching.map((v) => {
     const pricing = resolveVehiclePricing(v);
     return {
       _id: String(v._id),
@@ -48,7 +72,6 @@ const getModelVariants = cache(async (modelSlug: string) => {
       tarifJour: pricing.tarifJour,
       tarifJour10Plus: pricing.tarifJour10Plus,
       displayTarifJour: getVehicleDisplayPrice(v),
-      isAvailable: v.statut === 'disponible',
     };
   }).sort((a, b) => {
     if (a.displayTarifJour !== b.displayTarifJour) {
@@ -92,7 +115,6 @@ export default async function VehicleModelPage({ params }: Props) {
   const { marque, modele, categorie, carburant, transmission, places } = variants[0];
   const displayPrices = variants.map((variant) => variant.displayTarifJour).filter((price) => price > 0);
   const modelMinTarif = displayPrices.length > 0 ? Math.min(...displayPrices) : 0;
-  const availableCount = variants.filter((variant) => variant.isAvailable).length;
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -112,10 +134,8 @@ export default async function VehicleModelPage({ params }: Props) {
           '@type': 'AggregateOffer',
           priceCurrency: 'MAD',
           lowPrice: modelMinTarif,
-          offerCount: availableCount > 0 ? availableCount : variants.length,
-          availability: availableCount > 0
-            ? 'https://schema.org/InStock'
-            : 'https://schema.org/OutOfStock',
+          offerCount: variants.length,
+          availability: 'https://schema.org/InStock',
         },
       },
       {
