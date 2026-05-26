@@ -27,13 +27,40 @@ export default function DashboardWhatsAppSummaryButton() {
 
     setIsSending(true);
     try {
-      const res = await fetch('/api/whatsapp/daily-summary', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        cache: 'no-store',
-      });
+      const endpointCandidates = [
+        '/api/whatsapp/daily-summary',
+        '/api/whatsapp/send-summary',
+      ];
+
+      let res: Response | null = null;
+      let sawHtml404 = false;
+      for (const endpoint of endpointCandidates) {
+        const attempt = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          cache: 'no-store',
+        });
+
+        const contentType = attempt.headers.get('content-type') || '';
+        const looksLikeHtml404 = attempt.status === 404 && contentType.includes('text/html');
+        if (looksLikeHtml404) {
+          sawHtml404 = true;
+          continue;
+        }
+
+        res = attempt;
+        break;
+      }
+
+      if (!res) {
+        throw new Error(
+          sawHtml404
+            ? 'Endpoint WhatsApp introuvable sur le serveur actif. En développement, redémarrez Next avec npm run dev.'
+            : 'Endpoint WhatsApp introuvable (404)'
+        );
+      }
 
       const clone = res.clone();
       const payload = (await res.json().catch(async () => {

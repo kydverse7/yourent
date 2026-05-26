@@ -10,6 +10,7 @@ import { calcNbJours, calcTarifTotal, resolveVehiclePricing } from '@/lib/utils'
 import { auditLog, diff } from '@/services/auditService';
 import { recomputeClientStats } from '@/services/clientStatsService';
 import { rateLimit } from '@/lib/rateLimit';
+import { syncVehicleStatusFromPlanning } from '@/services/vehicleAvailabilityService';
 import { z } from 'zod';
 
 type Ctx = { params: Promise<{ id: string }> };
@@ -135,12 +136,12 @@ export async function PUT(req: NextRequest, { params }: Ctx) {
     });
   }
 
-  // Libérer le véhicule
-  if (before.vehicle) {
-    await Vehicle.findByIdAndUpdate(before.vehicle, { statut: 'disponible' });
-  }
   if (before.reservation) {
     await Reservation.findByIdAndUpdate(before.reservation, { statut: 'terminee' });
+  }
+  // Recalculer le statut reel du vehicule apres mise a jour de la location/reservation.
+  if (before.vehicle) {
+    await syncVehicleStatusFromPlanning(before.vehicle);
   }
   if (before.client) {
     await recomputeClientStats(String(before.client));

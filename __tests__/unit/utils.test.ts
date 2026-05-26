@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatCurrency, calcTarifTotal, calcPalier, slugify } from '@/lib/utils';
+import { formatCurrency, calcTarifTotal, calcPalier, slugify, formatDate, formatDateTime } from '@/lib/utils';
 
 describe('formatCurrency', () => {
   it('formate un montant en MAD', () => {
@@ -13,9 +13,9 @@ describe('formatCurrency', () => {
 });
 
 describe('calcTarifTotal', () => {
-  it('calcule le prix pour 3 jours à 200 MAD', () => {
-    const result = calcTarifTotal(3, 200);
-    expect(result.total).toBe(600);
+  it('calcule le prix pour 5 jours à 200 MAD', () => {
+    const result = calcTarifTotal(5, 200);
+    expect(result.total).toBe(1000);
   });
 
   it('applique le palier 10+ jours', () => {
@@ -56,5 +56,17 @@ describe('slugify', () => {
 
   it('supprime les caractères spéciaux', () => {
     expect(slugify('Toyota Corolla (2023)')).toBe('toyota-corolla-2023');
+  });
+});
+
+describe('formatDate', () => {
+  it('retourne un fallback pour une date invalide', () => {
+    expect(formatDate('invalid-date')).toBe('-');
+  });
+});
+
+describe('formatDateTime', () => {
+  it('retourne un fallback pour une date invalide', () => {
+    expect(formatDateTime('invalid-date')).toBe('-');
   });
 });

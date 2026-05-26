@@ -147,6 +147,8 @@ export default function LocationsPage() {
       header: '',
       enableSorting: false,
       cell: ({ row }) => {
+        const montantRestant = Number(row.original.montantRestant ?? row.original.montantTotal ?? 0);
+        const canCollectPayment = ['en_cours', 'terminee'].includes(row.original.statut) && montantRestant > 0;
         const canCreateDeparture = !row.original.etatDesLieuxAvantId;
         const canCreateReturn = !!row.original.etatDesLieuxAvantId && !row.original.etatDesLieuxApresId;
 
@@ -155,9 +157,9 @@ export default function LocationsPage() {
           <Link href={`/locations/${row.original._id}`}>
             <Button variant="ghost" size="sm">Voir</Button>
           </Link>
-          {row.original.statut === 'en_cours' && (
+          {canCollectPayment && (
             <Button variant="outline" size="sm" onClick={() => openQuickPay('location', row.original._id)}>
-              Payer
+              Encaisser
             </Button>
           )}
 

@@ -11,6 +11,7 @@ import { auditLog } from '@/services/auditService';
 import { recomputeClientStats } from '@/services/clientStatsService';
 import { rateLimit } from '@/lib/rateLimit';
 import { cautionPriseSchema } from '@/lib/validators/caution.schema';
+import { findVehiclePlanningConflict } from '@/services/vehicleAvailabilityService';
 import { z } from 'zod';
 
 function serializeLocation(location: any) {
@@ -120,14 +121,20 @@ export async function POST(req: NextRequest) {
 
   const vehicleId = parsed.data.vehicle ?? parsed.data.vehicule;
   if (!vehicleId) return apiError('Véhicule requis', 422);
-
-  // Vérifier disponibilité du véhicule
+  // Verifier disponibilite du vehicule
   const vehicule = await Vehicle.findById(vehicleId);
   if (!vehicule) return apiError('Véhicule introuvable', 404);
   const isRetroactive = parsed.data.retroactive === true && new Date(parsed.data.finPrevueAt) < new Date();
-  if (!isRetroactive && vehicule.statut !== 'disponible') return apiError('Véhicule non disponible', 409);
+  if (!parsed.data.reservation && !isRetroactive) {
+    const directConflict = await findVehiclePlanningConflict({
+      vehicleId,
+      debutAt: new Date(parsed.data.debutAt),
+      finAt: new Date(parsed.data.finPrevueAt),
+    });
+    if (directConflict) return apiError('Ce véhicule est déjà réservé sur cette période', 409);
+  }
 
-  // Vérifier client
+  // Verifier client
   const clientDoc = await Client.findById(parsed.data.client).lean();
   if (!clientDoc) return apiError('Client introuvable', 404);
 
@@ -135,8 +142,7 @@ export async function POST(req: NextRequest) {
   const { tarifJour: baseTarif, tarifJour10Plus } = resolveVehiclePricing(vehicule as any);
   const nbJours = calcNbJours(new Date(parsed.data.debutAt), new Date(parsed.data.finPrevueAt));
   const pricing = calcTarifTotal(nbJours, baseTarif, tarifJour10Plus);
-
-  // ── Mode direct (sans réservation) ──
+  // Mode direct (sans reservation)
   if (!parsed.data.reservation) {
     const montantTotal = pricing.total;
 
@@ -176,8 +182,7 @@ export async function POST(req: NextRequest) {
 
     return apiSuccess(serializeLocation(location.toObject()), 201);
   }
-
-  // ── Mode réservation ──
+  // Mode reservation
   const reservation = await Reservation.findById(parsed.data.reservation).lean();
   if (!reservation) return apiError('Réservation introuvable', 404);
   if (!['confirmee', 'en_cours'].includes(reservation.statut)) {
@@ -191,6 +196,15 @@ export async function POST(req: NextRequest) {
   }
   if (!reservation.client) {
     return apiError('La réservation doit être rattachée à un client pour démarrer une location', 409);
+  }
+  if (!isRetroactive) {
+    const reservationConflict = await findVehiclePlanningConflict({
+      vehicleId,
+      debutAt: new Date(parsed.data.debutAt),
+      finAt: new Date(parsed.data.finPrevueAt),
+      excludeReservationId: parsed.data.reservation,
+    });
+    if (reservationConflict) return apiError('Ce véhicule est déjà réservé sur cette période', 409);
   }
 
   const optionsTotal = (reservation.optionsSupplementaires ?? []).reduce(

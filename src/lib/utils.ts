@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { format, differenceInDays, isBefore } from 'date-fns';
+import { format, differenceInDays, isBefore, isValid } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { ALERT_URGENCE_JOURS, ALERT_WARNING_JOURS, PALIERS } from './constants';
 
@@ -10,12 +10,22 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 // ===== FORMATAGE =====
-export function formatDate(date: Date | string, fmt = 'dd/MM/yyyy'): string {
-  return format(new Date(date), fmt, { locale: fr });
+function toValidDate(input: Date | string | null | undefined): Date | null {
+  if (input === null || input === undefined) return null;
+  const date = input instanceof Date ? input : new Date(input);
+  return isValid(date) ? date : null;
 }
 
-export function formatDateTime(date: Date | string): string {
-  return format(new Date(date), "dd/MM/yyyy 'à' HH:mm", { locale: fr });
+export function formatDate(date: Date | string | null | undefined, fmt = 'dd/MM/yyyy'): string {
+  const parsedDate = toValidDate(date);
+  if (!parsedDate) return '-';
+  return format(parsedDate, fmt, { locale: fr });
+}
+
+export function formatDateTime(date: Date | string | null | undefined): string {
+  const parsedDate = toValidDate(date);
+  if (!parsedDate) return '-';
+  return format(parsedDate, "dd/MM/yyyy 'à' HH:mm", { locale: fr });
 }
 
 export function formatCurrency(amount: number, currency = 'MAD'): string {
