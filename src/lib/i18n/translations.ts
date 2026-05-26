@@ -20,7 +20,7 @@ const fr: Record<string, string> = {
     'Location de voitures à Casablanca · Location voiture Maroc · Location SUV Casablanca · Location berline Casablanca · Location voiture luxe Maroc · Rent car Casablanca · Location voiture aéroport Mohammed V · Yourent Casablanca',
 
   /* ── Hero ─────────────────────────────────── */
-  'hero.badge': 'Minimum 3 jours',
+  'hero.badge': 'Minimum 5 jours',
   'hero.cta': 'Explorer le catalogue',
   'hero.delivery': 'Livraison aéroport & Casablanca',
   'hero.cars': 'Voitures',
@@ -141,7 +141,7 @@ const fr: Record<string, string> = {
     "Oui, la livraison est incluse dans tout Casablanca. Nous proposons également la livraison à l’aéroport Mohammed V et à Mohammedia moyennant un léger supplément.",
   'faq.q3': 'Quelle est la durée minimum de location ?',
   'faq.a3':
-    "La durée minimum est de 3 jours. Pour les locations longue durée (11 jours et plus), vous bénéficiez automatiquement d’un tarif préférentiel.",
+    "La durée minimum est de 5 jours. Pour les locations longue durée (11 jours et plus), vous bénéficiez automatiquement d’un tarif préférentiel.",
   'faq.q4': 'Comment fonctionne le dépôt de garantie ?',
   'faq.a4':
     "Un dépôt de garantie est demandé au départ, par chèque ou espèces, dont le montant varie selon le véhicule. Il est intégralement restitué au retour du véhicule en bon état.",
@@ -169,7 +169,7 @@ const fr: Record<string, string> = {
   'cat.sortDefault': 'Prix croissant',
   'cat.sortDesc': 'Prix décroissant',
   'cat.sortName': 'Nom A–Z',
-  'cat.perDay': '/jour · min 3 jours',
+  'cat.perDay': '/jour · min 5 jours',
   'cat.depositFrom': 'Caution dès',
   'cat.seeOptions': 'Voir les options',
   'cat.bookNow': 'Réserver',
@@ -189,7 +189,7 @@ const fr: Record<string, string> = {
   'model.places': 'places',
   'model.priceFrom': 'Tarif à partir de',
   'model.perDay': '/jour',
-  'model.minDuration': 'Location minimale : 3 jours',
+  'model.minDuration': 'Location minimale : 5 jours',
   'model.service': 'Standard service',
   'model.serviceDesc': 'Assistance et préparation premium',
   'model.longDuration': 'Tarif avantageux appliqué automatiquement au-delà de 10 jours.',
@@ -250,7 +250,7 @@ const en: Record<string, string> = {
     'Car rental Casablanca · Car hire Morocco · SUV rental Casablanca · Sedan rental Casablanca · Luxury car rental Morocco · Rent car Casablanca · Airport car rental Mohammed V · Yourent Casablanca',
 
   /* ── Hero ─────────────────────────────────── */
-  'hero.badge': 'Minimum 3 days',
+  'hero.badge': 'Minimum 5 days',
   'hero.cta': 'Explore our fleet',
   'hero.delivery': 'Airport & Casablanca delivery',
   'hero.cars': 'Cars',
@@ -373,7 +373,7 @@ const en: Record<string, string> = {
     'Yes, delivery is included throughout Casablanca. We also offer delivery to Mohammed V Airport and Mohammedia for a small additional fee.',
   'faq.q3': 'What is the minimum rental duration?',
   'faq.a3':
-    'The minimum duration is 3 days. For long-term rentals (11 days or more), you automatically benefit from a preferential rate.',
+    'The minimum duration is 5 days. For long-term rentals (11 days or more), you automatically benefit from a preferential rate.',
   'faq.q4': 'How does the security deposit work?',
   'faq.a4':
     'A deposit is required at pick-up, by cheque or cash — the amount varies depending on the vehicle. It is fully refunded when the vehicle is returned in good condition.',
@@ -401,7 +401,7 @@ const en: Record<string, string> = {
   'cat.sortDefault': 'Price: Low to High',
   'cat.sortDesc': 'Price: High to Low',
   'cat.sortName': 'Name A–Z',
-  'cat.perDay': '/day · min 3 days',
+  'cat.perDay': '/day · min 5 days',
   'cat.depositFrom': 'Deposit from',
   'cat.seeOptions': 'See options',
   'cat.bookNow': 'Book now',
@@ -421,7 +421,7 @@ const en: Record<string, string> = {
   'model.places': 'seats',
   'model.priceFrom': 'Starting from',
   'model.perDay': '/day',
-  'model.minDuration': 'Minimum rental: 3 days',
+  'model.minDuration': 'Minimum rental: 5 days',
   'model.service': 'Standard service',
   'model.serviceDesc': 'Assistance and premium preparation',
   'model.longDuration': 'Preferential rate applied automatically beyond 10 days.',
@@ -482,7 +482,7 @@ const ar: Record<string, string> = {
     'تأجير سيارات الدار البيضاء · تأجير سيارات المغرب · تأجير SUV الدار البيضاء · تأجير سيدان الدار البيضاء · تأجير سيارات فاخرة المغرب · Rent car Casablanca · تأجير سيارات مطار محمد الخامس · يورنت الدار البيضاء',
 
   /* ── Hero ─────────────────────────────────── */
-  'hero.badge': '3 أيام كحد أدنى',
+  'hero.badge': '5 أيام كحد أدنى',
   'hero.cta': 'تصفح الكتالوج',
   'hero.delivery': 'التوصيل للمطار والدار البيضاء',
   'hero.cars': 'سيارة',
@@ -605,7 +605,7 @@ const ar: Record<string, string> = {
     'نعم، التوصيل مشمول في جميع أنحاء الدار البيضاء. كما نوفر التوصيل إلى مطار محمد الخامس والمحمدية مقابل رسوم إضافية بسيطة.',
   'faq.q3': 'ما هي المدة الدنيا للتأجير؟',
   'faq.a3':
-    'المدة الدنيا هي 3 أيام. بالنسبة للتأجير الطويل (11 يومًا فأكثر)، تستفيد تلقائيًا من سعر تفضيلي.',
+    'المدة الدنيا هي 5 أيام. بالنسبة للتأجير الطويل (11 يومًا فأكثر)، تستفيد تلقائيًا من سعر تفضيلي.',
   'faq.q4': 'كيف يعمل نظام وديعة الضمان؟',
   'faq.a4':
     'يُطلب ضمان عند الاستلام، عبر شيك أو نقدًا، ويختلف المبلغ حسب السيارة. يُسترد بالكامل عند إرجاع السيارة بحالة جيدة.',
@@ -633,7 +633,7 @@ const ar: Record<string, string> = {
   'cat.sortDefault': 'السعر: من الأقل',
   'cat.sortDesc': 'السعر: من الأعلى',
   'cat.sortName': 'الاسم أ–ي',
-  'cat.perDay': '/يوم · 3 أيام كحد أدنى',
+  'cat.perDay': '/يوم · 5 أيام كحد أدنى',
   'cat.depositFrom': 'تأمين يبدأ من',
   'cat.seeOptions': 'عرض الخيارات',
   'cat.bookNow': 'احجز',
@@ -653,7 +653,7 @@ const ar: Record<string, string> = {
   'model.places': 'مقاعد',
   'model.priceFrom': 'ابتداءً من',
   'model.perDay': '/يوم',
-  'model.minDuration': 'الحد الأدنى للتأجير: 3 أيام',
+  'model.minDuration': 'الحد الأدنى للتأجير: 5 أيام',
   'model.service': 'الخدمة القياسية',
   'model.serviceDesc': 'مساعدة وتحضير فاخر',
   'model.longDuration': 'يُطبّق سعر تفضيلي تلقائيًا لأكثر من 10 أيام.',

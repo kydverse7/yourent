@@ -175,7 +175,7 @@ export default function NouveauVehiculePage() {
         {/* Tarifs */}
         <section className="bg-noir-card border border-gold/10 rounded-xl p-5 space-y-4">
           <h2 className="text-sm font-semibold text-gold uppercase tracking-wider">Tarification</h2>
-          <p className="text-xs text-cream-muted">Minimum de location : 3 jours. Le tarif 11+ jours est optionnel ; sinon le tarif de base s&apos;applique.</p>
+          <p className="text-xs text-cream-muted">Minimum de location : 5 jours. Le tarif 11+ jours est optionnel ; sinon le tarif de base s&apos;applique.</p>
           <div className="space-y-3">
             <div className="space-y-1">
               <label className="text-xs text-cream-muted">Tarif / jour (MAD) *</label>

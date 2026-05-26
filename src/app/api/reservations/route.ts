@@ -6,9 +6,11 @@ import { Vehicle } from '@/models/Vehicle';
 import { reservationSchema, publicReservationSchema } from '@/lib/validators/reservation.schema';
 import { apiError, apiPaginated, apiSuccess } from '@/lib/apiHelpers';
 import { calcNbJours, calcTarifTotal, parsePaginationParams, resolveVehiclePricing } from '@/lib/utils';
+import { MIN_RESERVATION_DAYS } from '@/lib/constants';
 import { auditLog } from '@/services/auditService';
 import { rateLimit } from '@/lib/rateLimit';
 import { notifyNewReservation } from '@/lib/whatsapp';
+import { findVehiclePlanningConflict } from '@/services/vehicleAvailabilityService';
 
 function serializeReservation(reservation: any) {
   if (!reservation) return reservation;
@@ -74,9 +76,17 @@ export async function POST(req: NextRequest) {
     const vehicle = await Vehicle.findOne({ slug: data.vehicleSlug, isPublic: true }).lean();
     if (!vehicle) return apiError('Véhicule introuvable', 404);
 
+    const publicConflict = await findVehiclePlanningConflict({
+      vehicleId: String(vehicle._id),
+      debutAt: data.debutAt,
+      finAt: data.finAt,
+    });
+    if (publicConflict) return apiError('Ce véhicule est déjà réservé sur cette période', 409);
+
     const { tarifJour, tarifJour10Plus } = resolveVehiclePricing(vehicle as any);
     const nbJours = calcNbJours(data.debutAt, data.finAt);
-    const pricing = calcTarifTotal(nbJours, tarifJour, tarifJour10Plus);
+    const billingDays = Math.max(nbJours, MIN_RESERVATION_DAYS);
+    const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus);
     const optionsTotal = data.optionsSupplementaires.reduce((sum, option) => sum + option.prix, 0);
 
     const reservation = await Reservation.create({
@@ -129,9 +139,17 @@ export async function POST(req: NextRequest) {
   const vehicle = await Vehicle.findById(parsed.data.vehicleId).lean();
   if (!vehicle) return apiError('Véhicule introuvable', 404);
 
+  const internalConflict = await findVehiclePlanningConflict({
+    vehicleId: parsed.data.vehicleId,
+    debutAt: parsed.data.debutAt,
+    finAt: parsed.data.finAt,
+  });
+  if (internalConflict) return apiError('Ce véhicule est déjà réservé sur cette période', 409);
+
   const { tarifJour, tarifJour10Plus } = resolveVehiclePricing(vehicle as any);
   const nbJours = calcNbJours(parsed.data.debutAt, parsed.data.finAt);
-  const pricing = calcTarifTotal(nbJours, tarifJour, tarifJour10Plus);
+  const billingDays = Math.max(nbJours, MIN_RESERVATION_DAYS);
+  const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus);
   const optionsTotal = parsed.data.optionsSupplementaires.reduce((sum, option) => sum + option.prix, 0);
   const totalEstime = Math.max(0, pricing.total + optionsTotal - parsed.data.remise);
 

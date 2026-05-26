@@ -8,7 +8,7 @@ export const LOCALE = 'fr-MA';
 export const TIMEZONE = 'Africa/Casablanca';
 
 // Tarification location
-export const MIN_RESERVATION_DAYS = 3;
+export const MIN_RESERVATION_DAYS = 5;
 export const LONG_RENTAL_THRESHOLD_DAYS = 10;
 
 // Paliers tarifaires (jours)

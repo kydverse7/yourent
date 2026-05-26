@@ -63,7 +63,8 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
     ? calcNbJours(new Date(form.debutAt), new Date(form.finAt))
     : 0;
 
-  const pricing = nbJours > 0 ? calcTarifTotal(nbJours, tarifJour, tarifJour10Plus) : null;
+  const pricingDays = nbJours > 0 ? Math.max(nbJours, MIN_RESERVATION_DAYS) : 0;
+  const pricing = pricingDays > 0 ? calcTarifTotal(pricingDays, tarifJour, tarifJour10Plus) : null;
   const total = pricing?.total ?? 0;
 
   const set = (field: string, value: string) =>
@@ -165,7 +166,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
       {/* ── Estimation tarif ── */}
       {nbJours > 0 && (
         <div className="rounded-xl border border-[rgba(201,168,76,0.2)] bg-[rgba(201,168,76,0.06)] p-3.5 text-sm">
-          <span className="text-[#b9a88f]">{nbJours} {t('form.days').replace(/\{s\}/g, nbJours > 1 ? 's' : '')} · {t('form.estimate')} : </span>
+          <span className="text-[#b9a88f]">{pricingDays} {t('form.days').replace(/\{s\}/g, pricingDays > 1 ? 's' : '')} · {t('form.estimate')} : </span>
           <span className="text-[#c9a84c] font-bold text-base">{formatCurrency(total)}</span>
           <span className="text-[#b9a88f] text-xs ml-1">{t('form.exDeposit')}</span>
           {pricing?.palier === '10Plus' && (

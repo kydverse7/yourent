@@ -308,7 +308,7 @@ export default function VehiculeDetailPage({ params }: { params: Promise<{ id: s
         {/* Tarifs */}
         <section className="bg-noir-card border border-gold/10 rounded-xl p-5 space-y-4">
           <h2 className="text-sm font-semibold text-gold uppercase tracking-wider">Tarifs & Caution</h2>
-          <p className="text-xs text-cream-muted">Minimum de location : 3 jours. Le tarif 11+ jours s&apos;applique automatiquement pour les locations de plus de 10 jours.</p>
+          <p className="text-xs text-cream-muted">Minimum de location : 5 jours. Le tarif 11+ jours s&apos;applique automatiquement pour les locations de plus de 10 jours.</p>
           <div className="space-y-3">
             {[
               { key: 'tarifJour', label: 'Tarif / jour (MAD)' },
