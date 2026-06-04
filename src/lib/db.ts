@@ -1,5 +1,22 @@
 import mongoose from 'mongoose';
 
+// Enregistrement explicite de tous les modèles pour s'assurer qu'ils sont enregistrés
+// auprès de Mongoose dans l'environnement Next.js (Hot Reloading / Serverless)
+import '@/models/Client';
+import '@/models/Vehicle';
+import '@/models/Reservation';
+import '@/models/Location';
+import '@/models/Payment';
+import '@/models/EtatDesLieux';
+import '@/models/Maintenance';
+import '@/models/Expense';
+import '@/models/User';
+import '@/models/Agence';
+import '@/models/AuditLog';
+import '@/models/DocumentSequence';
+import '@/models/Notification';
+import '@/models/GeneratedDocument';
+
 declare global {
   // eslint-disable-next-line no-var
   var mongooseConnection: {
