@@ -5,6 +5,7 @@ import { Location } from '@/models/Location';
 import { Payment } from '@/models/Payment';
 import { Reservation } from '@/models/Reservation';
 import { Vehicle } from '@/models/Vehicle';
+import { Agence } from '@/models/Agence';
 import { apiError, apiPaginated, apiSuccess } from '@/lib/apiHelpers';
 import { calcNbJours, calcTarifTotal, parsePaginationParams, resolveVehiclePricing } from '@/lib/utils';
 import { auditLog } from '@/services/auditService';
@@ -13,6 +14,11 @@ import { rateLimit } from '@/lib/rateLimit';
 import { cautionPriseSchema } from '@/lib/validators/caution.schema';
 import { findVehiclePlanningConflict } from '@/services/vehicleAvailabilityService';
 import { z } from 'zod';
+
+async function isHighSeasonEnabled(): Promise<boolean> {
+  const agence = await Agence.findOne().lean();
+  return agence?.parametres?.highSeason ?? false;
+}
 
 function serializeLocation(location: any) {
   if (!location) return location;
@@ -142,7 +148,8 @@ export async function POST(req: NextRequest) {
   // Calculer pricing
   const { tarifJour: baseTarif, tarifJour10Plus } = resolveVehiclePricing(vehicule as any);
   const nbJours = calcNbJours(new Date(parsed.data.debutAt), new Date(parsed.data.finPrevueAt));
-  const highSeason = parsed.data.highSeason === true;
+  const globalHighSeason = await isHighSeasonEnabled();
+  const highSeason = parsed.data.highSeason === true || globalHighSeason;
   const pricing = calcTarifTotal(nbJours, baseTarif, tarifJour10Plus, { forceStandard: highSeason });
   // Mode direct (sans reservation)
   if (!parsed.data.reservation) {

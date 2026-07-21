@@ -24,6 +24,7 @@ export interface IAgence extends Document {
     cautionObligatoire: boolean;
     typesCautionAcceptes: string[];
     nbJoursGrace: number;
+    highSeason: boolean;
     conditionsGenerales?: string;
   };
   createdAt: Date;
@@ -53,6 +54,7 @@ const AgenceSchema = new Schema<IAgence>(
         default: ['cheque', 'carte_empreinte', 'cash'],
       },
       nbJoursGrace: { type: Number, default: 1 },
+      highSeason: { type: Boolean, default: false },
       conditionsGenerales: String,
     },
   },

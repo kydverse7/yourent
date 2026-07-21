@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 import DashboardStats from './_components/DashboardStats';
 import DashboardAlerts from './_components/DashboardAlerts';
+import HighSeasonToggle from './_components/HighSeasonToggle';
 import { SkeletonCard } from '@/components/ui';
 
 export const metadata: Metadata = { title: 'Dashboard' };
@@ -20,6 +21,8 @@ export default function DashboardPage() {
         </p>
         </div>
       </div>
+
+      <HighSeasonToggle />
 
       <Suspense
         fallback={
