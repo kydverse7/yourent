@@ -176,6 +176,9 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Tarif / jour</p>
               <p className="mt-2 text-sm font-semibold text-gold">{formatCurrency(location.tarifJour ?? 0)}</p>
+              {location.highSeason && (
+                <p className="text-[10px] text-amber-300">haute saison</p>
+              )}
             </div>
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Montant total</p>

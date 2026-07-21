@@ -23,6 +23,7 @@ export interface ILocation extends Document {
   tarifJour: number;
   nbJours: number;
   palier: 'standard' | '10Plus';
+  highSeason: boolean;
   remise: number;
   optionsTotal: number;
   montantTotal: number;
@@ -85,6 +86,7 @@ const LocationSchema = new Schema<ILocation>(
     tarifJour: { type: Number, default: 0 },
     nbJours: { type: Number, default: 1 },
     palier: { type: String, enum: ['standard', '10Plus'], default: 'standard' },
+    highSeason: { type: Boolean, default: false },
     remise: { type: Number, default: 0 },
     optionsTotal: { type: Number, default: 0 },
     montantTotal: { type: Number, required: true, default: 0 },

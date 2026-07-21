@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { Badge, Button, Input, Select, Skeleton } from '@/components/ui';
 import { ClientDocumentUploadCard } from '@/components/clients/ClientDocumentUploadCard';
-import { formatCurrency, formatDateTime } from '@/lib/utils';
+import { calcNbJours, calcTarifTotal, formatCurrency, formatDateTime, resolveVehiclePricing } from '@/lib/utils';
 import toast from 'react-hot-toast';
 
 /* ──────── types ──────── */
@@ -70,11 +70,14 @@ type ReservationListItem = {
     kilometrage?: number;
     cautionMontant?: number;
     cautionDefaut?: number;
+    tarifParJour?: number;
+    tarifParJour10Plus?: number;
   };
   debutAt: string;
   finAt: string;
   tarifTotal?: number;
-  prix?: { totalEstime?: number };
+  prix?: { totalEstime?: number; parJour?: number; palier?: string; remise?: number };
+  optionsSupplementaires?: Array<{ nom: string; prix: number }>;
   montantPaye?: number;
   montantRestant?: number;
   statut: string;
@@ -423,6 +426,7 @@ export default function NouvelleLocationPage() {
   const [kmDepart, setKmDepart] = useState('');
   const [cautionType, setCautionType] = useState<CautionType>('cheque');
   const [cautionReference, setCautionReference] = useState('');
+  const [highSeason, setHighSeason] = useState(false);
 
   /* ── intermediaire ── */
   const [hasIntermediaire, setHasIntermediaire] = useState(false);
@@ -508,11 +512,33 @@ export default function NouvelleLocationPage() {
 
   const nbJours = calcNbJoursLocal(debutAt, finPrevueAt);
   const tarifJour = selectedVehicle
-    ? nbJours >= 10
+    ? !highSeason && nbJours >= 10
       ? selectedVehicle.tarifJour10Plus || selectedVehicle.tarifJour || 0
       : selectedVehicle.tarifJour || 0
     : 0;
   const montantTotal = tarifJour * nbJours;
+
+  // Recalcul du montant réservation si haute saison est forcée
+  const reservationRecalc = useMemo(() => {
+    if (!selectedReservation?.vehicule) return null;
+    const { tarifJour: base, tarifJour10Plus } = resolveVehiclePricing({
+      tarifParJour: selectedReservation.vehicule.tarifParJour,
+      tarifParJour10Plus: selectedReservation.vehicule.tarifParJour10Plus,
+    });
+    const days = calcNbJours(new Date(selectedReservation.debutAt), new Date(selectedReservation.finAt));
+    return calcTarifTotal(days, base, tarifJour10Plus, { forceStandard: highSeason });
+  }, [selectedReservation, highSeason]);
+
+  const reservationPreviewTotal = useMemo(() => {
+    if (!reservationRecalc || !selectedReservation) {
+      return selectedReservation?.prix?.totalEstime ?? selectedReservation?.tarifTotal ?? 0;
+    }
+    const optionsTotal =
+      selectedReservation.optionsSupplementaires?.reduce((sum, o) => sum + (o.prix ?? 0), 0) ?? 0;
+    const remise = selectedReservation.prix?.remise ?? 0;
+    return Math.max(0, reservationRecalc.total + optionsTotal - remise);
+  }, [reservationRecalc, selectedReservation]);
+
   const cautionAmount =
     selectedVehicle?.cautionMontant ?? selectedVehicle?.cautionDefaut ?? 0;
   const cautionReferenceRequired =
@@ -557,6 +583,7 @@ export default function NouvelleLocationPage() {
           finPrevueAt: new Date(finPrevueAt).toISOString(),
           kmDepart: Number(kmDepart) || 0,
           mode: 'direct',
+          highSeason,
           ...(isRetroactive ? { retroactive: true } : {}),
           ...(cautionPayload ? { caution: cautionPayload } : {}),
           ...(hasIntermediaire && intermediaireNom.trim()
@@ -612,6 +639,7 @@ export default function NouvelleLocationPage() {
           debutAt: selectedReservation.debutAt,
           finPrevueAt: selectedReservation.finAt,
           kmDepart: selectedReservation.vehicule.kilometrage ?? 0,
+          highSeason,
           ...(cautionPayload ? { caution: cautionPayload } : {}),
           ...(hasIntermediaire && intermediaireNom.trim()
             ? { intermediaire: { nom: intermediaireNom.trim(), telephone: intermediaireTel.trim() } }
@@ -964,6 +992,33 @@ export default function NouvelleLocationPage() {
                 />
               </div>
 
+              {/* Haute saison */}
+              <div className="rounded-2xl border border-gold/10 bg-gold/5 p-4">
+                <label className="flex cursor-pointer items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-cream">Haute saison</p>
+                    <p className="text-xs text-cream-muted">
+                      Forcer le tarif journalier de base, même sur 11+ jours.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={highSeason}
+                    onClick={() => setHighSeason((v) => !v)}
+                    className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+                      highSeason ? 'bg-gold' : 'bg-noir-root border border-gold/20'
+                    }`}
+                  >
+                    <span
+                      className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${
+                        highSeason ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                </label>
+              </div>
+
               {isRetroactive && (
                 <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
                   <strong>Location rétroactive</strong> — Les dates sont dans le passé. La location sera enregistrée avec le statut <em>terminée</em>.
@@ -987,11 +1042,15 @@ export default function NouvelleLocationPage() {
                     <p className="mt-2 text-lg font-semibold text-gold">
                       {formatCurrency(tarifJour)}
                     </p>
-                    {nbJours >= 10 && (
+                    {highSeason ? (
+                      <p className="text-[10px] text-amber-300">
+                        tarif haute saison
+                      </p>
+                    ) : nbJours >= 10 ? (
                       <p className="text-[10px] text-cream-faint">
                         palier 11+ jours
                       </p>
-                    )}
+                    ) : null}
                   </div>
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
@@ -1287,18 +1346,44 @@ export default function NouvelleLocationPage() {
               </div>
             ) : (
               <div className="space-y-4">
+                {/* Haute saison */}
+                <div className="rounded-2xl border border-gold/10 bg-gold/5 p-4">
+                  <label className="flex cursor-pointer items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-cream">Haute saison</p>
+                      <p className="text-xs text-cream-muted">
+                        Forcer le tarif journalier de base, même sur 11+ jours.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={highSeason}
+                      onClick={() => setHighSeason((v) => !v)}
+                      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+                        highSeason ? 'bg-gold' : 'bg-noir-root border border-gold/20'
+                      }`}
+                    >
+                      <span
+                        className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${
+                          highSeason ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </label>
+                </div>
+
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
                       Montant contrat
                     </p>
                     <p className="mt-2 text-lg font-semibold text-gold">
-                      {formatCurrency(
-                        selectedReservation.prix?.totalEstime ??
-                          selectedReservation.tarifTotal ??
-                          0,
-                      )}
+                      {formatCurrency(reservationPreviewTotal)}
                     </p>
+                    {highSeason && reservationRecalc?.palier === 'standard' && (
+                      <p className="text-[10px] text-amber-300">tarif haute saison appliqué</p>
+                    )}
                   </div>
                   <div className="lux-panel-muted p-4">
                     <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">
@@ -1326,10 +1411,7 @@ export default function NouvelleLocationPage() {
                     </p>
                     <p className="mt-2 text-lg font-semibold text-amber-300">
                       {formatCurrency(
-                        selectedReservation.montantRestant ??
-                          selectedReservation.prix?.totalEstime ??
-                          selectedReservation.tarifTotal ??
-                          0,
+                        Math.max(0, reservationPreviewTotal - (selectedReservation.montantPaye ?? 0)),
                       )}
                     </p>
                   </div>

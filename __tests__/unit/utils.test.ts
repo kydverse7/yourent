@@ -43,6 +43,20 @@ describe('calcPalier', () => {
   it('retourne "10Plus" pour >= 30 jours aussi', () => {
     expect(calcPalier(30)).toBe('10Plus');
   });
+
+  it('force le palier standard en haute saison', () => {
+    expect(calcPalier(15, { forceStandard: true })).toBe('standard');
+    expect(calcPalier(30, { forceStandard: true })).toBe('standard');
+  });
+});
+
+describe('calcTarifTotal haute saison', () => {
+  it('ignore le palier 10+ quand forceStandard est actif', () => {
+    const result = calcTarifTotal(16, 300, 250, { forceStandard: true });
+    expect(result.palier).toBe('standard');
+    expect(result.tarifJour).toBe(300);
+    expect(result.total).toBe(4800);
+  });
 });
 
 describe('slugify', () => {

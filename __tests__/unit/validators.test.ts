@@ -31,11 +31,11 @@ describe('cautionPriseSchema', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejette carte empreinte avec mauvais nombre de chiffres', () => {
+  it('rejette carte empreinte avec référence trop longue', () => {
     const result = cautionPriseSchema.safeParse({
       typePrise: 'carte_empreinte',
       montant: 5000,
-      referenceDoc: '12', // pas 4 chiffres
+      referenceDoc: 'a'.repeat(101),
     });
     expect(result.success).toBe(false);
   });

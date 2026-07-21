@@ -42,6 +42,7 @@ const reservationBaseSchema = z.object({
   notes: z.string().max(1000).optional(),
   typePaiement: z.enum(['especes', 'carte', 'virement', 'cheque']).optional(),
   montantPaye: z.number().min(0).default(0),
+  highSeason: z.boolean().default(false),
 });
 
 export const reservationSchema = reservationBaseSchema

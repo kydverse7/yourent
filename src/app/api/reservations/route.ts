@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
 
   const [items, total] = await Promise.all([
     Reservation.find(filter)
-      .populate('vehicle', 'marque modele immatriculation')
+      .populate('vehicle', 'marque modele immatriculation tarifParJour tarifParJour10Plus cautionDefaut')
       .populate('client', 'prenom nom telephone')
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -110,6 +110,7 @@ export async function POST(req: NextRequest) {
         totalEstime: pricing.total + optionsTotal,
         remise: 0,
       },
+      highSeason: false,
       montantRestant: pricing.total + optionsTotal,
     });
 
@@ -149,7 +150,8 @@ export async function POST(req: NextRequest) {
   const { tarifJour, tarifJour10Plus } = resolveVehiclePricing(vehicle as any);
   const nbJours = calcNbJours(parsed.data.debutAt, parsed.data.finAt);
   const billingDays = Math.max(nbJours, MIN_RESERVATION_DAYS);
-  const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus);
+  const highSeason = parsed.data.highSeason === true;
+  const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus, { forceStandard: highSeason });
   const optionsTotal = parsed.data.optionsSupplementaires.reduce((sum, option) => sum + option.prix, 0);
   const totalEstime = Math.max(0, pricing.total + optionsTotal - parsed.data.remise);
 
@@ -172,6 +174,7 @@ export async function POST(req: NextRequest) {
     montantPaye: parsed.data.montantPaye,
     montantRestant: Math.max(0, totalEstime - parsed.data.montantPaye),
     createdBy: session.user.id,
+    highSeason,
     prix: {
       parJour: pricing.tarifJour,
       palier: pricing.palier,

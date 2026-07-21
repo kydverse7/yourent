@@ -27,6 +27,7 @@ export interface IReservation extends Document {
   caution?: { montant: number; statut: 'paye' | 'en_attente' | 'partiel' };
   optionsSupplementaires: Array<{ nom: string; prix: number }>;
   conducteurSecondaire?: { nom: string; prenom: string; permisNumero: string };
+  highSeason: boolean;
   retardMinutes: number;
   contratNumero?: string;
   contratPdfUrl?: string;
@@ -91,6 +92,7 @@ const ReservationSchema = new Schema<IReservation>(
       prenom: String,
       permisNumero: String,
     },
+    highSeason: { type: Boolean, default: false },
     retardMinutes: { type: Number, default: 0 },
     contratNumero: { type: String, trim: true },
     contratPdfUrl: String,

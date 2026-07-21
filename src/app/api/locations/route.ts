@@ -64,6 +64,7 @@ const locationSchema = z.object({
   notes: z.string().optional(),
   mode: z.enum(['reservation', 'direct']).optional(),
   retroactive: z.boolean().optional(),
+  highSeason: z.boolean().optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -141,7 +142,8 @@ export async function POST(req: NextRequest) {
   // Calculer pricing
   const { tarifJour: baseTarif, tarifJour10Plus } = resolveVehiclePricing(vehicule as any);
   const nbJours = calcNbJours(new Date(parsed.data.debutAt), new Date(parsed.data.finPrevueAt));
-  const pricing = calcTarifTotal(nbJours, baseTarif, tarifJour10Plus);
+  const highSeason = parsed.data.highSeason === true;
+  const pricing = calcTarifTotal(nbJours, baseTarif, tarifJour10Plus, { forceStandard: highSeason });
   // Mode direct (sans reservation)
   if (!parsed.data.reservation) {
     const montantTotal = pricing.total;
@@ -159,6 +161,7 @@ export async function POST(req: NextRequest) {
       tarifJour: pricing.tarifJour,
       nbJours,
       palier: pricing.palier,
+      highSeason,
       remise: 0,
       optionsTotal: 0,
       montantTotal,
@@ -226,6 +229,7 @@ export async function POST(req: NextRequest) {
     tarifJour: pricing.tarifJour,
     nbJours,
     palier: pricing.palier,
+    highSeason,
     remise,
     optionsTotal,
     montantTotal,
@@ -242,6 +246,7 @@ export async function POST(req: NextRequest) {
     'prix.parJour': pricing.tarifJour,
     'prix.palier': pricing.palier,
     'prix.totalEstime': montantTotal,
+    highSeason,
     montantRestant: Math.max(0, montantTotal - Number(reservation.montantPaye ?? 0)),
   });
 

@@ -85,17 +85,18 @@ export function getVehicleDisplayPrice(vehicle: VehiclePricingSource | null | un
   return Number.isFinite(tarifJour) && tarifJour > 0 ? tarifJour : 0;
 }
 
-export function calcPalier(nbJours: number): TarifPalier {
-  if (nbJours >= PALIERS.LONG.min) return '10Plus';
+export function calcPalier(nbJours: number, opts?: { forceStandard?: boolean }): TarifPalier {
+  if (!opts?.forceStandard && nbJours >= PALIERS.LONG.min) return '10Plus';
   return 'standard';
 }
 
 export function calcTarifTotal(
   nbJours: number,
   tarifParJour: number,
-  tarifParJour10Plus = 0
+  tarifParJour10Plus = 0,
+  opts?: { forceStandard?: boolean }
 ): { palier: TarifPalier; tarifJour: number; total: number } {
-  const palier = calcPalier(nbJours);
+  const palier = calcPalier(nbJours, opts);
   const tarifJour = palier === '10Plus' ? (tarifParJour10Plus || tarifParJour) : tarifParJour;
   return { palier, tarifJour, total: tarifJour * nbJours };
 }
