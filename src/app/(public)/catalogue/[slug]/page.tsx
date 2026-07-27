@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
+import { Agence } from '@/models/Agence';
 import { getVehicleDisplayPrice, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
 import { ChevronLeft, Sparkles } from 'lucide-react';
 import { VehicleModelView } from './_components/VehicleModelView';
@@ -107,9 +108,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 300;
 
+const getHighSeasonSetting = cache(async () => {
+  await connectDB();
+  const agence = await Agence.findOne().select('parametres.highSeason').lean();
+  return agence?.parametres?.highSeason ?? false;
+});
+
 export default async function VehicleModelPage({ params }: Props) {
   const { slug } = await params;
-  const variants = await getModelVariants(slug);
+  const [variants, highSeason] = await Promise.all([
+    getModelVariants(slug),
+    getHighSeasonSetting(),
+  ]);
   if (!variants || variants.length === 0) notFound();
 
   const { marque, modele, categorie, carburant, transmission, places } = variants[0];
@@ -198,6 +208,7 @@ export default async function VehicleModelPage({ params }: Props) {
         carburant={carburant}
         transmission={transmission}
         places={places}
+        highSeason={highSeason}
       />
     </div>
   );

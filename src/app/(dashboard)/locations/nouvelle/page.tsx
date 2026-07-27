@@ -440,6 +440,24 @@ export default function NouvelleLocationPage() {
 
   /* ════════ QUERIES ════════ */
 
+  const { data: globalSettings } = useQuery({
+    queryKey: ['admin-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/admin/settings');
+      const payload = await res.json();
+      if (!res.ok) throw new Error(payload.error ?? 'Erreur');
+      return payload.data as { highSeason: boolean };
+    },
+  });
+
+  // Initialise le toggle local sur le réglage global "haute saison" dès qu'il est chargé,
+  // pour que l'estimation affichée corresponde au tarif réellement appliqué à l'enregistrement.
+  useEffect(() => {
+    if (globalSettings) {
+      setHighSeason(globalSettings.highSeason);
+    }
+  }, [globalSettings]);
+
   const { data: clientsData, isLoading: loadingClients } = useQuery({
     queryKey: ['clients-search', clientSearch],
     queryFn: async () => {

@@ -39,9 +39,10 @@ interface Props {
   redirectSlug: string;
   tarifJour: number;
   tarifJour10Plus?: number;
+  highSeason?: boolean;
 }
 
-export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehiculeSlug, redirectSlug, tarifJour, tarifJour10Plus = 0 }: Props) {
+export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehiculeSlug, redirectSlug, tarifJour, tarifJour10Plus = 0, highSeason = false }: Props) {
   const router = useRouter();
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
@@ -64,7 +65,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
     : 0;
 
   const pricingDays = nbJours > 0 ? Math.max(nbJours, MIN_RESERVATION_DAYS) : 0;
-  const pricing = pricingDays > 0 ? calcTarifTotal(pricingDays, tarifJour, tarifJour10Plus) : null;
+  const pricing = pricingDays > 0 ? calcTarifTotal(pricingDays, tarifJour, tarifJour10Plus, { forceStandard: highSeason }) : null;
   const total = pricing?.total ?? 0;
 
   const set = (field: string, value: string) =>

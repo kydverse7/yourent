@@ -92,7 +92,8 @@ export async function POST(req: NextRequest) {
     const { tarifJour, tarifJour10Plus } = resolveVehiclePricing(vehicle as any);
     const nbJours = calcNbJours(data.debutAt, data.finAt);
     const billingDays = Math.max(nbJours, MIN_RESERVATION_DAYS);
-    const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus);
+    const globalHighSeason = await isHighSeasonEnabled();
+    const pricing = calcTarifTotal(billingDays, tarifJour, tarifJour10Plus, { forceStandard: globalHighSeason });
     const optionsTotal = data.optionsSupplementaires.reduce((sum, option) => sum + option.prix, 0);
 
     const reservation = await Reservation.create({
@@ -116,7 +117,7 @@ export async function POST(req: NextRequest) {
         totalEstime: pricing.total + optionsTotal,
         remise: 0,
       },
-      highSeason: false,
+      highSeason: globalHighSeason,
       montantRestant: pricing.total + optionsTotal,
     });
 
