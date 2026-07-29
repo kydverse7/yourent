@@ -72,7 +72,7 @@ export default function OGImage() {
               maxWidth: '700px',
             }}
           >
-            Berlines · SUV · Voitures de luxe — Réservation en ligne 24h/24
+            Berlines · SUV · Voitures de luxe — Réservation en ligne
           </div>
         </div>
 

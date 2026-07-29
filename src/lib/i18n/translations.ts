@@ -101,10 +101,10 @@ const fr: Record<string, string> = {
     'Notre flotte est renouvelée régulièrement pour votre confort et votre sécurité.',
   'why.fleet.stat': '+',
   'why.fleet.label': 'véhicules',
-  'why.assistance.title': 'Assistance 24/7',
+  'why.assistance.title': 'Assistance routière',
   'why.assistance.desc':
     'Notre équipe est disponible jour et nuit pour vous accompagner.',
-  'why.assistance.stat': '24/7',
+  'why.assistance.stat': 'jour & nuit',
   'why.assistance.label': 'disponibilité',
 
   /* ── Economic ─────────────────────────────── */
@@ -238,12 +238,12 @@ const en: Record<string, string> = {
   'nav.faq': 'FAQ',
   'nav.contact': 'Contact',
   'nav.agency': 'Agency Portal',
-  'nav.concierge': 'Concierge 24/7',
+  'nav.concierge': 'Concierge',
   'nav.book': 'Book Now',
 
   /* ── Footer ─────────────────────────────── */
   'footer.desc':
-    'Car rental agency in Casablanca, Morocco. Sedans, SUVs, luxury & economy cars — Mohammed V airport delivery, online booking 24/7.',
+    'Car rental agency in Casablanca, Morocco. Sedans, SUVs, luxury & economy cars — Mohammed V airport delivery, online booking.',
   'footer.catalogue': 'Car Catalogue',
   'footer.contact': 'Contact us',
   'footer.seo':
@@ -333,10 +333,10 @@ const en: Record<string, string> = {
     'Our fleet is regularly renewed for your comfort and safety.',
   'why.fleet.stat': '+',
   'why.fleet.label': 'vehicles',
-  'why.assistance.title': '24/7 Assistance',
+  'why.assistance.title': 'Roadside Assistance',
   'why.assistance.desc':
     'Our team is available day and night to support you.',
-  'why.assistance.stat': '24/7',
+  'why.assistance.stat': 'day & night',
   'why.assistance.label': 'availability',
 
   /* ── Economic ─────────────────────────────── */
@@ -379,7 +379,7 @@ const en: Record<string, string> = {
     'A deposit is required at pick-up, by cheque or cash — the amount varies depending on the vehicle. It is fully refunded when the vehicle is returned in good condition.',
   'faq.q5': 'What happens in case of a breakdown or accident?',
   'faq.a5':
-    'All our vehicles are fully insured. In case of breakdown, our 24/7 assistance sends a replacement as soon as possible. In case of an accident, our team supports you through all procedures.',
+    'All our vehicles are fully insured. In case of breakdown, our assistance sends a replacement as soon as possible. In case of an accident, our team supports you through all procedures.',
   'faq.q6': 'Can I modify or cancel my reservation?',
   'faq.a6':
     'Any reservation can be modified or cancelled free of charge up to 24 hours before the pick-up date. After that, cancellation fees may apply.',
@@ -565,10 +565,10 @@ const ar: Record<string, string> = {
     'يتم تجديد أسطولنا بانتظام لراحتك وسلامتك.',
   'why.fleet.stat': '+',
   'why.fleet.label': 'سيارة',
-  'why.assistance.title': 'مساعدة 24/7',
+  'why.assistance.title': 'مساعدة على الطريق',
   'why.assistance.desc':
     'فريقنا متاح ليلًا ونهارًا لمرافقتك.',
-  'why.assistance.stat': '24/7',
+  'why.assistance.stat': 'ليلًا ونهارًا',
   'why.assistance.label': 'التوفر',
 
   /* ── Economic ─────────────────────────────── */
@@ -611,7 +611,7 @@ const ar: Record<string, string> = {
     'يُطلب ضمان عند الاستلام، عبر شيك أو نقدًا، ويختلف المبلغ حسب السيارة. يُسترد بالكامل عند إرجاع السيارة بحالة جيدة.',
   'faq.q5': 'ماذا يحدث في حالة عطل أو حادث؟',
   'faq.a5':
-    'جميع سياراتنا مؤمّنة بتأمين شامل. في حالة عطل، ترسل خدمة المساعدة 24/7 سيارة بديلة في أسرع وقت. في حالة حادث، يرافقك فريقنا في جميع الإجراءات.',
+    'جميع سياراتنا مؤمّنة بتأمين شامل. في حالة عطل، ترسل خدمة المساعدة سيارة بديلة في أسرع وقت. في حالة حادث، يرافقك فريقنا في جميع الإجراءات.',
   'faq.q6': 'هل يمكنني تعديل أو إلغاء حجزي؟',
   'faq.a6':
     'يمكن تعديل أو إلغاء أي حجز مجانًا حتى 24 ساعة قبل موعد الاستلام. بعد ذلك، قد تُطبق رسوم إلغاء.',

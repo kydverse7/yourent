@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     default: 'Yourent — Location de voitures à Casablanca & au Maroc',
   },
   description:
-    'Yourent : agence de location de voitures à Casablanca, Maroc. Louez berlines, SUV et voitures de luxe au meilleur prix. Livraison aéroport, réservation en ligne 24h/24.',
+    'Yourent : agence de location de voitures à Casablanca, Maroc. Louez berlines, SUV et voitures de luxe au meilleur prix. Livraison aéroport, réservation en ligne.',
   keywords: [
     'location voiture Casablanca',
     'location voiture Maroc',
