@@ -46,7 +46,7 @@ const fr: Record<string, string> = {
   'contact.email': 'Email',
   'contact.hours': 'Horaires',
   'contact.hoursValue': 'Lun – Dim · 8h – 22h',
-  'contact.hoursSub': '7j/7 — Livraison 24h',
+  'contact.hoursSub': '7j/7 — Livraison incluse',
   'contact.addressSub': '20100 Casablanca, Maroc',
   'contact.statVehicles': 'Véhicules',
   'contact.statClients': 'Clients satisfaits',
@@ -103,8 +103,8 @@ const fr: Record<string, string> = {
   'why.fleet.label': 'véhicules',
   'why.assistance.title': 'Assistance routière',
   'why.assistance.desc':
-    'Notre équipe est disponible jour et nuit pour vous accompagner.',
-  'why.assistance.stat': 'jour & nuit',
+    'Notre équipe est disponible jusqu’à 23h pour vous accompagner.',
+  'why.assistance.stat': 'jusqu’à 23h',
   'why.assistance.label': 'disponibilité',
 
   /* ── Economic ─────────────────────────────── */
@@ -147,7 +147,7 @@ const fr: Record<string, string> = {
     "Un dépôt de garantie est demandé au départ, par chèque ou espèces, dont le montant varie selon le véhicule. Il est intégralement restitué au retour du véhicule en bon état.",
   'faq.q5': "Que se passe-t-il en cas de panne ou d’accident ?",
   'faq.a5':
-    "Tous nos véhicules sont assurés tous risques. En cas de panne, notre assistance 24h/7j vous envoie un remplacement dans les plus brefs délais. En cas d’accident, notre équipe vous accompagne dans toutes les démarches.",
+    "Tous nos véhicules sont assurés tous risques. En cas de panne, notre assistance vous envoie un remplacement dans les plus brefs délais. En cas d’accident, notre équipe vous accompagne dans toutes les démarches.",
   'faq.q6': 'Puis-je modifier ou annuler ma réservation ?',
   'faq.a6':
     "Toute réservation peut être modifiée ou annulée sans frais jusqu’à 24 h avant la date de prise en charge. Au-delà, des frais d’annulation peuvent s’appliquer.",
@@ -276,7 +276,7 @@ const en: Record<string, string> = {
   'contact.email': 'Email',
   'contact.hours': 'Hours',
   'contact.hoursValue': 'Mon – Sun · 8am – 10pm',
-  'contact.hoursSub': '7 days a week — 24h delivery',
+  'contact.hoursSub': '7 days a week — Delivery included',
   'contact.addressSub': '20100 Casablanca, Morocco',
   'contact.statVehicles': 'Vehicles',
   'contact.statClients': 'Happy clients',
@@ -335,8 +335,8 @@ const en: Record<string, string> = {
   'why.fleet.label': 'vehicles',
   'why.assistance.title': 'Roadside Assistance',
   'why.assistance.desc':
-    'Our team is available day and night to support you.',
-  'why.assistance.stat': 'day & night',
+    'Our team is available until 11pm to support you.',
+  'why.assistance.stat': 'until 11pm',
   'why.assistance.label': 'availability',
 
   /* ── Economic ─────────────────────────────── */
@@ -567,8 +567,8 @@ const ar: Record<string, string> = {
   'why.fleet.label': 'سيارة',
   'why.assistance.title': 'مساعدة على الطريق',
   'why.assistance.desc':
-    'فريقنا متاح ليلًا ونهارًا لمرافقتك.',
-  'why.assistance.stat': 'ليلًا ونهارًا',
+    'فريقنا متاح حتى الساعة 23h لمرافقتك.',
+  'why.assistance.stat': 'حتى 23h',
   'why.assistance.label': 'التوفر',
 
   /* ── Economic ─────────────────────────────── */
