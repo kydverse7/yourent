@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Plus, Clock, AlertTriangle, Sparkles, History, Zap } from 'lucide-react';
+import { Plus, Clock, AlertTriangle, Sparkles, History, Zap, CalendarClock } from 'lucide-react';
 import { useLocations } from '@/hooks/useLocations';
 import { useFilterStore } from '@/stores/filterStore';
 import { useUIStore } from '@/stores/uiStore';
@@ -38,6 +38,7 @@ export default function LocationsPage() {
   const filters = useFilterStore((s) => s.locations);
   const setFilters = useFilterStore((s) => s.setLocationFilters);
   const openQuickPay = useUIStore((s) => s.openQuickPayModal);
+  const openProlong = useUIStore((s) => s.openProlongModal);
 
   // Override statut based on tab
   const effectiveStatut = tab === 'actives' ? 'en_cours' : (filters.statut === 'en_cours' ? '' : filters.statut);
@@ -160,6 +161,11 @@ export default function LocationsPage() {
           {canCollectPayment && (
             <Button variant="outline" size="sm" onClick={() => openQuickPay('location', row.original._id)}>
               Encaisser
+            </Button>
+          )}
+          {row.original.statut === 'en_cours' && (
+            <Button variant="secondary" size="sm" onClick={() => openProlong(row.original._id)}>
+              <CalendarClock className="w-3.5 h-3.5 mr-1" /> Prolonger
             </Button>
           )}
 

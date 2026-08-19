@@ -19,6 +19,11 @@ interface UIState {
   quickPayTarget: { type: 'location' | 'reservation'; id: string } | null;
   openQuickPayModal: (type: 'location' | 'reservation', id: string) => void;
   closeQuickPayModal: () => void;
+
+  prolongModalOpen: boolean;
+  prolongLocationId: string | null;
+  openProlongModal: (locationId: string) => void;
+  closeProlongModal: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -41,4 +46,9 @@ export const useUIStore = create<UIState>((set) => ({
   quickPayTarget: null,
   openQuickPayModal: (type, id) => set({ quickPayModalOpen: true, quickPayTarget: { type, id } }),
   closeQuickPayModal: () => set({ quickPayModalOpen: false, quickPayTarget: null }),
+
+  prolongModalOpen: false,
+  prolongLocationId: null,
+  openProlongModal: (locationId) => set({ prolongModalOpen: true, prolongLocationId: locationId }),
+  closeProlongModal: () => set({ prolongModalOpen: false, prolongLocationId: null }),
 }));

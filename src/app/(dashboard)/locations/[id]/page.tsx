@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, ClipboardCheck, CreditCard, FileSignature, Receipt, Shield, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowLeft, ClipboardCheck, CreditCard, FileSignature, Receipt, Shield, CheckCircle2, Sparkles, CalendarClock } from 'lucide-react';
 import { Button, Badge, Input, Skeleton } from '@/components/ui';
 import { buildPdfViewerUrl, formatCurrency, formatDateTime } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
@@ -15,6 +15,7 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
   const openQuickPay = useUIStore((s) => s.openQuickPayModal);
   const openCaution = useUIStore((s) => s.openCautionModal);
   const openConfirm = useUIStore((s) => s.openConfirmModal);
+  const openProlong = useUIStore((s) => s.openProlongModal);
 
   const { data, isLoading } = useQuery({
     queryKey: ['location', id],
@@ -145,6 +146,11 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
             <Shield className="h-4 w-4" /> Caution
           </Button>
           {location.statut === 'en_cours' && (
+            <Button variant="secondary" onClick={() => openProlong(id)}>
+              <CalendarClock className="h-4 w-4" /> Prolonger
+            </Button>
+          )}
+          {location.statut === 'en_cours' && (
             <Button
               variant="gold"
               onClick={() =>
@@ -172,6 +178,11 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Fin prévue</p>
               <p className="mt-2 text-sm text-cream">{formatDateTime(location.finPrevueAt)}</p>
+              {(location.prolongations?.length ?? 0) > 0 && (
+                <p className="mt-1 text-[10px] text-gold">
+                  {location.prolongations.length} prolongation{location.prolongations.length > 1 ? 's' : ''}
+                </p>
+              )}
             </div>
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Tarif / jour</p>
@@ -200,6 +211,32 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
         </section>
 
         <aside className="space-y-6">
+          {(location.prolongations?.length ?? 0) > 0 && (
+            <section className="lux-panel p-6">
+              <div className="mb-4 flex items-center gap-3">
+                <CalendarClock className="h-5 w-5 text-gold" />
+                <h2 className="text-lg font-semibold text-cream">Prolongations</h2>
+              </div>
+              <div className="space-y-3">
+                {location.prolongations.map((p: { nouvelleFin: string; montantSup?: number; raison?: string; date: string }, i: number) => (
+                  <div key={i} className="lux-panel-muted p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-cream">
+                          Jusqu&apos;au {formatDateTime(p.nouvelleFin)}
+                        </p>
+                        <p className="mt-1 text-xs text-cream-muted">
+                          Décidée le {formatDateTime(p.date)}{p.raison ? ` — ${p.raison}` : ''}
+                        </p>
+                      </div>
+                      <span className="text-sm font-semibold text-amber-300">+{formatCurrency(p.montantSup ?? 0)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section className="lux-panel p-6">
             <h2 className="mb-4 text-lg font-semibold text-cream">Client</h2>
             <div className="space-y-3 text-sm text-cream-muted">

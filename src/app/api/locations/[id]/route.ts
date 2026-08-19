@@ -60,7 +60,7 @@ export async function GET(_req: NextRequest, { params }: Ctx) {
   await connectDB();
   const { id } = await params;
   const location = await Location.findById(id)
-    .populate('vehicle', 'marque modele immatriculation kilometrage')
+    .populate('vehicle', 'marque modele immatriculation kilometrage tarifParJour tarifParJour10Plus tarifParJour15Plus tarifParJour30Plus tarifJour tarifJour10Plus tarifJour15Plus tarifJour30Plus')
     .populate('client', 'prenom nom telephone')
     .populate('reservation', 'prix')
     .populate('etatDesLieuxAvantId', 'moment createdAt kmReleve niveauCarburant proprete signePar')
