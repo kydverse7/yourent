@@ -355,7 +355,7 @@ export function buildParcImageTable(snapshot: ParcSnapshot): string {
 }
 
 export async function exportParcImage(snapshot: ParcSnapshot): Promise<void> {
-  const { toPng } = await import('html-to-image');
+  const { toBlob } = await import('html-to-image');
 
   const container = document.createElement('div');
   container.style.position = 'fixed';
@@ -376,13 +376,14 @@ export async function exportParcImage(snapshot: ParcSnapshot): Promise<void> {
       content.style.width = `${100 / scale}%`;
     }
 
-    const dataUrl = await toPng(page, {
+    // toBlob évite les data: URLs, bloquées par la CSP (connect-src)
+    const blob = await toBlob(page, {
       width: A4_WIDTH,
       height: A4_HEIGHT,
       pixelRatio: 2,
       backgroundColor: '#FFFFFF',
     });
-    const blob = await (await fetch(dataUrl)).blob();
+    if (!blob) throw new Error("Génération de l'image impossible");
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
