@@ -21,6 +21,7 @@ interface ReservationFilters {
 
 interface LocationFilters {
   statut: string;
+  immat: string;
   vehicule: string;
   client: string;
   page: number;
@@ -54,7 +55,7 @@ interface FilterState {
 const defaultVehicleFilters: VehicleFilters = { q: '', statut: '', type: '', page: 1 };
 const defaultClientFilters: ClientFilters = { q: '', blacklist: false, page: 1 };
 const defaultReservationFilters: ReservationFilters = { statut: '', vehicule: '', page: 1 };
-const defaultLocationFilters: LocationFilters = { statut: '', vehicule: '', client: '', page: 1 };
+const defaultLocationFilters: LocationFilters = { statut: '', immat: '', vehicule: '', client: '', page: 1 };
 
 const now = new Date();
 const defaultFinanceFilters: FinanceFilters = {

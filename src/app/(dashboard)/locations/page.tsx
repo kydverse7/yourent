@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Clock, AlertTriangle, Sparkles, History, Zap, CalendarClock } from 'lucide-react';
+import { Plus, Clock, AlertTriangle, Sparkles, History, Zap, CalendarClock, Search, X } from 'lucide-react';
 import { useLocations } from '@/hooks/useLocations';
 import { useFilterStore } from '@/stores/filterStore';
 import { useUIStore } from '@/stores/uiStore';
 import { DataTable } from '@/components/ui/DataTable';
-import { Badge, Button } from '@/components/ui';
+import { Badge, Button, Input, Select } from '@/components/ui';
 import { ParcExportButton } from '@/components/dashboard/ParcExportButton';
 import { formatCurrency, getStatutColor } from '@/lib/utils';
 import type { ColumnDef } from '@tanstack/react-table';
@@ -40,12 +40,39 @@ export default function LocationsPage() {
   const setFilters = useFilterStore((s) => s.setLocationFilters);
   const openQuickPay = useUIStore((s) => s.openQuickPayModal);
   const openProlong = useUIStore((s) => s.openProlongModal);
+  const [immatInput, setImmatInput] = useState(filters.immat);
 
-  // Override statut based on tab
-  const effectiveStatut = tab === 'actives' ? 'en_cours' : (filters.statut === 'en_cours' ? '' : filters.statut);
-  const { data, isLoading } = useLocations({
-    statut: tab === 'actives' ? 'en_cours' : (filters.statut && filters.statut !== 'en_cours' ? filters.statut : 'terminee,annulee'),
-  });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (immatInput.trim() !== filters.immat) {
+        setFilters({ immat: immatInput.trim(), page: 1 });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [immatInput, filters.immat, setFilters]);
+
+  // État filter (tab-aware) overrides the stored statut
+  const etatOptions: Array<{ value: string; label: string }> =
+    tab === 'actives'
+      ? [
+          { value: '', label: 'Tous les états' },
+          { value: 'en_cours', label: 'En cours' },
+          { value: 'en_retard', label: 'En retard' },
+        ]
+      : [
+          { value: '', label: 'Tous les états' },
+          { value: 'terminee', label: 'Terminée' },
+          { value: 'annulee', label: 'Annulée' },
+        ];
+
+  const effectiveStatut =
+    tab === 'actives'
+      ? filters.statut === 'en_retard'
+        ? 'en_retard'
+        : 'en_cours'
+      : filters.statut || 'terminee,annulee';
+
+  const { data, isLoading } = useLocations({ statut: effectiveStatut });
 
   const locations: Location[] = data?.data ?? [];
   const total: number = data?.meta?.total ?? 0;
@@ -56,7 +83,6 @@ export default function LocationsPage() {
     setTab(t);
     setFilters({ statut: '', page: 1 });
   };
-
   const columns: ColumnDef<Location>[] = [
     {
       accessorKey: 'vehicule',
@@ -232,23 +258,37 @@ export default function LocationsPage() {
         </button>
       </div>
 
-      {tab === 'historique' && (
-        <div className="lux-filter-bar">
-          {['', 'terminee', 'annulee'].map((s) => (
-            <button
-              key={s}
-              onClick={() => setFilters({ statut: s, page: 1 })}
-              className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                filters.statut === s
-                  ? 'bg-gold text-noir-root'
-                  : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
-              }`}
-            >
-              {s === '' ? 'Toutes' : s.charAt(0).toUpperCase() + s.slice(1)}
-            </button>
-          ))}
+      <div className="lux-filter-bar flex-col sm:flex-row">
+        <div className="flex flex-1 gap-2">
+          <Input
+            placeholder="Rechercher par immatriculation..."
+            value={immatInput}
+            onChange={(e) => setImmatInput(e.target.value)}
+            leftIcon={<Search className="w-4 h-4" />}
+            rightIcon={
+              immatInput ? (
+                <button
+                  type="button"
+                  aria-label="Effacer la recherche"
+                  className="text-cream-faint transition-colors hover:text-cream"
+                  onClick={() => setImmatInput('')}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              ) : undefined
+            }
+            className="flex-1"
+          />
         </div>
-      )}
+        <div className="w-full sm:w-52">
+          <Select
+            aria-label="Filtrer par état"
+            value={filters.statut}
+            onChange={(e) => setFilters({ statut: e.target.value, page: 1 })}
+            options={etatOptions}
+          />
+        </div>
+      </div>
 
       <DataTable columns={columns} data={locations} isLoading={isLoading} emptyText="Aucune location trouvée." />
 

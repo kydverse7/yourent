@@ -83,11 +83,28 @@ export async function GET(req: NextRequest) {
 
   const filter: Record<string, any> = {};
   const statut = searchParams.get('statut');
-  if (statut) {
+  if (statut === 'en_retard') {
+    filter.statut = 'en_cours';
+    filter.finPrevueAt = { $lt: new Date() };
+  } else if (statut) {
     filter.statut = statut.includes(',') ? { $in: statut.split(',') } : statut;
   }
   const vehiculeId = searchParams.get('vehicule');
-  if (vehiculeId) filter.vehicle = vehiculeId;
+  const immat = searchParams.get('immat')?.trim();
+  const vehicleFilter: Record<string, unknown>[] = [];
+  if (vehiculeId) vehicleFilter.push({ vehicle: vehiculeId });
+  if (immat) {
+    const escaped = immat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const matchingVehicles = await Vehicle.find({ immatriculation: { $regex: escaped, $options: 'i' } })
+      .select('_id')
+      .lean();
+    vehicleFilter.push({ vehicle: { $in: matchingVehicles.map((v: { _id: unknown }) => v._id) } });
+  }
+  if (vehicleFilter.length === 1) {
+    filter.vehicle = vehicleFilter[0].vehicle;
+  } else if (vehicleFilter.length > 1) {
+    filter.$and = vehicleFilter;
+  }
   const clientId = searchParams.get('client');
   if (clientId) filter.client = clientId;
 

@@ -10,6 +10,7 @@ export function useLocations(overrides?: { statut?: string }) {
     queryFn: async () => {
       const p = new URLSearchParams();
       if (statut) p.set('statut', statut);
+      if (filters.immat) p.set('immat', filters.immat);
       if (filters.vehicule) p.set('vehicule', filters.vehicule);
       if (filters.client) p.set('client', filters.client);
       p.set('page', String(filters.page));
