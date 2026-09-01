@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Clock, AlertTriangle, Sparkles, History, Zap, CalendarClock, Search, X } from 'lucide-react';
+import { Plus, AlertTriangle, Sparkles, History, Zap, CalendarClock, Search, X } from 'lucide-react';
 import { useLocations } from '@/hooks/useLocations';
 import { useFilterStore } from '@/stores/filterStore';
 import { useUIStore } from '@/stores/uiStore';
@@ -132,8 +132,7 @@ export default function LocationsPage() {
       header: 'Statut',
       cell: ({ getValue }) => {
         const s = getValue<string>();
-        const color = getStatutColor(s);
-        return <Badge variant={color as any}>{s.replace('_', ' ')}</Badge>;
+        return <Badge variant={getStatutColor(s)}>{s.replace('_', ' ')}</Badge>;
       },
     },
     {

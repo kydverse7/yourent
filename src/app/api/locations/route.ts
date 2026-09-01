@@ -20,7 +20,24 @@ async function isHighSeasonEnabled(): Promise<boolean> {
   return agence?.parametres?.highSeason ?? false;
 }
 
-function serializeLocation(location: any) {
+interface SerializedLocationInput {
+  reservation?: { prix?: { parJour?: number; palier?: string; remise?: number } } | null;
+  tarifJour?: number | null;
+  nbJours?: number | null;
+  palier?: string | null;
+  remise?: number | null;
+  optionsTotal?: number | null;
+  cautionMontant?: number | null;
+  cautionStatut?: string | null;
+  caution?: { montant?: number; statut?: string } | null;
+  finAt?: string | Date | null;
+  finReelleAt?: string | Date | null;
+  vehicule?: unknown;
+  vehicle?: unknown;
+  [key: string]: unknown;
+}
+
+function serializeLocation(location?: SerializedLocationInput | null) {
   if (!location) return location;
 
   const reservation = location.reservation;
@@ -81,7 +98,15 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const { page, limit, skip } = parsePaginationParams(searchParams);
 
-  const filter: Record<string, any> = {};
+  type LocationsFilter = {
+    statut?: string | { $in: string[] };
+    finPrevueAt?: { $lt: Date };
+    vehicle?: string | { $in: unknown[] };
+    client?: string;
+    $and?: LocationsFilter[];
+  };
+
+  const filter: LocationsFilter = {};
   const statut = searchParams.get('statut');
   if (statut === 'en_retard') {
     filter.statut = 'en_cours';
@@ -91,7 +116,7 @@ export async function GET(req: NextRequest) {
   }
   const vehiculeId = searchParams.get('vehicule');
   const immat = searchParams.get('immat')?.trim();
-  const vehicleFilter: Record<string, unknown>[] = [];
+  const vehicleFilter: LocationsFilter[] = [];
   if (vehiculeId) vehicleFilter.push({ vehicle: vehiculeId });
   if (immat) {
     const escaped = immat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -163,7 +188,7 @@ export async function POST(req: NextRequest) {
   if (!clientDoc) return apiError('Client introuvable', 404);
 
   // Calculer pricing
-  const { tarifJour: baseTarif, tarifJour10Plus } = resolveVehiclePricing(vehicule as any);
+  const { tarifJour: baseTarif, tarifJour10Plus } = resolveVehiclePricing(vehicule);
   const nbJours = calcNbJours(new Date(parsed.data.debutAt), new Date(parsed.data.finPrevueAt));
   const globalHighSeason = await isHighSeasonEnabled();
   const highSeason = parsed.data.highSeason === true || globalHighSeason;

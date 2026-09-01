@@ -175,24 +175,26 @@ export function getInitials(name: string): string {
 }
 
 // ===== STATUT BADGE COLOR =====
-export function getStatutColor(statut: string): string {
-  const map: Record<string, string> = {
-    disponible: 'text-green-400 bg-green-400/15 border-green-400/30',
-    loue: 'text-blue-400 bg-blue-400/15 border-blue-400/30',
-    reserve: 'text-amber-400 bg-amber-400/15 border-amber-400/30',
-    maintenance: 'text-red-400 bg-red-400/15 border-red-400/30',
-    en_attente: 'text-amber-400 bg-amber-400/15 border-amber-400/30',
-    confirmee: 'text-green-400 bg-green-400/15 border-green-400/30',
-    en_cours: 'text-blue-400 bg-blue-400/15 border-blue-400/30',
-    terminee: 'text-[#A89880] bg-[#A89880]/15 border-[#A89880]/30',
-    annulee: 'text-red-400 bg-red-400/15 border-red-400/30',
-    active: 'text-green-400 bg-green-400/15 border-green-400/30',
-    suspended: 'text-red-400 bg-red-400/15 border-red-400/30',
-    paye: 'text-green-400 bg-green-400/15 border-green-400/30',
-    partiel: 'text-amber-400 bg-amber-400/15 border-amber-400/30',
-    en_attente_pmt: 'text-red-400 bg-red-400/15 border-red-400/30',
+export type StatutBadgeVariant = 'green' | 'blue' | 'amber' | 'red' | 'muted';
+
+export function getStatutColor(statut: string): StatutBadgeVariant {
+  const map: Record<string, StatutBadgeVariant> = {
+    disponible: 'green',
+    loue: 'blue',
+    reserve: 'amber',
+    maintenance: 'red',
+    en_attente: 'amber',
+    confirmee: 'green',
+    en_cours: 'blue',
+    terminee: 'muted',
+    annulee: 'red',
+    active: 'green',
+    suspended: 'red',
+    paye: 'green',
+    partiel: 'amber',
+    en_attente_pmt: 'red',
   };
-  return map[statut] ?? 'text-[#A89880] bg-[#A89880]/15 border-[#A89880]/30';
+  return map[statut] ?? 'muted';
 }
 
 // ===== UPLOAD UTILS =====
