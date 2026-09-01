@@ -8,6 +8,7 @@ import { useFilterStore } from '@/stores/filterStore';
 import { useUIStore } from '@/stores/uiStore';
 import { DataTable } from '@/components/ui/DataTable';
 import { Badge, Button } from '@/components/ui';
+import { ParcExportButton } from '@/components/dashboard/ParcExportButton';
 import { formatCurrency, getStatutColor } from '@/lib/utils';
 import type { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
@@ -197,12 +198,15 @@ export default function LocationsPage() {
           <h1 className="text-3xl font-bold text-cream">Locations</h1>
           <p className="mt-2 text-sm text-cream-muted">{total} location{total > 1 ? 's' : ''}</p>
         </div>
-        <Link href="/locations/nouvelle">
-          <Button variant="gold">
-            <Plus className="w-4 h-4 mr-2" />
-            Nouvelle location
-          </Button>
-        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          <ParcExportButton />
+          <Link href="/locations/nouvelle">
+            <Button variant="gold">
+              <Plus className="w-4 h-4 mr-2" />
+              Nouvelle location
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
