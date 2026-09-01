@@ -24,6 +24,11 @@ interface UIState {
   prolongLocationId: string | null;
   openProlongModal: (locationId: string) => void;
   closeProlongModal: () => void;
+
+  swapVehicleModalOpen: boolean;
+  swapVehicleLocationId: string | null;
+  openSwapVehicleModal: (locationId: string) => void;
+  closeSwapVehicleModal: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -51,4 +56,9 @@ export const useUIStore = create<UIState>((set) => ({
   prolongLocationId: null,
   openProlongModal: (locationId) => set({ prolongModalOpen: true, prolongLocationId: locationId }),
   closeProlongModal: () => set({ prolongModalOpen: false, prolongLocationId: null }),
+
+  swapVehicleModalOpen: false,
+  swapVehicleLocationId: null,
+  openSwapVehicleModal: (locationId) => set({ swapVehicleModalOpen: true, swapVehicleLocationId: locationId }),
+  closeSwapVehicleModal: () => set({ swapVehicleModalOpen: false, swapVehicleLocationId: null }),
 }));

@@ -3,11 +3,34 @@
 import Link from 'next/link';
 import { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, ClipboardCheck, CreditCard, FileSignature, Receipt, Shield, CheckCircle2, Sparkles, CalendarClock } from 'lucide-react';
+import { ArrowLeft, ClipboardCheck, CreditCard, FileSignature, Receipt, Shield, CheckCircle2, Sparkles, CalendarClock, Repeat } from 'lucide-react';
 import { Button, Badge, Input, Skeleton } from '@/components/ui';
 import { buildPdfViewerUrl, formatCurrency, formatDateTime } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
 import toast from 'react-hot-toast';
+
+interface LocationDetail {
+  statut: string;
+  debutAt: string;
+  finPrevueAt: string;
+  tarifJour?: number;
+  montantTotal?: number;
+  montantPaye?: number;
+  montantRestant?: number;
+  highSeason?: boolean;
+  prolongations?: Array<{ nouvelleFin: string; montantSup?: number; raison?: string; date: string }>;
+  vehicule?: { marque?: string; modele?: string; immatriculation?: string; kilometrage?: number };
+  client?: { prenom?: string; nom?: string; telephone?: string };
+  cautionMontant?: number;
+  cautionStatut?: string;
+  caution?: { typePrise?: string; referenceDoc?: string };
+  contratNumero?: string;
+  contratPdfUrl?: string;
+  factureNumero?: string;
+  facturePdfUrl?: string;
+  etatDesLieuxAvantId?: { createdAt?: string } | null;
+  etatDesLieuxApresId?: { createdAt?: string } | null;
+}
 
 export default function LocationDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -16,6 +39,7 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
   const openCaution = useUIStore((s) => s.openCautionModal);
   const openConfirm = useUIStore((s) => s.openConfirmModal);
   const openProlong = useUIStore((s) => s.openProlongModal);
+  const openSwapVehicle = useUIStore((s) => s.openSwapVehicleModal);
 
   const { data, isLoading } = useQuery({
     queryKey: ['location', id],
@@ -40,7 +64,7 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
     staleTime: 30_000,
   });
 
-  const location = data as any;
+  const location = data as LocationDetail | undefined;
   const kmRetourDefault = location?.vehicule?.kilometrage ?? 0;
 
   const closeMutation = useMutation({
@@ -146,6 +170,11 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
             <Shield className="h-4 w-4" /> Caution
           </Button>
           {location.statut === 'en_cours' && (
+            <Button variant="secondary" onClick={() => openSwapVehicle(id)}>
+              <Repeat className="h-4 w-4" /> Changer de véhicule
+            </Button>
+          )}
+          {location.statut === 'en_cours' && (
             <Button variant="secondary" onClick={() => openProlong(id)}>
               <CalendarClock className="h-4 w-4" /> Prolonger
             </Button>
@@ -178,7 +207,7 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
             <div className="lux-panel-muted p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cream-faint">Fin prévue</p>
               <p className="mt-2 text-sm text-cream">{formatDateTime(location.finPrevueAt)}</p>
-              {(location.prolongations?.length ?? 0) > 0 && (
+              {location.prolongations && (
                 <p className="mt-1 text-[10px] text-gold">
                   {location.prolongations.length} prolongation{location.prolongations.length > 1 ? 's' : ''}
                 </p>
@@ -211,14 +240,14 @@ export default function LocationDetailPage({ params }: { params: Promise<{ id: s
         </section>
 
         <aside className="space-y-6">
-          {(location.prolongations?.length ?? 0) > 0 && (
+          {location.prolongations && location.prolongations.length > 0 && (
             <section className="lux-panel p-6">
               <div className="mb-4 flex items-center gap-3">
                 <CalendarClock className="h-5 w-5 text-gold" />
                 <h2 className="text-lg font-semibold text-cream">Prolongations</h2>
               </div>
               <div className="space-y-3">
-                {location.prolongations.map((p: { nouvelleFin: string; montantSup?: number; raison?: string; date: string }, i: number) => (
+                {location.prolongations.map((p, i) => (
                   <div key={i} className="lux-panel-muted p-4">
                     <div className="flex items-center justify-between gap-3">
                       <div>
