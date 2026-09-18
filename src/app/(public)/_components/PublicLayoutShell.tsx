@@ -176,9 +176,11 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             >
               <PhoneCall className="h-4 w-4 text-gold" /> {t('nav.concierge')}
             </a>
-            <Link href="/catalogue" className="btn-gold hidden sm:inline-flex">
-              {t('nav.book')} <ArrowUpRight className="h-4 w-4" />
-            </Link>
+            <span className="hidden sm:block">
+              <Link href="/catalogue" className="btn-gold">
+                {t('nav.book')} <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </span>
 
             {/* ── Hamburger (mobile only) ── */}
             <button
@@ -272,8 +274,8 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <motion.div
               className="space-y-3 max-w-md"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
@@ -285,8 +287,8 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             <motion.nav
               aria-label={t('aria.footerNav')}
               className="flex flex-wrap gap-x-6 gap-y-2 text-sm"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >

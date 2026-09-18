@@ -1,12 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
+import { Types } from 'mongoose';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
-import { toModelSlug } from '@/lib/utils';
-import { Sparkles } from 'lucide-react';
+import { parseSearchDateRange, toModelSlug } from '@/lib/utils';
+import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
+import { CalendarX2, Sparkles } from 'lucide-react';
 import { t as tr, tp, type Locale } from '@/lib/i18n';
 import { CatalogueInfiniteGrid } from './_components/CatalogueInfiniteGrid';
+import { CatalogueDateFilter } from './_components/CatalogueDateFilter';
 
 export const metadata: Metadata = {
   title: 'Catalogue de voitures à louer à Casablanca | Yourent Maroc',
@@ -74,8 +77,20 @@ function buildFilterUrl(
   return `/catalogue${qs ? `?${qs}` : ''}`;
 }
 
-async function getGroupedVehicles(searchParams: Record<string, string>) {
+/**
+ * Disponibilité groupée. Avec `busyObjectIds` (recherche par dates),
+ * `countDispo` compte les unités libres sur la plage demandée
+ * au lieu du statut statique « disponible ».
+ */
+async function getGroupedVehicles(
+  searchParams: Record<string, string>,
+  busyObjectIds: Types.ObjectId[] | null,
+) {
   await connectDB();
+
+  const countDispoAccumulator = busyObjectIds !== null
+    ? { $sum: { $cond: [{ $not: [{ $in: ['$_id', busyObjectIds] }] }, 1, 0] } }
+    : { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } };
 
   const matchFilter: CatalogueMatchFilter = {
     actif: { $ne: false },
@@ -113,7 +128,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
           marque: { $first: '$marqueDisplay' },
           modele: { $first: '$modeleDisplay' },
           count: { $sum: 1 },
-          countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
+          countDispo: countDispoAccumulator,
           firstTarifParJour: { $first: '$tarifParJourSafe' },
           firstCautionDefaut: { $first: '$cautionDefautSafe' },
           categorie: { $first: '$categorie' },
@@ -141,7 +156,7 @@ async function getGroupedVehicles(searchParams: Record<string, string>) {
       {
         $group: {
           _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-          countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
+          countDispo: countDispoAccumulator,
         },
       },
       { $match: { countDispo: { $gt: 0 } } },
@@ -204,7 +219,16 @@ export default async function CataloguePage({
   const selectedMarque = normalizeFilterValue(params.marque);
   const cookieStore = await cookies();
   const locale = (cookieStore.get('locale')?.value === 'en' ? 'en' : 'fr') as Locale;
-  const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params);
+
+  // Recherche par dates : plage valide → véhicules occupés exclus du compteur de dispo.
+  const dateRange = parseSearchDateRange(params.du, params.au);
+  const busyObjectIds = dateRange
+    ? [...(await findBusyVehicleIds({ debutAt: dateRange.debut, finAt: dateRange.fin }))].map(
+        (id) => new Types.ObjectId(id),
+      )
+    : null;
+
+  const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params, busyObjectIds);
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -278,9 +302,16 @@ export default async function CataloguePage({
 
       {/* ── Sticky filter bar ── */}
       <div className="sticky top-20 z-20 -mx-2 rounded-2xl bg-noir-root/80 px-2 py-3 backdrop-blur-xl sm:-mx-0 sm:px-0">
+        {/* Date availability filter */}
+        <CatalogueDateFilter
+          params={params}
+          du={dateRange?.du}
+          au={dateRange?.au}
+        />
+
         {/* Brand filter */}
         {brands.length > 1 && (
-          <div className="lux-filter-bar">
+          <div className="lux-filter-bar mt-2">
             <Link
               href={buildFilterUrl(params, 'marque', undefined)}
               className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
@@ -310,10 +341,24 @@ export default async function CataloguePage({
 
       <div className="mt-6">
         {vehicles.length === 0 ? (
-          <div className="lux-panel py-24 text-center text-cream-muted">
-            <p className="text-lg">{tr(locale, 'cat.empty')}</p>
-            <p className="mt-2 text-sm">{tr(locale, 'cat.emptyHint')}</p>
-          </div>
+          dateRange ? (
+            <div className="lux-panel flex flex-col items-center gap-4 py-24 text-center text-cream-muted">
+              <CalendarX2 className="h-10 w-10 text-gold/50" />
+              <p className="text-lg text-cream">{tr(locale, 'cat.datesEmpty')}</p>
+              <p className="max-w-md text-sm">{tr(locale, 'cat.datesEmptyHint')}</p>
+              <Link
+                href={`/catalogue${selectedMarque ? `?marque=${encodeURIComponent(selectedMarque)}` : ''}${params.type ? `${selectedMarque ? '&' : '?'}type=${encodeURIComponent(params.type)}` : ''}`}
+                className="mt-2 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-gold transition-colors hover:bg-gold/20"
+              >
+                {tr(locale, 'cat.datesReset')}
+              </Link>
+            </div>
+          ) : (
+            <div className="lux-panel py-24 text-center text-cream-muted">
+              <p className="text-lg">{tr(locale, 'cat.empty')}</p>
+              <p className="mt-2 text-sm">{tr(locale, 'cat.emptyHint')}</p>
+            </div>
+          )
         ) : (
           <CatalogueInfiniteGrid
             initialVehicles={vehicles}
@@ -323,6 +368,8 @@ export default async function CataloguePage({
             type={params.type}
             marque={selectedMarque || undefined}
             limit={PAGE_SIZE}
+            du={dateRange?.du}
+            au={dateRange?.au}
           />
         )}
       </div>

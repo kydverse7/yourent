@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format, differenceInDays, isBefore, isValid } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ALERT_URGENCE_JOURS, ALERT_WARNING_JOURS, PALIERS } from './constants';
+import { ALERT_URGENCE_JOURS, ALERT_WARNING_JOURS, MIN_RESERVATION_DAYS, PALIERS } from './constants';
 
 // ===== CLASSNAMES =====
 export function cn(...inputs: ClassValue[]): string {
@@ -44,6 +44,48 @@ export function formatNumber(n: number): string {
 // ===== CALCUL TARIFS =====
 export function calcNbJours(debut: Date, fin: Date): number {
   return Math.max(1, differenceInDays(new Date(fin), new Date(debut)));
+}
+
+// ===== RECHERCHE PAR DATES (catalogue public) =====
+export type SearchDateRange = {
+  du: string;
+  au: string;
+  /** Début de location (00:00 UTC, même interprétation que le formulaire de réservation). */
+  debut: Date;
+  /** Fin exclusive : jour de retour + 1 (00:00 UTC). */
+  fin: Date;
+  /** Nombre de jours de location. */
+  days: number;
+};
+
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Valide une plage de dates de recherche `du`/`au` (YYYY-MM-DD).
+ * Retourne null si absentes, malformées, dans le passé, inversées
+ * ou inférieures à la durée minimale de location.
+ */
+export function parseSearchDateRange(
+  du: string | null | undefined,
+  au: string | null | undefined,
+  options?: { minDays?: number },
+): SearchDateRange | null {
+  const minDays = options?.minDays ?? MIN_RESERVATION_DAYS;
+  if (!du || !au) return null;
+  if (!ISO_DATE_PATTERN.test(du) || !ISO_DATE_PATTERN.test(au)) return null;
+
+  const debut = new Date(du);
+  const end = new Date(au);
+  if (!isValid(debut) || !isValid(end)) return null;
+
+  // Le départ ne peut pas être dans le passé (comparaison ISO sur les jours UTC).
+  const todayUtc = new Date().toISOString().slice(0, 10);
+  if (du < todayUtc) return null;
+
+  const days = differenceInDays(end, debut);
+  if (days < minDays) return null;
+
+  return { du, au, debut, fin: new Date(debut.getTime() + (days + 1) * 86_400_000), days };
 }
 
 export type TarifPalier = 'standard' | '10Plus';

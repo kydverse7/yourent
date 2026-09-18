@@ -5,11 +5,15 @@ import Link from 'next/link';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { Agence } from '@/models/Agence';
-import { getVehicleDisplayPrice, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { getVehicleDisplayPrice, parseSearchDateRange, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
 import { ChevronLeft, Sparkles } from 'lucide-react';
 import { VehicleModelView } from './_components/VehicleModelView';
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string>>;
+};
 
 type VehicleModelRow = {
   _id: string;
@@ -35,7 +39,7 @@ type VehicleModelRow = {
   tarifParJour30Plus?: number;
 };
 
-const getModelVariants = cache(async (modelSlug: string) => {
+const getModelVariants = cache(async (modelSlug: string, dateRange: { debut: Date; fin: Date } | null) => {
   await connectDB();
   const vehicles = await Vehicle.find({
     actif: { $ne: false },
@@ -47,9 +51,16 @@ const getModelVariants = cache(async (modelSlug: string) => {
     .sort({ tarifParJour: 1 })
     .lean<VehicleModelRow[]>();
 
-  const matching = vehicles.filter(
-    (v) => toModelSlug(v.marque, v.modele) === modelSlug && v.statut === 'disponible',
-  );
+  // Avec des dates : unités libres sur la plage (locations + réservations +
+  // maintenance exclues). Sans dates : statut statique « disponible ».
+  const busy = dateRange
+    ? await findBusyVehicleIds({ debutAt: dateRange.debut, finAt: dateRange.fin })
+    : null;
+
+  const matching = vehicles.filter((v) => {
+    if (toModelSlug(v.marque, v.modele) !== modelSlug) return false;
+    return busy !== null ? !busy.has(String(v._id)) : v.statut === 'disponible';
+  });
   if (matching.length === 0) return null;
 
   return matching.map((v) => {
@@ -85,7 +96,7 @@ const getModelVariants = cache(async (modelSlug: string) => {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const variants = await getModelVariants(slug);
+  const variants = await getModelVariants(slug, null);
   if (!variants || variants.length === 0) return { title: '404' };
 
   const { marque, modele } = variants[0];
@@ -114,13 +125,19 @@ const getHighSeasonSetting = cache(async () => {
   return agence?.parametres?.highSeason ?? false;
 });
 
-export default async function VehicleModelPage({ params }: Props) {
+export default async function VehicleModelPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const sp = await searchParams;
+  const dateRange = parseSearchDateRange(sp.du, sp.au);
   const [variants, highSeason] = await Promise.all([
-    getModelVariants(slug),
+    getModelVariants(slug, dateRange),
     getHighSeasonSetting(),
   ]);
   if (!variants || variants.length === 0) notFound();
+
+  const backHref = dateRange
+    ? `/catalogue?du=${dateRange.du}&au=${dateRange.au}`
+    : '/catalogue';
 
   const { marque, modele, categorie, carburant, transmission, places } = variants[0];
   const displayPrices = variants.map((variant) => variant.displayTarifJour).filter((price) => price > 0);
@@ -185,16 +202,18 @@ export default async function VehicleModelPage({ params }: Props) {
       />
       <div className="mb-6 flex items-center justify-between gap-3">
         <Link
-          href="/catalogue"
+          href={backHref}
           className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:text-gold"
         >
           <ChevronLeft className="h-4 w-4" /> Retour au catalogue
         </Link>
-        <span className="hidden items-center gap-2 md:inline-flex lux-eyebrow">
-          <Sparkles className="h-3.5 w-3.5" />{' '}
-          {variants.length > 1
-            ? `${variants.length} véhicules disponibles`
-            : 'fiche véhicule premium'}
+        <span className="hidden md:inline">
+          <span className="lux-eyebrow">
+            <Sparkles className="h-3.5 w-3.5" />{' '}
+            {variants.length > 1
+              ? `${variants.length} véhicules disponibles`
+              : 'fiche véhicule premium'}
+          </span>
         </span>
       </div>
 
@@ -209,6 +228,8 @@ export default async function VehicleModelPage({ params }: Props) {
         transmission={transmission}
         places={places}
         highSeason={highSeason}
+        initialDu={dateRange?.du}
+        initialAu={dateRange?.au}
       />
     </div>
   );

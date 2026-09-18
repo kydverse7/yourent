@@ -28,6 +28,16 @@ const fr: Record<string, string> = {
   'hero.subline': 'Location de voitures de luxe à Casablanca',
   'hero.pageTitle': 'Location de voitures à Casablanca — Yourent, agence de location auto au Maroc',
 
+  /* ── Hero — recherche par dates ──────────── */
+  'hero.searchLive': 'Disponibilité en temps réel',
+  'hero.searchDepart': 'Début de location',
+  'hero.searchRetour': 'Fin de location',
+  'hero.searchCta': 'Voir les disponibilités',
+  'hero.searchDays': '{count} jour{s}',
+  'hero.searchMinHint': 'Minimum {count} jours',
+  'hero.searchErrDates': 'Veuillez choisir vos dates de location.',
+  'hero.searchErrRange': 'La durée minimum de location est de {count} jours.',
+
   /* ── Brand Slider ─────────────────────────── */
   'brand.eyebrow': 'notre flotte de luxe',
   'brand.book': 'Réserver',
@@ -183,6 +193,21 @@ const fr: Record<string, string> = {
   'cat.retry': 'Réessayer',
   'cat.places': 'places',
 
+  /* ── Catalogue — filtre par dates ─────────── */
+  'cat.datesAdd': 'Rechercher par dates',
+  'cat.datesEdit': 'Modifier les dates',
+  'cat.datesApply': 'Appliquer',
+  'cat.datesCancel': 'Annuler',
+  'cat.datesClear': 'Retirer le filtre dates',
+  'cat.datesStart': 'Début',
+  'cat.datesEnd': 'Retour',
+  'cat.datesDays': '{count} jour{s}',
+  'cat.datesErr': 'La durée minimum de location est de {count} jours.',
+  'cat.datesActive': 'Véhicules disponibles pour vos dates',
+  'cat.datesEmpty': 'Aucun véhicule disponible pour ces dates.',
+  'cat.datesEmptyHint': 'Modifiez vos dates ou explorez le catalogue complet.',
+  'cat.datesReset': 'Voir tout le catalogue',
+
   /* ── Model Detail ──────────────────────────── */
   'model.variants': '{count} véhicule{s} disponible{s} — choisissez le vôtre',
   'model.eyebrow': 'Sélection signature',
@@ -257,6 +282,16 @@ const en: Record<string, string> = {
   'hero.available': 'available',
   'hero.subline': 'Luxury car rental in Casablanca',
   'hero.pageTitle': 'Car rental in Casablanca — Yourent, car hire agency in Morocco',
+
+  /* ── Hero — date search ───────────────────── */
+  'hero.searchLive': 'Real-time availability',
+  'hero.searchDepart': 'Pick-up date',
+  'hero.searchRetour': 'Return date',
+  'hero.searchCta': 'Check availability',
+  'hero.searchDays': '{count} day{s}',
+  'hero.searchMinHint': 'Minimum {count} days',
+  'hero.searchErrDates': 'Please choose your rental dates.',
+  'hero.searchErrRange': 'Minimum rental duration is {count} days.',
 
   /* ── Brand Slider ─────────────────────────── */
   'brand.eyebrow': 'our luxury fleet',
@@ -415,6 +450,21 @@ const en: Record<string, string> = {
   'cat.retry': 'Retry',
   'cat.places': 'seats',
 
+  /* ── Catalogue — date filter ──────────────── */
+  'cat.datesAdd': 'Search by dates',
+  'cat.datesEdit': 'Change dates',
+  'cat.datesApply': 'Apply',
+  'cat.datesCancel': 'Cancel',
+  'cat.datesClear': 'Remove date filter',
+  'cat.datesStart': 'Pick-up',
+  'cat.datesEnd': 'Return',
+  'cat.datesDays': '{count} day{s}',
+  'cat.datesErr': 'Minimum rental duration is {count} days.',
+  'cat.datesActive': 'Vehicles available for your dates',
+  'cat.datesEmpty': 'No vehicle available for these dates.',
+  'cat.datesEmptyHint': 'Try different dates or browse the full catalogue.',
+  'cat.datesReset': 'See the full catalogue',
+
   /* ── Model Detail ──────────────────────────── */
   'model.variants': '{count} vehicle{s} available — choose yours',
   'model.eyebrow': 'Signature selection',
@@ -489,6 +539,16 @@ const ar: Record<string, string> = {
   'hero.available': 'متاحة',
   'hero.subline': 'تأجير سيارات فاخرة في الدار البيضاء',
   'hero.pageTitle': 'تأجير سيارات في الدار البيضاء — يورنت، وكالة تأجير سيارات في المغرب',
+
+  /* ── Hero — البحث بالتواريخ ───────────────── */
+  'hero.searchLive': 'توفر في الوقت الفعلي',
+  'hero.searchDepart': 'تاريخ الاستلام',
+  'hero.searchRetour': 'تاريخ الإرجاع',
+  'hero.searchCta': 'عرض السيارات المتاحة',
+  'hero.searchDays': '{count} يوم',
+  'hero.searchMinHint': 'الحد الأدنى {count} أيام',
+  'hero.searchErrDates': 'يرجى اختيار تواريخ التأجير.',
+  'hero.searchErrRange': 'المدة الدنيا للتأجير هي {count} أيام.',
 
   /* ── Brand Slider ─────────────────────────── */
   'brand.eyebrow': 'أسطولنا الفاخر',
@@ -646,6 +706,21 @@ const ar: Record<string, string> = {
   'cat.loading': 'جارٍ التحميل…',
   'cat.retry': 'إعادة المحاولة',
   'cat.places': 'مقاعد',
+
+  /* ── Catalogue — فلترة بالتواريخ ──────────── */
+  'cat.datesAdd': 'ابحث بالتواريخ',
+  'cat.datesEdit': 'تعديل التواريخ',
+  'cat.datesApply': 'تطبيق',
+  'cat.datesCancel': 'إلغاء',
+  'cat.datesClear': 'إزالة فلتر التواريخ',
+  'cat.datesStart': 'الاستلام',
+  'cat.datesEnd': 'الإرجاع',
+  'cat.datesDays': '{count} يوم',
+  'cat.datesErr': 'المدة الدنيا للتأجير هي {count} أيام.',
+  'cat.datesActive': 'سيارات متاحة لتواريخك',
+  'cat.datesEmpty': 'لا توجد سيارات متاحة لهذه التواريخ.',
+  'cat.datesEmptyHint': 'جرّب تواريخ أخرى أو تصفح الكتالوج كاملاً.',
+  'cat.datesReset': 'عرض الكتالوج كاملاً',
 
   /* ── Model Detail ──────────────────────────── */
   'model.variants': '{count} سيارة متاحة — اختر ما يناسبك',

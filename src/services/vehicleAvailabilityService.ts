@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 import { Location } from '@/models/Location';
 import { Reservation } from '@/models/Reservation';
 import { Vehicle } from '@/models/Vehicle';
+import { connectDB } from '@/lib/db';
 
 type ObjectIdLike = string | Types.ObjectId;
 
@@ -104,5 +105,50 @@ export async function syncVehicleStatusFromPlanning(vehicleIdInput: ObjectIdLike
 
   await Vehicle.findByIdAndUpdate(vehicleId, { statut: 'disponible' });
   return 'disponible';
+}
+
+/**
+ * Identifiants des véhicules INDISPONIBLES pour une plage de dates
+ * (locations en cours chevauchantes, réservations confirmées/en cours
+ * chevauchantes, et véhicules en maintenance).
+ * Mêmes règles de conflit que findVehiclePlanningConflict.
+ */
+export async function findBusyVehicleIds(input: {
+  debutAt: Date;
+  finAt: Date;
+}): Promise<Set<string>> {
+  const { debutAt, finAt } = input;
+
+  await connectDB();
+
+  const [locations, reservations, maintenance] = await Promise.all([
+    Location.find({
+      statut: 'en_cours',
+      debutAt: { $lt: finAt },
+      $or: [
+        { finReelleAt: { $gt: debutAt } },
+        { finReelleAt: null, finPrevueAt: { $gt: debutAt } },
+        { finReelleAt: { $exists: false }, finPrevueAt: { $gt: debutAt } },
+      ],
+    })
+      .select('vehicle')
+      .lean(),
+    Reservation.find({
+      statut: { $in: ['confirmee', 'en_cours'] },
+      debutAt: { $lt: finAt },
+      finAt: { $gt: debutAt },
+    })
+      .select('vehicle')
+      .lean(),
+    Vehicle.find({ statut: 'maintenance' })
+      .select('_id')
+      .lean(),
+  ]);
+
+  const busy = new Set<string>();
+  for (const loc of locations) busy.add(String(loc.vehicle));
+  for (const res of reservations) busy.add(String(res.vehicle));
+  for (const veh of maintenance) busy.add(String(veh._id));
+  return busy;
 }
 

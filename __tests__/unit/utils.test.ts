@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatCurrency, calcTarifTotal, calcPalier, slugify, formatDate, formatDateTime } from '@/lib/utils';
+import { formatCurrency, calcTarifTotal, calcPalier, slugify, formatDate, formatDateTime, parseSearchDateRange } from '@/lib/utils';
 
 describe('formatCurrency', () => {
   it('formate un montant en MAD', () => {
@@ -82,5 +82,52 @@ describe('formatDate', () => {
 describe('formatDateTime', () => {
   it('retourne un fallback pour une date invalide', () => {
     expect(formatDateTime('invalid-date')).toBe('-');
+  });
+});
+
+function futureDates(days: number): { du: string; au: string } {
+  const du = new Date();
+  du.setUTCDate(du.getUTCDate() + 7);
+  const au = new Date(du);
+  au.setUTCDate(au.getUTCDate() + days);
+  return { du: du.toISOString().slice(0, 10), au: au.toISOString().slice(0, 10) };
+}
+
+describe('parseSearchDateRange', () => {
+  it('valide une plage correcte de 5 jours', () => {
+    const { du, au } = futureDates(5);
+    const range = parseSearchDateRange(du, au);
+    expect(range).not.toBeNull();
+    expect(range!.du).toBe(du);
+    expect(range!.au).toBe(au);
+    expect(range!.days).toBe(5);
+  });
+
+  it('calcule une fin exclusive (au + 1 jour)', () => {
+    const { du, au } = futureDates(5);
+    const range = parseSearchDateRange(du, au)!;
+    expect(range.fin.getTime() - range.debut.getTime()).toBe(6 * 86_400_000);
+  });
+
+  it('rejette une durée inférieure au minimum', () => {
+    const { du, au } = futureDates(4);
+    expect(parseSearchDateRange(du, au)).toBeNull();
+  });
+
+  it('rejette des dates manquantes ou malformées', () => {
+    expect(parseSearchDateRange(undefined, '2030-01-10')).toBeNull();
+    expect(parseSearchDateRange('2030-01-01', undefined)).toBeNull();
+    expect(parseSearchDateRange('01/01/2030', '2030-01-10')).toBeNull();
+    expect(parseSearchDateRange('2030-13-01', '2030-01-10')).toBeNull();
+  });
+
+  it('rejette un départ dans le passé', () => {
+    expect(parseSearchDateRange('2020-01-01', '2020-01-10')).toBeNull();
+  });
+
+  it('autorise une durée personnalisée via minDays', () => {
+    const { du, au } = futureDates(2);
+    expect(parseSearchDateRange(du, au)).toBeNull();
+    expect(parseSearchDateRange(du, au, { minDays: 2 })).not.toBeNull();
   });
 });

@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLocale } from '@/lib/i18n';
 import { LandingHeroTopBar } from './LandingHeroTopBar';
 import { LandingWordmark } from './LandingWordmark';
+import { LandingSearchCard } from './LandingSearchCard';
 import { MARQUEE_BRANDS } from './constants';
 import {
   motion,
@@ -69,7 +70,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
 
         {/* ── Macan hero photo — futuristic reveal ── */}
         <motion.div
-          className="relative z-20 mx-auto mt-4 w-full max-w-sm sm:max-w-md md:max-w-xl"
+          className="relative z-20 mx-auto mt-2 w-full max-w-sm sm:max-w-md md:max-w-lg"
           {...hero.car}
         >
           {/* glow behind the car */}
@@ -85,16 +86,22 @@ export const LandingHeroSection = forwardRef<HTMLDivElement>(
               fill
               priority
               className="object-contain"
-              sizes="(max-width: 640px) 90vw, (max-width: 768px) 70vw, 540px"
+              sizes="(max-width: 640px) 90vw, (max-width: 768px) 70vw, 512px"
             />
           </div>
         </motion.div>
 
-
+        {/* ── Availability search card — overlaps the car ── */}
+        <motion.div
+          className="relative z-30 mx-auto -mt-3 w-full max-w-2xl px-3 md:-mt-5"
+          {...hero.search}
+        >
+          <LandingSearchCard />
+        </motion.div>
 
         {/* ── bottom pills + marquee — staggered slide-up ── */}
         <motion.div
-          className="relative z-40 flex shrink-0 flex-col items-center gap-4 px-4 pb-5 pt-6 md:px-6 md:pb-8 md:pt-0"
+          className="relative z-40 flex shrink-0 flex-col items-center gap-4 px-4 pb-5 pt-4 md:px-6 md:pb-8 md:pt-0"
           variants={hero.pills(0.15)}
           initial="hidden"
           animate="visible"

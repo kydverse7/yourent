@@ -142,6 +142,10 @@ export const heroBase = (baseDelay: number) => ({
     initial: { opacity: 0, scale: 0.3 },
     animate: { opacity: 1, scale: 1.2, transition: { duration: 1.8, ease: [0.0, 0.0, 0.58, 1.0] as const, delay: baseDelay + 0.7 } },
   },
+  search: {
+    initial: { opacity: 0, y: 46, scale: 0.94, filter: 'blur(14px)' },
+    animate: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { duration: 1, ease: SMOOTH, delay: baseDelay + 0.66 } },
+  },
   pills: (sd = 0.15) => stagger(sd, baseDelay + 0.8),
 });
 

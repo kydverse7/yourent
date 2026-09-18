@@ -32,6 +32,8 @@ type Props = {
   type?: string;
   marque?: string;
   limit: number;
+  du?: string;
+  au?: string;
 };
 
 export function CatalogueInfiniteGrid({
@@ -42,9 +44,12 @@ export function CatalogueInfiniteGrid({
   type,
   marque,
   limit,
+  du,
+  au,
 }: Props) {
   const { t, tp } = useLocale();
-  const queryKey = `${type ?? ''}|${marque ?? ''}|${limit}`;
+  const queryKey = `${type ?? ''}|${marque ?? ''}|${limit}|${du ?? ''}|${au ?? ''}`;
+  const dateQuery = du && au ? `?du=${du}&au=${au}` : '';
   const [vehicles, setVehicles] = useState(initialVehicles);
   const [page, setPage] = useState(initialPage);
   const [hasNext, setHasNext] = useState(initialHasNext);
@@ -110,6 +115,8 @@ export function CatalogueInfiniteGrid({
       });
       if (type) params.set('type', type);
       if (marque) params.set('marque', marque);
+      if (du) params.set('du', du);
+      if (au) params.set('au', au);
 
       const response = await fetch(`/api/public/vehicules?${params.toString()}`, {
         cache: 'no-store',
@@ -154,7 +161,7 @@ export function CatalogueInfiniteGrid({
       }
       setIsLoading(false);
     }
-  }, [hasNext, isLoading, limit, page, type, marque]);
+  }, [hasNext, isLoading, limit, page, type, marque, du, au]);
 
   useEffect(() => {
     const target = sentinelRef.current;
@@ -201,7 +208,7 @@ export function CatalogueInfiniteGrid({
         {displayVehicles.map((v) => (
           <Link
             key={v.modelSlug}
-            href={`/catalogue/${v.modelSlug}`}
+            href={`/catalogue/${v.modelSlug}${dateQuery}`}
             className="group lux-panel overflow-hidden"
           >
             <div className="relative h-56 bg-noir-root">
@@ -252,15 +259,15 @@ export function CatalogueInfiniteGrid({
                 )}
               </div>
 
-              <div className="mt-5 flex items-end justify-between gap-4">
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="text-xl font-bold text-gold">
                     {formatCurrency(v.minTarif)}
                     <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
                   </span>
-                  {v.minCaution && v.minCaution > 0 && (
+                  {(v.minCaution ?? 0) > 0 && (
                     <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-cream-muted">
-                      {t('cat.depositFrom')} <span className="text-cream">{formatCurrency(v.minCaution)}</span>
+                      {t('cat.depositFrom')} <span className="text-cream">{formatCurrency(v.minCaution ?? 0)}</span>
                     </span>
                   )}
                 </div>

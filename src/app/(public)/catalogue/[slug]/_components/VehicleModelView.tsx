@@ -47,6 +47,8 @@ type Props = {
   transmission: string;
   places: number;
   highSeason?: boolean;
+  initialDu?: string;
+  initialAu?: string;
 };
 
 export function VehicleModelView({
@@ -60,6 +62,8 @@ export function VehicleModelView({
   transmission,
   places,
   highSeason = false,
+  initialDu,
+  initialAu,
 }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const selected = variants[selectedIdx];
@@ -247,6 +251,8 @@ export function VehicleModelView({
           tarifJour={selected.tarifJour}
           tarifJour10Plus={selected.tarifJour10Plus}
           highSeason={highSeason}
+          initialDu={initialDu}
+          initialAu={initialAu}
         />
       </div>
     </div>

@@ -1,8 +1,10 @@
 import { NextRequest } from 'next/server';
+import { Types } from 'mongoose';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { apiPaginated } from '@/lib/apiHelpers';
-import { parsePaginationParams, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { parsePaginationParams, parseSearchDateRange, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
 import { rateLimit } from '@/lib/rateLimit';
 
 function normalizeFilterValue(value: string | null): string {
@@ -78,6 +80,20 @@ export async function GET(req: NextRequest) {
   const q = searchParams.get('q')?.trim();
   if (q) filter.$text = { $search: q };
 
+  // Recherche par dates : les véhicules occupés sur la plage sont exclus.
+  const dateRange = parseSearchDateRange(searchParams.get('du'), searchParams.get('au'));
+  const busyObjectIds = dateRange
+    ? [...(await findBusyVehicleIds({ debutAt: dateRange.debut, finAt: dateRange.fin }))].map(
+        (id) => new Types.ObjectId(id),
+      )
+    : null;
+
+  const countDispoAccumulator = busyObjectIds !== null
+    ? { $sum: { $cond: [{ $not: [{ $in: ['$_id', busyObjectIds] }] }, 1, 0] } }
+    : { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } };
+
+  if (busyObjectIds !== null) filter._id = { $nin: busyObjectIds };
+
   const grouped = searchParams.get('grouped') === 'true';
 
   if (grouped) {
@@ -102,9 +118,9 @@ export async function GET(req: NextRequest) {
             _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
             marque: { $first: '$marqueDisplay' },
             modele: { $first: '$modeleDisplay' },
-            count: { $sum: 1 },
-            countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
-            firstTarifParJour: { $first: '$tarifParJourSafe' },
+          count: { $sum: 1 },
+          countDispo: countDispoAccumulator,
+          firstTarifParJour: { $first: '$tarifParJourSafe' },
             firstCautionDefaut: { $first: '$cautionDefautSafe' },
             categorie: { $first: '$categorie' },
             places: { $first: '$places' },
@@ -129,12 +145,12 @@ export async function GET(req: NextRequest) {
           },
         },
         { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-        {
-          $group: {
-            _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-            countDispo: { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } },
-          },
+      {
+        $group: {
+          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
+          countDispo: countDispoAccumulator,
         },
+      },
         { $match: { countDispo: { $gt: 0 } } },
         { $count: 'total' },
       ]),

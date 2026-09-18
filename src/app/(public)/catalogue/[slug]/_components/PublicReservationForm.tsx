@@ -40,16 +40,19 @@ interface Props {
   tarifJour: number;
   tarifJour10Plus?: number;
   highSeason?: boolean;
+  /** Dates pré-remplies depuis la recherche par disponibilité. */
+  initialDu?: string;
+  initialAu?: string;
 }
 
-export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehiculeSlug, redirectSlug, tarifJour, tarifJour10Plus = 0, highSeason = false }: Props) {
+export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehiculeSlug, redirectSlug, tarifJour, tarifJour10Plus = 0, highSeason = false, initialDu, initialAu }: Props) {
   const router = useRouter();
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
   const [whatsappSame, setWhatsappSame] = useState(true);
   const [form, setForm] = useState({
-    debutAt: '',
-    finAt: '',
+    debutAt: initialDu ?? '',
+    finAt: initialAu ?? '',
     prenom: '',
     nom: '',
     indicatif: '+212',
@@ -139,7 +142,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
       </div>
 
       {/* ── Dates ── */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label className={labelBase}>{t('form.startDate')}</label>
           <input
@@ -183,7 +186,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
       )}
 
       {/* ── Nom / Prénom ── */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label className={labelBase}>{t('form.firstName')}</label>
           <input
