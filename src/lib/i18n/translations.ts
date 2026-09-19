@@ -192,6 +192,11 @@ const fr: Record<string, string> = {
   'cat.loading': 'Chargement…',
   'cat.retry': 'Réessayer',
   'cat.places': 'places',
+  'cat.labelSeats': 'Places',
+  'cat.labelFuel': 'Carburant',
+  'cat.labelGear': 'Boîte',
+  'cat.priceFrom': 'À partir de',
+  'cat.availDates': 'Disponible du {du} au {au}',
 
   /* ── Catalogue — filtre par dates ─────────── */
   'cat.datesAdd': 'Rechercher par dates',
@@ -449,6 +454,11 @@ const en: Record<string, string> = {
   'cat.loading': 'Loading…',
   'cat.retry': 'Retry',
   'cat.places': 'seats',
+  'cat.labelSeats': 'Seats',
+  'cat.labelFuel': 'Fuel',
+  'cat.labelGear': 'Gearbox',
+  'cat.priceFrom': 'Starting from',
+  'cat.availDates': 'Available {du} → {au}',
 
   /* ── Catalogue — date filter ──────────────── */
   'cat.datesAdd': 'Search by dates',
@@ -706,6 +716,11 @@ const ar: Record<string, string> = {
   'cat.loading': 'جارٍ التحميل…',
   'cat.retry': 'إعادة المحاولة',
   'cat.places': 'مقاعد',
+  'cat.labelSeats': 'المقاعد',
+  'cat.labelFuel': 'الوقود',
+  'cat.labelGear': 'علبة السرعة',
+  'cat.priceFrom': 'ابتداءً من',
+  'cat.availDates': 'متاح من {du} إلى {au}',
 
   /* ── Catalogue — فلترة بالتواريخ ──────────── */
   'cat.datesAdd': 'ابحث بالتواريخ',

@@ -142,14 +142,11 @@ export function VehicleModelView({
                       className={`h-4 w-4 ${i === selectedIdx ? 'text-gold' : 'text-cream-faint'}`}
                     />
                     <span className="font-semibold text-cream">
-                      {v.annee ?? '—'}
+                      {marque} {i + 1}
                     </span>
                     {v.couleur && (
                       <span className="text-cream-muted">{v.couleur}</span>
                     )}
-                    <span className="text-cream-faint">
-                      {v.kilometrage.toLocaleString('fr-FR')} km
-                    </span>
                   </div>
                   <span className="whitespace-nowrap text-sm font-bold text-gold">
                     {formatCurrency(v.displayTarifJour)}/j
@@ -168,10 +165,8 @@ export function VehicleModelView({
               {marque} {modele}
             </h1>
             <p className="text-sm text-cream-muted">
-              {selected.annee} ·{' '}
               <span className="capitalize">{categorie}</span>
               {selected.couleur ? ` · ${selected.couleur}` : ''}
-              {` · ${selected.kilometrage.toLocaleString('fr-FR')} km`}
             </p>
           </div>
 
@@ -232,7 +227,6 @@ export function VehicleModelView({
             </h2>
             <p className="mt-1 text-sm text-cream-faint">
               {marque} {modele}
-              {selected.annee ? ` ${selected.annee}` : ''}
               {selected.couleur ? ` · ${selected.couleur}` : ''}
             </p>
           </div>

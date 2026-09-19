@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowUpDown, Car, Fuel, Gauge, Search, Users } from 'lucide-react';
+import { ArrowRight, ArrowUpDown, CalendarCheck, Car, Fuel, Gauge, Search, Users } from 'lucide-react';
+import { format } from 'date-fns';
 import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
 
@@ -229,52 +230,86 @@ export function CatalogueInfiniteGrid({
                 <span className="rounded-full border border-gold/20 bg-black/35 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold capitalize sm:px-3 sm:py-1 sm:text-[11px]">
                   {v.categorie}
                 </span>
-                {v.count > 1 && (
-                  <span className="flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-cream sm:px-2.5 sm:py-1 sm:text-[11px]">
-                    <Car className="h-3 w-3" /> {v.countDispo}/{v.count} {t('cat.dispo')}
-                  </span>
-                )}
               </div>
             </div>
             <div className="p-5">
-              <h2 className="text-lg font-bold text-cream">
-                {v.marque} {v.modele}
-              </h2>
-
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-cream-muted">
-                {v.places && (
-                  <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3" /> {v.places} {t('cat.places')}
-                  </span>
-                )}
-                {v.carburant && (
-                  <span className="flex items-center gap-1">
-                    <Fuel className="h-3 w-3" /> {v.carburant}
-                  </span>
-                )}
-                {v.transmission && (
-                  <span className="flex items-center gap-1">
-                    <Gauge className="h-3 w-3" /> {v.transmission}
+              <div className="flex items-start justify-between gap-3">
+                <h2 className="text-lg font-bold text-cream">
+                  {v.marque} {v.modele}
+                </h2>
+                {v.count > 1 && (
+                  <span className="mt-0.5 flex shrink-0 items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-cream-muted">
+                    <Car className="h-3 w-3 text-gold" /> {v.countDispo}/{v.count}
                   </span>
                 )}
               </div>
 
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+              {/* ── Specs libellées ── */}
+              <div className="mt-4 grid grid-cols-3 gap-3 rounded-2xl border border-white/5 bg-white/[0.03] p-3.5">
+                <div>
+                  <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-cream-faint">
+                    <Users className="h-3 w-3 text-gold/70" /> {t('cat.labelSeats')}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-cream">
+                    {v.places ? `${v.places} ${t('cat.places')}` : '—'}
+                  </p>
+                </div>
+                <div>
+                  <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-cream-faint">
+                    <Fuel className="h-3 w-3 text-gold/70" /> {t('cat.labelFuel')}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold capitalize text-cream">
+                    {v.carburant || '—'}
+                  </p>
+                </div>
+                <div>
+                  <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-cream-faint">
+                    <Gauge className="h-3 w-3 text-gold/70" /> {t('cat.labelGear')}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold capitalize text-cream">
+                    {v.transmission || '—'}
+                  </p>
+                </div>
+              </div>
+
+              {/* ── Dates choisies ── */}
+              {dateQuery && (
+                <div className="mt-3 flex items-center gap-2 rounded-xl border border-gold/15 bg-gold/5 px-3 py-2 text-xs font-medium text-gold">
+                  <CalendarCheck className="h-3.5 w-3.5 shrink-0" />
+                  {t('cat.availDates')
+                    .replace('{du}', format(new Date(du as string), 'dd/MM'))
+                    .replace('{au}', format(new Date(au as string), 'dd/MM'))}
+                </div>
+              )}
+
+              {/* ── Tarif + caution ── */}
+              <div className="mt-4 border-t border-white/5 pt-4">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-xl font-bold text-gold">
-                    {formatCurrency(v.minTarif)}
-                    <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
-                  </span>
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cream-faint">
+                      {t('cat.priceFrom')}
+                    </p>
+                    <p className="text-xl font-bold text-gold">
+                      {formatCurrency(v.minTarif)}
+                      <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
+                    </p>
+                  </div>
                   {(v.minCaution ?? 0) > 0 && (
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-cream-muted">
-                      {t('cat.depositFrom')} <span className="text-cream">{formatCurrency(v.minCaution ?? 0)}</span>
-                    </span>
+                    <div className="ml-auto text-right">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cream-faint">
+                        {t('cat.depositFrom')}
+                      </p>
+                      <p className="text-sm font-semibold text-cream">
+                        {formatCurrency(v.minCaution ?? 0)}
+                      </p>
+                    </div>
                   )}
                 </div>
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-cream transition-colors group-hover:text-gold">
-                  {v.count > 1 ? t('cat.seeOptions') : t('cat.bookNow')}{' '}
-                  <ArrowRight className="h-4 w-4" />
-                </span>
+              </div>
+
+              <div className="mt-4 flex items-center justify-end gap-2 text-sm font-semibold text-cream transition-colors group-hover:text-gold">
+                {v.count > 1 ? t('cat.seeOptions') : t('cat.bookNow')}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
             </div>
           </Link>
