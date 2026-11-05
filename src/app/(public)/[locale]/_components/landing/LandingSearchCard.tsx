@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useToday } from '../../catalogue/_lib/useToday';
 import { addDays, differenceInDays, format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CalendarDays, MoveRight } from 'lucide-react';
@@ -26,14 +26,13 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
  * la date tient alors à côté de notre icône, et un appui n'importe où ouvre le calendrier.
  */
 const dateInputBase =
-  'h-12 w-full min-w-0 rounded-xl border border-white/[0.09] bg-black/[0.32] pl-9 pr-2 text-sm font-semibold text-[#f7f1e8] outline-none transition-all duration-200 hover:border-[rgba(201,168,76,0.28)] focus:border-[rgba(201,168,76,0.55)] focus:bg-black/[0.45] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.14)] cursor-pointer sm:pl-10 sm:pr-3 max-sm:[&::-webkit-calendar-picker-indicator]:absolute max-sm:[&::-webkit-calendar-picker-indicator]:inset-0 max-sm:[&::-webkit-calendar-picker-indicator]:h-full max-sm:[&::-webkit-calendar-picker-indicator]:w-full max-sm:[&::-webkit-calendar-picker-indicator]:opacity-0';
+  'h-12 w-full min-w-0 rounded-xl border border-white/[0.09] bg-black/[0.32] pl-9 pr-2 text-base font-semibold sm:text-sm text-[#f7f1e8] outline-none transition-all duration-200 hover:border-[rgba(201,168,76,0.28)] focus:border-[rgba(201,168,76,0.55)] focus:bg-black/[0.45] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.14)] cursor-pointer sm:pl-10 sm:pr-3 max-sm:[&::-webkit-calendar-picker-indicator]:absolute max-sm:[&::-webkit-calendar-picker-indicator]:inset-0 max-sm:[&::-webkit-calendar-picker-indicator]:h-full max-sm:[&::-webkit-calendar-picker-indicator]:w-full max-sm:[&::-webkit-calendar-picker-indicator]:opacity-0';
 
 /* ─── Hero search card — availability by dates ──────── */
 export function LandingSearchCard() {
-  const router = useRouter();
   const { t, lp } = useLocale();
 
-  const today = toIsoDay(new Date());
+  const today = useToday();
   const [du, setDu] = useState('');
   const [au, setAu] = useState('');
 
@@ -66,7 +65,8 @@ export function LandingSearchCard() {
       );
       return;
     }
-    router.push(lp(`/catalogue?du=${du}&au=${au}`));
+    // Vraie navigation : le routeur client resservirait la page en cache de /catalogue, voir CatalogueView.
+    window.location.assign(lp(`/catalogue?du=${du}&au=${au}`));
   };
 
   return (

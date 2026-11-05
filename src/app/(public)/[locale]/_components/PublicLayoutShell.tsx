@@ -149,7 +149,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             <div ref={langRef} className="relative">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-cream-muted transition-colors hover:border-gold/20 hover:text-gold"
+                className="flex min-h-11 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-cream-muted transition-colors hover:border-gold/20 hover:text-gold"
                 aria-label={t('aria.langSelect')}
                 aria-expanded={langOpen}
               >
@@ -163,7 +163,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                     <button
                       key={lang.code}
                       onClick={() => { setLocale(lang.code); setLangOpen(false); }}
-                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
+                      className={`flex min-h-11 w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                         locale === lang.code
                           ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold'
                           : 'text-cream-muted hover:bg-white/5 hover:text-cream'
@@ -192,7 +192,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             {/* ── Hamburger (mobile only) ── */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cream-muted transition-colors hover:border-gold/20 hover:text-gold md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cream-muted transition-colors hover:border-gold/20 hover:text-gold md:hidden"
               aria-label={menuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -241,7 +241,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 end-0 z-50 flex h-12 w-8 items-center justify-center rounded-s-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform md:bottom-6 md:end-5 md:w-12 md:rounded-full md:hover:scale-110"
+        className="fixed bottom-4 end-0 z-50 flex h-12 w-11 items-center justify-center rounded-s-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform md:bottom-6 md:end-5 md:w-12 md:rounded-full md:hover:scale-110"
         aria-label={t('aria.whatsapp')}
       >
         <WhatsAppIcon className="h-5 w-5 md:h-6 md:w-6" />

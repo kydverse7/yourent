@@ -507,3 +507,10 @@ a {
     grid-template-columns: minmax(320px, 1fr) minmax(0, 1.618fr);
   }
 }
+
+/* Zones tactiles : au moins 44 px sur téléphone pour les boutons principaux. */
+@media (max-width: 767px) {
+  .btn-gold {
+    min-height: 44px;
+  }
+}

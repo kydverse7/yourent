@@ -4,6 +4,7 @@ import Link from '@/lib/i18n/LocaleLink';
 import type { Locale } from '@/lib/i18n/translations';
 import type { FleetModel } from '@/lib/seo/fleet';
 import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
+import { formatEurApprox } from '@/lib/site';
 import type { Block, FaqItem, Section } from '@/content/types';
 import { SEO_LABELS } from './seoLabels';
 
@@ -78,6 +79,12 @@ function formatPrice(value: number): string {
   return value.toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');
 }
 
+/** Équivalent indicatif, sous le prix en dirhams : les colonnes des tableaux gardent leur largeur. */
+export function EurHint({ mad, locale }: { mad: number; locale: Locale }) {
+  const text = formatEurApprox(mad, locale);
+  return text ? <span className="block text-[10px] font-normal text-cream-faint sm:text-xs">{text}</span> : null;
+}
+
 export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: FleetModel[] }) {
   const labels = SEO_LABELS[locale];
   const altSuffix = { fr: 'à louer à Casablanca', en: 'for rent in Casablanca', ar: 'للكراء في الدار البيضاء' }[locale];
@@ -105,6 +112,11 @@ export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: F
                 <p className="text-xl font-bold text-gold">
                   {formatPrice(vehicle.minTarif)} {labels.currency}
                   <span className="text-xs font-normal text-cream-muted">{labels.perDay}</span>
+                  {formatEurApprox(vehicle.minTarif, locale) && (
+                    <span className="ms-1.5 whitespace-nowrap text-xs font-normal text-cream-faint">
+                      {formatEurApprox(vehicle.minTarif, locale)}
+                    </span>
+                  )}
                 </p>
               </div>
               {vehicle.countDispo === 0 ? (
@@ -151,8 +163,14 @@ function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetMod
                     {vehicle.marque} {vehicle.modele}
                   </Link>
                 </td>
-                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>{formatPrice(vehicle.minTarif)} {labels.currency}</td>
-                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>{formatPrice(vehicle.minTarifLong)} {labels.currency}</td>
+                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>
+                  {formatPrice(vehicle.minTarif)} {labels.currency}
+                  <EurHint mad={vehicle.minTarif} locale={locale} />
+                </td>
+                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>
+                  {formatPrice(vehicle.minTarifLong)} {labels.currency}
+                  <EurHint mad={vehicle.minTarifLong} locale={locale} />
+                </td>
                 <td className={`${TABLE_CELL} text-cream-muted`}>
                   {vehicle.minCaution > 0 ? (
                     <span className="whitespace-nowrap">{formatPrice(vehicle.minCaution)} {labels.currency}</span>
@@ -270,12 +288,12 @@ export function SeoFaq({ locale, items, tokens }: { locale: Locale; items: FaqIt
       <h2 className="text-2xl font-bold text-cream">{SEO_LABELS[locale].faqTitle}</h2>
       <div className="space-y-3">
         {items.map((item) => (
-          <details key={item.q} className="group lux-panel-muted px-5 py-4" open>
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-cream">
+          <details key={item.q} className="group lux-panel-muted px-5 py-2.5" open>
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-semibold text-cream">
               {resolveTokens(item.q, tokens)}
               <ChevronDown className="h-4 w-4 shrink-0 text-gold transition-transform group-open:rotate-180" />
             </summary>
-            <p className="mt-3 leading-relaxed text-cream-muted">
+            <p className="mt-1.5 pb-1.5 leading-relaxed text-cream-muted">
               <RichText text={item.a} locale={locale} tokens={tokens} />
             </p>
           </details>
@@ -305,7 +323,7 @@ export function RelatedLinks({
           <Link
             key={link.key}
             href={link.path}
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:border-gold/30 hover:text-gold"
+            className="inline-flex min-h-11 items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:border-gold/30 hover:text-gold"
           >
             {link.label}
           </Link>

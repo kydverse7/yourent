@@ -5,25 +5,25 @@ const article: Article = {
   metaTitle: `Péages Casablanca Marrakech Rabat : tarif | Yourent`,
   metaDescription: `Péages entre Casablanca, Rabat et Marrakech : tronçons, classes de véhicule, moyens de paiement, Pass Jawaz et où vérifier le tarif à jour sur ADM.`,
   h1: `Péages Casablanca - Marrakech - Rabat : comment ils fonctionnent et où vérifier le tarif`,
-  intro: `Les autoroutes entre Casablanca, Rabat et Marrakech sont à péage, géré par Autoroutes du Maroc (ADM), et le tarif dépend du tronçon parcouru et de la classe du véhicule. Aucun montant n'est donné ici : la grille officielle d'ADM ne porte pas de date d'application sur sa page, et les chiffres trouvés ailleurs se contredisent. Cet article explique comment lire la grille et comment payer.`,
+  intro: `Les autoroutes entre Casablanca, Rabat et Marrakech sont à péage, géré par Autoroutes du Maroc (ADM). Le tarif dépend du tronçon parcouru et de la classe du véhicule. Aucun montant n'est donné ici, car la grille officielle d'ADM ne porte pas de date d'application sur sa page et les chiffres trouvés ailleurs se contredisent. Cet article explique donc comment lire la grille et comment payer.`,
   excerpt: `Comment fonctionnent les péages entre Casablanca, Rabat et Marrakech : tronçons, classes de véhicule, paiement, Pass Jawaz, et où consulter la grille officielle d'ADM.`,
   datePublished: '2026-11-05',
   dateModified: '2026-11-05',
   sections: [
     {
-      h2: `Quelles autoroutes relient Casablanca à Rabat et à Marrakech ?`,
+      h2: `Quelles autoroutes à péage relient Casablanca à Rabat et à Marrakech ?`,
       blocks: [
         {
           type: 'list',
           items: [
             `**Casablanca - Rabat :** par l'A1, qui va de Rabat à Safi en passant par Casablanca et El Jadida.`,
-            `**Casablanca - Marrakech :** par l'A3, l'autoroute du Sud, qui dessert Nouaceur (aéroport Mohammed V), Berrechid, Settat et Marrakech.`,
-            `**Marrakech - Agadir :** par la suite de l'A3. Selon Wikipédia, l'A3 fait 429 km de Casablanca à Agadir, et le tronçon Marrakech - Agadir, mis en service en juin 2010, compte 7 gares de péage.`,
+            `**Casablanca - Marrakech :** par l'A3, l'autoroute du Sud, qui dessert notamment Nouaceur (aéroport Mohammed V), Berrechid, Settat et Marrakech.`,
+            `**Marrakech - Agadir :** par la suite de l'A3. Selon Wikipédia, l'A3 fait 429 km de Casablanca à Agadir. Le tronçon Marrakech - Agadir, mis en service en juin 2010, compte 7 gares de péage.`,
           ],
         },
         {
           type: 'p',
-          text: `Les gares sont situées aux échangeurs. Le péage ne se paie pas une fois pour tout le trajet à tarif unique : chaque ligne de la grille correspond à un trajet entre deux points d'accès, par exemple « Nouaceur - Marrakech Palmeraie » ou « Casablanca - Aéroport Mohammed V ».`,
+          text: `Les gares sont situées aux échangeurs. Le péage ne se paie pas une fois pour tout le trajet, à tarif unique. Chaque ligne de la grille correspond en effet à un trajet entre deux points d'accès. Par exemple, « Nouaceur - Marrakech Palmeraie » et « Casablanca - Aéroport Mohammed V » sont deux lignes distinctes.`,
         },
       ],
     },
@@ -32,15 +32,15 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Le tarif officiel est publié dans la **grille tarifaire sur le réseau** du site d'ADM. La page web affiche des prix par tronçon et par classe (classe 1, 2 et 3) mais, lors de la consultation du 5 novembre 2026, elle n'indiquait ni date d'application ni devise. Le fichier PDF mis en ligne par ADM a été créé en janvier 2024 d'après ses métadonnées, ce qui n'établit pas la date de validité des prix.`,
+          text: `Le tarif officiel est publié dans la **grille tarifaire sur le réseau** du site d'ADM. La page web affiche des prix par tronçon et par classe (classe 1, 2 et 3). Lors de la consultation du 5 novembre 2026, elle n'indiquait toutefois ni date d'application ni devise. Le fichier PDF mis en ligne par ADM a été créé en janvier 2024 d'après ses métadonnées, ce qui n'établit pas la date de validité des prix.`,
         },
         {
           type: 'p',
-          text: `Plusieurs sites de voyage donnent par ailleurs des montants pour Casablanca - Rabat, Casablanca - Marrakech ou Marrakech - Agadir. Ils divergent d'une source à l'autre, et certains annoncent des hausses récentes sans citer de document d'ADM. Faute de source datée et officielle, **aucun prix n'est repris ici**.`,
+          text: `Plusieurs sites de voyage donnent des montants pour Casablanca - Rabat, Casablanca - Marrakech ou Marrakech - Agadir. Ils divergent d'une source à l'autre, et certains annoncent des hausses récentes sans citer de document d'ADM. Faute de source datée et officielle, **aucun prix n'est donc repris ici**.`,
         },
         {
           type: 'p',
-          text: `Pour connaître le prix de votre trajet : ouvrez la page « Grille tarifaire sur le réseau » d'ADM, repérez la ligne entre votre point d'entrée et votre point de sortie, et lisez la colonne de votre classe. Vous pouvez aussi demander le montant à la gare de péage ou joindre ADM.`,
+          text: `Pour connaître le prix de votre trajet, ouvrez la page « Grille tarifaire sur le réseau » d'ADM. Repérez la ligne entre votre point d'entrée et votre point de sortie, puis lisez la colonne de votre classe. Vous pouvez aussi demander le montant à la gare de péage ou joindre ADM.`,
         },
       ],
     },
@@ -70,15 +70,15 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `ADM indique que les voies de péage acceptent le **Pass Jawaz**, les **cartes bancaires**, la **carte réseau** et les **espèces**. La page ne précise pas quel mode est accepté sur quelle voie : suivez les panneaux en arrivant à la gare.`,
+          text: `ADM indique que les voies de péage acceptent le **Pass Jawaz**, les **cartes bancaires**, la **carte réseau** et les **espèces**. La page ne précise toutefois pas quel mode est accepté sur quelle voie : suivez donc les panneaux en arrivant à la gare.`,
         },
         {
           type: 'p',
-          text: `Le Pass Jawaz est un badge de paiement à distance : on passe sans s'arrêter, sur les voies marquées du pictogramme, à 20 km/h. Il se fixe derrière le pare-brise et se recharge en agence ADM, en ligne, par application ou en banque partenaire. Sur une voiture de location, l'équipe précise sur WhatsApp si un badge est possible : ADM ne traite pas ce cas sur sa page.`,
+          text: `Le Pass Jawaz est un badge de paiement à distance : on passe sans s'arrêter, à 20 km/h, sur les voies marquées du pictogramme. Il se fixe derrière le pare-brise et se recharge en agence ADM, en ligne, par application ou en banque partenaire. Pour une voiture de location, l'équipe précise sur WhatsApp si un badge est possible, car ADM ne traite pas ce cas sur sa page.`,
         },
         {
           type: 'p',
-          text: `Gardez une carte bancaire et un peu d'espèces à portée de main au moment de passer le péage : les deux modes sont acceptés.`,
+          text: `Gardez une carte bancaire et un peu d'espèces à portée de main au moment de passer le péage, car les deux modes sont acceptés.`,
         },
       ],
     },
@@ -87,11 +87,11 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Avant de partir, consultez le **trafic en temps réel** sur le site et l'application ADM Trafic. Sur autoroute, la vitesse maximale est de 120 km/h pour une voiture de tourisme, et la vitesse minimale de 60 km/h en circulation normale, selon le décret n° 2-10-420.`,
+          text: `Avant de partir, consultez le **trafic en temps réel** sur le site et l'application ADM Trafic. Sur autoroute, la vitesse maximale est de 120 km/h pour une voiture de tourisme. La vitesse minimale est de 60 km/h en circulation normale, selon le décret n° 2-10-420. Les autres règles de circulation sont rappelées dans l'article [conduire à Casablanca en voiture de location](/blog/conduire-a-casablanca).`,
         },
         {
           type: 'p',
-          text: `Si vous partez pour plusieurs jours, voyez l'article [road trip Casablanca - Marrakech - Agadir](/blog/road-trip-casablanca-marrakech-agadir). Pour louer au départ de l'aéroport ou de Casablanca, la page [tarifs de location](route:tarifs) donne les prix par modèle, calculés par jour.`,
+          text: `Si vous partez pour plusieurs jours, voyez l'article [road trip Casablanca - Marrakech - Agadir](/blog/road-trip-casablanca-marrakech-agadir). Pour louer au départ de l'aéroport ou de Casablanca, la page [tarifs de location de voiture](route:tarifs) donne les prix par modèle, calculés par jour. La livraison à l'aéroport est détaillée sur la page [location de voiture à l'aéroport Mohammed V](route:aeroport).`,
         },
       ],
     },
@@ -111,7 +111,7 @@ const article: Article = {
     },
     {
       q: `Faut-il un Pass Jawaz pour une location de quelques jours ?`,
-      a: `Non, le paiement en espèces ou par carte reste possible. Pour savoir si un badge est utilisable sur une voiture de location, demandez à l'équipe sur WhatsApp.`,
+      a: `Non, car le paiement en espèces ou par carte reste possible. Pour savoir si un badge est utilisable sur une voiture de location, demandez à l'équipe sur WhatsApp.`,
     },
   ],
   related: ['tarifs', 'aeroport', 'longue-duree', 'suv'],

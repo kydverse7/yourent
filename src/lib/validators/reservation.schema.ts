@@ -62,6 +62,17 @@ export const reservationSchema = reservationBaseSchema
 // Utilise le schéma de base (sans refine) pour permettre le .partial()
 export const reservationUpdateSchema = reservationBaseSchema.partial();
 
+/** Retire les caractères de contrôle (sauf retours à la ligne et tabulations) et les espaces autour. */
+function cleanFreeText(value: string): string {
+  return value
+    .replace(/\r\n?/g, '\n')
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+    .trim();
+}
+
+export const PUBLIC_NOTES_MAX_LENGTH = 1000;
+
 // Schéma public (site web) — sans clientId, informations minimales
 export const publicReservationSchema = z.object({
   vehicleSlug: z.string().min(1),
@@ -79,6 +90,11 @@ export const publicReservationSchema = z.object({
   optionsSupplementaires: z
     .array(z.object({ nom: z.string(), prix: z.number() }))
     .default([]),
+  notes: z
+    .string()
+    .transform(cleanFreeText)
+    .refine((value) => value.length <= PUBLIC_NOTES_MAX_LENGTH, 'Notes trop longues')
+    .optional(),
   // Anti-spam honeypot — doit être vide
   website: z.literal('').optional(),
 }).refine((d) => d.finAt > d.debutAt, {

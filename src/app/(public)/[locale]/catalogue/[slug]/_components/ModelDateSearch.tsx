@@ -1,17 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { addDays, differenceInDays, format } from 'date-fns';
 import { ArrowRight, CalendarDays } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { MIN_RESERVATION_DAYS } from '@/lib/constants';
 import { useLocale } from '@/lib/i18n';
+import { useToday } from '../../_lib/useToday';
 
 const toIsoDay = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const inputClass =
-  'h-11 w-full rounded-xl border border-white/10 bg-white/5 ps-10 pe-3 text-sm font-semibold text-cream outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
+  'h-11 w-full rounded-xl border border-white/10 bg-white/5 ps-10 pe-3 text-base font-semibold text-cream sm:text-sm outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
 const labelClass = 'mb-1 block text-[0.58rem] font-bold uppercase tracking-[0.16em] text-cream-muted';
 
 /** Recherche d'autres dates sur la fiche d'un modèle sans unité libre. */
@@ -24,12 +24,11 @@ export function ModelDateSearch({
   initialDu?: string;
   initialAu?: string;
 }) {
-  const router = useRouter();
   const { t, lp } = useLocale();
   const [du, setDu] = useState(initialDu ?? '');
   const [au, setAu] = useState(initialAu ?? '');
 
-  const today = toIsoDay(new Date());
+  const today = useToday();
   const minAu = du ? toIsoDay(addDays(new Date(du), MIN_RESERVATION_DAYS)) : today;
 
   const handleDu = (value: string) => {
@@ -45,7 +44,8 @@ export function ModelDateSearch({
       toast.error(t('cat.datesErr').replace('{count}', String(MIN_RESERVATION_DAYS)));
       return;
     }
-    router.push(lp(`/catalogue/${modelSlug}?du=${du}&au=${au}`));
+    // Vraie navigation : le routeur client resservirait la fiche en cache, voir CatalogueView.
+    window.location.assign(lp(`/catalogue/${modelSlug}?du=${du}&au=${au}`));
   };
 
   return (

@@ -111,6 +111,7 @@ export async function POST(req: NextRequest) {
       canal: 'public',
       statut: 'en_attente',
       optionsSupplementaires: data.optionsSupplementaires,
+      notes: data.notes || undefined,
       prix: {
         parJour: pricing.tarifJour,
         palier: pricing.palier,

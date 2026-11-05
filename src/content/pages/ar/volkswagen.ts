@@ -7,16 +7,16 @@ const page: PageContent = {
   eyebrow: 'Volkswagen',
   h1: 'كراء فولكسفاغن في الدار البيضاء: Touareg وGolf 8 وTiguan وT-Roc',
   intro:
-    'لكراء فولكسفاغن في الدار البيضاء، تقدّم Yourent أربعة طرازات من Volkswagen، من T-Roc بسعر {price:volkswagen-t-roc} درهم في اليوم إلى Touareg بسعر {price:volkswagen-touareg} درهم. تختار الطراز في الكتالوج، وترسل تواريخك، ويؤكد الفريق على واتساب أو بالهاتف. تُسلَّم السيارة في الفندق أو في عنوانك أو في مطار محمد الخامس. أقل مدة 5 أيام.',
+    'تقدّم Yourent كراء فولكسفاغن في الدار البيضاء بأربعة طرازات، من T-Roc بسعر {price:volkswagen-t-roc} درهم في اليوم إلى Touareg بسعر {price:volkswagen-touareg} درهم. تختار الطراز في الكتالوج وترسل تواريخك، ثم يؤكد الفريق على واتساب أو بالهاتف. وتصلك السيارة في الفندق أو في عنوانك أو في مطار محمد الخامس. أقل مدة 5 أيام.',
   breadcrumb: 'Volkswagen',
   vehicles: { marques: ['Volkswagen'], sort: 'asc' },
   sections: [
     {
-      h2: 'أربع سيارات Volkswagen لأربع طرق في السفر',
+      h2: 'كراء فولكسفاغن في الدار البيضاء: أربعة طرازات لأربع طرق في السفر',
       blocks: [
         {
           type: 'p',
-          text: 'Volkswagen هي العلامة الأكثر حضورًا في أسطول Yourent. [Golf 8](/catalogue/volkswagen-golf-8) سيارة مدمجة متعددة الاستعمالات، بالديزل أو البنزين، وبعلبة سرعات أوتوماتيكية أو يدوية حسب النسخة. و[T-Roc](/catalogue/volkswagen-t-roc) سيارة SUV مدمجة، أعلى من السيدان ولا تشغل مساحة كبيرة. وترتفع [Tiguan](/catalogue/volkswagen-tiguan) درجة في المساحة. أما [Touareg](/catalogue/volkswagen-touareg) فهي SUV الكبيرة من العلامة.',
+          text: 'Volkswagen هي العلامة الأكثر حضورًا في أسطول Yourent. [Golf 8](/catalogue/volkswagen-golf-8) سيارة مدمجة متعددة الاستعمالات، بالديزل أو البنزين، وبعلبة سرعات أوتوماتيكية أو يدوية حسب النسخة. في المقابل، [T-Roc](/catalogue/volkswagen-t-roc) سيارة SUV مدمجة، أعلى من السيدان ولا تشغل مساحة كبيرة. أما [Tiguan](/catalogue/volkswagen-tiguan) فتوفر مساحة أكبر، و[Touareg](/catalogue/volkswagen-touareg) هي SUV الكبيرة من العلامة.',
         },
       ],
     },
@@ -35,7 +35,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'عند الوصول إلى مطار محمد الخامس، تكفي T-Roc أو Golf لشخصين بحقيبتين. ولأربعة أشخاص مع أمتعتهم، اتجه إلى Tiguan أو Touareg. أما خلال الإقامة في الدار البيضاء، فتبقى Golf الأسهل في الركن. وعلى الطريق السيار نحو مراكش، يظهر الفرق خصوصًا في الخلف: Touareg أكثر ثباتًا من T-Roc.',
+          text: 'عند الوصول إلى مطار محمد الخامس، تكفي T-Roc أو Golf لشخصين بحقيبتين. لكن لأربعة أشخاص مع أمتعتهم، اتجه إلى Tiguan أو Touareg. أما خلال الإقامة في الدار البيضاء، فتبقى Golf الأسهل في الركن. وعلى الطريق السيار نحو مراكش، Touareg أكثر ثباتًا من T-Roc.',
         },
       ],
     },
@@ -48,7 +48,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'تتراوح الأسعار بين {minPrice} و{maxPrice} درهم في اليوم: {price:volkswagen-t-roc} درهم لسيارة T-Roc، و{price:volkswagen-golf-8} درهم لسيارة Golf 8، و{price:volkswagen-tiguan} درهم لسيارة Tiguan، و{price:volkswagen-touareg} درهم لسيارة Touareg. وبعد 10 أيام يُطبَّق سعر مخفض تلقائيًا. وكل سيارة مغطاة بتأمين ضد جميع المخاطر مع مبلغ التحمل.',
+          text: 'تتراوح الأسعار بين {minPrice} و{maxPrice} درهم في اليوم: {price:volkswagen-t-roc} درهم لسيارة T-Roc، و{price:volkswagen-golf-8} درهم لسيارة Golf 8، و{price:volkswagen-tiguan} درهم لسيارة Tiguan، و{price:volkswagen-touareg} درهم لسيارة Touareg. ويُطبَّق سعر أقل تلقائيًا بعد 10 أيام، ما لم يعلّقه موسم الذروة. ويغطي تأمين ضد جميع المخاطر مع مبلغ التحمل الطرازات الأربعة.',
         },
         { type: 'pricing' },
       ],
@@ -58,7 +58,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'إذا كنت تريد الحجم نفسه بصورة أكثر وجاهة، فانظر إلى [Audi Q3](/catalogue/audi-q3) أو إلى صفحة [كراء سيارات SUV](route:suv). ولميزانية أضيق، تبقى [Dacia Duster](/catalogue/dacia-duster) الحل الأوفر بين سيارات SUV. وإذا كنت تريد علبة أوتوماتيكية فقط، فإن صفحة [كراء سيارة أوتوماتيك](route:automatique) تفرز الأسطول بدلًا منك.',
+          text: 'إذا كنت تريد الحجم نفسه بصورة أكثر وجاهة، فانظر إلى [Audi Q3](/catalogue/audi-q3) أو إلى صفحة [كراء سيارات SUV](route:suv). في المقابل، تبقى [Dacia Duster](/catalogue/dacia-duster) الحل الأوفر بين سيارات SUV لميزانية أضيق. وإذا كنت تريد علبة أوتوماتيكية فقط، فإن صفحة [كراء سيارة أوتوماتيك](route:automatique) تفرز الأسطول بدلًا منك.',
         },
       ],
     },
@@ -66,11 +66,11 @@ const page: PageContent = {
   faq: [
     {
       q: 'أي سيارة Volkswagen أختار لطريق الدار البيضاء - مراكش؟',
-      a: '[Tiguan](/catalogue/volkswagen-tiguan) و[Touareg](/catalogue/volkswagen-touareg) هما الأكثر راحة في هذا الطريق، بصندوق واسع. وتناسب T-Roc جيدًا مسافرين أو ثلاثة.',
+      a: '[Tiguan](/catalogue/volkswagen-tiguan) و[Touareg](/catalogue/volkswagen-touareg) هما الأكثر راحة في هذا الطريق، بصندوق واسع، بينما تناسب T-Roc مسافرين أو ثلاثة.',
     },
     {
       q: 'هل Golf 8 بعلبة سرعات أوتوماتيكية؟',
-      a: 'تتوفر بالعلبتين، وبالديزل والبنزين، حسب النسخة. اذكر ما تفضله في طلبك، ويقترح عليك الفريق السيارة المطابقة من بين الشاغرة في تواريخك.',
+      a: 'تتوفر بالعلبتين، وبالديزل والبنزين، حسب النسخة. اذكر ما تفضله في طلبك، ثم يقترح عليك الفريق السيارة المطابقة من بين الشاغرة في تواريخك.',
     },
     {
       q: 'هل سيارات SUV من Volkswagen بالديزل؟',
@@ -82,7 +82,7 @@ const page: PageContent = {
     },
     {
       q: 'ما أقل مدة لكراء سيارة Volkswagen؟',
-      a: '5 أيام على الأقل، في كل الطرازات. ويُطبَّق سعر أقل تلقائيًا بعد 10 أيام.',
+      a: 'تكتري لمدة 5 أيام على الأقل، في كل الطرازات، ثم ينخفض السعر اليومي بعد 10 أيام.',
     },
   ],
   related: ['suv', 'automatique', 'longue-duree', 'aeroport', 'tarifs'],

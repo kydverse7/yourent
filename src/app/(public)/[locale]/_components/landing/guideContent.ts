@@ -37,27 +37,28 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     eyebrow: 'Le guide avant de louer',
     h2: 'Location de voiture à Casablanca : comment ça marche chez Yourent',
     intro: ({ vehicleCount, minPrice, minDays }) =>
-      `Yourent loue ${vehicleCount > 0 ? `${vehicleCount} véhicules` : 'des véhicules'} à Casablanca${minPrice > 0 ? `, à partir de ${minPrice} DH par jour` : ''}, pour ${minDays} jours minimum. Vous envoyez une demande en ligne, l’équipe confirme sur WhatsApp ou par téléphone, puis la voiture est livrée à votre hôtel, à l’aéroport Mohammed V ou à l’adresse que vous indiquez.`,
+      `Pour une location de voiture à Casablanca, Yourent propose ${vehicleCount > 0 ? `${vehicleCount} véhicules` : 'des véhicules'}${minPrice > 0 ? `, à partir de ${minPrice} DH par jour` : ''}, pour ${minDays} jours minimum. Vous envoyez une demande en ligne, l’équipe confirme sur WhatsApp ou par téléphone, puis la voiture est livrée à votre hôtel, à l’aéroport Mohammed V ou à l’adresse que vous indiquez.`,
     flow: {
-      h3: 'De la demande en ligne à la remise des clés',
+      h3: 'Louer une voiture à Casablanca : de la demande à la remise des clés',
       paragraphs: [
-        'Tout part de vos dates. Dans le [catalogue](/catalogue), la recherche retire les voitures déjà prises sur cette période : il ne reste que celles que vous pouvez vraiment louer. Vous ouvrez la fiche du modèle qui vous convient et vous envoyez votre demande avec vos coordonnées.',
+        'Tout part de vos dates. Dans le [catalogue de location de voitures à Casablanca](/catalogue), la recherche retire les voitures déjà prises sur cette période : il ne reste donc que celles que vous pouvez vraiment louer. Vous ouvrez ensuite la fiche du modèle qui vous convient et vous envoyez votre demande avec vos coordonnées.',
         'Cette demande ne vous fait rien payer, car le site n’encaisse aucun paiement. Un membre de l’équipe vous répond pour valider le véhicule, le montant et le lieu de remise, puis le règlement se fait directement avec lui.',
-        'Les plans changent souvent avant un voyage. Vous pouvez modifier ou annuler sans frais jusqu’à 24 h avant la prise en charge ; plus tard, des frais peuvent s’appliquer.',
+        'Les plans changent souvent avant un voyage. C’est pourquoi vous pouvez modifier ou annuler sans frais jusqu’à 24 h avant la prise en charge ; plus tard, en revanche, des frais peuvent s’appliquer.',
       ],
     },
     airport: {
-      h3: 'La livraison à l’aéroport Mohammed V',
+      h3: 'Location de voiture à l’aéroport Mohammed V : la livraison',
       paragraphs: ({ hours }) => [
-        'Vous ne payez pas de frais de livraison à l’aéroport Mohammed V, pas plus que dans le reste de Casablanca. Yourent n’a pas de comptoir dans le terminal : le véhicule vient à vous, sur rendez-vous. Il peut aussi vous attendre à votre hôtel ou à votre domicile en ville, 7j/7.',
+        'Vous ne payez pas de frais de livraison à l’aéroport Mohammed V, pas plus que dans le reste de Casablanca. Yourent n’a pas de comptoir dans le terminal : le véhicule vient donc à vous, sur rendez-vous. Il peut aussi vous attendre à votre hôtel ou à votre domicile en ville, 7j/7.',
         `Donnez votre date et votre heure d’arrivée dans la demande, l’équipe vous indique ensuite le lieu de rendez-vous sur WhatsApp. Horaires de l’équipe : ${hours}. Si votre avion atterrit en dehors de ces horaires, posez la question avant de réserver.`,
-        'Hors de la ville, Mohammedia est possible avec un léger supplément. Pour le déroulé complet de l’arrivée, lisez notre [page sur la location à l’aéroport](route:aeroport).',
+        'Hors de la ville, Mohammedia est possible avec un léger supplément. Pour le déroulé complet de l’arrivée, lisez notre page [location de voiture à l’aéroport de Casablanca](route:aeroport). Si vous venez de France ou d’un autre pays d’Europe, voyez aussi notre [location de voiture à Casablanca depuis la France et l’Europe](route:europe).',
+        'Votre voyage continue hors de la ville ? Notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca, et notre page [location de voiture de Casablanca à Marrakech](route:marrakech) détaille ce trajet. La voiture se récupère dans tous les cas à Casablanca ou à l’aéroport.',
       ],
     },
     ranges: {
       h3: 'Quelle gamme choisir',
       lead: ({ modelCount }) =>
-        `${modelCount > 0 ? `La flotte compte ${modelCount} modèles, tous à 5 places.` : 'Tous nos modèles ont 5 places.'} Le bon choix dépend surtout de vos trajets, de vos bagages et de la boîte de vitesses que vous préférez.`,
+        `${modelCount > 0 ? `La flotte compte ${modelCount} modèles, tous à 5 places.` : 'Tous nos modèles ont 5 places.'} Pour louer une voiture à Casablanca, le bon choix dépend surtout de vos trajets, de vos bagages et de la boîte de vitesses que vous préférez.`,
       price: (value) => `dès ${value} DH par jour`,
       items: [
         {
@@ -88,23 +89,23 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'longue-duree',
           title: 'Longue durée',
-          text: 'Au-delà de 10 jours, le tarif réduit s’applique tout seul sur la plupart des modèles, sans demande de votre part. Le prix affiché ici est le plus bas de ce palier.',
+          text: 'Au-delà de 10 jours, le tarif réduit s’applique tout seul sur la plupart des modèles, sauf si la haute saison le suspend. Le prix affiché ici est le plus bas de ce palier.',
         },
       ],
       outro:
-        'Vous visez une marque précise ? Voyez nos pages [Mercedes](route:mercedes), [Range Rover](route:range-rover) et [Porsche](route:porsche), ou comparez les prix modèle par modèle sur la [page des tarifs](route:tarifs).',
+        'Vous visez le haut de gamme ? Voyez notre [location de voiture de luxe à Casablanca](route:luxe), puis nos pages [location de Mercedes](route:mercedes), [location de Range Rover à Casablanca](route:range-rover) et [location de Porsche](route:porsche). Vous pouvez aussi comparer les prix modèle par modèle sur la page [prix de location de voiture à Casablanca](route:tarifs).',
     },
     prepare: {
-      h3: 'Ce qu’il faut prévoir',
+      h3: 'Ce qu’il faut prévoir pour votre location de voiture à Casablanca',
       items: ({ minDays }) => [
         `**Durée.** La location dure au moins ${minDays} jours : il n’y a pas de formule à la journée ni au week-end.`,
-        '**Documents.** Préparez une pièce d’identité valide (CIN ou passeport), un permis obtenu il y a plus de 2 ans et un justificatif de domicile. Si vous venez de l’étranger, le permis international est accepté.',
+        '**Âge et documents.** Il faut avoir au moins 21 ans. Préparez aussi une pièce d’identité valide (CIN ou passeport), un permis obtenu il y a plus de 2 ans et un justificatif de domicile. Si vous venez de l’étranger, le permis international est accepté.',
         '**Caution.** Elle se donne au départ, par chèque, en espèces ou par empreinte de carte. Son montant dépend du véhicule, et vous la récupérez au retour si la voiture est en bon état.',
         '**Assurance.** Chaque voiture est couverte tous risques, avec une franchise. Demandez-en le montant pour votre modèle avant de confirmer.',
         '**Imprévus.** En cas de panne, un véhicule de remplacement part vers vous dans les plus brefs délais. Après un accident, l’équipe vous aide dans les démarches.',
       ],
       outro:
-        'Âge minimum, kilométrage, retour dans une autre ville : pour ces questions, l’équipe vous répond sur [WhatsApp](whatsapp). Le reste est détaillé dans nos [conditions de location](route:conditions).',
+        'Kilométrage, retour dans une autre ville : pour ces questions, l’équipe vous répond sur [WhatsApp](whatsapp). Le reste est détaillé dans nos [conditions de location de voiture](route:conditions).',
     },
   },
 
@@ -112,25 +113,25 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     eyebrow: 'Before you rent',
     h2: 'Car rental in Casablanca: how it works at Yourent',
     intro: ({ vehicleCount, minPrice, minDays }) =>
-      `Yourent rents out ${vehicleCount > 0 ? `${vehicleCount} vehicles` : 'vehicles'} in Casablanca${minPrice > 0 ? `, from ${minPrice} MAD per day` : ''}, for a minimum of ${minDays} days. You send a request online, the team confirms by WhatsApp or phone, and the car is delivered to your hotel, to Mohammed V Airport or to the address you give.`,
+      `Yourent offers car rental in Casablanca with ${vehicleCount > 0 ? `${vehicleCount} vehicles` : 'the whole fleet'}${minPrice > 0 ? `, from ${minPrice} MAD per day` : ''}, for a minimum of ${minDays} days. Send a request online; the team confirms by WhatsApp or phone, then the car is delivered to your hotel, to Mohammed V Airport or to the address you give.`,
     flow: {
       h3: 'From online request to handover',
       paragraphs: [
-        'It starts with your dates. In the [catalogue](/catalogue), the search removes cars already taken for that period, so you only see the ones you can actually rent. Open the page of the model that suits you and send your request with your contact details.',
+        'It starts with your dates. In the [car catalogue](/catalogue), the search removes cars already taken for that period, so you only see the ones you can actually rent. Open the page of the model that suits you, then send your request with your contact details.',
         'The request costs nothing, because the website takes no payment. A team member replies to confirm the vehicle, the amount and the handover location, and you then pay them directly.',
-        'Travel plans often change. You can modify or cancel free of charge up to 24 hours before pick-up; after that, fees may apply.',
+        'Travel plans often change, so you can modify or cancel free of charge up to 24 hours before pick-up. After that deadline, however, fees may apply.',
       ],
     },
     airport: {
-      h3: 'Delivery at Mohammed V Airport',
+      h3: 'Car rental at Casablanca airport: delivery to Mohammed V',
       paragraphs: ({ hours }) => [
-        'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal: the car comes to you, by appointment. It can also be brought to your hotel or home in the city, 7 days a week.',
-        `Give your arrival date and time in the request, and the team will send you the meeting point on WhatsApp. Team hours: ${hours}. If your flight lands outside these hours, ask before you book.`,
-        'Outside the city, Mohammedia is possible for a small extra charge. For a full account of the arrival, read our [airport rental page](route:aeroport).',
+        'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal; instead, the car comes to you, by appointment. It can also be brought to your hotel or home in the city, 7 days a week.',
+        `Give your arrival date and time in the request, and the team will send you the meeting point on WhatsApp. Team hours: ${hours}. If your flight lands outside these hours, however, ask before you book.`,
+        'Outside the city, Mohammedia is possible for a small extra charge. For a full account of the arrival, read our [car rental Casablanca airport page](route:aeroport).',
       ],
     },
     ranges: {
-      h3: 'Which range to choose',
+      h3: 'Rent a car in Casablanca: which range to choose',
       lead: ({ modelCount }) =>
         `${modelCount > 0 ? `The fleet has ${modelCount} models, all with 5 seats.` : 'All our models have 5 seats.'} The right choice depends mostly on your journeys, your luggage and the gearbox you prefer.`,
       price: (value) => `from ${value} MAD per day`,
@@ -163,23 +164,23 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'longue-duree',
           title: 'Long-term rental',
-          text: 'After 10 days, the lower rate applies automatically on most models, with nothing to ask for. The price shown here is the lowest at that level.',
+          text: 'After 10 days, the lower rate applies automatically on most models, unless high season suspends it. The price shown here is the lowest at that level.',
         },
       ],
       outro:
-        'Looking for a specific make? See our [Mercedes](route:mercedes), [Range Rover](route:range-rover) and [Porsche](route:porsche) pages, or compare prices model by model on the [prices page](route:tarifs).',
+        'Looking for a specific make? See our [Mercedes rental](route:mercedes), [Range Rover rental](route:range-rover) and [Porsche rental](route:porsche) pages, or compare model by model on the [car rental prices in Casablanca](route:tarifs) page.',
     },
     prepare: {
       h3: 'What to prepare',
       items: ({ minDays }) => [
         `**Duration.** A rental lasts at least ${minDays} days: there is no daily or weekend option.`,
-        '**Documents.** Bring a valid ID (national ID card or passport), a driving licence held for more than 2 years and proof of address. If you are coming from abroad, an international driving permit is accepted.',
+        '**Age and documents.** You must be at least 21. Bring a valid ID (national ID card or passport), a driving licence held for more than 2 years and proof of address. If you are coming from abroad, an international driving permit is accepted.',
         '**Deposit.** You leave it at pick-up, by cheque, in cash or as a card imprint. The amount depends on the vehicle, and you get it back on return if the car is in good condition.',
         '**Insurance.** Every car has comprehensive insurance with an excess. Ask for the amount of the excess on your model before you confirm.',
         '**If something goes wrong.** If the car breaks down, a replacement is sent to you as soon as possible. After an accident, the team helps you with the paperwork.',
       ],
       outro:
-        'Minimum age, mileage, returning the car in another city: for these questions, the team answers on [WhatsApp](whatsapp). Everything else is set out in our [rental requirements](route:conditions).',
+        'Mileage, returning the car in another city: for these questions, the team answers on [WhatsApp](whatsapp). Everything else is set out in our [car rental requirements](route:conditions).',
     },
   },
 
@@ -187,25 +188,25 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     eyebrow: 'دليلك قبل الكراء',
     h2: 'كراء السيارات في الدار البيضاء: كيف يتم لدى Yourent',
     intro: ({ vehicleCount, minPrice, minDays }) =>
-      `توفر Yourent ${vehicleCount > 0 ? `${vehicleCount} سيارة` : 'سيارات'} للكراء في الدار البيضاء${minPrice > 0 ? `، ابتداءً من ${minPrice} درهم في اليوم` : ''}، لمدة ${minDays} أيام على الأقل. ترسل طلبك عبر الإنترنت، ويؤكده الفريق عبر واتساب أو الهاتف، ثم تُسلَّم السيارة إلى فندقك أو إلى مطار محمد الخامس أو إلى العنوان الذي تحدده.`,
+      `لكراء السيارات في الدار البيضاء، توفر Yourent ${vehicleCount > 0 ? `${vehicleCount} سيارة` : 'أسطولًا متنوعًا'}${minPrice > 0 ? `، ابتداءً من ${minPrice} درهم في اليوم` : ''}، لمدة ${minDays} أيام على الأقل. ترسل طلبك عبر الإنترنت، ويؤكده الفريق عبر واتساب أو الهاتف، ثم تُسلَّم السيارة إلى فندقك أو إلى مطار محمد الخامس أو إلى العنوان الذي تحدده.`,
     flow: {
       h3: 'من الطلب عبر الإنترنت إلى تسليم المفاتيح',
       paragraphs: [
-        'تبدأ العملية بتواريخك. في [الكتالوج](/catalogue)، يستبعد البحث السيارات المحجوزة خلال تلك الفترة، فلا يبقى أمامك إلا ما يمكنك كراؤه فعلًا. افتح صفحة الطراز الذي يناسبك وأرسل طلبك مع بيانات الاتصال بك.',
+        'تبدأ العملية بتواريخك. في [كتالوج السيارات](/catalogue)، يستبعد البحث السيارات المحجوزة خلال تلك الفترة، لذلك لا يبقى أمامك إلا ما يمكنك كراؤه فعلًا. افتح صفحة الطراز الذي يناسبك، ثم أرسل طلبك مع بيانات الاتصال بك.',
         'لا يترتب على هذا الطلب أي دفع، لأن الموقع لا يستقبل أي مبالغ. يرد عليك أحد أعضاء الفريق لتأكيد السيارة والمبلغ ومكان التسليم، ثم تتم التسوية معه مباشرة.',
-        'كثيرًا ما تتغير الخطط قبل السفر. يمكنك التعديل أو الإلغاء دون رسوم حتى 24 ساعة قبل موعد الاستلام، وبعد ذلك قد تُطبق رسوم.',
+        'كثيرًا ما تتغير الخطط قبل السفر، لذا يمكنك التعديل أو الإلغاء دون رسوم حتى 24 ساعة قبل موعد الاستلام. لكن بعد هذا الأجل قد تُطبق رسوم.',
       ],
     },
     airport: {
-      h3: 'التوصيل إلى مطار محمد الخامس',
+      h3: 'كراء السيارات في مطار محمد الخامس: التوصيل',
       paragraphs: ({ hours }) => [
-        'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المطار: السيارة تأتي إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
-        `اذكر تاريخ وصولك وساعته في الطلب، وسيحدد لك الفريق مكان اللقاء عبر واتساب. أوقات عمل الفريق: ${hours}. إذا كانت طائرتك ستهبط خارج هذه الأوقات، فاسأل قبل الحجز.`,
-        'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط. لمعرفة تفاصيل الوصول كاملة، اقرأ [صفحة الكراء في المطار](route:aeroport).',
+        'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المطار، لذلك تأتي السيارة إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
+        `اذكر تاريخ وصولك وساعته في الطلب، وسيحدد لك الفريق مكان اللقاء عبر واتساب. أوقات عمل الفريق: ${hours}. وإذا كانت طائرتك ستهبط خارج هذه الأوقات، فاسأل قبل الحجز.`,
+        'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط. لمعرفة تفاصيل الوصول كاملة، اقرأ صفحة [كراء السيارات في مطار محمد الخامس](route:aeroport).',
       ],
     },
     ranges: {
-      h3: 'أي فئة تختار',
+      h3: 'كراء سيارة في الدار البيضاء: أي فئة تختار',
       lead: ({ modelCount }) =>
         `${modelCount > 0 ? `يضم الأسطول ${modelCount} طرازًا، وكلها بخمسة مقاعد.` : 'كل طرازاتنا بخمسة مقاعد.'} يتوقف الاختيار المناسب أساسًا على رحلاتك وأمتعتك وعلبة السرعات التي تفضلها.`,
       price: (value) => `ابتداءً من ${value} درهم في اليوم`,
@@ -238,23 +239,23 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'longue-duree',
           title: 'الكراء طويل المدة',
-          text: 'بعد 10 أيام، يُطبق السعر المخفض تلقائيًا في معظم الطرازات دون أن تطلبه. والسعر المعروض هنا هو الأدنى في هذه الفئة.',
+          text: 'بعد 10 أيام، يُطبق السعر المخفض تلقائيًا في معظم الطرازات، ما لم يعلّقه موسم الذروة. والسعر المعروض هنا هو الأدنى في هذه الفئة.',
         },
       ],
       outro:
-        'هل تبحث عن علامة بعينها؟ اطلع على صفحات [مرسيدس](route:mercedes) و[رينج روفر](route:range-rover) و[بورش](route:porsche)، أو قارن الأسعار طرازًا بطراز في [صفحة الأسعار](route:tarifs).',
+        'هل تبحث عن علامة بعينها؟ اطلع على صفحات [كراء مرسيدس](route:mercedes) و[كراء رينج روفر](route:range-rover) و[كراء بورش](route:porsche)، أو قارن طرازًا بطراز في صفحة [أسعار كراء السيارات](route:tarifs).',
     },
     prepare: {
       h3: 'ما يجب تحضيره',
       items: ({ minDays }) => [
         `**المدة.** يستمر الكراء ${minDays} أيام على الأقل: لا توجد صيغة ليوم واحد أو لنهاية الأسبوع.`,
-        '**الوثائق.** حضّر وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. إذا كنت قادمًا من الخارج، تُقبل رخصة السياقة الدولية.',
+        '**السن والوثائق.** يجب أن يكون عمرك 21 سنة على الأقل. وحضّر وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. وإذا كنت قادمًا من الخارج، تُقبل رخصة السياقة الدولية.',
         '**الضمان.** يُقدَّم عند الانطلاق، بشيك أو نقدًا أو ببصمة البطاقة. يتوقف مبلغه على السيارة، وتسترده عند الإرجاع إذا كانت السيارة في حالة جيدة.',
         '**التأمين.** كل سيارة مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. اسأل عن قيمة هذا المبلغ بالنسبة إلى طرازك قبل التأكيد.',
         '**الطوارئ.** عند حدوث عطل، تُرسل إليك سيارة بديلة في أقرب وقت. وبعد وقوع حادث، يساعدك الفريق في الإجراءات.',
       ],
       outro:
-        'الحد الأدنى للسن، أو عدد الكيلومترات، أو إرجاع السيارة في مدينة أخرى: عن هذه الأسئلة يجيبك الفريق عبر [واتساب](whatsapp). وباقي التفاصيل موجود في [شروط الكراء](route:conditions).',
+        'عدد الكيلومترات، أو إرجاع السيارة في مدينة أخرى: عن هذه الأسئلة يجيبك الفريق عبر [واتساب](whatsapp). وباقي التفاصيل موجود في [شروط كراء السيارات](route:conditions).',
     },
   },
 };

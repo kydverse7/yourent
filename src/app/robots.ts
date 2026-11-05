@@ -24,6 +24,10 @@ export default function robots(): MetadataRoute.Robots {
           '/parametres',
           '/reservations',
           '/vehicules',
+          // Routes internes de la recherche par dates ou filtres : jamais une adresse publique.
+          '/catalogue-recherche',
+          '/en/catalogue-recherche',
+          '/ar/catalogue-recherche',
         ],
       },
     ],

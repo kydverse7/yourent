@@ -85,7 +85,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: num
             <Link
               href="/catalogue"
               style={{ color: '#120f09' }}
-              className="inline-flex items-center gap-2 rounded-full border border-[#f3d98a] bg-gradient-to-br from-[#f6e29b] via-[#d8b24f] to-[#b98724] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-black shadow-[0_14px_34px_rgba(201,168,76,0.28)] transition-transform duration-200 hover:-translate-y-0.5 pointer-events-auto"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#f3d98a] bg-gradient-to-br from-[#f6e29b] via-[#d8b24f] to-[#b98724] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-black shadow-[0_14px_34px_rgba(201,168,76,0.28)] transition-transform duration-200 hover:-translate-y-0.5 pointer-events-auto"
             >
               {t('hero.cta')} <ArrowRight className="h-3 w-3 text-black rtl:rotate-180" />
             </Link>

@@ -3,19 +3,19 @@ import type { Article } from '../types';
 const article: Article = {
   slug: 'road-trip-casablanca-marrakech-agadir',
   metaTitle: `Road trip Casablanca Marrakech Agadir | Yourent`,
-  metaDescription: `Road trip Casablanca, Marrakech, Agadir en voiture de location : itinéraire par l'autoroute A3 et quel modèle choisir selon le groupe et le budget.`,
+  metaDescription: `Road trip Casablanca, Marrakech, Agadir en voiture de location : itinéraire par l'autoroute A3, modèle selon le groupe et le budget, dès {fleetMin} DH par jour.`,
   h1: `Road trip Casablanca - Marrakech - Agadir : quelle voiture choisir`,
-  intro: `Casablanca, Marrakech et Agadir s'enchaînent sur une seule autoroute, l'A3, longue de 429 km entre Casablanca et Agadir. Pour ce trajet, un SUV diesel ou une berline automatique est le choix le plus simple : confortable sur autoroute, avec de la place pour les bagages. Chez Yourent, la location est de 5 jours minimum, ce qui convient à un road trip de ce type.`,
+  intro: `Pour un road trip Casablanca, Marrakech, Agadir, tout s'enchaîne sur une seule autoroute, l'A3, longue de 429 km entre Casablanca et Agadir. Un SUV diesel ou une berline automatique est le choix le plus simple, avec de la place pour les bagages. Chez Yourent, la location démarre à 5 jours, ce qui convient à ce type de voyage.`,
   excerpt: `L'itinéraire Casablanca, Marrakech, Agadir par l'A3 et le choix de la voiture selon votre groupe : SUV diesel, berline automatique ou citadine, avec les fiches de la flotte.`,
   datePublished: '2026-11-05',
   dateModified: '2026-11-05',
   sections: [
     {
-      h2: `Quel est l'itinéraire de Casablanca à Marrakech puis Agadir ?`,
+      h2: `Quel est l'itinéraire d'un road trip de Casablanca à Marrakech puis Agadir ?`,
       blocks: [
         {
           type: 'p',
-          text: `L'autoroute A3, dite autoroute du Sud, relie Casablanca à Agadir en passant par Nouaceur (aéroport Mohammed V), Berrechid, Settat, Marrakech et Chichaoua. Selon Wikipédia, elle compte 429 km, ouverts par tronçons de 2001 à 2010. Le tronçon Marrakech - Agadir, mis en service en juin 2010, a 7 gares de péage.`,
+          text: `L'autoroute A3, dite autoroute du Sud, relie Casablanca à Agadir en passant par Nouaceur (aéroport Mohammed V), Berrechid, Settat, Marrakech et Chichaoua. Selon Wikipédia, elle compte 429 km, ouverts par tronçons de 2001 à 2010. Ouvert en juin 2010, le tronçon Marrakech - Agadir compte 7 gares de péage.`,
         },
         {
           type: 'list',
@@ -23,22 +23,22 @@ const article: Article = {
           items: [
             `**Casablanca - Marrakech :** l'A3 depuis Casablanca ou depuis l'aéroport Mohammed V, qui est déjà sur son tracé à Nouaceur.`,
             `**Étape à Marrakech :** demandez à l'hébergement s'il dispose d'un parking avant d'arriver.`,
-            `**Marrakech - Agadir :** la suite de l'A3, avec ses gares de péage aux échangeurs.`,
+            `**Marrakech - Agadir :** puis la suite de l'A3, avec ses gares de péage aux échangeurs.`,
             `**Retour :** par le même axe jusqu'à Casablanca.`,
           ],
         },
         {
           type: 'p',
-          text: `Les durées de conduite varient avec le trafic et les arrêts ; calculez-les sur votre GPS le jour du départ, et consultez le trafic en temps réel d'ADM. Pour les tarifs des péages, voir l'article [péages Casablanca - Marrakech - Rabat](/blog/peages-casablanca-marrakech-rabat) : le montant n'y est pas figé, car la grille se vérifie sur le site d'ADM.`,
+          text: `Les durées de conduite varient avec le trafic et les arrêts. Calculez-les donc sur votre GPS le jour du départ, et consultez le trafic en temps réel d'ADM. Pour les péages, voir l'article [péages Casablanca Marrakech Rabat](/blog/peages-casablanca-marrakech-rabat) : aucun montant n'y est figé, car la grille se vérifie sur le site d'ADM.`,
         },
       ],
     },
     {
-      h2: `Quelle voiture choisir selon votre groupe ?`,
+      h2: `Quelle voiture choisir selon votre groupe pour un road trip ?`,
       blocks: [
         {
           type: 'p',
-          text: `Toutes les voitures de la flotte Yourent ont 5 places. Le choix se fait donc sur la place pour les bagages, le confort sur autoroute, la boîte et le carburant :`,
+          text: `Toutes les voitures de la flotte Yourent ont 5 places. Le choix se fait donc sur la place pour les bagages, la boîte et le carburant :`,
         },
         {
           type: 'table',
@@ -60,7 +60,7 @@ const article: Article = {
               `SUV diesel. Le Duster est le plus économique des SUV de la flotte, le Tiguan est en boîte automatique.`,
             ],
             [
-              `Grand confort, longue distance`,
+              `Grand gabarit, longue distance`,
               `[Volkswagen Touareg](/catalogue/volkswagen-touareg) ({price:volkswagen-touareg} DH/jour), [Kia Sorento](/catalogue/kia-sorento) ({price:kia-sorento} DH/jour)`,
               `SUV diesel automatiques.`,
             ],
@@ -73,7 +73,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Les tarifs affichés sont ceux d'une location de 5 à 10 jours ; au-delà de 10 jours, un tarif réduit s'applique automatiquement sur la plupart des modèles. Les pages [location de SUV à Casablanca](route:suv) et [location de voiture automatique](route:automatique) présentent chaque catégorie.`,
+          text: `Les tarifs affichés sont ceux d'une location de 5 à 10 jours, alors qu'un tarif réduit s'applique automatiquement au-delà de 10 jours sur la plupart des modèles. Les pages [location de SUV à Casablanca](route:suv) et [location de voiture automatique à Casablanca](route:automatique) présentent en détail chaque catégorie.`,
         },
       ],
     },
@@ -83,17 +83,17 @@ const article: Article = {
         {
           type: 'list',
           items: [
-            `**Le kilométrage inclus.** Il n'est pas affiché sur le site : l'équipe le précise sur WhatsApp. Sur 430 km d'autoroute à l'aller, la question compte.`,
+            `**Le kilométrage inclus.** Il n'est pas affiché sur le site : l'équipe le précise sur WhatsApp. Sur environ 430 km d'autoroute à l'aller, la question compte donc.`,
             `**Le retour dans une autre ville.** Si vous voulez rendre la voiture ailleurs qu'à Casablanca, demandez à l'équipe : ce cas n'est pas décrit sur le site.`,
-            `**L'assurance.** Tous les véhicules sont couverts par une assurance tous risques avec franchise ; demandez le montant de la franchise avant de partir.`,
+            `**L'assurance.** Une assurance tous risques avec franchise couvre tous les véhicules, mais demandez le montant de la franchise avant de partir.`,
             `**Les documents.** Pièce d'identité (CIN ou passeport), permis de plus de 2 ans, justificatif de domicile et caution.`,
-            `**La panne.** Un véhicule de remplacement est envoyé dans les plus brefs délais. Notez le numéro de l'agence avant de quitter Casablanca.`,
+            `**La panne.** Un véhicule de remplacement est envoyé dans les plus brefs délais en cas de panne. Notez donc le numéro de l'agence avant de quitter Casablanca.`,
             `**La vitesse.** 120 km/h au maximum sur autoroute pour une voiture de tourisme, 100 km/h hors agglomération.`,
           ],
         },
         {
           type: 'p',
-          text: `Pour les règles de conduite, voir l'article [conduire à Casablanca](/blog/conduire-a-casablanca).`,
+          text: `Pour les autres règles de conduite, voir l'article [conduire à Casablanca en voiture de location](/blog/conduire-a-casablanca).`,
         },
       ],
     },
@@ -102,7 +102,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Choisissez vos dates sur le catalogue : la recherche n'affiche que les voitures libres. Envoyez la demande en ligne ; l'équipe confirme sur WhatsApp ou par téléphone, puis livre la voiture à l'hôtel, à l'adresse choisie ou à l'aéroport Mohammed V, sans frais dans Casablanca. Pour un voyage de plus d'un mois, regardez la page [location longue durée](route:longue-duree).`,
+          text: `Choisissez vos dates sur le catalogue : la recherche n'affiche que les voitures libres. Envoyez ensuite la demande en ligne. L'équipe confirme sur WhatsApp ou par téléphone, puis livre la voiture à l'hôtel, à l'adresse choisie ou à l'aéroport Mohammed V, sans frais dans Casablanca. Pour un voyage de plus d'un mois, regardez la page [location de voiture longue durée à Casablanca](route:longue-duree).`,
         },
       ],
     },
@@ -110,19 +110,19 @@ const article: Article = {
   faq: [
     {
       q: `Quelle autoroute relie Casablanca, Marrakech et Agadir ?`,
-      a: `L'A3, dite autoroute du Sud. Selon Wikipédia, elle fait 429 km entre Casablanca et Agadir et passe par Berrechid, Settat et Marrakech.`,
+      a: `L'A3, dite autoroute du Sud. Selon Wikipédia, elle fait 429 km entre Casablanca et Agadir. Elle passe par Berrechid, Settat et Marrakech.`,
     },
     {
       q: `Quelle voiture choisir pour un road trip à plusieurs avec des bagages ?`,
-      a: `Un SUV diesel comme le Dacia Duster, le Volkswagen Tiguan ou le Touareg offre de la place et un bon confort sur autoroute. Toutes les voitures de la flotte Yourent ont 5 places.`,
+      a: `Un SUV diesel comme le Dacia Duster, le Volkswagen Tiguan ou le Touareg offre de la place pour les valises. Toutes les voitures de la flotte ont 5 places : ce sont donc les bagages qui départagent.`,
     },
     {
       q: `Peut-on rendre la voiture à Agadir ou à Marrakech ?`,
-      a: `Le retour dans une autre ville n'est pas décrit sur le site. L'équipe de Yourent le précise sur WhatsApp.`,
+      a: `Le retour dans une autre ville n'est pas décrit sur le site. L'équipe de Yourent le précise donc sur WhatsApp.`,
     },
     {
       q: `Combien de jours minimum pour louer chez Yourent ?`,
-      a: `Cinq jours au minimum, et le tarif baisse automatiquement au-delà de 10 jours sur la plupart des modèles.`,
+      a: `Cinq jours au minimum. Le tarif baisse ensuite automatiquement au-delà de 10 jours sur la plupart des modèles.`,
     },
   ],
   related: ['suv', 'automatique', 'longue-duree', 'tarifs'],

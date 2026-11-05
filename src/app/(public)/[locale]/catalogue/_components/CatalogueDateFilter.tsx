@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from '@/lib/i18n/LocaleLink';
-import { useRouter } from 'next/navigation';
 import { addDays, differenceInDays, format } from 'date-fns';
 import { fr, enGB, arSA } from 'date-fns/locale';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -34,7 +32,7 @@ function buildDatesUrl(
 }
 
 const dateInputBase =
-  'h-11 w-full rounded-xl border border-white/10 bg-white/5 ps-10 pe-3 text-sm font-semibold text-cream outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
+  'h-11 w-full rounded-xl border border-white/10 bg-white/5 ps-10 pe-3 text-base font-semibold text-cream sm:text-sm outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
 
 /* ─── Sticky catalogue date filter ──────────────────── */
 export function CatalogueDateFilter({
@@ -46,7 +44,6 @@ export function CatalogueDateFilter({
   du?: string;
   au?: string;
 }) {
-  const router = useRouter();
   const { t, locale, lp } = useLocale();
   const [editing, setEditing] = useState(false);
   const [draftDu, setDraftDu] = useState(du ?? '');
@@ -78,7 +75,8 @@ export function CatalogueDateFilter({
       toast.error(t('cat.datesErr').replace('{count}', String(MIN_RESERVATION_DAYS)));
       return;
     }
-    router.push(lp(buildDatesUrl(params, { du: draftDu, au: draftAu })));
+    // Vraie navigation : le routeur client resservirait la page en cache de /catalogue, voir CatalogueView.
+    window.location.assign(lp(buildDatesUrl(params, { du: draftDu, au: draftAu })));
   };
 
   return (
@@ -177,17 +175,18 @@ export function CatalogueDateFilter({
                     setDraftAu(au ?? '');
                     setEditing(true);
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-muted transition-colors hover:border-gold/20 hover:text-gold"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/8 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-muted transition-colors hover:border-gold/20 hover:text-gold"
                 >
                   <Pencil className="h-3 w-3" /> {t('cat.datesEdit')}
                 </button>
-                <Link
-                  href={buildDatesUrl(params, null)}
+                <a
+                  href={lp(buildDatesUrl(params, null))}
                   title={t('cat.datesClear')}
-                  className="inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border border-white/8 bg-white/5 text-cream-muted transition-colors hover:border-rose-400/30 hover:text-rose-300"
+                  aria-label={t('cat.datesClear')}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/8 bg-white/5 text-cream-muted transition-colors hover:border-rose-400/30 hover:text-rose-300"
                 >
                   <X className="h-3.5 w-3.5" />
-                </Link>
+                </a>
               </>
             ) : (
               <button
@@ -197,7 +196,7 @@ export function CatalogueDateFilter({
                   setDraftAu('');
                   setEditing(true);
                 }}
-                className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-gold transition-colors hover:border-gold/40 hover:bg-gold/10"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/20 bg-gold/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-gold transition-colors hover:border-gold/40 hover:bg-gold/10"
               >
                 <CalendarDays className="h-3.5 w-3.5" /> {t('cat.datesAdd')}
               </button>

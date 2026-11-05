@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
-import { BUSINESS } from '@/lib/site';
+import { BUSINESS, formatEurApprox } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../../_lib/specLabels';
 import { ModelDateSearch } from './ModelDateSearch';
 import PublicReservationForm from './PublicReservationForm';
@@ -67,7 +67,7 @@ export function VehicleModelView({
   const { t, tp, locale } = useLocale();
 
   const name = `${marque} ${modele}`;
-  const photoAlt = t('model.photoAlt').replace('{name}', name);
+  const photoAlt = t('model.h1').replace('{name}', name);
   const whatsappHref = `${BUSINESS.whatsappUrl}?text=${encodeURIComponent(t('model.waMessage').replace('{name}', name))}`;
   const hasLongRate = !highSeason && selected.tarifJour10Plus > 0 && selected.tarifJour10Plus < selected.tarifJour;
   const category = categoryLabel(t, selected.categorie);
@@ -199,6 +199,11 @@ export function VehicleModelView({
                 <span className="text-base font-normal text-cream-muted">
                   {t('model.perDay')}
                 </span>
+                {formatEurApprox(modelMinTarif, locale) && (
+                  <span className="ms-2 whitespace-nowrap text-sm font-normal text-cream-faint">
+                    {formatEurApprox(modelMinTarif, locale)}
+                  </span>
+                )}
               </p>
               <p className="mt-2 text-xs text-cream-faint">
                 {t('model.minDuration')}

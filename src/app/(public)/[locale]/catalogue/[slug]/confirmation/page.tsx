@@ -89,10 +89,10 @@ export default async function ConfirmationPage({
           <p className="text-cream text-sm font-semibold mb-4">{tr(locale, 'confirmation.help')}</p>
           <div className="space-y-3">
             <a
-              href={`tel:${agence.telephone}`}
+              href={`tel:+${waPhone}`}
               className="flex items-center gap-3 justify-center text-cream hover:text-gold transition-colors"
             >
-              <Phone className="w-4 h-4 text-gold" /> <bdi dir="ltr">{agence.telephone}</bdi>
+              <Phone className="w-4 h-4 text-gold" /> <bdi dir="ltr">+{waPhone}</bdi>
             </a>
             <a
               href={`mailto:${agence.email}`}

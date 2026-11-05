@@ -76,7 +76,6 @@ export function businessNode(locale: Locale, stats?: Pick<FleetStats, 'minPrice'
         '@type': 'ContactPoint',
         telephone: BUSINESS.phone,
         contactType: 'customer service',
-        areaServed: 'MA',
         availableLanguage: ['fr', 'en', 'ar'],
       },
     ],

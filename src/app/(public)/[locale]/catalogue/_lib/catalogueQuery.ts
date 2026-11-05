@@ -41,6 +41,18 @@ type GroupedRow = {
   firstPhoto?: string | null;
 };
 
+export type RawSearchParams = Record<string, string | string[] | undefined>;
+
+/** `?type=a&type=b` donne un tableau : on ne garde que la première valeur. */
+export function firstSearchValues(raw: RawSearchParams): Record<string, string> {
+  const values: Record<string, string> = {};
+  for (const [key, value] of Object.entries(raw)) {
+    const first = Array.isArray(value) ? value[0] : value;
+    if (first) values[key] = first;
+  }
+  return values;
+}
+
 export function normalizeFilterValue(value?: string | null): string {
   return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
 }

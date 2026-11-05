@@ -7,6 +7,7 @@ import { ArrowRight, ArrowUpDown, CalendarCheck, Car, Fuel, Gauge, Search, Users
 import { format } from 'date-fns';
 import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
+import { formatEurApprox } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../_lib/specLabels';
 
 type SortOrder = 'price-asc' | 'price-desc' | 'name';
@@ -49,9 +50,11 @@ export function CatalogueInfiniteGrid({
   du,
   au,
 }: Props) {
-  const { t, tp } = useLocale();
+  const { t, tp, locale, lp } = useLocale();
   const queryKey = `${type ?? ''}|${marque ?? ''}|${limit}|${du ?? ''}|${au ?? ''}`;
   const dateQuery = du && au ? `?du=${du}&au=${au}` : '';
+  // Avec des dates, vraie navigation vers la fiche : voir CatalogueView.
+  const CardLink = dateQuery ? 'a' : Link;
   const [vehicles, setVehicles] = useState(initialVehicles);
   const [page, setPage] = useState(initialPage);
   const [hasNext, setHasNext] = useState(initialHasNext);
@@ -189,7 +192,8 @@ export function CatalogueInfiniteGrid({
             placeholder={t('cat.search')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl border border-white/8 bg-white/5 py-2.5 ps-10 pe-4 text-sm text-cream placeholder:text-cream-muted/50 outline-none transition-all focus:border-gold/30 focus:ring-1 focus:ring-gold/20"
+            aria-label={t('cat.search')}
+            className="h-11 w-full rounded-xl border border-white/8 bg-white/5 py-2.5 ps-10 pe-4 text-base text-cream sm:text-sm placeholder:text-cream-muted/50 outline-none transition-all focus:border-gold/30 focus:ring-1 focus:ring-gold/20"
           />
         </div>
         <div className="relative w-full sm:w-auto">
@@ -197,7 +201,8 @@ export function CatalogueInfiniteGrid({
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-            className="w-full cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 ps-9 pe-8 text-xs font-semibold uppercase tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream [&>option]:bg-noir-root [&>option]:text-cream"
+            aria-label={t('cat.sortDefault')}
+            className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 ps-9 pe-8 text-base font-semibold uppercase sm:text-xs tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream [&>option]:bg-noir-root [&>option]:text-cream"
           >
             <option value="price-asc">{t('cat.sortDefault')}</option>
             <option value="price-desc">{t('cat.sortDesc')}</option>
@@ -208,9 +213,9 @@ export function CatalogueInfiniteGrid({
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {displayVehicles.map((v) => (
-          <Link
+          <CardLink
             key={v.modelSlug}
-            href={`/catalogue/${v.modelSlug}${dateQuery}`}
+            href={dateQuery ? lp(`/catalogue/${v.modelSlug}${dateQuery}`) : `/catalogue/${v.modelSlug}`}
             className="group lux-panel overflow-hidden"
           >
             <div className="relative h-56 bg-noir-root">
@@ -298,6 +303,11 @@ export function CatalogueInfiniteGrid({
                     <p className="text-xl font-bold text-gold">
                       {formatCurrency(v.minTarif)}
                       <span className="text-xs font-normal text-cream-muted">{t('cat.perDay')}</span>
+                      {formatEurApprox(v.minTarif, locale) && (
+                        <span className="ms-1.5 whitespace-nowrap text-xs font-normal text-cream-faint">
+                          {formatEurApprox(v.minTarif, locale)}
+                        </span>
+                      )}
                     </p>
                   </div>
                   {(v.minCaution ?? 0) > 0 && (
@@ -318,7 +328,7 @@ export function CatalogueInfiniteGrid({
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </div>
             </div>
-          </Link>
+          </CardLink>
         ))}
       </div>
 

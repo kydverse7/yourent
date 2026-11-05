@@ -41,6 +41,7 @@ export async function GET() {
   lines.push(
     '- Livraison gratuite dans tout Casablanca et à l\'aéroport Mohammed V (livraison à l\'hôtel, à l\'aéroport ou à l\'adresse choisie). Mohammedia : possible avec un léger supplément.',
   );
+  lines.push(`- Âge minimum du conducteur : ${BUSINESS.minAge} ans.`);
   lines.push('- Documents : pièce d\'identité valide (CIN ou passeport), permis de plus de 2 ans, justificatif de domicile. Permis international accepté pour les touristes étrangers.');
   lines.push('- Caution demandée au départ (chèque, espèces ou empreinte de carte), montant selon le véhicule, restituée au retour du véhicule en bon état.');
   lines.push('- Assurance tous risques avec franchise sur tous les véhicules.');

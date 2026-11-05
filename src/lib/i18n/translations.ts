@@ -44,7 +44,7 @@ const fr: Record<string, string> = {
   'hero.delivery': 'Livraison aéroport & Casablanca',
   'hero.cars': 'Voitures',
   'hero.available': 'dans la flotte',
-  'hero.pageTitle': 'Location de voitures à Casablanca et à l’aéroport Mohammed V',
+  'hero.pageTitle': 'Location de voiture à Casablanca et à l’aéroport Mohammed V',
   'hero.imgAlt': 'Porsche Macan à louer à Casablanca',
 
   /* ── Hero — recherche par dates ──────────── */
@@ -64,9 +64,9 @@ const fr: Record<string, string> = {
 
   /* ── Contact ──────────────────────────────── */
   'contact.eyebrow': 'Casablanca, Maroc',
-  'contact.title': 'Agence location voitures',
+  'contact.title': 'Agence de location de voitures',
   'contact.titleGold': 'Casablanca',
-  'contact.subtitle': 'Écrivez-nous sur WhatsApp ou appelez l’équipe : nous préparons le véhicule et le livrons à votre hôtel, à l’aéroport ou à l’adresse de votre choix.',
+  'contact.subtitle': 'Pour votre location de voiture à Casablanca, écrivez-nous sur WhatsApp ou appelez l’équipe : nous livrons ensuite le véhicule à votre hôtel, à l’aéroport ou à l’adresse de votre choix.',
   'contact.imgAlt': 'Vue aérienne de Casablanca, Maroc — Yourent location de voitures',
   'contact.followUs': 'Suivez-nous',
   'contact.directions': 'Itinéraire',
@@ -97,7 +97,7 @@ const fr: Record<string, string> = {
   'signature.eyebrow': 'Berlines et SUV à louer',
   'signature.title': 'Location de berlines et de SUV à Casablanca',
   'signature.subtitle':
-    "Une sélection premium pensée pour les arrivées qui comptent, les séjours haut de gamme et les usages à forte valeur d’image.",
+    "Pour un rendez-vous, un séjour ou un long trajet, ces berlines et SUV à louer à Casablanca sont livrés gratuitement en ville et à l’aéroport Mohammed V.",
   'signature.cta': 'Voir tout le catalogue',
   'signature.book': 'Réserver',
   'signature.from': 'À partir de',
@@ -111,12 +111,12 @@ const fr: Record<string, string> = {
   'newArrival.from': 'À partir de',
   'newArrival.perDay': '/ jour',
   'why.eyebrow': 'Pourquoi Yourent',
-  'why.title': "L’excellence au service de votre mobilité",
+  'why.title': "Pourquoi louer votre voiture à Casablanca chez Yourent",
   'why.subtitle':
-    'Chaque détail est pensé pour que votre location soit simple, premium et sans stress.',
+    'Votre location de voiture à Casablanca comprend la livraison gratuite et une assurance tous risques avec franchise, avec une équipe joignable de 8h à 22h.',
   'why.delivery.title': 'Livraison gratuite',
   'why.delivery.desc':
-    "Livraison incluse dans tout Casablanca et à l’aéroport Mohammed V.",
+    "La voiture vous est livrée sans frais dans tout Casablanca et à l’aéroport Mohammed V.",
   'why.delivery.stat': '0 DH',
   'why.delivery.label': 'frais de livraison',
   'why.insurance.title': 'Assurance tous risques avec franchise',
@@ -126,19 +126,19 @@ const fr: Record<string, string> = {
   'why.insurance.label': 'des véhicules',
   'why.fleet.title': 'Une flotte variée',
   'why.fleet.desc':
-    'De la citadine au SUV premium, en boîte manuelle ou automatique : tous les modèles sont dans le catalogue.',
+    'De la citadine au SUV premium, en boîte manuelle ou automatique : tous les modèles à louer à Casablanca figurent dans le catalogue.',
   'why.fleet.label': 'véhicules',
-  'why.assistance.title': 'Assistance routière',
+  'why.assistance.title': 'Assistance en cas de panne',
   'why.assistance.desc':
-    'Notre équipe est disponible de 8h à 22h, 7j/7. En cas de panne, un véhicule de remplacement est envoyé dans les plus brefs délais.',
+    'Notre équipe répond de 8h à 22h, 7j/7. Si la voiture tombe en panne, elle envoie un véhicule de remplacement dans les plus brefs délais.',
   'why.assistance.stat': 'jusqu’à 22h',
   'why.assistance.label': 'disponibilité',
 
   /* ── Economic ─────────────────────────────── */
   'eco.eyebrow': 'Voitures économiques à louer',
-  'eco.title': 'Location de voitures pas cher à Casablanca',
+  'eco.title': 'Location de voitures pas chères à Casablanca',
   'eco.subtitle':
-    'Performantes, sobres et parfaitement entretenues — notre gamme économique vous emmène partout, sans compromis.',
+    'Pour louer une voiture pas chère à Casablanca, ces citadines suffisent en ville, et la livraison reste gratuite, y compris à l’aéroport Mohammed V.',
   'eco.cta': 'Voir notre flotte',
   'eco.book': 'Réserver maintenant',
 
@@ -147,10 +147,10 @@ const fr: Record<string, string> = {
   'process.title': 'Louez en 3 étapes, livraison incluse',
   'process.s1.title': 'Choisir dans le catalogue',
   'process.s1.body':
-    'Indiquez vos dates et parcourez les véhicules disponibles à Casablanca.',
-  'process.s2.title': 'Commander votre voiture en ligne',
+    'Indiquez vos dates : la recherche ne garde alors que les voitures à louer à Casablanca encore libres sur cette période.',
+  'process.s2.title': 'Envoyer votre demande en ligne',
   'process.s2.body':
-    'Réservez en quelques clics, puis notre équipe confirme avec vous la disponibilité et les modalités.',
+    'Vous ne payez rien en ligne : notre équipe confirme ensuite avec vous la disponibilité et le montant, sur WhatsApp ou par téléphone.',
   'process.s3.title': 'Recevoir le véhicule',
   'process.s3.body':
     "Livraison à votre hôtel, à l’aéroport ou à l’adresse de votre choix. 7j/7.",
@@ -159,22 +159,22 @@ const fr: Record<string, string> = {
   'faq.eyebrow': 'questions fréquentes',
   'faq.title': 'Tout savoir avant de réserver',
   'faq.subtitle':
-    'Les réponses aux questions les plus posées par nos clients à Casablanca.',
-  'faq.q1': 'Quels documents faut-il pour louer un véhicule ?',
+    "Les réponses aux questions les plus posées avant une location de voiture à Casablanca.",
+  'faq.q1': "Quel âge et quels documents faut-il pour louer une voiture à Casablanca ?",
   'faq.a1':
-    "Il suffit d’une pièce d’identité valide (CIN ou passeport), d’un permis de conduire de plus de 2 ans et d’un justificatif de domicile. Pour les touristes étrangers, le permis international est accepté.",
+    "Il faut avoir au moins 21 ans et présenter une pièce d’identité valide (CIN ou passeport), un permis de conduire de plus de 2 ans et un justificatif de domicile. Pour les touristes étrangers, le permis international est accepté.",
   'faq.q2': 'La livraison du véhicule est-elle incluse ?',
   'faq.a2':
     "Oui, la livraison est gratuite dans tout Casablanca et à l’aéroport Mohammed V. Nous livrons aussi à Mohammedia, avec un léger supplément.",
   'faq.q3': 'Quelle est la durée minimum de location ?',
   'faq.a3':
-    "La durée minimum est de 5 jours. Pour les locations longue durée (11 jours et plus), vous bénéficiez automatiquement d’un tarif préférentiel.",
-  'faq.q4': 'Comment fonctionne le dépôt de garantie ?',
+    "La durée minimum est de 5 jours. Au-delà de 10 jours, un tarif réduit s’applique automatiquement sur la plupart des modèles.",
+  'faq.q4': "Comment fonctionne la caution ?",
   'faq.a4':
-    "Un dépôt de garantie est demandé au départ, par chèque, espèces ou empreinte de carte. Son montant varie selon le véhicule. Il est restitué au retour du véhicule en bon état.",
+    "Une caution est demandée au départ, par chèque, espèces ou empreinte de carte. Son montant varie selon le véhicule, et elle est restituée au retour du véhicule en bon état.",
   'faq.q5': "Que se passe-t-il en cas de panne ou d’accident ?",
   'faq.a5':
-    "Tous nos véhicules sont assurés tous risques, avec franchise. En cas de panne, notre assistance vous envoie un remplacement dans les plus brefs délais. En cas d’accident, notre équipe vous accompagne dans toutes les démarches.",
+    "Tous nos véhicules sont assurés tous risques, avec franchise. En cas de panne, notre équipe vous envoie un véhicule de remplacement dans les plus brefs délais. Après un accident, elle vous accompagne aussi dans les démarches.",
   'faq.q6': 'Puis-je modifier ou annuler ma réservation ?',
   'faq.a6':
     "Toute réservation peut être modifiée ou annulée sans frais jusqu’à 24 h avant la date de prise en charge. Au-delà, des frais d’annulation peuvent s’appliquer.",
@@ -183,7 +183,7 @@ const fr: Record<string, string> = {
   'cta.eyebrow': 'Réservez votre voiture au Maroc',
   'cta.title': 'Votre location de voiture à Casablanca vous attend',
   'cta.explore': 'Explorer le catalogue',
-  'cta.whatsapp': 'Parler au concierge',
+  'cta.whatsapp': 'Écrire à l’équipe',
 
   /* ── Catalogue ────────────────────────────── */
   'cat.eyebrow': 'collection raffinée',
@@ -250,19 +250,20 @@ const fr: Record<string, string> = {
   'model.back': 'Retour au catalogue',
   'model.sheetLabel': 'Fiche véhicule',
   'model.countAvailable': '{count} véhicule{s} disponible{s}',
-  'model.h1': 'Location {name} à Casablanca',
+  'model.h1': '{name} en location à Casablanca',
   'model.intro': '{name} à louer à Casablanca dès {price} DH par jour, avec livraison gratuite en ville et à l’aéroport Mohammed V. Réservez en ligne, l’équipe confirme sur WhatsApp ou par téléphone.',
   'model.specs': 'Caractéristiques et tarif',
   'model.photoAlt': '{name} à louer à Casablanca',
   'model.copyTitle': 'Louer {article} {name} à Casablanca',
   'model.pricesTitle': 'Tarifs {name}',
+  'model.ratesTitle': '{name} : tarifs de location à Casablanca',
   'model.includedTitle': 'Ce qui est inclus',
   'model.included1': 'Livraison gratuite à Casablanca et à l’aéroport Mohammed V',
   'model.included2': 'Assurance tous risques avec franchise',
   'model.included3': 'Location de 5 jours minimum',
   'model.similarTitle': 'Modèles similaires',
   'model.linkAirport': 'Location de voiture à l’aéroport Mohammed V',
-  'model.linkBrand': 'Location {brand} à Casablanca',
+  'model.linkBrand': 'Voitures {brand} à louer à Casablanca',
   'model.rented': 'Actuellement loué',
   'model.rentedHint': 'Aucune unité de ce modèle n’est libre en ce moment. Choisissez d’autres dates ou écrivez à l’équipe sur WhatsApp pour connaître les prochaines disponibilités.',
   'model.unavailableDates': 'Indisponible à ces dates',
@@ -358,11 +359,11 @@ const en: Record<string, string> = {
   /* ── Hero ─────────────────────────────────── */
   'hero.badge': 'Minimum 5 days',
   'hero.cta': 'Explore our fleet',
-  'hero.delivery': 'Airport & Casablanca delivery',
+  'hero.delivery': 'Free airport & Casablanca delivery',
   'hero.cars': 'Cars',
   'hero.available': 'in our fleet',
   'hero.pageTitle': 'Car rental in Casablanca and at Mohammed V Airport',
-  'hero.imgAlt': 'Porsche Macan for rent in Casablanca',
+  'hero.imgAlt': 'Car rental in Casablanca: Porsche Macan at Yourent',
 
   /* ── Hero — date search ───────────────────── */
   'hero.searchLive': 'Real-time availability',
@@ -430,26 +431,26 @@ const en: Record<string, string> = {
 
   /* ── Why Yourent ──────────────────────────── */
   'why.eyebrow': 'Why Yourent',
-  'why.title': 'What you get with every rental',
+  'why.title': 'Car rental in Casablanca: what you get with every rental',
   'why.subtitle':
     'Free delivery, insurance on every car and a team you can reach every day from 8 am to 10 pm.',
   'why.delivery.title': 'Free Delivery',
   'why.delivery.desc':
-    'Free delivery anywhere in Casablanca and at Mohammed V Airport.',
+    'Delivery costs nothing anywhere in Casablanca or at Mohammed V Airport, so you only pay for the rental.',
   'why.delivery.stat': '0 MAD',
   'why.delivery.label': 'delivery fees',
   'why.insurance.title': 'Comprehensive insurance with an excess',
   'why.insurance.desc':
-    'All our cars have comprehensive insurance with an excess. The team tells you the amount.',
+    'All our cars have comprehensive insurance with an excess. The team tells you the amount before you book.',
   'why.insurance.stat': '%',
   'why.insurance.label': 'of vehicles',
   'why.fleet.title': 'A varied fleet',
   'why.fleet.desc':
-    'From city cars to premium SUVs, manual or automatic: every model is listed in the catalogue.',
+    'From city cars to premium SUVs, manual or automatic: you can compare every model in the catalogue.',
   'why.fleet.label': 'vehicles',
   'why.assistance.title': 'Roadside Assistance',
   'why.assistance.desc':
-    'Our team is available from 8am to 10pm, 7 days a week. If the car breaks down, a replacement is sent as soon as possible.',
+    'Our team is available from 8 am to 10 pm, 7 days a week. If the car breaks down, a replacement is sent as soon as possible.',
   'why.assistance.stat': 'until 10pm',
   'why.assistance.label': 'availability',
 
@@ -469,38 +470,38 @@ const en: Record<string, string> = {
     'Enter your dates and browse the vehicles available in Casablanca.',
   'process.s2.title': 'Order your car online',
   'process.s2.body':
-    'Book in a few clicks, then our team confirms availability and details with you.',
+    'Send your request online, then our team confirms availability and details with you.',
   'process.s3.title': 'Receive your vehicle',
   'process.s3.body':
     'Delivery to your hotel, the airport or the address you choose, 7 days a week.',
 
   /* ── FAQ ──────────────────────────────────── */
   'faq.eyebrow': 'frequently asked questions',
-  'faq.title': 'Everything you need to know before booking',
+  'faq.title': 'Car rental in Casablanca: what to know before booking',
   'faq.subtitle':
-    'Answers to the most common questions from our clients in Casablanca.',
+    'Answers to the questions clients ask most about car rental in Casablanca.',
   'faq.q1': 'What documents do I need to rent a vehicle?',
   'faq.a1':
-    'You need a valid ID (CIN or passport), a driving licence held for more than 2 years and proof of address. For foreign tourists, an international driving permit is accepted.',
+    'You must be at least 21 years old. You also need a valid ID (CIN or passport), a driving licence held for more than 2 years and proof of address. For foreign tourists, an international driving permit is accepted.',
   'faq.q2': 'Is vehicle delivery included?',
   'faq.a2':
     'Yes, delivery is free throughout Casablanca and at Mohammed V Airport. We also deliver to Mohammedia for a small additional fee.',
   'faq.q3': 'What is the minimum rental duration?',
   'faq.a3':
-    'The minimum rental is 5 days. For long-term rentals (11 days or more), a lower rate applies automatically on most models.',
+    'The minimum rental is 5 days. From day 11, a lower rate applies automatically on most models, unless high season suspends it.',
   'faq.q4': 'How does the security deposit work?',
   'faq.a4':
-    'A deposit is required at pick-up, by cheque, cash or card imprint. The amount varies depending on the vehicle. It is returned when the vehicle comes back in good condition.',
+    'A deposit is required at pick-up, by cheque, cash or card imprint. The amount varies depending on the vehicle. It is then returned when the vehicle comes back in good condition.',
   'faq.q5': 'What happens in case of a breakdown or accident?',
   'faq.a5':
-    'All our cars have comprehensive insurance with an excess. If the car breaks down, a replacement is sent as soon as possible. After an accident, our team helps you with the paperwork.',
+    'All our cars have comprehensive insurance with an excess. If the car breaks down, a replacement is sent as soon as possible. After an accident, our team also helps you with the paperwork.',
   'faq.q6': 'Can I modify or cancel my reservation?',
   'faq.a6':
-    'Any reservation can be modified or cancelled free of charge up to 24 hours before the pick-up date. After that, cancellation fees may apply.',
+    'Any reservation can be modified or cancelled free of charge up to 24 hours before the pick-up date. After that, however, cancellation fees may apply.',
 
   /* ── Final CTA ────────────────────────────── */
-  'cta.eyebrow': 'Book your car in Morocco',
-  'cta.title': 'Your car rental in Casablanca awaits',
+  'cta.eyebrow': 'Book your car in Casablanca',
+  'cta.title': 'Rent a car in Casablanca: send your request today',
   'cta.explore': 'Explore the catalogue',
   'cta.whatsapp': 'Talk to the team',
 
@@ -563,7 +564,7 @@ const en: Record<string, string> = {
   'model.minDuration': 'Minimum rental: 5 days',
   'model.service': 'Standard service',
   'model.serviceDesc': 'Assistance and premium preparation',
-  'model.longDuration': 'A lower rate applies automatically after 10 days.',
+  'model.longDuration': 'A lower rate applies automatically after 10 days on most models.',
   'model.reservation': 'Reservation request',
   'model.contactMsg': 'We will get back to you shortly with confirmation, final availability and pick-up details.',
   'model.back': 'Back to catalogue',
@@ -575,6 +576,7 @@ const en: Record<string, string> = {
   'model.photoAlt': '{name} for rent in Casablanca',
   'model.copyTitle': 'Renting the {name} in Casablanca',
   'model.pricesTitle': '{name} rates',
+  'model.ratesTitle': '{name} rental rates in Casablanca',
   'model.includedTitle': 'What is included',
   'model.included1': 'Free delivery in Casablanca and at Mohammed V airport',
   'model.included2': 'Comprehensive insurance with an excess',
@@ -677,11 +679,11 @@ const ar: Record<string, string> = {
   /* ── Hero ─────────────────────────────────── */
   'hero.badge': '5 أيام كحد أدنى',
   'hero.cta': 'تصفح الكتالوج',
-  'hero.delivery': 'التوصيل إلى المطار وداخل الدار البيضاء',
+  'hero.delivery': 'توصيل مجاني إلى المطار وداخل الدار البيضاء',
   'hero.cars': 'سيارة',
   'hero.available': 'في أسطولنا',
   'hero.pageTitle': 'كراء السيارات في الدار البيضاء وفي مطار محمد الخامس',
-  'hero.imgAlt': 'بورش ماكان للكراء في الدار البيضاء',
+  'hero.imgAlt': 'كراء السيارات في الدار البيضاء: بورش ماكان لدى Yourent',
 
   /* ── Hero — البحث بالتواريخ ───────────────── */
   'hero.searchLive': 'التوفر في الوقت الفعلي',
@@ -749,22 +751,22 @@ const ar: Record<string, string> = {
 
   /* ── Why Yourent ──────────────────────────── */
   'why.eyebrow': 'لماذا Yourent',
-  'why.title': 'ما تحصل عليه مع كل كراء',
+  'why.title': 'كراء السيارات في الدار البيضاء: ما تحصل عليه مع كل كراء',
   'why.subtitle':
     'توصيل مجاني، وتأمين على كل السيارات، وفريق تصل إليه كل يوم من الثامنة صباحًا إلى العاشرة ليلًا.',
   'why.delivery.title': 'توصيل مجاني',
   'why.delivery.desc':
-    'التوصيل مجاني في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس.',
+    'لا يكلفك التوصيل شيئًا في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس، لذلك لا تؤدي إلا ثمن الكراء.',
   'why.delivery.stat': '0 درهم',
   'why.delivery.label': 'رسوم التوصيل',
   'why.insurance.title': 'التأمين ضد جميع المخاطر مع مبلغ التحمل',
   'why.insurance.desc':
-    'جميع سياراتنا مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. ويخبرك الفريق بقيمته.',
+    'جميع سياراتنا مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. ويخبرك الفريق بقيمته قبل الحجز.',
   'why.insurance.stat': '%',
   'why.insurance.label': 'من السيارات',
   'why.fleet.title': 'أسطول متنوع',
   'why.fleet.desc':
-    'من سيارات المدينة إلى سيارات SUV الفاخرة، بعلبة يدوية أو أوتوماتيكية: كل الطرازات موجودة في الكتالوج.',
+    'من سيارات المدينة إلى سيارات SUV الفاخرة، بعلبة يدوية أو أوتوماتيكية: يمكنك مقارنة كل الطرازات في الكتالوج.',
   'why.fleet.label': 'سيارة',
   'why.assistance.title': 'مساعدة على الطريق',
   'why.assistance.desc':
@@ -788,38 +790,38 @@ const ar: Record<string, string> = {
     'أدخل تواريخك وتصفح السيارات المتوفرة في الدار البيضاء.',
   'process.s2.title': 'اطلب سيارتك عبر الإنترنت',
   'process.s2.body':
-    'احجز ببضع نقرات، ثم يؤكد فريقنا معك التوفر والتفاصيل.',
+    'أرسل طلبك عبر الإنترنت، ثم يؤكد فريقنا معك التوفر والتفاصيل.',
   'process.s3.title': 'استلم السيارة',
   'process.s3.body':
     'التوصيل إلى فندقك أو إلى المطار أو إلى العنوان الذي تختاره، طوال أيام الأسبوع.',
 
   /* ── FAQ ──────────────────────────────────── */
   'faq.eyebrow': 'أسئلة شائعة',
-  'faq.title': 'كل ما تحتاج معرفته قبل الحجز',
+  'faq.title': 'كراء السيارات في الدار البيضاء: ما تحتاج معرفته قبل الحجز',
   'faq.subtitle':
-    'إجابات عن الأسئلة الأكثر شيوعًا لدى زبنائنا في الدار البيضاء.',
+    'إجابات عن الأسئلة التي يطرحها زبناؤنا أكثر حول كراء السيارات في الدار البيضاء.',
   'faq.q1': 'ما الوثائق المطلوبة لكراء سيارة؟',
   'faq.a1':
-    'تحتاج إلى وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. وبالنسبة إلى السياح الأجانب، تُقبل الرخصة الدولية.',
+    'يجب أن يكون عمرك 21 سنة على الأقل. كما تحتاج إلى وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. وبالنسبة إلى السياح الأجانب، تُقبل الرخصة الدولية.',
   'faq.q2': 'هل توصيل السيارة مشمول في السعر؟',
   'faq.a2':
     'نعم، التوصيل مجاني في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس. كما نوصل إلى المحمدية مقابل مبلغ إضافي بسيط.',
   'faq.q3': 'ما أقل مدة للكراء؟',
   'faq.a3':
-    'أقل مدة هي 5 أيام. وفي الكراء الطويل (11 يومًا فأكثر)، يُطبَّق سعر مخفض تلقائيًا في معظم الطرازات.',
+    'أقل مدة هي 5 أيام. وابتداءً من اليوم الحادي عشر، يُطبَّق سعر مخفض تلقائيًا في معظم الطرازات، ما لم يعلّقه موسم الذروة.',
   'faq.q4': 'كيف يعمل الضمان؟',
   'faq.a4':
-    'يُطلب الضمان عند الانطلاق، بشيك أو نقدًا أو ببصمة البطاقة البنكية، ويختلف مبلغه حسب السيارة. ويُرد إليك عند إرجاع السيارة في حالة جيدة.',
+    'يُطلب الضمان عند الانطلاق، بشيك أو نقدًا أو ببصمة البطاقة البنكية، ويختلف مبلغه حسب السيارة. ثم يُرد إليك عند إرجاع السيارة في حالة جيدة.',
   'faq.q5': 'ماذا يحدث في حالة عطل أو حادث؟',
   'faq.a5':
-    'جميع سياراتنا مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. عند حدوث عطل، تُرسل إليك سيارة بديلة في أقرب الآجال. وعند وقوع حادث، يرافقك فريقنا في الإجراءات.',
+    'جميع سياراتنا مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. عند حدوث عطل، تُرسل إليك سيارة بديلة في أقرب الآجال. كما يرافقك فريقنا في الإجراءات عند وقوع حادث.',
   'faq.q6': 'هل يمكنني تعديل أو إلغاء حجزي؟',
   'faq.a6':
-    'يمكن تعديل الحجز أو إلغاؤه دون رسوم حتى 24 ساعة قبل موعد الاستلام. وبعد ذلك قد تُطبق رسوم إلغاء.',
+    'يمكن تعديل الحجز أو إلغاؤه دون رسوم حتى 24 ساعة قبل موعد الاستلام. لكن بعد ذلك قد تُطبق رسوم إلغاء.',
 
   /* ── Final CTA ────────────────────────────── */
-  'cta.eyebrow': 'احجز سيارتك في المغرب',
-  'cta.title': 'سيارتك في الدار البيضاء في انتظارك',
+  'cta.eyebrow': 'احجز سيارتك في الدار البيضاء',
+  'cta.title': 'كراء السيارات في الدار البيضاء: أرسل طلبك اليوم',
   'cta.explore': 'تصفح الكتالوج',
   'cta.whatsapp': 'تحدث مع الفريق',
 
@@ -882,7 +884,7 @@ const ar: Record<string, string> = {
   'model.minDuration': 'أقل مدة للكراء: 5 أيام',
   'model.service': 'الخدمة القياسية',
   'model.serviceDesc': 'مساعدة وتحضير فاخر',
-  'model.longDuration': 'يُطبَّق سعر مخفض تلقائيًا بعد 10 أيام.',
+  'model.longDuration': 'يُطبَّق سعر مخفض تلقائيًا بعد 10 أيام في معظم الطرازات.',
   'model.reservation': 'طلب حجز',
   'model.contactMsg': 'سنعاود الاتصال بك سريعًا مع التأكيد والتوفر النهائي وتفاصيل الاستلام.',
   'model.back': 'العودة إلى الكتالوج',
@@ -894,6 +896,7 @@ const ar: Record<string, string> = {
   'model.photoAlt': '{name} للكراء في الدار البيضاء',
   'model.copyTitle': 'كراء {name} في الدار البيضاء',
   'model.pricesTitle': 'أسعار {name}',
+  'model.ratesTitle': 'أسعار كراء {name} في الدار البيضاء',
   'model.includedTitle': 'ما هو مشمول',
   'model.included1': 'توصيل مجاني داخل الدار البيضاء وإلى مطار محمد الخامس',
   'model.included2': 'التأمين ضد جميع المخاطر مع مبلغ التحمل',

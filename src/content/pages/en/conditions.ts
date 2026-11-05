@@ -1,29 +1,29 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'Car Rental Requirements Casablanca | Yourent',
+  metaTitle: 'Car Rental Requirements Casablanca: Age 21+ | Yourent',
   metaDescription:
-    'Car rental requirements in Casablanca: ID, licence held over 2 years, proof of address, deposit, insurance, free cancellation up to 24 hours before.',
+    'Car rental requirements in Casablanca: age 21, ID, licence held over 2 years, proof of address, deposit, insurance, free cancellation up to 24 hours before.',
   eyebrow: 'Requirements',
   h1: 'Car Rental Requirements in Casablanca',
   intro:
-    'To rent a car from Yourent in Casablanca, you need a valid ID, a driving licence held for more than 2 years, proof of address and a deposit at pick-up. The minimum rental is 5 days and every car has comprehensive insurance with an excess. This page sums up the agency rules; it does not replace the contract you receive at pick-up.',
+    "Yourent's car rental requirements in Casablanca are short: age 21 or over, a valid ID, a licence over 2 years old, proof of address and a deposit. The rental lasts at least 5 days and comes with comprehensive insurance with an excess. This page sums up the agency's rules, but it does not replace the contract you receive at pick-up.",
   breadcrumb: 'Rental requirements',
   sections: [
     {
-      h2: 'Documents to show when renting a car',
+      h2: 'Car rental requirements: age and documents',
       blocks: [
         {
           type: 'list',
           items: [
-            'A valid ID: Moroccan CIN or passport.',
-            'A driving licence held for more than 2 years.',
+            'A valid identity document: your CIN or your passport.',
+            'A licence you have held for over 2 years.',
             'Proof of address.',
           ],
         },
         {
           type: 'p',
-          text: 'An international driving permit is accepted for foreign tourists. If your licence was issued abroad and you have no international permit, ask the team to confirm before you book. The minimum driver age is not shown on the site: the team gives it before you book.',
+          text: 'The minimum age to rent is 21. Foreign tourists may use an international driving permit. However, if your licence was issued abroad and you have no international permit, ask the team to confirm before you book.',
         },
       ],
     },
@@ -32,7 +32,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A deposit is taken when the car is handed over. It can be paid by cheque, in cash or by card imprint. The amount depends on the car you rent: the [prices](route:tarifs) page gives the minimum for each model, and the team confirms the exact sum. It is returned once the car is back in good condition. The team tells you before you book how long the deposit takes to come back.',
+          text: 'A deposit is taken when the car is handed over, by cheque, in cash or by card imprint. The amount depends on the car you rent: the [car rental prices in Casablanca](route:tarifs) page gives the minimum for each model, then the team confirms the exact sum. You recover the deposit once the car comes back in good condition. Ask the team how long this takes before you book.',
         },
       ],
     },
@@ -41,7 +41,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The minimum rental is 5 days. After 10 days, a lower rate applies automatically on most models. Included mileage and whether you can return the car in another city are not shown on the site: the team gives them on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at the address you choose, from 8 am to 10 pm, 7 days a week. The place where the car is collected at the end of the rental is agreed with the team.',
+          text: 'You rent for 5 days or more. Beyond 10 days, the daily rate falls automatically on most models, although high season can suspend this. Included mileage and returning in another city are not on the site, so the team answers on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at your address, from 8 am to 10 pm, every day. The place where you return the car is agreed with the team.',
         },
       ],
     },
@@ -51,9 +51,9 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Insurance**: every car has comprehensive insurance with an excess. The team gives the excess amount before you book.',
-            '**Breakdown**: a replacement car is sent as soon as possible.',
-            '**Accident**: the team helps the customer with the paperwork.',
+            '**Insurance**: the cover is comprehensive, with an excess, and the team gives that amount before you book.',
+            '**Breakdown**: a replacement car comes to you as quickly as possible.',
+            '**Accident**: the team helps you with the paperwork.',
           ],
         },
       ],
@@ -63,7 +63,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A booking can be changed or cancelled free of charge up to 24 hours before pick-up. After that, fees may apply, and the team tells you when you make the request. The online booking is a request: there is no online payment, and you pay the team afterwards.',
+          text: 'A booking can be changed or cancelled free of charge up to 24 hours before pick-up. After that, fees may apply; the team tells you which ones. The online booking is only a request: there is no online payment, so you pay the team afterwards.',
         },
       ],
     },
@@ -76,7 +76,7 @@ const page: PageContent = {
           rows: [
             ['Documents', 'CIN or passport, licence held over 2 years, proof of address'],
             ['Foreign licence', 'International driving permit accepted for tourists'],
-            ['Minimum age', 'Given by the team before you book'],
+            ['Minimum age', '21 years'],
             ['Duration', '5 days minimum, lower rate after 10 days on most models'],
             ['Deposit', 'Cheque, cash or card imprint, amount depends on the car'],
             ['Insurance', 'Comprehensive with an excess, amount given by the team'],
@@ -88,7 +88,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'A question about a point in this table? Write to the team from the [contact](route:contact) page or check the [FAQ](route:faq).',
+          text: 'A question about a point in this table? First check the [car rental FAQ](route:faq), then write to the team from the [Yourent contact](route:contact) page.',
         },
       ],
     },
@@ -96,23 +96,23 @@ const page: PageContent = {
   faq: [
     {
       q: 'Which documents do I need to rent a car in Casablanca?',
-      a: 'You need a valid ID (CIN or passport), a driving licence held for more than 2 years and proof of address.',
+      a: 'You must be at least 21 and show a CIN or passport, a licence held for more than 2 years and proof of address.',
     },
     {
       q: 'Is my foreign driving licence accepted?',
-      a: 'For foreign tourists, the international driving permit is accepted. In any other case, the team replies on WhatsApp before you book.',
+      a: 'Foreign tourists can rely on the international driving permit. In any other case, the team replies on WhatsApp before you book.',
     },
     {
       q: 'How is the deposit paid?',
-      a: 'The deposit is paid at pick-up, by cheque, in cash or by card imprint. It is returned once the car is back in good condition.',
+      a: 'You pay it at pick-up, by cheque, in cash or by card imprint, then recover it if the car comes back in good condition.',
     },
     {
       q: 'What happens if the car breaks down or I have an accident?',
-      a: 'If the car breaks down, a replacement is sent as soon as possible. After an accident, the team helps you with the paperwork.',
+      a: 'For a breakdown, the agency sends a replacement car as quickly as possible. For an accident, it guides you through the formalities.',
     },
     {
       q: 'Until when can I cancel for free?',
-      a: 'Up to 24 hours before pick-up. After that, fees may apply.',
+      a: 'Up to 24 hours before pick-up, but fees may apply later than that.',
     },
   ],
   related: ['tarifs', 'faq', 'contact', 'aeroport'],

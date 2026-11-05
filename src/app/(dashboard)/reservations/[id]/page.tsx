@@ -212,7 +212,7 @@ export default function ReservationDetailPage({ params }: { params: Promise<{ id
           </div>
 
           {reservation.notes && (
-            <div className="mt-5 rounded-[22px] border border-white/8 bg-white/[0.03] p-4 text-sm text-cream-muted">
+            <div className="mt-5 whitespace-pre-line rounded-[22px] border border-white/8 bg-white/[0.03] p-4 text-sm text-cream-muted">
               {reservation.notes}
             </div>
           )}

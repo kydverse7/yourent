@@ -1973,3 +1973,27 @@ html:has(:target) .lp-below-fold {
   background: rgba(201, 168, 76, 0.06);
   border-color: rgba(201, 168, 76, 0.3);
 }
+
+/* Zones tactiles sur téléphone : onglets et réseaux à 44 px, points du carrousel agrandis sans changer leur aspect. */
+@media (max-width: 767px) {
+  .lp-tab-btn,
+  .eco-card-cta,
+  .ct-map-btn-primary,
+  .ct-map-btn-outline,
+  .lp-pill-btn {
+    min-height: 44px;
+  }
+  .lp-icon-btn,
+  .ct-social-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .eco-dot {
+    position: relative;
+  }
+  .eco-dot::after {
+    content: '';
+    position: absolute;
+    inset: -18px -6px;
+  }
+}

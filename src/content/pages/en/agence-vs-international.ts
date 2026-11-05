@@ -3,19 +3,19 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Local or International Car Rental Casablanca | Yourent',
   metaDescription:
-    'Local agency or international car rental in Casablanca: compare pick-up, delivery, deposit, flexibility and breakdown help to choose the right option.',
+    'Local or international car rental in Casablanca? Compare pick-up, free airport delivery, deposit, flexibility and breakdown help to choose what suits you.',
   eyebrow: 'Comparison',
-  h1: 'Local Agency or International Car Rental in Casablanca: How to Choose',
+  h1: 'Local or international car rental in Casablanca: how to choose',
   intro:
-    'In Casablanca, you can rent from a big international company or from a local agency like Yourent. Each has its advantages: the international company has desks and a worldwide network, while the local agency usually offers delivery and direct contact with the team. The right choice depends on how long you stay and how you want to collect the car.',
+    'For car rental in Casablanca, you can use a big international company or a local agency like Yourent. The international company has desks and a worldwide network, while the local agency usually offers delivery and direct contact with the team. The right choice depends on how long you stay and how you want to collect the car.',
   breadcrumb: 'Local or international',
   sections: [
     {
-      h2: 'Comparison: local agency and international car rental',
+      h2: 'Car rental in Casablanca: local agency and international company compared',
       blocks: [
         {
           type: 'p',
-          text: "This table describes general trends, not the terms of any particular company: they vary from one brand to another and from one offer to another. Always check the terms published by each company. For Yourent, the columns reflect the agency's own rules.",
+          text: "This table describes general trends, not the terms of any particular company, because they vary from one brand and one offer to another. Always check the terms published by each company. For Yourent, the column reflects the agency's own rules.",
         },
         {
           type: 'table',
@@ -61,7 +61,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Airport presence**: a desk in the arrivals hall means you do not wait for someone to bring the car. Yourent delivers to Mohammed V airport but has no desk there.',
+            '**Airport presence**: a desk in the arrivals hall means you do not wait for someone to bring the car. Yourent, by contrast, delivers to Mohammed V airport but has no desk there.',
             '**International network**: if you rent in several countries or cities, a single company can cover everything, with one account and known terms.',
             '**Short rentals**: for a day or a weekend, a big company is often the answer, since Yourent rents for 5 days minimum.',
           ],
@@ -73,11 +73,11 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A local agency suits you when the rental lasts at least 5 days and you want the car where you are: outside the hotel, at the station or at your family home. You talk directly to the team preparing the car, which makes special requests easier, such as the handover time or the return place (to be confirmed before you book).',
+          text: 'A local agency suits a rental of at least 5 days when you want the car where you are: your hotel, the station or your family home. You talk directly to the team preparing the car, so you can raise requests such as the handover time or the return place.',
         },
         {
           type: 'p',
-          text: 'The deposit matters too. At Yourent, it can be paid by cheque, in cash or by card imprint; the amount depends on the car, and the [prices](route:tarifs) page shows the minimum. If you do not want a bank card blocked, ask each company what it accepts.',
+          text: 'The deposit matters too. At Yourent, you leave it by cheque, in cash or by card imprint. The amount depends on the car, and the [car rental prices in Casablanca](route:tarifs) page shows the minimum. If you would rather not have a bank card blocked, ask each company what it accepts.',
         },
       ],
     },
@@ -97,7 +97,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'At Yourent, the deposit and cancellation are described on the [rental requirements](route:conditions) page. The excess amount, included mileage and returning in another city are given by the team before you book.',
+          text: 'At Yourent, the deposit and cancellation are described on the [car rental requirements](route:conditions) page. The team gives the excess amount, the included mileage and the options for returning in another city before you book.',
         },
       ],
     },
@@ -106,7 +106,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The choice is often decided on arrival: a desk on site or a delivered car. To see how Yourent organises the handover, read the [car rental at Mohammed V airport](route:aeroport) page. For a specific request, use the [contact](route:contact) page.',
+          text: 'The choice is often decided on arrival: a desk on site or a delivered car. To see how Yourent organises the handover, first read the [car rental at Mohammed V airport](route:aeroport) page. Then, for a specific request, use the [Yourent contact](route:contact) page.',
         },
       ],
     },
@@ -114,23 +114,23 @@ const page: PageContent = {
   faq: [
     {
       q: 'Is it better to rent from an international company or a local agency in Casablanca?',
-      a: 'It depends on your stay. An international company offers desks and a worldwide network. A local agency like Yourent delivers the car and offers direct contact, for a rental of 5 days or more.',
+      a: 'It depends on your stay. An international company offers desks and a worldwide network. A local agency like Yourent, on the other hand, delivers the car and offers direct contact, for a rental of 5 days or more.',
     },
     {
       q: 'Does Yourent have a desk at the airport?',
-      a: 'No. Yourent delivers the car to Mohammed V airport, free of charge, but has no office on site.',
+      a: 'No. Delivery to Mohammed V airport is free, but you will not find a Yourent office in the terminal.',
     },
     {
       q: 'Can I rent for a single day at Yourent?',
-      a: 'No, the minimum is 5 days. For a single day, you will need another company.',
+      a: 'No, the minimum is 5 days, so a single day means going to another company.',
     },
     {
       q: 'How does the deposit work at Yourent?',
-      a: 'It is taken at pick-up, by cheque, in cash or by card imprint. The amount depends on the car. It is returned once the car is back in good condition.',
+      a: 'It is taken at pick-up, by cheque, in cash or by card imprint. The amount depends on the car, and you get it back when the car returns undamaged.',
     },
     {
       q: 'What happens if the car breaks down at Yourent?',
-      a: 'A replacement car is sent as soon as possible. After an accident, the team helps the customer with the paperwork.',
+      a: 'The team sends a replacement car as quickly as it can. In the case of an accident, it also supports you through the paperwork.',
     },
   ],
   related: ['aeroport', 'conditions', 'tarifs', 'a-propos', 'contact'],

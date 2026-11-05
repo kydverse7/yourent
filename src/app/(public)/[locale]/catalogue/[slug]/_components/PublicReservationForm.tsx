@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui';
 import { addDays } from 'date-fns';
 import { MIN_RESERVATION_DAYS } from '@/lib/constants';
@@ -8,29 +8,15 @@ import { calcNbJours, calcTarifTotal, formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-
-const INDICATIFS = [
-  { code: '+212', label: '🇲🇦 +212', country: 'Maroc' },
-  { code: '+33', label: '🇫🇷 +33', country: 'France' },
-  { code: '+34', label: '🇪🇸 +34', country: 'Espagne' },
-  { code: '+39', label: '🇮🇹 +39', country: 'Italie' },
-  { code: '+44', label: '🇬🇧 +44', country: 'UK' },
-  { code: '+49', label: '🇩🇪 +49', country: 'Allemagne' },
-  { code: '+31', label: '🇳🇱 +31', country: 'Pays-Bas' },
-  { code: '+32', label: '🇧🇪 +32', country: 'Belgique' },
-  { code: '+41', label: '🇨🇭 +41', country: 'Suisse' },
-  { code: '+1', label: '🇺🇸 +1', country: 'USA/Canada' },
-  { code: '+966', label: '🇸🇦 +966', country: 'Arabie S.' },
-  { code: '+971', label: '🇦🇪 +971', country: 'EAU' },
-  { code: '+216', label: '🇹🇳 +216', country: 'Tunisie' },
-  { code: '+213', label: '🇩🇿 +213', country: 'Algérie' },
-];
+import { useToday } from '../../_lib/useToday';
+import { parseFormPhone } from '../_lib/phone';
+import { DIAL_CODES, DIAL_CODE_VALUES, dialCodeLabel } from '../_lib/dialCodes';
 
 /* ── Styles réutilisables pour les champs du formulaire ── */
 const fieldBase =
-  'w-full h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 text-[#f7f1e8] text-[0.95rem] placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
+  'w-full h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 text-[#f7f1e8] text-base sm:text-[0.95rem] placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
 const selectBase =
-  'h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 text-[#f7f1e8] text-sm appearance-none cursor-pointer transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
+  'h-12 rounded-xl border border-white/[0.12] bg-white/[0.06] px-3 text-[#f7f1e8] text-base sm:text-sm appearance-none cursor-pointer transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)]';
 const labelBase = 'block text-sm font-medium text-[#b9a88f] mb-1.5';
 
 interface Props {
@@ -47,9 +33,15 @@ interface Props {
 
 export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehiculeSlug, redirectSlug, tarifJour, tarifJour10Plus = 0, highSeason = false, initialDu, initialAu }: Props) {
   const router = useRouter();
-  const { t, lp } = useLocale();
+  const { t, lp, locale } = useLocale();
+  const today = useToday();
   const [loading, setLoading] = useState(false);
   const [whatsappSame, setWhatsappSame] = useState(true);
+  // Noms de pays dans la langue de la page, ajoutés après le premier rendu pour rester identique au HTML du serveur.
+  const [countryNames, setCountryNames] = useState<Intl.DisplayNames>();
+  useEffect(() => {
+    setCountryNames(new Intl.DisplayNames([locale], { type: 'region' }));
+  }, [locale]);
   const [form, setForm] = useState({
     debutAt: initialDu ?? '',
     finAt: initialAu ?? '',
@@ -92,9 +84,10 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
 
     setLoading(true);
     try {
-      const normalizedPhone = form.telephone.replace(/[\s().-]/g, '');
-      const fullPhone = form.indicatif + normalizedPhone.replace(/^\+?\d{1,3}/, (m) => normalizedPhone.startsWith('+') || normalizedPhone.startsWith('0') ? '' : '');
-      const whatsappNumber = whatsappSame ? fullPhone : form.indicatif + form.whatsapp.replace(/[\s().-]/g, '');
+      const phone = parseFormPhone(form.telephone, form.indicatif, DIAL_CODE_VALUES);
+      const whatsappNumber = whatsappSame
+        ? phone.international
+        : parseFormPhone(form.whatsapp, phone.indicatif, DIAL_CODE_VALUES).international;
 
       const res = await fetch('/api/reservations', {
         method: 'POST',
@@ -105,10 +98,11 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           finAt: new Date(form.finAt).toISOString(),
           prenom: form.prenom,
           nom: form.nom,
-          indicatif: form.indicatif,
-          telephone: normalizedPhone,
+          indicatif: phone.indicatif,
+          telephone: phone.telephone,
           whatsapp: whatsappNumber,
           email: form.email,
+          notes: form.notes,
           optionsSupplementaires: [],
           website: form.website,
         }),
@@ -144,23 +138,25 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
       {/* ── Dates ── */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <label className={labelBase}>{t('form.startDate')}</label>
+          <label htmlFor="res-debut" className={labelBase}>{t('form.startDate')}</label>
           <input
+            id="res-debut"
             type="date"
             value={form.debutAt}
             onChange={(e) => set('debutAt', e.target.value)}
-            min={new Date().toISOString().split('T')[0]}
+            min={today}
             required
             className={fieldBase}
           />
         </div>
         <div>
-          <label className={labelBase}>{t('form.endDate')}</label>
+          <label htmlFor="res-fin" className={labelBase}>{t('form.endDate')}</label>
           <input
+            id="res-fin"
             type="date"
             value={form.finAt}
             onChange={(e) => set('finAt', e.target.value)}
-            min={form.debutAt ? addDays(new Date(form.debutAt), MIN_RESERVATION_DAYS).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
+            min={form.debutAt ? addDays(new Date(form.debutAt), MIN_RESERVATION_DAYS).toISOString().split('T')[0] : today}
             required
             className={fieldBase}
           />
@@ -188,8 +184,10 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
       {/* ── Nom / Prénom ── */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <label className={labelBase}>{t('form.firstName')}</label>
+          <label htmlFor="res-prenom" className={labelBase}>{t('form.firstName')}</label>
           <input
+            id="res-prenom"
+            autoComplete="given-name"
             type="text"
             value={form.prenom}
             onChange={(e) => set('prenom', e.target.value)}
@@ -198,8 +196,10 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           />
         </div>
         <div>
-          <label className={labelBase}>{t('form.lastName')}</label>
+          <label htmlFor="res-nom" className={labelBase}>{t('form.lastName')}</label>
           <input
+            id="res-nom"
+            autoComplete="family-name"
             type="text"
             value={form.nom}
             onChange={(e) => set('nom', e.target.value)}
@@ -211,20 +211,24 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
 
       {/* ── Téléphone avec indicatif ── */}
       <div>
-        <label className={labelBase}>{t('form.phone')}</label>
+        <label htmlFor="res-tel" className={labelBase}>{t('form.phone')}</label>
         <div className="flex gap-2">
           <select
             value={form.indicatif}
+            aria-label={t('form.phone')}
             onChange={(e) => set('indicatif', e.target.value)}
             dir="ltr"
             className={`${selectBase} w-[130px] shrink-0`}
           >
-            {INDICATIFS.map((ind) => (
-              <option key={ind.code} value={ind.code}>{ind.label}</option>
+            {DIAL_CODES.map((ind) => (
+              <option key={ind.code} value={ind.code}>{dialCodeLabel(ind, countryNames)}</option>
             ))}
           </select>
           <input
+            id="res-tel"
             type="tel"
+            inputMode="tel"
+            autoComplete="tel"
             dir="ltr"
             value={form.telephone}
             onChange={(e) => set('telephone', e.target.value)}
@@ -237,7 +241,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
 
       {/* ── WhatsApp ── */}
       <div className="space-y-3">
-        <label className="flex items-center gap-2.5 cursor-pointer text-sm text-[#b9a88f]">
+        <label className="flex min-h-11 items-center gap-2.5 cursor-pointer text-sm text-[#b9a88f]">
           <input
             type="checkbox"
             checked={whatsappSame}
@@ -248,19 +252,24 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
         </label>
         {!whatsappSame && (
           <div>
-            <label className={labelBase}>{t('form.whatsapp')}</label>
+            <label htmlFor="res-whatsapp" className={labelBase}>{t('form.whatsapp')}</label>
             <div className="flex gap-2">
               <select
                 value={form.indicatif}
+                aria-label={t('form.phone')}
                 onChange={(e) => set('indicatif', e.target.value)}
+                dir="ltr"
                 className={`${selectBase} w-[130px] shrink-0`}
               >
-                {INDICATIFS.map((ind) => (
-                  <option key={ind.code} value={ind.code}>{ind.label}</option>
-                ))}
+                {DIAL_CODES.map((ind) => (
+              <option key={ind.code} value={ind.code}>{dialCodeLabel(ind, countryNames)}</option>
+            ))}
               </select>
               <input
+                id="res-whatsapp"
                 type="tel"
+                inputMode="tel"
+                dir="ltr"
                 value={form.whatsapp}
                 onChange={(e) => set('whatsapp', e.target.value)}
                 placeholder="6XX XXX XXX"
@@ -274,8 +283,11 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
 
       {/* ── Email ── */}
       <div>
-        <label className={labelBase}>{t('form.email')}</label>
+        <label htmlFor="res-email" className={labelBase}>{t('form.email')}</label>
         <input
+          id="res-email"
+          autoComplete="email"
+          autoCapitalize="none"
           type="email"
           value={form.email}
           onChange={(e) => set('email', e.target.value)}
@@ -286,12 +298,14 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
 
       {/* ── Notes ── */}
       <div>
-        <label className={labelBase}>{t('form.notes')}</label>
+        <label htmlFor="res-notes" className={labelBase}>{t('form.notes')}</label>
         <textarea
+          id="res-notes"
           value={form.notes}
           onChange={(e) => set('notes', e.target.value)}
           rows={3}
-          className="w-full rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 py-3 text-[#f7f1e8] text-sm placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] resize-none"
+          maxLength={1000}
+          className="w-full rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 py-3 text-[#f7f1e8] text-base sm:text-sm placeholder:text-[#a99880]/55 transition-all duration-200 outline-none hover:border-[rgba(201,168,76,0.25)] focus:border-[rgba(201,168,76,0.5)] focus:bg-white/[0.08] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] resize-none"
           placeholder={t('form.notesPlaceholder')}
         />
       </div>

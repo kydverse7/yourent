@@ -2,21 +2,21 @@ import type { LocalizedPage } from '../types';
 
 const page: LocalizedPage = {
   fr: {
-    metaTitle: 'Agence locale ou loueur international à Casablanca | Yourent',
+    metaTitle: 'Loueur international Casablanca ou agence locale | Yourent',
     metaDescription:
-      'Agence locale ou loueur international à Casablanca : comparaison par critères (lieu de remise, livraison, caution, flexibilité, assistance) pour choisir.',
+      'Loueur international Casablanca ou agence locale : comparatif (remise, livraison, caution, flexibilité, assistance) selon la durée du séjour.',
     eyebrow: 'Comparatif',
-    h1: 'Agence locale ou loueur international à Casablanca : comment choisir',
+    h1: 'Loueur international ou agence locale à Casablanca : comment choisir',
     intro:
-      'À Casablanca, on peut louer chez un grand loueur international ou chez une agence locale comme Yourent. Les deux se défendent : le loueur international a des comptoirs et un réseau mondial, l’agence locale propose en général une livraison et un contact direct avec l’équipe. Le bon choix dépend de la durée de votre séjour et de la façon dont vous voulez récupérer la voiture.',
+      'Loueur international à Casablanca ou agence locale comme Yourent ? Le choix dépend de la durée du séjour et de la façon de récupérer la voiture. Le grand loueur a des comptoirs et un réseau mondial, alors que l’agence locale propose en général une livraison et un contact direct avec l’équipe. Les deux se défendent, mais pas pour les mêmes besoins.',
     breadcrumb: 'Agence locale ou loueur international',
     sections: [
       {
-        h2: 'Comparatif : agence locale et loueur international',
+        h2: 'Loueur international à Casablanca et agence locale : le comparatif',
         blocks: [
           {
             type: 'p',
-            text: 'Ce tableau décrit des tendances générales, pas les conditions d’un loueur en particulier : elles varient d’une enseigne à l’autre et d’une offre à l’autre. Vérifiez toujours les conditions publiées par chaque loueur. La colonne Yourent reprend les règles de l’agence.',
+            text: 'Ce comparatif entre loueur international et agence locale à Casablanca décrit des tendances générales. Il ne reprend pas les conditions d’un loueur en particulier, car elles varient d’une enseigne à l’autre. Vérifiez toujours ce que publie chaque loueur. La colonne Yourent reprend les règles de l’agence.',
           },
           {
             type: 'table',
@@ -48,6 +48,11 @@ const page: LocalizedPage = {
                 '5 jours minimum, tarif réduit au-delà de 10 jours',
               ],
               [
+                'Âge du conducteur',
+                'Variable selon l’enseigne',
+                '21 ans minimum',
+              ],
+              [
                 'Assistance',
                 'Réseau international et numéro d’assistance de l’enseigne',
                 'Véhicule de remplacement en cas de panne, accompagnement par l’équipe en cas d’accident',
@@ -62,7 +67,7 @@ const page: LocalizedPage = {
           {
             type: 'list',
             items: [
-              '**Présence à l’aéroport** : un comptoir dans le hall d’arrivée évite d’attendre un livreur. Yourent livre à l’aéroport Mohammed V mais n’y a pas de comptoir.',
+              '**Présence à l’aéroport** : un comptoir dans le hall d’arrivée évite d’attendre un livreur, alors que Yourent livre à l’aéroport Mohammed V sans y tenir de comptoir.',
               '**Réseau international** : si vous louez dans plusieurs pays ou plusieurs villes, un seul loueur peut tout couvrir, avec un compte et des conditions connues.',
               '**Location courte** : pour une journée ou un week-end, un grand loueur est souvent la solution, puisque Yourent loue pour 5 jours minimum.',
             ],
@@ -74,11 +79,11 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Une agence de quartier convient quand la location dure au moins 5 jours et que vous voulez la voiture là où vous êtes : devant l’hôtel, à la gare ou chez des proches. Vous parlez directement à l’équipe qui prépare le véhicule, ce qui facilite les demandes particulières comme l’heure de remise ou le lieu de reprise (à confirmer avant la réservation).',
+            text: 'Une agence de quartier convient quand la location dure au moins 5 jours. Elle convient aussi si vous voulez la voiture là où vous êtes : devant l’hôtel, à la gare ou chez des proches. Vous parlez directement à l’équipe qui prépare le véhicule. Les demandes particulières, comme l’heure de remise ou le lieu de reprise, s’en trouvent facilitées (à confirmer avant la réservation).',
           },
           {
             type: 'p',
-            text: 'La caution compte aussi. Chez Yourent, elle peut se verser par chèque, en espèces ou par empreinte de carte ; le montant dépend du véhicule et figure sur la page [tarifs](route:tarifs). Si vous ne voulez pas bloquer une carte bancaire, demandez à chaque loueur ce qu’il accepte.',
+            text: 'La caution compte aussi. Chez Yourent, vous pouvez la verser par chèque, en espèces ou par empreinte de carte. Son montant dépend du véhicule, et la page [prix de location de voiture à Casablanca](route:tarifs) l’indique par modèle. Si vous ne voulez pas bloquer une carte bancaire, demandez à chaque loueur ce qu’il accepte.',
           },
         ],
       },
@@ -98,7 +103,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: 'Chez Yourent, la caution et l’annulation sont décrites sur la page [conditions de location](route:conditions). Le montant de la franchise, le kilométrage inclus et le retour dans une autre ville sont précisés par l’équipe avant la réservation.',
+            text: 'Chez Yourent, la caution et l’annulation sont décrites dans les [conditions de location de voiture à Casablanca](route:conditions). En revanche, l’équipe précise le montant de la franchise, le kilométrage inclus et le retour dans une autre ville avant la réservation.',
           },
         ],
       },
@@ -107,7 +112,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Le choix se joue souvent à l’arrivée : comptoir sur place ou voiture livrée. Pour voir comment Yourent organise la remise, lisez la page [location de voiture à l’aéroport Mohammed V](route:aeroport). Pour une demande précise, utilisez la page [contact](route:contact).',
+            text: 'Le choix se joue souvent à l’arrivée : comptoir sur place ou voiture livrée. Pour voir comment Yourent organise la remise, lisez la page [location de voiture à l’aéroport de Casablanca](route:aeroport). Pour une demande précise, la page [contact de l’agence](route:contact) réunit tous les moyens de joindre l’équipe.',
           },
         ],
       },
@@ -115,23 +120,23 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Vaut-il mieux louer chez un loueur international ou une agence locale à Casablanca ?',
-        a: 'Cela dépend du séjour. Un loueur international offre des comptoirs et un réseau mondial. Une agence locale comme Yourent livre la voiture et permet un contact direct, pour une location de 5 jours minimum.',
+        a: 'Cela dépend du séjour. Un loueur international offre des comptoirs et un réseau mondial. Une agence locale comme Yourent, elle, livre la voiture et permet un contact direct, pour 5 jours minimum.',
       },
       {
         q: 'Yourent a-t-il un comptoir à l’aéroport ?',
-        a: 'Non. Yourent livre la voiture à l’aéroport Mohammed V, gratuitement, mais n’a pas de bureau sur place.',
+        a: 'Non, mais Yourent livre la voiture à l’aéroport Mohammed V sans frais. L’agence n’a pas de bureau sur place.',
       },
       {
         q: 'Peut-on louer pour une journée chez Yourent ?',
-        a: 'Non, la durée minimum est de 5 jours. Pour une seule journée, il faut se tourner vers un autre loueur.',
+        a: 'Non, car la durée minimum est de 5 jours. Pour une seule journée, il faut donc se tourner vers un autre loueur.',
       },
       {
         q: 'Comment la caution fonctionne-t-elle chez Yourent ?',
-        a: 'Elle est demandée au départ, par chèque, en espèces ou par empreinte de carte. Son montant dépend du véhicule, et elle vous est rendue au retour de la voiture en bon état.',
+        a: 'Elle est demandée au départ, par chèque, en espèces ou par empreinte de carte. Son montant dépend du véhicule, puis elle vous est rendue quand la voiture revient en bon état.',
       },
       {
         q: 'Que faire en cas de panne chez Yourent ?',
-        a: 'Un véhicule de remplacement est envoyé dans les plus brefs délais. En cas d’accident, l’équipe accompagne le client dans les démarches.',
+        a: 'Prévenez l’équipe : elle envoie un véhicule de remplacement dans les plus brefs délais. Après un accident, elle accompagne le client dans les démarches.',
       },
     ],
     related: ['aeroport', 'conditions', 'tarifs', 'a-propos', 'contact'],

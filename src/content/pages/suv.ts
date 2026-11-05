@@ -4,11 +4,11 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location SUV Casablanca : Duster, Tiguan, Touareg | Yourent',
     metaDescription:
-      'Location SUV à Casablanca : Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. Dès {minPrice} DH/jour, livraison gratuite et assurance tous risques. Demande en ligne.',
+      "Location SUV Casablanca : Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. Dès {minPrice} DH/jour, livraison gratuite à l'aéroport, assurance tous risques.",
     eyebrow: 'SUV et grands espaces',
-    h1: 'Location SUV à Casablanca',
+    h1: 'Location de SUV à Casablanca : du Duster au Range Rover Sport',
     intro:
-      "Yourent propose des SUV à louer à Casablanca dès {minPrice} DH par jour, du Dacia Duster au Range Rover Sport. La voiture est livrée gratuitement à Casablanca et à l'aéroport Mohammed V. Vous choisissez le SUV et vos dates en ligne, l'équipe confirme sur WhatsApp. Location de 5 jours minimum.",
+      "Yourent propose neuf SUV à la location à Casablanca, dès {minPrice} DH par jour, du Dacia Duster au Range Rover Sport. La voiture est livrée gratuitement à Casablanca et à l'aéroport Mohammed V. Vous choisissez le SUV et vos dates en ligne, puis l'équipe confirme sur WhatsApp. Comptez 5 jours de location au minimum.",
     breadcrumb: 'Location SUV',
     vehicles: {
       models: [
@@ -26,24 +26,24 @@ const page: LocalizedPage = {
     },
     sections: [
       {
-        h2: 'Quel SUV louer à Casablanca selon votre trajet',
+        h2: 'Location de SUV à Casablanca : quel modèle selon votre trajet',
         blocks: [
           {
             type: 'p',
-            text: "Un SUV se loue pour sa position de conduite haute, son coffre et son confort sur route. Yourent en propose neuf modèles, ce qui laisse de la marge selon le budget et le nombre de bagages.",
+            text: "Un SUV se loue surtout pour sa position de conduite haute et son coffre. Avec neuf modèles, vous avez de la marge selon le budget et le nombre de bagages.",
           },
           {
             type: 'list',
             items: [
-              "**Petit budget** : le [Dacia Duster](/catalogue/dacia-duster), diesel à boîte manuelle, est le SUV le plus abordable de la flotte, et l'un des plus nombreux.",
-              "**Urbain et compact** : le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) et l'[Audi Q3](/catalogue/audi-q3), pratiques en ville comme sur autoroute.",
-              "**Famille et long trajet** : le [Kia Sorento](/catalogue/kia-sorento), le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) et le [Touareg](/catalogue/volkswagen-touareg), plus grands, diesel, à boîte automatique.",
-              "**Premium** : le [Range Rover Evoque](/catalogue/range-rover-evoque), le [Porsche Macan](/catalogue/porsche-macan) et le [Range Rover Sport](/catalogue/range-rover-sport), si vous voulez du prestige. Voir aussi la page [voiture de luxe](route:luxe).",
+              "**Petit budget** : le [Dacia Duster](/catalogue/dacia-duster), diesel à boîte manuelle, est le SUV le plus abordable de la flotte, et aussi l'un des plus nombreux.",
+              "**Urbain et compact** : le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) et l'[Audi Q3](/catalogue/audi-q3) restent pratiques en ville comme sur autoroute.",
+              "**Famille et long trajet** : le [Kia Sorento](/catalogue/kia-sorento), le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) et le [Touareg](/catalogue/volkswagen-touareg) sont plus grands, diesel, à boîte automatique.",
+              "**Premium** : le [Range Rover Evoque](/catalogue/range-rover-evoque), le [Porsche Macan](/catalogue/porsche-macan) et le [Range Rover Sport](/catalogue/range-rover-sport) visent le prestige. Voyez aussi notre [location de voiture de luxe à Casablanca](route:luxe).",
             ],
           },
           {
             type: 'p',
-            text: "Tous les SUV ont 5 places. Pour partir à plusieurs avec des valises, privilégiez le Sorento, le Tiguan ou le Touareg.",
+            text: "Chaque SUV de la sélection compte 5 places. Pour partir à plusieurs avec des valises, regardez donc les plus grands : le Sorento, le Tiguan et le Touareg.",
           },
         ],
       },
@@ -52,20 +52,20 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Beaucoup de recherches \"location 4x4 Casablanca\" visent en réalité un SUV : une voiture haute et confortable pour la route. C'est ce que Yourent propose. Nous ne présentons pas ces véhicules comme des 4x4 tout-terrain.",
+            text: "Beaucoup de recherches \"location 4x4 Casablanca\" visent en réalité un SUV : une voiture haute et confortable pour la route. C'est ce que Yourent propose. En revanche, nous ne présentons pas ces véhicules comme des 4x4 tout-terrain.",
           },
           {
             type: 'p',
-            text: "Si vous cherchez précisément une transmission intégrale, par exemple pour une piste, la montagne ou l'Atlas, demandez à l'équipe sur WhatsApp quel modèle convient avant de réserver. Elle vous répond selon le véhicule réellement disponible à vos dates. Pour la ville, l'autoroute et les routes goudronnées, un SUV de la liste ci-dessous suffit.",
+            text: "Si vous cherchez précisément une transmission intégrale, par exemple pour une piste, la montagne ou l'Atlas, demandez à l'équipe sur WhatsApp quel modèle convient avant de réserver. Elle vous répond selon les véhicules libres à vos dates. Pour la ville, l'autoroute et les routes goudronnées, n'importe quel SUV de la liste ci-dessous suffit en pratique.",
           },
         ],
       },
       {
-        h2: 'Tarifs des SUV à louer',
+        h2: 'Prix de la location de SUV à Casablanca',
         blocks: [
           {
             type: 'p',
-            text: "Les tarifs des SUV de Yourent vont de {minPrice} DH à {maxPrice} DH par jour. Sur la plupart de ces modèles, le tarif baisse automatiquement au-delà de 10 jours, ce qui compte pour un séjour long.",
+            text: "Les tarifs vont de {minPrice} DH à {maxPrice} DH par jour selon le SUV. Sur la plupart de ces modèles, le prix baisse automatiquement au-delà de 10 jours, ce qui compte pour un séjour long.",
           },
           { type: 'pricing' },
         ],
@@ -75,26 +75,26 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le T-Roc et le Macan sont à essence. Côté boîte, le Duster est en manuelle, les autres SUV sont en automatique, et l'Audi Q3 existe dans les deux versions : le choix se confirme à la réservation. Les modèles à boîte automatique sont regroupés sur la page [location de voiture automatique](route:automatique).",
+            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le T-Roc et le Macan, eux, sont à essence. Côté boîte, le Duster est en manuelle, alors que les autres SUV sont en automatique. L'Audi Q3 existe toutefois dans les deux versions : le choix se confirme à la réservation. Pour tout voir, consultez notre [location de voiture automatique à Casablanca](route:automatique).",
           },
         ],
       },
       {
-        h2: 'Réserver un SUV et se faire livrer',
+        h2: 'Louer un SUV à Casablanca et se faire livrer',
         blocks: [
           {
             type: 'list',
             ordered: true,
             items: [
               "Utilisez la recherche par dates du catalogue pour voir quels SUV sont libres.",
-              "Envoyez votre demande en ligne : elle n'engage aucun paiement.",
+              "Envoyez ensuite votre demande en ligne : elle n'engage aucun paiement.",
               "L'équipe confirme sur WhatsApp ou par téléphone et indique la caution.",
-              "Le SUV est livré gratuitement à Casablanca ou à l'[aéroport Mohammed V](route:aeroport), 7j/7.",
+              "Le SUV est livré sans frais à Casablanca ou à l'aéroport, 7j/7 : voyez notre page [location de voiture à l'aéroport de Casablanca](route:aeroport).",
             ],
           },
           {
             type: 'p',
-            text: "Pensez à prévoir une pièce d'identité (CIN ou passeport), un permis de plus de 2 ans et un justificatif de domicile. Les touristes étrangers peuvent présenter le permis international. Détails dans les [conditions de location](route:conditions).",
+            text: "Pour louer un SUV, il faut avoir au moins 21 ans et un permis de plus de 2 ans. Prévoyez aussi une pièce d'identité (CIN ou passeport) et un justificatif de domicile. Si vous venez de l'étranger, le permis international convient également, comme le rappellent nos [conditions de location de voiture](route:conditions).",
           },
         ],
       },
@@ -110,19 +110,19 @@ const page: LocalizedPage = {
       },
       {
         q: 'Vos SUV sont-ils des 4x4 ?',
-        a: "Yourent loue des SUV pour la route, la ville et l'autoroute. Pour une transmission intégrale ou un usage sur piste, demandez à l'équipe sur WhatsApp quel modèle convient avant de réserver.",
+        a: "Yourent loue des SUV pour la route, la ville et l'autoroute. Pour une transmission intégrale ou un usage sur piste, interrogez donc l'équipe sur WhatsApp avant de réserver.",
       },
       {
         q: 'Quel SUV choisir pour partir en famille à Marrakech ?',
-        a: "Le Kia Sorento, le Volkswagen Tiguan et le Touareg sont les plus spacieux et les plus confortables pour un long trajet avec des bagages. Tous ont 5 places et une boîte automatique.",
+        a: "Le Kia Sorento, le Volkswagen Tiguan et le Touareg sont les plus grands de la sélection, avec un coffre adapté aux valises. Tous trois ont 5 places et une boîte automatique.",
       },
       {
         q: 'Peut-on louer un SUV en boîte automatique ?',
-        a: "Oui. Tous les SUV sont en automatique, sauf le Dacia Duster qui est en manuelle. L'Audi Q3 existe en automatique et en manuelle : le choix se confirme à la réservation.",
+        a: "Oui. Tous les SUV sont en automatique, sauf le Dacia Duster qui est en manuelle. Quant à l'Audi Q3, il existe dans les deux boîtes : l'équipe confirme votre choix à la réservation.",
       },
       {
         q: 'Quelle durée minimale pour louer un SUV ?',
-        a: "La location est de 5 jours minimum. Au-delà de 10 jours, le tableau de cette page donne le tarif de chaque SUV.",
+        a: "Il faut réserver un SUV pour 5 jours au moins. Au-delà de 10 jours, le tableau de cette page donne le tarif de chaque modèle.",
       },
     ],
     related: ['automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],

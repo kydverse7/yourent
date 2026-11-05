@@ -86,6 +86,15 @@ const LOCAL = {
     fr: '/location-voiture-mre-casablanca',
     en: '/car-rental-moroccans-abroad-casablanca',
   },
+  marrakech: {
+    fr: '/location-voiture-casablanca-marrakech',
+    en: '/car-rental-casablanca-to-marrakech',
+    ar: '/car-rental-casablanca-to-marrakech',
+  },
+  europe: {
+    fr: '/location-voiture-casablanca-depuis-france-europe',
+    en: '/car-rental-casablanca-from-europe',
+  },
   'agence-vs-international': {
     fr: '/agence-locale-ou-loueur-international-casablanca',
     en: '/local-agency-or-international-car-rental-casablanca',

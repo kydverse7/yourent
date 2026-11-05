@@ -26,12 +26,29 @@ export const BUSINESS = {
   /** Relevé sur la fiche Google le 2026-11-05 : à mettre à jour de temps en temps. */
   googleRating: { value: 4.8, count: 170, asOf: '2026-11-05' },
   minRentalDays: 5,
+  /** Âge minimum du conducteur, confirmé par le propriétaire le 2026-11-05. */
+  minAge: 21,
   social: {
     instagram: 'https://www.instagram.com/you_rent_car',
     facebook: 'https://www.facebook.com/yourent.ma',
     tiktok: 'https://www.tiktok.com/@yourent.ma',
   },
 } as const;
+
+/**
+ * Dirhams pour 1 euro : cours de référence de Bank Al-Maghrib (bkam.ma), relevé à la date ci-dessous.
+ * Sert uniquement à l'équivalent indicatif affiché : la facturation et les données structurées restent en dirhams.
+ * À mettre à jour de temps en temps.
+ */
+export const EUR_RATE = 10.9589;
+export const EUR_RATE_AS_OF = '2026-11-05';
+
+/** « ≈ 28 € » pour un montant en dirhams. `null` en arabe ou sans montant : rien à afficher. */
+export function formatEurApprox(mad: number, locale: 'fr' | 'en' | 'ar'): string | null {
+  if (locale === 'ar' || !(mad > 0)) return null;
+  const euros = Math.round(mad / EUR_RATE).toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');
+  return `≈\u00a0${euros}\u00a0€`;
+}
 
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//.test(path)) return path;

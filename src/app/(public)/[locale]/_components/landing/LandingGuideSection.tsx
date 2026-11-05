@@ -4,6 +4,8 @@ import type { Locale } from '@/lib/i18n/translations';
 import { filterFleet, type FleetFilter, type FleetModel, type FleetStats } from '@/lib/seo/fleet';
 import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
 import { BUSINESS } from '@/lib/site';
+import { t as tr } from '@/lib/i18n';
+import { RelatedLinks } from '../seo/SeoBlocks';
 import { formatBusinessHours } from './constants';
 import { GUIDE_CONTENT, type GuideRangeKey } from './guideContent';
 
@@ -164,6 +166,14 @@ export function LandingGuideSection({
               <RichText text={content.prepare.outro} locale={locale} />
             </p>
           </div>
+
+          <RelatedLinks
+            locale={locale}
+            items={(['aeroport', 'luxe', 'range-rover', 'maroc'] as const).map((key) => ({
+              key,
+              label: tr(locale, `footer.link.${key}`),
+            }))}
+          />
         </div>
       </div>
     </section>

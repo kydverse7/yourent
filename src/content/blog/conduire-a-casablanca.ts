@@ -3,19 +3,19 @@ import type { Article } from '../types';
 const article: Article = {
   slug: 'conduire-a-casablanca',
   metaTitle: `Conduire à Casablanca : règles et parking | Yourent`,
-  metaDescription: `Conduire à Casablanca en voiture de location : vitesse, ceinture, téléphone, stationnement, contrôles et carburant, avec les règles vérifiées.`,
+  metaDescription: `Conduire à Casablanca en voiture de location : vitesse, ceinture, téléphone, stationnement et carburant, règles sourcées. Livraison gratuite à Casablanca.`,
   h1: `Conduire à Casablanca en voiture de location : les règles à connaître`,
-  intro: `À Casablanca, la vitesse est limitée à 60 km/h en agglomération pour une voiture de tourisme, la ceinture est obligatoire à toutes les places et le téléphone ne se tient pas en main. Le stationnement payant se fait aux horodateurs dans les zones équipées. Cet article ne reprend que des règles vérifiées, avec leur source, et signale ce qui doit se confirmer sur place.`,
+  intro: `Pour conduire à Casablanca, la vitesse est limitée à 60 km/h en agglomération (voiture de tourisme). La ceinture est obligatoire à toutes les places, et le téléphone ne se tient pas en main. Le stationnement est payant aux horodateurs, dans les zones équipées. Cet article ne reprend donc que des règles vérifiées, avec leur source, et signale ce qui doit se confirmer sur place.`,
   excerpt: `Vitesse, ceinture, téléphone, alcool, stationnement, contrôles et carburant : ce qu'un conducteur de voiture de location doit savoir pour rouler à Casablanca.`,
   datePublished: '2026-11-05',
   dateModified: '2026-11-05',
   sections: [
     {
-      h2: `Quelles sont les limitations de vitesse à Casablanca et au Maroc ?`,
+      h2: `Conduire à Casablanca : quelles sont les limitations de vitesse ?`,
       blocks: [
         {
           type: 'p',
-          text: `Pour une voiture de moins de 3,5 tonnes, le décret n° 2-10-420 pris pour l'application de la loi n° 52-05 fixe :`,
+          text: `Pour une voiture de moins de 3,5 tonnes, le décret n° 2-10-420 pris pour l'application de la loi n° 52-05 fixe les limites suivantes :`,
         },
         {
           type: 'table',
@@ -28,7 +28,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `La limite en agglomération peut être portée à 80 km/h par arrêté conjoint des ministres de l'Intérieur et de l'Équipement, et les panneaux locaux priment : une section de boulevard peut être signalée à une vitesse différente. Un conducteur en période probatoire est limité à 90 km/h. Sur autoroute, la vitesse minimale est de 60 km/h en circulation normale. Des radars fixes sont installés sur le réseau routier, selon LesMRE.`,
+          text: `La limite en agglomération peut être portée à 80 km/h par arrêté conjoint des ministres de l'Intérieur et de l'Équipement. Les panneaux locaux priment toutefois : une section de boulevard peut être signalée à une vitesse différente. Un conducteur en période probatoire est limité à 90 km/h. Sur autoroute, la vitesse minimale est de 60 km/h en circulation normale. Des radars fixes sont installés sur le réseau routier, selon LesMRE.`,
         },
       ],
     },
@@ -39,13 +39,13 @@ const article: Article = {
           type: 'list',
           items: [
             `**Ceinture.** Elle est obligatoire sur tous les sièges, y compris à l'arrière.`,
-            `**Téléphone.** Tenir son téléphone en main est interdit. Le kit mains libres est autorisé. L'infraction donne lieu à une amende et peut retirer des points du permis.`,
-            `**Alcool.** Le plus simple est de ne pas boire avant de conduire. Au-delà du seuil légal, les sanctions vont de l'amende à la suspension du permis, voire à une peine de prison, y compris pour les titulaires d'un permis européen.`,
+            `**Téléphone.** Tenir son téléphone en main est interdit, mais le kit mains libres est autorisé. L'infraction donne lieu à une amende et peut retirer des points du permis.`,
+            `**Alcool.** Le plus simple est de ne pas boire avant de conduire. Au-delà du seuil légal, les sanctions vont de l'amende à la suspension du permis, voire à une peine de prison. Elles s'appliquent aussi aux titulaires d'un permis européen.`,
           ],
         },
         {
           type: 'p',
-          text: `Les montants des amendes ne sont pas repris ici : les sources divergent et certaines datent d'avant la réforme. Pour les montants et le barème de points, LesMRE renvoie au site de l'Agence nationale de la sécurité routière (narsa.ma).`,
+          text: `Les montants des amendes ne sont pas repris ici, car les sources divergent et certaines datent d'avant la réforme. Pour les montants et le barème de points, LesMRE renvoie au site de l'Agence nationale de la sécurité routière (narsa.ma).`,
         },
       ],
     },
@@ -58,13 +58,13 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Deux points de contexte, relevés dans la presse en 2025 : la gestion du stationnement par la société Casa Baia était en cours de remise en cause par le conseil de la ville, et la présidente de la commune a interdit l'octroi de nouvelles autorisations aux gardiens de voitures. Les tarifs ne sont pas repris ici, car les derniers chiffres publics datent de plusieurs années. L'appareil affiche le prix en vigueur.`,
+          text: `Deux points de contexte ont été relevés dans la presse en 2025 : la gestion du stationnement par la société Casa Baia était en cours de remise en cause par le conseil de la ville, et la présidente de la commune a interdit l'octroi de nouvelles autorisations aux gardiens de voitures. Les tarifs ne sont pas repris ici, car les derniers chiffres publics datent de plusieurs années. L'appareil affiche donc le prix en vigueur.`,
         },
         {
           type: 'list',
           items: [
-            `Demandez à votre hôtel s'il dispose d'un parking ou d'un partenariat, avant d'arriver.`,
-            `Ne laissez aucun objet visible dans l'habitacle.`,
+            `Avant d'arriver, demandez à votre hôtel s'il dispose d'un parking ou d'un partenariat.`,
+            `Ne laissez surtout aucun objet visible dans l'habitacle.`,
           ],
         },
       ],
@@ -74,11 +74,11 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Des contrôles routiers ont lieu sur les axes principaux. Gardez avec vous votre permis, votre pièce d'identité ou votre passeport, et le contrat de location remis par le loueur, avec les papiers du véhicule. Si un procès-verbal vous est remis, conservez-le : il indique comment payer l'amende, et il sera utile si le loueur vous demande le détail.`,
+          text: `Des contrôles routiers ont lieu sur les axes principaux. Gardez donc avec vous votre permis, votre pièce d'identité ou votre passeport, le contrat de location remis par le loueur et les papiers du véhicule. Si un procès-verbal vous est remis, conservez-le, car il indique comment payer l'amende et servira si le loueur vous demande le détail.`,
         },
         {
           type: 'p',
-          text: `Les règles sur la durée de validité d'un permis étranger sont expliquées dans l'article [louer une voiture au Maroc avec un permis étranger](/blog/louer-voiture-maroc-permis-etranger).`,
+          text: `Les règles de validité d'un permis étranger sont expliquées dans l'article [louer une voiture au Maroc avec un permis étranger](/blog/louer-voiture-maroc-permis-etranger).`,
         },
       ],
     },
@@ -87,24 +87,24 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Vérifiez le carburant de votre voiture avant le premier plein : les fiches du catalogue Yourent indiquent l'essence, le diesel ou l'hybride pour chaque modèle, et une erreur de carburant abîme le moteur. Près de l'aéroport Mohammed V, une station-service ouverte 24h/24 est signalée par l'ONDA, ce qui permet de faire le plein avant de rendre une voiture ou en arrivant de nuit.`,
+          text: `Vérifiez le carburant de votre voiture avant le premier plein, car une erreur de carburant abîme le moteur. Les fiches du catalogue Yourent indiquent l'essence, le diesel ou l'hybride pour chaque modèle. Près de l'aéroport Mohammed V, l'ONDA signale une station-service ouverte 24h/24. Elle permet de faire le plein avant de rendre une voiture ou en arrivant de nuit.`,
         },
         {
           type: 'p',
-          text: `Les prix à la pompe changent et ne sont pas repris ici. Le niveau de carburant au retour est noté sur l'état des lieux : photographiez la jauge à la remise et à la restitution.`,
+          text: `Les prix à la pompe changent et ne sont donc pas repris ici. Le niveau de carburant au retour est noté sur l'état des lieux ; photographiez la jauge à la remise et à la restitution.`,
         },
       ],
     },
     {
-      h2: `Conduire avec Yourent`,
+      h2: `Conduire à Casablanca avec Yourent`,
       blocks: [
         {
           type: 'p',
-          text: `Yourent livre la voiture à l'hôtel, à l'adresse choisie ou à l'aéroport Mohammed V, sans frais dans Casablanca. En cas de panne, un véhicule de remplacement est envoyé dans les plus brefs délais ; en cas d'accident, l'équipe accompagne le client dans les démarches. Les conditions complètes (documents, caution, assurance tous risques avec franchise) sont sur la page [conditions de location](route:conditions).`,
+          text: `Yourent livre la voiture à l'hôtel, à l'adresse choisie ou à l'aéroport Mohammed V, sans frais dans Casablanca. En cas de panne, Yourent envoie un véhicule de remplacement dans les plus brefs délais. Après un accident, l'équipe accompagne aussi le client dans ses démarches. Pour les conditions complètes (documents, caution, assurance tous risques avec franchise), voir la page [conditions de location de voiture](route:conditions).`,
         },
         {
           type: 'p',
-          text: `Pour des trajets sur autoroute au départ de Casablanca, lisez [péages Casablanca - Marrakech - Rabat](/blog/peages-casablanca-marrakech-rabat).`,
+          text: `Pour des trajets sur autoroute au départ de Casablanca, lisez l'article [péages Casablanca Marrakech Rabat](/blog/peages-casablanca-marrakech-rabat).`,
         },
       ],
     },
@@ -112,19 +112,19 @@ const article: Article = {
   faq: [
     {
       q: `Quelle est la vitesse maximale à Casablanca ?`,
-      a: `60 km/h en agglomération pour une voiture de moins de 3,5 tonnes, selon le décret n° 2-10-420. La limite peut être portée à 80 km/h par arrêté, et les panneaux locaux priment.`,
+      a: `60 km/h en agglomération pour une voiture de moins de 3,5 tonnes, selon le décret n° 2-10-420. La limite peut toutefois être portée à 80 km/h par arrêté, et les panneaux locaux priment.`,
     },
     {
       q: `Peut-on téléphoner au volant au Maroc ?`,
-      a: `Tenir son téléphone en main est interdit. Le kit mains libres est autorisé. L'infraction est sanctionnée par une amende et un retrait de points possible.`,
+      a: `Tenir son téléphone en main est interdit, mais le kit mains libres est autorisé. L'infraction est sanctionnée par une amende et un retrait de points possible.`,
     },
     {
       q: `Le stationnement est-il payant à Casablanca ?`,
-      a: `Oui dans les zones équipées d'horodateurs. Le tarif est affiché sur l'appareil. Les zones et la gestion ont évolué en 2025 : fiez-vous aux panneaux de la rue.`,
+      a: `Oui dans les zones équipées d'horodateurs, et le tarif est affiché sur l'appareil. Les zones et la gestion ont toutefois évolué en 2025 : fiez-vous aux panneaux de la rue.`,
     },
     {
       q: `Que faire si la voiture de location tombe en panne ?`,
-      a: `Prévenez l'équipe de Yourent : un véhicule de remplacement est envoyé dans les plus brefs délais. En cas d'accident, l'équipe accompagne le client dans les démarches.`,
+      a: `Prévenez l'équipe de Yourent : un véhicule de remplacement est envoyé dans les plus brefs délais. Après un accident, elle accompagne aussi le client dans ses démarches.`,
     },
   ],
   related: ['conditions', 'aeroport', 'automatique', 'faq'],
