@@ -20,7 +20,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'It is the car for someone who wants to treat themselves for a few days without giving up the boot of an SUV: a stay\'s luggage or a small family\'s suitcases.',
+          text: 'It is the car for someone who wants to treat themselves during a stay without giving up the boot of an SUV, which takes a couple\'s luggage or a small family\'s suitcases.',
         },
       ],
     },
@@ -29,7 +29,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), which is more stately and calmer, the Macan is the most dynamic to drive. Next to the [Audi Q3](/catalogue/audi-q3), of similar size, it plays in a higher price bracket: {price:porsche-macan} MAD per day against {price:audi-q3} MAD. And if what you want is mostly space on a tighter budget, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) remains a big SUV at {price:volkswagen-touareg} MAD.',
+          text: 'Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), which is calmer and more about image, the Macan is the most dynamic to drive. Next to the [Audi Q3](/catalogue/audi-q3), of similar size, it plays in a higher price bracket: {price:porsche-macan} MAD per day against {price:audi-q3} MAD. And if what you want is mostly space on a tighter budget, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) remains a big SUV at {price:volkswagen-touareg} MAD.',
         },
       ],
     },
@@ -41,8 +41,8 @@ const page: PageContent = {
           items: [
             '**On arrival in Casablanca**: the car is delivered to you at Mohammed V airport and you head straight to the hotel or the road. Details on the [car rental at the airport](route:aeroport) page.',
             '**During a stay in town**: comfortable in traffic thanks to the automatic gearbox, but bulkier than a compact to park near the Corniche.',
-            '**Casablanca to Marrakech**: the motorway is its favourite ground. Quick overtaking, good stability, less fatigue on the journey.',
-            '**A weekend for two**: the Macan gives the feel of a sports car with the practicality of an SUV.',
+            '**Casablanca to Marrakech**: the motorway is where it shines. Quick overtaking, good stability, less fatigue on the journey.',
+            '**A trip for two**: the Macan gives the feel of a sports car with the practicality of an SUV.',
           ],
         },
       ],
@@ -56,7 +56,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The Macan is listed at {minPrice} MAD per day. The table below gives the rate for 5 to 10 days, the rate after 10 days and the deposit taken at pick-up. Comprehensive insurance with an excess is included.',
+          text: 'The Macan is listed at {minPrice} MAD per day. The table below gives the rate for 5 to 10 days, the rate after 10 days and the minimum deposit taken at pick-up. Comprehensive insurance with an excess is included.',
         },
         { type: 'pricing' },
         {
@@ -77,7 +77,7 @@ const page: PageContent = {
     },
     {
       q: 'What deposit is needed for the Macan?',
-      a: 'The amount depends on the car and is shown in the price table above. It is paid at pick-up by cheque, in cash or by card imprint, and returned when the car comes back in good condition.',
+      a: 'The amount depends on the car: the price table above gives the minimum. It is paid at pick-up by cheque, in cash or by card imprint, and returned when the car comes back in good condition.',
     },
     {
       q: 'Can I book the Porsche in advance for an airport arrival?',

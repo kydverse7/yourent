@@ -16,24 +16,24 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The [Audi A3](/catalogue/audi-a3) is a premium compact, petrol and automatic. It is the smaller and cheaper of the two, very at home in town. The [Audi Q3](/catalogue/audi-q3) is a compact diesel SUV, with a higher seat and more boot space. It comes with an automatic or a manual gearbox depending on the car.',
+          text: 'The [Audi A3](/catalogue/audi-a3) is a premium compact, petrol and automatic. It is the smaller and cheaper of the two, and very much at home in town. The [Audi Q3](/catalogue/audi-q3) is a compact diesel SUV, with a higher seat and more boot space. It comes with an automatic or a manual gearbox depending on the car.',
         },
         {
           type: 'p',
-          text: 'The A3 is offered in very few units, the Q3 in several. If your dates are fixed, use the date search in the catalogue to see what is free.',
+          text: 'There are very few A3s in the fleet and several Q3s. If your dates are fixed, use the date search in the catalogue to see what is free.',
         },
       ],
     },
     {
-      h2: 'Choosing between the A3 and the Q3 for how you will use it',
+      h2: 'A3 or Q3: which one suits your trip',
       blocks: [
         {
           type: 'list',
           items: [
             '**Arriving at Mohammed V airport**: for one or two people with little luggage, the A3 is enough. For more suitcases, take the Q3. The car is delivered to the airport, see the [airport car rental](route:aeroport) page.',
-            '**A stay in Casablanca**: the A3 slips through the centre and parks almost anywhere. The Q3 is more comfortable on the boulevards and for leaving the city.',
+            '**A stay in Casablanca**: the A3 slips through the centre and is easier to park. The Q3 is more comfortable on the boulevards and for leaving the city.',
             '**Casablanca to Marrakech**: the diesel Q3 is best suited to a long motorway drive. The petrol A3 is better for a return trip for two.',
-            '**A business meeting**: the A3 gives the image of a discreet, well-kept saloon, without the showier tone of a big engine.',
+            '**A business meeting**: the A3 looks smart and discreet, without being showy.',
           ],
         },
       ],
@@ -47,7 +47,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The A3 is {price:audi-a3} MAD per day, the Q3 {price:audi-q3} MAD. The choice comes down first to the size of the car. A lower rate applies automatically after 10 days. Comprehensive insurance with an excess is included, and the deposit is given in the table.',
+          text: 'The A3 is {price:audi-a3} MAD per day, the Q3 {price:audi-q3} MAD. The choice comes down first to the size of the car. The table below gives the rate after 10 days and the minimum deposit for each model. Comprehensive insurance with an excess is included.',
         },
         { type: 'pricing' },
       ],
@@ -69,7 +69,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I choose a manual gearbox on an Audi?',
-      a: 'Only the Q3 exists with both gearboxes. The A3 is automatic only. State the gearbox you want in your request.',
+      a: 'Only the Q3 comes with both gearboxes. The A3 is automatic only. State the gearbox you want in your request.',
     },
     {
       q: 'Can the Audi be delivered to the airport?',

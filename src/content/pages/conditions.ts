@@ -42,7 +42,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'La durée minimum de location est de 5 jours. Un tarif réduit s’applique automatiquement au-delà de 10 jours. Le kilométrage inclus et la possibilité de rendre le véhicule dans une autre ville ne sont pas affichés sur le site : l’équipe les précise sur WhatsApp avant la réservation. La livraison et la reprise se font à l’hôtel, à l’aéroport Mohammed V ou à l’adresse choisie, de 8h à 22h, 7j/7.',
+            text: 'La durée minimum de location est de 5 jours. Au-delà de 10 jours, un tarif réduit s’applique automatiquement sur la plupart des modèles. Le kilométrage inclus et la possibilité de rendre le véhicule dans une autre ville ne sont pas affichés sur le site : l’équipe les précise sur WhatsApp avant la réservation. La livraison se fait à l’hôtel, à l’aéroport Mohammed V ou à l’adresse choisie, de 8h à 22h, 7j/7. Le lieu de reprise en fin de location se convient avec l’équipe.',
           },
         ],
       },
@@ -78,7 +78,7 @@ const page: LocalizedPage = {
               ['Documents', 'CIN ou passeport, permis de plus de 2 ans, justificatif de domicile'],
               ['Permis étranger', 'Permis international accepté pour les touristes'],
               ['Âge minimum', 'Précisé par l’équipe avant la réservation'],
-              ['Durée', '5 jours minimum, tarif réduit au-delà de 10 jours'],
+              ['Durée', '5 jours minimum, tarif réduit au-delà de 10 jours sur la plupart des modèles'],
               ['Caution', 'Chèque, espèces ou empreinte de carte, montant selon le véhicule'],
               ['Assurance', 'Tous risques avec franchise, montant précisé par l’équipe'],
               ['Kilométrage', 'Précisé par l’équipe avant la réservation'],

@@ -78,7 +78,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Gardez une carte bancaire et un peu d'espèces dans l'habitacle : les deux modes sont acceptés.`,
+          text: `Gardez une carte bancaire et un peu d'espèces à portée de main au moment de passer le péage : les deux modes sont acceptés.`,
         },
       ],
     },

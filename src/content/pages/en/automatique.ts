@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Automatic Car Rental Casablanca | Yourent',
   metaDescription:
-    'Automatic car rental Casablanca from {minPrice} MAD/day: Fiat 500, Corolla, Golf 8, SUVs and premium cars. Free delivery, fully insured. Request online.',
+    'Automatic car rental Casablanca from {minPrice} MAD/day: Fiat 500 Cabriolet, Corolla, Golf 8, SUVs, premium cars. Free delivery, insurance included.',
   eyebrow: 'Automatic gearbox',
   h1: 'Automatic Car Rental in Casablanca',
   intro:
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Casablanca is dense: traffic lights, jams, constant stopping and starting. An **automatic car** removes the clutch and makes driving calmer, especially if you do not know the city or you arrive after a long flight.',
+          text: 'Casablanca traffic is dense: lights, jams, constant stopping and starting. An **automatic car** removes the clutch and makes driving calmer, especially if you do not know the city or you arrive after a long flight.',
         },
         {
           type: 'list',
@@ -34,7 +34,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Not every model is offered with both gearboxes. The [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) and the [Audi Q3](/catalogue/audi-q3) exist in automatic and manual: if you want the automatic, say so in your request and the choice is confirmed when you book.',
+          text: 'Not every model is offered with both gearboxes. The [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) and the [Audi Q3](/catalogue/audi-q3) come in automatic and manual: if you want the automatic, say so in your request and the choice is confirmed when you book.',
         },
         {
           type: 'p',
@@ -47,7 +47,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Rates are per day for a rental of 5 to 10 days. After 10 days, a lower rate applies automatically. The deposit is shown in the table when it is set; otherwise the team gives it at confirmation.',
+          text: 'Rates are per day. The "5 to 10 days" column gives the standard rate, and the "Over 10 days" column the rate that applies automatically from day 11, lower on most models. The deposit is shown in the table when it is set; otherwise the team gives it at confirmation.',
         },
         { type: 'pricing' },
       ],
@@ -59,8 +59,8 @@ const page: PageContent = {
           type: 'list',
           items: [
             'Tourists and Moroccans living abroad who are used to automatics and do not want to adapt to a clutch on arrival.',
-            'Drivers who mostly do city driving and the motorway between Casablanca and Rabat.',
-            'Multi-day road trips, where you feel less tired.',
+            'Drivers who mostly stick to the city and the motorway between Casablanca and Rabat.',
+            'Anyone on a road trip of several days: you arrive less tired.',
             'People who drive rarely: an automatic reduces the risk of stalling on a hill or at a light.',
           ],
         },
@@ -97,11 +97,11 @@ const page: PageContent = {
   faq: [
     {
       q: 'What is the cheapest automatic car in Casablanca?',
-      a: 'The Fiat 500 Cabriolet, from {minPrice} MAD per day. It is automatic, petrol, with 5 seats.',
+      a: 'The Fiat 500 Cabriolet, from {minPrice} MAD per day. It is automatic and runs on petrol.',
     },
     {
-      q: 'Are the Golf 8 and the Audi Q3 really automatic?',
-      a: 'Both models exist in automatic and manual. Ask for the automatic in your request: the team confirms the gearbox when you book.',
+      q: 'Are the Golf 8 and the Audi Q3 automatic?',
+      a: 'Both models come in automatic and manual. Ask for the automatic in your request: the team confirms the gearbox when you book.',
     },
     {
       q: 'Does the Dacia Duster come in automatic?',
@@ -109,10 +109,10 @@ const page: PageContent = {
     },
     {
       q: 'Does an automatic car cost more?',
-      a: 'At Yourent, the price is the one for the model, shown in the table above. The smallest automatic starts at {minPrice} MAD per day, and the top-end cars go up to {maxPrice} MAD.',
+      a: 'At Yourent, the price depends on the model, as shown in the table above. The smallest automatic starts at {minPrice} MAD per day, and the top-end cars go up to {maxPrice} MAD.',
     },
     {
-      q: 'Can I get an automatic car delivered at the airport?',
+      q: 'Can I get an automatic car delivered to the airport?',
       a: 'Yes, delivery to Mohammed V airport is free, as it is anywhere in Casablanca. The team gives the meeting point on WhatsApp.',
     },
   ],

@@ -1,9 +1,9 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'كراء فولكسفاغن الدار البيضاء: Touareg وGolf 8 | Yourent',
+  metaTitle: 'كراء فولكسفاغن في الدار البيضاء: Touareg وGolf 8 | Yourent',
   metaDescription:
-    'كراء فولكسفاغن في الدار البيضاء من {minPrice} درهم في اليوم: T-Roc أو Golf 8 أو Tiguan أو Touareg. توصيل إلى الفندق والمطار، وجواب سريع من الفريق على واتساب.',
+    'كراء فولكسفاغن في الدار البيضاء من {minPrice} درهم في اليوم: T-Roc أو Golf 8 أو Tiguan أو Touareg. توصيل إلى الفندق والمطار، وتأكيد من الفريق على واتساب.',
   eyebrow: 'Volkswagen',
   h1: 'كراء فولكسفاغن في الدار البيضاء: Touareg وGolf 8 وTiguan وT-Roc',
   intro:
@@ -25,9 +25,9 @@ const page: PageContent = {
       blocks: [
         {
           type: 'table',
-          head: ['الطراز', 'نوع الهيكل', 'الأنسب لـ'],
+          head: ['الطراز', 'نوع الهيكل', 'الاستعمال الأنسب'],
           rows: [
-            ['[Golf 8](/catalogue/volkswagen-golf-8)', 'مدمجة', 'إقامة في المدينة، مسافر أو اثنان، وميزانية مضبوطة'],
+            ['[Golf 8](/catalogue/volkswagen-golf-8)', 'مدمجة', 'إقامة في المدينة، مسافر أو اثنان، وسيارة سهلة الركن'],
             ['[T-Roc](/catalogue/volkswagen-t-roc)', 'SUV مدمجة', 'زوجان يريدان وضعية مرتفعة دون حجم مزعج'],
             ['[Tiguan](/catalogue/volkswagen-tiguan)', 'SUV عائلية', 'عائلة بحقائبها، ورحلة نحو مراكش'],
             ['[Touareg](/catalogue/volkswagen-touareg)', 'SUV كبيرة', 'مجموعة وأمتعة كثيرة ورحلة طويلة مريحة'],
@@ -48,7 +48,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'تتراوح الأسعار بين {minPrice} و{maxPrice} درهم في اليوم: {price:volkswagen-t-roc} درهم لسيارة T-Roc، و{price:volkswagen-golf-8} درهم لسيارة Golf 8، و{price:volkswagen-tiguan} درهم لسيارة Tiguan، و{price:volkswagen-touareg} درهم لسيارة Touareg. وبعد 10 أيام يُطبَّق سعر مخفض تلقائيًا. وكل سيارة مغطاة بتأمين شامل مع مبلغ تحمّل (franchise).',
+          text: 'تتراوح الأسعار بين {minPrice} و{maxPrice} درهم في اليوم: {price:volkswagen-t-roc} درهم لسيارة T-Roc، و{price:volkswagen-golf-8} درهم لسيارة Golf 8، و{price:volkswagen-tiguan} درهم لسيارة Tiguan، و{price:volkswagen-touareg} درهم لسيارة Touareg. وبعد 10 أيام يُطبَّق سعر مخفض تلقائيًا. وكل سيارة مغطاة بتأمين ضد جميع المخاطر مع مبلغ التحمل.',
         },
         { type: 'pricing' },
       ],

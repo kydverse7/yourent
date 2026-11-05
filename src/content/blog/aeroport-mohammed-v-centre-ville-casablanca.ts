@@ -2,10 +2,10 @@ import type { Article } from '../types';
 
 const article: Article = {
   slug: 'aeroport-mohammed-v-centre-ville-casablanca',
-  metaTitle: `Aéroport Mohammed V centre-ville : le choix | Yourent`,
+  metaTitle: `Aéroport Mohammed V centre-ville : train, taxi | Yourent`,
   metaDescription: `De l'aéroport Mohammed V au centre-ville de Casablanca : train, taxi ou voiture de location ? Un choix selon vos bagages et votre heure d'arrivée.`,
   h1: `De l'aéroport Mohammed V au centre-ville de Casablanca : taxi, train ou voiture`,
-  intro: `Le train est la solution la moins chère et la plus prévisible pour un voyageur seul avec peu de bagages : environ 30 minutes jusqu'à Casa-Voyageurs. Le taxi convient à la porte-à-porte, la voiture de location à ceux qui ont plusieurs jours de déplacements. Voici comment choisir selon votre situation.`,
+  intro: `Le train est la solution la moins chère et la plus prévisible pour un voyageur seul avec peu de bagages : environ 30 minutes jusqu'à Casa-Voyageurs. Le taxi convient au porte-à-porte, la voiture de location à ceux qui ont plusieurs jours de déplacements. Voici comment choisir selon votre situation.`,
   excerpt: `Taxi, train ou voiture de location pour aller de l'aéroport Mohammed V au centre de Casablanca : un comparatif selon le nombre de voyageurs, les bagages et l'heure d'arrivée.`,
   datePublished: '2026-11-05',
   dateModified: '2026-11-05',
@@ -56,7 +56,7 @@ const article: Article = {
           items: [
             `**Avantage :** durée et prix connus à l'avance, pas de négociation.`,
             `**Limite :** il faut ensuite rejoindre votre hôtel depuis la gare, parfois en taxi, avec les bagages.`,
-            `**Attention à l'heure :** le dernier départ en général à 22h50. Un vol qui atterrit tard, avec la douane et les bagages, peut rater le dernier train. Dans ce cas, prévoyez une autre solution.`,
+            `**Attention à l'heure :** le dernier départ a lieu en général à 22h50. Un vol qui atterrit tard, avec la douane et les bagages, peut rater le dernier train. Dans ce cas, prévoyez une autre solution.`,
           ],
         },
       ],
@@ -79,7 +79,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Si votre séjour inclut des rendez-vous dans plusieurs quartiers, des trajets vers Rabat ou Marrakech, ou une famille à déplacer, une voiture évite de multiplier les courses. Elle a un coût : la location est chez Yourent de 5 jours minimum, à partir de {fleetMin} DH par jour, avec un tarif réduit automatique au-delà de 10 jours.`,
+          text: `Si votre séjour inclut des rendez-vous dans plusieurs quartiers, des trajets vers Rabat ou Marrakech, ou une famille à déplacer, une voiture évite de multiplier les courses. Elle a un coût : chez Yourent, la location est de 5 jours minimum, à partir de {fleetMin} DH par jour, avec un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles.`,
         },
         {
           type: 'p',

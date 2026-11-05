@@ -73,7 +73,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Les tarifs affichés sont ceux d'une location de 5 à 10 jours ; au-delà de 10 jours, un tarif réduit s'applique automatiquement. Les pages [location de SUV à Casablanca](route:suv) et [location de voiture automatique](route:automatique) présentent chaque catégorie.`,
+          text: `Les tarifs affichés sont ceux d'une location de 5 à 10 jours ; au-delà de 10 jours, un tarif réduit s'applique automatiquement sur la plupart des modèles. Les pages [location de SUV à Casablanca](route:suv) et [location de voiture automatique](route:automatique) présentent chaque catégorie.`,
         },
       ],
     },
@@ -118,11 +118,11 @@ const article: Article = {
     },
     {
       q: `Peut-on rendre la voiture à Agadir ou à Marrakech ?`,
-      a: `Le retour dans une autre ville n'est pas décrit sur le site. L'équipe de Yourent le précise sur WhatsApp selon vos dates.`,
+      a: `Le retour dans une autre ville n'est pas décrit sur le site. L'équipe de Yourent le précise sur WhatsApp.`,
     },
     {
       q: `Combien de jours minimum pour louer chez Yourent ?`,
-      a: `La location est de 5 jours minimum, avec un tarif réduit automatique au-delà de 10 jours.`,
+      a: `Cinq jours au minimum, et le tarif baisse automatiquement au-delà de 10 jours sur la plupart des modèles.`,
     },
   ],
   related: ['suv', 'automatique', 'longue-duree', 'tarifs'],

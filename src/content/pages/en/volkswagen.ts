@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Volkswagen Rental Casablanca: Touareg, Golf 8 | Yourent',
   metaDescription:
-    'Volkswagen rental Casablanca from {minPrice} MAD/day: T-Roc, Golf 8, Tiguan or Touareg. Delivery to your hotel and the airport, quick reply on WhatsApp.',
+    'Volkswagen rental Casablanca from {minPrice} MAD/day: T-Roc, Golf 8, Tiguan or Touareg. Delivery to your hotel and the airport, confirmed on WhatsApp.',
   eyebrow: 'Volkswagen',
   h1: 'Volkswagen Rental in Casablanca: Touareg, Golf 8, Tiguan, T-Roc',
   intro:
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: "Volkswagen is the best-represented brand in Yourent's fleet. The [Golf 8](/catalogue/volkswagen-golf-8) is the versatile compact, available in diesel or petrol, with an automatic or manual gearbox depending on the car. The [T-Roc](/catalogue/volkswagen-t-roc) is the compact SUV, taller than a saloon and sparing with space. The [Tiguan](/catalogue/volkswagen-tiguan) steps up in room. The [Touareg](/catalogue/volkswagen-touareg) is the brand's large SUV.",
+          text: "Volkswagen is the best-represented brand in Yourent's fleet. The [Golf 8](/catalogue/volkswagen-golf-8) is the versatile compact, available in diesel or petrol, with an automatic or manual gearbox depending on the car. The [T-Roc](/catalogue/volkswagen-t-roc) is the compact SUV, taller than a saloon without taking up much room. The [Tiguan](/catalogue/volkswagen-tiguan) steps up in room. The [Touareg](/catalogue/volkswagen-touareg) is the brand's large SUV.",
         },
       ],
     },
@@ -27,7 +27,7 @@ const page: PageContent = {
           type: 'table',
           head: ['Model', 'Body type', 'Best for'],
           rows: [
-            ['[Golf 8](/catalogue/volkswagen-golf-8)', 'Compact', 'A city stay, one or two travellers, a controlled budget'],
+            ['[Golf 8](/catalogue/volkswagen-golf-8)', 'Compact', 'A city stay, one or two travellers, a car that is easy to park'],
             ['[T-Roc](/catalogue/volkswagen-t-roc)', 'Compact SUV', 'A couple who want a high seating position without a bulky car'],
             ['[Tiguan](/catalogue/volkswagen-tiguan)', 'Family SUV', 'A family and their suitcases, a trip to Marrakech'],
             ['[Touareg](/catalogue/volkswagen-touareg)', 'Large SUV', 'A group, lots of luggage, a comfortable long drive'],
@@ -58,7 +58,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'If you want the same size with a more stately image, look at the [Audi Q3](/catalogue/audi-q3) or the [SUV rental](route:suv) page. On a tighter budget, the [Dacia Duster](/catalogue/dacia-duster) remains the most economical SUV. For an automatic gearbox only, the [automatic car rental](route:automatique) page sorts the fleet for you.',
+          text: 'If you want the same size with a more upmarket image, look at the [Audi Q3](/catalogue/audi-q3) or the [SUV rental](route:suv) page. On a tighter budget, the [Dacia Duster](/catalogue/dacia-duster) remains the most economical SUV. For an automatic gearbox only, the [automatic car rental](route:automatique) page sorts the fleet for you.',
         },
       ],
     },

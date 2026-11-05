@@ -19,7 +19,7 @@ const page: LocalizedPage = {
             items: [
               'Les prix modèle par modèle : [tarifs de location](route:tarifs).',
               'Les règles détaillées et le tableau récapitulatif : [conditions de location](route:conditions).',
-              'La livraison à l’arrivée : [location voiture aéroport Mohammed V](route:aeroport).',
+              'La livraison à l’arrivée : [location de voiture à l’aéroport Mohammed V](route:aeroport).',
               'Pour joindre l’équipe : [contact](route:contact).',
             ],
           },
@@ -29,7 +29,7 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Quel est le prix d’une location de voiture à Casablanca ?',
-        a: 'Chez Yourent, les prix démarrent à {fleetMin} DH par jour selon le modèle. Au-delà de 10 jours, un tarif réduit s’applique automatiquement. Le détail est sur la page [tarifs](route:tarifs).',
+        a: 'Chez Yourent, les prix démarrent à {fleetMin} DH par jour selon le modèle. Au-delà de 10 jours, un tarif réduit s’applique automatiquement sur la plupart des modèles. Le détail est sur la page [tarifs](route:tarifs).',
       },
       {
         q: 'Quelle est la durée minimum de location ?',
@@ -61,7 +61,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Peut-on récupérer la voiture à l’aéroport Mohammed V ?',
-        a: 'Yourent livre la voiture à l’aéroport, il n’y a pas de comptoir sur place. Le lieu de rendez-vous exact est confirmé avec l’équipe avant votre arrivée. Voir [location voiture aéroport](route:aeroport).',
+        a: 'Yourent livre la voiture à l’aéroport, il n’y a pas de comptoir sur place. Le lieu de rendez-vous exact est confirmé avec l’équipe avant votre arrivée. Voir [location de voiture à l’aéroport](route:aeroport).',
       },
       {
         q: 'Les voitures sont-elles assurées ?',

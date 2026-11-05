@@ -38,7 +38,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'For the same budget as the C-Class, an SUV changes how you experience the road: compare with the [Range Rover Evoque](/catalogue/range-rover-evoque) or the [Volkswagen Touareg](/catalogue/volkswagen-touareg).',
+          text: 'For a similar budget, an SUV gives you a higher driving position: compare with the [Range Rover Evoque](/catalogue/range-rover-evoque) or the [Volkswagen Touareg](/catalogue/volkswagen-touareg).',
         },
       ],
     },
@@ -51,12 +51,12 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Expect {minPrice} to {maxPrice} MAD per day depending on the model: {price:mercedes-cla} MAD for the CLA, {price:mercedes-c-220} MAD for the C-Class, {price:mercedes-e-220} MAD for the E-Class. A lower rate applies automatically after 10 days. Every car has comprehensive insurance with an excess. The deposit depends on the model and is paid by cheque, in cash or by card imprint.',
+          text: 'Expect {minPrice} to {maxPrice} MAD per day depending on the model: {price:mercedes-cla} MAD for the CLA, {price:mercedes-c-220} MAD for the C-Class, {price:mercedes-e-220} MAD for the E-Class. The table below gives the rate after 10 days for each model. Every car has comprehensive insurance with an excess. The deposit depends on the model and is paid by cheque, in cash or by card imprint.',
         },
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'Wondering about other premium models? The [luxury car rental](route:luxe) page compares them all.',
+          text: 'Looking at other premium models? The [luxury car rental](route:luxe) page compares them all.',
         },
       ],
     },
@@ -72,7 +72,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I take a Mercedes to Marrakech?',
-      a: 'Yes, the motorway links Casablanca and Marrakech and the E-Class is particularly comfortable on it. Included mileage is not the same on every contract: ask the team on WhatsApp before you leave.',
+      a: 'Yes, the motorway links Casablanca and Marrakech and the E-Class is particularly comfortable on it. Ask the team on WhatsApp about included mileage before you leave.',
     },
     {
       q: 'Can the Mercedes be delivered to the airport or my hotel?',

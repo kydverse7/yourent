@@ -16,7 +16,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Ce tableau décrit des tendances générales, pas les conditions d’un loueur en particulier : elles varient d’une enseigne à l’autre et d’une offre à l’autre. Vérifiez toujours les conditions publiées par chaque loueur. Pour Yourent, les colonnes reprennent les règles de l’agence.',
+            text: 'Ce tableau décrit des tendances générales, pas les conditions d’un loueur en particulier : elles varient d’une enseigne à l’autre et d’une offre à l’autre. Vérifiez toujours les conditions publiées par chaque loueur. La colonne Yourent reprend les règles de l’agence.',
           },
           {
             type: 'table',
@@ -107,7 +107,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Le choix se joue souvent à l’arrivée : comptoir sur place ou voiture livrée. Pour voir comment Yourent organise la remise, lisez la page [location voiture aéroport Mohammed V](route:aeroport). Pour une demande précise, utilisez la page [contact](route:contact).',
+            text: 'Le choix se joue souvent à l’arrivée : comptoir sur place ou voiture livrée. Pour voir comment Yourent organise la remise, lisez la page [location de voiture à l’aéroport Mohammed V](route:aeroport). Pour une demande précise, utilisez la page [contact](route:contact).',
           },
         ],
       },
@@ -127,7 +127,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Comment la caution fonctionne-t-elle chez Yourent ?',
-        a: 'Elle est demandée au départ, par chèque, en espèces ou par empreinte de carte, selon le véhicule. Elle est restituée au retour du véhicule en bon état.',
+        a: 'Elle est demandée au départ, par chèque, en espèces ou par empreinte de carte. Son montant dépend du véhicule, et elle vous est rendue au retour de la voiture en bon état.',
       },
       {
         q: 'Que faire en cas de panne chez Yourent ?',

@@ -86,46 +86,64 @@ export function PublicLandingPage({
       {/* ═══ Hero + Slider ═══ */}
       <div ref={wrapperRef} className="relative w-full flex flex-col gap-[40px]">
         <LandingHeroSection ref={heroRef} vehicleCount={stats.vehicleCount} />
-        <LandingBrandSliderSection
-          items={items}
-          brandIndex={brandIndex}
-          sliderActive={sliderActive}
-          apKey={apKey}
-          onTabSelect={handleTab}
-          onPause={handlePause}
-          onResume={handleResume}
-          isMobile={isMobile}
-        />
+        <div className="lp-below-fold">
+          <LandingBrandSliderSection
+            items={items}
+            brandIndex={brandIndex}
+            sliderActive={sliderActive}
+            apKey={apKey}
+            onTabSelect={handleTab}
+            onPause={handlePause}
+            onResume={handleResume}
+            isMobile={isMobile}
+          />
+        </div>
       </div>
 
       {/* ═══ Signature collection ═══ */}
-      <LandingSignatureCollectionSection vehicles={cardVehicles} />
+      <div className="lp-below-fold">
+        <LandingSignatureCollectionSection vehicles={cardVehicles} />
+      </div>
 
       {/* ═══ Nouvel Arrivage ═══ */}
-      <LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} />
+      <div className="lp-below-fold">
+        <LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} />
+      </div>
 
       {/* ═══ Why Yourent — golden ratio + animated counters ═══ */}
-      <LandingWhySection vehicleCount={stats.vehicleCount} />
+      <div className="lp-below-fold">
+        <LandingWhySection vehicleCount={stats.vehicleCount} />
+      </div>
 
       {/* ═══ Economic fleet ═══ */}
       {economicVehicles.length > 0 && (
-        <LandingEconomicFleetSection vehicles={economicVehicles} />
+        <div className="lp-below-fold">
+          <LandingEconomicFleetSection vehicles={economicVehicles} />
+        </div>
       )}
 
       {/* ═══ Process ═══ */}
-      <LandingProcessSection />
+      <div className="lp-below-fold">
+        <LandingProcessSection />
+      </div>
 
       {/* ═══ Contact / Nous rejoindre ═══ */}
-      <LandingContactSection stats={stats} />
+      <div className="lp-below-fold">
+        <LandingContactSection stats={stats} />
+      </div>
 
       {/* ═══ Guide de location (rendu côté serveur) ═══ */}
-      {guide}
+      <div className="lp-below-fold">{guide}</div>
 
       {/* ═══ FAQ ═══ */}
-      <LandingFaqSection />
+      <div className="lp-below-fold">
+        <LandingFaqSection />
+      </div>
 
       {/* ═══ Final CTA ═══ */}
-      <LandingFinalCtaSection />
+      <div className="lp-below-fold">
+        <LandingFinalCtaSection />
+      </div>
     </div>
   );
 }

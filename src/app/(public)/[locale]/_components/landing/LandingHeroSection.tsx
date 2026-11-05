@@ -57,14 +57,15 @@ export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: num
             style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 60%, rgba(201,168,76,0.22), transparent 70%)' }}
             aria-hidden="true"
           />
-          <div className="relative aspect-[16/9] w-full drop-shadow-[0_24px_60px_rgba(201,168,76,0.18)]">
+          {/* Ombre portée réservée au desktop : très coûteuse à l'affichage en mobile, où le halo ci-dessus suffit. */}
+          <div className="relative aspect-[16/9] w-full md:drop-shadow-[0_24px_60px_rgba(201,168,76,0.18)]">
             <Image
               src="/porshe-macan.png?v=2"
               alt={t('hero.imgAlt')}
               fill
               priority
               className="object-contain"
-              sizes="(max-width: 640px) 90vw, (max-width: 768px) 70vw, 512px"
+              sizes="(max-width: 640px) min(94vw, 384px), (max-width: 768px) 448px, 512px"
             />
           </div>
         </div>

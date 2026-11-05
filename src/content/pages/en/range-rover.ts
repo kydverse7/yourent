@@ -20,7 +20,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'These two Range Rovers are rented in very small numbers. A request with your dates, sent a few days ahead, avoids finding out they are already taken.',
+          text: 'There are very few of these two Range Rovers in the fleet. Send your request well ahead so you do not find them already rented.',
         },
       ],
     },
@@ -29,7 +29,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A high driving position, a comfortable seat and the brand image: people rent a Range Rover as much for what it shows as for what it can do. If prestige matters less than space, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) offers a similar size for {price:volkswagen-touareg} MAD per day. If you prefer sporty driving, the [Porsche Macan](/catalogue/porsche-macan) is sharper but less settled over long distances.',
+          text: 'A high driving position, a comfortable seat and the brand image: people rent a Range Rover as much for its image as for what it can do. If prestige matters less than space, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) comes close to the size of the Sport for {price:volkswagen-touareg} MAD per day. If you prefer sporty driving, the [Porsche Macan](/catalogue/porsche-macan) is sharper but less settled over long distances.',
         },
         {
           type: 'p',
@@ -46,7 +46,7 @@ const page: PageContent = {
             '**Arriving with family at the airport**: the Sport takes more luggage and more people. Yourent delivers the car to Mohammed V airport.',
             '**A stay in town**: the Evoque is easier to park and manoeuvre downtown or around the Corniche.',
             '**Casablanca to Marrakech**: on the motorway, the Sport gives the calmest ride. The Evoque also does the job very well for two or three people.',
-            '**A weekend outside the city**: the ride height of both models helps on slightly damaged secondary roads.',
+            '**A trip outside the city**: the ride height of both models helps on rougher back roads.',
           ],
         },
       ],
@@ -60,7 +60,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The daily rate runs from {minPrice} to {maxPrice} MAD depending on the model. It drops automatically after 10 days. Comprehensive insurance with an excess is included, and the deposit is set according to the car at pick-up.',
+          text: 'The daily rate runs from {minPrice} to {maxPrice} MAD depending on the model. It drops automatically after 10 days. Comprehensive insurance with an excess is included. The deposit, taken at pick-up, depends on the car: the table gives its minimum amount.',
         },
         { type: 'pricing' },
       ],
@@ -77,7 +77,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I rent a Range Rover to drive from Casablanca to Marrakech?',
-      a: 'Yes. Tell the team your route when you book. Included mileage is not stated across the board: the team gives it on WhatsApp depending on the length and the model.',
+      a: 'Yes. Tell the team your route when you book. Ask the team on WhatsApp about included mileage before you book.',
     },
     {
       q: 'What deposit should I expect for a Range Rover?',

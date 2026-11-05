@@ -23,7 +23,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Foreign tourists can show an international driving permit, which is accepted. If your licence was issued abroad and you have no international permit, ask the team to confirm before you book. The minimum driver age is not shown on the site: the team gives it before you book.',
+          text: 'An international driving permit is accepted for foreign tourists. If your licence was issued abroad and you have no international permit, ask the team to confirm before you book. The minimum driver age is not shown on the site: the team gives it before you book.',
         },
       ],
     },
@@ -32,7 +32,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A deposit is taken when the car is handed over. It can be paid by cheque, in cash or by card imprint. The amount depends on the car you rent, and you can find it by model on the [prices](route:tarifs) page. It is returned once the car is back in good condition. The team gives the deposit return time before you book.',
+          text: 'A deposit is taken when the car is handed over. It can be paid by cheque, in cash or by card imprint. The amount depends on the car you rent: the [prices](route:tarifs) page gives the minimum for each model, and the team confirms the exact sum. It is returned once the car is back in good condition. The team tells you before you book how long the deposit takes to come back.',
         },
       ],
     },
@@ -41,7 +41,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The minimum rental is 5 days. A lower rate applies automatically after 10 days. Included mileage and whether you can return the car in another city are not shown on the site: the team gives them on WhatsApp before you book. Delivery and collection take place at your hotel, at Mohammed V airport or at the address you choose, from 8 am to 10 pm, 7 days a week.',
+          text: 'The minimum rental is 5 days. After 10 days, a lower rate applies automatically on most models. Included mileage and whether you can return the car in another city are not shown on the site: the team gives them on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at the address you choose, from 8 am to 10 pm, 7 days a week. The place where the car is collected at the end of the rental is agreed with the team.',
         },
       ],
     },
@@ -77,7 +77,7 @@ const page: PageContent = {
             ['Documents', 'CIN or passport, licence held over 2 years, proof of address'],
             ['Foreign licence', 'International driving permit accepted for tourists'],
             ['Minimum age', 'Given by the team before you book'],
-            ['Duration', '5 days minimum, lower rate after 10 days'],
+            ['Duration', '5 days minimum, lower rate after 10 days on most models'],
             ['Deposit', 'Cheque, cash or card imprint, amount depends on the car'],
             ['Insurance', 'Comprehensive with an excess, amount given by the team'],
             ['Mileage', 'Given by the team before you book'],

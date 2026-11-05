@@ -32,7 +32,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `La franchise est souvent confondue avec la caution. Ce sont deux notions distinctes : la **caution** est la garantie versée au départ, et la **franchise** est le plafond de ce que vous devrez payer en cas de sinistre. Voir l'article sur la [caution d'une location de voiture](/blog/caution-location-voiture-maroc).`,
+          text: `La franchise est souvent confondue avec la caution. Ce sont deux notions distinctes : la **caution** est la garantie versée au départ, et la **franchise** est le plafond de ce que vous devrez payer en cas de sinistre couvert. Voir l'article sur la [caution d'une location de voiture](/blog/caution-location-voiture-maroc).`,
         },
       ],
     },
@@ -91,7 +91,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Les photos prises à la remise de la voiture permettent de distinguer un dommage ancien d'un dommage nouveau : c'est le meilleur moyen d'éviter de payer une franchise pour un défaut déjà présent.`,
+          text: `Les photos prises à la remise de la voiture permettent de distinguer un dommage ancien d'un dommage nouveau : elles vous évitent de payer une franchise pour un défaut déjà présent.`,
         },
       ],
     },
@@ -99,7 +99,7 @@ const article: Article = {
   faq: [
     {
       q: `Quelle est la franchise d'assurance chez Yourent ?`,
-      a: `Tous les véhicules sont couverts par une assurance tous risques avec franchise. Le montant n'est pas affiché sur le site : l'équipe le précise sur WhatsApp selon le véhicule.`,
+      a: `Tous les véhicules sont couverts par une assurance tous risques avec franchise. Le montant n'est pas affiché sur le site : l'équipe le précise sur WhatsApp.`,
     },
     {
       q: `Quelle est la différence entre franchise et caution ?`,

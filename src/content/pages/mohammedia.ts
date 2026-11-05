@@ -55,7 +55,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'La location dure 5 jours minimum. Un tarif réduit s’applique automatiquement au-delà de 10 jours : voir la page [tarifs](route:tarifs). Le lieu de reprise en fin de location, à Mohammedia ou à Casablanca, se décide avec l’équipe en même temps que la remise : un retour dans une autre ville se confirme avant la réservation.',
+            text: 'La location dure 5 jours minimum. Sur la plupart des modèles, un tarif réduit s’applique automatiquement au-delà de 10 jours : voir la page [tarifs](route:tarifs). Le lieu de reprise en fin de location, à Mohammedia ou à Casablanca, se décide avec l’équipe en même temps que la remise : un retour dans une autre ville se confirme avant la réservation.',
           },
         ],
       },

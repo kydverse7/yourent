@@ -32,7 +32,7 @@ const page: LocalizedPage = {
             type: "list",
             items: [
               "**Arrivée à l'aéroport Mohammed V** : pour une ou deux personnes avec peu de bagages, l'A3 suffit. Pour des valises plus nombreuses, prenez le Q3. La voiture est livrée à l'aéroport, voir la page [location à l'aéroport](route:aeroport).",
-              "**Séjour à Casablanca** : l'A3 se faufile dans le centre et se gare presque partout. Le Q3 est plus confortable sur les boulevards et pour sortir de la ville.",
+              "**Séjour à Casablanca** : l'A3 se faufile dans le centre et se gare plus facilement. Le Q3 est plus confortable sur les boulevards et pour sortir de la ville.",
               "**Casablanca-Marrakech** : le Q3 en diesel est le plus adapté à un long trajet d'autoroute. L'A3, à l'essence, se prête mieux à un aller-retour à deux.",
               "**Un rendez-vous professionnel** : l'A3 donne l'image d'une berline sobre et soignée, sans le ton plus ostentatoire d'une grosse cylindrée.",
             ],
@@ -48,7 +48,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "L'A3 est à {price:audi-a3} DH par jour, le Q3 à {price:audi-q3} DH. Le choix se joue d'abord sur le format de la voiture. Un tarif plus bas s'applique automatiquement au-delà de 10 jours. L'assurance tous risques avec franchise est comprise, et la caution est donnée dans le tableau.",
+            text: "L'A3 est à {price:audi-a3} DH par jour, le Q3 à {price:audi-q3} DH. Le choix se joue d'abord sur le format de la voiture. Au-delà de 10 jours, le tarif baisse automatiquement sur certains modèles : le tableau donne le montant de chacun. L'assurance tous risques avec franchise est comprise, et la caution est donnée dans le tableau.",
           },
           { type: "pricing" },
         ],
@@ -58,7 +58,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "Face à l'A3, la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) partage une partie de sa technique pour un prix proche. La [Mercedes CLA](/catalogue/mercedes-cla) vise plus haut en image. Face au Q3, le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) est moins cher et la [Porsche Macan](/catalogue/porsche-macan) bien plus sportive. Pour un tour d'horizon complet, voyez la page [location de voiture de luxe](route:luxe).",
+            text: "Face à l'A3, la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) partage une partie de sa technique pour un prix proche. La [Mercedes CLA](/catalogue/mercedes-cla) vise plus haut en image. Face au Q3, le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) est moins cher et le [Porsche Macan](/catalogue/porsche-macan) bien plus sportif. Pour un tour d'horizon complet, voyez la page [location de voiture de luxe](route:luxe).",
           },
         ],
       },

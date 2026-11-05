@@ -12,6 +12,7 @@ export const SEO_LABELS: Record<
     pricingLong: string;
     pricingDeposit: string;
     pricingNote: string;
+    pricingHighSeason: string;
     perDay: string;
     currency: string;
     from: string;
@@ -44,6 +45,7 @@ export const SEO_LABELS: Record<
     pricingLong: 'Plus de 10 jours',
     pricingDeposit: 'Caution dès',
     pricingNote: 'Tarifs par jour en dirhams, location de 5 jours minimum.',
+    pricingHighSeason: 'Haute saison en cours : le tarif réduit de plus de 10 jours ne s’applique pas actuellement.',
     perDay: '/jour',
     currency: 'DH',
     from: 'À partir de',
@@ -75,6 +77,7 @@ export const SEO_LABELS: Record<
     pricingLong: 'Over 10 days',
     pricingDeposit: 'Deposit from',
     pricingNote: 'Daily rates in Moroccan dirhams, 5-day minimum rental.',
+    pricingHighSeason: 'High season: the reduced rate for rentals over 10 days does not currently apply.',
     perDay: '/day',
     currency: 'MAD',
     from: 'From',
@@ -106,6 +109,7 @@ export const SEO_LABELS: Record<
     pricingLong: 'أكثر من 10 أيام',
     pricingDeposit: 'الضمان ابتداءً من',
     pricingNote: 'الأسعار لليوم الواحد بالدرهم، ومدة الكراء 5 أيام على الأقل.',
+    pricingHighSeason: 'موسم الذروة: السعر المخفض لأكثر من 10 أيام غير مطبق حاليًا.',
     perDay: '/يوم',
     currency: 'درهم',
     from: 'ابتداءً من',

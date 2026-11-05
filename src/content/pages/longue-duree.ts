@@ -6,9 +6,9 @@ const page: LocalizedPage = {
     metaDescription:
       'Location voiture longue durée à Casablanca : au mois ou pour plusieurs semaines, tarif réduit automatique après 10 jours, dès {minPrice} DH/jour. Livraison gratuite.',
     eyebrow: 'Longue durée',
-    h1: 'Location voiture longue durée à Casablanca',
+    h1: 'Location de voiture longue durée à Casablanca',
     intro:
-      "Yourent loue des voitures sur plusieurs semaines ou au mois à Casablanca. Le tarif par jour baisse automatiquement au-delà de 10 jours, à partir de {minPrice} DH par jour, et la livraison est gratuite. Pour un tarif précis au mois, l'équipe répond sur WhatsApp selon le modèle et les dates.",
+      "Yourent loue des voitures sur plusieurs semaines ou au mois à Casablanca, à partir de {minPrice} DH par jour. Sur la plupart des modèles, le tarif baisse automatiquement au-delà de 10 jours, et la livraison est gratuite à Casablanca et à l'aéroport Mohammed V. Pour un tarif précis au mois, l'équipe répond sur WhatsApp selon le modèle et les dates.",
     breadcrumb: 'Longue durée',
     vehicles: { sort: 'asc' },
     sections: [
@@ -17,11 +17,11 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "La **location voiture longue durée** ne demande pas de contrat spécial : c'est la même location, simplement plus longue. La durée minimum est de 5 jours. Entre 5 et 10 jours, le tarif par jour est celui du catalogue. Au-delà de 10 jours, un tarif par jour réduit s'applique automatiquement, sans code ni négociation.",
+            text: "Chez Yourent, la **location de voiture longue durée** n'est pas une formule à part : c'est la même location, simplement plus longue. La durée minimum est de 5 jours. Entre 5 et 10 jours, le tarif par jour est celui du catalogue. Dès 11 jours, un tarif par jour réduit s'applique automatiquement sur la plupart des modèles, sans code ni négociation.",
           },
           {
             type: 'p',
-            text: "Cela convient à plusieurs situations : un séjour de plusieurs semaines à Casablanca, une mission professionnelle, un Marocain résidant à l'étranger qui passe l'été au pays, un chantier ou un stage. Si votre durée se compte en mois, la formule \"location voiture au mois\" ou mensuelle se discute avec l'équipe.",
+            text: "Cela convient à plusieurs situations : un séjour de plusieurs semaines à Casablanca, une mission professionnelle, un Marocain résidant à l'étranger qui passe l'été au pays, un chantier ou un stage. Si votre durée se compte en mois, le tarif au mois se discute avec l'équipe.",
           },
         ],
       },
@@ -30,7 +30,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Il n'y a pas de grille mensuelle affichée : le coût dépend du modèle, de la durée exacte et de la période. Pour estimer, prenez le tarif par jour au-delà de 10 jours dans le tableau et multipliez par le nombre de jours. Par exemple, un Dacia Duster part de {price:dacia-duster} DH par jour sur 5 à 10 jours, et un Volkswagen Tiguan de {price:volkswagen-tiguan} DH ; le tableau montre leur tarif réduit.",
+            text: "Il n'y a pas de grille mensuelle affichée : le coût dépend du modèle, de la durée exacte et de la période. Pour estimer, prenez le tarif de la colonne « Plus de 10 jours » du tableau et multipliez-le par le nombre de jours. Par exemple, un Dacia Duster part de {price:dacia-duster} DH par jour sur 5 à 10 jours, et un Volkswagen Tiguan de {price:volkswagen-tiguan} DH ; le tableau montre leur tarif réduit.",
           },
           { type: 'pricing' },
           {
@@ -97,7 +97,7 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'À partir de combien de jours la location devient-elle moins chère par jour ?',
-        a: "Au-delà de 10 jours, un tarif par jour réduit s'applique automatiquement. De 5 à 10 jours, c'est le tarif standard du modèle.",
+        a: "Dès 11 jours, un tarif par jour réduit s'applique automatiquement sur la plupart des modèles. De 5 à 10 jours, c'est le tarif standard du modèle.",
       },
       {
         q: 'Peut-on louer une voiture au mois à Casablanca ?',
@@ -113,7 +113,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Faut-il payer toute la location à l\'avance ?',
-        a: "La réservation en ligne est une demande, sans paiement. Les modalités de règlement se font ensuite avec l'équipe, qui les précise à la confirmation sur WhatsApp.",
+        a: "La réservation en ligne est une demande, sans paiement. Le règlement se fait ensuite avec l'équipe, qui en précise les modalités à la confirmation sur WhatsApp.",
       },
     ],
     related: ['tarifs', 'economique', 'suv', 'conditions', 'aeroport'],

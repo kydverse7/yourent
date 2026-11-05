@@ -1,7 +1,7 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'كراء رينج روفر الدار البيضاء: Evoque وSport | Yourent',
+  metaTitle: 'كراء رينج روفر في الدار البيضاء: Evoque وSport | Yourent',
   metaDescription:
     'كراء رينج روفر في الدار البيضاء: Range Rover Evoque أو Sport من {minPrice} درهم في اليوم. ديزل وعلبة سرعات أوتوماتيكية، وتوصيل إلى الفندق أو مطار محمد الخامس.',
   eyebrow: 'Range Rover',
@@ -16,11 +16,11 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: '[Range Rover Evoque](/catalogue/range-rover-evoque) هي سيارة SUV المدمجة من العلامة، بخطوط أخفض وطابع حضري أكثر. أما [Range Rover Sport](/catalogue/range-rover-sport) فهي SUV كبيرة فخمة: أعرض وأكثر هيبة، ومصممة للمسافات الطويلة ولراحة ركاب المقاعد الخلفية. ويعكس فرق السعر هذا الاختلاف: {price:range-rover-evoque} درهم في اليوم لسيارة Evoque، و{price:range-rover-sport} درهم لسيارة Sport.',
+          text: '[Range Rover Evoque](/catalogue/range-rover-evoque) هي سيارة SUV المدمجة من العلامة، بخطوط أخفض وطابع حضري أكثر. أما [Range Rover Sport](/catalogue/range-rover-sport) فهي SUV كبيرة فاخرة: أعرض وأكثر هيبة، ومصممة للمسافات الطويلة ولراحة ركاب المقاعد الخلفية. ويعكس فرق السعر هذا الاختلاف: {price:range-rover-evoque} درهم في اليوم لسيارة Evoque، و{price:range-rover-sport} درهم لسيارة Sport.',
         },
         {
           type: 'p',
-          text: 'يتوفر هذان الطرازان بعدد قليل جدًا من الوحدات. إرسال طلب بتواريخك قبل بضعة أيام يجنبك اكتشاف أنهما محجوزتان.',
+          text: 'يتوفر هذان الطرازان بعدد قليل جدًا من الوحدات. أرسل طلبك قبل موعدك بوقت كافٍ حتى لا تجدهما محجوزتين.',
         },
       ],
     },
@@ -29,7 +29,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'وضعية قيادة مرتفعة ومقاعد مريحة وصورة العلامة: تُكترى Range Rover لما تُظهره بقدر ما تتيحه. وإذا كانت المساحة أهم عندك من الفخامة، فإن [Volkswagen Touareg](/catalogue/volkswagen-touareg) تقدم حجمًا قريبًا بسعر {price:volkswagen-touareg} درهم في اليوم. وإذا كنت تفضل القيادة الرياضية، فإن [Porsche Macan](/catalogue/porsche-macan) أكثر حيوية لكنها أقل ثباتًا في المسافات الطويلة.',
+          text: 'وضعية قيادة مرتفعة ومقاعد مريحة وصورة العلامة: تُكترى Range Rover لما تُظهره بقدر ما تتيحه. وإذا كانت المساحة أهم عندك من الفخامة، فإن [Volkswagen Touareg](/catalogue/volkswagen-touareg) تقترب من حجم Sport بسعر {price:volkswagen-touareg} درهم في اليوم. وإذا كنت تفضل القيادة الرياضية، فإن [Porsche Macan](/catalogue/porsche-macan) أكثر حيوية لكنها أقل ثباتًا في المسافات الطويلة.',
         },
         {
           type: 'p',
@@ -60,7 +60,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'يتراوح السعر اليومي بين {minPrice} و{maxPrice} درهم حسب الطراز، وينخفض تلقائيًا بعد 10 أيام. والتأمين الشامل مع مبلغ التحمّل (franchise) مشمول، أما مبلغ الضمان فيُحدد حسب السيارة عند الانطلاق.',
+          text: 'يتراوح السعر اليومي بين {minPrice} و{maxPrice} درهم حسب الطراز، وينخفض تلقائيًا بعد 10 أيام. والتأمين ضد جميع المخاطر مع مبلغ التحمل مشمول. ويُطلب الضمان عند الانطلاق حسب السيارة، ويعرض الجدول أدنى مبلغ له.',
         },
         { type: 'pricing' },
       ],
@@ -77,7 +77,7 @@ const page: PageContent = {
     },
     {
       q: 'هل يمكن كراء Range Rover للذهاب من الدار البيضاء إلى مراكش؟',
-      a: 'نعم. أخبر الفريق بمسارك عند الحجز. ولا يوجد إعلان عام عن عدد الكيلومترات المشمولة: يحدده الفريق على واتساب حسب المدة والطراز.',
+      a: 'نعم. أخبر الفريق بمسارك عند الحجز. واسأل الفريق على واتساب عن عدد الكيلومترات المشمولة قبل الحجز.',
     },
     {
       q: 'كم مبلغ الضمان الذي يجب توفيره لسيارة Range Rover؟',

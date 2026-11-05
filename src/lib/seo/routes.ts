@@ -61,6 +61,11 @@ const COMMERCIAL = {
     en: '/audi-rental-casablanca',
     ar: '/audi-rental-casablanca',
   },
+  maroc: {
+    fr: '/location-voiture-maroc',
+    en: '/car-rental-morocco',
+    ar: '/car-rental-morocco',
+  },
   tarifs: { fr: '/tarifs', en: '/prices', ar: '/prices' },
   conditions: {
     fr: '/conditions-de-location',

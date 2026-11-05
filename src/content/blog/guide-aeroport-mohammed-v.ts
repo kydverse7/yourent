@@ -3,7 +3,7 @@ import type { Article } from '../types';
 const article: Article = {
   slug: 'guide-aeroport-mohammed-v',
   metaTitle: `Aéroport Mohammed V Casablanca : guide pratique | Yourent`,
-  metaDescription: `Terminaux, arrivée, train, taxi, voiture et parking : tout ce qu'il faut savoir sur l'aéroport Mohammed V de Casablanca, avec les sources officielles.`,
+  metaDescription: `Terminaux, arrivée, train, taxi, voiture et parking : l'essentiel à savoir sur l'aéroport Mohammed V de Casablanca, avec les sources officielles.`,
   h1: `Aéroport Mohammed V de Casablanca : le guide pratique`,
   intro: `L'aéroport Mohammed V est situé à Nouaceur, à 27 km au sud-ouest du centre de Casablanca, soit 30 à 50 minutes de route selon la circulation. Depuis mai 2021, les vols internationaux utilisent le Terminal 1, d'où part aussi un train direct vers Casa-Voyageurs. Ce guide rassemble ce qui a été vérifié sur les pages de l'ONDA et dans la presse, avec la date de chaque relevé.`,
   excerpt: `Terminaux, formalités d'arrivée, train, taxi, voiture et parkings : un guide de l'aéroport Mohammed V de Casablanca, relevé le 5 novembre 2026 sur les pages officielles.`,
@@ -121,7 +121,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Yourent, agence de location de voitures à Casablanca, livre la voiture à l'aéroport Mohammed V sans frais, comme dans tout Casablanca. La location démarre à {fleetMin} DH par jour pour une durée minimale de 5 jours, avec un tarif réduit automatique au-delà de 10 jours. L'équipe répond de 8h à 22h, 7j/7.`,
+          text: `Yourent, agence de location de voitures à Casablanca, livre la voiture à l'aéroport Mohammed V sans frais, comme dans tout Casablanca. La location démarre à {fleetMin} DH par jour pour une durée minimale de 5 jours, avec un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles. L'équipe répond de 8h à 22h, 7j/7.`,
         },
         {
           type: 'p',
@@ -137,7 +137,7 @@ const article: Article = {
           items: [
             `Le terminal de votre vol, confirmé auprès de la compagnie.`,
             `Les documents d'entrée au Maroc et vos papiers de voyage.`,
-            `Le mode de transport au centre-ville choisi à l'avance, avec ses horaires : train jusqu'à 22h50 environ, taxi à tout moment.`,
+            `Le mode de transport au centre-ville choisi à l'avance, avec ses horaires : train jusqu'à 22h50 environ, taxi ou voiture au-delà.`,
             `Si vous louez : le contrat, le permis valide et le justificatif demandé par le loueur.`,
             `Le trafic sur le site d'ADM pour un trajet aux heures chargées.`,
           ],

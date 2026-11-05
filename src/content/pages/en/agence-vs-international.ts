@@ -7,7 +7,7 @@ const page: PageContent = {
   eyebrow: 'Comparison',
   h1: 'Local Agency or International Car Rental in Casablanca: How to Choose',
   intro:
-    'In Casablanca, you can rent from a big international company or from a local agency like Yourent. Both have a case: the international company has desks and a worldwide network, while the local agency usually offers delivery and direct contact with the team. The right choice depends on how long you stay and how you want to collect the car.',
+    'In Casablanca, you can rent from a big international company or from a local agency like Yourent. Each has its advantages: the international company has desks and a worldwide network, while the local agency usually offers delivery and direct contact with the team. The right choice depends on how long you stay and how you want to collect the car.',
   breadcrumb: 'Local or international',
   sections: [
     {
@@ -39,12 +39,12 @@ const page: PageContent = {
             [
               'Flexibility',
               'Standardised terms, set by the brand',
-              'Direct contact with the team on WhatsApp; free cancellation up to 24 hours before',
+              'Direct contact with the team on WhatsApp; free cancellation up to 24 hours before pick-up',
             ],
             [
               'Duration',
               'Daily rental possible with some companies',
-              '5 days minimum, lower rate after 10 days',
+              '5 days minimum, lower rate after 10 days on most models',
             ],
             [
               'Assistance',
@@ -61,7 +61,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Airport presence**: a desk in the arrivals hall saves you waiting for a driver. Yourent delivers to Mohammed V airport but has no desk there.',
+            '**Airport presence**: a desk in the arrivals hall means you do not wait for someone to bring the car. Yourent delivers to Mohammed V airport but has no desk there.',
             '**International network**: if you rent in several countries or cities, a single company can cover everything, with one account and known terms.',
             '**Short rentals**: for a day or a weekend, a big company is often the answer, since Yourent rents for 5 days minimum.',
           ],
@@ -73,11 +73,11 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A local agency suits you when the rental lasts at least 5 days and you want the car where you are: in front of the hotel, at the station or at relatives\'. You talk directly to the team preparing the car, which makes special requests easier, such as the handover time or the return place (to be confirmed before you book).',
+          text: 'A local agency suits you when the rental lasts at least 5 days and you want the car where you are: outside the hotel, at the station or at your family home. You talk directly to the team preparing the car, which makes special requests easier, such as the handover time or the return place (to be confirmed before you book).',
         },
         {
           type: 'p',
-          text: 'The deposit matters too. At Yourent, it can be paid by cheque, in cash or by card imprint; the amount depends on the car and is shown on the [prices](route:tarifs) page. If you do not want a bank card blocked, ask each company what it accepts.',
+          text: 'The deposit matters too. At Yourent, it can be paid by cheque, in cash or by card imprint; the amount depends on the car, and the [prices](route:tarifs) page shows the minimum. If you do not want a bank card blocked, ask each company what it accepts.',
         },
       ],
     },
@@ -122,11 +122,11 @@ const page: PageContent = {
     },
     {
       q: 'Can I rent for a single day at Yourent?',
-      a: 'No, the minimum is 5 days. For a single day, you need to turn to another company.',
+      a: 'No, the minimum is 5 days. For a single day, you will need another company.',
     },
     {
       q: 'How does the deposit work at Yourent?',
-      a: 'It is taken at pick-up, by cheque, in cash or by card imprint, depending on the car. It is returned once the car is back in good condition.',
+      a: 'It is taken at pick-up, by cheque, in cash or by card imprint. The amount depends on the car. It is returned once the car is back in good condition.',
     },
     {
       q: 'What happens if the car breaks down at Yourent?',

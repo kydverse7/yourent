@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: "Location Volkswagen Casablanca : Touareg, Golf 8 | Yourent",
     metaDescription:
-      "Louez une Volkswagen à Casablanca dès {minPrice} DH/jour : T-Roc, Golf 8, Tiguan ou Touareg. Livraison à l'hôtel et à l'aéroport, réponse rapide sur WhatsApp.",
+      "Louez une Volkswagen à Casablanca dès {minPrice} DH/jour : T-Roc, Golf 8, Tiguan ou Touareg. Livraison à l'hôtel et à l'aéroport, confirmation sur WhatsApp.",
     eyebrow: "Volkswagen",
     h1: "Location Volkswagen à Casablanca : Touareg, Golf 8, Tiguan, T-Roc",
     intro:
@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "Volkswagen est la marque la plus représentée dans la flotte de Yourent. La [Golf 8](/catalogue/volkswagen-golf-8) est la compacte polyvalente, disponible en diesel ou en essence, avec boîte automatique ou manuelle selon l'exemplaire. Le [T-Roc](/catalogue/volkswagen-t-roc) est le SUV compact, plus haut qu'une berline et économe en place. Le [Tiguan](/catalogue/volkswagen-tiguan) monte d'un cran en espace. Le [Touareg](/catalogue/volkswagen-touareg) est le grand SUV de la marque.",
+            text: "Volkswagen est la marque la plus représentée dans la flotte de Yourent. La [Golf 8](/catalogue/volkswagen-golf-8) est la compacte polyvalente, disponible en diesel ou en essence, avec boîte automatique ou manuelle selon l'exemplaire. Le [T-Roc](/catalogue/volkswagen-t-roc) est le SUV compact, plus haut qu'une berline sans prendre beaucoup de place. Le [Tiguan](/catalogue/volkswagen-tiguan) monte d'un cran en espace. Le [Touareg](/catalogue/volkswagen-touareg) est le grand SUV de la marque.",
           },
         ],
       },
@@ -26,9 +26,9 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "table",
-            head: ["Modèle", "Carrosserie", "Idéal pour"],
+            head: ["Modèle", "Carrosserie", "Pour qui"],
             rows: [
-              ["[Golf 8](/catalogue/volkswagen-golf-8)", "Compacte", "Un séjour en ville, un ou deux voyageurs, un budget maîtrisé"],
+              ["[Golf 8](/catalogue/volkswagen-golf-8)", "Compacte", "Un séjour en ville, un ou deux voyageurs, une voiture facile à garer"],
               ["[T-Roc](/catalogue/volkswagen-t-roc)", "SUV compact", "Un couple qui veut une position haute sans gabarit encombrant"],
               ["[Tiguan](/catalogue/volkswagen-tiguan)", "SUV familial", "Une famille et ses valises, un trajet vers Marrakech"],
               ["[Touareg](/catalogue/volkswagen-touareg)", "Grand SUV", "Un groupe, beaucoup de bagages, un long trajet confortable"],

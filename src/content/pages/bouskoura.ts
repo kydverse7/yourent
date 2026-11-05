@@ -43,7 +43,7 @@ const page: LocalizedPage = {
             items: [
               '**Livraison à Bouskoura**, si l’équipe la confirme pour votre adresse et votre date.',
               '**Remise à Casablanca**, gratuite, à l’hôtel ou à l’adresse choisie dans la ville.',
-              '**Remise à l’aéroport Mohammed V**, gratuite, si vous arrivez en avion : voir [location voiture aéroport](route:aeroport).',
+              '**Remise à l’aéroport Mohammed V**, gratuite, si vous arrivez en avion : voir [location de voiture à l’aéroport](route:aeroport).',
             ],
           },
         ],
@@ -53,7 +53,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Les prix par modèle sont sur la page [tarifs](route:tarifs), avec un tarif réduit automatique au-delà de 10 jours. La caution se verse au départ, par chèque, en espèces ou par empreinte de carte. Il faut une pièce d’identité valide, un permis de plus de 2 ans et un justificatif de domicile.',
+            text: 'Les prix par modèle sont sur la page [tarifs](route:tarifs), avec un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles. La caution se verse au départ, par chèque, en espèces ou par empreinte de carte. Il faut une pièce d’identité valide, un permis de plus de 2 ans et un justificatif de domicile.',
           },
         ],
       },

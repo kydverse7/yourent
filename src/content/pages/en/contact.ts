@@ -59,7 +59,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Prices, the deposit and the documents required are detailed on the [prices](route:tarifs) and [FAQ](route:faq) pages. An answer may already be there.',
+          text: 'Prices, the deposit and the documents required are detailed on the [prices](route:tarifs) and [FAQ](route:faq) pages. Your answer may already be there.',
         },
       ],
     },

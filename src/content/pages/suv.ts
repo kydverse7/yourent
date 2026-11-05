@@ -4,11 +4,11 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location SUV Casablanca : Duster, Tiguan, Touareg | Yourent',
     metaDescription:
-      'Location SUV à Casablanca : Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. Dès {minPrice} DH/jour, livraison gratuite, assurance tous risques. Demande en ligne.',
+      'Location SUV à Casablanca : Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. Dès {minPrice} DH/jour, livraison gratuite et assurance tous risques. Demande en ligne.',
     eyebrow: 'SUV et grands espaces',
     h1: 'Location SUV à Casablanca',
     intro:
-      "Yourent propose des SUV à louer à Casablanca dès {minPrice} DH par jour, du Dacia Duster au Range Rover Sport. La livraison est gratuite à Casablanca et à l'aéroport Mohammed V. Vous choisissez le SUV et vos dates en ligne, l'équipe confirme sur WhatsApp. Location de 5 jours minimum.",
+      "Yourent propose des SUV à louer à Casablanca dès {minPrice} DH par jour, du Dacia Duster au Range Rover Sport. La voiture est livrée gratuitement à Casablanca et à l'aéroport Mohammed V. Vous choisissez le SUV et vos dates en ligne, l'équipe confirme sur WhatsApp. Location de 5 jours minimum.",
     breadcrumb: 'Location SUV',
     vehicles: {
       models: [
@@ -65,7 +65,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Les SUV de Yourent s'étendent de {minPrice} DH à {maxPrice} DH par jour. Le tarif baisse automatiquement au-delà de 10 jours, ce qui compte pour un séjour long.",
+            text: "Les tarifs des SUV de Yourent vont de {minPrice} DH à {maxPrice} DH par jour. Sur la plupart de ces modèles, le tarif baisse automatiquement au-delà de 10 jours, ce qui compte pour un séjour long.",
           },
           { type: 'pricing' },
         ],
@@ -75,7 +75,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le T-Roc et le Macan sont à essence. Côté boîte, le Duster est en manuelle, les autres SUV sont en automatique, et l'Audi Q3 existe dans les deux versions : le choix se confirme à la réservation. Les modèles à boîte automatique sont regroupés sur la page [location voiture automatique](route:automatique).",
+            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le T-Roc et le Macan sont à essence. Côté boîte, le Duster est en manuelle, les autres SUV sont en automatique, et l'Audi Q3 existe dans les deux versions : le choix se confirme à la réservation. Les modèles à boîte automatique sont regroupés sur la page [location de voiture automatique](route:automatique).",
           },
         ],
       },
@@ -122,7 +122,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Quelle durée minimale pour louer un SUV ?',
-        a: "La location est de 5 jours minimum. Au-delà de 10 jours, un tarif réduit s'applique automatiquement.",
+        a: "La location est de 5 jours minimum. Au-delà de 10 jours, le tableau de cette page donne le tarif de chaque SUV.",
       },
     ],
     related: ['automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],

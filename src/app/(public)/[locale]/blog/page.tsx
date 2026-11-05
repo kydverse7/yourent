@@ -16,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locale,
     paths: { fr: '/blog' },
     title: 'Blog location de voiture à Casablanca : conseils | Yourent',
-    description: SEO_LABELS.fr.blogIntro,
+    description:
+      'Prix de location à Casablanca, caution, permis étranger, péages, conduite au Maroc, guide de l’aéroport Mohammed V : les conseils de Yourent.',
   });
 }
 

@@ -1,7 +1,7 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'كراء مرسيدس الدار البيضاء: CLA وC 220 وE 220 | Yourent',
+  metaTitle: 'كراء مرسيدس في الدار البيضاء: CLA وC 220 وE 220 | Yourent',
   metaDescription:
     'كراء مرسيدس في الدار البيضاء: Mercedes CLA وC 220 وE 220 من {minPrice} درهم في اليوم. توصيل إلى الفندق أو مطار محمد الخامس، وطلب عبر الإنترنت وجواب على واتساب.',
   eyebrow: 'Mercedes',
@@ -38,7 +38,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'بميزانية قريبة من C 220، تغيّر سيارة SUV علاقتك بالطريق: قارن مع [Range Rover Evoque](/catalogue/range-rover-evoque) أو [Volkswagen Touareg](/catalogue/volkswagen-touareg).',
+          text: 'بميزانية قريبة، تمنحك سيارة SUV وضعية قيادة أعلى: قارن مع [Range Rover Evoque](/catalogue/range-rover-evoque) أو [Volkswagen Touareg](/catalogue/volkswagen-touareg).',
         },
       ],
     },
@@ -51,7 +51,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'يتراوح الثمن بين {minPrice} و{maxPrice} درهم في اليوم حسب الطراز: {price:mercedes-cla} درهم لسيارة CLA، و{price:mercedes-c-220} درهم لسيارة C 220، و{price:mercedes-e-220} درهم لسيارة E 220. ويُطبَّق سعر مخفض تلقائيًا بعد 10 أيام. وكل السيارات مغطاة بتأمين شامل مع مبلغ تحمّل (franchise). يتوقف مبلغ الضمان على الطراز، ويُؤدى بشيك أو نقدًا أو ببصمة البطاقة البنكية.',
+          text: 'يتراوح السعر بين {minPrice} و{maxPrice} درهم في اليوم حسب الطراز: {price:mercedes-cla} درهم لسيارة CLA، و{price:mercedes-c-220} درهم لسيارة C 220، و{price:mercedes-e-220} درهم لسيارة E 220. ويعرض الجدول أسفله السعر بعد 10 أيام لكل طراز. وكل السيارات مغطاة بتأمين ضد جميع المخاطر مع مبلغ التحمل. يتوقف مبلغ الضمان على الطراز، ويُؤدى بشيك أو نقدًا أو ببصمة البطاقة البنكية.',
         },
         { type: 'pricing' },
         {
@@ -72,7 +72,7 @@ const page: PageContent = {
     },
     {
       q: 'هل يمكنني الذهاب إلى مراكش بسيارة Mercedes؟',
-      a: 'نعم، فالطريق السيار يربط الدار البيضاء بمراكش، وE 220 مريحة فيه بشكل خاص. أما عدد الكيلومترات المشمولة فليس هو نفسه في كل العقود، فاسأل عنه الفريق على واتساب قبل الانطلاق.',
+      a: 'نعم، فالطريق السيار يربط الدار البيضاء بمراكش، وE 220 مريحة فيه بشكل خاص. واسأل الفريق على واتساب عن عدد الكيلومترات المشمولة قبل الانطلاق.',
     },
     {
       q: 'هل يمكن توصيل Mercedes إلى المطار أو إلى الفندق؟',

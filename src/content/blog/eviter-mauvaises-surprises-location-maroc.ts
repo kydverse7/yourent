@@ -37,7 +37,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Chez Yourent, les tarifs sont publiés par modèle, à partir de {fleetMin} DH par jour, pour 5 jours minimum et avec un tarif réduit automatique au-delà de 10 jours. La livraison est gratuite à l'aéroport et dans tout Casablanca ; elle est possible à Mohammedia avec un léger supplément. Voir la page [tarifs](route:tarifs).`,
+          text: `Chez Yourent, les tarifs sont publiés par modèle, à partir de {fleetMin} DH par jour, pour 5 jours minimum et avec un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles. La livraison est gratuite à l'aéroport et dans tout Casablanca ; elle est possible à Mohammedia avec un léger supplément. Voir la page [tarifs](route:tarifs).`,
         },
       ],
     },

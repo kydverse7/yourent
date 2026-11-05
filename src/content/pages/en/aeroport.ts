@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Car Rental Casablanca Airport (CMN) | Yourent',
   metaDescription:
-    'Car rental Casablanca airport: Yourent delivers to Mohammed V (CMN) free of charge, from {minPrice} MAD/day, fully insured. Book online, confirm on WhatsApp.',
+    'Car rental Casablanca airport: Yourent delivers to Mohammed V (CMN) free of charge, from {minPrice} MAD/day, insurance included. Book online, confirm on WhatsApp.',
   eyebrow: 'Mohammed V Airport',
   h1: 'Car Rental at Mohammed V Airport (Casablanca CMN)',
   intro:
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Yourent is a Casablanca agency based at N°25 Rue Ibnou Mounir. It has no desk inside the terminal: the car comes to you. For **car rental at Casablanca airport (Mohammed V)**, the idea is simple. You book before you fly, and the car is waiting when your flight arrives, so you never have to find an agency.',
+          text: 'Yourent is a Casablanca agency based at N°25 Rue Ibnou Mounir. It has no desk inside the terminal: the car comes to you. For **car rental at Casablanca airport (Mohammed V)**, the idea is simple. You book before you fly, and a team member hands you the car on site, at the agreed meeting point, with no trip to an agency.',
         },
         {
           type: 'p',
@@ -58,9 +58,9 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            'You do not wait for your turn: the car is ready, in your name, for your arrival time.',
-            'You deal with the same people from booking to key handover, and you keep one contact on WhatsApp for the whole rental.',
-            'Terms are agreed before the flight: price, deposit, documents. No surprises when you land.',
+            'No queue at a desk: the meeting is set in advance with the team.',
+            'You deal directly with the team from booking to key handover, and you can reach them on WhatsApp during the rental.',
+            'Terms are agreed before the flight: price, deposit, documents. You know what to expect when you land.',
             'You can also ask for delivery to your hotel or to an address in Casablanca, 7 days a week.',
           ],
         },
@@ -98,7 +98,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The most useful step is to fix the timing with the team before you leave. Send your flight number, expected arrival time, number of passengers and suitcases. With that, the team prepares the right car, checks that it is free on your dates and writes to you on WhatsApp to set the meeting. You print nothing: everything happens by message.',
+          text: 'The most useful step is to fix the timing with the team before you leave. Send your flight number, expected arrival time, number of passengers and suitcases. With that, the team prepares the right car, checks that it is free on your dates and writes to you on WhatsApp to set the meeting.',
         },
         {
           type: 'p',
@@ -124,7 +124,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'From the airport, most customers head to Casablanca, Rabat or Marrakech. For the city and small budgets, a small car is enough. For long drives and families, an [SUV rental](route:suv) or a saloon gives more comfort and boot space. If you would rather not deal with a clutch after a flight, an [automatic car rental](route:automatique) is a good option.',
+          text: 'The airport is linked by motorway to Casablanca, Rabat and Marrakech. For the city and a small budget, a small car is enough. For long drives and families, an [SUV rental](route:suv) or a saloon gives more comfort and boot space. If you would rather not deal with a clutch after a flight, an [automatic car rental](route:automatique) is a good option.',
         },
         {
           type: 'p',
@@ -138,7 +138,7 @@ const page: PageContent = {
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'The daily rate drops automatically after 10 days. Airport delivery costs nothing: you only pay for the rental. All models and their terms are on the [prices](route:tarifs) page.',
+          text: 'On most models, the daily rate drops automatically after 10 days. Airport delivery costs nothing: you only pay for the rental. All models and their terms are on the [prices](route:tarifs) page.',
         },
       ],
     },

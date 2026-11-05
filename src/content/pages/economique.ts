@@ -4,9 +4,9 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location voiture pas cher Casablanca, petits prix | Yourent',
     metaDescription:
-      'Location voiture pas cher à Casablanca dès {minPrice} DH/jour : Fiat 500, Opel Corsa, Dacia Duster. Livraison gratuite, assurance tous risques comprise.',
+      'Location de voiture pas chère à Casablanca dès {minPrice} DH/jour : Fiat 500, Opel Corsa, Dacia Duster. Livraison gratuite, assurance tous risques comprise.',
     eyebrow: 'Petits budgets',
-    h1: 'Location voiture pas cher à Casablanca',
+    h1: 'Location de voiture pas chère à Casablanca',
     intro:
       "Yourent propose des voitures de location économiques à Casablanca dès {minPrice} DH par jour (Fiat 500, Opel Corsa), jusqu'à {maxPrice} DH pour le Dacia Duster. La livraison est gratuite à Casablanca et à l'aéroport, et l'assurance tous risques avec franchise est incluse. La location commence à 5 jours.",
     breadcrumb: 'Voiture pas chère',
@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Pour une **location voiture pas cher Casablanca**, quatre modèles de la flotte restent à {maxPrice} DH par jour ou moins. Les prix ci-dessous sont les tarifs par jour de 5 à 10 jours ; au-delà de 10 jours, ils baissent automatiquement.",
+            text: "Pour une **location de voiture pas chère à Casablanca**, quatre modèles de la flotte restent à {maxPrice} DH par jour ou moins. Le tableau donne le tarif de 5 à 10 jours et celui au-delà de 10 jours, qui baisse automatiquement sur la plupart de ces modèles.",
           },
           { type: 'pricing' },
           {
@@ -31,11 +31,11 @@ const page: LocalizedPage = {
         ],
       },
       {
-        h2: 'Pourquoi pas de voiture à 100 ou 150 DH par jour',
+        h2: 'Pourquoi pas de voiture à prix cassé',
         blocks: [
           {
             type: 'p',
-            text: "Yourent ne propose pas de voiture à 100 ou 150 DH par jour. Notre tarif d'entrée est de {minPrice} DH, et nous préférons l'écrire plutôt qu'afficher un prix d'appel que la facture finale ne confirmerait pas. Un tarif très bas peut s'accompagner d'une caution élevée, d'une franchise lourde, de frais de livraison ou d'options facturées en plus : c'est ce qu'il faut regarder avant de comparer.",
+            text: "Yourent ne pratique pas de prix cassé. Notre tarif d'entrée est de {minPrice} DH, et nous préférons l'écrire plutôt qu'afficher un prix d'appel que la facture finale ne confirmerait pas. Un tarif très bas peut s'accompagner d'une caution élevée, d'une franchise lourde, de frais de livraison ou d'options facturées en plus : c'est ce qu'il faut regarder avant de comparer.",
           },
           {
             type: 'p',
@@ -69,12 +69,12 @@ const page: LocalizedPage = {
         ],
       },
       {
-        h2: 'Payer moins cher sa location : les leviers qui marchent vraiment',
+        h2: 'Payer moins cher sa location : quatre leviers concrets',
         blocks: [
           {
             type: 'list',
             items: [
-              "**Louer plus longtemps** : au-delà de 10 jours, le tarif par jour baisse automatiquement. Voir la page [location longue durée](route:longue-duree).",
+              "**Louer plus longtemps** : au-delà de 10 jours, le tarif par jour baisse automatiquement sur la plupart des modèles. Voir la page [location longue durée](route:longue-duree).",
               "**Choisir une citadine** : pour la ville de Casablanca, la Fiat 500 ou l'Opel Corsa suffisent largement.",
               "**Se faire livrer** : la livraison gratuite évite des allers-retours vers une agence.",
               "**Réserver avec des dates précises** : la recherche du catalogue montre les voitures libres, donc le tarif exact, sans surprise.",
@@ -87,7 +87,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Choisissez le modèle et vos dates, puis envoyez la demande en ligne : elle n'engage aucun paiement. L'équipe confirme sur WhatsApp ou par téléphone, indique la caution, et la voiture est livrée à l'adresse choisie ou à l'[aéroport Mohammed V](route:aeroport). Vous pouvez modifier ou annuler sans frais jusqu'à 24 h avant la prise en charge.",
+            text: "Choisissez le modèle et vos dates, puis envoyez la demande en ligne : elle n'engage aucun paiement. L'équipe confirme sur WhatsApp ou par téléphone, indique la caution, et la voiture est livrée à l'adresse choisie ou à l'[aéroport Mohammed V](route:aeroport). La modification ou l'annulation reste gratuite jusqu'à 24 h avant la prise en charge.",
           },
           { type: 'vehicles' },
         ],
@@ -96,14 +96,14 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Quel est le prix minimum pour louer une voiture à Casablanca chez Yourent ?',
-        a: "À partir de {minPrice} DH par jour, pour la Fiat 500 et l'Opel Corsa. Le tarif baisse automatiquement au-delà de 10 jours.",
+        a: "À partir de {minPrice} DH par jour, pour la Fiat 500 et l'Opel Corsa. Le tableau indique le tarif de chaque modèle au-delà de 10 jours.",
       },
       {
         q: 'Que comprend le prix de la location ?',
         a: "La livraison gratuite à Casablanca et à l'aéroport Mohammed V, et une assurance tous risques avec franchise. Le montant de la franchise est précisé par l'équipe sur WhatsApp.",
       },
       {
-        q: 'Pourquoi ne louez-vous pas à 100 ou 150 DH par jour ?',
+        q: 'Pourquoi Yourent ne propose-t-il pas de prix plus bas ?',
         a: "Yourent préfère afficher son vrai tarif d'entrée, {minPrice} DH par jour, et dire ce qu'il comprend (livraison gratuite, assurance tous risques avec franchise) plutôt qu'un prix d'appel.",
       },
       {

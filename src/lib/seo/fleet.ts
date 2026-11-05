@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/db';
 import { toModelSlug } from '@/lib/utils';
 import { Vehicle } from '@/models/Vehicle';
 import { Client } from '@/models/Client';
+import { Agence } from '@/models/Agence';
 
 /** Un modèle de la flotte publique, toutes unités confondues. */
 export type FleetModel = {
@@ -16,8 +17,10 @@ export type FleetModel = {
   places: number;
   /** Tarif par jour le plus bas, de 5 à 10 jours. */
   minTarif: number;
-  /** Tarif par jour le plus bas au-delà de 10 jours. */
+  /** Tarif par jour le plus bas au-delà de 10 jours : égal à minTarif pendant la haute saison. */
   minTarifLong: number;
+  /** Haute saison activée dans le tableau de bord : le tarif réduit ne s'applique pas. */
+  highSeason: boolean;
   /** Caution la plus basse renseignée, 0 si aucune n'est renseignée. */
   minCaution: number;
   count: number;
@@ -57,7 +60,7 @@ function preferReadable(current: string, next: string): string {
   return isShouting(current) && !isShouting(next) ? next : current;
 }
 
-function groupModels(rows: VehicleRow[]): FleetModel[] {
+function groupModels(rows: VehicleRow[], highSeason: boolean): FleetModel[] {
   const models = new Map<string, FleetModel>();
 
   for (const row of rows) {
@@ -67,7 +70,7 @@ function groupModels(rows: VehicleRow[]): FleetModel[] {
 
     const slug = toModelSlug(marque, modele);
     const tarif = Number(row.tarifParJour ?? 0);
-    const tarifLong = Number(row.tarifParJour10Plus ?? 0) || tarif;
+    const tarifLong = highSeason ? tarif : Number(row.tarifParJour10Plus ?? 0) || tarif;
     const caution = Number(row.cautionDefaut ?? 0);
     const photo = row.backgroundPhoto ?? row.photoModele ?? row.photos?.[0] ?? null;
     const updatedAt = (row.updatedAt ?? new Date(0)).toISOString();
@@ -84,6 +87,7 @@ function groupModels(rows: VehicleRow[]): FleetModel[] {
         places: row.places ?? 0,
         minTarif: tarif,
         minTarifLong: tarifLong,
+        highSeason,
         minCaution: caution,
         count: 1,
         countDispo: row.statut === 'disponible' ? 1 : 0,
@@ -121,12 +125,15 @@ export const getFleetModels = unstable_cache(
   async (): Promise<FleetModel[]> => {
     try {
       await connectDB();
-      const rows = await Vehicle.find({ actif: { $ne: false }, isPublic: { $ne: false } })
-        .select(
-          'marque modele categorie carburant boite places statut tarifParJour tarifParJour10Plus cautionDefaut backgroundPhoto photoModele photos updatedAt',
-        )
-        .lean<VehicleRow[]>();
-      return groupModels(rows);
+      const [rows, agence] = await Promise.all([
+        Vehicle.find({ actif: { $ne: false }, isPublic: { $ne: false } })
+          .select(
+            'marque modele categorie carburant boite places statut tarifParJour tarifParJour10Plus cautionDefaut backgroundPhoto photoModele photos updatedAt',
+          )
+          .lean<VehicleRow[]>(),
+        Agence.findOne().select('parametres.highSeason').lean<{ parametres?: { highSeason?: boolean } }>(),
+      ]);
+      return groupModels(rows, agence?.parametres?.highSeason === true);
     } catch (error) {
       console.error('[fleet] lecture de la flotte impossible', error);
       return [];

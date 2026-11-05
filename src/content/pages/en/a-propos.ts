@@ -15,11 +15,11 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Yourent rents cars to residents, tourists and Moroccans living abroad. The fleet runs from the economical city car to the SUV and the premium car: Fiat 500, Dacia Duster, Volkswagen Golf 8, Mercedes CLA, Porsche Macan, Range Rover Sport. The cars, their photos and their prices are in the [catalogue](/catalogue).',
+          text: 'Yourent rents cars to residents, tourists and Moroccans living abroad. The fleet runs from small city cars to SUVs and premium cars: Fiat 500, Dacia Duster, Volkswagen Golf 8, Mercedes CLA, Porsche Macan, Range Rover Sport. The cars, their photos and their prices are in the [catalogue](/catalogue).',
         },
         {
           type: 'p',
-          text: 'The minimum rental is 5 days, with a lower rate applied automatically after 10 days. Every car has comprehensive insurance with an excess.',
+          text: 'The minimum rental is 5 days, and on most models the rate drops automatically after 10 days. Every car has comprehensive insurance with an excess.',
         },
       ],
     },

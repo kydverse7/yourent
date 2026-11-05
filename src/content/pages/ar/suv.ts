@@ -1,9 +1,9 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'كراء سيارات الدفع الرباعي الدار البيضاء SUV | Yourent',
+  metaTitle: 'كراء سيارات الدفع الرباعي SUV في الدار البيضاء | Yourent',
   metaDescription:
-    'كراء سيارات الدفع الرباعي في الدار البيضاء: طرازات SUV مثل Duster وT-Roc وTiguan وTouareg وQ3 وMacan، من {minPrice} درهم في اليوم، توصيل مجاني وتأمين شامل.',
+    'كراء سيارات الدفع الرباعي في الدار البيضاء: طرازات SUV مثل Duster وT-Roc وTiguan وTouareg وQ3 وMacan، من {minPrice} درهم في اليوم، توصيل مجاني والتأمين مشمول.',
   eyebrow: 'SUV ومساحة أوسع',
   h1: 'كراء سيارات الدفع الرباعي (SUV) في الدار البيضاء',
   intro:
@@ -42,7 +42,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'كل سيارات SUV بـ5 مقاعد. وإذا كنتم عدة أشخاص ومعكم حقائب، ففضّلوا Sorento أو Tiguan أو Touareg.',
+          text: 'كل سيارات SUV بخمسة مقاعد. وإذا كنتم عدة أشخاص ومعكم حقائب، ففضّلوا Sorento أو Tiguan أو Touareg.',
         },
       ],
     },
@@ -64,7 +64,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'تتراوح أسعار سيارات SUV لدى Yourent بين {minPrice} و{maxPrice} درهم في اليوم. وينخفض السعر تلقائيًا بعد 10 أيام، وهو فرق يُحسب له حساب في الإقامات الطويلة.',
+          text: 'تتراوح أسعار سيارات SUV لدى Yourent بين {minPrice} و{maxPrice} درهم في اليوم. وفي معظم هذه الطرازات، ينخفض السعر تلقائيًا بعد 10 أيام، وهو فرق يُحسب له حساب في الإقامات الطويلة.',
         },
         { type: 'pricing' },
       ],
@@ -113,7 +113,7 @@ const page: PageContent = {
     },
     {
       q: 'أي سيارة SUV أختار لرحلة عائلية إلى مراكش؟',
-      a: 'Kia Sorento وVolkswagen Tiguan وTouareg هي الأوسع والأكثر راحة في طريق طويل مع الأمتعة. وكلها بـ5 مقاعد وعلبة سرعات أوتوماتيكية.',
+      a: 'Kia Sorento وVolkswagen Tiguan وTouareg هي الأوسع والأكثر راحة في طريق طويل مع الأمتعة. وكلها بخمسة مقاعد وعلبة سرعات أوتوماتيكية.',
     },
     {
       q: 'هل يمكن كراء SUV بعلبة سرعات أوتوماتيكية؟',
@@ -121,7 +121,7 @@ const page: PageContent = {
     },
     {
       q: 'ما أقل مدة لكراء سيارة SUV؟',
-      a: '5 أيام على الأقل. وبعد 10 أيام يُطبَّق سعر مخفض تلقائيًا.',
+      a: '5 أيام على الأقل. وإذا تجاوزت المدة 10 أيام، يعرض جدول هذه الصفحة سعر كل سيارة SUV.',
     },
   ],
   related: ['automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],

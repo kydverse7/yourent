@@ -6,7 +6,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La Fiat 500 est faite pour la ville. Courte et facile à garer, elle se glisse dans les places que les autres laissent, ce qui change tout dans le Maarif, à Gauthier ou près de la Corniche un soir d'été. Elle convient à une personne seule ou à un couple qui se déplace surtout en ville, avec des bagages légers.",
       "Elle roule à l'essence et se conduit en boîte manuelle : si vous n'avez l'habitude que de l'automatique, regardez plutôt la [Fiat 500 Cabriolet](/catalogue/fiat-500-cabriolet). Son coffre reste modeste, donc oubliez les grandes valises. Pour quatre personnes ou une arrivée à l'aéroport chargée, l'[Opel Corsa](/catalogue/opel-corsa) offre un peu plus de place, à {price:opel-corsa} DH par jour contre {price:fiat-500} DH pour la 500.",
-      "Pour un trajet vers Marrakech, elle fait le travail à condition de voyager léger. L'équipe vous la livre à l'hôtel ou à l'aéroport Mohammed V. Elle consomme peu d'essence : pour des trajets courts et répétés, c'est la voiture la plus simple à vivre de la flotte.",
+      "Pour un trajet vers Marrakech, elle fait le travail à condition de voyager léger. L'équipe vous la livre à l'hôtel ou à l'aéroport Mohammed V. Elle consomme peu d'essence : pour des trajets courts et répétés, c'est l'une des voitures les plus simples à vivre de la flotte.",
     ],
     faq: [
       {
@@ -23,7 +23,7 @@ const copy: Record<string, ModelCopy> = {
   "opel-corsa": {
     paragraphs: [
       "L'Opel Corsa est la citadine qu'on loue sans se poser de question : discrète, simple, sans fausse note. Elle se conduit en boîte manuelle et roule à l'essence, avec un coffre plus utile qu'une Fiat 500 pour des bagages de séjour classique.",
-      "Elle s'adresse à celui qui cherche un des tarifs les plus bas de la flotte, {price:opel-corsa} DH par jour, sans renoncer à quatre vraies portes et à une banquette arrière correcte pour deux passagers. À Casablanca, elle passe partout : parkings du centre, rues étroites de l'ancienne médina, boulevards aux heures de pointe.",
+      "Elle s'adresse à celui qui cherche un des tarifs les plus bas de la flotte, {price:opel-corsa} DH par jour, sans renoncer à une banquette arrière correcte pour deux passagers. À Casablanca, elle se faufile sans peine : parkings du centre, rues étroites, boulevards aux heures de pointe.",
       "Sur la route, elle est dans son élément pour des trajets de quelques heures. Pour un long parcours avec plusieurs passagers, le [Dacia Duster](/catalogue/dacia-duster) apporte plus d'espace et une garde au sol plus haute. Si vous préférez une boîte automatique pour la ville, la [Toyota Corolla](/catalogue/toyota-corolla) est un cran au-dessus en confort.",
       "La livraison à l'hôtel ou à l'aéroport Mohammed V est gratuite à Casablanca.",
     ],
@@ -43,7 +43,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La Fiat 500 Cabriolet reste une petite citadine, mais décapotable. Dans notre catalogue elle est classée en premium, sans pour autant être une voiture de prestige : on la loue pour le plaisir de rouler toit ouvert sur la Corniche ou la route côtière vers Mohammedia, pas pour son standing.",
       "Elle roule à l'essence avec une boîte automatique, ce qui la rend confortable dans les embouteillages de Casablanca. Le coffre est petit : c'est une voiture pour deux, avec deux sacs de voyage.",
-      "Face à la [Fiat 500](/catalogue/fiat-500) classique, elle coûte {price:fiat-500-cabriolet} DH par jour contre {price:fiat-500} DH, et apporte l'automatique et le toit ouvrant. Si vous voulez simplement une voiture de ville pas chère, l'[Opel Corsa](/catalogue/opel-corsa) fait le travail à {price:opel-corsa} DH par jour. Mais si l'idée est de s'offrir un séjour en été avec l'air libre, elle n'a pas d'équivalent dans la flotte.",
+      "Face à la [Fiat 500](/catalogue/fiat-500) classique, elle coûte {price:fiat-500-cabriolet} DH par jour contre {price:fiat-500} DH, et apporte la boîte automatique et le toit ouvert. Si vous voulez simplement une voiture de ville pas chère, l'[Opel Corsa](/catalogue/opel-corsa) fait le travail à {price:opel-corsa} DH par jour. Mais pour rouler à l'air libre pendant un séjour d'été, elle n'a pas d'équivalent dans la flotte.",
       "Elle est proposée en très peu d'exemplaires : prévoyez votre demande tôt.",
     ],
     faq: [
@@ -65,9 +65,9 @@ const copy: Record<string, ModelCopy> = {
   "dacia-duster": {
     paragraphs: [
       "Le Dacia Duster est le SUV le plus abordable de la flotte, à {price:dacia-duster} DH par jour. Il roule au diesel et se conduit en boîte manuelle, ce qui le réserve aux conducteurs à l'aise avec l'embrayage. En échange, il offre de l'espace, un grand coffre et une hauteur de caisse bienvenue sur les routes de campagne.",
-      "C'est le bon choix pour une famille qui veut partir en week-end sans dépenser autant qu'avec un grand SUV, ou pour un groupe d'amis qui descend vers Essaouira ou Marrakech avec des sacs. Il consomme peu en diesel sur autoroute et ne demande pas qu'on le ménage.",
+      "C'est le bon choix pour une famille qui veut partir en vacances sans dépenser autant qu'avec un grand SUV, ou pour un groupe d'amis qui descend vers Essaouira ou Marrakech avec des sacs. Il consomme peu sur autoroute.",
       "Il est présent en plusieurs exemplaires, ce qui rend la disponibilité plus simple que sur les modèles rares.",
-      "Face au [Volkswagen T-Roc](/catalogue/volkswagen-t-roc), le Duster est moins raffiné et plus rustique, mais coûte {price:dacia-duster} DH par jour contre {price:volkswagen-t-roc} DH. Face au [Kia Sorento](/catalogue/kia-sorento), il manque d'automatique et de finition, mais ne coûte que {price:dacia-duster} DH contre {price:kia-sorento} DH. En ville, il reste un peu volumineux : pour la circulation du centre, une [Opel Corsa](/catalogue/opel-corsa) est plus pratique.",
+      "Face au [Volkswagen T-Roc](/catalogue/volkswagen-t-roc), le Duster est moins raffiné et plus rustique, mais coûte {price:dacia-duster} DH par jour contre {price:volkswagen-t-roc} DH. Face au [Kia Sorento](/catalogue/kia-sorento), il n'a ni la boîte automatique ni la même finition, mais ne coûte que {price:dacia-duster} DH contre {price:kia-sorento} DH. En ville, il reste un peu volumineux : pour la circulation du centre, une [Opel Corsa](/catalogue/opel-corsa) est plus pratique.",
     ],
     faq: [
       {
@@ -103,7 +103,7 @@ const copy: Record<string, ModelCopy> = {
   "volkswagen-t-roc": {
     paragraphs: [
       "Le Volkswagen T-Roc est un SUV compact à l'essence, en boîte automatique. Plus haut qu'une berline, plus court qu'un grand SUV, il convient à un couple ou à une petite famille qui veut une voiture facile en ville et crédible sur la route.",
-      "À Casablanca, il se gare sans difficulté et offre une bonne visibilité dans le trafic. Pour aller à Marrakech ou à Rabat, il tient bien l'autoroute et laisse assez de place pour les bagages de trois ou quatre jours. Il ne cherche pas à épater : c'est une valeur sûre, avec un tarif de {price:volkswagen-t-roc} DH par jour.",
+      "À Casablanca, il se gare sans difficulté et offre une bonne visibilité dans le trafic. Pour aller à Marrakech ou à Rabat, il tient bien l'autoroute et laisse assez de place pour les bagages de deux ou trois voyageurs. Il ne cherche pas à épater : c'est une valeur sûre, avec un tarif de {price:volkswagen-t-roc} DH par jour.",
       "Comparez-le au [Dacia Duster](/catalogue/dacia-duster) si le budget prime : le Duster est plus spacieux et moins cher, mais en diesel et boîte manuelle. Comparez-le au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) si vous voyagez à quatre avec des valises, car le Tiguan offre davantage d'espace à {price:volkswagen-tiguan} DH par jour.",
       "Il existe en plusieurs exemplaires, ce qui facilite la réservation en haute saison.",
     ],
@@ -122,8 +122,8 @@ const copy: Record<string, ModelCopy> = {
   "audi-a3": {
     paragraphs: [
       "L'Audi A3 est une compacte premium : elle donne l'allure d'une voiture soignée sans le gabarit d'une grande berline. Elle roule à l'essence, avec boîte automatique, et se conduit avec précision en ville comme sur autoroute.",
-      "Elle plaît à celui qui a un rendez-vous professionnel à Casablanca ou qui veut simplement une voiture plus raffinée qu'une citadine. À deux ou trois personnes, elle est parfaite pour un trajet vers Rabat, Mohammedia ou Marrakech. À quatre avec les valises, vous serez à l'étroit.",
-      "Elle est à {price:audi-a3} DH par jour, à comparer avec les {price:volkswagen-golf-8} DH de la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) : la Golf est plus polyvalente et existe en plusieurs boîtes, l'A3 a une finition et une image de marque plus haut de gamme. Face à la [Mercedes CLA](/catalogue/mercedes-cla), elle est plus sobre et moins chère.",
+      "Elle convient à un rendez-vous professionnel à Casablanca, ou à qui veut simplement une voiture plus raffinée qu'une citadine. À deux ou trois personnes, elle se prête bien à un trajet vers Rabat, Mohammedia ou Marrakech. À quatre avec les valises, vous serez à l'étroit.",
+      "Elle est à {price:audi-a3} DH par jour, à comparer avec les {price:volkswagen-golf-8} DH de la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) : la Golf est plus polyvalente et existe dans les deux boîtes, l'A3 a une finition et une image de marque plus haut de gamme. Face à la [Mercedes CLA](/catalogue/mercedes-cla), elle est plus sobre et moins chère.",
       "Elle est proposée en très peu d'exemplaires. Faites votre demande avec vos dates dès que possible.",
     ],
     faq: [
@@ -143,7 +143,7 @@ const copy: Record<string, ModelCopy> = {
       "La Volkswagen Golf 8 est la compacte polyvalente de la flotte. Elle existe en diesel ou en essence, en boîte automatique ou manuelle, selon l'exemplaire : indiquez votre préférence dans la demande, l'équipe vous propose la voiture libre qui correspond.",
       "Elle convient à presque tous les usages : une arrivée à l'aéroport Mohammed V, un séjour de deux semaines à Casablanca, un aller-retour à Marrakech. À quatre elle reste correcte pour un trajet court, et à deux elle est très à l'aise. Son prix est de {price:volkswagen-golf-8} DH par jour.",
       "Comparée à la [Toyota Corolla](/catalogue/toyota-corolla), la Golf est plus vive à conduire, la Corolla plus souple et hybride. Comparée au [Volkswagen T-Roc](/catalogue/volkswagen-t-roc), elle est plus compacte et plus facile à garer, mais moins haute : choisissez le T-Roc si vous tenez à la position haute.",
-      "C'est le choix le plus rationnel de la flotte pour qui ne veut pas de SUV et ne veut pas d'une simple citadine.",
+      "C'est un choix rationnel pour qui ne veut ni SUV ni simple citadine.",
     ],
     faq: [
       {
@@ -183,9 +183,9 @@ const copy: Record<string, ModelCopy> = {
   "volkswagen-tiguan": {
     paragraphs: [
       "Le Volkswagen Tiguan est le SUV intermédiaire de la marque : plus spacieux que le T-Roc, moins imposant que le Touareg. Il roule au diesel avec une boîte automatique, ce qui en fait une voiture reposante pour un long trajet.",
-      "Il s'adresse à une famille de quatre personnes avec valises, ou à des amis qui partent en week-end vers Marrakech, Essaouira ou Rabat. À Casablanca, sa taille reste raisonnable pour les parkings et le centre. Son tarif est de {price:volkswagen-tiguan} DH par jour.",
+      "Il s'adresse à une famille de quatre personnes avec valises, ou à des amis qui partent vers Marrakech, Essaouira ou Rabat. À Casablanca, sa taille reste raisonnable pour les parkings et le centre. Son tarif est de {price:volkswagen-tiguan} DH par jour.",
       "Comparez-le au [Kia Sorento](/catalogue/kia-sorento), à {price:kia-sorento} DH : le Tiguan a l'image et la conduite plus affûtée d'une Volkswagen, le Sorento plus d'espace intérieur. Comparez-le aussi à l'[Audi Q3](/catalogue/audi-q3), à {price:audi-q3} DH, plus compact et plus statutaire.",
-      "Si vous vous demandez entre le Tiguan et le [Volkswagen Touareg](/catalogue/volkswagen-touareg), posez-vous la question des bagages : au-delà de quatre grandes valises, prenez le Touareg. Son coffre et son habitacle permettent sinon de partir sans trier les affaires.",
+      "Si vous hésitez entre le Tiguan et le [Volkswagen Touareg](/catalogue/volkswagen-touareg), tout se joue sur les bagages : avec beaucoup de grandes valises, prenez le Touareg, dont le coffre et l'habitacle évitent de trier les affaires.",
     ],
     faq: [
       {
@@ -201,9 +201,9 @@ const copy: Record<string, ModelCopy> = {
 
   "audi-q3": {
     paragraphs: [
-      "L'Audi Q3 est un SUV compact premium en diesel. Il existe en boîte automatique et en boîte manuelle selon l'exemplaire, : précisez votre choix dans la demande.",
+      "L'Audi Q3 est un SUV compact premium en diesel. Il existe en boîte automatique et en boîte manuelle selon l'exemplaire : précisez votre choix dans la demande.",
       "Il convient à un couple, à un voyageur d'affaires ou à une petite famille qui veut un SUV facile à garer à Casablanca, plus statutaire qu'un T-Roc. Sur la route de Marrakech, le diesel donne de l'aisance, et la position haute rend le trajet moins fatigant. Il est à {price:audi-q3} DH par jour.",
-      "Face à l'[Audi A3](/catalogue/audi-a3), il apporte la hauteur et un coffre plus généreux pour {price:audi-q3} DH contre {price:audi-a3} DH. Face à la [Porsche Macan](/catalogue/porsche-macan), il est moins cher, plus raisonnable et moins sportif. Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il est plus compact mais plus chic.",
+      "Face à l'[Audi A3](/catalogue/audi-a3), il apporte la hauteur et un coffre plus généreux pour {price:audi-q3} DH contre {price:audi-a3} DH. Face au [Porsche Macan](/catalogue/porsche-macan), il est moins cher, plus raisonnable et moins sportif. Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il est plus compact mais plus chic.",
       "Plusieurs exemplaires existent, ce qui laisse de la marge pour réserver. Livré à l'hôtel ou à l'aéroport Mohammed V, il est prêt à rouler dès la remise des clés.",
     ],
     faq: [
@@ -216,15 +216,15 @@ const copy: Record<string, ModelCopy> = {
         a: "Oui, le Q3 de la flotte est un diesel.",
       },
       {
-        q: "Quelle différence entre le Q3 et la Porsche Macan ?",
-        a: "La [Porsche Macan](/catalogue/porsche-macan) est une essence plus sportive et plus chère. Le Q3 est un SUV plus sobre, en diesel, au tarif plus modéré.",
+        q: "Quelle différence entre le Q3 et le Porsche Macan ?",
+        a: "Le [Porsche Macan](/catalogue/porsche-macan) roule à l'essence, il est plus sportif et plus cher. Le Q3 est un SUV plus sobre, en diesel, au tarif plus modéré.",
       },
     ],
   },
 
   "mercedes-cla": {
     paragraphs: [
-      "La Mercedes CLA est un coupé compact à quatre portes. À l'essence et en boîte automatique, elle donne l'accès à la marque à Casablanca sans le gabarit des grandes berlines. Elle plaît à celui qui veut une voiture stylée pour un séjour à deux, une arrivée à l'aéroport Mohammed V ou un week-end vers Marrakech.",
+      "La Mercedes CLA est un coupé compact à quatre portes. À l'essence et en boîte automatique, elle donne l'accès à la marque à Casablanca sans le gabarit des grandes berlines. Elle plaît à celui qui veut une voiture stylée pour un séjour à deux, une arrivée à l'aéroport Mohammed V ou une escapade vers Marrakech.",
       "Sa ligne basse a un revers : l'accès à l'arrière est moins aisé qu'avec une berline classique et le coffre reste moyen. Elle est faite pour deux ou trois passagers. En ville, sa taille reste raisonnable. Elle est à {price:mercedes-cla} DH par jour.",
       "Face à l'[Audi A3](/catalogue/audi-a3), elle a plus de présence et plus de style, pour {price:mercedes-cla} DH contre {price:audi-a3} DH. Face à la [Mercedes Classe C 220](/catalogue/mercedes-c-220), elle est moins chère ({price:mercedes-c-220} DH pour la Classe C), plus sportive et plus jeune d'allure, mais moins spacieuse, notamment pour les passagers arrière.",
       "Elle existe en plusieurs exemplaires, ce qui en fait la Mercedes la plus facile à réserver.",
@@ -243,18 +243,18 @@ const copy: Record<string, ModelCopy> = {
 
   "volkswagen-touareg": {
     paragraphs: [
-      "Le Volkswagen Touareg est le grand SUV de la flotte, au diesel et en boîte automatique. Il s'adresse à un groupe, à une famille avec beaucoup de bagages ou à celui qui veut un SUV haut de gamme sans passer au prix d'une Range Rover. Il est à {price:volkswagen-touareg} DH par jour.",
+      "Le Volkswagen Touareg est le grand SUV de la flotte, au diesel et en boîte automatique. Il s'adresse à un groupe, à une famille avec beaucoup de bagages ou à celui qui veut un SUV haut de gamme sans passer au prix d'un Range Rover Sport. Il est à {price:volkswagen-touareg} DH par jour.",
       "C'est l'un des modèles les mieux représentés de la flotte, ce qui reflète sa polyvalence : à l'aéroport, il avale valises et passagers ; sur l'autoroute vers Marrakech, il file en silence ; en ville, il se range avec un peu d'attention, mais sa visibilité aide. Il est proposé en grand nombre, la disponibilité y est donc plus simple.",
-      "Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il offre un cran de plus en espace et en confort pour un prix supérieur. Face à la [Range Rover Evoque](/catalogue/range-rover-evoque), à {price:range-rover-evoque} DH, il est plus spacieux alors que l'Evoque joue la carte de l'image. Face à la [Range Rover Sport](/catalogue/range-rover-sport), il est bien moins cher ({price:range-rover-sport} DH pour la Sport) et suffit largement pour la plupart des voyages.",
+      "Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il offre un cran de plus en espace et en confort pour un prix supérieur. Face au [Range Rover Evoque](/catalogue/range-rover-evoque), à {price:range-rover-evoque} DH, il est plus spacieux alors que l'Evoque joue la carte de l'image. Face au [Range Rover Sport](/catalogue/range-rover-sport), il est bien moins cher ({price:range-rover-sport} DH pour le Sport) et suffit largement pour la plupart des voyages.",
     ],
     faq: [
       {
         q: "Le Touareg est-il automatique et diesel ?",
-        a: "Oui, celui de la flotte est un diesel en boîte automatique, avec 5 places.",
+        a: "Oui, le Touareg de la flotte roule au diesel, en boîte automatique.",
       },
       {
         q: "Touareg ou Range Rover Evoque ?",
-        a: "Le Touareg est plus grand et plus spacieux, l'[Evoque](/catalogue/range-rover-evoque) plus compact et plus statutaire. Le tarif est proche : comparez sur la page [location Range Rover](route:range-rover).",
+        a: "Le Touareg est plus grand et plus spacieux, l'[Evoque](/catalogue/range-rover-evoque) plus compact et plus statutaire. Côté tarif, comptez {price:volkswagen-touareg} DH par jour pour le Touareg et {price:range-rover-evoque} DH pour l'Evoque. Voir aussi la page [location Range Rover](route:range-rover).",
       },
       {
         q: "Le Touareg est-il adapté aux longs trajets ?",
@@ -265,19 +265,19 @@ const copy: Record<string, ModelCopy> = {
 
   "range-rover-evoque": {
     paragraphs: [
-      "La Range Rover Evoque est le SUV compact de la marque britannique. Elle roule au diesel avec une boîte automatique, et sa silhouette basse et urbaine la distingue des SUV plus carrés. On la choisit pour son image autant que pour son agrément, à un tarif de {price:range-rover-evoque} DH par jour.",
-      "Elle convient à un couple ou à un voyageur d'affaires qui veut arriver quelque part avec une voiture qui se remarque. À Casablanca, son gabarit reste maniable ; vers Marrakech, elle tient bien la route et sa position haute fatigue peu. Son coffre est correct mais pas immense.",
-      "Face à la [Range Rover Sport](/catalogue/range-rover-sport), elle est beaucoup moins chère, plus petite et plus facile à garer. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, elle sacrifie de l'espace pour le prestige. Face à l'[Audi Q3](/catalogue/audi-q3), elle est plus chère ({price:audi-q3} DH pour le Q3) et plus statutaire.",
-      "Elle est proposée en très peu d'exemplaires. Une demande anticipée est conseillée.",
+      "Le Range Rover Evoque est le SUV compact de la marque britannique. Il roule au diesel avec une boîte automatique, et sa silhouette basse et urbaine le distingue des SUV plus carrés. On le choisit pour son image autant que pour son agrément, à un tarif de {price:range-rover-evoque} DH par jour.",
+      "Il convient à un couple ou à un voyageur d'affaires qui veut arriver quelque part avec une voiture qui se remarque. À Casablanca, son gabarit reste maniable ; vers Marrakech, il tient bien la route et sa position haute fatigue peu. Son coffre est correct mais pas immense.",
+      "Face au [Range Rover Sport](/catalogue/range-rover-sport), il est beaucoup moins cher, plus petit et plus facile à garer. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, il sacrifie de l'espace pour le prestige. Face à l'[Audi Q3](/catalogue/audi-q3), il est plus cher ({price:audi-q3} DH pour le Q3) et plus statutaire.",
+      "Il est proposé en très peu d'exemplaires. Une demande anticipée est conseillée.",
     ],
     faq: [
       {
-        q: "L'Evoque est-elle en diesel ?",
+        q: "L'Evoque est-il en diesel ?",
         a: "Oui, l'Evoque de la flotte est un diesel avec boîte automatique.",
       },
       {
         q: "Evoque ou Sport : lequel choisir ?",
-        a: "L'Evoque pour la ville et un voyage à deux ou trois. La [Sport](/catalogue/range-rover-sport) pour la famille, les bagages et les longues distances.",
+        a: "L'Evoque pour la ville et un voyage à deux ou trois. Le [Sport](/catalogue/range-rover-sport) pour la famille, les bagages et les longues distances.",
       },
     ],
   },
@@ -287,7 +287,7 @@ const copy: Record<string, ModelCopy> = {
       "La Mercedes Classe C 220 est la berline de référence de la marque : diesel, boîte automatique, sobre et confortable. Elle convient aux déplacements professionnels, aux séjours à Casablanca où l'on veut arriver en berline soignée et aux trajets sur autoroute vers Rabat ou Marrakech. Elle est à {price:mercedes-c-220} DH par jour.",
       "Son format reste raisonnable en ville, ce qui la distingue de la Classe E. À l'arrière, deux adultes sont à l'aise. Le coffre suffit pour des valises de séjour.",
       "Face à la [Mercedes CLA](/catalogue/mercedes-cla), elle est plus classique, plus spacieuse et en diesel, mais plus chère ({price:mercedes-cla} DH pour la CLA). Face à la [Mercedes Classe E 220](/catalogue/mercedes-e-220), elle est moins grande et moins chère, mais le confort reste proche pour la plupart des trajets.",
-      "La Classe C est proposée en très peu d'exemplaires. Demandez vos dates tôt : la livraison à l'hôtel ou à l'aéroport Mohammed V est gratuite à Casablanca, et elle convient aussi bien à un séjour de deux semaines qu'à un déplacement de cinq jours.",
+      "La Classe C est proposée en très peu d'exemplaires. Demandez vos dates tôt. Elle convient aussi bien à un séjour de deux semaines qu'à un déplacement de cinq jours, et la livraison à l'hôtel ou à l'aéroport Mohammed V est gratuite à Casablanca.",
     ],
     faq: [
       {
@@ -303,9 +303,9 @@ const copy: Record<string, ModelCopy> = {
 
   "mercedes-e-220": {
     paragraphs: [
-      "La Mercedes Classe E 220 est la grande berline de la flotte : diesel, boîte automatique, très confortable. On la loue pour les longs trajets, les rendez-vous où l'image compte et les arrivées à l'aéroport Mohammed V où l'on veut être transporté plutôt que de conduire. Elle est à {price:mercedes-e-220} DH par jour.",
-      "Sur l'autoroute, c'est la plus reposante des Mercedes que nous proposons. À l'arrière, trois personnes tiennent mieux que dans une Classe C. En ville, sa longueur demande de la prudence dans les rues étroites, mais les parkings du centre-ville et des hôtels l'acceptent sans problème.",
-      "Face à la [Mercedes Classe C 220](/catalogue/mercedes-c-220), elle apporte de l'espace et de la présence, pour plus cher. Face à la [Range Rover Sport](/catalogue/range-rover-sport), elle est bien moins chère et plus basse, avec un confort de berline plutôt que de SUV.",
+      "La Mercedes Classe E 220 est la grande berline de la flotte : diesel, boîte automatique, très confortable. On la loue pour les longs trajets, les rendez-vous où l'image compte et les arrivées à l'aéroport Mohammed V où l'on veut retrouver un grand confort dès la sortie du terminal. Elle est à {price:mercedes-e-220} DH par jour.",
+      "Sur l'autoroute, c'est la plus reposante des Mercedes que nous proposons. À l'arrière, trois personnes tiennent mieux que dans une Classe C. En ville, sa longueur demande de la prudence dans les rues étroites et au moment de se garer.",
+      "Face à la [Mercedes Classe C 220](/catalogue/mercedes-c-220), elle apporte de l'espace et de la présence, pour plus cher. Face au [Range Rover Sport](/catalogue/range-rover-sport), elle est bien moins chère et plus basse, avec un confort de berline plutôt que de SUV.",
       "Elle est proposée en très peu d'exemplaires. La livraison à l'hôtel ou à l'aéroport est gratuite à Casablanca, tous les jours de 8h à 22h.",
     ],
     faq: [
@@ -322,41 +322,41 @@ const copy: Record<string, ModelCopy> = {
 
   "porsche-macan": {
     paragraphs: [
-      "La Porsche Macan est le SUV sportif de la flotte : essence, boîte automatique, cinq places. Elle se conduit comme une berline vive plutôt que comme un SUV haut, ce qui la distingue de tous les autres modèles proposés. Elle est à {price:porsche-macan} DH par jour.",
-      "On la choisit pour une occasion précise : un week-end à deux, un séjour où l'on veut se faire plaisir, une route comme celle de Casablanca à Marrakech qu'elle avale avec aisance. Elle n'est pas pensée pour économiser : un budget serré se tournera vers l'[Audi Q3](/catalogue/audi-q3), plus raisonnable.",
-      "Face à la [Range Rover Evoque](/catalogue/range-rover-evoque), elle est plus sportive et plus dynamique ; l'Evoque est plus calme et plus statutaire. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, elle est plus chère et moins spacieuse, mais bien plus excitante à conduire.",
-      "Plusieurs exemplaires sont disponibles. La livraison se fait à l'hôtel ou à l'aéroport Mohammed V.",
+      "Le Porsche Macan est le SUV sportif de la flotte : essence, boîte automatique, cinq places. Il se conduit comme une berline vive plutôt que comme un SUV haut, ce qui le distingue de tous les autres modèles proposés. Il est à {price:porsche-macan} DH par jour.",
+      "On le choisit pour une occasion précise : des vacances à deux, un séjour où l'on veut se faire plaisir, une route comme celle de Casablanca à Marrakech qu'il avale avec aisance. Il n'est pas pensé pour économiser : un budget serré se tournera vers l'[Audi Q3](/catalogue/audi-q3), plus raisonnable.",
+      "Face au [Range Rover Evoque](/catalogue/range-rover-evoque), il est plus sportif et plus dynamique ; l'Evoque est plus calme et plus statutaire. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, il est plus cher et moins spacieux, mais bien plus excitant à conduire.",
+      "Plusieurs exemplaires sont proposés. La livraison se fait à l'hôtel, à l'adresse de votre choix ou à l'aéroport Mohammed V.",
     ],
     faq: [
       {
-        q: "La Macan est-elle en essence ?",
-        a: "Oui, la Porsche Macan de la flotte fonctionne à l'essence, avec boîte automatique.",
+        q: "Le Macan est-il en essence ?",
+        a: "Oui, le Porsche Macan de la flotte fonctionne à l'essence, avec boîte automatique.",
       },
       {
         q: "Y a-t-il d'autres Porsche dans la flotte ?",
-        a: "Non, la Macan est le seul modèle Porsche proposé. La page [location Porsche](route:porsche) en détaille l'usage.",
+        a: "Non, le Macan est le seul modèle Porsche proposé. La page [location Porsche](route:porsche) en détaille l'usage.",
       },
     ],
   },
 
   "range-rover-sport": {
     paragraphs: [
-      "La Range Rover Sport est le véhicule le plus prestigieux de la flotte : grand SUV diesel, boîte automatique, cinq places et un niveau de confort au sommet de la gamme. Elle est à {price:range-rover-sport} DH par jour, le haut de la grille tarifaire de l'agence.",
-      "On la loue pour une arrivée marquante à l'aéroport Mohammed V, un mariage, un voyage où la famille ou le groupe doit voyager à l'aise, ou simplement pour le plaisir de rouler dans un SUV de cette catégorie. Sur l'autoroute vers Marrakech, c'est une voiture qui absorbe les kilomètres. En ville, sa taille impose de la prudence aux stationnements.",
-      "Face à la [Range Rover Evoque](/catalogue/range-rover-evoque), elle est plus grande, plus confortable et beaucoup plus chère. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), elle apporte le prestige de la marque, pas forcément plus d'espace utile : si le budget compte, le Touareg fait presque autant.",
+      "Le Range Rover Sport est le modèle le plus haut de gamme de la flotte : grand SUV diesel, boîte automatique, cinq places et un niveau de confort à la hauteur. Il est à {price:range-rover-sport} DH par jour, le haut de la grille tarifaire de l'agence.",
+      "On le loue pour une arrivée marquante à l'aéroport Mohammed V, un mariage, un voyage où la famille ou le groupe doit voyager à l'aise, ou simplement pour le plaisir de rouler dans un SUV de cette catégorie. Sur l'autoroute vers Marrakech, c'est une voiture qui absorbe les kilomètres. En ville, sa taille impose de la prudence pour se garer.",
+      "Face au [Range Rover Evoque](/catalogue/range-rover-evoque), il est plus grand, plus confortable et beaucoup plus cher. Face au [Volkswagen Touareg](/catalogue/volkswagen-touareg), il apporte le prestige de la marque, pas forcément plus d'espace utile : si le budget compte, le Touareg fait presque autant.",
       "Très peu d'exemplaires : demandez vos dates tôt. L'équipe confirme sur WhatsApp et livre la voiture à l'adresse de votre choix.",
     ],
     faq: [
       {
-        q: "La Range Rover Sport est-elle diesel ?",
-        a: "Oui, elle est en diesel avec boîte automatique.",
+        q: "Le Range Rover Sport est-il diesel ?",
+        a: "Oui, il est en diesel avec boîte automatique.",
       },
       {
-        q: "Pourquoi la Sport coûte-t-elle plus cher que l'Evoque ?",
-        a: "Elle est plus grande, plus haut de gamme et plus confortable. Si vous voulez la marque à un tarif plus bas, voyez l'[Evoque](/catalogue/range-rover-evoque).",
+        q: "Pourquoi le Sport coûte-t-il plus cher que l'Evoque ?",
+        a: "Il est plus grand, plus haut de gamme et plus confortable. Si vous voulez la marque à un tarif plus bas, voyez l'[Evoque](/catalogue/range-rover-evoque).",
       },
       {
-        q: "Est-elle adaptée à un long voyage ?",
+        q: "Est-il adapté à un long voyage ?",
         a: "Oui, c'est l'un de ses usages naturels. Demandez le kilométrage inclus à l'équipe avant un départ de plusieurs centaines de kilomètres.",
       },
     ],

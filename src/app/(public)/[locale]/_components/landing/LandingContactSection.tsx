@@ -101,7 +101,7 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
     {
       icon: Phone,
       label: t('contact.phone'),
-      value: BUSINESS.phoneDisplay,
+      value: <bdi dir="ltr">{BUSINESS.phoneDisplay}</bdi>,
       href: `tel:${BUSINESS.phone}`,
     },
     {

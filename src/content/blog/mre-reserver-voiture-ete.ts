@@ -21,7 +21,7 @@ const article: Article = {
           type: 'list',
           items: [
             `**Choisir le modèle.** La flotte compte {vehicleCount} véhicules répartis en {modelCount} modèles. Un modèle précis, par exemple un SUV pour toute la famille, peut déjà être loué pour vos dates si vous attendez le dernier moment.`,
-            `**Fixer le prix.** Les tarifs par jour démarrent à {fleetMin} DH. Avec une location de 5 jours minimum et un tarif réduit au-delà de 10 jours, un séjour d'un mois a un coût plus lisible si vous le calculez à l'avance.`,
+            `**Anticiper le budget.** Les tarifs par jour démarrent à {fleetMin} DH. Avec une location de 5 jours minimum et un tarif réduit au-delà de 10 jours sur la plupart des modèles, un séjour d'un mois se calcule mieux à l'avance. L'équipe confirme le prix pour vos dates.`,
             `**Éviter les démarches à l'arrivée.** Après un vol, on veut ses clés, pas une file d'agence.`,
           ],
         },
@@ -36,7 +36,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Yourent livre la voiture à l'aéroport Mohammed V sans frais, comme dans tout Casablanca. À Mohammedia, la livraison est possible avec un léger supplément. L'équipe répond de 8h à 22h, 7j/7.`,
+          text: `La livraison à l'aéroport Mohammed V ne coûte rien, comme partout dans Casablanca. À Mohammedia, la livraison est possible avec un léger supplément. L'équipe répond de 8h à 22h, 7j/7.`,
         },
         {
           type: 'p',
@@ -57,12 +57,12 @@ const article: Article = {
             `Une **pièce d'identité valide** : CIN ou passeport.`,
             `Un **permis de conduire de plus de 2 ans**.`,
             `Un **justificatif de domicile**.`,
-            `La **caution** : chèque, espèces ou empreinte de carte, selon le modèle.`,
+            `La **caution** : chèque, espèces ou empreinte de carte, avec un montant qui dépend du modèle.`,
           ],
         },
         {
           type: 'p',
-          text: `Si votre permis est délivré à l'étranger, la loi n° 52-05 permet à un Marocain résidant à l'étranger de conduire avec ce permis pendant un an au maximum à compter de sa résidence au Maroc. Pour un séjour d'été, ce délai n'est pas en cause. Quel justificatif de domicile l'équipe accepte pour une adresse à l'étranger : demandez-le par WhatsApp avant le départ. Voir aussi [louer avec un permis étranger](/blog/louer-voiture-maroc-permis-etranger).`,
+          text: `Si votre permis est délivré à l'étranger, la loi n° 52-05 permet à un Marocain résidant à l'étranger de conduire avec ce permis pendant un an au maximum à compter de sa résidence au Maroc. Pour un séjour d'été, ce délai n'est pas en cause. Pour le justificatif de domicile d'une adresse à l'étranger, demandez par WhatsApp, avant le départ, lequel l'équipe accepte. Voir aussi [louer avec un permis étranger](/blog/louer-voiture-maroc-permis-etranger).`,
         },
       ],
     },
@@ -71,7 +71,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Le tarif est affiché par jour. Pour un séjour de trois semaines, par exemple, le tarif réduit s'applique au-delà de 10 jours. Un SUV diesel comme le [Dacia Duster](/catalogue/dacia-duster) ({price:dacia-duster} DH par jour) ou le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) ({price:volkswagen-tiguan} DH) convient à une famille avec valises. La [berline Toyota Corolla](/catalogue/toyota-corolla) ({price:toyota-corolla} DH) est hybride et automatique.`,
+          text: `Le tarif est affiché par jour. Pour un séjour de trois semaines, par exemple, le tarif réduit au-delà de 10 jours entre en jeu sur la plupart des modèles : faites-le confirmer par l'équipe, surtout en pleine saison. Un SUV diesel comme le [Dacia Duster](/catalogue/dacia-duster) ({price:dacia-duster} DH par jour) ou le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) ({price:volkswagen-tiguan} DH) convient à une famille avec valises. La [berline Toyota Corolla](/catalogue/toyota-corolla) ({price:toyota-corolla} DH) est hybride et automatique.`,
         },
         {
           type: 'p',

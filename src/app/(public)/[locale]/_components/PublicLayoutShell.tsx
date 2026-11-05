@@ -33,7 +33,7 @@ const LANGUAGES: { code: 'fr' | 'en' | 'ar'; flag: string; label: string }[] = [
 ];
 
 /* ── Colonnes de liens du pied de page ── */
-const FOOTER_RENTAL_KEYS: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'automatique', 'longue-duree', 'economique'];
+const FOOTER_RENTAL_KEYS: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'automatique', 'longue-duree', 'economique', 'maroc'];
 const FOOTER_BRAND_KEYS: SeoRouteKey[] = ['mercedes', 'range-rover', 'porsche'];
 const FOOTER_INFO_KEYS: SeoRouteKey[] = ['tarifs', 'conditions', 'faq', 'a-propos', 'contact'];
 
@@ -236,18 +236,19 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
 
       <main className="relative z-10 flex-1">{children}</main>
 
-      {/* ── WhatsApp floating button — always visible, bottom-right ── */}
+      {/* ── WhatsApp : toujours visible. Sur mobile, languette collée au bord pour ne pas couvrir les boutons. ── */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform hover:scale-110"
+        className="fixed bottom-4 end-0 z-50 flex h-12 w-8 items-center justify-center rounded-s-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform md:bottom-6 md:end-5 md:w-12 md:rounded-full md:hover:scale-110"
         aria-label={t('aria.whatsapp')}
       >
-        <WhatsAppIcon className="h-6 w-6" />
+        <WhatsAppIcon className="h-5 w-5 md:h-6 md:w-6" />
       </a>
 
-      <footer className="border-t border-white/5 py-10">
+      {/* Marge basse sur mobile : la dernière ligne du pied de page reste dégagée de la languette WhatsApp. */}
+      <footer className="border-t border-white/5 pb-20 pt-10 md:pb-10">
         <div className="lux-container flex flex-col gap-8">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
             <div className="space-y-4">
@@ -260,7 +261,9 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                   </a>
                 </p>
                 <p>
-                  <a href={`tel:${BUSINESS.phone}`} dir="ltr" className="transition-colors hover:text-cream">{BUSINESS.phoneDisplay}</a>
+                  <a href={`tel:${BUSINESS.phone}`} className="transition-colors hover:text-cream">
+                    <bdi dir="ltr">{BUSINESS.phoneDisplay}</bdi>
+                  </a>
                   {' · '}
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cream">WhatsApp</a>
                 </p>

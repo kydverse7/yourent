@@ -4,7 +4,7 @@ const page: PageContent = {
   metaTitle: 'Cheap Car Rental Casablanca, Low Prices | Yourent',
   metaDescription:
     'Cheap car rental Casablanca from {minPrice} MAD/day: Fiat 500, Opel Corsa, Dacia Duster. Free delivery, comprehensive insurance with an excess included. Book online.',
-  eyebrow: 'Small budgets',
+  eyebrow: 'Budget cars',
   h1: 'Cheap Car Rental in Casablanca',
   intro:
     'Yourent offers budget rental cars in Casablanca from {minPrice} MAD per day (Fiat 500, Opel Corsa), up to {maxPrice} MAD for the Dacia Duster. Delivery is free in Casablanca and at the airport, and comprehensive insurance with an excess is included. Rentals start at 5 days.',
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'For a **cheap car rental in Casablanca**, four models in the fleet stay at {maxPrice} MAD per day or less. The prices below are daily rates for 5 to 10 days; after 10 days they drop automatically.',
+          text: 'For a **cheap car rental in Casablanca**, four models in the fleet stay at {maxPrice} MAD per day or less. The prices below are daily rates for 5 to 10 days; the table also gives the rate after 10 days.',
         },
         { type: 'pricing' },
         {
@@ -30,11 +30,11 @@ const page: PageContent = {
       ],
     },
     {
-      h2: 'Why there is no car at 100 or 150 MAD a day',
+      h2: 'Why there are no rock-bottom prices',
       blocks: [
         {
           type: 'p',
-          text: 'Yourent does not offer a car at 100 or 150 MAD per day. Our entry rate is {minPrice} MAD, and we would rather say so than show a teaser price that the final bill would not match. A very low rate can come with a high deposit, a heavy excess, delivery fees or paid extras: that is what to check before comparing.',
+          text: 'Yourent does not do rock-bottom prices. Our entry rate is {minPrice} MAD, and we would rather say so than show a teaser price that the final bill would not match. A very low rate can come with a high deposit, a heavy excess, delivery fees or paid extras: that is what to check before comparing.',
         },
         {
           type: 'p',
@@ -68,12 +68,12 @@ const page: PageContent = {
       ],
     },
     {
-      h2: 'Paying less for your rental: what really works',
+      h2: 'Paying less for your rental: four practical ways',
       blocks: [
         {
           type: 'list',
           items: [
-            '**Rent for longer**: after 10 days, the daily rate drops automatically. See the [long term car rental](route:longue-duree) page.',
+            '**Rent for longer**: after 10 days, the daily rate drops automatically on most models. See the [long-term car rental](route:longue-duree) page.',
             '**Pick a small car**: for Casablanca city driving, the Fiat 500 or the Opel Corsa is plenty.',
             '**Get it delivered**: free delivery saves you trips to an agency.',
             '**Book with exact dates**: the catalogue search shows the free cars, so you get the exact price with no surprises.',
@@ -86,7 +86,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Choose the model and your dates, then send the online request: it does not involve any payment. The team confirms on WhatsApp or by phone, gives you the deposit, and the car is delivered to the address you chose or to [Mohammed V airport](route:aeroport). You can change or cancel free of charge up to 24 hours before pick-up.',
+          text: 'Choose the model and your dates, then send the online request: it does not involve any payment. The team confirms on WhatsApp or by phone, tells you the deposit amount, and the car is delivered to the address you chose or to [Mohammed V airport](route:aeroport). You can change or cancel free of charge up to 24 hours before pick-up.',
         },
         { type: 'vehicles' },
       ],
@@ -95,14 +95,14 @@ const page: PageContent = {
   faq: [
     {
       q: 'What is the lowest price to rent a car in Casablanca at Yourent?',
-      a: 'From {minPrice} MAD per day, for the Fiat 500 and the Opel Corsa. The rate drops automatically after 10 days.',
+      a: 'From {minPrice} MAD per day, for the Fiat 500 and the Opel Corsa. The table on this page also gives the rate after 10 days.',
     },
     {
       q: 'What does the rental price include?',
       a: 'Free delivery in Casablanca and at Mohammed V airport, and comprehensive insurance with an excess. The team gives the excess amount on WhatsApp.',
     },
     {
-      q: 'Why do you not rent at 100 or 150 MAD a day?',
+      q: 'Why does Yourent not offer lower prices?',
       a: 'Yourent prefers to show its real entry rate, {minPrice} MAD per day, and say what it includes (free delivery, comprehensive insurance with an excess) rather than a teaser price.',
     },
     {
@@ -111,7 +111,7 @@ const page: PageContent = {
     },
     {
       q: 'Is a deposit needed for a small car?',
-      a: 'Yes, a deposit is taken at pick-up for every car, by cheque, cash or card imprint. It is returned once the car is back in good condition, and the team gives the amount.',
+      a: 'Yes, a deposit is taken at pick-up for every car, by cheque, cash or card imprint. It is returned once the car is back in good condition, and the team tells you the amount.',
     },
   ],
   related: ['longue-duree', 'tarifs', 'conditions', 'agence-vs-international', 'suv'],

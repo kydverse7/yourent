@@ -6,7 +6,7 @@ const page: LocalizedPage = {
     metaDescription:
       'Location voiture automatique à Casablanca dès {minPrice} DH/jour : Fiat 500, Corolla, Golf 8, SUV et prestige. Livraison gratuite, assurance tous risques.',
     eyebrow: 'Boîte automatique',
-    h1: 'Location voiture automatique à Casablanca',
+    h1: 'Location de voiture automatique à Casablanca',
     intro:
       "Yourent loue des voitures à boîte automatique à Casablanca dès {minPrice} DH par jour, de la Fiat 500 Cabriolet au Range Rover Sport. La majorité de la flotte est disponible en automatique. Vous choisissez le véhicule et vos dates en ligne, l'équipe confirme sur WhatsApp, et la livraison est gratuite à Casablanca et à l'aéroport.",
     breadcrumb: 'Voiture automatique',
@@ -48,7 +48,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Les tarifs sont par jour pour une location de 5 à 10 jours. Au-delà de 10 jours, un tarif réduit s'applique automatiquement. La caution figure dans le tableau quand elle est renseignée ; sinon l'équipe la précise à la confirmation.",
+            text: "Les tarifs sont indiqués par jour. La colonne « 5 à 10 jours » donne le tarif standard, la colonne « Plus de 10 jours » celui qui s'applique automatiquement dès 11 jours, plus bas sur la plupart des modèles. La caution figure dans le tableau quand elle est renseignée ; sinon l'équipe la précise à la confirmation.",
           },
           { type: 'pricing' },
         ],
@@ -59,7 +59,7 @@ const page: LocalizedPage = {
           {
             type: 'list',
             items: [
-              "Les touristes et les Marocains résidents à l'étranger habitués à l'automatique, qui n'ont pas à s'adapter à l'embrayage en arrivant.",
+              "Les touristes et les Marocains résidant à l'étranger habitués à l'automatique, qui n'ont pas à s'adapter à l'embrayage en arrivant.",
               "Les conducteurs qui font surtout de la ville et de l'autoroute entre Casablanca et Rabat.",
               "Les trajets de plusieurs jours sur route, où la fatigue se sent moins.",
               "Les personnes qui conduisent peu : l'automatique réduit le risque de caler dans une côte ou à un feu.",
@@ -86,7 +86,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Vous pouvez modifier ou annuler sans frais jusqu'à 24 h avant la prise en charge. Les [conditions de location](route:conditions) détaillent le reste.",
+            text: "Un changement de plan ? La modification ou l'annulation est sans frais jusqu'à 24 h avant la prise en charge. Les [conditions de location](route:conditions) détaillent le reste.",
           },
         ],
       },
@@ -98,7 +98,7 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Quelle est la voiture automatique la moins chère à Casablanca ?',
-        a: "La Fiat 500 Cabriolet, à partir de {minPrice} DH par jour. Elle est automatique, à essence, avec 5 places.",
+        a: "La Fiat 500 Cabriolet, à partir de {minPrice} DH par jour. Elle est automatique et roule à l'essence.",
       },
       {
         q: 'La Golf 8 et l\'Audi Q3 sont-elles bien automatiques ?',

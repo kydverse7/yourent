@@ -59,7 +59,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'La livraison est gratuite dans tout Casablanca, gare comprise, ainsi qu’à l’aéroport Mohammed V. Si vous arrivez en avion, voyez la page [location voiture aéroport](route:aeroport). Les prix, par modèle, sont sur la page [tarifs](route:tarifs).',
+            text: 'La livraison est gratuite dans tout Casablanca, gare comprise, ainsi qu’à l’aéroport Mohammed V. Si vous arrivez en avion, voyez la page [location de voiture à l’aéroport](route:aeroport). Les prix, par modèle, sont sur la page [tarifs](route:tarifs).',
           },
         ],
       },

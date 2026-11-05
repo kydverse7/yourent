@@ -21,8 +21,12 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+/*
+ * Sur mobile, l'icône native du calendrier devient invisible et couvre tout le champ :
+ * la date tient alors à côté de notre icône, et un appui n'importe où ouvre le calendrier.
+ */
 const dateInputBase =
-  'h-12 w-full rounded-xl border border-white/[0.09] bg-black/[0.32] pl-10 pr-3 text-sm font-semibold text-[#f7f1e8] outline-none transition-all duration-200 hover:border-[rgba(201,168,76,0.28)] focus:border-[rgba(201,168,76,0.55)] focus:bg-black/[0.45] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.14)] cursor-pointer';
+  'h-12 w-full min-w-0 rounded-xl border border-white/[0.09] bg-black/[0.32] pl-9 pr-2 text-sm font-semibold text-[#f7f1e8] outline-none transition-all duration-200 hover:border-[rgba(201,168,76,0.28)] focus:border-[rgba(201,168,76,0.55)] focus:bg-black/[0.45] focus:shadow-[0_0_0_3px_rgba(201,168,76,0.14)] cursor-pointer sm:pl-10 sm:pr-3 max-sm:[&::-webkit-calendar-picker-indicator]:absolute max-sm:[&::-webkit-calendar-picker-indicator]:inset-0 max-sm:[&::-webkit-calendar-picker-indicator]:h-full max-sm:[&::-webkit-calendar-picker-indicator]:w-full max-sm:[&::-webkit-calendar-picker-indicator]:opacity-0';
 
 /* ─── Hero search card — availability by dates ──────── */
 export function LandingSearchCard() {
@@ -73,12 +77,10 @@ export function LandingSearchCard() {
     >
       {/* ── glass card shell ── */}
       <div
-        className="relative overflow-hidden rounded-[22px] border border-[rgba(201,168,76,0.14)] px-4 py-4 sm:px-6"
+        className="relative overflow-hidden rounded-[22px] border border-[rgba(201,168,76,0.14)] px-4 py-4 sm:px-6 sm:backdrop-blur-[24px]"
         style={{
           background:
             'linear-gradient(180deg, rgba(20,17,11,0.86) 0%, rgba(11,10,8,0.92) 100%)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
           boxShadow:
             '0 34px 90px rgba(0,0,0,0.6), 0 0 44px rgba(201,168,76,0.07), inset 0 1px 0 rgba(201,168,76,0.1)',
         }}
@@ -97,13 +99,13 @@ export function LandingSearchCard() {
         <div className="pointer-events-none absolute bottom-2.5 right-2.5 h-5 w-5 rounded-br-md border-b border-r border-[rgba(201,168,76,0.3)]" aria-hidden="true" />
 
         {/* ── header row : live label + day counter ── */}
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <span className="flex min-w-0 items-center gap-2 text-[0.6rem] font-extrabold uppercase tracking-[0.2em] text-[#c9a84c]">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+          <span className="flex min-w-0 items-center gap-2 text-[0.6rem] font-extrabold uppercase tracking-[0.14em] text-[#c9a84c] sm:tracking-[0.2em]">
             <span
               className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a84c] shadow-[0_0_10px_rgba(201,168,76,0.8)] animate-pulse"
               aria-hidden="true"
             />
-            <span className="truncate">{t('hero.searchLive')}</span>
+            <span>{t('hero.searchLive')}</span>
           </span>
 
           <AnimatePresence mode="popLayout" initial={false}>

@@ -8,7 +8,7 @@ const page: LocalizedPage = {
     eyebrow: 'MRE',
     h1: 'Location de voiture MRE à Casablanca',
     intro:
-      'Yourent propose aux Marocains résidant à l’étranger une location de voiture à Casablanca à partir de {fleetMin} DH par jour, réservable depuis l’étranger avant le départ. La voiture est livrée gratuitement à l’aéroport Mohammed V à votre arrivée, et le tarif baisse automatiquement au-delà de 10 jours, durée courante d’un séjour d’été.',
+      'Yourent propose aux Marocains résidant à l’étranger une location de voiture à Casablanca à partir de {fleetMin} DH par jour, réservable depuis l’étranger avant le départ. La voiture est livrée gratuitement à l’aéroport Mohammed V à votre arrivée, et, sur la plupart des modèles, le tarif baisse automatiquement au-delà de 10 jours, durée courante d’un séjour d’été. L’équipe confirme le prix pour vos dates.',
     breadcrumb: 'Location voiture MRE',
     vehicles: { sort: 'asc' },
     sections: [
@@ -30,11 +30,11 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Yourent livre la voiture à l’aéroport Mohammed V, gratuitement, 7j/7 de 8h à 22h. Il n’y a pas de comptoir Yourent dans l’aéroport : le véhicule vous est remis sur place par l’équipe, à un point de rendez-vous confirmé avant votre arrivée. Envoyez à l’équipe votre date et l’heure d’arrivée prévues par WhatsApp. Pour une arrivée en dehors de 8h–22h, ou si votre vol change, écrivez d’abord à l’équipe : elle confirme ce qui est possible.',
+            text: 'Yourent livre la voiture à l’aéroport Mohammed V, gratuitement, 7j/7 de 8h à 22h. Il n’y a pas de comptoir Yourent dans l’aéroport : le véhicule vous est remis sur place par l’équipe, à un point de rendez-vous confirmé avant votre arrivée. Envoyez à l’équipe votre date et l’heure d’arrivée prévues par WhatsApp. Pour une arrivée en dehors de 8h-22h, ou si votre vol change, écrivez d’abord à l’équipe : elle confirme ce qui est possible.',
           },
           {
             type: 'p',
-            text: 'La livraison est aussi gratuite dans tout Casablanca : chez la famille, à l’hôtel ou ailleurs en ville. Détails sur la page [location voiture aéroport](route:aeroport).',
+            text: 'La livraison est aussi gratuite dans tout Casablanca : chez la famille, à l’hôtel ou ailleurs en ville. Détails sur la page [location de voiture à l’aéroport](route:aeroport).',
           },
         ],
       },
@@ -43,7 +43,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Un séjour au pays dure souvent plusieurs semaines. Chez Yourent, la location est de 5 jours minimum et un tarif réduit s’applique automatiquement au-delà de 10 jours, sans code. La colonne « au-delà de 10 jours » de la grille ci-dessous donne le prix par jour de chaque modèle pour une longue durée. Sur une Dacia Duster, par exemple, le tarif passe de {price:dacia-duster} DH par jour à un prix plus bas après 10 jours.',
+            text: 'Un séjour au pays dure souvent plusieurs semaines. Chez Yourent, la location est de 5 jours minimum et, sur la plupart des modèles, un tarif réduit s’applique automatiquement au-delà de 10 jours, sans code. La colonne « Plus de 10 jours » de la grille ci-dessous donne le prix par jour de chaque modèle pour une longue durée. Sur un Dacia Duster, par exemple, le tarif passe de {price:dacia-duster} DH par jour à un prix plus bas après 10 jours. En pleine saison, faites confirmer ce tarif par l’équipe pour vos dates.',
           },
           { type: 'pricing' },
           {
@@ -71,7 +71,7 @@ const page: LocalizedPage = {
               'Une pièce d’identité valide : CIN ou passeport.',
               'Un permis de conduire de plus de 2 ans. Si votre permis a été délivré à l’étranger, l’équipe confirme avant la réservation s’il convient.',
               'Un justificatif de domicile : l’équipe précise lequel est accepté pour un résident à l’étranger.',
-              'Une caution au départ, par chèque, en espèces ou par empreinte de carte, selon le véhicule. Elle est restituée au retour du véhicule en bon état.',
+              'Une caution au départ, par chèque, en espèces ou par empreinte de carte, dont le montant dépend du véhicule. Elle vous est rendue au retour de la voiture en bon état.',
             ],
           },
           {
@@ -92,7 +92,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Quel est le tarif pour un séjour de plus de 10 jours ?',
-        a: 'Un tarif réduit s’applique automatiquement au-delà de 10 jours. La grille de cette page indique, pour chaque modèle, le prix par jour avant et après 10 jours.',
+        a: 'Sur la plupart des modèles, un tarif réduit s’applique automatiquement au-delà de 10 jours, et l’équipe confirme le prix pour vos dates. La grille de cette page indique, pour chaque modèle, le prix par jour avant et après 10 jours.',
       },
       {
         q: 'Quels documents un MRE doit-il présenter ?',

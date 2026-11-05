@@ -39,7 +39,7 @@ const page: LocalizedPage = {
           },
           {
             type: "p",
-            text: "Pour un même budget que la Classe C, un SUV change le rapport à la route : comparez avec la [Range Rover Evoque](/catalogue/range-rover-evoque) ou le [Volkswagen Touareg](/catalogue/volkswagen-touareg).",
+            text: "Pour un budget voisin, un SUV offre une position de conduite plus haute : comparez avec le [Range Rover Evoque](/catalogue/range-rover-evoque) ou le [Volkswagen Touareg](/catalogue/volkswagen-touareg).",
           },
         ],
       },
@@ -52,7 +52,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "Comptez de {minPrice} à {maxPrice} DH par jour selon le modèle : {price:mercedes-cla} DH pour la CLA, {price:mercedes-c-220} DH pour la Classe C, {price:mercedes-e-220} DH pour la Classe E. Un tarif réduit s'applique automatiquement au-delà de 10 jours. Toutes les voitures sont couvertes par une assurance tous risques avec franchise. La caution dépend du modèle et se règle par chèque, en espèces ou par empreinte de carte.",
+            text: "Comptez de {minPrice} à {maxPrice} DH par jour selon le modèle : {price:mercedes-cla} DH pour la CLA, {price:mercedes-c-220} DH pour la Classe C, {price:mercedes-e-220} DH pour la Classe E. Au-delà de 10 jours, le tarif baisse automatiquement sur certains modèles : le tableau ci-dessous le précise. Toutes les voitures sont couvertes par une assurance tous risques avec franchise. La caution dépend du modèle et se règle par chèque, en espèces ou par empreinte de carte.",
           },
           { type: "pricing" },
           {
@@ -73,7 +73,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Puis-je prendre une Mercedes pour aller à Marrakech ?",
-        a: "Oui, l'autoroute relie Casablanca à Marrakech et la Classe E y est particulièrement confortable. Le kilométrage inclus n'est pas le même pour tous les contrats : demandez-le à l'équipe sur WhatsApp avant de partir.",
+        a: "Oui, l'autoroute relie Casablanca à Marrakech et la Classe E y est particulièrement confortable. L'équipe précise le kilométrage inclus sur WhatsApp : demandez-le avant de partir.",
       },
       {
         q: "La Mercedes peut-elle être livrée à l'aéroport ou à l'hôtel ?",

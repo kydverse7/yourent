@@ -3,9 +3,9 @@ import type { Article } from '../types';
 const article: Article = {
   slug: 'prix-location-voiture-casablanca',
   metaTitle: `Prix location voiture Casablanca : tarifs | Yourent`,
-  metaDescription: `Prix d'une location de voiture à Casablanca : tarifs par modèle dès {fleetMin} DH par jour, durée minimale, tarif dégressif et points qui font varier le prix.`,
+  metaDescription: `Prix d'une location de voiture à Casablanca : tarifs par modèle dès {fleetMin} DH par jour, durée minimale, tarif au-delà de 10 jours et ce qui fait varier le prix.`,
   h1: `Prix d'une location de voiture à Casablanca : à quoi s'attendre`,
-  intro: `À Casablanca, le prix d'une location de voiture dépend d'abord du modèle et de la durée. Chez Yourent, la flotte va de {fleetMin} DH à {maxPrice} DH par jour, pour une location de 5 jours minimum et un tarif réduit automatique au-delà de 10 jours. Voici comment lire un devis et ce qui fait monter ou baisser la facture.`,
+  intro: `À Casablanca, le prix d'une location de voiture dépend d'abord du modèle et de la durée. Chez Yourent, la flotte va de {fleetMin} DH à {maxPrice} DH par jour, pour une location de 5 jours minimum, avec un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles. Voici comment lire un devis et ce qui fait monter ou baisser la facture.`,
   excerpt: `Ce qui fait varier le prix d'une location à Casablanca : modèle, durée, boîte, caution, assurance. Avec les tarifs par jour de plusieurs modèles de la flotte Yourent.`,
   datePublished: '2026-11-05',
   dateModified: '2026-11-05',
@@ -15,7 +15,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Il n'existe pas de prix unique : un loueur affiche un tarif par jour, différent pour chaque voiture. Pour comparer deux offres, il faut regarder le **total pour vos dates**, pas seulement le prix du jour. Une petite économique et un SUV premium n'ont rien en commun côté tarif, et une location d'une semaine ne coûte pas sept fois un tarif de week-end.`,
+          text: `Il n'existe pas de prix unique : un loueur affiche un tarif par jour, différent pour chaque voiture. Pour comparer deux offres, il faut regarder le **total pour vos dates**, pas seulement le prix du jour. Une petite économique et un SUV premium n'ont rien en commun côté tarif, et le prix par jour peut changer avec la durée.`,
         },
         {
           type: 'p',
@@ -37,7 +37,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `La grille complète, avec le tarif au-delà de 10 jours et la caution de chaque modèle, est sur la page [tarifs de location](route:tarifs). Les prix sont lus dans la base de Yourent : ils changent, la page tarifs est la référence.`,
+          text: `La grille complète, avec le tarif au-delà de 10 jours et la caution de chaque modèle, est sur la page [tarifs de location](route:tarifs). Ces prix reprennent les tarifs en vigueur de Yourent : ils changent, et la page tarifs reste la référence.`,
         },
       ],
     },
@@ -46,7 +46,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `La durée pèse autant que le modèle. Yourent loue pour **5 jours minimum**. Au-delà de 10 jours, un tarif journalier plus bas s'applique automatiquement, sans négociation. Le calcul est simple : tarif du jour multiplié par le nombre de jours, avec le tarif réduit à partir du 11e jour.`,
+          text: `La durée pèse autant que le modèle. Yourent loue pour **5 jours minimum**. Dès 11 jours, un tarif journalier plus bas s'applique automatiquement sur la plupart des modèles, sans négociation. Le calcul est simple : tarif par jour multiplié par le nombre de jours, le tarif réduit valant alors pour toute la durée de la location. L'équipe confirme le total pour vos dates.`,
         },
         {
           type: 'p',
@@ -64,7 +64,7 @@ const article: Article = {
             `**La boîte de vitesses.** Plusieurs modèles sont en boîte automatique, d'autres en manuelle. Une même gamme peut exister dans les deux versions : demandez laquelle est disponible pour vos dates.`,
             `**Le carburant.** Essence, diesel ou hybride. Il ne change pas le tarif de location lui-même, mais il pèse sur le coût d'un long trajet.`,
             `**La durée.** Voir plus haut : minimum de 5 jours, tarif réduit au-delà de 10 jours.`,
-            `**La période.** Les prix affichés sont ceux de la base au moment de la lecture. La disponibilité d'un modèle, elle, varie avec les dates : la recherche par dates de la page catalogue exclut les véhicules déjà loués.`,
+            `**La période.** Les prix affichés sont les tarifs en vigueur, et l'équipe confirme celui qui s'applique à vos dates, surtout en pleine saison. La disponibilité d'un modèle varie aussi avec les dates : la recherche par dates de la page catalogue exclut les véhicules déjà loués.`,
             `**Les options et suppléments.** La livraison est gratuite dans tout Casablanca et à l'aéroport Mohammed V. À Mohammedia, la livraison est possible avec un léger supplément. Pour toute autre demande, l'équipe précise le tarif sur WhatsApp.`,
           ],
         },
@@ -110,7 +110,7 @@ const article: Article = {
   faq: [
     {
       q: `À partir de quel prix peut-on louer une voiture à Casablanca chez Yourent ?`,
-      a: `Le tarif le plus bas de la flotte est de {fleetMin} DH par jour. La location est de 5 jours minimum, et le tarif baisse automatiquement au-delà de 10 jours.`,
+      a: `Le tarif le plus bas de la flotte est de {fleetMin} DH par jour. La location est de 5 jours minimum, et le tarif baisse automatiquement au-delà de 10 jours sur la plupart des modèles.`,
     },
     {
       q: `Le prix affiché est-il le prix final ?`,

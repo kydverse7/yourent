@@ -49,7 +49,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Yourent ne loue pas à la journée. La formule convient à un séjour professionnel de plusieurs jours, à une famille en visite ou à un résident qui a besoin d’un véhicule pendant quelques semaines. Au-delà de 10 jours, le tarif baisse automatiquement. Voyez la page [tarifs](route:tarifs) pour les prix de chaque modèle.',
+            text: 'Yourent ne loue pas à la journée. La formule convient à un séjour professionnel de plusieurs jours, à une famille en visite ou à un résident qui a besoin d’un véhicule pendant quelques semaines. Au-delà de 10 jours, le tarif baisse automatiquement sur la plupart des modèles. Voyez la page [tarifs](route:tarifs) pour les prix de chaque modèle.',
           },
         ],
       },
@@ -58,7 +58,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Prévoyez une pièce d’identité valide (CIN ou passeport), un permis de plus de 2 ans, un justificatif de domicile et une caution au départ, par chèque, en espèces ou par empreinte de carte. Les [conditions de location](route:conditions) donnent le détail.',
+            text: 'Prévoyez une pièce d’identité valide (CIN ou passeport), un permis de plus de 2 ans, un justificatif de domicile et une caution au départ, par chèque, en espèces ou par empreinte de carte. Le détail figure dans les [conditions de location](route:conditions).',
           },
         ],
       },

@@ -88,7 +88,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'longue-duree',
           title: 'Longue durée',
-          text: 'Au-delà de 10 jours, le tarif réduit s’applique tout seul, sans demande de votre part. Le prix affiché ici est le plus bas de ce palier.',
+          text: 'Au-delà de 10 jours, le tarif réduit s’applique tout seul sur la plupart des modèles, sans demande de votre part. Le prix affiché ici est le plus bas de ce palier.',
         },
       ],
       outro:
@@ -124,7 +124,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     airport: {
       h3: 'Delivery at Mohammed V Airport',
       paragraphs: ({ hours }) => [
-        'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal: the car comes to you, by appointment. It can also meet you at your hotel or home in the city, 7 days a week.',
+        'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal: the car comes to you, by appointment. It can also be brought to your hotel or home in the city, 7 days a week.',
         `Give your arrival date and time in the request, and the team will send you the meeting point on WhatsApp. Team hours: ${hours}. If your flight lands outside these hours, ask before you book.`,
         'Outside the city, Mohammedia is possible for a small extra charge. For a full account of the arrival, read our [airport rental page](route:aeroport).',
       ],
@@ -142,7 +142,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         },
         {
           key: 'berline',
-          title: 'Sedans and hatchbacks',
+          title: 'Saloons and hatchbacks',
           text: 'Toyota Corolla hybrid, Volkswagen Golf 8 and Audi A3, for a mix of city appointments and motorway driving.',
         },
         {
@@ -163,7 +163,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'longue-duree',
           title: 'Long-term rental',
-          text: 'Beyond 10 days, the reduced rate applies by itself, with nothing to ask for. The price shown here is the lowest at that level.',
+          text: 'After 10 days, the lower rate applies automatically on most models, with nothing to ask for. The price shown here is the lowest at that level.',
         },
       ],
       outro:
@@ -175,17 +175,17 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         `**Duration.** A rental lasts at least ${minDays} days: there is no daily or weekend option.`,
         '**Documents.** Bring a valid ID (national ID card or passport), a driving licence held for more than 2 years and proof of address. If you are coming from abroad, an international driving permit is accepted.',
         '**Deposit.** You leave it at pick-up, by cheque, in cash or as a card imprint. The amount depends on the vehicle, and you get it back on return if the car is in good condition.',
-        '**Insurance.** Every car has all-risk cover with an excess. Ask for the amount of the excess on your model before you confirm.',
-        '**The unexpected.** If the car breaks down, a replacement is sent to you as soon as possible. After an accident, the team helps you with the paperwork.',
+        '**Insurance.** Every car has comprehensive insurance with an excess. Ask for the amount of the excess on your model before you confirm.',
+        '**If something goes wrong.** If the car breaks down, a replacement is sent to you as soon as possible. After an accident, the team helps you with the paperwork.',
       ],
       outro:
-        'Minimum age, mileage, returning the car in another city: for these questions, the team answers on [WhatsApp](whatsapp). Everything else is set out in our [rental conditions](route:conditions).',
+        'Minimum age, mileage, returning the car in another city: for these questions, the team answers on [WhatsApp](whatsapp). Everything else is set out in our [rental requirements](route:conditions).',
     },
   },
 
   ar: {
     eyebrow: 'دليلك قبل الكراء',
-    h2: 'كراء سيارة في الدار البيضاء: كيف يتم ذلك مع Yourent',
+    h2: 'كراء السيارات في الدار البيضاء: كيف يتم لدى Yourent',
     intro: ({ vehicleCount, minPrice, minDays }) =>
       `توفر Yourent ${vehicleCount > 0 ? `${vehicleCount} سيارة` : 'سيارات'} للكراء في الدار البيضاء${minPrice > 0 ? `، ابتداءً من ${minPrice} درهم في اليوم` : ''}، لمدة ${minDays} أيام على الأقل. ترسل طلبك عبر الإنترنت، ويؤكده الفريق عبر واتساب أو الهاتف، ثم تُسلَّم السيارة إلى فندقك أو إلى مطار محمد الخامس أو إلى العنوان الذي تحدده.`,
     flow: {
@@ -199,7 +199,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     airport: {
       h3: 'التوصيل إلى مطار محمد الخامس',
       paragraphs: ({ hours }) => [
-        'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المحطة: السيارة تأتي إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
+        'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المطار: السيارة تأتي إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
         `اذكر تاريخ وصولك وساعته في الطلب، وسيحدد لك الفريق مكان اللقاء عبر واتساب. أوقات عمل الفريق: ${hours}. إذا كانت طائرتك ستهبط خارج هذه الأوقات، فاسأل قبل الحجز.`,
         'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط. لمعرفة تفاصيل الوصول كاملة، اقرأ [صفحة الكراء في المطار](route:aeroport).',
       ],
@@ -213,32 +213,32 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         {
           key: 'economique',
           title: 'سيارات مدينة اقتصادية',
-          text: 'فيات 500 وأوبل كورسا بعلبة سرعات يدوية: أقل الأسعار في الأسطول، وحجم يسهل ركنه في المدينة.',
+          text: 'Fiat 500 وOpel Corsa بعلبة سرعات يدوية: أقل الأسعار في الأسطول، وحجم يسهل ركنه في المدينة.',
         },
         {
           key: 'berline',
           title: 'سيارات سيدان',
-          text: 'تويوتا كورولا الهجينة وفولكسفاغن غولف 8 وأودي A3، للجمع بين المواعيد داخل المدينة والطرق السيارة.',
+          text: 'Toyota Corolla الهجينة وVolkswagen Golf 8 وAudi A3، للجمع بين المواعيد داخل المدينة والطرق السيارة.',
         },
         {
           key: 'suv',
           title: 'سيارات SUV',
-          text: 'من داسيا داستر إلى فولكسفاغن طوارق، مرورًا بـT-Roc وتيغوان وأودي Q3 وكيا سورينتو: مساحة أكبر للأمتعة والرحلات الطويلة.',
+          text: 'من Dacia Duster إلى Volkswagen Touareg، مرورًا بـT-Roc وTiguan وAudi Q3 وKia Sorento: مساحة أكبر للأمتعة والرحلات الطويلة.',
         },
         {
           key: 'automatique',
           title: 'علبة سرعات أوتوماتيكية',
-          text: 'معظم الطرازات أوتوماتيكية. أما غولف 8 وأودي Q3 فمتوفرتان بالعلبتين، لذا حدد اختيارك في الطلب.',
+          text: 'معظم الطرازات أوتوماتيكية. أما Golf 8 وAudi Q3 فمتوفرتان بالعلبتين، لذا حدد اختيارك في الطلب.',
         },
         {
           key: 'luxe',
           title: 'سيارات فاخرة',
-          text: 'مرسيدس CLA وC 220 وE 220، وبورش ماكان، ورينج روفر إيفوك وسبورت، لموعد عمل أو مناسبة خاصة.',
+          text: 'Mercedes CLA وC 220 وE 220، وPorsche Macan، وRange Rover Evoque وSport، لموعد عمل أو مناسبة خاصة.',
         },
         {
           key: 'longue-duree',
           title: 'الكراء طويل المدة',
-          text: 'بعد 10 أيام، يُطبق السعر المخفض تلقائيًا دون أن تطلبه. والسعر المعروض هنا هو الأدنى في هذه الفئة.',
+          text: 'بعد 10 أيام، يُطبق السعر المخفض تلقائيًا في معظم الطرازات دون أن تطلبه. والسعر المعروض هنا هو الأدنى في هذه الفئة.',
         },
       ],
       outro:
@@ -248,13 +248,13 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
       h3: 'ما يجب تحضيره',
       items: ({ minDays }) => [
         `**المدة.** يستمر الكراء ${minDays} أيام على الأقل: لا توجد صيغة ليوم واحد أو لنهاية الأسبوع.`,
-        '**الوثائق.** حضّر وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى على الحصول عليها أكثر من سنتين، وإثبات عنوان السكن. إذا كنت قادمًا من الخارج، تُقبل رخصة السياقة الدولية.',
+        '**الوثائق.** حضّر وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. إذا كنت قادمًا من الخارج، تُقبل رخصة السياقة الدولية.',
         '**الضمان.** يُقدَّم عند الانطلاق، بشيك أو نقدًا أو ببصمة البطاقة. يتوقف مبلغه على السيارة، وتسترده عند الإرجاع إذا كانت السيارة في حالة جيدة.',
-        '**التأمين.** كل سيارة مغطاة بتأمين شامل مع مبلغ تحمل. اسأل عن قيمة هذا المبلغ بالنسبة لطرازك قبل التأكيد.',
+        '**التأمين.** كل سيارة مغطاة بالتأمين ضد جميع المخاطر مع مبلغ التحمل. اسأل عن قيمة هذا المبلغ بالنسبة إلى طرازك قبل التأكيد.',
         '**الطوارئ.** عند حدوث عطل، تُرسل إليك سيارة بديلة في أقرب وقت. وبعد وقوع حادث، يساعدك الفريق في الإجراءات.',
       ],
       outro:
-        'السن الأدنى، أو عدد الكيلومترات، أو إرجاع السيارة في مدينة أخرى: عن هذه الأسئلة يجيبك الفريق عبر [واتساب](whatsapp). وباقي التفاصيل موجود في [شروط الكراء](route:conditions).',
+        'الحد الأدنى للسن، أو عدد الكيلومترات، أو إرجاع السيارة في مدينة أخرى: عن هذه الأسئلة يجيبك الفريق عبر [واتساب](whatsapp). وباقي التفاصيل موجود في [شروط الكراء](route:conditions).',
     },
   },
 };

@@ -216,6 +216,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           <select
             value={form.indicatif}
             onChange={(e) => set('indicatif', e.target.value)}
+            dir="ltr"
             className={`${selectBase} w-[130px] shrink-0`}
           >
             {INDICATIFS.map((ind) => (
@@ -224,6 +225,7 @@ export default function PublicReservationForm({ vehiculeId: _vehiculeId, vehicul
           </select>
           <input
             type="tel"
+            dir="ltr"
             value={form.telephone}
             onChange={(e) => set('telephone', e.target.value)}
             placeholder="6XX XXX XXX"

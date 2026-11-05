@@ -51,7 +51,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: 'La livraison est gratuite dans tout Casablanca et à l’aéroport, 7j/7. Pour la gare Casa Voyageurs, voyez [location voiture gare Casa Voyageurs](route:casa-voyageurs) ; pour l’arrivée en avion, [location voiture aéroport](route:aeroport).',
+            text: 'La livraison est gratuite dans tout Casablanca et à l’aéroport, 7j/7. Pour la gare Casa Voyageurs, voyez [location de voiture à la gare Casa Voyageurs](route:casa-voyageurs) ; pour l’arrivée en avion, [location de voiture à l’aéroport](route:aeroport).',
           },
         ],
       },

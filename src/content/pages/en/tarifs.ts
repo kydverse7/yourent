@@ -3,11 +3,11 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Car Rental Prices Casablanca from {fleetMin} MAD | Yourent',
   metaDescription:
-    'Car rental prices in Casablanca: from {fleetMin} MAD per day, lower rate after 10 days, free delivery in Casablanca and at Mohammed V airport. Minimum 5 days.',
+    'Car rental prices in Casablanca: from {fleetMin} MAD per day, lower rate after 10 days on most models, free delivery in Casablanca and at Mohammed V airport.',
   eyebrow: 'Prices',
   h1: 'Car Rental Prices in Casablanca',
   intro:
-    'At Yourent, car rental in Casablanca starts at {fleetMin} MAD per day, with a minimum rental of 5 days. The price drops automatically after 10 days. The price list below is read from the current rates: it follows the real price of each model.',
+    'At Yourent, car rental in Casablanca starts at {fleetMin} MAD per day, with a minimum rental of 5 days. On most models, the price drops automatically after 10 days. The price list below shows the current rate of each model.',
   breadcrumb: 'Prices',
   vehicles: { sort: 'asc' },
   sections: [
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: "Each row shows the model's daily rate, its rate after 10 days and the deposit taken at pick-up. This list comes from the agency's current rates, so it is up to date when you read it. The cheapest car in the fleet starts at {fleetMin} MAD per day, the most expensive at {maxPrice} MAD per day.",
+          text: "Each row shows the model's daily rate, its rate after 10 days and the minimum deposit taken at pick-up. This list comes from the agency's current rates, so it is up to date when you read it. The cheapest car in the fleet starts at {fleetMin} MAD per day, the most expensive at {maxPrice} MAD per day.",
         },
         { type: 'pricing' },
       ],
@@ -28,12 +28,12 @@ const page: PageContent = {
           type: 'list',
           items: [
             '**From 5 to 10 days**: the standard daily rate of the model you choose. Yourent does not offer rentals of under 5 days.',
-            '**After 10 days**: a lower rate applied automatically, with no code and no steps to take. On some models the gap is large, on others the rate stays the same: the "after 10 days" column of the list shows it model by model.',
+            '**After 10 days**: a lower rate applied automatically, with no code and no steps to take. On some models the gap is large, on others the rate stays the same: the "Over 10 days" column of the list shows it model by model.',
           ],
         },
         {
           type: 'p',
-          text: 'How to read it: a Dacia Duster is listed at {price:dacia-duster} MAD per day up to 10 days. For a longer stay, the rate in the last column applies. For a stay of several weeks, see the [long term car rental](route:longue-duree) page.',
+          text: 'How to read it: a Dacia Duster is listed at {price:dacia-duster} MAD per day for 5 to 10 days. From day 11, the rate in the "Over 10 days" column applies. For a stay of several weeks, see the [long-term car rental](route:longue-duree) page.',
         },
       ],
     },
@@ -50,7 +50,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Included mileage, the excess amount and any extra charge for returning in another city are not shown on the site: the team gives them on WhatsApp before you book. There is no online payment, you pay the team directly.',
+          text: 'Included mileage, the excess amount and whether you can return the car in another city are not shown on the site: the team tells you on WhatsApp before you book. There is no online payment: you pay the team directly.',
         },
       ],
     },
@@ -59,7 +59,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A deposit is taken at pick-up, by cheque, in cash or by card imprint. The amount depends on the car: it is shown in the last column of the list, for each model. It is returned once the car is back in good condition. The team gives the exact return timing before you book. The documents to bring are listed on the [rental requirements](route:conditions) page.',
+          text: 'A deposit is taken at pick-up, by cheque, in cash or by card imprint. The amount depends on the car: the last column of the list, "Deposit from", gives the minimum for each model, and the team confirms the exact sum. It is returned once the car is back in good condition. The team gives the exact return timing before you book. The documents to bring are listed on the [rental requirements](route:conditions) page.',
         },
       ],
     },
@@ -80,7 +80,7 @@ const page: PageContent = {
     },
     {
       q: 'Is there a lower price for a long rental?',
-      a: 'Yes. After 10 days, a lower rate applies automatically. For some models it stays the same: the list shows both rates for each car.',
+      a: 'Yes. After 10 days, a lower rate applies automatically on most models. On some it stays the same: the list shows both rates for each car.',
     },
     {
       q: 'Is delivery included in the price?',

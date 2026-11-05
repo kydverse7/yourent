@@ -4,9 +4,9 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location voiture aéroport Mohammed V Casablanca | Yourent',
     metaDescription:
-      "Location voiture aéroport Mohammed V à Casablanca : livraison gratuite à l'arrivée, dès {minPrice} DH/jour, assurance tous risques. Réponse rapide sur WhatsApp.",
+      "Location voiture aéroport Mohammed V à Casablanca : livraison gratuite à l'arrivée, dès {minPrice} DH/jour, assurance tous risques. Confirmation sur WhatsApp.",
     eyebrow: 'Aéroport Mohammed V',
-    h1: 'Location voiture aéroport Mohammed V (Casablanca CMN)',
+    h1: "Location de voiture à l'aéroport Mohammed V (Casablanca CMN)",
     intro:
       "Yourent livre votre voiture de location à l'aéroport Mohammed V de Casablanca (CMN), sans frais de livraison, dès {minPrice} DH par jour. Vous choisissez un véhicule et vos dates en ligne, l'équipe confirme sur WhatsApp ou par téléphone, puis un membre de l'équipe vous remet les clés à votre arrivée. La location commence à 5 jours.",
     breadcrumb: 'Aéroport Mohammed V',
@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Yourent est une agence de Casablanca, installée au N°25 Rue Ibnou Mounir. Elle n'a pas de bureau dans le terminal : la voiture vient à vous. Pour une **location voiture aéroport Mohammed V**, le principe est simple : vous réservez avant le départ, et le véhicule vous attend à l'arrivée de votre vol, à l'aéroport de Casablanca, sans que vous ayez à passer par une agence.",
+            text: "Yourent est une agence de Casablanca, installée au N°25 Rue Ibnou Mounir. Elle n'a pas de bureau dans le terminal : la voiture vient à vous. Pour une **location de voiture à l'aéroport Mohammed V**, le principe est simple : vous réservez avant le départ, et un membre de l'équipe vous remet le véhicule sur place, au rendez-vous convenu, sans passage par une agence.",
           },
           {
             type: 'p',
@@ -59,9 +59,9 @@ const page: LocalizedPage = {
           {
             type: 'list',
             items: [
-              "Vous n'attendez pas votre tour : le véhicule est prêt, à votre nom, pour votre heure d'arrivée.",
-              "Vous échangez avec la même personne de la réservation à la remise des clés, et vous gardez un seul interlocuteur sur WhatsApp pendant toute la location.",
-              "Les conditions sont validées avant le vol : tarif, caution, documents. Il n'y a pas de surprise à l'arrivée.",
+              "Vous n'attendez pas votre tour à un guichet : le rendez-vous est fixé à l'avance avec l'équipe.",
+              "Vous traitez directement avec l'équipe, de la réservation à la remise des clés, et vous la gardez joignable sur WhatsApp pendant la location.",
+              "Les conditions sont validées avant le vol : tarif, caution, documents. Vous savez à quoi vous attendre en arrivant.",
               "Vous pouvez aussi demander la livraison à votre hôtel ou à une adresse de Casablanca, 7j/7.",
             ],
           },
@@ -99,7 +99,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Le plus utile est de caler les horaires avec l'équipe avant le départ. Envoyez votre numéro de vol, l'heure d'arrivée prévue, le nombre de passagers et de valises. Avec ces informations, l'équipe prépare le bon véhicule, vérifie qu'il est libre à vos dates et vous écrit sur WhatsApp pour fixer le rendez-vous. Vous n'avez rien à imprimer : tout se passe par message.",
+            text: "Le plus utile est de caler les horaires avec l'équipe avant le départ. Envoyez votre numéro de vol, l'heure d'arrivée prévue, le nombre de passagers et de valises. Avec ces informations, l'équipe prépare le bon véhicule, vérifie qu'il est libre à vos dates et vous écrit sur WhatsApp pour fixer le rendez-vous.",
           },
           {
             type: 'p',
@@ -125,7 +125,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "À partir de l'aéroport, la plupart des clients rejoignent Casablanca, Rabat ou Marrakech. Pour la ville et les petits budgets, une citadine suffit. Pour les longs trajets et les familles, une [location SUV](route:suv) ou une berline offre plus de confort et de coffre. Si vous préférez ne pas jongler avec l'embrayage après un vol, la [location voiture automatique](route:automatique) est une bonne option.",
+            text: "L'aéroport est relié par autoroute à Casablanca, Rabat et Marrakech. Pour la ville et les petits budgets, une citadine suffit. Pour les longs trajets et les familles, une [location SUV](route:suv) ou une berline offre plus de confort et de coffre. Si vous préférez ne pas jongler avec l'embrayage après un vol, la [location de voiture automatique](route:automatique) est une bonne option.",
           },
           {
             type: 'p',
@@ -139,7 +139,7 @@ const page: LocalizedPage = {
           { type: 'pricing' },
           {
             type: 'p',
-            text: "Le tarif par jour baisse automatiquement au-delà de 10 jours. La livraison à l'aéroport ne coûte rien : seule la location est facturée. Retrouvez tous les modèles et leurs conditions sur la page [tarifs](route:tarifs).",
+            text: "Sur la plupart des modèles, le tarif par jour baisse automatiquement au-delà de 10 jours. La livraison à l'aéroport ne coûte rien : seule la location est facturée. Retrouvez tous les modèles et leurs conditions sur la page [tarifs](route:tarifs).",
           },
         ],
       },

@@ -3,11 +3,11 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Car Rental for Moroccans Living Abroad | Yourent',
   metaDescription:
-    'Car rental for Moroccans living abroad (MRE) in Casablanca: book before you travel, free delivery at Mohammed V airport, from {fleetMin} MAD a day, lower rate.',
+    'Car rental for Moroccans living abroad (MRE) in Casablanca: book before you travel, free delivery at Mohammed V airport, from {fleetMin} MAD a day.',
   eyebrow: 'MRE',
   h1: 'Car Rental for Moroccans Living Abroad (MRE) in Casablanca',
   intro:
-    'Yourent offers Moroccans living abroad a car rental in Casablanca from {fleetMin} MAD per day, which you can book from abroad before you travel. The car is delivered free of charge to Mohammed V airport when you arrive, and the rate drops automatically after 10 days, a common length for a summer stay.',
+    'Yourent rents cars in Casablanca to Moroccans living abroad, from {fleetMin} MAD per day, and you can book before you travel. The car is delivered free of charge to Mohammed V airport when you arrive, and on most models the rate drops automatically after 10 days, a common length for a summer stay. The team confirms the price for your dates.',
   breadcrumb: 'MRE car rental',
   vehicles: { sort: 'asc' },
   sections: [
@@ -42,12 +42,12 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'A stay back home often lasts several weeks. At Yourent, the minimum rental is 5 days and a lower rate applies automatically after 10 days, with no code. The "after 10 days" column in the list below gives each model\'s daily price for a long rental. On a Dacia Duster, for example, the rate goes from {price:dacia-duster} MAD per day to a lower price after 10 days.',
+          text: 'A stay back home often lasts several weeks. At Yourent, the minimum rental is 5 days and, on most models, a lower rate applies automatically after 10 days, with no code. The "Over 10 days" column in the list below gives each model\'s daily price for a long rental. On a Dacia Duster, for example, the rate goes from {price:dacia-duster} MAD per day to a lower price after 10 days. In high season, ask the team to confirm this rate for your dates.',
         },
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'For a stay of over a month, see also the [long term car rental](route:longue-duree) page. Availability in high season depends on bookings already made: the earlier you ask, the wider the choice.',
+          text: 'For a stay of over a month, see also the [long-term car rental](route:longue-duree) page. Availability in high season depends on bookings already made: the earlier you ask, the wider the choice.',
         },
       ],
     },
@@ -70,7 +70,7 @@ const page: PageContent = {
             'A valid ID: Moroccan CIN or passport.',
             'A driving licence held for more than 2 years. If your licence was issued abroad, the team confirms before you book whether it is suitable.',
             'Proof of address: the team tells you which one is accepted for a resident abroad.',
-            'A deposit at pick-up, by cheque, in cash or by card imprint, depending on the car. It is returned once the car is back in good condition.',
+            'A deposit at pick-up, by cheque, in cash or by card imprint. The amount depends on the car. It is returned once the car is back in good condition.',
           ],
         },
         {
@@ -82,7 +82,7 @@ const page: PageContent = {
   ],
   faq: [
     {
-      q: 'Can I book a car from abroad as a Moroccan living abroad?',
+      q: 'Can I book a car before leaving my country of residence?',
       a: 'Yes. You send a request with your dates from the site, then the team confirms on WhatsApp or by phone. There is no online payment.',
     },
     {
@@ -91,7 +91,7 @@ const page: PageContent = {
     },
     {
       q: 'What is the rate for a stay of more than 10 days?',
-      a: 'A lower rate applies automatically after 10 days. The list on this page shows, for each model, the daily price before and after 10 days.',
+      a: 'On most models, a lower rate applies automatically after 10 days, and the team confirms the price for your dates. The list on this page shows, for each model, the daily price before and after 10 days.',
     },
     {
       q: 'Which documents must I show?',
@@ -99,7 +99,7 @@ const page: PageContent = {
     },
     {
       q: 'What if my flight arrives late?',
-      a: 'Tell the team on WhatsApp. They confirm how to adjust the handover, especially if you land after 10 pm.',
+      a: 'Tell the team on WhatsApp. If you land after 10 pm, outside delivery hours, they tell you what is possible.',
     },
     {
       q: 'Can I rent for the whole summer holiday?',

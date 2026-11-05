@@ -28,7 +28,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Il n'y a pas de montant fixe commun à tous les loueurs. Il varie avec la valeur de la voiture : une petite économique n'a pas la même caution qu'un SUV premium. Chez Yourent, le montant dépend du véhicule choisi ; il figure par modèle dans le tableau de la page [tarifs de location](route:tarifs).`,
+          text: `Il n'y a pas de montant fixe commun à tous les loueurs. Il varie avec la valeur de la voiture : une petite économique n'a pas la même caution qu'un SUV premium. Chez Yourent, le montant dépend du véhicule choisi ; le tableau de la page [tarifs de location](route:tarifs) donne le montant minimum de chaque modèle.`,
         },
         {
           type: 'p',
@@ -87,7 +87,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Cette méthode protège aussi le loueur : elle ne dénonce personne, elle rend le constat simple pour les deux côtés. En cas de panne, Yourent envoie un véhicule de remplacement dans les plus brefs délais ; en cas d'accident, l'équipe accompagne le client dans les démarches.`,
+          text: `Cette méthode protège aussi le loueur : le constat devient simple pour les deux côtés. En cas de panne, Yourent envoie un véhicule de remplacement dans les plus brefs délais ; en cas d'accident, l'équipe accompagne le client dans les démarches.`,
         },
       ],
     },
@@ -104,18 +104,18 @@ const article: Article = {
   faq: [
     {
       q: `Combien coûte la caution d'une location de voiture au Maroc ?`,
-      a: `Le montant varie selon le loueur et la valeur de la voiture. Chez Yourent, il dépend du véhicule et figure par modèle dans le tableau des tarifs. Demandez-le par écrit avant de confirmer.`,
+      a: `Le montant varie selon le loueur et la valeur de la voiture. Chez Yourent, il dépend du véhicule, et le tableau des tarifs donne le montant minimum de chaque modèle. Demandez-le par écrit avant de confirmer.`,
     },
     {
       q: `Comment paie-t-on la caution chez Yourent ?`,
-      a: `Par chèque, en espèces ou par empreinte de carte, au départ. Quel que soit le mode, il est noté dans le contrat.`,
+      a: `Par chèque, en espèces ou par empreinte de carte, au départ. Quel que soit le mode, faites-le noter dans le contrat.`,
     },
     {
       q: `Quand récupère-t-on la caution ?`,
       a: `Elle est restituée au retour du véhicule en bon état. Le délai précis, notamment pour une empreinte de carte, est communiqué par l'équipe sur WhatsApp.`,
     },
     {
-      q: `Que faire si le loueur affirme qu'il y a une rayure déjà présente au départ ?`,
+      q: `Que faire si le loueur vous attribue une rayure déjà présente au départ ?`,
       a: `Comparez avec vos photos de départ et l'état des lieux signé. C'est la raison pour laquelle on photographie la voiture sous tous les angles avant de partir.`,
     },
     {

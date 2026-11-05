@@ -20,7 +20,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: 'La location est de 5 jours minimum, avec un tarif réduit automatique au-delà de 10 jours. Tous les véhicules sont couverts par une assurance tous risques avec franchise.',
+            text: 'La location est de 5 jours minimum, et le tarif baisse automatiquement au-delà de 10 jours sur la plupart des modèles. Tous les véhicules sont couverts par une assurance tous risques avec franchise.',
           },
         ],
       },

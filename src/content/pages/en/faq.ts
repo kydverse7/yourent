@@ -11,7 +11,7 @@ const page: PageContent = {
   breadcrumb: 'FAQ',
   sections: [
     {
-      h2: 'Going further',
+      h2: 'More information',
       blocks: [
         {
           type: 'list',
@@ -28,7 +28,7 @@ const page: PageContent = {
   faq: [
     {
       q: 'How much does a car rental in Casablanca cost?',
-      a: 'At Yourent, prices start at {fleetMin} MAD per day depending on the model. After 10 days, a lower rate applies automatically. The details are on the [prices](route:tarifs) page.',
+      a: 'At Yourent, prices start at {fleetMin} MAD per day depending on the model. After 10 days, a lower rate applies automatically on most models. The details are on the [prices](route:tarifs) page.',
     },
     {
       q: 'What is the minimum rental period?',
@@ -52,7 +52,7 @@ const page: PageContent = {
     },
     {
       q: 'How is the deposit paid?',
-      a: 'By cheque, in cash or by card imprint. The amount depends on the car and appears in the [prices](route:tarifs) list.',
+      a: 'By cheque, in cash or by card imprint. The amount depends on the car: the [prices](route:tarifs) list gives the minimum, and the team confirms the exact sum.',
     },
     {
       q: 'Is delivery free?',
@@ -92,7 +92,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I return the car in another city?',
-      a: 'This is confirmed with the team before you book; no rule is shown on the site.',
+      a: 'Ask the team before you book: the site does not set a rule on this.',
     },
     {
       q: 'What are the agency opening hours?',

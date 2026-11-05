@@ -113,6 +113,7 @@ function toFleetModel(modelSlug: string, units: VehicleModelRow[], countDispo: n
     boites: [...new Set(units.map((unit) => unit.boite).filter(Boolean))],
     places: units[0].places ?? 0,
     minTarif: positiveMin(variants.map((variant) => variant.tarifJour)),
+    highSeason: false,
     minTarifLong: positiveMin(variants.map((variant) => variant.tarifJour10Plus || variant.tarifJour)),
     minCaution: positiveMin(units.map((unit) => Number(unit.cautionDefaut ?? 0))),
     count: units.length,
@@ -173,11 +174,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const model = toFleetModel(slug, units, 0);
   const name = `${model.marque} ${model.modele}`;
   const meta = MODEL_META[locale];
+  const fullTitle = meta.title(name, model.minTarif);
 
   return buildMetadata({
     locale,
     paths: samePathAllLocales(`/catalogue/${slug}`),
-    title: meta.title(name, model.minTarif),
+    // Au-delà de 60 caractères, Google tronque : on retire le prix, qui reste dans la description.
+    title: [...fullTitle].length <= 60 ? fullTitle : meta.title(name, 0),
     description: meta.description(name, model.minTarif),
     image: model.photo ? { url: model.photo, alt: meta.imageAlt(name) } : undefined,
     noindex: Boolean(sp.du || sp.au),

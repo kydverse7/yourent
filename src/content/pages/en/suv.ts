@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'SUV Rental Casablanca: Duster, Tiguan, Touareg | Yourent',
   metaDescription:
-    'SUV rental Casablanca: Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. From {minPrice} MAD/day, free delivery, fully insured. Send your request online.',
+    'SUV rental Casablanca: Duster, T-Roc, Tiguan, Touareg, Audi Q3, Macan. From {minPrice} MAD/day, free delivery, insurance included. Send your request online.',
   eyebrow: 'SUVs and room to spare',
   h1: 'SUV Rental in Casablanca',
   intro:
@@ -34,7 +34,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Small budget**: the [Dacia Duster](/catalogue/dacia-duster), a manual diesel, is the most affordable SUV in the fleet and one of the most numerous.',
+            '**On a budget**: the [Dacia Duster](/catalogue/dacia-duster), a manual diesel, is the most affordable SUV in the fleet and one of the most numerous.',
             '**Urban and compact**: the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) and the [Audi Q3](/catalogue/audi-q3), handy in town and on the motorway.',
             '**Family and long drives**: the [Kia Sorento](/catalogue/kia-sorento), the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) and the [Touareg](/catalogue/volkswagen-touareg), larger, diesel, automatic.',
             '**Premium**: the [Range Rover Evoque](/catalogue/range-rover-evoque), the [Porsche Macan](/catalogue/porsche-macan) and the [Range Rover Sport](/catalogue/range-rover-sport), if you want prestige. See also the [luxury car](route:luxe) page.',
@@ -64,7 +64,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Yourent SUVs range from {minPrice} MAD to {maxPrice} MAD per day. The rate drops automatically after 10 days, which matters for a long stay.',
+          text: 'Yourent SUVs range from {minPrice} MAD to {maxPrice} MAD per day. On most of these models, the rate drops automatically after 10 days, which matters for a long stay.',
         },
         { type: 'pricing' },
       ],
@@ -121,7 +121,7 @@ const page: PageContent = {
     },
     {
       q: 'What is the minimum rental period for an SUV?',
-      a: 'The minimum rental is 5 days. After 10 days, a lower rate applies automatically.',
+      a: 'The minimum rental is 5 days. For rentals over 10 days, the table on this page gives the rate for each SUV.',
     },
   ],
   related: ['automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],

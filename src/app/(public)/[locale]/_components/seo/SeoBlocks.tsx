@@ -70,8 +70,12 @@ function RichText({ text, locale, tokens }: { text: string; locale: Locale; toke
   );
 }
 
+/**
+ * Séparateur de milliers insécable : avec une espace simple, l'arabe (RTL) inverse
+ * les groupes de chiffres et « 1 000 » s'affiche « 000 1 ».
+ */
 function formatPrice(value: number): string {
-  return value.toLocaleString('fr-FR').replace(/ | /g, ' ');
+  return value.toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');
 }
 
 export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: FleetModel[] }) {
@@ -120,39 +124,51 @@ export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: F
   );
 }
 
+/* Tableaux sans largeur minimale : ils tiennent à 390 px, le texte revient à la ligne. */
+const TABLE_HEAD = 'bg-white/[0.04] text-[10px] uppercase tracking-[0.04em] text-cream-muted sm:text-xs sm:tracking-[0.1em]';
+const TABLE_HEAD_CELL = 'px-1 py-2.5 text-start align-bottom font-semibold min-[380px]:px-2 sm:px-4 sm:py-3';
+const TABLE_CELL = 'px-1 py-2.5 align-top min-[380px]:px-2 sm:px-4 sm:py-3';
+
 function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetModel[] }) {
   const labels = SEO_LABELS[locale];
   return (
     <div>
       <div className="overflow-x-auto rounded-2xl border border-white/8">
-        <table className="w-full min-w-[520px] text-start text-sm">
-          <thead className="bg-white/[0.04] text-xs uppercase tracking-[0.1em] text-cream-muted">
+        <table className="w-full text-start text-xs sm:text-sm">
+          <thead className={TABLE_HEAD}>
             <tr>
-              <th scope="col" className="px-4 py-3 text-start font-semibold">{labels.pricingModel}</th>
-              <th scope="col" className="px-4 py-3 text-start font-semibold">{labels.pricingShort}</th>
-              <th scope="col" className="px-4 py-3 text-start font-semibold">{labels.pricingLong}</th>
-              <th scope="col" className="px-4 py-3 text-start font-semibold">{labels.pricingDeposit}</th>
+              <th scope="col" className={TABLE_HEAD_CELL}>{labels.pricingModel}</th>
+              <th scope="col" className={TABLE_HEAD_CELL}>{labels.pricingShort}</th>
+              <th scope="col" className={TABLE_HEAD_CELL}>{labels.pricingLong}</th>
+              <th scope="col" className={TABLE_HEAD_CELL}>{labels.pricingDeposit}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
             {vehicles.map((vehicle) => (
               <tr key={vehicle.slug}>
-                <td className="px-4 py-3 font-medium text-cream">
+                <td className={`${TABLE_CELL} font-medium text-cream`}>
                   <Link href={`/catalogue/${vehicle.slug}`} className="hover:text-gold">
                     {vehicle.marque} {vehicle.modele}
                   </Link>
                 </td>
-                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarif)} {labels.currency}</td>
-                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarifLong)} {labels.currency}</td>
-                <td className="px-4 py-3 text-cream-muted">
-                  {vehicle.minCaution > 0 ? `${formatPrice(vehicle.minCaution)} ${labels.currency}` : labels.onRequest}
+                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>{formatPrice(vehicle.minTarif)} {labels.currency}</td>
+                <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>{formatPrice(vehicle.minTarifLong)} {labels.currency}</td>
+                <td className={`${TABLE_CELL} text-cream-muted`}>
+                  {vehicle.minCaution > 0 ? (
+                    <span className="whitespace-nowrap">{formatPrice(vehicle.minCaution)} {labels.currency}</span>
+                  ) : (
+                    labels.onRequest
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="mt-2 text-xs text-cream-faint">{labels.pricingNote}</p>
+      <p className="mt-2 text-xs text-cream-faint">
+        {labels.pricingNote}
+        {vehicles.some((vehicle) => vehicle.highSeason) ? ` ${labels.pricingHighSeason}` : ''}
+      </p>
     </div>
   );
 }
@@ -190,11 +206,11 @@ function BlockView({
     case 'table':
       return (
         <div className="overflow-x-auto rounded-2xl border border-white/8">
-          <table className="w-full min-w-[480px] text-sm">
-            <thead className="bg-white/[0.04] text-xs uppercase tracking-[0.1em] text-cream-muted">
+          <table className="w-full text-xs sm:text-sm">
+            <thead className={TABLE_HEAD}>
               <tr>
                 {block.head.map((cell, index) => (
-                  <th key={index} scope="col" className="px-4 py-3 text-start font-semibold">{cell}</th>
+                  <th key={index} scope="col" className={TABLE_HEAD_CELL}>{cell}</th>
                 ))}
               </tr>
             </thead>
@@ -202,7 +218,7 @@ function BlockView({
               {block.rows.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   {row.map((cell, cellIndex) => (
-                    <td key={cellIndex} className="px-4 py-3 text-cream-muted">
+                    <td key={cellIndex} className={`${TABLE_CELL} text-cream-muted`}>
                       <RichText text={cell} locale={locale} tokens={tokens} />
                     </td>
                   ))}

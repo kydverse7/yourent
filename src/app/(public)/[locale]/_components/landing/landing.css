@@ -4,6 +4,19 @@
    Keeps all cinematic / premium visual effects isolated.
 ══════════════════════════════════════════════════════════════ */
 
+/* ─── Sections sous la ligne de flottaison ──────────────── */
+/* Style et mise en page calculés à l'approche de l'écran : c'était le plus gros poste avant le
+   premier affichage en mobile. Le contenu reste dans le HTML pour Google et la recherche dans la page. */
+.lp-below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* Lien direct vers une section (/#faq) : il faut les vraies hauteurs pour tomber au bon endroit. */
+html:has(:target) .lp-below-fold {
+  content-visibility: visible;
+}
+
 /* ─── Hero background ───────────────────────────────────── */
 .lp-hero-bg {
   background:
@@ -312,6 +325,8 @@
 
 /* ─── Marquee ──────────────────────────────────────────── */
 .lp-marquee {
+  /* Sur le conteneur et non sur la piste : en RTL, la piste partirait sinon du bord droit et sortirait du cadre. */
+  direction: ltr;
   overflow: hidden;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -324,7 +339,6 @@
   display: flex;
   width: max-content;
   animation: lpMarquee 32s linear infinite;
-  direction: ltr;
 }
 
 .lp-marquee-item {
@@ -735,15 +749,21 @@
   .lp-morph-stage {
     padding-top: 80px;
   }
+  /* Mobile : pas de flou ni d'animation sur les halos du hero, ils retardaient le premier affichage.
+     Leurs dégradés radiaux suffisent à garder le même rendu. */
   .lp-hero-top-glow {
     top: -2%;
     width: min(92vw, 28rem);
     height: min(22vh, 12rem);
+    filter: none;
+    animation: none;
   }
   .lp-hero-side-glow-l,
   .lp-hero-side-glow-r {
     opacity: 0.7;
+    filter: none;
   }
+  .lp-marquee { backdrop-filter: none; }
   .lp-hero-grid {
     inset: auto -24% -12%;
     height: 42%;

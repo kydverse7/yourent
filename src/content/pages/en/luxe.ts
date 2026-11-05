@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Luxury Car Rental Casablanca, Premium Cars | Yourent',
   metaDescription:
-    'Luxury car rental Casablanca: Range Rover, Porsche Macan, Mercedes. From {minPrice} MAD/day, free delivery, fully insured. Send your request online.',
+    'Luxury car rental Casablanca: Range Rover, Porsche Macan, Mercedes. From {minPrice} MAD/day, free delivery, insurance included. Send your request online.',
   eyebrow: 'Prestige cars',
   h1: 'Luxury Car Rental in Casablanca',
   intro:
@@ -32,7 +32,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Make an impression**: a Mercedes saloon ([C 220](/catalogue/mercedes-c-220) or [E 220](/catalogue/mercedes-e-220)) for a business meeting, a ceremony or welcoming a guest.',
+            '**Make an impression**: a Mercedes saloon ([C 220](/catalogue/mercedes-c-220) or [E 220](/catalogue/mercedes-e-220)) for a business meeting or a ceremony.',
             '**Travel with a group**: a [Range Rover Sport](/catalogue/range-rover-sport) or a [Volkswagen Touareg](/catalogue/volkswagen-touareg), roomy, for the road to Marrakech or Rabat with family and luggage.',
             '**Enjoy the drive**: the [Porsche Macan](/catalogue/porsche-macan) for sportier driving, or the [Mercedes CLA](/catalogue/mercedes-cla) for coupé lines at a gentler price.',
             '**Go for a more compact prestige car**: the [Range Rover Evoque](/catalogue/range-rover-evoque), easy to park in town.',
@@ -45,7 +45,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The prices below are daily rates for rentals of 5 to 10 days. After 10 days the rate drops automatically. Every car in this selection has an automatic gearbox.',
+          text: 'The prices below are daily rates for rentals of 5 to 10 days. After 10 days, the rate drops automatically on most of them. Every car in this selection has an automatic gearbox.',
         },
         { type: 'pricing' },
       ],
@@ -59,7 +59,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Premium cars come in small numbers: several of these models exist in only one or two units. Book early if your dates fall on a weekend, a wedding or a holiday period, and use the date search in the catalogue to see what is free.',
+          text: 'Premium cars come in small numbers: several of these models exist in only one or two units. Book early if your dates fall around a wedding or a holiday period, and use the date search in the catalogue to see what is free.',
         },
       ],
     },
@@ -72,7 +72,7 @@ const page: PageContent = {
             'Free delivery in Casablanca, to your hotel, to the address of your choice or to [Mohammed V airport](route:aeroport).',
             'Comprehensive insurance with an excess on every car.',
             'A replacement car sent as soon as possible if you break down, and help from the team if you have an accident.',
-            'A minimum rental of 5 days, with a lower rate applied automatically after 10 days.',
+            'A minimum rental of 5 days, with a lower rate applied automatically after 10 days on most models.',
           ],
         },
         {

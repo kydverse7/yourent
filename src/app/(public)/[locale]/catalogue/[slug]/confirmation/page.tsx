@@ -92,7 +92,7 @@ export default async function ConfirmationPage({
               href={`tel:${agence.telephone}`}
               className="flex items-center gap-3 justify-center text-cream hover:text-gold transition-colors"
             >
-              <Phone className="w-4 h-4 text-gold" /> {agence.telephone}
+              <Phone className="w-4 h-4 text-gold" /> <bdi dir="ltr">{agence.telephone}</bdi>
             </a>
             <a
               href={`mailto:${agence.email}`}
