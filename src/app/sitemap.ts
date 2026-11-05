@@ -2,9 +2,10 @@ import type { MetadataRoute } from 'next';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { toModelSlug } from '@/lib/utils';
+import { SITE_URL } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://yourent.ma';
+  const baseUrl = SITE_URL;
 
   /* ── Static pages ── */
   const staticPages: MetadataRoute.Sitemap = [

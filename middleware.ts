@@ -1,24 +1,40 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 import { auth } from './src/lib/auth';
 
+/** Espaces réservés à l'agence et API : l'authentification s'y applique, jamais de préfixe de langue. */
+const PRIVATE_PREFIXES = [
+  '/api',
+  '/login',
+  '/dashboard',
+  '/alertes',
+  '/clients',
+  '/contrats',
+  '/depenses',
+  '/etat-des-lieux',
+  '/factures',
+  '/finances',
+  '/locations',
+  '/maintenance',
+  '/paiements',
+  '/parametres',
+  '/reservations',
+  '/vehicules',
+];
+
+function isPrivatePath(pathname: string): boolean {
+  return PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 /**
- * Middleware de protection des routes :
+ * Protection des routes privées :
  * - /dashboard/** → requiert session valide (tous les rôles)
  * - /login → redirige vers /dashboard si déjà connecté
  * - /api/dashboard/** → requiert session (gérée dans chaque route handler)
  */
-export default auth((req) => {
+const authMiddleware = auth((req) => {
   const { pathname } = req.nextUrl;
   const session = req.auth;
-
-  // Routes publiques (toujours accessibles)
-  const isPublicRoute =
-    pathname.startsWith('/login') ||
-    pathname.startsWith('/api/auth') ||
-    pathname.startsWith('/api/public') ||
-    pathname.startsWith('/api/whatsapp/webhook') ||
-    pathname === '/';
 
   // Rediriger /login → /dashboard si déjà connecté
   if (pathname.startsWith('/login') && session) {
@@ -40,15 +56,46 @@ export default auth((req) => {
   return NextResponse.next();
 });
 
+/**
+ * Pages publiques : aucun contrôle de session ni cookie, pour rester en cache.
+ * Le français est servi à la racine (réécriture interne vers /fr), l'anglais sous /en, l'arabe sous /ar.
+ */
+function publicMiddleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  if (pathname === '/fr' || pathname.startsWith('/fr/')) {
+    const url = req.nextUrl.clone();
+    url.pathname = pathname.slice(3) || '/';
+    return NextResponse.redirect(url, 308);
+  }
+
+  if (pathname === '/en' || pathname.startsWith('/en/') || pathname === '/ar' || pathname.startsWith('/ar/')) {
+    return NextResponse.next();
+  }
+
+  const url = req.nextUrl.clone();
+  url.pathname = `/fr${pathname === '/' ? '' : pathname}`;
+  return NextResponse.rewrite(url);
+}
+
+export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  if (isPrivatePath(req.nextUrl.pathname)) {
+    return (authMiddleware as unknown as (r: NextRequest, e: NextFetchEvent) => Response | Promise<Response>)(
+      req,
+      event,
+    );
+  }
+  return publicMiddleware(req);
+}
+
 export const config = {
   matcher: [
     /*
-     * Match toutes les routes sauf :
-     * - _next/static (fichiers statiques)
-     * - _next/image (optimisation images)
-     * - favicon
-     * - fichiers publics
+     * Toutes les routes sauf :
+     * - _next (fichiers générés)
+     * - les fichiers portant une extension (images, robots.txt, sitemap.xml, llms.txt...)
+     * - l'image de partage générée
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/|opengraph-image|.*\\.[a-zA-Z0-9]+$).*)',
   ],
 };

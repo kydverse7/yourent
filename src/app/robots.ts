@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { absoluteUrl } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,9 +7,26 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/login', '/dashboard/'],
+        disallow: [
+          '/api/',
+          '/login',
+          '/dashboard',
+          '/alertes',
+          '/clients',
+          '/contrats',
+          '/depenses',
+          '/etat-des-lieux',
+          '/factures',
+          '/finances',
+          '/locations',
+          '/maintenance',
+          '/paiements',
+          '/parametres',
+          '/reservations',
+          '/vehicules',
+        ],
       },
     ],
-    sitemap: 'https://yourent.ma/sitemap.xml',
+    sitemap: absoluteUrl('/sitemap.xml'),
   };
 }
