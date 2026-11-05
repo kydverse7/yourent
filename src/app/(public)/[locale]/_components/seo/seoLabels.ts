@@ -13,6 +13,7 @@ export const SEO_LABELS: Record<
     pricingDeposit: string;
     pricingNote: string;
     perDay: string;
+    currency: string;
     from: string;
     unavailable: string;
     book: string;
@@ -44,6 +45,7 @@ export const SEO_LABELS: Record<
     pricingDeposit: 'Caution dès',
     pricingNote: 'Tarifs par jour en dirhams, location de 5 jours minimum.',
     perDay: '/jour',
+    currency: 'DH',
     from: 'À partir de',
     unavailable: 'Actuellement loué',
     book: 'Réserver',
@@ -74,6 +76,7 @@ export const SEO_LABELS: Record<
     pricingDeposit: 'Deposit from',
     pricingNote: 'Daily rates in Moroccan dirhams, 5-day minimum rental.',
     perDay: '/day',
+    currency: 'MAD',
     from: 'From',
     unavailable: 'Currently rented',
     book: 'Book',
@@ -104,6 +107,7 @@ export const SEO_LABELS: Record<
     pricingDeposit: 'الضمان ابتداءً من',
     pricingNote: 'الأسعار لليوم الواحد بالدرهم، ومدة الكراء 5 أيام على الأقل.',
     perDay: '/يوم',
+    currency: 'درهم',
     from: 'ابتداءً من',
     unavailable: 'مكتراة حاليًا',
     book: 'احجز',

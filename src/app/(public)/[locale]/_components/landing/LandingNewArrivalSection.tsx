@@ -69,7 +69,6 @@ export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionPr
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(min-width: 768px) 60vw, 100vw"
-                    priority
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center text-7xl text-[#c9a84c]/20">
@@ -96,14 +95,9 @@ export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionPr
                   )}
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-bold text-[#f7f1e8] md:text-3xl">
-                    {vehicle.marque} {vehicle.modele}
-                  </h3>
-                  <p className="mt-2 text-sm text-[#a39880]">
-                    {t('newArrival.subtitle')}
-                  </p>
-                </div>
+                <h3 className="text-2xl font-bold text-[#f7f1e8] md:text-3xl">
+                  {vehicle.marque} {vehicle.modele}
+                </h3>
 
                 {vehicle.tarifJour > 0 && (
                   <div>

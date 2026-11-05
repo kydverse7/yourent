@@ -1,6 +1,7 @@
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLocale } from '@/lib/i18n';
+import { BUSINESS } from '@/lib/site';
 import {
   motion,
   scaleUp,
@@ -12,10 +13,10 @@ import {
 } from './motion';
 
 /**
- * Final CTA block + copyright.
+ * Final CTA block.
  */
 export function LandingFinalCtaSection() {
-  const { t, locale } = useLocale();
+  const { t } = useLocale();
   return (
     <section className="lux-container pb-24">
       <ScrollReveal variants={scaleUp} viewport={{ once: true, amount: 0.25 }}>
@@ -52,7 +53,7 @@ export function LandingFinalCtaSection() {
             </motion.div>
             <motion.div variants={staggerItem}>
               <a
-                href="https://wa.me/212661236231"
+                href={BUSINESS.whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="lp-pill-btn text-sm"
@@ -63,10 +64,6 @@ export function LandingFinalCtaSection() {
           </StaggerContainer>
         </div>
       </ScrollReveal>
-
-      <p className="mt-10 text-center text-sm text-cream-faint">
-        © {new Date().getFullYear()} Yourent — Casablanca, {locale === 'ar' ? 'المغرب' : locale === 'fr' ? 'Maroc' : 'Morocco'}
-      </p>
     </section>
   );
 }

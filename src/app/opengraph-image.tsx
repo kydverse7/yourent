@@ -1,4 +1,8 @@
 import { ImageResponse } from 'next/og';
+import { SITE_URL } from '@/lib/site';
+
+/** Adresse affichée : celle du site, jamais recopiée à la main. */
+const SITE_HOST = new URL(SITE_URL).host;
 
 export const runtime = 'edge';
 export const alt = 'Yourent — Location de voitures à Casablanca, Maroc';
@@ -89,7 +93,7 @@ export default function OGImage() {
             letterSpacing: '0.15em',
           }}
         >
-          yourent.ma
+          {SITE_HOST}
         </div>
       </div>
     ),

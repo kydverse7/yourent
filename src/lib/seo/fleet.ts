@@ -53,7 +53,7 @@ type VehicleRow = {
 
 /** « KIA SORENTO » et « Kia Sorento » sont le même modèle : on garde la graphie la plus lisible. */
 function preferReadable(current: string, next: string): string {
-  const isShouting = (value: string) => value.length > 3 && value === value.toUpperCase();
+  const isShouting = (value: string) => value === value.toUpperCase();
   return isShouting(current) && !isShouting(next) ? next : current;
 }
 

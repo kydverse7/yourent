@@ -5,10 +5,11 @@ import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronDown, Globe, Menu, PhoneCall, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { LanguageProvider, useLocale } from '@/lib/i18n';
-import { YourentLoader } from '@/components/ui/YourentLoader';
 import { PHONE_NUMBER, WHATSAPP_URL } from '@/lib/constants';
+import { BUSINESS } from '@/lib/site';
+import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
+import { formatBusinessHours } from './landing/constants';
 import type { Locale } from '@/lib/i18n';
 
 type Props = {
@@ -19,7 +20,6 @@ type Props = {
 export function PublicLayoutShell({ children, locale }: Props) {
   return (
     <LanguageProvider locale={locale}>
-      <YourentLoader />
       <LayoutShell>{children}</LayoutShell>
     </LanguageProvider>
   );
@@ -31,6 +31,11 @@ const LANGUAGES: { code: 'fr' | 'en' | 'ar'; flag: string; label: string }[] = [
   { code: 'en', flag: '🇬🇧', label: 'English' },
   { code: 'ar', flag: '🇲🇦', label: 'العربية' },
 ];
+
+/* ── Colonnes de liens du pied de page ── */
+const FOOTER_RENTAL_KEYS: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'automatique', 'longue-duree', 'economique'];
+const FOOTER_BRAND_KEYS: SeoRouteKey[] = ['mercedes', 'range-rover', 'porsche'];
+const FOOTER_INFO_KEYS: SeoRouteKey[] = ['tarifs', 'conditions', 'faq', 'a-propos', 'contact'];
 
 /* ── WhatsApp icon (inline SVG to avoid extra dep) ── */
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -69,31 +74,49 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
 
   const currentLang = LANGUAGES.find((l) => l.code === locale) ?? LANGUAGES[0];
 
-  const NAV_ITEMS: { href: string; key: string; isExternal?: boolean; isAnchor?: boolean }[] = [
+  /* Aéroport et Tarifs : dans la barre si la largeur le permet (xl), toujours dans le menu mobile. */
+  const NAV_ITEMS: { href: string; key: string; isAnchor?: boolean; wideOnly?: boolean }[] = [
     { href: '/', key: 'nav.home' },
     { href: '/catalogue', key: 'nav.catalogue' },
+    { href: getRoutePath('aeroport', locale) ?? '', key: 'nav.aeroport', wideOnly: true },
+    { href: getRoutePath('tarifs', locale) ?? '', key: 'nav.tarifs', wideOnly: true },
     { href: '/#process', key: 'nav.process', isAnchor: true },
     { href: '/#faq', key: 'nav.faq', isAnchor: true },
     { href: '/#contact', key: 'nav.contact', isAnchor: true },
+  ].filter((item) => item.href);
+
+  /* Une page absente dans la langue courante n'a pas de lien. */
+  const footerLinks = (keys: SeoRouteKey[]) =>
+    keys.flatMap((key) => {
+      const href = getRoutePath(key, locale);
+      return href ? [{ href, label: t(`footer.link.${key}`) }] : [];
+    });
+
+  const FOOTER_COLUMNS = [
+    { title: t('footer.heading.rentals'), links: footerLinks(FOOTER_RENTAL_KEYS) },
+    {
+      title: t('footer.heading.brands'),
+      links: [...footerLinks(FOOTER_BRAND_KEYS), { href: '/catalogue', label: t('footer.link.catalogue') }],
+    },
+    {
+      title: t('footer.heading.info'),
+      links: [
+        ...footerLinks(FOOTER_INFO_KEYS),
+        ...(locale === 'fr' ? [{ href: '/blog', label: t('footer.link.blog') }] : []),
+      ],
+    },
   ];
+
+  const country = locale === 'ar' ? 'المغرب' : locale === 'fr' ? 'Maroc' : 'Morocco';
 
   return (
     <div className="relative min-h-screen flex flex-col" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.18),transparent_45%)]" />
 
-      <motion.header
-        className="sticky top-0 z-40 border-b border-white/5 bg-noir-root/70 backdrop-blur-xl"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <header className="sticky top-0 z-40 border-b border-white/5 bg-noir-root/70 backdrop-blur-xl">
         <div className="lux-container flex h-20 items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
-            <motion.div
-              className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-gold/20 bg-gold/10 shadow-gold"
-              whileHover={{ scale: 1.08, rotate: 2 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-            >
+            <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-gold/20 bg-gold/10 shadow-gold transition-transform duration-200 hover:rotate-2 hover:scale-105">
               <Image
                 src="/logo-yourent.png"
                 alt="Yourent"
@@ -102,34 +125,26 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                 sizes="48px"
                 quality={65}
               />
-            </motion.div>
+            </div>
           </Link>
 
           {/* ── Desktop nav ── */}
-          <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-5 text-sm text-cream-muted md:flex lg:gap-7">
-            {NAV_ITEMS.map(({ href, key, isExternal, isAnchor }, i) => {
-              const Comp = isExternal || isAnchor ? 'a' : Link;
+          <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-5 whitespace-nowrap text-sm text-cream-muted md:flex lg:gap-7 xl:gap-5 2xl:gap-7">
+            {NAV_ITEMS.map(({ href, key, isAnchor, wideOnly }) => {
+              const Comp = isAnchor ? 'a' : Link;
               return (
-                <motion.span
+                <Comp
                   key={key}
-                  initial={{ opacity: 0, y: -12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.07, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  href={isAnchor ? lp(href) : href}
+                  className={`transition-colors hover:text-gold${wideOnly ? ' hidden xl:inline' : ''}`}
                 >
-                  <Comp href={isAnchor ? lp(href) : href} className="transition-colors hover:text-gold">
-                    {t(key)}
-                  </Comp>
-                </motion.span>
+                  {t(key)}
+                </Comp>
               );
             })}
           </nav>
 
-          <motion.div
-            className="flex items-center gap-2 sm:gap-3"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Language selector dropdown */}
             <div ref={langRef} className="relative">
               <button
@@ -142,37 +157,29 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                 <span className="text-sm leading-none">{currentLang.flag}</span>
                 <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
               </button>
-              <AnimatePresence>
-                {langOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute end-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-2xl border border-white/10 bg-noir-root/95 shadow-xl backdrop-blur-xl"
-                  >
-                    {LANGUAGES.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => { setLocale(lang.code); setLangOpen(false); }}
-                        className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
-                          locale === lang.code
-                            ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold'
-                            : 'text-cream-muted hover:bg-white/5 hover:text-cream'
-                        }`}
-                      >
-                        <span className="text-base leading-none">{lang.flag}</span>
-                        {lang.label}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {langOpen && (
+                <div className="absolute end-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-2xl border border-white/10 bg-noir-root/95 opacity-100 shadow-xl backdrop-blur-xl transition-opacity duration-200 starting:opacity-0">
+                  {LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => { setLocale(lang.code); setLangOpen(false); }}
+                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
+                        locale === lang.code
+                          ? 'border border-gold/40 bg-gold-gradient text-noir-root shadow-gold'
+                          : 'text-cream-muted hover:bg-white/5 hover:text-cream'
+                      }`}
+                    >
+                      <span className="text-base leading-none">{lang.flag}</span>
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <a
               href={`tel:${PHONE_NUMBER}`}
-              className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:text-cream lg:flex"
+              className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:text-cream lg:flex xl:hidden 2xl:flex"
             >
               <PhoneCall className="h-4 w-4 text-gold" /> {t('nav.concierge')}
             </a>
@@ -190,125 +197,103 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
-          </motion.div>
+          </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* ── Mobile fullscreen menu ── */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="fixed inset-0 z-[50] flex flex-col bg-noir-root/95 backdrop-blur-2xl md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      {menuOpen && (
+        <div className="fixed inset-0 z-[50] flex flex-col overflow-y-auto bg-noir-root/95 opacity-100 backdrop-blur-2xl transition-opacity duration-300 starting:opacity-0 md:hidden">
+          {/* Close button — large & gold */}
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute end-5 top-6 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-gold/40 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
+            aria-label={t('aria.menuClose')}
           >
-            {/* Close button — fixed top-right, large & gold */}
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="absolute top-6 right-5 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-gold/40 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
-              aria-label={t('aria.menuClose')}
-            >
-              <X className="h-7 w-7" strokeWidth={2.5} />
-            </button>
+            <X className="h-7 w-7" strokeWidth={2.5} />
+          </button>
 
-            <nav className="flex flex-1 flex-col items-center justify-center gap-7 px-6">
-              {NAV_ITEMS.map(({ href, key, isExternal, isAnchor }, i) => {
-                const Comp = isExternal || isAnchor ? 'a' : Link;
-                return (
-                  <motion.div
-                    key={key}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.08 + i * 0.08, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Comp
-                      href={isAnchor ? lp(href) : href}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-2xl font-semibold tracking-wide text-cream-muted transition-colors hover:text-gold"
-                    >
-                      {t(key)}
-                    </Comp>
-                  </motion.div>
-                );
-              })}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.45 }}
-              >
-                <Link href="/catalogue" onClick={() => setMenuOpen(false)} className="btn-gold mt-4 text-lg px-8 py-3">
-                  {t('nav.book')} <ArrowUpRight className="h-5 w-5" />
-                </Link>
-              </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <nav className="flex flex-1 flex-col items-center justify-center gap-5 px-6 py-20">
+            {NAV_ITEMS.map(({ href, key, isAnchor }) => {
+              const Comp = isAnchor ? 'a' : Link;
+              return (
+                <Comp
+                  key={key}
+                  href={isAnchor ? lp(href) : href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-2xl font-semibold tracking-wide text-cream-muted transition-colors hover:text-gold"
+                >
+                  {t(key)}
+                </Comp>
+              );
+            })}
+            <Link href="/catalogue" onClick={() => setMenuOpen(false)} className="btn-gold mt-4 text-lg px-8 py-3">
+              {t('nav.book')} <ArrowUpRight className="h-5 w-5" />
+            </Link>
+          </nav>
+        </div>
+      )}
 
       <main className="relative z-10 flex-1">{children}</main>
 
       {/* ── WhatsApp floating button — always visible, bottom-right ── */}
-      <motion.a
+      <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_6px_28px_rgba(37,211,102,0.4)] transition-transform hover:scale-110"
-        initial={{ opacity: 0, scale: 0.5, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 1, ease: [0.22, 1, 0.36, 1] }}
         aria-label={t('aria.whatsapp')}
       >
         <WhatsAppIcon className="h-6 w-6" />
-      </motion.a>
+      </a>
 
-      <motion.footer
-        className="border-t border-white/5 py-10"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-      >
+      <footer className="border-t border-white/5 py-10">
         <div className="lux-container flex flex-col gap-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <motion.div
-              className="space-y-3 max-w-md"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+            <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">Yourent</p>
-              <p className="text-sm text-cream-muted leading-relaxed">
-                {t('footer.desc')}
-              </p>
-            </motion.div>
-            <motion.nav
-              aria-label={t('aria.footerNav')}
-              className="flex flex-wrap gap-x-6 gap-y-2 text-sm"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Link href="/" className="text-cream-muted transition-colors hover:text-cream">{t('nav.home')}</Link>
-              <Link href="/catalogue" className="text-cream-muted transition-colors hover:text-cream">{t('footer.catalogue')}</Link>
-              <a href={`tel:${PHONE_NUMBER}`} className="text-cream-muted transition-colors hover:text-cream">{t('footer.contact')}</a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-cream-muted transition-colors hover:text-cream">WhatsApp</a>
-            </motion.nav>
+              <p className="text-sm text-cream-muted leading-relaxed">{t('footer.desc')}</p>
+              <address className="space-y-1.5 text-sm not-italic leading-relaxed text-cream-muted">
+                <p>
+                  <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cream">
+                    {BUSINESS.address.street}, {t('contact.addressSub').replace('{postalCode}', BUSINESS.address.postalCode)}
+                  </a>
+                </p>
+                <p>
+                  <a href={`tel:${BUSINESS.phone}`} dir="ltr" className="transition-colors hover:text-cream">{BUSINESS.phoneDisplay}</a>
+                  {' · '}
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cream">WhatsApp</a>
+                </p>
+                <p>
+                  <a href={`mailto:${BUSINESS.email}`} className="transition-colors hover:text-cream">{BUSINESS.email}</a>
+                </p>
+                <p>{formatBusinessHours(locale)}</p>
+              </address>
+            </div>
+
+            <nav aria-label={t('aria.footerNav')} className="grid gap-8 text-sm sm:grid-cols-3">
+              {FOOTER_COLUMNS.map((column) => (
+                <div key={column.title} className="space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cream">{column.title}</p>
+                  <ul className="space-y-2">
+                    {column.links.map((link) => (
+                      <li key={link.href}>
+                        <Link href={link.href} className="text-cream-muted transition-colors hover:text-gold">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
           </div>
 
-          <div className="flex flex-col gap-4 border-t border-white/5 pt-6 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-xs text-cream-faint leading-relaxed">
-              {t('footer.seo')}
-            </p>
-            <p className="text-sm text-cream-faint whitespace-nowrap">
-              © {new Date().getFullYear()} Yourent — Casablanca, {locale === 'ar' ? 'المغرب' : locale === 'fr' ? 'Maroc' : 'Morocco'}
-            </p>
-          </div>
+          <p className="border-t border-white/5 pt-6 text-sm text-cream-faint">
+            © {new Date().getFullYear()} Yourent, Casablanca, {country}
+          </p>
         </div>
-      </motion.footer>
+      </footer>
     </div>
   );
 }

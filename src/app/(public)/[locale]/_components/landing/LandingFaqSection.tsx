@@ -1,59 +1,33 @@
 'use client';
 
-import { useState } from 'react';
 import { ChevronDown, Sparkles } from 'lucide-react';
 import { useLocale } from '@/lib/i18n';
-import {
-  motion,
-  AnimatePresence,
-  ScrollReveal,
-  StaggerContainer,
-  staggerCard,
-  tiltUp,
-} from './motion';
+import { ScrollReveal, tiltUp } from './motion';
 
 const FAQ_COUNT = 6;
 
-function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+/** Les réponses sont toujours dans le HTML : `<details>` les replie sans les retirer de la page. */
+function FaqItem({ q, a }: { q: string; a: string }) {
   return (
-    <motion.div variants={staggerCard} className="group" style={{ perspective: 800 }}>
-      <button
-        onClick={onToggle}
-        className="flex w-full items-start gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-5 text-left transition-all hover:border-[#c9a84c]/15 hover:bg-white/[0.03] sm:px-6"
-        aria-expanded={isOpen}
-      >
+    <details name="landing-faq" className="group">
+      <summary className="flex w-full cursor-pointer list-none items-start gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-5 text-start transition-all hover:border-[#c9a84c]/15 hover:bg-white/[0.03] sm:px-6 [&::-webkit-details-marker]:hidden">
         <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl border border-[#c9a84c]/20 bg-[#c9a84c]/10 text-xs font-bold text-[#c9a84c]">
           ?
         </span>
-        <span className="flex-1 text-[0.95rem] font-semibold leading-relaxed text-[#f7f1e8] sm:text-base">
+        <h3 className="flex-1 text-[0.95rem] font-semibold leading-relaxed tracking-normal text-[#f7f1e8] sm:text-base">
           {q}
-        </span>
-        <ChevronDown
-          className={`mt-1 h-4 w-4 shrink-0 text-[#756858] transition-transform duration-300 ${isOpen ? 'rotate-180 text-[#c9a84c]' : ''}`}
-        />
-      </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 pl-16 pt-1 sm:px-6 sm:pl-[4.5rem]">
-              <p className="text-sm leading-relaxed text-[#b9a88f]">{a}</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+        </h3>
+        <ChevronDown className="mt-1 h-4 w-4 shrink-0 text-[#756858] transition-transform duration-300 group-open:rotate-180 group-open:text-[#c9a84c]" />
+      </summary>
+      <div className="px-5 pb-5 ps-16 pt-3 sm:px-6 sm:ps-[4.5rem]">
+        <p className="text-sm leading-relaxed text-[#b9a88f]">{a}</p>
+      </div>
+    </details>
   );
 }
 
 export function LandingFaqSection() {
   const { t } = useLocale();
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const items = Array.from({ length: FAQ_COUNT }, (_, i) => ({
     q: t(`faq.q${i + 1}`),
@@ -75,21 +49,11 @@ export function LandingFaqSection() {
           </p>
         </ScrollReveal>
 
-        <StaggerContainer
-          staggerDelay={0.08}
-          className="relative mx-auto max-w-3xl space-y-3"
-          viewport={{ once: true, amount: 0.05 }}
-        >
+        <div className="relative mx-auto max-w-3xl space-y-3">
           {items.map((item, i) => (
-            <FaqItem
-              key={i}
-              q={item.q}
-              a={item.a}
-              isOpen={openIdx === i}
-              onToggle={() => setOpenIdx(openIdx === i ? null : i)}
-            />
+            <FaqItem key={i} q={item.q} a={item.a} />
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

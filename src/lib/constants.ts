@@ -2,6 +2,8 @@
 // YOURENT — Constantes globales
 // ========================
 
+import { BUSINESS } from './site';
+
 // Devise & localisation
 export const DEVISE = 'MAD';
 export const LOCALE = 'fr-MA';
@@ -81,5 +83,5 @@ export const COLORS = {
 } as const;
 
 // Contact agence (public)
-export const PHONE_NUMBER = '+212661236231';
-export const WHATSAPP_URL = `https://wa.me/${PHONE_NUMBER.replace('+', '')}`;
+export const PHONE_NUMBER = BUSINESS.phone;
+export const WHATSAPP_URL = BUSINESS.whatsappUrl;

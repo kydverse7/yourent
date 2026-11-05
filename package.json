@@ -12,7 +12,8 @@
     "test:unit": "vitest run __tests__/unit",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "seed": "node scripts/seed.mjs"
+    "seed": "node scripts/seed.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",

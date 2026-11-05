@@ -22,7 +22,7 @@ const LandingNewArrivalSection = dynamic<{ vehicle: LandingVehicle | null }>(
   () => import('./LandingNewArrivalSection').then((mod) => mod.LandingNewArrivalSection),
 );
 
-const LandingWhySection = dynamic(
+const LandingWhySection = dynamic<{ vehicleCount: number }>(
   () => import('./LandingWhySection').then((mod) => mod.LandingWhySection),
 );
 
@@ -44,6 +44,8 @@ export function PublicLandingPage({
   sliderBrands,
   economicVehicles,
   newArrivalVehicle,
+  stats,
+  guide,
 }: PublicLandingPageProps) {
   /* ── Derived data ── */
   const items: SliderBrandData[] = useMemo(
@@ -83,7 +85,7 @@ export function PublicLandingPage({
     <div className="flex flex-col pt-5 pb-10">
       {/* ═══ Hero + Slider ═══ */}
       <div ref={wrapperRef} className="relative w-full flex flex-col gap-[40px]">
-        <LandingHeroSection ref={heroRef} />
+        <LandingHeroSection ref={heroRef} vehicleCount={stats.vehicleCount} />
         <LandingBrandSliderSection
           items={items}
           brandIndex={brandIndex}
@@ -102,8 +104,8 @@ export function PublicLandingPage({
       {/* ═══ Nouvel Arrivage ═══ */}
       <LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} />
 
-      {/* ═══ Why YouRent — golden ratio + animated counters ═══ */}
-      <LandingWhySection />
+      {/* ═══ Why Yourent — golden ratio + animated counters ═══ */}
+      <LandingWhySection vehicleCount={stats.vehicleCount} />
 
       {/* ═══ Economic fleet ═══ */}
       {economicVehicles.length > 0 && (
@@ -114,7 +116,10 @@ export function PublicLandingPage({
       <LandingProcessSection />
 
       {/* ═══ Contact / Nous rejoindre ═══ */}
-      <LandingContactSection />
+      <LandingContactSection stats={stats} />
+
+      {/* ═══ Guide de location (rendu côté serveur) ═══ */}
+      {guide}
 
       {/* ═══ FAQ ═══ */}
       <LandingFaqSection />

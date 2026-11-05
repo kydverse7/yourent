@@ -34,7 +34,7 @@ function buildDatesUrl(
 }
 
 const dateInputBase =
-  'h-11 w-full rounded-xl border border-white/10 bg-white/5 pl-10 pr-3 text-sm font-semibold text-cream outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
+  'h-11 w-full rounded-xl border border-white/10 bg-white/5 ps-10 pe-3 text-sm font-semibold text-cream outline-none transition-all focus:border-gold/40 focus:shadow-[0_0_0_3px_rgba(201,168,76,0.12)] cursor-pointer';
 
 /* ─── Sticky catalogue date filter ──────────────────── */
 export function CatalogueDateFilter({
@@ -98,7 +98,7 @@ export function CatalogueDateFilter({
                 {t('cat.datesStart')}
               </span>
               <span className="relative block">
-                <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
+                <CalendarDays className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
                 <input
                   type="date"
                   value={draftDu}
@@ -115,7 +115,7 @@ export function CatalogueDateFilter({
                 {t('cat.datesEnd')}
               </span>
               <span className="relative block">
-                <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
+                <CalendarDays className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
                 <input
                   type="date"
                   value={draftAu}

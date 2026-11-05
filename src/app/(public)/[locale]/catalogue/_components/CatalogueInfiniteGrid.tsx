@@ -7,6 +7,7 @@ import { ArrowRight, ArrowUpDown, CalendarCheck, Car, Fuel, Gauge, Search, Users
 import { format } from 'date-fns';
 import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
+import { categoryLabel, fuelLabel, gearLabel } from '../_lib/specLabels';
 
 type SortOrder = 'price-asc' | 'price-desc' | 'name';
 
@@ -122,7 +123,7 @@ export function CatalogueInfiniteGrid({
       const response = await fetch(`/api/public/vehicules?${params.toString()}`, {
         cache: 'no-store',
       });
-      if (!response.ok) throw new Error('Impossible de charger plus de modèles.');
+      if (!response.ok) throw new Error(t('cat.loadError'));
 
       const payload = await response.json();
       const nextVehicles = Array.isArray(payload?.data) ? payload.data : [];
@@ -152,7 +153,7 @@ export function CatalogueInfiniteGrid({
       ) {
         return;
       }
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue.');
+      setError(err instanceof Error ? err.message : t('cat.loadError'));
     } finally {
       if (
         activeQueryKeyRef.current !== requestKey
@@ -162,7 +163,7 @@ export function CatalogueInfiniteGrid({
       }
       setIsLoading(false);
     }
-  }, [hasNext, isLoading, limit, page, type, marque, du, au]);
+  }, [hasNext, isLoading, limit, page, type, marque, du, au, t]);
 
   useEffect(() => {
     const target = sentinelRef.current;
@@ -182,21 +183,21 @@ export function CatalogueInfiniteGrid({
       {/* ── Search bar + sort ── */}
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-muted" />
+          <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-muted" />
           <input
             type="text"
             placeholder={t('cat.search')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl border border-white/8 bg-white/5 py-2.5 pl-10 pr-4 text-sm text-cream placeholder:text-cream-muted/50 outline-none transition-all focus:border-gold/30 focus:ring-1 focus:ring-gold/20"
+            className="w-full rounded-xl border border-white/8 bg-white/5 py-2.5 ps-10 pe-4 text-sm text-cream placeholder:text-cream-muted/50 outline-none transition-all focus:border-gold/30 focus:ring-1 focus:ring-gold/20"
           />
         </div>
         <div className="relative w-full sm:w-auto">
-          <ArrowUpDown className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream-muted" />
+          <ArrowUpDown className="pointer-events-none absolute start-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream-muted" />
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-            className="w-full cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 pl-9 pr-8 text-xs font-semibold uppercase tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream [&>option]:bg-noir-root [&>option]:text-cream"
+            className="w-full cursor-pointer appearance-none rounded-xl border border-white/8 bg-white/5 py-2.5 ps-9 pe-8 text-xs font-semibold uppercase tracking-[0.1em] text-cream-muted outline-none transition-all focus:border-gold/30 hover:text-cream [&>option]:bg-noir-root [&>option]:text-cream"
           >
             <option value="price-asc">{t('cat.sortDefault')}</option>
             <option value="price-desc">{t('cat.sortDesc')}</option>
@@ -216,7 +217,7 @@ export function CatalogueInfiniteGrid({
               {v.featuredPhoto ? (
                 <Image
                   src={v.featuredPhoto}
-                  alt={`${v.marque} ${v.modele} à louer à Casablanca`}
+                  alt={t('model.photoAlt').replace('{name}', `${v.marque} ${v.modele}`)}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -226,10 +227,15 @@ export function CatalogueInfiniteGrid({
                   🚗
                 </div>
               )}
-              <div className="absolute left-3 top-3 flex flex-wrap items-center gap-1.5 max-w-[calc(100%-1.5rem)] sm:left-4 sm:top-4 sm:gap-2">
+              <div className="absolute start-3 top-3 flex flex-wrap items-center gap-1.5 max-w-[calc(100%-1.5rem)] sm:start-4 sm:top-4 sm:gap-2">
                 <span className="rounded-full border border-gold/20 bg-black/35 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] text-gold capitalize sm:px-3 sm:py-1 sm:text-[11px]">
-                  {v.categorie}
+                  {categoryLabel(t, v.categorie)}
                 </span>
+                {v.countDispo === 0 && (
+                  <span className="rounded-full border border-white/15 bg-black/60 px-2.5 py-0.5 text-[10px] font-semibold text-cream sm:px-3 sm:py-1 sm:text-[11px]">
+                    {t('cat.rented')}
+                  </span>
+                )}
               </div>
             </div>
             <div className="p-5">
@@ -259,7 +265,7 @@ export function CatalogueInfiniteGrid({
                     <Fuel className="h-3 w-3 text-gold/70" /> {t('cat.labelFuel')}
                   </p>
                   <p className="mt-1 text-sm font-semibold capitalize text-cream">
-                    {v.carburant || '—'}
+                    {fuelLabel(t, v.carburant) || '—'}
                   </p>
                 </div>
                 <div>
@@ -267,7 +273,7 @@ export function CatalogueInfiniteGrid({
                     <Gauge className="h-3 w-3 text-gold/70" /> {t('cat.labelGear')}
                   </p>
                   <p className="mt-1 text-sm font-semibold capitalize text-cream">
-                    {v.transmission || '—'}
+                    {gearLabel(t, v.transmission) || '—'}
                   </p>
                 </div>
               </div>
@@ -295,7 +301,7 @@ export function CatalogueInfiniteGrid({
                     </p>
                   </div>
                   {(v.minCaution ?? 0) > 0 && (
-                    <div className="ml-auto text-right">
+                    <div className="ms-auto text-end">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cream-faint">
                         {t('cat.depositFrom')}
                       </p>
@@ -308,8 +314,8 @@ export function CatalogueInfiniteGrid({
               </div>
 
               <div className="mt-4 flex items-center justify-end gap-2 text-sm font-semibold text-cream transition-colors group-hover:text-gold">
-                {v.count > 1 ? t('cat.seeOptions') : t('cat.bookNow')}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                {v.countDispo === 0 ? t('cat.seeModel') : v.count > 1 ? t('cat.seeOptions') : t('cat.bookNow')}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </div>
             </div>
           </Link>

@@ -3,35 +3,10 @@ import { Types } from 'mongoose';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { apiPaginated } from '@/lib/apiHelpers';
-import { parsePaginationParams, parseSearchDateRange, resolveVehiclePricing, toModelSlug } from '@/lib/utils';
+import { parsePaginationParams, parseSearchDateRange, resolveVehiclePricing } from '@/lib/utils';
 import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
 import { rateLimit } from '@/lib/rateLimit';
-
-function normalizeFilterValue(value: string | null): string {
-  return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
-}
-
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-type PublicVehiclesFilter = Record<string, unknown>;
-
-type GroupedVehicleRow = {
-  marque: string;
-  modele: string;
-  count: number;
-  countDispo: number;
-  firstTarifParJour: number;
-  firstCautionDefaut: number;
-  categorie?: string;
-  places?: number;
-  carburant?: string;
-  boite?: string;
-  backgroundPhoto?: string | null;
-  photoModele?: string | null;
-  firstPhoto?: string | null;
-};
+import { buildCatalogueMatch, queryGroupedCatalogue } from '@/app/(public)/[locale]/catalogue/_lib/catalogueQuery';
 
 type PublicVehicleRow = {
   _id: string;
@@ -61,26 +36,13 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const { page, limit, skip } = parsePaginationParams(searchParams);
 
-  const filter: PublicVehiclesFilter = {
-    actif: { $ne: false },
-    isPublic: { $ne: false },
-  };
+  const match = buildCatalogueMatch({
+    type: searchParams.get('type'),
+    marque: searchParams.get('marque'),
+    q: searchParams.get('q'),
+  });
 
-  const type = searchParams.get('type')?.trim();
-  if (type) filter.categorie = type;
-
-  const marque = normalizeFilterValue(searchParams.get('marque'));
-  if (marque) {
-    filter.marque = {
-      $regex: `^\\s*${escapeRegExp(marque)}\\s*$`,
-      $options: 'i',
-    };
-  }
-
-  const q = searchParams.get('q')?.trim();
-  if (q) filter.$text = { $search: q };
-
-  // Recherche par dates : les véhicules occupés sur la plage sont exclus.
+  // Recherche par dates : les véhicules occupés sur la plage ne comptent pas comme libres.
   const dateRange = parseSearchDateRange(searchParams.get('du'), searchParams.get('au'));
   const busyObjectIds = dateRange
     ? [...(await findBusyVehicleIds({ debutAt: dateRange.debut, finAt: dateRange.fin }))].map(
@@ -88,96 +50,14 @@ export async function GET(req: NextRequest) {
       )
     : null;
 
-  const countDispoAccumulator = busyObjectIds !== null
-    ? { $sum: { $cond: [{ $not: [{ $in: ['$_id', busyObjectIds] }] }, 1, 0] } }
-    : { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } };
-
-  if (busyObjectIds !== null) filter._id = { $nin: busyObjectIds };
-
-  const grouped = searchParams.get('grouped') === 'true';
-
-  if (grouped) {
-    const [groups, countResult] = await Promise.all([
-      Vehicle.aggregate([
-        { $match: filter },
-        {
-          $addFields: {
-            marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
-            modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
-            marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
-            modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
-            availabilityRank: { $cond: [{ $eq: ['$statut', 'disponible'] }, 0, 1] },
-            tarifParJourSafe: { $ifNull: ['$tarifParJour', 0] },
-            cautionDefautSafe: { $ifNull: ['$cautionDefaut', 0] },
-          },
-        },
-        { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-        { $sort: { availabilityRank: 1, tarifParJourSafe: 1 } },
-        {
-          $group: {
-            _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-            marque: { $first: '$marqueDisplay' },
-            modele: { $first: '$modeleDisplay' },
-          count: { $sum: 1 },
-          countDispo: countDispoAccumulator,
-          firstTarifParJour: { $first: '$tarifParJourSafe' },
-            firstCautionDefaut: { $first: '$cautionDefautSafe' },
-            categorie: { $first: '$categorie' },
-            places: { $first: '$places' },
-            carburant: { $first: '$carburant' },
-            boite: { $first: '$boite' },
-            backgroundPhoto: { $first: '$backgroundPhoto' },
-            photoModele: { $first: '$photoModele' },
-            firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
-          },
-        },
-        { $match: { countDispo: { $gt: 0 } } },
-        { $sort: { firstTarifParJour: 1 } },
-        { $skip: skip },
-        { $limit: limit },
-      ]),
-      Vehicle.aggregate([
-        { $match: filter },
-        {
-          $addFields: {
-            marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
-            modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
-          },
-        },
-        { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-      {
-        $group: {
-          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-          countDispo: countDispoAccumulator,
-        },
-      },
-        { $match: { countDispo: { $gt: 0 } } },
-        { $count: 'total' },
-      ]),
-    ]);
-
-    const total = countResult[0]?.total ?? 0;
-
-    return apiPaginated(
-      (groups as GroupedVehicleRow[]).map((g) => ({
-        modelSlug: toModelSlug(g.marque, g.modele),
-        marque: g.marque,
-        modele: g.modele,
-        count: g.count,
-        countDispo: g.countDispo,
-        minTarif: g.firstTarifParJour > 0 ? g.firstTarifParJour : 0,
-        minCaution: g.firstCautionDefaut > 0 ? g.firstCautionDefaut : 0,
-        categorie: g.categorie,
-        places: g.places,
-        carburant: g.carburant,
-        transmission: g.boite,
-        featuredPhoto: g.backgroundPhoto ?? g.photoModele ?? g.firstPhoto ?? null,
-      })),
-      { total, page, limit },
-    );
+  // Défilement infini du catalogue : même lecture et même règle que la page.
+  if (searchParams.get('grouped') === 'true') {
+    const { models, total } = await queryGroupedCatalogue({ match, busyObjectIds, skip, limit });
+    return apiPaginated(models, { total, page, limit });
   }
 
   // Non-grouped mode
+  const filter = busyObjectIds !== null ? { ...match, _id: { $nin: busyObjectIds } } : match;
   const [items, total] = await Promise.all([
     Vehicle.find(filter)
       .select('marque modele annee type categorie places transmission boite carburant tarifParJour tarifParJour10Plus tarifParJour15Plus tarifParJour30Plus photos backgroundPhoto photoModele slug description')

@@ -120,35 +120,6 @@ export const drawLine: Variants = {
   visible: { scaleX: 1, opacity: 1, transition: { duration: 1.4, ease: SMOOTH } },
 };
 
-/* ── Hero cascade (after loader) ── */
-export const heroBase = (baseDelay: number) => ({
-  bg: {
-    initial: { opacity: 0, scale: 0.94 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 1.4, ease: SMOOTH, delay: baseDelay } },
-  },
-  topBar: {
-    initial: { opacity: 0, y: -30, filter: 'blur(8px)' },
-    animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: SMOOTH, delay: baseDelay + 0.15 } },
-  },
-  wordmark: {
-    initial: { opacity: 0, scale: 0.85, filter: 'blur(24px)' },
-    animate: { opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 1.1, ease: SMOOTH, delay: baseDelay + 0.3 } },
-  },
-  car: {
-    initial: { opacity: 0, scale: 0.78, y: 80, filter: 'blur(28px) brightness(1.8)' },
-    animate: { opacity: 1, scale: 1, y: 0, filter: 'blur(0px) brightness(1)', transition: { duration: 1.3, ease: SMOOTH, delay: baseDelay + 0.5 } },
-  },
-  carGlow: {
-    initial: { opacity: 0, scale: 0.3 },
-    animate: { opacity: 1, scale: 1.2, transition: { duration: 1.8, ease: [0.0, 0.0, 0.58, 1.0] as const, delay: baseDelay + 0.7 } },
-  },
-  search: {
-    initial: { opacity: 0, y: 46, scale: 0.94, filter: 'blur(14px)' },
-    animate: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { duration: 1, ease: SMOOTH, delay: baseDelay + 0.66 } },
-  },
-  pills: (sd = 0.15) => stagger(sd, baseDelay + 0.8),
-});
-
 /* ═══ Wrapper Components ═══ */
 
 type ScrollRevealProps = HTMLMotionProps<'div'> & {

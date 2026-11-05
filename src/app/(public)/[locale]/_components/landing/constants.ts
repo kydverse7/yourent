@@ -1,3 +1,5 @@
+import type { Locale } from '@/lib/i18n/translations';
+import { BUSINESS } from '@/lib/site';
 import type { BrandAmbientColor } from './types';
 
 /* ─────────── Brand ambient colours ─────────── */
@@ -27,19 +29,29 @@ export const DISPLAY_BRANDS = [
 /* ─────────── Marquee (hero) — generic brand names ─── */
 
 export const MARQUEE_BRANDS = [
-  'Porsche', 'Range Rover', 'Mercedes', 'BMW',
-  'Audi', 'Volkswagen', 'Peugeot', 'Toyota',
-  'Fiat', 'Opel', 'Kia', 'Dacia',
+  'Porsche', 'Range Rover', 'Mercedes', 'Audi', 'Volkswagen',
+  'Toyota', 'Fiat', 'Opel', 'Kia', 'Dacia',
 ] as const;
 
 /* ─────────── Social links ─────────── */
 
 export const SOCIALS = [
-  { label: 'Instagram', href: 'https://instagram.com/yourent.ma',  icon: 'Instagram' as const },
-  { label: 'Facebook',  href: 'https://facebook.com/yourent.ma',   icon: 'Facebook'  as const },
-  { label: 'TikTok',    href: 'https://tiktok.com/@yourent.ma',    icon: 'TikTok'    as const },
-  { label: 'WhatsApp',  href: 'https://wa.me/212661236231',        icon: 'WhatsApp'  as const },
+  { label: 'Instagram', href: BUSINESS.social.instagram, icon: 'Instagram' as const },
+  { label: 'Facebook',  href: BUSINESS.social.facebook,  icon: 'Facebook'  as const },
+  { label: 'TikTok',    href: BUSINESS.social.tiktok,    icon: 'TikTok'    as const },
+  { label: 'WhatsApp',  href: BUSINESS.whatsappUrl,      icon: 'WhatsApp'  as const },
 ] as const;
+
+/* ─────────── Horaires, dans la langue de la page ─────────── */
+
+export function formatBusinessHours(locale: Locale): string {
+  if (locale === 'fr') return BUSINESS.hours.display;
+  const opens = Number(BUSINESS.hours.opens.split(':')[0]);
+  const closes = Number(BUSINESS.hours.closes.split(':')[0]) - 12;
+  return locale === 'en'
+    ? `${opens}am – ${closes}pm, 7 days a week`
+    : `${opens}ص – ${closes}م، 7 أيام في الأسبوع`;
+}
 
 /* ─────────── Process steps ─────────── */
 

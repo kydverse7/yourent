@@ -125,24 +125,27 @@
   stroke-width: 1.4;
   stroke-dasharray: 2200;
   stroke-dashoffset: 2200;
-  animation: lpDraw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: lpDraw 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .lp-wm-fill {
   fill: url(#lpGrad);
   opacity: 0;
-  animation: lpFill 800ms ease forwards;
-  animation-delay: 1.15s;
+  animation: lpFill 500ms ease forwards;
+  animation-delay: 0.2s;
 }
 
-.lp-subline {
+/* H1 de l'accueil : visible dès le HTML */
+.lp-hero-title {
   margin-top: 0.6rem;
-  color: var(--text-secondary);
-  font-size: clamp(0.88rem, 1.1vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+  max-width: 34ch;
+  color: #f7f1e8;
+  font-size: clamp(1.3rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-align: center;
+  text-wrap: balance;
 }
 
 /* ─── Media frame ──────────────────────────────────────── */
@@ -252,15 +255,6 @@
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   position: relative;
-}
-
-.hero-fleet-plus {
-  font-size: 0.55rem;
-  font-weight: 700;
-  color: #c9a84c;
-  vertical-align: super;
-  margin-left: 0px;
-  line-height: 1;
 }
 
 .hero-fleet-label {
@@ -738,12 +732,6 @@
 
 @media (max-width: 768px) {
   .lp-wm-stroke, .lp-wm-fill { font-size: 88px; }
-  .lp-subline {
-    max-width: 22rem;
-    letter-spacing: 0.12em;
-    font-size: 0.72rem;
-    line-height: 1.45;
-  }
   .lp-morph-stage {
     padding-top: 80px;
   }
@@ -1375,35 +1363,6 @@
 .ct-title-block {
   text-align: center;
   margin-bottom: 1.5rem;
-}
-
-/* Title row: title + TripAdvisor side by side, centered */
-.ct-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.ct-tripadvisor-badge {
-  width: 48px;
-  height: auto;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-  object-fit: contain;
-}
-
-@media (min-width: 480px) {
-  .ct-tripadvisor-badge {
-    width: 56px;
-  }
-}
-
-@media (min-width: 768px) {
-  .ct-tripadvisor-badge {
-    width: 72px;
-  }
 }
 
 .ct-main-title {

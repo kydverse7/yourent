@@ -63,7 +63,6 @@ export function LandingSignatureCollectionSection({
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    priority={i < 2}
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center text-5xl text-[#c9a84c]/20">

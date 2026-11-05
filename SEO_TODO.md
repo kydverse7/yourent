@@ -36,11 +36,11 @@ Objectif: executer un plan SEO complet front-end + back-end, sans casser le styl
 
 ## Sprint 1 - Fondations SEO techniques (priorite haute)
 
-- [ ] Mettre en place les routes i18n par URL: /fr, /en, /ar (au lieu du cookie seul).
-- [ ] Ajouter les alternates hreflang sur toutes les pages publiques principales.
-- [ ] Verifier et normaliser les canonical par page (home, catalogue, fiche modele, pages locales).
+- [x] Mettre en place les routes i18n par URL: /fr, /en, /ar (au lieu du cookie seul).
+- [x] Ajouter les alternates hreflang sur toutes les pages publiques principales.
+- [x] Verifier et normaliser les canonical par page (home, catalogue, fiche modele, pages locales).
 - [ ] Gerer noindex pour toutes les pages de confirmation, pages privees et pages sans valeur SEO.
-- [ ] Ajouter generateStaticParams sur les pages dynamiques SEO (modeles, pages locales) quand possible.
+- [x] Ajouter generateStaticParams sur les pages dynamiques SEO (modeles, pages locales) quand possible.
 - [ ] Verifier revalidate/ISR pour avoir un TTFB stable sans perdre la fraicheur des prix/dispo.
 
 ## Sprint 2 - Pages SEO a creer (meme design landing/catalogue)
@@ -66,8 +66,8 @@ Objectif: executer un plan SEO complet front-end + back-end, sans casser le styl
 
 - [ ] Ajouter un job/ping de reindexation sitemap quand un vehicule public est cree/modifie.
 - [ ] Verifier que le sitemap inclut toutes les nouvelles pages SEO et toutes les fiches indexables.
-- [ ] Ajouter date lastModified fiable depuis la DB pour les URLs dynamiques.
-- [ ] Verifier robots pour autoriser uniquement le crawl utile et bloquer bruit technique.
+- [x] Ajouter date lastModified fiable depuis la DB pour les URLs dynamiques.
+- [x] Verifier robots pour autoriser uniquement le crawl utile et bloquer bruit technique.
 - [ ] Ajouter logs simples cote serveur pour suivre les bots (Googlebot/Bingbot) sur pages SEO.
 
 ## Sprint 5 - Qualite, tracking et validation
@@ -79,7 +79,7 @@ Objectif: executer un plan SEO complet front-end + back-end, sans casser le styl
   - location voiture aeroport casablanca
   - location voiture luxe casablanca
   - car rental casablanca
-- [ ] Instrumenter KPI conversion SEO (clic whatsapp, clic appel, reservation envoyee).
+- [x] Instrumenter KPI conversion SEO (clic whatsapp, clic appel, reservation envoyee).
 - [ ] Lancer un mini audit technique tous les 15 jours (404, canonical, metadata, schema).
 
 ## Ordre de demarrage recommande (pratique)
@@ -100,3 +100,20 @@ Objectif: executer un plan SEO complet front-end + back-end, sans casser le styl
 - [ ] Liens internes depuis au moins 2 pages existantes
 - [ ] Page testee sur mobile et desktop
 - [ ] Texte valide selon les regles redaction SEO (mots de transition, ponctuation, orthographe, style pro)
+
+## Notes de mise en oeuvre (verifie dans le code)
+
+- generateStaticParams : present sur [seoSlug] et blog/[slug] ; les fiches modele sont rendues a la demande avec revalidate = 300.
+- KPI : composant Analytics (whatsapp_click, phone_click, reservation_submitted) en place ; il n'envoie rien tant que NEXT_PUBLIC_GA_ID n'est pas defini et que GA4 n'est pas configure. Aucune conversion Google Ads n'est creee (identifiant de libelle inconnu).
+- Sitemap, llms.txt et IndexNow (npm run indexnow) sont prets ; le sitemap ne liste que les pages SEO dont le contenu est enregistre dans src/content/pages. Les cases du Sprint 2 restent ouvertes tant que les pages ne sont pas relues et publiees.
+
+## Actions du proprietaire
+
+- [ ] Vercel : ajouter le domaine yourent.ma (apex) avec une redirection 308 vers www.yourent.ma, et garder www.yourent.ma comme domaine principal.
+- [ ] Vercel : definir la variable NEXT_PUBLIC_GA_ID (identifiant GA4, de forme G-XXXXXXXXXX), puis redeployer.
+- [ ] Vercel : definir NEXT_PUBLIC_GSC_VERIFICATION (jeton de la balise meta Google Search Console) puis redeployer.
+- [ ] Vercel : definir NEXT_PUBLIC_BING_VERIFICATION (jeton de la balise meta Bing Webmaster Tools) puis redeployer.
+- [ ] Google Search Console : ajouter la propriete https://www.yourent.ma, verifier la propriete, soumettre https://www.yourent.ma/sitemap.xml.
+- [ ] Bing Webmaster Tools : ajouter le site, verifier la propriete, soumettre le sitemap.
+- [ ] Creer l'evenement cle et la conversion Google Ads (libelle de conversion a fournir) apres collecte des premiers evenements GA4.
+- [ ] Apres publication : lancer npm run indexnow (verifier d'abord avec npm run indexnow -- --dry-run).

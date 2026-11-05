@@ -16,7 +16,8 @@ import {
   Send,
 } from 'lucide-react';
 import { useLocale } from '@/lib/i18n';
-import { SOCIALS } from './constants';
+import { BUSINESS } from '@/lib/site';
+import { SOCIALS, formatBusinessHours } from './constants';
 import {
   motion,
   ScrollReveal,
@@ -29,15 +30,13 @@ import {
   useScroll,
   useTransform,
 } from './motion';
+import type { LandingStats } from './types';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Instagram,
   Facebook,
   WhatsApp: MessageCircle,
 };
-
-const GOOGLE_MAPS_LINK =
-  'https://www.google.com/maps/search/N%C2%B025+Rue+Ibnou+Mounir+20100+Casablanca';
 
 /* ── SVG Filigrane that draws on scroll ── */
 function FiligraneSVG() {
@@ -87,54 +86,57 @@ function FiligraneSVG() {
   );
 }
 
-export function LandingContactSection() {
-  const { t } = useLocale();
+export function LandingContactSection({ stats }: { stats: LandingStats }) {
+  const { t, locale } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
 
   const CONTACT_ITEMS = [
     {
       icon: MapPin,
       label: t('contact.address'),
-      value: 'N°25 Rue Ibnou Mounir',
-      sub: t('contact.addressSub'),
-      href: GOOGLE_MAPS_LINK,
+      value: BUSINESS.address.street,
+      sub: t('contact.addressSub').replace('{postalCode}', BUSINESS.address.postalCode),
+      href: BUSINESS.mapsUrl,
     },
     {
       icon: Phone,
       label: t('contact.phone'),
-      value: '+212 6 61 23 62 31',
-      href: 'tel:+212661236231',
+      value: BUSINESS.phoneDisplay,
+      href: `tel:${BUSINESS.phone}`,
     },
     {
       icon: Mail,
       label: t('contact.email'),
-      value: 'contact@yourent.ma',
-      href: 'mailto:contact@yourent.ma',
+      value: BUSINESS.email,
+      href: `mailto:${BUSINESS.email}`,
     },
     {
       icon: Clock,
       label: t('contact.hours'),
-      value: t('contact.hoursValue'),
+      value: formatBusinessHours(locale),
       sub: t('contact.hoursSub'),
     },
   ];
 
-  const STATS = [
-    { number: '60+', label: t('contact.statVehicles'), icon: null },
-    { number: '5K+', label: t('contact.statClients'), icon: null },
-    { number: '4.9', label: t('contact.statGoogle'), icon: Star },
-  ];
+  const { value: ratingValue, count: ratingCount } = BUSINESS.googleRating;
+  const rating = ratingValue.toLocaleString(locale === 'fr' ? 'fr-FR' : 'en-US');
+
+  // Un compteur à zéro (base injoignable) n'est pas affiché.
+  const COUNTERS = [
+    { number: stats.vehicleCount, label: t('contact.statVehicles') },
+    { number: stats.clientCount, label: t('contact.statClients') },
+  ].filter((counter) => counter.number > 0);
 
   return (
     <section id="contact" ref={sectionRef} className="ct-section scroll-mt-24">
       {/* ═══ Parallax background image ═══ */}
       <div className="ct-parallax-wrap" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/image-casablanca.jpg"
           alt={t('contact.imgAlt')}
+          fill
+          sizes="100vw"
           className="ct-parallax-img"
-          loading="lazy"
         />
         {/* Multi-layer overlays for cinematic depth */}
         <div className="ct-overlay-gradient" />
@@ -158,20 +160,10 @@ export function LandingContactSection() {
 
         {/* ── Title block ── */}
         <ScrollReveal variants={tiltUp} className="ct-title-block">
-          <div className="ct-title-row">
-            <h2 className="ct-main-title">
-              <span className="ct-main-title-light">{t('contact.title')} </span>
-              <span className="ct-main-title-gold">{t('contact.titleGold')}</span>
-            </h2>
-            <Image
-              src="/new-award-trip-advisor.png"
-              alt="TripAdvisor Award"
-              width={176}
-              height={154}
-              sizes="(max-width: 479px) 48px, (max-width: 767px) 56px, 72px"
-              className="ct-tripadvisor-badge"
-            />
-          </div>
+          <h2 className="ct-main-title">
+            <span className="ct-main-title-light">{t('contact.title')} </span>
+            <span className="ct-main-title-gold">{t('contact.titleGold')}</span>
+          </h2>
           <div className="ct-title-separator">
             <motion.div
               className="ct-title-sep-line"
@@ -202,15 +194,27 @@ export function LandingContactSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
         >
-          {STATS.map((s) => (
-            <motion.div key={s.label} className="ct-strip-stat" variants={staggerCard}>
-              <span className="ct-strip-num">
-                {s.number}
-                {s.icon && <Star className="h-3.5 w-3.5 fill-[#c9a84c] text-[#c9a84c] inline ml-1 -mt-0.5" />}
-              </span>
-              <span className="ct-strip-label">{s.label}</span>
+          {COUNTERS.map((counter) => (
+            <motion.div key={counter.label} className="ct-strip-stat" variants={staggerCard}>
+              <span className="ct-strip-num">{counter.number}</span>
+              <span className="ct-strip-label">{counter.label}</span>
             </motion.div>
           ))}
+          <motion.a
+            href={BUSINESS.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ct-strip-stat"
+            variants={staggerCard}
+          >
+            <span className="ct-strip-num">
+              {rating}
+              <Star className="h-3.5 w-3.5 fill-[#c9a84c] text-[#c9a84c] inline ms-1 -mt-0.5" />
+            </span>
+            <span className="ct-strip-label">
+              {t('contact.statGoogle').replace('{count}', String(ratingCount))}
+            </span>
+          </motion.a>
         </motion.div>
 
         {/* ── Main content grid ── */}
@@ -318,14 +322,14 @@ export function LandingContactSection() {
                   <div className="ct-map-pulse" />
                   <div>
                     <p className="ct-map-name">{t('contact.mapName')}</p>
-                    <p className="ct-map-addr">N°25 Rue Ibnou Mounir, 20100</p>
+                    <p className="ct-map-addr">{BUSINESS.address.street}, {BUSINESS.address.postalCode}</p>
                   </div>
                 </div>
                 <div className="ct-map-btns">
-                  <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noreferrer" className="ct-map-btn-primary">
+                  <a href={BUSINESS.mapsUrl} target="_blank" rel="noreferrer" className="ct-map-btn-primary">
                     {t('contact.directions')} <ArrowRight className="h-3.5 w-3.5" />
                   </a>
-                  <a href="https://wa.me/212661236231" target="_blank" rel="noreferrer" className="ct-map-btn-outline">
+                  <a href={BUSINESS.whatsappUrl} target="_blank" rel="noreferrer" className="ct-map-btn-outline">
                     <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                   </a>
                 </div>

@@ -99,7 +99,7 @@ export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: F
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cream-faint">{labels.from}</p>
                 <p className="text-xl font-bold text-gold">
-                  {formatPrice(vehicle.minTarif)} DH
+                  {formatPrice(vehicle.minTarif)} {labels.currency}
                   <span className="text-xs font-normal text-cream-muted">{labels.perDay}</span>
                 </p>
               </div>
@@ -142,10 +142,10 @@ function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetMod
                     {vehicle.marque} {vehicle.modele}
                   </Link>
                 </td>
-                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarif)} DH</td>
-                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarifLong)} DH</td>
+                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarif)} {labels.currency}</td>
+                <td className="px-4 py-3 text-cream-muted">{formatPrice(vehicle.minTarifLong)} {labels.currency}</td>
                 <td className="px-4 py-3 text-cream-muted">
-                  {vehicle.minCaution > 0 ? `${formatPrice(vehicle.minCaution)} DH` : labels.onRequest}
+                  {vehicle.minCaution > 0 ? `${formatPrice(vehicle.minCaution)} ${labels.currency}` : labels.onRequest}
                 </td>
               </tr>
             ))}

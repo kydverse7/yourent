@@ -10,24 +10,23 @@ import {
   Calendar,
   ArrowRight,
   CircleDot,
+  MessageCircle,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
+import { BUSINESS } from '@/lib/site';
+import { categoryLabel, fuelLabel, gearLabel } from '../../_lib/specLabels';
+import { ModelDateSearch } from './ModelDateSearch';
 import PublicReservationForm from './PublicReservationForm';
 
-type Variant = {
+export type Variant = {
   _id: string;
   slug: string;
-  marque: string;
-  modele: string;
-  annee?: number;
   couleur?: string;
-  kilometrage: number;
   carburant: string;
   transmission: string;
   places: number;
   categorie: string;
-  options: string[];
   description?: string;
   photos: string[];
   featuredPhoto: string | null;
@@ -37,15 +36,14 @@ type Variant = {
 };
 
 type Props = {
+  /** Unités réservables : libres aux dates choisies, ou disponibles aujourd'hui sans dates. Peut être vide. */
   variants: Variant[];
+  /** Unité dont on montre les photos et les caractéristiques quand aucune n'est réservable. */
+  fallbackUnit: Variant;
   modelSlug: string;
   modelMinTarif: number;
   marque: string;
   modele: string;
-  categorie: string;
-  carburant: string;
-  transmission: string;
-  places: number;
   highSeason?: boolean;
   initialDu?: string;
   initialAu?: string;
@@ -53,21 +51,26 @@ type Props = {
 
 export function VehicleModelView({
   variants,
+  fallbackUnit,
   modelSlug,
   modelMinTarif,
   marque,
   modele,
-  categorie,
-  carburant,
-  transmission,
-  places,
   highSeason = false,
   initialDu,
   initialAu,
 }: Props) {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const selected = variants[selectedIdx];
-  const { t, tp } = useLocale();
+  const selected = variants[selectedIdx] ?? variants[0] ?? fallbackUnit;
+  const canBook = variants.length > 0;
+  const hasDates = Boolean(initialDu && initialAu);
+  const { t, tp, locale } = useLocale();
+
+  const name = `${marque} ${modele}`;
+  const photoAlt = t('model.photoAlt').replace('{name}', name);
+  const whatsappHref = `${BUSINESS.whatsappUrl}?text=${encodeURIComponent(t('model.waMessage').replace('{name}', name))}`;
+  const hasLongRate = !highSeason && selected.tarifJour10Plus > 0 && selected.tarifJour10Plus < selected.tarifJour;
+  const category = categoryLabel(t, selected.categorie);
 
   return (
     <div className="lux-grid-phi items-start">
@@ -79,7 +82,7 @@ export function VehicleModelView({
             {selected.featuredPhoto ? (
               <Image
                 src={selected.featuredPhoto}
-                alt={`${marque} ${modele} — location Casablanca`}
+                alt={photoAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"
@@ -90,9 +93,9 @@ export function VehicleModelView({
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-            <div className="absolute bottom-5 left-5 flex items-center gap-2">
+            <div className="absolute bottom-5 start-5 flex items-center gap-2">
               <span className="rounded-full border border-gold/20 bg-black/35 px-4 py-2 text-xs uppercase tracking-[0.16em] text-gold capitalize">
-                {categorie}
+                {category}
               </span>
               {selected.couleur && (
                 <span className="rounded-full border border-white/15 bg-black/50 px-3 py-1.5 text-xs text-cream">
@@ -112,7 +115,13 @@ export function VehicleModelView({
                     key={i}
                     className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-white/8 bg-noir-card"
                   >
-                    <Image src={photo} alt="" fill sizes="112px" className="object-cover" />
+                    <Image
+                      src={photo}
+                      alt={`${photoAlt} (${i + 2})`}
+                      fill
+                      sizes="112px"
+                      className="object-cover"
+                    />
                   </div>
                 ))}
             </div>
@@ -131,7 +140,7 @@ export function VehicleModelView({
                   key={v._id}
                   type="button"
                   onClick={() => setSelectedIdx(i)}
-                  className={`flex items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-all ${
+                  className={`flex items-center justify-between gap-4 rounded-2xl border p-4 text-start transition-all ${
                     i === selectedIdx
                       ? 'border-gold/30 bg-gold/15 shadow-gold'
                       : 'border-white/8 bg-white/[0.02] hover:border-white/15'
@@ -149,7 +158,7 @@ export function VehicleModelView({
                     )}
                   </div>
                   <span className="whitespace-nowrap text-sm font-bold text-gold">
-                    {formatCurrency(v.displayTarifJour)}/j
+                    {formatCurrency(v.displayTarifJour)}{t('model.perDay')}
                   </span>
                 </button>
               ))}
@@ -161,24 +170,22 @@ export function VehicleModelView({
         <div className="lux-panel p-6 md:p-7">
           <div className="space-y-3">
             <span className="lux-eyebrow">{t('model.eyebrow')}</span>
-            <h1 className="lux-title-sm">
-              {marque} {modele}
-            </h1>
+            <h2 className="text-2xl font-bold text-cream">{t('model.specs')}</h2>
             <p className="text-sm text-cream-muted">
-              <span className="capitalize">{categorie}</span>
+              <span className="capitalize">{category}</span>
               {selected.couleur ? ` · ${selected.couleur}` : ''}
             </p>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-cream-muted">
             <span className="flex items-center gap-1.5">
-              <Users className="h-4 w-4 text-gold" /> {places} {t('model.places')}
+              <Users className="h-4 w-4 text-gold" /> {selected.places} {t('model.places')}
             </span>
             <span className="flex items-center gap-1.5">
-              <Fuel className="h-4 w-4 text-gold" /> {carburant}
+              <Fuel className="h-4 w-4 text-gold" /> {fuelLabel(t, selected.carburant)}
             </span>
             <span className="flex items-center gap-1.5">
-              <Gauge className="h-4 w-4 text-gold" /> {transmission}
+              <Gauge className="h-4 w-4 text-gold" /> {gearLabel(t, selected.transmission)}
             </span>
           </div>
 
@@ -204,13 +211,16 @@ export function VehicleModelView({
               <p className="mt-2 flex items-center gap-2 text-sm font-medium text-cream">
                 <ShieldCheck className="h-4 w-4 text-gold" /> {t('model.serviceDesc')}
               </p>
-              <p className="mt-2 text-xs text-cream-faint">
-                {t('model.longDuration')}
-              </p>
+              {hasLongRate && (
+                <p className="mt-2 text-xs text-cream-faint">
+                  {t('model.longDuration')}
+                </p>
+              )}
             </div>
           </div>
 
-          {selected.description && (
+          {/* La description est saisie en français dans la base. */}
+          {locale === 'fr' && selected.description && (
             <p className="mt-6 text-sm leading-relaxed text-cream-muted">
               {selected.description}
             </p>
@@ -218,7 +228,7 @@ export function VehicleModelView({
         </div>
       </div>
 
-      {/* ── Right column: Reservation form (sticky) ── */}
+      {/* ── Right column: Reservation form or contact (sticky) ── */}
       <div className="lux-panel p-6 md:sticky md:top-28 md:p-7">
         <div className="mb-6 flex items-center justify-between gap-3">
           <div>
@@ -226,28 +236,54 @@ export function VehicleModelView({
               <Calendar className="h-4 w-4 text-gold" /> {t('model.reservation')}
             </h2>
             <p className="mt-1 text-sm text-cream-faint">
-              {marque} {modele}
-              {selected.couleur ? ` · ${selected.couleur}` : ''}
+              {name}
+              {canBook && selected.couleur ? ` · ${selected.couleur}` : ''}
             </p>
           </div>
-          <ArrowRight className="hidden h-5 w-5 text-gold md:block" />
+          <ArrowRight className="hidden h-5 w-5 text-gold md:block rtl:rotate-180" />
         </div>
 
-        <div className="mb-5 rounded-2xl border border-gold/15 bg-gold/5 p-4 text-sm text-cream-muted">
-          {t('model.contactMsg')}
-        </div>
+        {canBook ? (
+          <>
+            <div className="mb-5 rounded-2xl border border-gold/15 bg-gold/5 p-4 text-sm text-cream-muted">
+              {t('model.contactMsg')}
+            </div>
 
-        <PublicReservationForm
-          key={selected._id}
-          vehiculeId={selected._id}
-          vehiculeSlug={selected.slug}
-          redirectSlug={modelSlug}
-          tarifJour={selected.tarifJour}
-          tarifJour10Plus={selected.tarifJour10Plus}
-          highSeason={highSeason}
-          initialDu={initialDu}
-          initialAu={initialAu}
-        />
+            <PublicReservationForm
+              key={selected._id}
+              vehiculeId={selected._id}
+              vehiculeSlug={selected.slug}
+              redirectSlug={modelSlug}
+              tarifJour={selected.tarifJour}
+              tarifJour10Plus={selected.tarifJour10Plus}
+              highSeason={highSeason}
+              initialDu={initialDu}
+              initialAu={initialAu}
+            />
+          </>
+        ) : (
+          <div className="space-y-5">
+            <div className="rounded-2xl border border-gold/15 bg-gold/5 p-4">
+              <p className="font-semibold text-gold">
+                {hasDates ? t('model.unavailableDates') : t('model.rented')}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-cream-muted">
+                {hasDates ? t('model.unavailableDatesHint') : t('model.rentedHint')}
+              </p>
+            </div>
+
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#20BD5A]"
+            >
+              <MessageCircle className="h-5 w-5" /> {t('model.whatsappCta')}
+            </a>
+
+            <ModelDateSearch modelSlug={modelSlug} initialDu={initialDu} initialAu={initialAu} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -6,10 +6,11 @@ import { Vehicle } from '@/models/Vehicle';
 import { getVehicleDisplayPrice, toModelSlug } from '@/lib/utils';
 import { t as tr, type Locale } from '@/lib/i18n';
 import { isLocale } from '@/lib/i18n/routing';
-import { getFleetStats } from '@/lib/seo/fleet';
+import { getFleetModels, getFleetStats } from '@/lib/seo/fleet';
 import { businessNode, faqNode, jsonLdString, websiteNode } from '@/lib/seo/jsonLd';
 import { buildMetadata, samePathAllLocales } from '@/lib/seo/metadata';
 import { PublicLandingPage } from './_components/landing';
+import { LandingGuideSection } from './_components/landing/LandingGuideSection';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -235,8 +236,8 @@ export default async function PublicHomePage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const [{ signatureVehicles, sliderBrands, economicVehicles, newArrivalVehicle }, stats] =
-    await Promise.all([getPublicHomeData(), getFleetStats()]);
+  const [{ signatureVehicles, sliderBrands, economicVehicles, newArrivalVehicle }, stats, models] =
+    await Promise.all([getPublicHomeData(), getFleetStats(), getFleetModels()]);
 
   const faqItems = Array.from({ length: 6 }, (_, index) => ({
     q: tr(locale, `faq.q${index + 1}`),
@@ -260,6 +261,8 @@ export default async function PublicHomePage({ params }: Props) {
         sliderBrands={sliderBrands}
         economicVehicles={economicVehicles}
         newArrivalVehicle={newArrivalVehicle}
+        stats={{ vehicleCount: stats.vehicleCount, clientCount: stats.clientCount }}
+        guide={<LandingGuideSection locale={locale} stats={stats} models={models} />}
       />
     </>
   );

@@ -3,14 +3,16 @@ import Link from '@/lib/i18n/LocaleLink';
 import { Types } from 'mongoose';
 import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
-import { parseSearchDateRange, toModelSlug } from '@/lib/utils';
+import { parseSearchDateRange } from '@/lib/utils';
 import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
 import { CalendarX2, Sparkles } from 'lucide-react';
 import { t as tr, tp, type Locale } from '@/lib/i18n';
 import { isLocale, localePath } from '@/lib/i18n/routing';
 import { getFleetStats } from '@/lib/seo/fleet';
+import { breadcrumbNode, BUSINESS_ID, businessNode, jsonLdString } from '@/lib/seo/jsonLd';
 import { buildMetadata, samePathAllLocales } from '@/lib/seo/metadata';
 import { absoluteUrl } from '@/lib/site';
+import { buildCatalogueMatch, normalizeFilterValue, pickReadable, queryGroupedCatalogue } from './_lib/catalogueQuery';
 import { CatalogueInfiniteGrid } from './_components/CatalogueInfiniteGrid';
 import { CatalogueDateFilter } from './_components/CatalogueDateFilter';
 
@@ -32,15 +34,35 @@ const CATALOGUE_META: Record<Locale, { title: string; description: (minPrice: nu
   },
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+type RawSearchParams = Record<string, string | string[] | undefined>;
+
+/** `?type=a&type=b` donne un tableau : on ne garde que la première valeur. */
+function firstValues(raw: RawSearchParams): Record<string, string> {
+  const values: Record<string, string> = {};
+  for (const [key, value] of Object.entries(raw)) {
+    const first = Array.isArray(value) ? value[0] : value;
+    if (first) values[key] = first;
+  }
+  return values;
+}
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<RawSearchParams>;
+}): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const stats = await getFleetStats();
+  const [stats, sp] = await Promise.all([getFleetStats(), searchParams]);
   return buildMetadata({
     locale,
     paths: samePathAllLocales('/catalogue'),
     title: CATALOGUE_META[locale].title,
     description: CATALOGUE_META[locale].description(stats.minPrice),
+    // Les filtres gardent la canonical sans paramètres ; une recherche par dates n'a pas à être indexée.
+    noindex: Boolean(sp.du || sp.au),
   });
 }
 
@@ -50,34 +72,6 @@ type BrandOption = {
   value: string;
   label: string;
 };
-
-type CatalogueMatchFilter = Record<string, unknown>;
-
-type GroupedVehicleRow = {
-  marque: string;
-  modele: string;
-  count: number;
-  countDispo: number;
-  firstTarifParJour: number;
-  firstCautionDefaut: number;
-  categorie?: string;
-  places?: number;
-  carburant?: string;
-  boite?: string;
-  backgroundPhoto?: string | null;
-  photoModele?: string | null;
-  firstPhoto?: string | null;
-};
-
-function normalizeFilterValue(value?: string): string {
-  return value?.trim().toLowerCase().replace(/\s+/g, ' ') ?? '';
-}
-
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-
 
 function buildFilterUrl(
   current: Record<string, string>,
@@ -94,9 +88,8 @@ function buildFilterUrl(
 }
 
 /**
- * Disponibilité groupée. Avec `busyObjectIds` (recherche par dates),
- * `countDispo` compte les unités libres sur la plage demandée
- * au lieu du statut statique « disponible ».
+ * Catalogue groupé par modèle, voir `queryGroupedCatalogue` pour la règle d'affichage.
+ * Avec `busyObjectIds` (recherche par dates), `countDispo` compte les unités libres sur la plage.
  */
 async function getGroupedVehicles(
   searchParams: Record<string, string>,
@@ -104,80 +97,13 @@ async function getGroupedVehicles(
 ) {
   await connectDB();
 
-  const countDispoAccumulator = busyObjectIds !== null
-    ? { $sum: { $cond: [{ $not: [{ $in: ['$_id', busyObjectIds] }] }, 1, 0] } }
-    : { $sum: { $cond: [{ $eq: ['$statut', 'disponible'] }, 1, 0] } };
-
-  const matchFilter: CatalogueMatchFilter = {
-    actif: { $ne: false },
-    isPublic: { $ne: false },
-  };
-  if (searchParams.type?.trim()) matchFilter.categorie = searchParams.type.trim();
-
-  const normalizedMarque = normalizeFilterValue(searchParams.marque);
-  if (normalizedMarque) {
-    matchFilter.marque = {
-      $regex: `^\\s*${escapeRegExp(normalizedMarque)}\\s*$`,
-      $options: 'i',
-    };
-  }
-
-  const [groups, countResult, brandGroups] = await Promise.all([
-    Vehicle.aggregate([
-      { $match: matchFilter },
-      {
-        $addFields: {
-          marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
-          modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
-          marqueDisplay: { $trim: { input: { $ifNull: ['$marque', ''] } } },
-          modeleDisplay: { $trim: { input: { $ifNull: ['$modele', ''] } } },
-          availabilityRank: { $cond: [{ $eq: ['$statut', 'disponible'] }, 0, 1] },
-          tarifParJourSafe: { $ifNull: ['$tarifParJour', 0] },
-          cautionDefautSafe: { $ifNull: ['$cautionDefaut', 0] },
-        },
-      },
-      { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-      { $sort: { availabilityRank: 1, tarifParJourSafe: 1 } },
-      {
-        $group: {
-          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-          marque: { $first: '$marqueDisplay' },
-          modele: { $first: '$modeleDisplay' },
-          count: { $sum: 1 },
-          countDispo: countDispoAccumulator,
-          firstTarifParJour: { $first: '$tarifParJourSafe' },
-          firstCautionDefaut: { $first: '$cautionDefautSafe' },
-          categorie: { $first: '$categorie' },
-          places: { $first: '$places' },
-          carburant: { $first: '$carburant' },
-          boite: { $first: '$boite' },
-          backgroundPhoto: { $first: '$backgroundPhoto' },
-          photoModele: { $first: '$photoModele' },
-          firstPhoto: { $first: { $arrayElemAt: ['$photos', 0] } },
-        },
-      },
-      { $match: { countDispo: { $gt: 0 } } },
-      { $sort: { firstTarifParJour: 1 } },
-      { $limit: PAGE_SIZE },
-    ]),
-    Vehicle.aggregate([
-      { $match: matchFilter },
-      {
-        $addFields: {
-          marqueNorm: { $toLower: { $trim: { input: { $ifNull: ['$marque', ''] } } } },
-          modeleNorm: { $toLower: { $trim: { input: { $ifNull: ['$modele', ''] } } } },
-        },
-      },
-      { $match: { marqueNorm: { $ne: '' }, modeleNorm: { $ne: '' } } },
-      {
-        $group: {
-          _id: { marque: '$marqueNorm', modele: '$modeleNorm' },
-          countDispo: countDispoAccumulator,
-        },
-      },
-      { $match: { countDispo: { $gt: 0 } } },
-      { $count: 'total' },
-    ]),
+  const [{ models, total }, brandGroups] = await Promise.all([
+    queryGroupedCatalogue({
+      match: buildCatalogueMatch({ type: searchParams.type, marque: searchParams.marque }),
+      busyObjectIds,
+      skip: 0,
+      limit: PAGE_SIZE,
+    }),
     Vehicle.aggregate([
       {
         $match: {
@@ -194,36 +120,20 @@ async function getGroupedVehicles(
       {
         $group: {
           _id: { $toLower: '$brandTrim' },
-          label: { $first: '$brandTrim' },
+          labels: { $addToSet: '$brandTrim' },
         },
       },
     ]),
   ]);
 
-  const total = countResult[0]?.total ?? 0;
   const brands: BrandOption[] = brandGroups
-    .map((brand: { _id: string; label: string }) => ({
+    .map((brand: { _id: string; labels: string[] }) => ({
       value: normalizeFilterValue(brand._id),
-      label: brand.label,
+      label: pickReadable(brand.labels),
     }))
     .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 
-  const vehicles = (groups as GroupedVehicleRow[]).map((g) => ({
-    modelSlug: toModelSlug(g.marque, g.modele),
-    marque: g.marque,
-    modele: g.modele,
-    count: g.count,
-    countDispo: g.countDispo,
-    minTarif: g.firstTarifParJour > 0 ? g.firstTarifParJour : 0,
-    minCaution: g.firstCautionDefaut > 0 ? g.firstCautionDefaut : 0,
-    categorie: g.categorie,
-    places: g.places,
-    carburant: g.carburant,
-    transmission: g.boite,
-    featuredPhoto: g.backgroundPhoto ?? g.photoModele ?? g.firstPhoto ?? null,
-  }));
-
-  return { vehicles, total, hasNext: total > PAGE_SIZE, brands: brands.sort() };
+  return { vehicles: models, total, hasNext: total > PAGE_SIZE, brands };
 }
 
 export default async function CataloguePage({
@@ -231,10 +141,11 @@ export default async function CataloguePage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<Record<string, string>>;
+  searchParams: Promise<RawSearchParams>;
 }) {
-  const [{ locale: rawLocale }, params] = await Promise.all([routeParams, searchParams]);
+  const [{ locale: rawLocale }, rawParams] = await Promise.all([routeParams, searchParams]);
   const locale = rawLocale as Locale;
+  const params = firstValues(rawParams);
   const selectedMarque = normalizeFilterValue(params.marque);
 
   // Recherche par dates : plage valide → véhicules occupés exclus du compteur de dispo.
@@ -245,65 +156,58 @@ export default async function CataloguePage({
       )
     : null;
 
-  const { vehicles, total, hasNext, brands } = await getGroupedVehicles(params, busyObjectIds);
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'OfferCatalog',
-        '@id': `${absoluteUrl(localePath(locale, '/catalogue'))}#catalog`,
-        name: `${tr(locale, 'cat.title')} — Yourent`,
-        description: tp(locale, 'cat.subtitle', total),
-        url: absoluteUrl(localePath(locale, '/catalogue')),
-        numberOfItems: total,
-        itemListElement: vehicles.slice(0, 20).map((v, i) => ({
+  const [{ vehicles, total, hasNext, brands }, stats] = await Promise.all([
+    getGroupedVehicles(params, busyObjectIds),
+    getFleetStats(),
+  ]);
+  const subtitle = tp(locale, dateRange ? 'cat.subtitleDates' : 'cat.subtitle', total);
+  const catalogueUrl = absoluteUrl(localePath(locale, '/catalogue'));
+  const jsonLd = jsonLdString([
+    businessNode(locale, stats),
+    {
+      '@type': 'OfferCatalog',
+      '@id': `${catalogueUrl}#catalog`,
+      name: `${tr(locale, 'cat.title')} | Yourent`,
+      description: subtitle,
+      url: catalogueUrl,
+      numberOfItems: total,
+      itemListElement: vehicles.slice(0, 20).map((v, i) => {
+        const url = absoluteUrl(localePath(locale, `/catalogue/${v.modelSlug}`));
+        return {
           '@type': 'ListItem',
           position: i + 1,
           item: {
             '@type': 'Car',
             name: `${v.marque} ${v.modele}`,
-            url: absoluteUrl(localePath(locale, `/catalogue/${v.modelSlug}`)),
+            url,
             image: v.featuredPhoto ? absoluteUrl(v.featuredPhoto) : undefined,
             offers: {
               '@type': 'Offer',
+              url,
               priceCurrency: 'MAD',
               price: v.minTarif,
               availability: v.countDispo > 0
                 ? 'https://schema.org/InStock'
                 : 'https://schema.org/OutOfStock',
+              seller: { '@id': BUSINESS_ID },
             },
           },
-        })),
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${absoluteUrl(localePath(locale, '/catalogue'))}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: tr(locale, 'nav.home'),
-            item: absoluteUrl(localePath(locale, '/')),
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: tr(locale, 'cat.title'),
-            item: absoluteUrl(localePath(locale, '/catalogue')),
-          },
-        ],
-      },
-    ],
-  };
+        };
+      }),
+    },
+    breadcrumbNode(
+      locale,
+      [
+        { name: tr(locale, 'nav.home'), path: '/' },
+        { name: tr(locale, 'cat.breadcrumb'), path: '/catalogue' },
+      ],
+      '/catalogue',
+    ),
+  ]);
 
   return (
     <div className="lux-container py-8 md:py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
-        }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="lux-page-head mb-8">
         <div className="space-y-2">
           <span className="lux-eyebrow">
@@ -311,7 +215,7 @@ export default async function CataloguePage({
           </span>
           <h1 className="lux-title-sm">{tr(locale, 'cat.title')}</h1>
           <p className="lux-subtitle">
-            {tp(locale, 'cat.subtitle', total)}
+            {subtitle}
           </p>
         </div>
 

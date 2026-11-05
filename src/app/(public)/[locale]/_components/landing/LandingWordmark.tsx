@@ -1,21 +1,15 @@
 'use client';
 
-import { motion } from './motion';
 import { useLocale } from '@/lib/i18n';
 
 /**
- * Animated SVG wordmark with stroke-draw + fill reveal.
+ * Logo décoratif (tracé CSS) suivi du H1 de la page, visible dès le HTML.
  */
 export function LandingWordmark() {
   const { t } = useLocale();
   return (
-    <motion.div
-      className="flex shrink-0 flex-col items-center px-4 pb-0 pt-2 md:pt-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      <svg viewBox="0 0 1200 200" className="lp-wordmark" aria-label="Yourent">
+    <div className="flex shrink-0 flex-col items-center px-4 pb-0 pt-2 md:pt-4">
+      <svg viewBox="0 0 1200 200" className="lp-wordmark" aria-hidden="true">
         <defs>
           <linearGradient id="lpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#ffffff" />
@@ -43,18 +37,7 @@ export function LandingWordmark() {
           Yourent
         </text>
       </svg>
-      <motion.p
-        className="lp-subline mt-2 md:mt-3"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-      >
-        {t('hero.subline')}
-      </motion.p>
-      {/* sr-only h1 for SEO — invisible but read by crawlers & screen readers */}
-      <h1 className="sr-only">
-        {t('hero.pageTitle')}
-      </h1>
-    </motion.div>
+      <h1 className="lp-hero-title">{t('hero.pageTitle')}</h1>
+    </div>
   );
 }

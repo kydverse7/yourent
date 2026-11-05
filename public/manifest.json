@@ -1,19 +1,19 @@
 {
   "name": "Yourent",
   "short_name": "Yourent",
-  "description": "Location de voitures à Casablanca, Maroc — Berlines, SUV et voitures de luxe",
+  "description": "Yourent, agence de location de voitures à Casablanca : livraison gratuite à Casablanca et à l'aéroport Mohammed V, réservation en ligne.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",
   "icons": [
     {
-      "src": "/logo-yourent.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/logo-yourent.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

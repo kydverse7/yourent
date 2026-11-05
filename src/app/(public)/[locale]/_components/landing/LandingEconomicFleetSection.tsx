@@ -8,7 +8,6 @@ import { formatCurrency } from '@/lib/utils';
 import { useLocale } from '@/lib/i18n';
 import {
   motion,
-  AnimatePresence,
   ScrollReveal,
   blurFade,
   slideLeft,
@@ -190,24 +189,17 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
                         </div>
                       )}
 
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 8 }}
-                            transition={{ duration: 0.25 }}
-                          >
-                            <Link
-                              href={`/catalogue/${vehicle.slug}`}
-                              className="eco-card-cta"
-                            >
-                              {t('eco.book')}
-                              <ArrowRight className="h-3.5 w-3.5" />
-                            </Link>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {/* Lien toujours dans le HTML ; sur une carte inactive il est masqué et le clic active la carte. */}
+                      <div className={`transition-opacity duration-300 ${isActive ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
+                        <Link
+                          href={`/catalogue/${vehicle.slug}`}
+                          className="eco-card-cta"
+                          tabIndex={isActive ? undefined : -1}
+                        >
+                          {t('eco.book')}
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

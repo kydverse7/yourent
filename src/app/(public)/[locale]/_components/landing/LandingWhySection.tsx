@@ -28,7 +28,8 @@ function CountUp({
   suffix?: string;
   duration?: number;
 }) {
-  const [value, setValue] = useState(0);
+  // Le HTML porte le vrai chiffre ; le décompte ne démarre qu'à l'entrée dans la vue.
+  const [value, setValue] = useState(target);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
@@ -71,7 +72,7 @@ type Advantage = {
   counter: React.ReactNode;
 };
 
-function useAdvantages(): Advantage[] {
+function useAdvantages(vehicleCount: number): Advantage[] {
   const { t } = useLocale();
   return [
     {
@@ -97,11 +98,7 @@ function useAdvantages(): Advantage[] {
       titleKey: 'why.fleet.title',
       descKey: 'why.fleet.desc',
       labelKey: 'why.fleet.label',
-      counter: (
-        <>
-          <CountUp target={60} suffix={t('why.fleet.stat')} />
-        </>
-      ),
+      counter: <CountUp target={vehicleCount} />,
     },
     {
       icon: Headphones,
@@ -114,9 +111,9 @@ function useAdvantages(): Advantage[] {
 }
 
 /* ── Section component ─────────────────────── */
-export function LandingWhySection() {
+export function LandingWhySection({ vehicleCount }: { vehicleCount: number }) {
   const { t } = useLocale();
-  const advantages = useAdvantages();
+  const advantages = useAdvantages(vehicleCount);
 
   return (
     <section className="lux-container py-16 md:py-24">
@@ -125,7 +122,7 @@ export function LandingWhySection() {
         <div className="pointer-events-none absolute inset-x-0 -top-px h-48 rounded-t-[28px] bg-[radial-gradient(ellipse_61.8%_38.2%_at_50%_0%,rgba(201,168,76,0.10),transparent)]" />
 
         {/* ── Header — left aligned ── */}
-        <ScrollReveal variants={tiltUp} className="relative mb-10 text-center md:mb-14 md:text-left">
+        <ScrollReveal variants={tiltUp} className="relative mb-10 text-center md:mb-14 md:text-start">
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('why.eyebrow')}
           </span>

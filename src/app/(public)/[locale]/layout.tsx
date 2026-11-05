@@ -6,6 +6,7 @@ import { QueryProvider } from '@/providers/QueryProvider';
 import { inter, notoArabic } from '@/lib/fonts';
 import { isLocale, isRtl, LOCALES } from '@/lib/i18n/routing';
 import { SITE_URL } from '@/lib/site';
+import { Analytics } from './_components/Analytics';
 import { PublicLayoutShell } from './_components/PublicLayoutShell';
 import '@/app/globals.css';
 
@@ -15,13 +16,25 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
+const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   manifest: '/manifest.json',
   icons: {
     icon: '/favicon.ico',
-    apple: '/logo-yourent.png',
+    apple: '/icon-192.png',
   },
+  ...(GSC_VERIFICATION || BING_VERIFICATION
+    ? {
+        verification: {
+          ...(GSC_VERIFICATION ? { google: GSC_VERIFICATION } : {}),
+          ...(BING_VERIFICATION ? { other: { 'msvalidate.01': BING_VERIFICATION } } : {}),
+        },
+      }
+    : {}),
 };
 
 export function generateStaticParams() {
@@ -53,9 +66,13 @@ export default async function PublicRootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-17463963038');
+            gtag('config', 'AW-17463963038');${
+              GA_ID ? `
+            gtag('config', ${JSON.stringify(GA_ID)});` : ''
+            }
           `}
         </Script>
+        <Analytics />
         <QueryProvider>
           <PublicLayoutShell locale={locale}>{children}</PublicLayoutShell>
           <Toaster

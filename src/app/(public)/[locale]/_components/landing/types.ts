@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 /* ─────────── Landing page shared types ─────────── */
 
 export type LandingVehicle = {
@@ -18,11 +20,20 @@ export type SliderBrandData = {
 
 export type BrandAmbientColor = [r: number, g: number, b: number];
 
+/** Vrais chiffres de la flotte, lus côté serveur. */
+export type LandingStats = {
+  vehicleCount: number;
+  clientCount: number;
+};
+
 export type PublicLandingPageProps = {
   signatureVehicles: LandingVehicle[];
   sliderBrands: SliderBrandData[];
   economicVehicles: LandingVehicle[];
   newArrivalVehicle?: LandingVehicle | null;
+  stats: LandingStats;
+  /** Section de texte rendue côté serveur : son contenu n'alourdit pas le JavaScript client. */
+  guide: ReactNode;
 };
 
 export type MorphProgress = {
