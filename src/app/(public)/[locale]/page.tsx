@@ -10,7 +10,15 @@ import { getFleetModels, getFleetStats } from '@/lib/seo/fleet';
 import { businessNode, faqNode, jsonLdString, websiteNode } from '@/lib/seo/jsonLd';
 import { buildMetadata, samePathAllLocales } from '@/lib/seo/metadata';
 import { PublicLandingPage } from './_components/landing';
+import { LandingContactSection } from './_components/landing/LandingContactSection';
+import { LandingFaqSection } from './_components/landing/LandingFaqSection';
+import { LandingFinalCtaSection } from './_components/landing/LandingFinalCtaSection';
 import { LandingGuideSection } from './_components/landing/LandingGuideSection';
+import { LandingHeroSection } from './_components/landing/LandingHeroSection';
+import { LandingNewArrivalSection } from './_components/landing/LandingNewArrivalSection';
+import { LandingProcessSection } from './_components/landing/LandingProcessSection';
+import { LandingSignatureCollectionSection } from './_components/landing/LandingSignatureCollectionSection';
+import { LandingWhySection } from './_components/landing/LandingWhySection';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -105,9 +113,9 @@ const HOME_META: Record<Locale, { title: string; description: (minPrice: number)
       `Car rental agency in Casablanca from ${minPrice} MAD/day: city cars, SUVs, Mercedes, Porsche. Free delivery at Mohammed V airport, book online.`,
   },
   ar: {
-    title: 'كراء السيارات في الدار البيضاء ومطار محمد الخامس | Yourent',
+    title: 'كراء وتأجير السيارات في الدار البيضاء ومطار محمد الخامس | Yourent',
     description: (minPrice) =>
-      `وكالة كراء السيارات في الدار البيضاء ابتداءً من ${minPrice} درهم لليوم: سيارات المدينة والدفع الرباعي ومرسيدس وبورش. توصيل مجاني إلى مطار محمد الخامس وحجز عبر الإنترنت.`,
+      `وكالة كراء وتأجير السيارات في الدار البيضاء ابتداءً من ${minPrice} درهم لليوم: سيارات المدينة والدفع الرباعي ومرسيدس وبورش. توصيل مجاني إلى مطار محمد الخامس وحجز عبر الإنترنت.`,
   },
 };
 
@@ -257,12 +265,22 @@ export default async function PublicHomePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <PublicLandingPage
-        signatureVehicles={signatureVehicles}
         sliderBrands={sliderBrands}
         economicVehicles={economicVehicles}
-        newArrivalVehicle={newArrivalVehicle}
-        stats={{ vehicleCount: stats.vehicleCount, clientCount: stats.clientCount }}
+        hero={<LandingHeroSection vehicleCount={stats.vehicleCount} locale={locale} />}
+        signature={<LandingSignatureCollectionSection vehicles={signatureVehicles.slice(0, 4)} locale={locale} />}
+        newArrival={<LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} locale={locale} />}
+        why={<LandingWhySection vehicleCount={stats.vehicleCount} locale={locale} />}
+        steps={<LandingProcessSection locale={locale} />}
+        contact={
+          <LandingContactSection
+            stats={{ vehicleCount: stats.vehicleCount, clientCount: stats.clientCount }}
+            locale={locale}
+          />
+        }
         guide={<LandingGuideSection locale={locale} stats={stats} models={models} />}
+        faq={<LandingFaqSection locale={locale} />}
+        finalCta={<LandingFinalCtaSection locale={locale} />}
       />
     </>
   );

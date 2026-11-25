@@ -1,21 +1,14 @@
 import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
-import { useLocale } from '@/lib/i18n';
-import {
-  motion,
-  ScrollReveal,
-  StaggerContainer,
-  staggerCard,
-  fadeUp,
-  slideLeft,
-  slideRight,
-} from './motion';
+import { formatCurrency } from '@/lib/format';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
+import { rvDelay } from './reveal';
 import type { LandingVehicle } from './types';
 
 type LandingSignatureCollectionSectionProps = {
   vehicles: LandingVehicle[];
+  locale: Locale;
 };
 
 /**
@@ -23,12 +16,13 @@ type LandingSignatureCollectionSectionProps = {
  */
 export function LandingSignatureCollectionSection({
   vehicles,
+  locale,
 }: LandingSignatureCollectionSectionProps) {
-  const { t } = useLocale();
+  const t = (key: string) => tr(locale, key);
   return (
     <section className="lux-container py-16 md:py-24">
       <div className="mb-10 flex flex-wrap items-center justify-center gap-6 text-center md:items-end md:justify-between md:text-left">
-        <ScrollReveal variants={slideLeft} className="space-y-3">
+        <div className="rv rv-slide-left space-y-3">
           <span className="lux-eyebrow">{t('signature.eyebrow')}</span>
           <h2 className="lux-title-sm max-w-[20ch]">
             {t('signature.title')}
@@ -36,21 +30,17 @@ export function LandingSignatureCollectionSection({
           <p className="lux-subtitle">
             {t('signature.subtitle')}
           </p>
-        </ScrollReveal>
-        <ScrollReveal variants={slideRight}>
+        </div>
+        <div className="rv rv-slide-right">
           <Link href="/catalogue" className="btn-gold shrink-0">
             {t('signature.cta')} <ArrowRight className="h-4 w-4" />
           </Link>
-        </ScrollReveal>
+        </div>
       </div>
 
-      <StaggerContainer
-        staggerDelay={0.14}
-        className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"
-        viewport={{ once: true, amount: 0.1 }}
-      >
+      <div data-rv-amount="0.1" className="rv rv-group grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {vehicles.map((vehicle, i) => (
-          <motion.div key={vehicle._id} variants={staggerCard} style={{ perspective: 1000 }}>
+          <div key={vehicle._id} className="rv-item" style={{ ...rvDelay(i * 0.14), perspective: 1000 }}>
             <Link
               href={`/catalogue/${vehicle.slug}`}
               className="group lux-panel block overflow-hidden transition-transform duration-300 hover:-translate-y-1"
@@ -106,9 +96,9 @@ export function LandingSignatureCollectionSection({
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </div>
         ))}
-      </StaggerContainer>
+      </div>
     </section>
   );
 }

@@ -1,6 +1,5 @@
 import { useLocale } from '@/lib/i18n';
 import type { SliderBrandData, BrandAmbientColor } from './types';
-import { motion } from './motion';
 
 type LandingBrandTabsProps = {
   items: SliderBrandData[];
@@ -35,7 +34,7 @@ export function LandingBrandTabs({
       {items.map((b, i) => {
         const isActive = i === brandIndex;
         return (
-          <motion.a
+          <a
             key={b.brand}
             href={lp(b.vehicle ? `/catalogue/${b.vehicle.slug}` : '/catalogue')}
             aria-current={isActive ? 'true' : undefined}
@@ -55,10 +54,6 @@ export function LandingBrandTabs({
                   }
                 : undefined
             }
-            whileHover={{ scale: 1.06, y: -2 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 18 }}
-            layout
           >
             {b.brand}
             {isActive && sliderActive && (
@@ -68,7 +63,7 @@ export function LandingBrandTabs({
                 style={{ background: `rgb(${brightRgb})` }}
               />
             )}
-          </motion.a>
+          </a>
         );
       })}
     </div>

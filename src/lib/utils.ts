@@ -2,7 +2,10 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { format, differenceInDays, isBefore, isValid } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ALERT_URGENCE_JOURS, ALERT_WARNING_JOURS, MIN_RESERVATION_DAYS, PALIERS } from './constants';
+import { ALERT_URGENCE_JOURS, ALERT_WARNING_JOURS, MIN_RESERVATION_DAYS } from './constants';
+
+export { formatCurrency, formatNumber } from './format';
+export { calcNbJours, calcPalier, calcTarifTotal, type TarifPalier } from './pricing';
 
 // ===== CLASSNAMES =====
 export function cn(...inputs: ClassValue[]): string {
@@ -26,24 +29,6 @@ export function formatDateTime(date: Date | string | null | undefined): string {
   const parsedDate = toValidDate(date);
   if (!parsedDate) return '-';
   return format(parsedDate, "dd/MM/yyyy 'à' HH:mm", { locale: fr });
-}
-
-export function formatCurrency(amount: number, currency = 'MAD'): string {
-  return new Intl.NumberFormat('fr-MA', {
-    style: 'currency',
-    currency,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
-export function formatNumber(n: number): string {
-  return new Intl.NumberFormat('fr-MA').format(n);
-}
-
-// ===== CALCUL TARIFS =====
-export function calcNbJours(debut: Date, fin: Date): number {
-  return Math.max(1, differenceInDays(new Date(fin), new Date(debut)));
 }
 
 // ===== RECHERCHE PAR DATES (catalogue public) =====
@@ -88,8 +73,6 @@ export function parseSearchDateRange(
   return { du, au, debut, fin: new Date(debut.getTime() + (days + 1) * 86_400_000), days };
 }
 
-export type TarifPalier = 'standard' | '10Plus';
-
 type VehiclePricingSource = Partial<{
   tarifParJour: number;
   tarifParJour10Plus: number;
@@ -125,22 +108,6 @@ export function resolveVehiclePricing(vehicle: VehiclePricingSource | null | und
 export function getVehicleDisplayPrice(vehicle: VehiclePricingSource | null | undefined): number {
   const { tarifJour } = resolveVehiclePricing(vehicle);
   return Number.isFinite(tarifJour) && tarifJour > 0 ? tarifJour : 0;
-}
-
-export function calcPalier(nbJours: number, opts?: { forceStandard?: boolean }): TarifPalier {
-  if (!opts?.forceStandard && nbJours >= PALIERS.LONG.min) return '10Plus';
-  return 'standard';
-}
-
-export function calcTarifTotal(
-  nbJours: number,
-  tarifParJour: number,
-  tarifParJour10Plus = 0,
-  opts?: { forceStandard?: boolean }
-): { palier: TarifPalier; tarifJour: number; total: number } {
-  const palier = calcPalier(nbJours, opts);
-  const tarifJour = palier === '10Plus' ? (tarifParJour10Plus || tarifParJour) : tarifParJour;
-  return { palier, tarifJour, total: tarifJour * nbJours };
 }
 
 export function buildPdfViewerUrl(sourceUrl: string, fileName = 'document.pdf'): string {

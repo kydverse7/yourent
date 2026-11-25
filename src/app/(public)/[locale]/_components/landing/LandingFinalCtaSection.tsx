@@ -1,57 +1,32 @@
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-import { useLocale } from '@/lib/i18n';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { BUSINESS } from '@/lib/site';
-import {
-  motion,
-  scaleUp,
-  popIn,
-  tiltUp,
-  staggerItem,
-  ScrollReveal,
-  StaggerContainer,
-} from './motion';
+import { rvDelay } from './reveal';
 
 /**
  * Final CTA block.
  */
-export function LandingFinalCtaSection() {
-  const { t } = useLocale();
+export function LandingFinalCtaSection({ locale }: { locale: Locale }) {
+  const t = (key: string) => tr(locale, key);
   return (
     <section className="lux-container pb-24">
-      <ScrollReveal variants={scaleUp} viewport={{ once: true, amount: 0.25 }}>
+      <div data-rv-amount="0.25" className="rv rv-scale-up">
         <div className="lp-cta relative flex flex-col items-center gap-4 sm:gap-5 md:gap-7 overflow-hidden rounded-[28px] py-12 sm:py-16 md:py-20 text-center">
           <div className="lp-cta-glow" aria-hidden="true" />
-          <motion.span
-            className="lux-eyebrow relative z-10"
-            variants={popIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <span data-rv-amount="0" className="rv rv-pop-in lux-eyebrow relative z-10">
             {t('cta.eyebrow')}
-          </motion.span>
-          <motion.h2
-            className="lux-title-sm relative z-10 max-w-[22ch]"
-            variants={tiltUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          </span>
+          <h2 data-rv-amount="0" className="rv rv-tilt-up lux-title-sm relative z-10 max-w-[22ch]">
             {t('cta.title')}
-          </motion.h2>
-          <StaggerContainer
-            staggerDelay={0.12}
-            delayChildren={0.3}
-            className="relative z-10 flex flex-wrap items-center justify-center gap-3"
-            viewport={{ once: true, amount: 0.5 }}
-          >
-            <motion.div variants={staggerItem}>
+          </h2>
+          <div data-rv-amount="0.5" className="rv rv-group relative z-10 flex flex-wrap items-center justify-center gap-3">
+            <div className="rv-item rv-item-up" style={rvDelay(0.3)}>
               <Link href="/catalogue" className="btn-gold text-base">
                 {t('cta.explore')} <ArrowRight className="h-4 w-4" />
               </Link>
-            </motion.div>
-            <motion.div variants={staggerItem}>
+            </div>
+            <div className="rv-item rv-item-up" style={rvDelay(0.42)}>
               <a
                 href={BUSINESS.whatsappUrl}
                 target="_blank"
@@ -60,10 +35,10 @@ export function LandingFinalCtaSection() {
               >
                 <MessageCircle className="h-4 w-4 text-[#c9a84c]" /> {t('cta.whatsapp')}
               </a>
-            </motion.div>
-          </StaggerContainer>
+            </div>
+          </div>
         </div>
-      </ScrollReveal>
+      </div>
     </section>
   );
 }

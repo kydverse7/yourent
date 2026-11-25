@@ -1,12 +1,9 @@
-'use client';
-
-import { useLocale } from '@/lib/i18n';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 
 /**
  * Logo décoratif (tracé CSS) suivi du H1 de la page, visible dès le HTML.
  */
-export function LandingWordmark() {
-  const { t } = useLocale();
+export function LandingWordmark({ locale }: { locale: Locale }) {
   return (
     <div className="flex shrink-0 flex-col items-center px-4 pb-0 pt-2 md:pt-4">
       <svg viewBox="0 0 1200 200" className="lp-wordmark" aria-hidden="true">
@@ -37,7 +34,7 @@ export function LandingWordmark() {
           Yourent
         </text>
       </svg>
-      <h1 className="lp-hero-title">{t('hero.pageTitle')}</h1>
+      <h1 className="lp-hero-title">{tr(locale, 'hero.pageTitle')}</h1>
     </div>
   );
 }

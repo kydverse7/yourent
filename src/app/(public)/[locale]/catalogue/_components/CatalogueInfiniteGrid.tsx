@@ -5,7 +5,7 @@ import Link from '@/lib/i18n/LocaleLink';
 import Image from 'next/image';
 import { ArrowRight, ArrowUpDown, CalendarCheck, Car, Fuel, Gauge, Search, Users } from 'lucide-react';
 import { format } from 'date-fns';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency } from '@/lib/format';
 import { useLocale } from '@/lib/i18n';
 import { formatEurApprox } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../_lib/specLabels';

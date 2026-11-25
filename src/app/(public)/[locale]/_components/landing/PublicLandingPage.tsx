@@ -1,51 +1,34 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import './landing.css';
 
 import { useMemo, useRef } from 'react';
 import { DISPLAY_BRANDS } from './constants';
-import { useMorphProgress, useIsMobile } from './hooks/useMorphProgress';
+import { useMorphProgress } from './hooks/useMorphProgress';
 import { useLandingSlider } from './hooks/useLandingSlider';
-import { LandingHeroSection } from './LandingHeroSection';
 import { LandingBrandSliderSection } from './LandingBrandSliderSection';
-import { LandingProcessSection } from './LandingProcessSection';
-import { LandingContactSection } from './LandingContactSection';
-import { LandingFaqSection } from './LandingFaqSection';
-import type { LandingVehicle, PublicLandingPageProps, SliderBrandData } from './types';
-
-const LandingSignatureCollectionSection = dynamic<{ vehicles: LandingVehicle[] }>(
-  () => import('./LandingSignatureCollectionSection').then((mod) => mod.LandingSignatureCollectionSection),
-);
-
-const LandingNewArrivalSection = dynamic<{ vehicle: LandingVehicle | null }>(
-  () => import('./LandingNewArrivalSection').then((mod) => mod.LandingNewArrivalSection),
-);
-
-const LandingWhySection = dynamic<{ vehicleCount: number }>(
-  () => import('./LandingWhySection').then((mod) => mod.LandingWhySection),
-);
-
-const LandingEconomicFleetSection = dynamic<{ vehicles: LandingVehicle[] }>(
-  () => import('./LandingEconomicFleetSection').then((mod) => mod.LandingEconomicFleetSection),
-);
-
-const LandingFinalCtaSection = dynamic(
-  () => import('./LandingFinalCtaSection').then((mod) => mod.LandingFinalCtaSection),
-);
+import { LandingEconomicFleetSection } from './LandingEconomicFleetSection';
+import { LandingRevealObserver } from './LandingRevealObserver';
+import type { PublicLandingPageProps, SliderBrandData } from './types';
 
 /* ═══════════════════════════════════════════════════════════
    PublicLandingPage — shell component
-   Orchestrates all landing sections.
+   Seuls le slider et le carrousel ont besoin de JavaScript : les autres sections
+   sont rendues côté serveur et arrivent ici déjà prêtes, sans code à hydrater.
 ═══════════════════════════════════════════════════════════ */
 
 export function PublicLandingPage({
-  signatureVehicles,
   sliderBrands,
   economicVehicles,
-  newArrivalVehicle,
-  stats,
+  hero,
+  signature,
+  newArrival,
+  why,
+  steps,
+  contact,
   guide,
+  faq,
+  finalCta,
 }: PublicLandingPageProps) {
   /* ── Derived data ── */
   const items: SliderBrandData[] = useMemo(
@@ -56,18 +39,12 @@ export function PublicLandingPage({
     [sliderBrands],
   );
 
-  const cardVehicles = useMemo(
-    () => signatureVehicles.slice(0, 4),
-    [signatureVehicles],
-  );
-
   /* ── Refs ── */
   const heroRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   /* ── Hooks motion  ── */
-  const isMobile = useIsMobile();
-  const { sliderActive } = useMorphProgress(heroRef, wrapperRef);
+  const sliderActive = useMorphProgress(heroRef, wrapperRef);
 
   const {
     brandIndex,
@@ -83,9 +60,11 @@ export function PublicLandingPage({
   /* ── Render ── */
   return (
     <div className="flex flex-col pt-5 pb-10">
+      <LandingRevealObserver />
+
       {/* ═══ Hero + Slider ═══ */}
       <div ref={wrapperRef} className="relative w-full flex flex-col gap-[40px]">
-        <LandingHeroSection ref={heroRef} vehicleCount={stats.vehicleCount} />
+        <div ref={heroRef}>{hero}</div>
         <div className="lp-below-fold">
           <LandingBrandSliderSection
             items={items}
@@ -95,25 +74,18 @@ export function PublicLandingPage({
             onTabSelect={handleTab}
             onPause={handlePause}
             onResume={handleResume}
-            isMobile={isMobile}
           />
         </div>
       </div>
 
       {/* ═══ Signature collection ═══ */}
-      <div className="lp-below-fold">
-        <LandingSignatureCollectionSection vehicles={cardVehicles} />
-      </div>
+      <div className="lp-below-fold">{signature}</div>
 
       {/* ═══ Nouvel Arrivage ═══ */}
-      <div className="lp-below-fold">
-        <LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} />
-      </div>
+      <div className="lp-below-fold">{newArrival}</div>
 
       {/* ═══ Why Yourent — golden ratio + animated counters ═══ */}
-      <div className="lp-below-fold">
-        <LandingWhySection vehicleCount={stats.vehicleCount} />
-      </div>
+      <div className="lp-below-fold">{why}</div>
 
       {/* ═══ Economic fleet ═══ */}
       {economicVehicles.length > 0 && (
@@ -123,27 +95,19 @@ export function PublicLandingPage({
       )}
 
       {/* ═══ Process ═══ */}
-      <div className="lp-below-fold">
-        <LandingProcessSection />
-      </div>
+      <div className="lp-below-fold">{steps}</div>
 
       {/* ═══ Contact / Nous rejoindre ═══ */}
-      <div className="lp-below-fold">
-        <LandingContactSection stats={stats} />
-      </div>
+      <div className="lp-below-fold">{contact}</div>
 
       {/* ═══ Guide de location (rendu côté serveur) ═══ */}
       <div className="lp-below-fold">{guide}</div>
 
       {/* ═══ FAQ ═══ */}
-      <div className="lp-below-fold">
-        <LandingFaqSection />
-      </div>
+      <div className="lp-below-fold">{faq}</div>
 
       {/* ═══ Final CTA ═══ */}
-      <div className="lp-below-fold">
-        <LandingFinalCtaSection />
-      </div>
+      <div className="lp-below-fold">{finalCta}</div>
     </div>
   );
 }

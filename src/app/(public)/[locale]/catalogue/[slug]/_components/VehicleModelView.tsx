@@ -12,7 +12,7 @@ import {
   CircleDot,
   MessageCircle,
 } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency } from '@/lib/format';
 import { useLocale } from '@/lib/i18n';
 import { BUSINESS, formatEurApprox } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../../_lib/specLabels';
@@ -84,6 +84,7 @@ export function VehicleModelView({
                 src={selected.featuredPhoto}
                 alt={photoAlt}
                 fill
+                loading="eager"
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"
               />

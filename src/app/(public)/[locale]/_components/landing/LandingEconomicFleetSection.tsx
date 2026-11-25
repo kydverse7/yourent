@@ -1,18 +1,11 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency } from '@/lib/format';
 import { useLocale } from '@/lib/i18n';
-import {
-  motion,
-  ScrollReveal,
-  blurFade,
-  slideLeft,
-  slideRight,
-} from './motion';
 import type { LandingVehicle } from './types';
 
 type Props = {
@@ -44,6 +37,26 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
   /* ── Touch / swipe handling ── */
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
+
+  /* ── Barre sous le modèle actif : elle glisse d'un nom à l'autre ── */
+  const navRef = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    // L'observateur appelle aussi au démarrage, au moment où la section est mise en page.
+    const observer = new ResizeObserver(() => {
+      const button = nav.querySelector<HTMLElement>('.eco-name-link--active');
+      const bar = barRef.current;
+      if (!button || !bar) return;
+      const inset = button.offsetWidth * 0.15;
+      bar.style.width = `${button.offsetWidth - inset * 2}px`;
+      bar.style.transform = `translateX(${button.offsetLeft + inset}px)`;
+      bar.style.opacity = '1';
+    });
+    observer.observe(nav);
+    return () => observer.disconnect();
+  }, [active]);
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -66,7 +79,7 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
     <section className="lux-container py-16 md:py-24 overflow-hidden">
       {/* ── Header ── */}
       <div className="mb-10 flex flex-wrap items-center justify-center gap-6 text-center md:items-end md:justify-between md:text-left">
-        <ScrollReveal variants={slideLeft} className="space-y-3">
+        <div className="rv rv-slide-left space-y-3">
           <span className="lux-eyebrow">{t('eco.eyebrow')}</span>
           <h2 className="lux-title-sm max-w-[24ch]">
             {t('eco.title')}
@@ -74,17 +87,17 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
           <p className="lux-subtitle max-w-[42ch]">
             {t('eco.subtitle')}
           </p>
-        </ScrollReveal>
-        <ScrollReveal variants={slideRight}>
+        </div>
+        <div className="rv rv-slide-right">
           <Link href="/catalogue" className="btn-gold shrink-0">
             {t('eco.cta')} <ArrowRight className="h-4 w-4" />
           </Link>
-        </ScrollReveal>
+        </div>
       </div>
 
       {/* ── Quick-select name links ── */}
-      <ScrollReveal variants={blurFade} className="mb-8">
-        <nav className="eco-name-links" aria-label={t('aria.ecoNav')}>
+      <div className="rv rv-blur-fade mb-8">
+        <nav ref={navRef} className="eco-name-links" aria-label={t('aria.ecoNav')}>
           {vehicles.map((v, i) => (
             <button
               key={v._id}
@@ -93,20 +106,14 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
             >
               <span className="eco-name-link-marque">{v.marque}</span>
               <span className="eco-name-link-modele">{v.modele}</span>
-              {i === active && (
-                <motion.span
-                  className="eco-name-link-bar"
-                  layoutId="eco-active-bar"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
             </button>
           ))}
+          <span ref={barRef} className="eco-name-link-bar" aria-hidden="true" />
         </nav>
-      </ScrollReveal>
+      </div>
 
       {/* ── Carousel ── */}
-      <ScrollReveal variants={blurFade}>
+      <div className="rv rv-blur-fade">
         <div className="eco-carousel">
           {/* ── Stacked horizontal cards ── */}
           <div
@@ -127,25 +134,17 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
               const absPos = Math.abs(pos);
 
               return (
-                <motion.div
+                <div
                   key={vehicle._id}
                   className="eco-card-wrapper"
-                  animate={{
-                    x: `${pos * 60}%`,
-                    scale: isActive ? 1 : Math.max(0.72, 1 - absPos * 0.14),
+                  onClick={() => !isActive && setActive(i)}
+                  style={{
+                    transform: `translateX(${pos * 60}%) scale(${isActive ? 1 : Math.max(0.72, 1 - absPos * 0.14)}) rotateY(${pos * -4}deg)`,
                     zIndex: count - absPos,
                     opacity: absPos > 2 ? 0 : isActive ? 1 : 0.45,
                     filter: isActive ? 'blur(0px)' : `blur(${absPos * 3}px)`,
-                    rotateY: pos * -4,
+                    cursor: isActive ? 'default' : 'pointer',
                   }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 280,
-                    damping: 28,
-                    mass: 0.85,
-                  }}
-                  onClick={() => !isActive && setActive(i)}
-                  style={{ cursor: isActive ? 'default' : 'pointer' }}
                 >
                   <div className={`eco-card eco-card--h${isActive ? ' eco-card--active' : ''}`}>
                     {/* ── Left: Image ── */}
@@ -202,7 +201,7 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -229,7 +228,7 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
             </button>
           </div>
         </div>
-      </ScrollReveal>
+      </div>
     </section>
   );
 }

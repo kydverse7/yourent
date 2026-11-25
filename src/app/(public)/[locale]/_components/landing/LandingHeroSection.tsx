@@ -1,8 +1,7 @@
-import { forwardRef } from 'react';
 import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { useLocale } from '@/lib/i18n';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { LandingHeroTopBar } from './LandingHeroTopBar';
 import { LandingWordmark } from './LandingWordmark';
 import { LandingSearchCard } from './LandingSearchCard';
@@ -27,12 +26,10 @@ function BrandMarquee() {
 
 /* ─── Hero section ──────────────────────────────────── */
 /* Aucun élément du hero n'attend le JavaScript : l'image et le titre sont visibles dès le HTML. */
-export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: number }>(
-  function LandingHeroSection({ vehicleCount }, ref) {
-    const { t } = useLocale();
+export function LandingHeroSection({ vehicleCount, locale }: { vehicleCount: number; locale: Locale }) {
+    const t = (key: string) => tr(locale, key);
     return (
       <section
-        ref={ref}
         className="relative z-10 flex h-auto min-h-0 w-full flex-col px-3 pt-2 md:px-5 md:pt-3 lg:px-6"
       >
         {/* ── hero panel background ── */}
@@ -44,10 +41,10 @@ export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: num
           <div className="lp-hero-grid pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
         </div>
 
-        <LandingHeroTopBar vehicleCount={vehicleCount} />
+        <LandingHeroTopBar vehicleCount={vehicleCount} locale={locale} />
 
         {/* ── Logo + H1 ── */}
-        <LandingWordmark />
+        <LandingWordmark locale={locale} />
 
         {/* ── Macan hero photo ── */}
         <div className="relative z-20 mx-auto mt-2 w-full max-w-sm sm:max-w-md md:max-w-lg">
@@ -64,6 +61,7 @@ export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: num
               alt={t('hero.imgAlt')}
               fill
               priority
+              fetchPriority="high"
               className="object-contain"
               sizes="(max-width: 640px) min(94vw, 384px), (max-width: 768px) 448px, 512px"
             />
@@ -96,5 +94,4 @@ export const LandingHeroSection = forwardRef<HTMLDivElement, { vehicleCount: num
         </div>
       </section>
     );
-  },
-);
+}

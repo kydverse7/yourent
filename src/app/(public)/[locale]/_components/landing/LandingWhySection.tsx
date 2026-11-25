@@ -1,15 +1,7 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
 import { Truck, ShieldCheck, CarFront, Headphones, Sparkles } from 'lucide-react';
-import { useLocale } from '@/lib/i18n';
-import {
-  motion,
-  ScrollReveal,
-  StaggerContainer,
-  staggerCard,
-  tiltUp,
-} from './motion';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
+import { LandingCountUp } from './LandingCountUp';
+import { rvDelay } from './reveal';
 
 /* ── φ = 1.618 — golden ratio design notes ──
    Typography scale : stat 2.6rem (φ²·⁰⁵), title 1rem×φ, label 0.65rem
@@ -17,51 +9,6 @@ import {
    Grid gap         : gap-4 md:gap-5 (20 px ≈ 16×φ⁰·⁵⁵)
    Icon box         : 48 px = 3rem ≈ 16×φ²
 ────────────────────────────────────────────── */
-
-/* ── Animated count-up ─────────────────────── */
-function CountUp({
-  target,
-  suffix = '',
-  duration = 2000,
-}: {
-  target: number;
-  suffix?: string;
-  duration?: number;
-}) {
-  // Le HTML porte le vrai chiffre ; le décompte ne démarre qu'à l'entrée dans la vue.
-  const [value, setValue] = useState(target);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const t0 = performance.now();
-          (function tick(now: number) {
-            const p = Math.min((now - t0) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
-            setValue(Math.round(eased * target));
-            if (p < 1) requestAnimationFrame(tick);
-          })(t0);
-        }
-      },
-      { threshold: 0.4 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [target, duration]);
-
-  return (
-    <span ref={ref}>
-      {value}
-      {suffix}
-    </span>
-  );
-}
 
 /* ── Advantage card data ───────────────────── */
 type Advantage = {
@@ -72,8 +19,8 @@ type Advantage = {
   counter: React.ReactNode;
 };
 
-function useAdvantages(vehicleCount: number): Advantage[] {
-  const { t } = useLocale();
+function advantagesFor(locale: Locale, vehicleCount: number): Advantage[] {
+  const t = (key: string) => tr(locale, key);
   return [
     {
       icon: Truck,
@@ -89,7 +36,7 @@ function useAdvantages(vehicleCount: number): Advantage[] {
       labelKey: 'why.insurance.label',
       counter: (
         <>
-          <CountUp target={100} suffix={t('why.insurance.stat')} />
+          <LandingCountUp target={100} suffix={t('why.insurance.stat')} />
         </>
       ),
     },
@@ -98,7 +45,7 @@ function useAdvantages(vehicleCount: number): Advantage[] {
       titleKey: 'why.fleet.title',
       descKey: 'why.fleet.desc',
       labelKey: 'why.fleet.label',
-      counter: <CountUp target={vehicleCount} />,
+      counter: <LandingCountUp target={vehicleCount} />,
     },
     {
       icon: Headphones,
@@ -111,9 +58,9 @@ function useAdvantages(vehicleCount: number): Advantage[] {
 }
 
 /* ── Section component ─────────────────────── */
-export function LandingWhySection({ vehicleCount }: { vehicleCount: number }) {
-  const { t } = useLocale();
-  const advantages = useAdvantages(vehicleCount);
+export function LandingWhySection({ vehicleCount, locale }: { vehicleCount: number; locale: Locale }) {
+  const t = (key: string) => tr(locale, key);
+  const advantages = advantagesFor(locale, vehicleCount);
 
   return (
     <section className="lux-container py-16 md:py-24">
@@ -122,7 +69,7 @@ export function LandingWhySection({ vehicleCount }: { vehicleCount: number }) {
         <div className="pointer-events-none absolute inset-x-0 -top-px h-48 rounded-t-[28px] bg-[radial-gradient(ellipse_61.8%_38.2%_at_50%_0%,rgba(201,168,76,0.10),transparent)]" />
 
         {/* ── Header — left aligned ── */}
-        <ScrollReveal variants={tiltUp} className="relative mb-10 text-center md:mb-14 md:text-start">
+        <div className="rv rv-tilt-up relative mb-10 text-center md:mb-14 md:text-start">
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('why.eyebrow')}
           </span>
@@ -130,22 +77,17 @@ export function LandingWhySection({ vehicleCount }: { vehicleCount: number }) {
           <p className="lux-subtitle mt-3 max-w-[48ch]">
             {t('why.subtitle')}
           </p>
-        </ScrollReveal>
+        </div>
 
         {/* ── 2×2 grid (golden-ratio gap) ── */}
-        <StaggerContainer
-          staggerDelay={0.12}
-          className="relative mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 md:gap-5"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+        <div data-rv-amount="0.1" className="rv rv-group relative mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 md:gap-5">
           {advantages.map((adv, i) => {
             const Icon = adv.icon;
             return (
-              <motion.div
+              <div
                 key={i}
-                variants={staggerCard}
-                style={{ perspective: 1000 }}
-                className="group relative flex flex-col items-center rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all hover:border-[#c9a84c]/15 hover:bg-white/[0.04] md:p-8"
+                style={{ ...rvDelay(i * 0.12), perspective: 1000 }}
+                className="rv-item group relative flex flex-col items-center rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all hover:border-[#c9a84c]/15 hover:bg-white/[0.04] md:p-8"
               >
                 {/* Icon — φ² = 48 px */}
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#c9a84c]/20 bg-[#c9a84c]/10 transition-colors group-hover:bg-[#c9a84c]/15">
@@ -167,10 +109,10 @@ export function LandingWhySection({ vehicleCount }: { vehicleCount: number }) {
                 <p className="mt-1.5 text-sm leading-relaxed text-[#b9a88f]">
                   {t(adv.descKey)}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

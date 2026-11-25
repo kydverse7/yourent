@@ -27,20 +27,16 @@ export type LandingStats = {
 };
 
 export type PublicLandingPageProps = {
-  signatureVehicles: LandingVehicle[];
   sliderBrands: SliderBrandData[];
   economicVehicles: LandingVehicle[];
-  newArrivalVehicle?: LandingVehicle | null;
-  stats: LandingStats;
-  /** Section de texte rendue côté serveur : son contenu n'alourdit pas le JavaScript client. */
+  /* Sections rendues côté serveur : leur contenu n'alourdit pas le JavaScript client. */
+  hero: ReactNode;
+  signature: ReactNode;
+  newArrival: ReactNode;
+  why: ReactNode;
+  steps: ReactNode;
+  contact: ReactNode;
   guide: ReactNode;
-};
-
-export type MorphProgress = {
-  /** 0–1 raw scroll progress through the hero */
-  raw: number;
-  /** 0–1 clamped motion progress (snaps to 1 when slider active) */
-  motion: number;
-  /** true when scroll has passed the hero threshold */
-  sliderActive: boolean;
+  faq: ReactNode;
+  finalCta: ReactNode;
 };

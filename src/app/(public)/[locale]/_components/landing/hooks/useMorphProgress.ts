@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { NAV_HEIGHT, MORPH_THRESHOLD } from '../constants';
-import type { MorphProgress } from '../types';
 
 /**
- * Tracks scroll progress through the hero section and determines
- * when the slider should become active.
+ * Indique si le défilement a dépassé le hero, c'est-à-dire si le slider doit démarrer.
+ * Mesure au plus une fois par image, et ne provoque un rendu que lorsque la réponse change.
  *
  * @param heroRef   - ref to the hero section element
  * @param wrapperRef - ref to the wrapper containing hero + slider
@@ -12,42 +11,31 @@ import type { MorphProgress } from '../types';
 export function useMorphProgress(
   heroRef: React.RefObject<HTMLDivElement | null>,
   wrapperRef: React.RefObject<HTMLDivElement | null>,
-): MorphProgress {
-  const [raw, setRaw] = useState(0);
+): boolean {
+  const [sliderActive, setSliderActive] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
       const wrapper = wrapperRef.current;
       if (!wrapper) return;
       const rect = wrapper.getBoundingClientRect();
       const heroHeight = heroRef.current?.offsetHeight ?? window.innerHeight;
       const scrolled = NAV_HEIGHT - rect.top;
-      setRaw(Math.max(0, Math.min(1, scrolled / heroHeight)));
+      setSliderActive(Math.max(0, Math.min(1, scrolled / heroHeight)) >= MORPH_THRESHOLD);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // initial measure
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, [heroRef, wrapperRef]);
 
-  const sliderActive = raw >= MORPH_THRESHOLD;
-  const motion = sliderActive ? 1 : Math.min(raw / MORPH_THRESHOLD, 1);
-
-  return { raw, motion, sliderActive };
-}
-
-/**
- * Tracks viewport width to determine mobile breakpoint.
- */
-export function useIsMobile(breakpoint = 768): boolean {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < breakpoint);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, [breakpoint]);
-
-  return isMobile;
+  return sliderActive;
 }

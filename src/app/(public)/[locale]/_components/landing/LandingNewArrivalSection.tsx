@@ -1,25 +1,17 @@
 import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
-import { useLocale } from '@/lib/i18n';
-import {
-  motion,
-  ScrollReveal,
-  StaggerContainer,
-  staggerCard,
-  fadeUp,
-  slideLeft,
-  slideRight,
-} from './motion';
+import { formatCurrency } from '@/lib/format';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import type { LandingVehicle } from './types';
 
 type LandingNewArrivalSectionProps = {
   vehicle: LandingVehicle | null;
+  locale: Locale;
 };
 
-export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionProps) {
-  const { t } = useLocale();
+export function LandingNewArrivalSection({ vehicle, locale }: LandingNewArrivalSectionProps) {
+  const t = (key: string) => tr(locale, key);
 
   if (!vehicle) return null;
 
@@ -27,7 +19,7 @@ export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionPr
     <section className="lux-container py-16 md:py-24">
       {/* ── Header row — same layout as Signature / Economic ── */}
       <div className="mb-10 flex flex-wrap items-center justify-center gap-6 text-center md:items-end md:justify-between md:text-left">
-        <ScrollReveal variants={slideLeft} className="space-y-3">
+        <div className="rv rv-slide-left space-y-3">
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('newArrival.eyebrow')}
           </span>
@@ -37,21 +29,17 @@ export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionPr
           <p className="lux-subtitle max-w-[42ch]">
             {t('newArrival.subtitle')}
           </p>
-        </ScrollReveal>
-        <ScrollReveal variants={slideRight}>
+        </div>
+        <div className="rv rv-slide-right">
           <Link href={`/catalogue/${vehicle.slug}`} className="btn-gold shrink-0">
             {t('newArrival.cta')} <ArrowRight className="h-4 w-4" />
           </Link>
-        </ScrollReveal>
+        </div>
       </div>
 
       {/* ── Featured card — full-width cinematic panel ── */}
-      <StaggerContainer
-        staggerDelay={0.14}
-        className="grid gap-5 md:grid-cols-1"
-        viewport={{ once: true, amount: 0.1 }}
-      >
-        <motion.div variants={staggerCard} style={{ perspective: 1000 }}>
+      <div data-rv-amount="0.1" className="rv rv-group grid gap-5 md:grid-cols-1">
+        <div className="rv-item" style={{ perspective: 1000 }}>
           <div className="relative overflow-hidden rounded-[28px] border border-white/[0.07] bg-gradient-to-b from-white/[0.03] to-white/[0.015]">
             {/* Decorative glow */}
             <div className="pointer-events-none absolute inset-x-0 -top-px h-48 rounded-t-[28px] bg-[radial-gradient(ellipse_61.8%_38.2%_at_50%_0%,rgba(201,168,76,0.10),transparent)]" />
@@ -120,8 +108,8 @@ export function LandingNewArrivalSection({ vehicle }: LandingNewArrivalSectionPr
               </div>
             </div>
           </div>
-        </motion.div>
-      </StaggerContainer>
+        </div>
+      </div>
     </section>
   );
 }

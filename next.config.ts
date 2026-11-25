@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { SEO_ROUTES } from './src/lib/seo/routes';
 
 /**
  * Mesure d'audience et Google Ads (GA4 + balise AW), d'après la liste de Google :
@@ -7,6 +8,33 @@ import type { NextConfig } from 'next';
  * le charge bel et bien (violation constatée le 2026-11-05).
  * Google impose de lister chaque domaine national : seul google.co.ma est ajouté (clientèle marocaine).
  */
+/**
+ * Adresses anglaises (ou arabes) demandées sans leur préfixe de langue, par ex. /car-rental-casablanca-to-marrakech :
+ * Google les a trouvées et les voit en 404 (Search Console, 2026-11-25). Elles renvoient vers la version /en,
+ * sauf quand l'adresse existe aussi en français (/faq, /contact), qui reste servie à la racine.
+ */
+function unprefixedForeignRedirects() {
+  const frenchPaths = new Set<string>();
+  for (const paths of Object.values(SEO_ROUTES)) {
+    if ('fr' in paths && paths.fr) frenchPaths.add(paths.fr);
+  }
+  const seen = new Set<string>();
+  const list: { source: string; destination: string; permanent: true }[] = [];
+  for (const paths of Object.values(SEO_ROUTES)) {
+    const p = paths as Partial<Record<'fr' | 'en' | 'ar', string>>;
+    const candidates: [string | undefined, string][] = [
+      [p.en, 'en'],
+      [p.ar, p.en === p.ar ? 'en' : 'ar'],
+    ];
+    for (const [path, locale] of candidates) {
+      if (!path || frenchPaths.has(path) || seen.has(path)) continue;
+      seen.add(path);
+      list.push({ source: path, destination: `/${locale}${path}`, permanent: true });
+    }
+  }
+  return list;
+}
+
 const GOOGLE_SCRIPTS = [
   'https://www.googletagmanager.com',
   'https://*.google-analytics.com',
@@ -64,6 +92,7 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     const legacy: [string, string][] = [
+      ['/index.php', '/'],
       ['/nos-vehicules', '/catalogue'],
       ['/shop', '/catalogue'],
       ['/contacts', '/contact'],
@@ -89,7 +118,10 @@ const nextConfig: NextConfig = {
       ['/clio', '/location-voiture-pas-cher-casablanca'],
       ['/catalogue/renault-clio-4', '/location-voiture-pas-cher-casablanca'],
     ];
-    return legacy.map(([source, destination]) => ({ source, destination, permanent: true }));
+    return [
+      ...legacy.map(([source, destination]) => ({ source, destination, permanent: true })),
+      ...unprefixedForeignRedirects(),
+    ];
   },
   async headers() {
     return [
@@ -115,6 +147,11 @@ const nextConfig: NextConfig = {
             ].join('; '),
           },
         ],
+      },
+      {
+        /* Image de partage (réseaux sociaux) : utile en aperçu, sans intérêt comme page dans Google. */
+        source: '/opengraph-image',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
       },
     ];
   },

@@ -429,6 +429,14 @@ a {
 }
 
 
+.lux-swap-in {
+  animation: luxSwapIn 0.2s ease-out backwards;
+}
+
+@keyframes luxSwapIn {
+  from { opacity: 0; transform: translateY(-6px); }
+}
+
 .lux-filter-bar {
   display: flex;
   flex-wrap: nowrap;

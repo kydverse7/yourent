@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { addDays, differenceInDays, format } from 'date-fns';
 import { fr, enGB, arSA } from 'date-fns/locale';
-import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, CalendarDays, Pencil, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useLocale } from '@/lib/i18n';
@@ -81,15 +80,10 @@ export function CatalogueDateFilter({
 
   return (
     <div className="lux-filter-bar">
-      <AnimatePresence mode="wait" initial={false}>
-        {editing ? (
-          <motion.div
+      {editing ? (
+          <div
             key="editor"
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-            className="flex w-full flex-col gap-2 rounded-2xl border border-gold/20 bg-gold/[0.06] p-3 sm:flex-row sm:items-end"
+            className="lux-swap-in flex w-full flex-col gap-2 rounded-2xl border border-gold/20 bg-gold/[0.06] p-3 sm:flex-row sm:items-end"
           >
             <label className="min-w-0 flex-1">
               <span className="mb-1 block text-[0.58rem] font-bold uppercase tracking-[0.16em] text-cream-muted">
@@ -150,14 +144,10 @@ export function CatalogueDateFilter({
                 {t('cat.datesCancel')}
               </button>
             </div>
-          </motion.div>
+          </div>
         ) : (
-          <motion.div
+          <div
             key={active ? 'active' : 'idle'}
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
             className="flex flex-wrap items-center gap-2"
           >
             {active ? (
@@ -201,9 +191,8 @@ export function CatalogueDateFilter({
                 <CalendarDays className="h-3.5 w-3.5" /> {t('cat.datesAdd')}
               </button>
             )}
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   );
 }

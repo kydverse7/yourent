@@ -1,8 +1,5 @@
-'use client';
-
 import { ChevronDown, Sparkles } from 'lucide-react';
-import { useLocale } from '@/lib/i18n';
-import { ScrollReveal, tiltUp } from './motion';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 
 const FAQ_COUNT = 6;
 
@@ -26,8 +23,8 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function LandingFaqSection() {
-  const { t } = useLocale();
+export function LandingFaqSection({ locale }: { locale: Locale }) {
+  const t = (key: string) => tr(locale, key);
 
   const items = Array.from({ length: FAQ_COUNT }, (_, i) => ({
     q: t(`faq.q${i + 1}`),
@@ -39,7 +36,7 @@ export function LandingFaqSection() {
       <div className="relative overflow-hidden rounded-[28px] border border-white/[0.07] bg-gradient-to-b from-white/[0.03] to-white/[0.015] p-6 sm:p-10 md:p-14">
         <div className="pointer-events-none absolute inset-x-0 -top-px h-48 rounded-t-[28px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(201,168,76,0.1),transparent)]" />
 
-        <ScrollReveal variants={tiltUp} className="relative mb-10 text-center md:mb-14">
+        <div className="rv rv-tilt-up relative mb-10 text-center md:mb-14">
           <span className="lux-eyebrow">
             <Sparkles className="h-3.5 w-3.5" /> {t('faq.eyebrow')}
           </span>
@@ -47,7 +44,7 @@ export function LandingFaqSection() {
           <p className="lux-subtitle mx-auto mt-3 max-w-[52ch]">
             {t('faq.subtitle')}
           </p>
-        </ScrollReveal>
+        </div>
 
         <div className="relative mx-auto max-w-3xl space-y-3">
           {items.map((item, i) => (

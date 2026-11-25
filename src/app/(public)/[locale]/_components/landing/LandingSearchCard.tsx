@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useToday } from '../../catalogue/_lib/useToday';
 import { addDays, differenceInDays, format } from 'date-fns';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CalendarDays, MoveRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useLocale } from '@/lib/i18n';
@@ -108,32 +107,23 @@ export function LandingSearchCard() {
             <span>{t('hero.searchLive')}</span>
           </span>
 
-          <AnimatePresence mode="popLayout" initial={false}>
-            {days >= MIN_RESERVATION_DAYS ? (
-              <motion.span
+          {days >= MIN_RESERVATION_DAYS ? (
+              <span
                 key={days}
-                initial={{ opacity: 0, scale: 0.7, y: -4 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.7, y: 4 }}
-                transition={{ duration: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[rgba(201,168,76,0.22)] bg-[rgba(201,168,76,0.08)] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#e8c97a]"
+                className="lp-days-chip inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[rgba(201,168,76,0.22)] bg-[rgba(201,168,76,0.08)] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#e8c97a]"
               >
                 {t('hero.searchDays')
                   .replace('{count}', String(days))
                   .replace(/\{s\}/g, days > 1 ? 's' : '')}
-              </motion.span>
+              </span>
             ) : (
-              <motion.span
+              <span
                 key="hint"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
                 className="shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#756858]"
               >
                 {t('hero.searchMinHint').replace('{count}', String(MIN_RESERVATION_DAYS))}
-              </motion.span>
+              </span>
             )}
-          </AnimatePresence>
         </div>
 
         {/* ── fields + CTA ── */}
@@ -156,13 +146,9 @@ export function LandingSearchCard() {
 
           {/* gold connector */}
           <span className="hidden h-12 items-center justify-center text-[#c9a84c]/70 sm:flex" aria-hidden="true">
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              className="flex items-center"
-            >
+            <span className="lp-connector flex items-center">
               <MoveRight className="h-4 w-4" />
-            </motion.span>
+            </span>
           </span>
 
           <label className="block min-w-0">

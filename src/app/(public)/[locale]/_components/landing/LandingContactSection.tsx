@@ -1,6 +1,3 @@
-'use client';
-
-import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   MapPin,
@@ -15,21 +12,11 @@ import {
   Star,
   Send,
 } from 'lucide-react';
-import { useLocale } from '@/lib/i18n';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { BUSINESS } from '@/lib/site';
 import { SOCIALS, formatBusinessHours } from './constants';
-import {
-  motion,
-  ScrollReveal,
-  fadeUp,
-  tiltUp,
-  slideLeft,
-  slideRight,
-  stagger,
-  staggerCard,
-  useScroll,
-  useTransform,
-} from './motion';
+import { LandingFiligrane } from './LandingFiligrane';
+import { rvDelay } from './reveal';
 import type { LandingStats } from './types';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -38,57 +25,8 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   WhatsApp: MessageCircle,
 };
 
-/* ── SVG Filigrane that draws on scroll ── */
-function FiligraneSVG() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<SVGTextElement>(null);
-  const [pathLen, setPathLen] = useState(3200);
-
-  useEffect(() => {
-    if (textRef.current) {
-      const len = textRef.current.getComputedTextLength();
-      // Account for stroke joins — add a generous margin
-      setPathLen(len * 1.15);
-    }
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: wrapRef,
-    // start drawing when bottom of viewport hits the element,
-    // finish when the element leaves the top of the viewport
-    offset: ['start end', 'end start'],
-  });
-
-  // Map scroll 0→1 to dashOffset pathLen→0 (draws the text)
-  const dashOffset = useTransform(scrollYProgress, [0, 0.65], [pathLen, 0]);
-  // Fade in as it starts drawing
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.6, 1], [0, 1, 1, 0.5]);
-
-  return (
-    <div ref={wrapRef} className="ct-filigrane-wrap" aria-hidden="true">
-      <svg className="ct-filigrane-svg" viewBox="0 0 1200 100" preserveAspectRatio="xMidYMid meet">
-        <motion.text
-          ref={textRef}
-          x="600"
-          y="78"
-          textAnchor="middle"
-          className="ct-filigrane-text"
-          style={{
-            strokeDasharray: pathLen,
-            strokeDashoffset: dashOffset,
-            opacity,
-          }}
-        >
-          CASABLANCA
-        </motion.text>
-      </svg>
-    </div>
-  );
-}
-
-export function LandingContactSection({ stats }: { stats: LandingStats }) {
-  const { t, locale } = useLocale();
-  const sectionRef = useRef<HTMLElement>(null);
+export function LandingContactSection({ stats, locale }: { stats: LandingStats; locale: Locale }) {
+  const t = (key: string) => tr(locale, key);
 
   const CONTACT_ITEMS = [
     {
@@ -128,7 +66,7 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
   ].filter((counter) => counter.number > 0);
 
   return (
-    <section id="contact" ref={sectionRef} className="ct-section scroll-mt-24">
+    <section id="contact" className="ct-section scroll-mt-24">
       {/* ═══ Parallax background image ═══ */}
       <div className="ct-parallax-wrap" aria-hidden="true">
         <Image
@@ -150,62 +88,44 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
       <div className="lux-container relative z-10">
 
         {/* ── Eyebrow tag ── */}
-        <ScrollReveal variants={fadeUp} className="ct-eyebrow-row">
+        <div className="rv rv-fade-up ct-eyebrow-row">
           <span className="ct-eyebrow-pill">
             <span className="ct-eyebrow-dot" />
             <MapPin className="h-3 w-3" />
             {t('contact.eyebrow')}
           </span>
-        </ScrollReveal>
+        </div>
 
         {/* ── Title block ── */}
-        <ScrollReveal variants={tiltUp} className="ct-title-block">
+        <div className="rv rv-tilt-up ct-title-block">
           <h2 className="ct-main-title">
             <span className="ct-main-title-light">{t('contact.title')} </span>
             <span className="ct-main-title-gold">{t('contact.titleGold')}</span>
           </h2>
           <div className="ct-title-separator">
-            <motion.div
-              className="ct-title-sep-line"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            />
+            <div data-rv-amount="0" className="rv rv-sep-line ct-title-sep-line" />
             <Send className="ct-title-sep-icon" />
-            <motion.div
-              className="ct-title-sep-line"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            />
+            <div data-rv-amount="0" className="rv rv-sep-line ct-title-sep-line" />
           </div>
           <p className="ct-main-subtitle">
             {t('contact.subtitle')}
           </p>
-        </ScrollReveal>
+        </div>
 
         {/* ── Stats strip ── */}
-        <motion.div
-          className="ct-stats-strip"
-          variants={stagger(0.15, 0.4)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          {COUNTERS.map((counter) => (
-            <motion.div key={counter.label} className="ct-strip-stat" variants={staggerCard}>
+        <div data-rv-amount="0.5" className="rv rv-group ct-stats-strip">
+          {COUNTERS.map((counter, i) => (
+            <div key={counter.label} className="rv-item ct-strip-stat" style={rvDelay(0.4 + i * 0.15)}>
               <span className="ct-strip-num">{counter.number}</span>
               <span className="ct-strip-label">{counter.label}</span>
-            </motion.div>
+            </div>
           ))}
-          <motion.a
+          <a
             href={BUSINESS.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ct-strip-stat"
-            variants={staggerCard}
+            className="rv-item ct-strip-stat"
+            style={rvDelay(0.4 + COUNTERS.length * 0.15)}
           >
             <span className="ct-strip-num">
               {rating}
@@ -214,22 +134,16 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
             <span className="ct-strip-label">
               {t('contact.statGoogle').replace('{count}', String(ratingCount))}
             </span>
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
 
         {/* ── Main content grid ── */}
         <div className="ct-content-grid">
 
           {/* ── Left: glass cards with contact info ── */}
-          <ScrollReveal variants={slideLeft} className="ct-left-col">
-            <motion.div
-              className="ct-glass-stack"
-              variants={stagger(0.1, 0.2)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {CONTACT_ITEMS.map((item) => {
+          <div className="rv rv-slide-left ct-left-col">
+            <div data-rv-amount="0.2" className="rv rv-group ct-glass-stack">
+              {CONTACT_ITEMS.map((item, itemIndex) => {
                 const Icon = item.icon;
                 const inner = (
                   <div className="ct-glass-inner">
@@ -255,7 +169,7 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
                 );
 
                 return (
-                  <motion.div key={item.label} variants={staggerCard}>
+                  <div key={item.label} className="rv-item" style={rvDelay(0.2 + itemIndex * 0.1)}>
                     {item.href ? (
                       <a
                         href={item.href}
@@ -268,54 +182,42 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
                     ) : (
                       <div className="ct-glass-card">{inner}</div>
                     )}
-                  </motion.div>
+                  </div>
                 );
               })}
-            </motion.div>
+            </div>
 
             {/* ── Socials ── */}
-            <motion.div
-              className="ct-social-row"
-              variants={stagger(0.08, 0.7)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-            >
+            <div data-rv-amount="0.5" className="rv rv-group ct-social-row">
               <span className="ct-social-label">{t('contact.followUs')}</span>
               <div className="ct-social-icons">
-                {SOCIALS.map(({ label, href, icon }) => {
+                {SOCIALS.map(({ label, href, icon }, socialIndex) => {
                   const Icon = ICON_MAP[icon];
                   return (
-                    <motion.a
+                    <a
                       key={label}
                       href={href}
                       target="_blank"
                       rel="noreferrer"
                       aria-label={label}
-                      className="ct-social-icon"
-                      variants={staggerCard}
-                      whileHover={{ scale: 1.15, y: -3 }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 14 }}
+                      className="rv-item ct-social-icon"
+                      style={rvDelay(0.7 + socialIndex * 0.08)}
                     >
                       {icon === 'TikTok' ? (
                         <span className="text-[10px] font-black tracking-tighter">TK</span>
                       ) : (
                         Icon && <Icon className="h-[15px] w-[15px]" />
                       )}
-                    </motion.a>
+                    </a>
                   );
                 })}
               </div>
-            </motion.div>
-          </ScrollReveal>
+            </div>
+          </div>
 
           {/* ── Right: floating map card ── */}
-          <ScrollReveal variants={slideRight} className="ct-right-col">
-            <motion.div
-              className="ct-map-float"
-              whileHover={{ y: -4 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-            >
+          <div className="rv rv-slide-right ct-right-col">
+            <div className="ct-map-float">
               {/* Header: agency info + buttons */}
               <div className="ct-map-header">
                 <div className="ct-map-info-left">
@@ -349,12 +251,12 @@ export function LandingContactSection({ stats }: { stats: LandingStats }) {
                 <div className="ct-map-corner ct-map-corner--tl" />
                 <div className="ct-map-corner ct-map-corner--br" />
               </div>
-            </motion.div>
-          </ScrollReveal>
+            </div>
+          </div>
         </div>
 
         {/* ═══ Filigrane "CASABLANCA" — SVG stroke-draw on scroll ═══ */}
-        <FiligraneSVG />
+        <LandingFiligrane />
       </div>
 
       {/* ═══ Bottom decorative line ═══ */}

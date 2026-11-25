@@ -1,16 +1,11 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from '@/lib/i18n/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency } from '@/lib/format';
 import { useLocale } from '@/lib/i18n';
 import { LandingBrandTabs } from './LandingBrandTabs';
 import { BRAND_AMBIENT } from './constants';
-import {
-  motion,
-  AnimatePresence,
-  brandInfoVariants,
-  carSlideVariants,
-} from './motion';
 import type { SliderBrandData, BrandAmbientColor } from './types';
 
 type LandingBrandSliderSectionProps = {
@@ -21,8 +16,24 @@ type LandingBrandSliderSectionProps = {
   onTabSelect: (index: number) => void;
   onPause: () => void;
   onResume: () => void;
-  isMobile?: boolean;
 };
+
+const CAR_EXIT_MS = 500;
+const INFO_EXIT_MS = 350;
+
+/** La nouvelle valeur ne s'affiche qu'après l'animation de sortie de l'ancienne ; rien ne s'anime au premier rendu. */
+function useSwapAfterExit<T>(value: T, exitMs: number) {
+  const [state, setState] = useState({ shown: value, swapped: false });
+
+  useEffect(() => {
+    if (value === state.shown) return;
+    const timer = setTimeout(() => setState({ shown: value, swapped: true }), exitMs);
+    return () => clearTimeout(timer);
+  }, [value, state.shown, exitMs]);
+
+  const phase = value !== state.shown ? 'exit' : state.swapped ? 'enter' : 'idle';
+  return { shown: state.shown, phase };
+}
 
 /**
  * Brand slider section with cinematic background,
@@ -36,7 +47,6 @@ export function LandingBrandSliderSection({
   onTabSelect,
   onPause,
   onResume,
-  isMobile,
 }: LandingBrandSliderSectionProps) {
   const { t, locale } = useLocale();
   const isRtl = locale === 'ar';
@@ -44,6 +54,9 @@ export function LandingBrandSliderSection({
   const ambient: BrandAmbientColor = BRAND_AMBIENT[active.brand] ?? [200, 80, 50];
   const [ar, ag, ab] = ambient;
   const rgb = `${ar},${ag},${ab}`;
+  const car = useSwapAfterExit(active, CAR_EXIT_MS);
+  const info = useSwapAfterExit(active, INFO_EXIT_MS);
+  const shownInfo = info.shown;
 
   return (
     <section
@@ -85,37 +98,26 @@ export function LandingBrandSliderSection({
       {/* ── brand info panel + vehicle photo ── */}
       <div className={`relative z-40 flex min-h-0 flex-1 flex-col items-center justify-end px-5 pb-6 pointer-events-none md:flex-row md:items-center md:justify-between md:px-14 md:pb-0${isRtl ? ' md:flex-row-reverse' : ''}`}>
         {/* Vehicle hero photo */}
-        {active.vehicle?.featuredPhoto && (
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={active.brand + '-photo'}
-              className="pointer-events-none relative z-30 w-[85%] max-w-[420px] md:w-[48%] md:max-w-[540px]"
-              variants={carSlideVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
+        {car.shown.vehicle?.featuredPhoto && (
+            <div
+              key={car.shown.brand + '-photo'}
+              className={`lp-car lp-car--${car.phase} pointer-events-none relative z-30 w-[85%] max-w-[420px] md:w-[48%] md:max-w-[540px]`}
               style={{ perspective: 1200 }}
             >
               <div className="relative aspect-[16/9] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <Image
-                  src={active.vehicle.featuredPhoto}
-                  alt={`${active.vehicle.marque} ${active.vehicle.modele}`}
+                  src={car.shown.vehicle.featuredPhoto}
+                  alt={`${car.shown.vehicle.marque} ${car.shown.vehicle.modele}`}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 70vw, 540px"
                 />
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
         )}
-        <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={active.brand}
-          variants={brandInfoVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className={`lp-brand-info pointer-events-auto flex w-full max-w-md flex-col items-center justify-center gap-2 py-2 text-center md:w-[38%] md:max-w-none md:gap-4 md:py-6${isRtl ? ' md:items-end md:text-right' : ' md:items-start md:text-left'}`}
+        <div
+          key={shownInfo.brand}
+          className={`lp-brand-info lp-brand-info--${info.phase} pointer-events-auto flex w-full max-w-md flex-col items-center justify-center gap-2 py-2 text-center md:w-[38%] md:max-w-none md:gap-4 md:py-6${isRtl ? ' md:items-end md:text-right' : ' md:items-start md:text-left'}`}
         >
           <span
             className={`lp-brand-tag${isRtl ? ' self-center md:self-end' : ' self-center md:self-start'}`}
@@ -125,15 +127,15 @@ export function LandingBrandSliderSection({
               background: `rgba(${rgb},0.1)`,
             }}
           >
-            {active.brand}
+            {shownInfo.brand}
           </span>
 
-          {active.vehicle ? (
+          {shownInfo.vehicle ? (
             <>
               <h3 className="lp-brand-name leading-[1.0]">
                 <span className="md:block">
-                  {active.vehicle.marque}{' '}
-                  <span className="lp-brand-model">{active.vehicle.modele}</span>
+                  {shownInfo.vehicle.marque}{' '}
+                  <span className="lp-brand-model">{shownInfo.vehicle.modele}</span>
                 </span>
               </h3>
               <div className="flex flex-row items-baseline gap-2 md:flex-col md:gap-0">
@@ -141,12 +143,12 @@ export function LandingBrandSliderSection({
                   {t('signature.from')}
                 </p>
                 <p className="lp-brand-price">
-                  {formatCurrency(active.vehicle.tarifJour)}
+                  {formatCurrency(shownInfo.vehicle.tarifJour)}
                   <span className="lp-brand-price-unit"> {t('signature.perDay')}</span>
                 </p>
               </div>
               <Link
-                href={`/catalogue/${active.vehicle.slug}`}
+                href={`/catalogue/${shownInfo.vehicle.slug}`}
                 className={`btn-gold mt-2${isRtl ? ' self-center md:self-end' : ' self-center md:self-start'}`}
                 style={{
                   background: `linear-gradient(135deg, rgb(${rgb}), rgba(${rgb},0.55))`,
@@ -158,12 +160,11 @@ export function LandingBrandSliderSection({
             </>
           ) : (
             <>
-              <h3 className="lp-brand-name">{active.brand}</h3>
+              <h3 className="lp-brand-name">{shownInfo.brand}</h3>
               <p className="text-sm text-[#b9a88f]">{t('brand.comingSoon')}</p>
             </>
           )}
-        </motion.div>
-        </AnimatePresence>
+        </div>
       </div>
 
       {/* ── tabs ── */}

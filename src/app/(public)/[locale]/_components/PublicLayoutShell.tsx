@@ -9,6 +9,7 @@ import { LanguageProvider, useLocale } from '@/lib/i18n';
 import { PHONE_NUMBER, WHATSAPP_URL } from '@/lib/constants';
 import { BUSINESS } from '@/lib/site';
 import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
+import { alternatePathname } from '@/lib/i18n/routing';
 import { formatBusinessHours } from './landing/constants';
 import type { Locale } from '@/lib/i18n';
 
@@ -84,6 +85,16 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
     { href: '/#faq', key: 'nav.faq', isAnchor: true },
     { href: '/#contact', key: 'nav.contact', isAnchor: true },
   ].filter((item) => item.href);
+
+  /*
+   * Liens vers la même page dans les autres langues, toujours présents dans le HTML :
+   * Google suit ces liens (le menu déroulant n'existe qu'après un clic).
+   * Côté serveur, l'adresse lue peut être l'adresse interne (/fr/..., /catalogue-recherche) : on la ramène à l'adresse publique.
+   */
+  const publicPath = (pathname ?? '/')
+    .replace(/^\/fr(?=\/|$)/, '')
+    .replace(/^(\/(?:en|ar))?\/catalogue-recherche(?=\/|$)/, '$1/catalogue') || '/';
+  const languageLinks = LANGUAGES.map((lang) => ({ ...lang, href: alternatePathname(publicPath, lang.code) }));
 
   /* Une page absente dans la langue courante n'a pas de lien. */
   const footerLinks = (keys: SeoRouteKey[]) =>
@@ -254,21 +265,21 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">Yourent</p>
               <p className="text-sm text-cream-muted leading-relaxed">{t('footer.desc')}</p>
-              <address className="space-y-1.5 text-sm not-italic leading-relaxed text-cream-muted">
+              <address className="space-y-1 text-sm not-italic leading-relaxed text-cream-muted">
                 <p>
-                  <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cream">
+                  <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-block min-h-6 transition-colors hover:text-cream">
                     {BUSINESS.address.street}, {t('contact.addressSub').replace('{postalCode}', BUSINESS.address.postalCode)}
                   </a>
                 </p>
                 <p>
-                  <a href={`tel:${BUSINESS.phone}`} className="transition-colors hover:text-cream">
+                  <a href={`tel:${BUSINESS.phone}`} className="inline-block min-h-6 transition-colors hover:text-cream">
                     <bdi dir="ltr">{BUSINESS.phoneDisplay}</bdi>
                   </a>
                   {' · '}
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-cream">WhatsApp</a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-block min-h-6 transition-colors hover:text-cream">WhatsApp</a>
                 </p>
                 <p>
-                  <a href={`mailto:${BUSINESS.email}`} className="transition-colors hover:text-cream">{BUSINESS.email}</a>
+                  <a href={`mailto:${BUSINESS.email}`} className="inline-block min-h-6 transition-colors hover:text-cream">{BUSINESS.email}</a>
                 </p>
                 <p>{formatBusinessHours(locale)}</p>
               </address>
@@ -292,9 +303,26 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
             </nav>
           </div>
 
-          <p className="border-t border-white/5 pt-6 text-sm text-cream-faint">
-            © {new Date().getFullYear()} Yourent, Casablanca, {country}
-          </p>
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-6 text-sm text-cream-faint">
+            <p>© {new Date().getFullYear()} Yourent, Casablanca, {country}</p>
+            <nav aria-label={t('aria.langSelect')}>
+              <ul className="flex flex-wrap items-center gap-4">
+                {languageLinks.map((lang) => (
+                  <li key={lang.code}>
+                    <a
+                      href={lang.href}
+                      hrefLang={lang.code}
+                      lang={lang.code}
+                      aria-current={locale === lang.code ? 'page' : undefined}
+                      className={locale === lang.code ? 'text-gold' : 'transition-colors hover:text-gold'}
+                    >
+                      {lang.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import { Toaster } from 'react-hot-toast';
-import { QueryProvider } from '@/providers/QueryProvider';
 import { inter, notoArabic } from '@/lib/fonts';
 import { isLocale, isRtl, LOCALES } from '@/lib/i18n/routing';
 import { SITE_URL } from '@/lib/site';
 import { Analytics } from './_components/Analytics';
 import { PublicLayoutShell } from './_components/PublicLayoutShell';
+import { PublicToaster } from './_components/PublicToaster';
 import '@/app/globals.css';
 
 export const viewport: Viewport = {
@@ -56,11 +55,8 @@ export default async function PublicRootLayout({
   return (
     <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'} className={fontClasses}>
       <body suppressHydrationWarning className="min-h-screen antialiased bg-noir-root text-cream">
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17463963038"
-          strategy="afterInteractive"
-        />
+        {/* File dataLayer créée tout de suite : les événements émis avant le chargement du tag y attendent.
+            Le tag lui-même est chargé après la page, sans préchargement prioritaire dans l'en-tête. */}
         <Script id="google-ads-gtag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -72,24 +68,13 @@ export default async function PublicRootLayout({
             }
           `}
         </Script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17463963038"
+          strategy="lazyOnload"
+        />
         <Analytics />
-        <QueryProvider>
-          <PublicLayoutShell locale={locale}>{children}</PublicLayoutShell>
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                background: 'rgba(17,17,17,0.92)',
-                color: '#F5F0E8',
-                border: '1px solid rgba(201,168,76,0.22)',
-                backdropFilter: 'blur(16px)',
-                boxShadow: '0 18px 42px rgba(0,0,0,0.38)',
-                borderRadius: '18px',
-              },
-              success: { iconTheme: { primary: '#C9A84C', secondary: '#0A0A0A' } },
-            }}
-          />
-        </QueryProvider>
+        <PublicLayoutShell locale={locale}>{children}</PublicLayoutShell>
+        <PublicToaster />
       </body>
     </html>
   );

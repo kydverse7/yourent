@@ -43,6 +43,9 @@ export function alternatePathname(pathname: string, target: Locale): string {
     }
   }
 
-  if (path.startsWith('/blog/')) return localePath(target, '/');
+  /* Le blog n'existe qu'en français : dans une autre langue, on renvoie vers l'accueil. */
+  if (path === '/blog' || path.startsWith('/blog/')) {
+    return target === locale ? localePath(target, path) : localePath(target, '/');
+  }
   return localePath(target, path);
 }
