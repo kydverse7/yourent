@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { inter, notoArabic } from '@/lib/fonts';
 import { isLocale, isRtl, LOCALES } from '@/lib/i18n/routing';
 import { SITE_URL } from '@/lib/site';
+import { ADS_ID } from '@/lib/ads';
 import { Analytics } from './_components/Analytics';
 import { PublicLayoutShell } from './_components/PublicLayoutShell';
 import { PublicToaster } from './_components/PublicToaster';
@@ -56,22 +57,33 @@ export default async function PublicRootLayout({
     <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'} className={fontClasses}>
       <body suppressHydrationWarning className="min-h-screen antialiased bg-noir-root text-cream">
         {/* File dataLayer créée tout de suite : les événements émis avant le chargement du tag y attendent.
-            Le tag lui-même est chargé après la page, sans préchargement prioritaire dans l'en-tête. */}
+            Le tag lui-même est chargé après la page (vitesse), sauf pour un visiteur venu d'une annonce
+            (gclid, gbraid, wbraid…) : chargé aussitôt, avant qu'un changement de page n'efface l'identifiant du clic. */}
         <Script id="google-ads-gtag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-17463963038');${
+            gtag('config', '${ADS_ID}');${
               GA_ID ? `
             gtag('config', ${JSON.stringify(GA_ID)});` : ''
             }
+            (function () {
+              function load() {
+                if (window.__yourentTag) return;
+                window.__yourentTag = true;
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=${ADS_ID}';
+                document.head.appendChild(s);
+              }
+              function later() { (window.requestIdleCallback || setTimeout)(load); }
+              if (/[?&](gclid|gbraid|wbraid|gad_source|dclid)=/.test(location.search)) load();
+              else if (document.readyState === 'complete') later();
+              else window.addEventListener('load', later, { once: true });
+            })();
           `}
         </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17463963038"
-          strategy="lazyOnload"
-        />
         <Analytics />
         <PublicLayoutShell locale={locale}>{children}</PublicLayoutShell>
         <PublicToaster />
