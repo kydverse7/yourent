@@ -70,7 +70,7 @@ export function VehicleGridSection({
 }) {
   if (models.length === 0) return null;
   return (
-    <section className="sec" aria-labelledby={id}>
+    <section className="sec cv-auto" aria-labelledby={id}>
       <div className="lux-container">
         <SectionHeading id={id} title={title} text={text} action={<MoreLink href={more.href}>{more.label}</MoreLink>} />
         <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
@@ -103,7 +103,7 @@ export function LuxuryRow({
   const t = (key: string) => tr(locale, key);
   const luxePath = getRoutePath('luxe', locale) ?? '/catalogue';
   return (
-    <section className="sec" aria-labelledby="home-luxe">
+    <section className="sec cv-auto" aria-labelledby="home-luxe">
       <div className="lux-container">
         <SectionHeading
           id="home-luxe"

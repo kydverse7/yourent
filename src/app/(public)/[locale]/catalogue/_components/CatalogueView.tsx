@@ -283,6 +283,7 @@ export async function CatalogueView({ locale, params }: { locale: Locale; params
                     key={vehicle.modelSlug}
                     data-name={`${vehicle.marque} ${vehicle.modele}`.toLowerCase()}
                     data-price={vehicle.minTarif}
+                    className={index >= 4 ? '[contain-intrinsic-size:auto_440px] [content-visibility:auto]' : undefined}
                   >
                     <VehicleCard
                       vehicle={toCard(vehicle)}

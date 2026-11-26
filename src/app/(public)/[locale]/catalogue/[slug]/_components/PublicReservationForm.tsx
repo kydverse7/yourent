@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { MIN_RESERVATION_DAYS } from '@/lib/constants';
 import { formatPrice } from '@/lib/format';
@@ -35,18 +35,26 @@ interface Props {
   initialAu?: string;
 }
 
-/** Indicatif : la liste complète s'ouvre au toucher, le champ fermé n'affiche que « +212 ». */
+/**
+ * Indicatif : le champ fermé n'affiche que « +212 ». Les quelque 200 pays (avec leur nom dans la langue de la page)
+ * ne sont ajoutés qu'au premier contact avec le champ : moins d'éléments à hydrater au chargement de la fiche.
+ */
 function DialCodeSelect({
   value,
   onChange,
   label,
-  countryNames,
+  locale,
 }: {
   value: string;
   onChange: (value: string) => void;
   label: string;
-  countryNames?: Intl.DisplayNames;
+  locale: string;
 }) {
+  const [names, setNames] = useState<Intl.DisplayNames | null>(null);
+  const activate = () => {
+    if (!names) setNames(new Intl.DisplayNames([locale], { type: 'region' }));
+  };
+  const options = names ? DIAL_CODES : DIAL_CODES.filter((item) => item.code === value);
   return (
     <div className="relative w-[5.75rem] shrink-0" dir="ltr">
       <span className="field pointer-events-none flex items-center justify-between gap-1 px-3 font-semibold" aria-hidden="true">
@@ -57,11 +65,14 @@ function DialCodeSelect({
         value={value}
         aria-label={label}
         onChange={(event) => onChange(event.target.value)}
+        onPointerDown={activate}
+        onFocus={activate}
+        onKeyDown={activate}
         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
       >
-        {DIAL_CODES.map((item) => (
+        {options.map((item) => (
           <option key={item.code} value={item.code}>
-            {dialCodeLabel(item, countryNames)}
+            {dialCodeLabel(item, names ?? undefined)}
           </option>
         ))}
       </select>
@@ -85,11 +96,6 @@ export default function PublicReservationForm({
   const [loading, setLoading] = useState(false);
   const [whatsappSame, setWhatsappSame] = useState(true);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
-  // Noms de pays dans la langue de la page, ajoutés après le premier rendu pour rester identique au HTML du serveur.
-  const [countryNames, setCountryNames] = useState<Intl.DisplayNames>();
-  useEffect(() => {
-    setCountryNames(new Intl.DisplayNames([locale], { type: 'region' }));
-  }, [locale]);
   const [form, setForm] = useState({
     debutAt: initialDu ?? '',
     finAt: initialAu ?? '',
@@ -288,7 +294,7 @@ export default function PublicReservationForm({
             value={form.indicatif}
             onChange={(value) => set('indicatif', value)}
             label={t('ui.dialCode')}
-            countryNames={countryNames}
+            locale={locale}
           />
           <input
             id="res-telephone"
@@ -326,7 +332,7 @@ export default function PublicReservationForm({
                 value={form.indicatif}
                 onChange={(value) => set('indicatif', value)}
                 label={t('ui.dialCode')}
-                countryNames={countryNames}
+                locale={locale}
               />
               <input
                 id="res-whatsapp"
