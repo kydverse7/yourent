@@ -93,6 +93,15 @@ const page: PageContent = {
         },
       ],
     },
+    {
+      h2: 'Personal data and audience measurement',
+      blocks: [
+        {
+          type: 'p',
+          text: 'To improve its website, Yourent records, without cookies, the pages viewed and time spent, clicks on contact and booking buttons, where the visit comes from (search engine, ad, social network, partner site), the device type and language, as well as the IP address and the approximate location derived from it (city, region, country). No name, phone number, email or typed text is recorded by this measurement. This data is used only by Yourent, is not shared with third parties and is deleted automatically after 90 days. The details you send in a booking request are used only to process it.',
+        },
+      ],
+    },
   ],
   faq: [
     {
