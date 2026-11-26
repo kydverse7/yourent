@@ -60,7 +60,7 @@ function MapDrawing() {
       {/* Marrakech : route du sud, sur demande */}
       <path
         className="dmap-route"
-        style={range(52, 66)}
+        style={range(46, 54)}
         pathLength={1}
         d="M204 304C204 340 194 374 182 404"
         stroke="rgba(232,201,122,0.55)"
@@ -69,7 +69,7 @@ function MapDrawing() {
       {/* Mohammedia : avec supplément */}
       <path
         className="dmap-route"
-        style={range(52, 64)}
+        style={range(46, 53)}
         pathLength={1}
         d="M172 168C212 172 268 138 298 96"
         stroke="#d9dce1"
@@ -79,7 +79,7 @@ function MapDrawing() {
       <path d="M204 304C226 256 158 226 172 168" fill="none" stroke="rgba(201,168,76,0.22)" strokeWidth="5" strokeLinecap="round" />
       <path
         className="dmap-route"
-        style={range(28, 52)}
+        style={range(30, 46)}
         pathLength={1}
         d="M204 304C226 256 158 226 172 168"
         stroke="#e8c97a"
@@ -87,20 +87,20 @@ function MapDrawing() {
       />
 
       {/* repères */}
-      <g className="dmap-pin" style={range(18, 28)}>
+      <g className="dmap-pin" style={range(22, 30)}>
         <circle cx="204" cy="304" r="11" fill="#0a0a0a" stroke="#e8c97a" strokeWidth="1.5" />
         <circle cx="204" cy="304" r="4" fill="#e8c97a" />
       </g>
-      <g className="dmap-pin" style={range(46, 54)}>
+      <g className="dmap-pin" style={range(42, 48)}>
         <circle cx="172" cy="168" r="17" fill="rgba(201,168,76,0.16)" />
         <circle cx="172" cy="168" r="11" fill="#0a0a0a" stroke="#e8c97a" strokeWidth="2" />
         <circle cx="172" cy="168" r="4.5" fill="#e8c97a" />
       </g>
-      <g className="dmap-pin" style={range(60, 66)}>
+      <g className="dmap-pin" style={range(51, 56)}>
         <circle cx="298" cy="96" r="8" fill="#0a0a0a" stroke="#d9dce1" strokeWidth="1.5" />
         <circle cx="298" cy="96" r="3" fill="#d9dce1" />
       </g>
-      <g className="dmap-pin" style={range(62, 68)}>
+      <g className="dmap-pin" style={range(52, 57)}>
         <path d="M189.1 398.4L182 404L180.7 395.1" fill="none" stroke="rgba(232,201,122,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </g>
 
@@ -157,22 +157,22 @@ export function DeliverySection({ locale }: { locale: Locale }) {
         {/* La carte illustre la liste : elle est masquée aux lecteurs d'écran. En mobile elle passe avant la liste. */}
         <div className="dmap row-start-2 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center" aria-hidden="true">
           <MapDrawing />
-          <p className="dmap-label t-label" style={{ left: '6%', top: '7%', ...range(10, 20) }}>
+          <p className="dmap-label t-label" style={{ left: '6%', top: '7%', ...range(14, 24) }}>
             {t('home.mapOcean')}
           </p>
-          <p className="dmap-label" style={{ right: '61%', top: '30%', textAlign: 'right', ...range(46, 56) }}>
+          <p className="dmap-label" style={{ right: '61%', top: '30%', textAlign: 'right', ...range(42, 50) }}>
             <strong>{t('home.mapCasa')}</strong>
             <span className="is-gold">{t('home.mapFree')}</span>
           </p>
-          <p className="dmap-label" style={{ right: '29.5%', top: '11%', textAlign: 'right', ...range(60, 68) }}>
+          <p className="dmap-label" style={{ right: '29.5%', top: '11%', textAlign: 'right', ...range(51, 57) }}>
             <strong>{t('home.mapMohammedia')}</strong>
             <span>{t('home.mapSurcharge')}</span>
           </p>
-          <p className="dmap-label" style={{ left: '55.5%', top: '68.5%', ...range(18, 28) }}>
+          <p className="dmap-label" style={{ left: '55.5%', top: '68.5%', ...range(22, 30) }}>
             <strong>{t('home.mapAirport')}</strong>
             <span className="is-gold">{t('home.mapFree')}</span>
           </p>
-          <p className="dmap-label" style={{ left: '50%', top: '88.5%', ...range(62, 70) }}>
+          <p className="dmap-label" style={{ left: '50%', top: '88.5%', ...range(52, 58) }}>
             <strong>{t('home.mapMarrakech')}</strong>
             <span>{t('home.mapOnRequest')}</span>
           </p>

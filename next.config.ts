@@ -149,6 +149,11 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        /* Polices du dossier public : fichiers qui ne changent pas (un nouveau fichier porterait un autre nom). */
+        source: '/fonts/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
         /* Image de partage (réseaux sociaux) : utile en aperçu, sans intérêt comme page dans Google. */
         source: '/opengraph-image',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],

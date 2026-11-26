@@ -627,7 +627,7 @@ body::before {
   /* ── Typographie ── */
   /* Titres en Instrument Serif (var(--font-display), posée par PublicLayoutShell) : grands, fins, serrés. */
   .t-h1 {
-    font-family: var(--font-display, var(--font-inter)), 'Iowan Old Style', Georgia, serif;
+    font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
     font-size: clamp(2.625rem, 1.55rem + 4.6vw, 5.25rem);
     font-weight: 400;
     line-height: 1;
@@ -637,7 +637,7 @@ body::before {
   }
   /* Pages SEO, fiches, blog : plafonné à 2,75 rem. */
   .t-h1-page {
-    font-family: var(--font-display, var(--font-inter)), 'Iowan Old Style', Georgia, serif;
+    font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
     font-size: clamp(2.375rem, 1.6rem + 3.2vw, 4rem);
     font-weight: 400;
     line-height: 1.04;
@@ -646,7 +646,7 @@ body::before {
     text-wrap: balance;
   }
   .t-h2 {
-    font-family: var(--font-display, var(--font-inter)), 'Iowan Old Style', Georgia, serif;
+    font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
     font-size: clamp(2rem, 1.5rem + 2.1vw, 3.25rem);
     font-weight: 400;
     line-height: 1.06;
@@ -695,12 +695,17 @@ body::before {
     color: var(--text-muted, #8f959e);
   }
   .t-price {
-    font-family: var(--font-display, var(--font-inter)), Georgia, serif;
-    font-size: 1.75rem;
+    font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1;
     color: #e8c97a;
     font-variant-numeric: lining-nums;
+  }
+  @media (min-width: 640px) {
+    .t-price {
+      font-size: 1.75rem;
+    }
   }
   /* Colonne de lecture : 68 caractères au plus. */
   .prose-col {
@@ -846,10 +851,27 @@ html:has(:target) .cv-auto {
   content-visibility: visible;
 }
 
+/*
+ * Police arabe du site public : Cairo variable, sous-ensemble arabe (31 Ko), dans /public/fonts.
+ * Déclarée ici, et non par next/font, pour deux raisons :
+ * - sa plage unicode-range la laisse passer AVANT Inter dans la pile sans jamais dessiner le latin.
+ *   L'inverse (Inter d'abord) ne marchait pas : la police de repli d'Inter est Arial, qui possède des
+ *   lettres arabes, donc Cairo n'était jamais ni utilisée ni téléchargée (pages arabes en Arial) ;
+ * - seules les pages arabes la préchargent (PublicLayoutShell) : rien de plus à charger en français ou en anglais.
+ */
+@font-face {
+  font-family: 'Cairo Arabe';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url('/fonts/cairo-arabic.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
 /* ── Arabe : ni espacement de lettres ni capitales, interligne plus aéré ── */
 [dir='rtl'] .site-public,
 .site-public [dir='rtl'] {
-  font-family: var(--font-inter), var(--font-arabic), system-ui, 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Cairo Arabe', var(--font-inter), system-ui, 'Segoe UI', Tahoma, sans-serif;
   line-height: 1.75;
 }
 [dir='rtl'] .site-public *,
@@ -861,9 +883,19 @@ html:has(:target) .cv-auto {
 [dir='rtl'] .site-public .t-h1,
 [dir='rtl'] .site-public .t-h1-page,
 [dir='rtl'] .site-public .t-h2 {
-  font-family: var(--font-inter), var(--font-arabic), system-ui, 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Cairo Arabe', var(--font-inter), system-ui, 'Segoe UI', Tahoma, sans-serif;
   font-weight: 700;
   line-height: 1.32;
+}
+/* Prix, chiffres et noms de modèle : chiffres et latin en police de titrage, lettres arabes en Cairo
+   (placée en tête : la police de repli du titrage, Times New Roman, possède elle aussi des lettres arabes). */
+[dir='rtl'] .site-public .t-price,
+[dir='rtl'] .site-public .t-figure,
+[dir='rtl'] .site-public .font-display,
+[dir='rtl'] .site-public .showcase-name,
+[dir='rtl'] .site-public .showcase-word,
+[dir='rtl'] .site-public .step-num {
+  font-family: 'Cairo Arabe', var(--font-display, var(--font-inter)), Georgia, serif;
 }
 [dir='rtl'] .site-public .t-h1 {
   font-size: clamp(1.875rem, 1.3rem + 2.6vw, 3.5rem);

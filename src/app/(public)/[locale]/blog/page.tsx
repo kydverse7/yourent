@@ -83,7 +83,7 @@ export default async function BlogIndexPage({ params }: Props) {
         />
 
         {featured && (
-          <article className="card relative mt-10 border-gold/30 p-6 transition-colors hover:border-gold/60 md:p-8">
+          <article className="card lift relative mt-10 border-gold/30 p-6 md:p-8">
             <p className="t-label text-gold">{tr('fr', 'ui.latest')}</p>
             <h2 className="t-h2 prose-col mt-2">
               <Link href={`/blog/${featured.slug}`} className="after:absolute after:inset-0 after:content-['']">
@@ -98,11 +98,11 @@ export default async function BlogIndexPage({ params }: Props) {
           </article>
         )}
 
-        <ul className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="rv-group mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {rest.map((article) => (
             <li key={article.slug}>
-              <article className="card relative flex h-full flex-col p-5 transition-colors hover:border-gold/40">
-                <h2 className="text-lg font-bold leading-snug text-cream">
+              <article className="card lift relative flex h-full flex-col p-5">
+                <h2 className="font-display text-[1.5rem] leading-[1.15] text-cream">
                   <Link href={`/blog/${article.slug}`} className="after:absolute after:inset-0 after:content-['']">
                     {article.h1}
                   </Link>

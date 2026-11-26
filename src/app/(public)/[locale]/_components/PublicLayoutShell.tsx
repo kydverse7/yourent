@@ -1,3 +1,4 @@
+import { preload } from 'react-dom';
 import { LanguageProvider } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { display } from '@/lib/fonts';
@@ -20,6 +21,10 @@ const MOTION_FALLBACK = `(function(){var d=document.documentElement;try{if(!('In
  * (choix de la langue, menu mobile, barre d'action, liens de langue du pied de page).
  */
 export function PublicLayoutShell({ children, locale }: { children: React.ReactNode; locale: Locale }) {
+  /* Pages arabes : la police arabe est préchargée, comme Inter, pour être là au premier affichage (voir globals.css). */
+  if (locale === 'ar') {
+    preload('/fonts/cairo-arabic.woff2', { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
+  }
   return (
     <LanguageProvider locale={locale} messages={clientMessages(locale)}>
       <div className={`relative flex min-h-screen flex-col ${display.variable}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>

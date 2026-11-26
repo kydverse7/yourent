@@ -119,7 +119,6 @@ export default async function PublicHomePage({ params }: Props) {
         id="home-luxe"
         eyebrow={t('home.showEyebrow')}
         title={t('home.luxeTitle')}
-        text={t('home.luxeText')}
         action={<MoreLink href={luxePath}>{t('home.luxeAll')}</MoreLink>}
         models={showcase.map((model) => showcaseFromFleet(model, locale))}
       />

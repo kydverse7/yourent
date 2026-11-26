@@ -18,9 +18,9 @@ export const display = Instrument_Serif({
 });
 
 /**
- * Police arabe : Cairo variable, sous-ensemble arabe seul (≈ 30 Ko au lieu de 160 Ko pour Noto Sans Arabic).
- * Le latin des pages arabes vient d'Inter (pile `var(--font-inter), var(--font-arabic)` dans globals.css).
- * Téléchargée seulement lorsqu'une page arabe l'utilise.
+ * Police arabe des espaces privés (documents) : Cairo variable, sous-ensemble arabe seul.
+ * Le site public n'utilise plus cette variable : il déclare « Cairo Arabe » dans globals.css
+ * (fichier public/fonts/cairo-arabic.woff2), placée avant Inter dans la pile et préchargée sur les pages arabes.
  */
 export const arabic = Cairo({
   subsets: ['arabic'],

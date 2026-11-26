@@ -28,7 +28,7 @@
 
 /* ── Typographie de marque ── */
 .font-display {
-  font-family: var(--font-display, var(--font-inter)), var(--font-arabic, serif), 'Iowan Old Style', Georgia, serif;
+  font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
@@ -53,7 +53,7 @@
 }
 /* Grand chiffre (prix, note, compteur). */
 .t-figure {
-  font-family: var(--font-display, var(--font-inter)), Georgia, serif;
+  font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
   font-size: clamp(2.5rem, 1.9rem + 2.6vw, 4rem);
   font-weight: 400;
   line-height: 1;
@@ -327,12 +327,12 @@ details[open] > summary .acc-chevron {
   height: 1px;
   background: var(--hair-gold);
 }
-/* Emplacement de la voiture : proportions fixes (--hero-ratio), que ce soit la photo ou une séquence. */
+/* Emplacement de la photo : proportions fixes, donc aucun décalage au chargement. */
 .hero-car {
   position: relative;
   width: min(94%, 34rem);
   margin-inline: auto;
-  aspect-ratio: var(--hero-ratio, 10 / 7);
+  aspect-ratio: 10 / 7;
 }
 /* La photo regarde vers la gauche : en arabe elle est retournée, pour avancer dans le sens de lecture. */
 [dir='rtl'] .hero-car-flip {
@@ -416,15 +416,9 @@ details[open] > summary .acc-chevron {
   position: relative;
   perspective: 1100px;
 }
-/* Emplacement du média : dimensions fixées par --ratio (photo 10/7 ; une séquence 16/9 se règle par la
-   propriété, sans toucher à la mise en page). Rien ne bouge quand la photo est remplacée. */
+/* Plateau aux proportions des photos (10 / 7) : rien ne bouge quand elles se chargent. */
 .showcase {
-  --r: var(--ratio, 10 / 7);
-}
-@media (min-width: 1024px) {
-  .showcase {
-    --r: var(--ratio-lg, var(--ratio, 10 / 7));
-  }
+  --r: 10 / 7;
 }
 .showcase-item {
   container-type: inline-size;
@@ -441,7 +435,7 @@ details[open] > summary .acc-chevron {
   position: absolute;
   inset-inline: -8%;
   top: 2%;
-  font-family: var(--font-display, var(--font-inter)), Georgia, serif;
+  font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
   /* La taille suit le nombre de lettres (--chars) : le mot tient toujours dans la largeur. */
   font-size: min(calc(150cqw / var(--chars, 8)), 16rem);
   line-height: 0.9;
@@ -523,7 +517,7 @@ details[open] > summary .acc-chevron {
   background: rgba(201, 168, 76, 0.6);
 }
 .showcase-name {
-  font-family: var(--font-display, var(--font-inter)), Georgia, serif;
+  font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
   font-size: clamp(2.25rem, 1.6rem + 3vw, 4.25rem);
   font-weight: 400;
   line-height: 1;
@@ -549,7 +543,7 @@ details[open] > summary .acc-chevron {
 
 @keyframes sc-car-first {
   0%,
-  78.57% {
+  69.49% {
     opacity: 1;
     transform: none;
   }
@@ -563,8 +557,8 @@ details[open] > summary .acc-chevron {
     opacity: 0;
     transform: translate3d(calc(var(--dir) * 60%), 0, 0) scale(0.84);
   }
-  19.35%,
-  80.65% {
+  26.47%,
+  73.53% {
     opacity: 1;
     transform: none;
   }
@@ -578,7 +572,7 @@ details[open] > summary .acc-chevron {
     opacity: 0;
     transform: translate3d(calc(var(--dir) * 60%), 0, 0) scale(0.84);
   }
-  21.43%,
+  30.51%,
   100% {
     opacity: 1;
     transform: none;
@@ -588,7 +582,7 @@ details[open] > summary .acc-chevron {
   0% {
     transform: rotateY(calc(var(--dir) * -11deg));
   }
-  78.57% {
+  69.49% {
     transform: rotateY(calc(var(--dir) * 9deg));
   }
   100% {
@@ -599,10 +593,10 @@ details[open] > summary .acc-chevron {
   0% {
     transform: rotateY(calc(var(--dir) * -34deg));
   }
-  19.35% {
+  26.47% {
     transform: rotateY(calc(var(--dir) * -10deg));
   }
-  80.65% {
+  73.53% {
     transform: rotateY(calc(var(--dir) * 9deg));
   }
   100% {
@@ -613,7 +607,7 @@ details[open] > summary .acc-chevron {
   0% {
     transform: rotateY(calc(var(--dir) * -34deg));
   }
-  21.43% {
+  30.51% {
     transform: rotateY(calc(var(--dir) * -10deg));
   }
   100% {
@@ -622,12 +616,12 @@ details[open] > summary .acc-chevron {
 }
 @keyframes sc-info-first {
   0%,
-  78.57% {
+  69.49% {
     opacity: 1;
     clip-path: inset(-10%);
     transform: none;
   }
-  89.29%,
+  84.75%,
   100% {
     opacity: 0;
     clip-path: inset(100% 0 0 0);
@@ -636,18 +630,18 @@ details[open] > summary .acc-chevron {
 }
 @keyframes sc-info-mid {
   0%,
-  9.68% {
+  13.24% {
     opacity: 0;
     clip-path: inset(0 0 100% 0);
     transform: translate3d(0, 1.5rem, 0);
   }
-  19.35%,
-  80.65% {
+  26.47%,
+  73.53% {
     opacity: 1;
     clip-path: inset(-10%);
     transform: none;
   }
-  90.32%,
+  86.76%,
   100% {
     opacity: 0;
     clip-path: inset(100% 0 0 0);
@@ -656,12 +650,12 @@ details[open] > summary .acc-chevron {
 }
 @keyframes sc-info-last {
   0%,
-  10.71% {
+  15.25% {
     opacity: 0;
     clip-path: inset(0 0 100% 0);
     transform: translate3d(0, 1.5rem, 0);
   }
-  21.43%,
+  30.51%,
   100% {
     opacity: 1;
     clip-path: inset(-10%);
@@ -754,7 +748,7 @@ details[open] > summary .acc-chevron {
   position: relative;
   aspect-ratio: 400 / 420;
   width: 100%;
-  max-width: 34rem;
+  max-width: 30rem;
   margin-inline: auto;
   direction: ltr;
 }
@@ -881,7 +875,7 @@ details[open] > summary .acc-chevron {
   border: 1px solid rgba(201, 168, 76, 0.6);
   border-radius: 50%;
   background: #0a0a0a;
-  font-family: var(--font-display, var(--font-inter)), Georgia, serif;
+  font-family: var(--font-display, var(--font-inter)), 'Cairo Arabe', Georgia, serif;
   font-size: 1.25rem;
   line-height: 1;
   color: #e8c97a;
@@ -1151,46 +1145,9 @@ details[open] > summary .acc-chevron {
       animation-range: 0px 90vh;
     }
 
-    /* Option data-pin (HomeHero pin={…}) : la scène reste épinglée le temps de --pin hauteurs d'écran,
-       pour y jouer une séquence ; le mouvement suit alors la plage épinglée. Seulement si l'écran est assez haut. */
-    @media (min-height: 760px) {
-      .hero[data-pin] {
-        height: calc(var(--stage-h) * (1 + var(--pin, 0.8)));
-        overflow: visible;
-        view-timeline: --hero block;
-        view-timeline-inset: var(--header-h) 0px;
-      }
-      .hero[data-pin] .hero-pin {
-        position: sticky;
-        top: var(--header-h);
-        display: grid;
-        height: var(--stage-h);
-        align-items: center;
-        overflow: clip;
-      }
-      .hero[data-pin] .hero-head-out {
-        animation: none;
-      }
-      .hero[data-pin] .hero-car,
-      .hero[data-pin] .hero-skyline,
-      .hero[data-pin] .hero-road-wrap {
-        animation-timeline: --hero;
-        animation-range: contain 0% contain 100%;
-      }
-    }
-    @media (min-height: 760px) and (max-width: 767px) {
-      .hero[data-pin] .hero-grid {
-        gap: 0.75rem;
-        padding-block: 1rem calc(4.5rem + env(safe-area-inset-bottom));
-      }
-      .hero[data-pin] .hero-cta {
-        display: none;
-      }
-    }
-
     /* Vitrine : scène épinglée, une voiture par tiers de course. */
     .showcase {
-      height: calc(var(--stage-h) * (1 + var(--n, 3) * 0.7));
+      height: calc(var(--stage-h) * (1 + var(--n, 3) * 0.8));
       padding-block: 0;
       view-timeline: --showcase block;
       view-timeline-inset: var(--header-h) 0px;
@@ -1211,9 +1168,6 @@ details[open] > summary .acc-chevron {
       display: grid;
       min-height: 0;
     }
-    .showcase-text {
-      display: none;
-    }
     .showcase-stage {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -1232,8 +1186,8 @@ details[open] > summary .acc-chevron {
       gap: 0.5rem;
       min-height: 0;
       pointer-events: none;
-      --from: calc((var(--i) - 0.12) / var(--n) * 100%);
-      --to: calc((var(--i) + 1.12) / var(--n) * 100%);
+      --from: calc((var(--i) - 0.18) / var(--n) * 100%);
+      --to: calc((var(--i) + 1.18) / var(--n) * 100%);
     }
     .showcase-car {
       display: grid;
@@ -1285,6 +1239,8 @@ details[open] > summary .acc-chevron {
     }
     /* Au clavier, la fiche ciblée reste lisible quelle que soit la position de défilement. */
     .showcase-info:focus-within {
+      z-index: 2;
+      background: #0a0a0a;
       animation: none;
     }
     .showcase-ring {
@@ -1355,7 +1311,7 @@ details[open] > summary .acc-chevron {
     .dmap-car {
       animation: dmap-car linear both;
       animation-timeline: --dmap;
-      animation-range: cover 28% cover 52%;
+      animation-range: cover 30% cover 46%;
     }
     .dmap-label {
       animation: rv-up linear both;

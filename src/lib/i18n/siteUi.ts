@@ -87,7 +87,7 @@ export const SITE_UI: Record<Locale, Record<string, string>> = {
     'home.blogText': 'Prix, caution, permis étranger, aéroport Mohammed V : nos réponses, article par article.',
     'home.blogAll': 'Tous les articles',
     'home.blogRead': 'Lire l’article',
-    'cat.sortFeatured': 'Haut de gamme d’abord',
+    'cat.sortFeatured': 'Luxe d’abord',
 
     /* Fiche */
     'ui.request': 'Demander ce véhicule',
@@ -184,7 +184,7 @@ export const SITE_UI: Record<Locale, Record<string, string>> = {
     'home.blogText': 'Prices, deposit, foreign licence, Mohammed V airport: our answers, one article at a time.',
     'home.blogAll': 'All articles',
     'home.blogRead': 'Read the article',
-    'cat.sortFeatured': 'Premium first',
+    'cat.sortFeatured': 'Luxury first',
 
     'ui.request': 'Request this car',
     'ui.ask': 'Ask a question',

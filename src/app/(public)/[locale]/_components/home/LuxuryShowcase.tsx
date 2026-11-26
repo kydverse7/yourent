@@ -11,24 +11,12 @@ import { fuelLabel, gearLabel } from '../../catalogue/_lib/specLabels';
 /**
  * VITRINE DE LUXE — scène épinglée : une voiture à la fois, sur un plateau en perspective.
  *
- * Aujourd'hui : la photo détourée du modèle, mise en profondeur par le CSS (perspective, rotation
- * légère pilotée par le défilement, plateau au sol qui tourne, reflet, nom en très grand à l'arrière-plan).
- * Demain : une séquence d'images ou un modèle 3D. Il suffit de remplir `media` pour un modèle :
- * tout le reste (épinglage, passage d'une voiture à l'autre, fiche, bouton) ne change pas.
- *
- * ── Brancher une séquence ou un modèle 3D ──
- *   <LuxuryShowcase … ratio="8 / 5" ratioLg="16 / 9"
- *     models={models.map((m) => ({ ...m, media: <ScrollSequence … /> }))} />
- * - `media` est rendu dans `.showcase-media` : une boîte en position absolue qui remplit le plateau,
- *   aux dimensions fixées par `ratio` (mobile) et `ratioLg` (≥ 1024 px). Rien ne bouge au remplacement.
- * - La scène : `section[data-showcase]`, haute de `--stage-h × (1 + n × 0.7)` ; son contenu reste épinglé
- *   sous l'en-tête pendant `hauteur − --stage-h` pixels de défilement.
- *   Progression de la scène, de 0 à 1 :  p = (hauteurEnTête − section.getBoundingClientRect().top) / (section.offsetHeight − hauteurScène)
- * - Chaque voiture (`li[data-showcase-item]`) porte `data-from` et `data-to` : elle est à l'écran pour
- *   p entre ces deux valeurs, donc sa propre progression vaut (p − from) / (to − from).
- *   En CSS, la même plage s'écrit : animation-timeline: --showcase; animation-range: contain var(--from) contain var(--to).
- * - Sans animation-timeline, ou avec « mouvement réduit », la scène n'est pas épinglée : les voitures sont
- *   côte à côte (rangée à faire glisser en mobile). Le média doit alors afficher son image fixe (poster).
+ * La photo détourée de chaque modèle est mise en profondeur par le CSS seul (site-motion.css) :
+ * perspective, rotation légère pilotée par le défilement, plateau au sol qui tourne, reflet, halo,
+ * nom de la marque en très grand à l'arrière-plan, passage d'une voiture à l'autre.
+ * La scène est haute de `--stage-h × (1 + n × 0.8)` : son contenu reste épinglé sous l'en-tête pendant
+ * que les voitures se succèdent. Sans animation-timeline, ou avec « mouvement réduit », elle n'est pas
+ * épinglée : les voitures sont côte à côte (rangée à faire glisser en mobile).
  */
 export type ShowcaseModel = {
   slug: string;
@@ -45,8 +33,6 @@ export type ShowcaseModel = {
   /** « 5 places · Diesel · Automatique » */
   specs?: string;
   available: boolean;
-  /** Séquence d'images, modèle 3D… : remplace la photo dans le plateau (voir l'en-tête du fichier). */
-  media?: ReactNode;
 };
 
 /** Position du sol dans les photos actuelles (mesurée sur les fichiers) ; 0,84 pour les autres. */
@@ -90,8 +76,6 @@ export function LuxuryShowcase({
   title,
   text,
   action,
-  ratio,
-  ratioLg,
 }: {
   locale: Locale;
   models: ShowcaseModel[];
@@ -101,22 +85,14 @@ export function LuxuryShowcase({
   title: string;
   text?: string;
   action?: ReactNode;
-  /** Proportions de l'emplacement du média : « 10 / 7 » (photos) par défaut. */
-  ratio?: string;
-  ratioLg?: string;
 }) {
   if (models.length === 0) return null;
   const t = (key: string) => tr(locale, key);
   const count = models.length;
   const pad = (value: number) => String(value).padStart(2, '0');
-  const sectionStyle = {
-    '--n': count,
-    ...(ratio ? { '--ratio': ratio } : {}),
-    ...(ratioLg ? { '--ratio-lg': ratioLg } : {}),
-  } as CSSProperties;
 
   return (
-    <section className="showcase" aria-labelledby={id} data-showcase style={sectionStyle}>
+    <section className="showcase" aria-labelledby={id} style={{ '--n': count } as CSSProperties}>
       <div className="showcase-pin">
         <div className="lux-container showcase-head">
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
@@ -125,7 +101,7 @@ export function LuxuryShowcase({
               <h2 id={id} className={`t-h2 prose-col ${eyebrow ? 'mt-3' : ''}`}>
                 {title}
               </h2>
-              {text && <p className="showcase-text t-body prose-col mt-3">{text}</p>}
+              {text && <p className="t-body prose-col mt-3">{text}</p>}
             </div>
             {action && <div className="shrink-0">{action}</div>}
           </div>
@@ -140,17 +116,8 @@ export function LuxuryShowcase({
           <ol className="showcase-stage">
             {models.map((model, index) => {
               const eur = formatEurApprox(model.price, locale);
-              const from = Math.max(0, (index - 0.12) / count);
-              const to = Math.min(1, (index + 1.12) / count);
               return (
-                <li
-                  key={model.slug}
-                  className="showcase-item"
-                  data-showcase-item
-                  data-from={from.toFixed(4)}
-                  data-to={to.toFixed(4)}
-                  style={{ '--i': index } as CSSProperties}
-                >
+                <li key={model.slug} className="showcase-item" style={{ '--i': index } as CSSProperties}>
                   <div className="showcase-car">
                     <div
                       className="showcase-visual"
@@ -162,14 +129,12 @@ export function LuxuryShowcase({
                       <span className="showcase-floor" aria-hidden="true">
                         <span className="showcase-ring" />
                       </span>
-                      {model.image && !model.media && (
-                        <span className="showcase-reflet" aria-hidden="true">
-                          <Image src={model.image} alt="" fill sizes={SIZES} loading="lazy" className="object-contain" />
-                        </span>
-                      )}
-                      <div className="showcase-media">
-                        {model.media ??
-                          (model.image ? (
+                      {model.image && (
+                        <>
+                          <span className="showcase-reflet" aria-hidden="true">
+                            <Image src={model.image} alt="" fill sizes={SIZES} loading="lazy" className="object-contain" />
+                          </span>
+                          <div className="showcase-media">
                             <Image
                               src={model.image}
                               alt={t('model.photoAlt').replace('{name}', model.name)}
@@ -178,8 +143,9 @@ export function LuxuryShowcase({
                               loading="lazy"
                               className="object-contain"
                             />
-                          ) : null)}
-                      </div>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
 

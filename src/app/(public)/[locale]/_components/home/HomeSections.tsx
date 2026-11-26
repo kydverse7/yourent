@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { ArrowRight, CarFront, Clock, Headphones, Mail, MapPin, Phone, ShieldCheck, Truck } from 'lucide-react';
 import Link from '@/lib/i18n/LocaleLink';
@@ -23,35 +23,12 @@ const step = (index: number) => ({ '--in': index }) as CSSProperties;
  *
  * Mouvement : entrée en scène au chargement (titre, voiture, ligne de route, horizon tracé), puis,
  * au défilement, la voiture avance, l'horizon glisse en parallaxe et le titre s'efface (site-motion.css).
- *
- * `media` remplace la photo par une séquence d'images ou un modèle 3D : il est rendu dans `.hero-car`,
- * boîte aux proportions fixes (10 / 7 par défaut, `mediaRatio` pour une autre valeur), donc sans décalage.
- * `pin` épingle la scène pendant ce nombre de hauteurs d'écran (0,8 par exemple), le temps de jouer une
- * séquence « entrée en scène » : progression de 0 à 1 sur la plage `contain` de `section[data-hero]`,
- *   p = (hauteurEnTête − section.getBoundingClientRect().top) / (section.offsetHeight − hauteurScène).
- * L'épinglage ne s'active que si l'écran est assez haut pour montrer toute la scène (voir .hero[data-pin]).
  */
-export function HomeHero({
-  locale,
-  minPrice,
-  media,
-  mediaRatio,
-  pin = 0,
-}: {
-  locale: Locale;
-  minPrice: number;
-  media?: ReactNode;
-  mediaRatio?: string;
-  pin?: number;
-}) {
+export function HomeHero({ locale, minPrice }: { locale: Locale; minPrice: number }) {
   const t = (key: string) => tr(locale, key);
-  const style = {
-    ...(pin > 0 ? { '--pin': pin } : {}),
-    ...(mediaRatio ? { '--hero-ratio': mediaRatio } : {}),
-  } as CSSProperties;
   return (
-    <section className="hero" data-hero data-pin={pin > 0 ? '' : undefined} style={style}>
-      <div className="hero-pin">
+    <section className="hero">
+      <div>
         <div className="lux-container hero-grid">
           <div className="hero-head hero-head-out">
             <p className="t-eyebrow hero-in">{t('home.heroEyebrow')}</p>
@@ -71,17 +48,15 @@ export function HomeHero({
             <div className="hero-car">
               <div className="hero-car-in">
                 <div className="hero-car-flip">
-                  {media ?? (
-                    <Image
-                      src="/porshe-macan.png?v=2"
-                      alt={t('hero.imgAlt')}
-                      fill
-                      priority
-                      fetchPriority="high"
-                      className="object-contain"
-                      sizes="(min-width: 1024px) 544px, (min-width: 640px) 544px, 100vw"
-                    />
-                  )}
+                  <Image
+                    src="/porshe-macan.png?v=2"
+                    alt={t('hero.imgAlt')}
+                    fill
+                    priority
+                    fetchPriority="high"
+                    className="object-contain"
+                    sizes="(min-width: 1024px) 544px, (min-width: 640px) 544px, 100vw"
+                  />
                 </div>
               </div>
             </div>
@@ -91,7 +66,7 @@ export function HomeHero({
             <div className="hero-in" style={step(2)}>
               <HomeSearchCard />
             </div>
-            <div className="hero-cta hero-in mt-4 grid grid-cols-2 gap-3 sm:flex" style={step(3)}>
+            <div className="hero-in mt-4 grid grid-cols-2 gap-3 sm:flex" style={step(3)}>
               <WhatsAppButton locale={locale} />
               <CallButton locale={locale} />
             </div>
@@ -165,9 +140,12 @@ export function LuxuryGallery({
       <div className="hg-pin">
         <div className="lux-container">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 md:mb-8">
-            <h3 id="home-luxe-more" className="font-display text-[1.75rem] leading-tight text-cream lg:text-[2.25rem]">
-              {t('home.luxeMore')}
-            </h3>
+            <div className="min-w-0">
+              <h3 id="home-luxe-more" className="font-display text-[1.75rem] leading-tight text-cream lg:text-[2.25rem]">
+                {t('home.luxeMore')}
+              </h3>
+              <p className="t-body prose-col mt-2">{t('home.luxeText')}</p>
+            </div>
             <div className="flex items-center gap-3">
               <MoreLink href={luxePath}>{t('home.luxeAll')}</MoreLink>
               <div className="hg-controls">
