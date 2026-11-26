@@ -190,7 +190,7 @@ export default async function SeoPage({ params }: Props) {
 
         {selection.length > 0 && (
           <div className="mt-10">
-            <VehicleCards locale={locale} vehicles={selection.slice(0, 4)} />
+            <VehicleCards locale={locale} vehicles={selection.slice(0, 4)} headingLevel="p" />
           </div>
         )}
 

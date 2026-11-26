@@ -58,7 +58,8 @@ export function VehicleCard({
 }: {
   vehicle: CardVehicle;
   locale: Locale;
-  headingLevel?: 'h2' | 'h3';
+  /** `p` : bande de cartes placée avant le premier H2 (ordre des titres). */
+  headingLevel?: 'h2' | 'h3' | 'p';
   variant?: 'full' | 'compact';
   /** Adresse de la fiche, sans langue (ajoutée par le lien). Par défaut, la fiche du modèle. */
   href?: string;

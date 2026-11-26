@@ -98,7 +98,7 @@ export function VehicleCards({
 }: {
   locale: Locale;
   vehicles: FleetModel[];
-  headingLevel?: 'h2' | 'h3';
+  headingLevel?: 'h2' | 'h3' | 'p';
 }) {
   return (
     <ul className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
