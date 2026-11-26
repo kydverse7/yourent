@@ -36,7 +36,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `La livraison à l'aéroport Mohammed V ne coûte rien, comme partout dans Casablanca. Pour Mohammedia, elle reste possible, mais avec un léger supplément ; pour Marrakech, elle s'organise sur demande. L'équipe est joignable de 8h à 22h, 7j/7.`,
+          text: `La livraison à l'aéroport Mohammed V ne coûte rien, comme partout dans Casablanca. Elle est gratuite aussi à Marrakech et à l'aéroport Marrakech-Ménara ; pour Mohammedia, elle reste possible, mais avec un léger supplément. L'équipe est joignable de 8h à 22h, 7j/7.`,
         },
         {
           type: 'p',

@@ -48,6 +48,7 @@ const page: PageContent = {
             '**Comfort and motorway**: a saloon like the [Toyota Corolla](/catalogue/toyota-corolla), whose hybrid system suits daily trips.',
             '**Family and long journeys**: a diesel SUV like the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) or the [Dacia Duster](/catalogue/dacia-duster). Our [SUV rental in Casablanca](route:suv) page lists them all.',
             '**Long term without a clutch**: an [automatic car rental](route:automatique), especially if you drive in town every day.',
+            '**A prestige car for the whole stay**: a Mercedes, a Range Rover or a Touareg, on the [long-term luxury car rental in Casablanca](route:luxe-longue-duree) page.',
           ],
         },
         {
@@ -119,7 +120,7 @@ const page: PageContent = {
       a: 'The online booking is a request, with no payment. The way you pay is then agreed with the team, who explain it at confirmation on WhatsApp.',
     },
   ],
-  related: ['tarifs', 'economique', 'suv', 'conditions', 'aeroport'],
+  related: ['tarifs', 'economique', 'suv', 'luxe-longue-duree', 'conditions', 'aeroport'],
 };
 
 export default page;

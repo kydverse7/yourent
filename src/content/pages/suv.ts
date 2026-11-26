@@ -38,7 +38,7 @@ const page: LocalizedPage = {
               "**Petit budget** : la [location d'un Dacia Duster à Casablanca](/catalogue/dacia-duster) reste la moins chère de la gamme. Ce diesel à boîte manuelle est aussi l'un des SUV les plus nombreux de la flotte.",
               "**Urbain et compact** : le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) et l'[Audi Q3](/catalogue/audi-q3) restent pratiques en ville comme sur autoroute.",
               "**Famille et long trajet** : le [Kia Sorento](/catalogue/kia-sorento), le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) et le [Touareg](/catalogue/volkswagen-touareg) sont plus grands, diesel, à boîte automatique.",
-              "**Premium** : le [Range Rover Evoque](/catalogue/range-rover-evoque), le [Porsche Macan](/catalogue/porsche-macan) et le [Range Rover Sport](/catalogue/range-rover-sport) visent le prestige. Voyez aussi notre [location de voiture de luxe à Casablanca](route:luxe).",
+              "**Premium** : le [Range Rover Evoque](/catalogue/range-rover-evoque), le [Porsche Macan](/catalogue/porsche-macan) et le [Range Rover Sport](/catalogue/range-rover-sport) visent le prestige. Ils sont comparés, avec le Touareg et l'Audi Q3, sur la page [location de SUV de luxe à Casablanca](route:suv-luxe).",
             ],
           },
           {
@@ -75,7 +75,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le T-Roc et le Macan, eux, sont à essence. Côté boîte, le Duster est en manuelle, alors que les autres SUV sont en automatique. L'Audi Q3 existe toutefois dans les deux versions : le choix se confirme à la réservation. Pour tout voir, consultez notre [location de voiture automatique à Casablanca](route:automatique).",
+            text: "La plupart des SUV de la flotte roulent au diesel, plus économique sur de longues distances. Le Macan, lui, est à essence ; le T-Roc et l'Audi Q3 existent en diesel ou en essence selon l'exemplaire. Côté boîte, le Duster est en manuelle, alors que les autres SUV sont en automatique. L'Audi Q3 existe toutefois dans les deux versions : le choix se confirme à la réservation. Pour tout voir, consultez notre [location de voiture automatique à Casablanca](route:automatique).",
           },
         ],
       },

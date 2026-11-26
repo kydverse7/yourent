@@ -16,6 +16,23 @@ const COMMERCIAL = {
     en: '/luxury-car-rental-casablanca',
     ar: '/luxury-car-rental-casablanca',
   },
+  /** Voitures de luxe : trois intentions distinctes de la page « luxe » (carrosserie, lieu de remise, durée). */
+  'suv-luxe': {
+    fr: '/location-suv-luxe-casablanca',
+    en: '/luxury-suv-rental-casablanca',
+  },
+  'luxe-aeroport': {
+    fr: '/location-voiture-luxe-aeroport-casablanca',
+    en: '/luxury-car-rental-casablanca-airport',
+  },
+  'luxe-longue-duree': {
+    fr: '/location-voiture-luxe-longue-duree-casablanca',
+    en: '/long-term-luxury-car-rental-casablanca',
+  },
+  berline: {
+    fr: '/location-berline-casablanca',
+    en: '/sedan-rental-casablanca',
+  },
   suv: {
     fr: '/location-suv-casablanca',
     en: '/suv-rental-casablanca',

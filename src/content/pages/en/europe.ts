@@ -98,7 +98,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Heading south straight after landing? Our [car rental Casablanca to Marrakech](route:marrakech) page covers the route and suitable models. If your flight lands in Marrakech instead, delivery there is possible on request: see [car rental in Marrakech](route:livraison-marrakech). For a short break, keep in mind that the minimum rental is 5 days.',
+          text: 'Heading south straight after landing? Our [car rental Casablanca to Marrakech](route:marrakech) page covers the route and suitable models. If your flight lands in Marrakech instead, delivery to Marrakech-Menara airport is free as well: see [car rental in Marrakech](route:livraison-marrakech). For a short break, keep in mind that the minimum rental is 5 days.',
         },
       ],
     },

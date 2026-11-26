@@ -3,10 +3,10 @@ import type { Article } from '../types';
 const article: Article = {
   slug: 'aeroport-marrakech-menara-voiture-location',
   metaTitle: `Aéroport Marrakech-Ménara : voiture de location | Yourent`,
-  metaDescription: `Arriver à l'aéroport Marrakech-Ménara (RAK) et récupérer une voiture de location livrée sur demande : préparatifs, documents, horaires et autres solutions.`,
+  metaDescription: `Arriver à l'aéroport Marrakech-Ménara (RAK) et récupérer une voiture de location livrée gratuitement : préparatifs, documents, horaires, autres solutions.`,
   h1: `Aéroport Marrakech-Ménara : arriver et récupérer sa voiture de location`,
-  intro: `L'aéroport de Marrakech-Ménara (code RAK) se trouve à environ 5 km du centre-ville. Yourent, agence de Casablanca, n'y a ni comptoir ni bureau, mais peut y livrer une voiture sur demande : l'équipe confirme sur WhatsApp la faisabilité, les conditions et l'éventuel supplément avant toute réservation. Voici comment préparer cette arrivée, ce qu'il faut envoyer avant le vol, et dans quels cas il vaut mieux prendre la voiture à Casablanca.`,
-  excerpt: `Livraison sur demande à l'aéroport Marrakech-Ménara, informations à envoyer avant le vol, remise de la voiture et solutions de rechange : le guide pour arriver à Marrakech et prendre le volant.`,
+  intro: `L'aéroport de Marrakech-Ménara (code RAK) se trouve à environ 5 km du centre-ville. Yourent, agence de Casablanca, n'y a ni comptoir ni bureau, mais y livre gratuitement votre voiture de location : l'équipe confirme sur WhatsApp la disponibilité, l'heure et le point de rendez-vous avant toute réservation. Voici comment préparer cette arrivée, ce qu'il faut envoyer avant le vol, et dans quels cas atterrir plutôt à Casablanca.`,
+  excerpt: `Livraison gratuite à l'aéroport Marrakech-Ménara, informations à envoyer avant le vol, remise de la voiture et solutions de rechange : le guide pour arriver à Marrakech et prendre le volant.`,
   datePublished: '2026-11-26',
   dateModified: '2026-11-26',
   sections: [
@@ -67,14 +67,14 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Yourent n'a pas d'agence à Marrakech. La voiture vient de Casablanca, et la livraison à l'aéroport Marrakech-Ménara se fait **sur demande**. Concrètement :`,
+          text: `Yourent n'a pas d'agence à Marrakech. La voiture vient de Casablanca, et la livraison à l'aéroport Marrakech-Ménara est **gratuite**. Concrètement :`,
         },
         {
           type: 'list',
           ordered: true,
           items: [
             `Vous choisissez un modèle et vos dates dans le [catalogue](/catalogue), puis vous envoyez la demande en précisant que la remise se fait à l'aéroport Marrakech-Ménara.`,
-            `L'équipe vous répond sur WhatsApp. Elle vous dit si la livraison est possible à vos dates, à quelles conditions et avec quel supplément éventuel. Vous ne payez rien en ligne.`,
+            `L'équipe vous répond sur WhatsApp. Elle confirme que la voiture est disponible à vos dates et fixe avec vous l'heure de la remise. Vous ne payez rien en ligne.`,
             `Une fois d'accord, vous recevez le point de rendez-vous. Un membre de l'équipe vous y attend avec la voiture.`,
           ],
         },
@@ -131,7 +131,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Si vos billets ne sont pas encore achetés, comparez. À l'aéroport Mohammed V de Casablanca, la livraison de Yourent est **gratuite**, et elle ne dépend pas d'une confirmation au cas par cas. Vous prenez ensuite l'autoroute A3 jusqu'à Marrakech, soit un peu plus de 200 km.`,
+          text: `Si vos billets ne sont pas encore achetés, choisissez selon votre itinéraire : la livraison de Yourent est **gratuite** à l'aéroport Mohammed V de Casablanca comme à Marrakech-Ménara. Atterrir à Casablanca a du sens si votre séjour commence par quelques jours en ville. Vous prenez ensuite l'autoroute A3 jusqu'à Marrakech, soit un peu plus de 200 km.`,
         },
         {
           type: 'p',
@@ -156,11 +156,11 @@ const article: Article = {
   faq: [
     {
       q: `Yourent a-t-elle un comptoir à l'aéroport de Marrakech-Ménara ?`,
-      a: `Non. Yourent est une agence de Casablanca, sans bureau à Marrakech. La voiture peut être livrée à l'aéroport sur demande, au point de rendez-vous envoyé sur WhatsApp.`,
+      a: `Non. Yourent est une agence de Casablanca, sans bureau à Marrakech. La voiture est livrée gratuitement à l'aéroport, au point de rendez-vous envoyé sur WhatsApp.`,
     },
     {
       q: `La livraison à l'aéroport Marrakech-Ménara est-elle gratuite ?`,
-      a: `La livraison gratuite concerne Casablanca et l'aéroport Mohammed V. Pour Marrakech, l'équipe confirme les conditions et l'éventuel supplément sur WhatsApp avant la réservation.`,
+      a: `Oui. Elle est gratuite à l'aéroport Marrakech-Ménara comme en ville à Marrakech, au même titre qu'à Casablanca et à l'aéroport Mohammed V.`,
     },
     {
       q: `Que se passe-t-il si mon vol pour Marrakech est retardé ?`,

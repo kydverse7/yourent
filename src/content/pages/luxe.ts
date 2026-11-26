@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location voiture luxe Casablanca dès {minPrice} DH | Yourent',
     metaDescription:
-      "Location de voiture de luxe à Casablanca : Range Rover, Porsche Macan, Mercedes dès {minPrice} DH/jour. Livraison gratuite à l'hôtel ou à l'aéroport.",
+      "Location de voiture de luxe et de prestige à Casablanca : Range Rover, Porsche Macan, Mercedes dès {minPrice} DH/jour, livrés à l'hôtel ou à l'aéroport.",
     eyebrow: 'Voitures de prestige',
     h1: 'Location de voiture de luxe à Casablanca : Range Rover, Porsche, Mercedes',
     intro:
@@ -64,7 +64,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Si vous savez déjà quelle marque vous voulez, chacune a sa page. La [location de Mercedes à Casablanca](route:mercedes) présente la CLA, la C 220 et l'E 220. La [location de Range Rover à Casablanca](route:range-rover) compare le Sport et l'Evoque. La [location de Porsche à Casablanca](route:porsche) est consacrée au Macan, et la [location de Volkswagen à Casablanca](route:volkswagen) inclut le Touareg.",
+            text: "Si vous savez déjà quelle marque vous voulez, chacune a sa page. La [location de Mercedes à Casablanca](route:mercedes) présente la CLA, la C 220 et l'E 220. La [location de Range Rover à Casablanca](route:range-rover) compare le Sport et l'Evoque. La [location de Porsche à Casablanca](route:porsche) est consacrée au Macan, et la [location de Volkswagen à Casablanca](route:volkswagen) inclut le Touareg. Si vous cherchez une carrosserie plutôt qu'une marque, deux pages comparent les modèles : la [location de SUV de luxe à Casablanca](route:suv-luxe) et la [location de berline à Casablanca](route:berline).",
           },
           {
             type: 'p',
@@ -77,11 +77,11 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Pour un mariage ou une cérémonie, une question revient souvent : peut-on prendre la voiture une seule journée ? La réponse est non, puisque la location dure au moins 5 jours. En pratique, prévoyez une période qui englobe l'événement et signalez la date clé dans votre demande.",
+            text: "Pour un mariage ou une cérémonie, une question revient souvent : peut-on prendre la voiture une seule journée ? La réponse est non, puisque la location dure au moins 5 jours. En pratique, prévoyez une période qui englobe l'événement et signalez la date clé dans votre demande. Notre article [voiture de mariage à Casablanca](/blog/location-voiture-mariage-casablanca) détaille l'organisation de la semaine.",
           },
           {
             type: 'p',
-            text: "Pour un déplacement professionnel, la voiture peut vous attendre à votre hôtel ou à votre arrivée, comme l'explique notre page [location de voiture à l'aéroport de Casablanca](route:aeroport). Si vous cherchez plutôt un véhicule avec chauffeur, posez la question sur WhatsApp, car le site présente la location du véhicule seul. Notre article [louer une voiture de luxe à Casablanca](/blog/louer-voiture-de-luxe-casablanca-conseils) passe en revue le budget, la caution et les erreurs les plus courantes.",
+            text: "Pour un déplacement professionnel, la voiture peut vous attendre à votre hôtel ou à votre arrivée, comme l'explique notre page [voiture de luxe à l'aéroport de Casablanca](route:luxe-aeroport). Si vous cherchez plutôt un véhicule avec chauffeur, posez la question sur WhatsApp, car le site présente la location du véhicule seul. Notre article [louer une voiture de luxe à Casablanca](/blog/louer-voiture-de-luxe-casablanca-conseils) passe en revue le budget, la caution et les erreurs les plus courantes.",
           },
         ],
       },
@@ -98,7 +98,7 @@ const page: LocalizedPage = {
               "La livraison gratuite à Casablanca, à l'hôtel, à l'adresse de votre choix ou à l'aéroport Mohammed V.",
               "Une assurance tous risques avec franchise sur chaque voiture de la sélection.",
               "Un véhicule de remplacement envoyé dans les plus brefs délais si la voiture tombe en panne, ainsi qu'un accompagnement de l'équipe après un accident.",
-              "Un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles, sans rien demander.",
+              "Un tarif réduit automatique au-delà de 10 jours sur la plupart des modèles, sans rien demander. La page [voiture de luxe en longue durée](route:luxe-longue-duree) explique le calcul sur plusieurs semaines.",
             ],
           },
           {
@@ -155,7 +155,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Peut-on se faire livrer une voiture de luxe à son hôtel ou à l'aéroport ?",
-        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. L'équipe vous donne le point de rendez-vous précis sur WhatsApp. Pour une remise à Marrakech, elle confirme les conditions sur demande.",
+        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. Elle l'est aussi à Marrakech et à l'aéroport Marrakech-Ménara. L'équipe vous donne le point de rendez-vous précis sur WhatsApp.",
       },
       {
         q: 'Quel âge faut-il pour louer une voiture de luxe à Casablanca ?',
@@ -170,7 +170,7 @@ const page: LocalizedPage = {
         a: "Le site présente la location du véhicule seul. Pour un chauffeur, l'équipe répond directement sur WhatsApp.",
       },
     ],
-    related: ['mercedes', 'range-rover', 'porsche', 'suv', 'tarifs'],
+    related: ['suv-luxe', 'luxe-aeroport', 'luxe-longue-duree', 'berline', 'mercedes', 'range-rover', 'porsche', 'tarifs'],
   },
 };
 

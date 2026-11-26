@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Avant de louer une voiture au Maroc, vérifiez le prix final, la caution, la franchise, le kilométrage, l'état des lieux et l'annulation. Les mauvaises surprises viennent presque toujours de questions non posées avant la signature. La liste ci-dessous passe ces points en revue pour n'importe quel loueur, avec ce que Yourent confirme et ce que l'équipe précise sur WhatsApp.`,
   excerpt: `Prix final, caution, franchise, kilométrage, état des lieux, annulation : la liste à cocher à parcourir avant de signer un contrat de location de voiture au Maroc.`,
   datePublished: '2026-11-05',
-  dateModified: '2026-11-05',
+  dateModified: '2026-11-26',
   sections: [
     {
       h2: `Avant de louer une voiture au Maroc, que faut-il vérifier dans le contrat ?`,
@@ -37,7 +37,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Chez Yourent, les tarifs sont publiés par modèle, à partir de {fleetMin} DH par jour, pour 5 jours minimum. Au-delà de 10 jours, un tarif réduit est appliqué automatiquement sur la plupart des modèles. La livraison ne coûte rien à l'aéroport ni dans Casablanca, alors qu'elle est possible à Mohammedia avec un léger supplément. Voir la page [tarifs de location de voiture à Casablanca](route:tarifs).`,
+          text: `Chez Yourent, les tarifs sont publiés par modèle, à partir de {fleetMin} DH par jour, pour 5 jours minimum. Au-delà de 10 jours, un tarif réduit est appliqué automatiquement sur la plupart des modèles. La livraison ne coûte rien dans Casablanca, à l'aéroport Mohammed V, à Marrakech ni à l'aéroport Marrakech-Ménara ; à Mohammedia, elle est possible avec un léger supplément. Voir la page [tarifs de location de voiture à Casablanca](route:tarifs).`,
         },
       ],
     },

@@ -82,7 +82,7 @@ const page: LocalizedPage = {
               ['Durée', '5 jours minimum, tarif réduit au-delà de 10 jours sur la plupart des modèles'],
               ['Caution', 'Chèque, espèces ou empreinte de carte, montant selon le véhicule'],
               ['Assurance', 'Tous risques avec franchise, montant précisé par l’équipe'],
-              ['Livraison', 'Gratuite à Casablanca et à l’aéroport Mohammed V, léger supplément à Mohammedia, Marrakech sur demande'],
+              ['Livraison', 'Gratuite à Casablanca, à l’aéroport Mohammed V, à Marrakech et à l’aéroport Marrakech-Ménara ; léger supplément à Mohammedia'],
               ['Kilométrage', 'Précisé par l’équipe avant la réservation'],
               ['Retour dans une autre ville', 'Précisé par l’équipe avant la réservation'],
               ['Annulation', 'Sans frais jusqu’à 24 h avant la prise en charge'],
@@ -92,6 +92,15 @@ const page: LocalizedPage = {
           {
             type: 'p',
             text: 'Une question sur l’une de ces conditions ? Écrivez à l’équipe depuis la page [contact de l’agence](route:contact) ou consultez la [FAQ sur la location de voiture à Casablanca](route:faq).',
+          },
+        ],
+      },
+      {
+        h2: 'Données personnelles et mesure d’audience',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Pour améliorer son site, Yourent enregistre, sans cookie, les pages consultées et le temps passé, les clics sur les boutons de contact et de réservation, l’origine de la visite (moteur de recherche, annonce, réseau social, site partenaire), le type d’appareil et la langue, ainsi que l’adresse IP et la localisation approximative qui en découle (ville, région, pays). Aucun nom, numéro de téléphone, e-mail ou texte saisi n’est enregistré par cette mesure. Ces données servent uniquement à Yourent, ne sont pas transmises à des tiers et sont supprimées automatiquement au bout de 90 jours. Les informations que vous envoyez dans une demande de réservation servent seulement à la traiter.',
           },
         ],
       },

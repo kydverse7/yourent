@@ -146,7 +146,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Pour un déplacement professionnel ou un événement, voyez plutôt notre [location de voiture de luxe à Casablanca](route:luxe). Le tarif de chaque modèle figure ci-dessous.",
+            text: "Pour un déplacement professionnel ou un événement, voyez plutôt la page [voiture de luxe à l'aéroport de Casablanca](route:luxe-aeroport). Le tarif de chaque modèle figure ci-dessous.",
           },
         ],
       },
@@ -169,7 +169,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Comme la location dure au moins 5 jours, elle vise surtout les voyageurs qui gardent la voiture pendant leur séjour. Si votre voyage continue hors de la ville, notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca. Et si vous atterrissez à Marrakech plutôt qu'à Casablanca, une livraison à l'aéroport Marrakech-Ménara s'organise sur demande : voyez notre page [location de voiture à Marrakech](route:livraison-marrakech).",
+            text: "Comme la location dure au moins 5 jours, elle vise surtout les voyageurs qui gardent la voiture pendant leur séjour. Si votre voyage continue hors de la ville, notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca. Et si vous atterrissez à Marrakech plutôt qu'à Casablanca, la livraison à l'aéroport Marrakech-Ménara est gratuite elle aussi : voyez notre page [location de voiture à Marrakech](route:livraison-marrakech).",
           },
         ],
       },

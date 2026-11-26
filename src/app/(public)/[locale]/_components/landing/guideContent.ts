@@ -52,7 +52,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         'Vous ne payez pas de frais de livraison à l’aéroport Mohammed V, pas plus que dans le reste de Casablanca. Yourent n’a pas de comptoir dans le terminal : le véhicule vient donc à vous, sur rendez-vous. Il peut aussi vous attendre à votre hôtel ou à votre domicile en ville, 7j/7.',
         `Donnez votre date et votre heure d’arrivée dans la demande, l’équipe vous indique ensuite le lieu de rendez-vous sur WhatsApp. Horaires de l’équipe : ${hours}. Si votre avion atterrit en dehors de ces horaires, posez la question avant de réserver.`,
         'Pour le déroulé complet de l’arrivée, lisez notre page [location de voiture à l’aéroport de Casablanca](route:aeroport). Si vous venez de France ou d’un autre pays d’Europe, voyez aussi notre [location de voiture à Casablanca depuis la France et l’Europe](route:europe).',
-        'Hors de la ville, Mohammedia est possible avec un léger supplément. Une livraison à Marrakech ou à l’aéroport Marrakech-Ménara s’organise aussi sur demande : l’équipe en confirme les conditions sur WhatsApp, comme l’explique notre page [location de voiture à Marrakech](route:livraison-marrakech). Si vous préférez prendre le volant ici et descendre par l’autoroute, voyez la [location de voiture de Casablanca à Marrakech](route:marrakech) ; pour un circuit plus large, la [location de voiture au Maroc](route:maroc).',
+        'Hors de la ville, la livraison est gratuite aussi à Marrakech et à l’aéroport Marrakech-Ménara, comme l’explique notre page [location de voiture à Marrakech](route:livraison-marrakech) ; à Mohammedia, elle est possible avec un léger supplément. Si vous préférez prendre le volant ici et descendre par l’autoroute, voyez la [location de voiture de Casablanca à Marrakech](route:marrakech) ; pour un circuit plus large, la [location de voiture au Maroc](route:maroc).',
       ],
     },
     ranges: {
@@ -128,7 +128,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal; instead, the car comes to you, by appointment. It can also be brought to your hotel or home in the city, 7 days a week.',
         `Give your arrival date and time in the request, and the team will send you the meeting point on WhatsApp. Team hours: ${hours}. If your flight lands outside these hours, however, ask before you book.`,
         'For a full account of the arrival, read our [car rental at Casablanca airport](route:aeroport) page. If you are flying in from abroad, see also [car rental in Casablanca from Europe](route:europe).',
-        'Outside the city, Mohammedia is possible for a small extra charge. Delivery to Marrakech or Marrakech-Menara airport can be arranged on request, with the conditions and any surcharge confirmed on WhatsApp: see [car rental in Marrakech](route:livraison-marrakech). If you would rather collect the car here and drive south, our [Casablanca to Marrakech car rental](route:marrakech) page covers the route, and [car rental in Morocco](route:maroc) the wider tour.',
+        'Outside the city, delivery is free in Marrakech and at Marrakech-Menara airport too: see [car rental in Marrakech](route:livraison-marrakech). Mohammedia is possible for a small extra charge. If you would rather collect the car here and drive south, our [Casablanca to Marrakech car rental](route:marrakech) page covers the route, and [car rental in Morocco](route:maroc) the wider tour.',
       ],
     },
     ranges: {
@@ -203,8 +203,8 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
       paragraphs: ({ hours }) => [
         'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المطار، لذلك تأتي السيارة إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
         `اذكر تاريخ وصولك وساعته في الطلب، وسيحدد لك الفريق مكان اللقاء عبر واتساب. أوقات عمل الفريق: ${hours}. وإذا كانت طائرتك ستهبط خارج هذه الأوقات، فاسأل قبل الحجز.`,
-        'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط، وإلى مراكش أو مطار مراكش المنارة عند الطلب، بشروط يؤكدها الفريق عبر واتساب قبل الحجز. ولمعرفة تفاصيل الوصول إلى الدار البيضاء بالطائرة، اقرأ صفحة [كراء السيارات في مطار محمد الخامس](route:aeroport).',
-        'هل تستمر رحلتك خارج المدينة؟ تشرح صفحة [كراء السيارات في المغرب](route:maroc) كيف تنطلق من الدار البيضاء، وتفصّل صفحة [كراء السيارات من الدار البيضاء إلى مراكش](route:marrakech) هذا الطريق وشروط التسليم في مراكش. أما مكان إرجاع السيارة فيُتفق عليه مع الفريق عبر واتساب قبل تأكيد الحجز.',
+        'خارج المدينة، التوصيل مجاني أيضًا إلى مراكش وإلى مطار مراكش المنارة، ويمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط. ولمعرفة تفاصيل الوصول إلى الدار البيضاء بالطائرة، اقرأ صفحة [كراء السيارات في مطار محمد الخامس](route:aeroport).',
+        'هل تستمر رحلتك خارج المدينة؟ تشرح صفحة [كراء السيارات في المغرب](route:maroc) كيف تنطلق من الدار البيضاء، وتفصّل صفحة [كراء السيارات من الدار البيضاء إلى مراكش](route:marrakech) هذا الطريق والتسليم في مراكش. أما مكان إرجاع السيارة فيُتفق عليه مع الفريق عبر واتساب قبل تأكيد الحجز.',
       ],
     },
     ranges: {

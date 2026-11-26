@@ -2,13 +2,13 @@ import type { LocalizedPage } from '../types';
 
 const page: LocalizedPage = {
   fr: {
-    metaTitle: 'Location voiture Marrakech et aéroport Ménara | Yourent',
+    metaTitle: 'Location voiture Marrakech : livraison gratuite | Yourent',
     metaDescription:
-      "Location de voiture à Marrakech et à l'aéroport Marrakech-Ménara : livraison sur demande depuis Casablanca, dès {minPrice} DH/jour, 5 jours minimum.",
-    eyebrow: 'Livraison à Marrakech',
-    h1: "Location de voiture à Marrakech : livraison en ville ou à l'aéroport Ménara, sur demande",
+      "Location de voiture à Marrakech : livraison gratuite en ville et à l'aéroport Marrakech-Ménara, dès {minPrice} DH/jour, 5 jours minimum.",
+    eyebrow: 'Livraison gratuite à Marrakech',
+    h1: "Location de voiture à Marrakech : livraison gratuite en ville ou à l'aéroport Ménara",
     intro:
-      "Yourent est une agence de Casablanca, sans bureau à Marrakech. Votre voiture de location peut toutefois vous y être livrée sur demande, en ville ou à l'aéroport Marrakech-Ménara (RAK), dès {minPrice} DH par jour et pour 5 jours minimum. Avant toute réservation, l'équipe confirme sur WhatsApp si la livraison est possible à vos dates, à quelles conditions et avec quel supplément éventuel.",
+      "Yourent est une agence de Casablanca, sans bureau à Marrakech. Votre voiture de location vous y est pourtant livrée gratuitement, en ville ou à l'aéroport Marrakech-Ménara (RAK), dès {minPrice} DH par jour et pour 5 jours minimum. Vous envoyez votre demande en ligne, puis l'équipe confirme sur WhatsApp la disponibilité, l'heure et le point de rendez-vous.",
     breadcrumb: 'Location à Marrakech',
     vehicles: { sort: 'asc' },
     sections: [
@@ -20,8 +20,8 @@ const page: LocalizedPage = {
             head: ['Votre question', 'La réponse'],
             rows: [
               ['Yourent a-t-elle une agence à Marrakech ?', "Non. La seule agence est à Casablanca, et la voiture vient de là."],
-              ['Peut-on recevoir la voiture à Marrakech ?', "Oui, sur demande : en ville ou à l'aéroport Marrakech-Ménara (RAK)."],
-              ['La livraison est-elle payante ?', "Un supplément peut s'appliquer. L'équipe confirme les conditions et le montant éventuel sur WhatsApp avant la réservation."],
+              ['Peut-on recevoir la voiture à Marrakech ?', "Oui, en ville ou à l'aéroport Marrakech-Ménara (RAK)."],
+              ['La livraison est-elle payante ?', "Non. Elle est gratuite à Marrakech et à l'aéroport Ménara, comme à Casablanca et à l'aéroport Mohammed V."],
               ['Combien coûte la voiture ?', 'Dès {minPrice} DH par jour, pour 5 jours minimum.'],
               ['Où rend-on la voiture ?', "Le lieu de restitution se convient avec l'équipe sur WhatsApp avant de confirmer."],
               ["Quand joindre l'équipe ?", 'Tous les jours de 8 h à 22 h, sur WhatsApp ou au +212 6 61 23 62 31.'],
@@ -38,7 +38,7 @@ const page: LocalizedPage = {
             ordered: true,
             items: [
               "**La demande en ligne.** Choisissez un modèle dans le [catalogue de voitures à louer](/catalogue) et indiquez vos dates. Dans le champ des notes, précisez que vous voulez la voiture à Marrakech ou à l'aéroport Marrakech-Ménara, avec la date, l'heure et, si vous arrivez en avion, votre numéro de vol.",
-              "**La réponse sur WhatsApp.** Vous ne payez rien en ligne. L'équipe vous dit si la livraison est possible à vos dates, puis confirme les conditions, l'éventuel supplément et le point de rendez-vous. Vous décidez une fois que tout est clair.",
+              "**La réponse sur WhatsApp.** Vous ne payez rien en ligne. L'équipe confirme que la voiture est disponible à vos dates, puis fixe avec vous l'heure et le point de rendez-vous. La livraison, elle, ne coûte rien. Vous décidez une fois que tout est clair.",
               "**La remise et le contrôle.** Un membre de l'équipe amène la voiture depuis Casablanca. Vous présentez vos documents, vous laissez la caution, puis vous faites le tour du véhicule ensemble avant de partir.",
               "**La restitution.** Le lieu de retour se convient avec l'équipe sur WhatsApp avant de confirmer. La caution vous revient quand la voiture est rendue en bon état.",
             ],
@@ -54,7 +54,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "L'aéroport de Marrakech-Ménara, code RAK, se trouve à environ 5 km du centre de Marrakech (source : Wikipédia). Yourent n'y a pas de comptoir, pas plus qu'en ville : une fois la livraison confirmée, un membre de l'équipe vous attend avec la voiture au point de rendez-vous envoyé sur WhatsApp.",
+            text: "L'aéroport de Marrakech-Ménara, code RAK, se trouve à environ 5 km du centre de Marrakech (source : Wikipédia). Yourent n'y a pas de comptoir, pas plus qu'en ville : une fois la réservation confirmée, un membre de l'équipe vous attend avec la voiture au point de rendez-vous envoyé sur WhatsApp, sans frais de livraison.",
           },
           {
             type: 'p',
@@ -71,8 +71,8 @@ const page: LocalizedPage = {
             rows: [
               [
                 'Vous atterrissez à Marrakech-Ménara et restez dans le sud',
-                'Livraison à Marrakech, sur demande',
-                "Vous recevez la voiture là où vous arrivez. Les conditions et l'éventuel supplément sont confirmés sur WhatsApp avant.",
+                "Livraison gratuite à l'aéroport Marrakech-Ménara",
+                'Vous recevez la voiture là où vous arrivez, sans frais de livraison.',
               ],
               [
                 'Vous atterrissez à Casablanca Mohammed V',
@@ -82,18 +82,18 @@ const page: LocalizedPage = {
               [
                 'Vous commencez par quelques jours à Casablanca',
                 "Livraison gratuite à l'hôtel, puis la [route de Casablanca à Marrakech](route:marrakech)",
-                "Aucun supplément de livraison. Cette page décrit l'autoroute et les péages.",
+                "Vous profitez de la ville avant de partir. Cette page décrit l'autoroute et les péages.",
               ],
               [
                 'Vous êtes déjà à Marrakech',
-                'Livraison en ville, sur demande',
-                "Envoyez votre adresse et vos dates à l'équipe : elle vous dit ce qui est possible.",
+                'Livraison gratuite en ville',
+                "Envoyez votre adresse et vos dates à l'équipe : elle fixe avec vous l'heure et le lieu de la remise.",
               ],
             ],
           },
           {
             type: 'p',
-            text: "En résumé, la livraison à Casablanca et à l'aéroport Mohammed V est toujours gratuite, alors que celle de Marrakech s'étudie au cas par cas. Si vos billets ne sont pas encore pris, comparez les deux avant de choisir votre aéroport d'arrivée. Dans tous les cas, la location dure au moins 5 jours.",
+            text: "En résumé, la livraison est gratuite à Marrakech et à l'aéroport Ménara comme à Casablanca et à l'aéroport Mohammed V : choisissez simplement l'arrivée qui convient à votre voyage. Dans tous les cas, la location dure au moins 5 jours, et le lieu de restitution se convient avec l'équipe sur WhatsApp.",
           },
         ],
       },
@@ -116,7 +116,7 @@ const page: LocalizedPage = {
               [
                 'Une automatique pour la ville et la route',
                 '[Toyota Corolla](/catalogue/toyota-corolla) ({price:toyota-corolla} DH/jour), [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) ({price:volkswagen-t-roc} DH/jour)',
-                'Une berline hybride et un SUV compact essence, tous deux automatiques.',
+                'Une berline hybride et un SUV compact, tous deux automatiques.',
               ],
               [
                 'En famille, avec des valises',
@@ -132,7 +132,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Pour sortir de Marrakech à plusieurs avec des sacs, un SUV apporte une position de conduite plus haute et davantage de coffre : toute la gamme est sur notre page [location de SUV à Casablanca](route:suv). Ces voitures sont faites pour la route, pas pour le tout-terrain. Si votre programme comprend des pistes, demandez à l'équipe quel modèle convient avant de réserver.",
+            text: "Pour sortir de Marrakech à plusieurs avec des sacs, un SUV apporte une position de conduite plus haute et davantage de coffre : toute la gamme est sur notre page [location de SUV à Casablanca](route:suv). Ces voitures sont faites pour la route, pas pour le tout-terrain. Si votre programme comprend des pistes, demandez à l'équipe quel modèle convient avant de réserver. Les modèles de prestige, Mercedes, Range Rover ou Porsche Macan, peuvent aussi être demandés à Marrakech : ils sont présentés sur la page [location de voiture de luxe à Casablanca](route:luxe).",
           },
         ],
       },
@@ -148,13 +148,12 @@ const page: LocalizedPage = {
             type: 'list',
             items: [
               'le carburant ;',
-              "les péages, si votre itinéraire emprunte l'autoroute ;",
-              "l'éventuel supplément de livraison hors de Casablanca, confirmé sur WhatsApp avant la réservation.",
+              "les péages, si votre itinéraire emprunte l'autoroute.",
             ],
           },
           {
             type: 'p',
-            text: "Une caution est aussi demandée au départ, puis rendue au retour de la voiture en bon état. Le kilométrage inclus n'est pas publié sur le site : posez la question si vous prévoyez de longs trajets. Les tarifs de toute la flotte figurent sur la page [prix de location de voiture à Casablanca](route:tarifs).",
+            text: "La livraison à Marrakech ou à l'aéroport Marrakech-Ménara, en revanche, ne s'ajoute pas au prix. Une caution est demandée au départ, puis rendue au retour de la voiture en bon état. Le kilométrage inclus n'est pas publié sur le site : posez la question si vous prévoyez de longs trajets. Les tarifs de toute la flotte figurent sur la page [prix de location de voiture à Casablanca](route:tarifs).",
           },
         ],
       },
@@ -185,15 +184,15 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Yourent a-t-elle une agence de location de voitures à Marrakech ?',
-        a: "Non. Yourent est une agence de Casablanca, avec une seule adresse : N°25 Rue Ibnou Mounir. Sur demande, la voiture est amenée à Marrakech depuis Casablanca.",
+        a: "Non. Yourent est une agence de Casablanca, avec une seule adresse : N°25 Rue Ibnou Mounir. La voiture est amenée gratuitement à Marrakech depuis Casablanca, en ville ou à l'aéroport Ménara.",
       },
       {
         q: "La livraison à Marrakech ou à l'aéroport Marrakech-Ménara est-elle gratuite ?",
-        a: "La livraison gratuite concerne Casablanca et l'aéroport Mohammed V. Pour Marrakech, l'équipe confirme les conditions et l'éventuel supplément sur WhatsApp avant la réservation.",
+        a: "Oui, comme à Casablanca et à l'aéroport Mohammed V. Vous payez la location, pas le trajet de la voiture depuis Casablanca.",
       },
       {
         q: "Peut-on récupérer une voiture de location à l'aéroport Marrakech-Ménara ?",
-        a: "Oui, sur demande. Yourent n'a pas de comptoir dans l'aéroport : une fois la livraison confirmée, un membre de l'équipe vous attend avec la voiture au point de rendez-vous envoyé sur WhatsApp. Transmettez votre numéro de vol et votre heure d'arrivée avec la demande.",
+        a: "Oui, et la livraison y est gratuite. Yourent n'a pas de comptoir dans l'aéroport : une fois la réservation confirmée, un membre de l'équipe vous attend avec la voiture au point de rendez-vous envoyé sur WhatsApp. Transmettez votre numéro de vol et votre heure d'arrivée avec la demande.",
       },
       {
         q: 'Peut-on rendre la voiture à Marrakech ?',
@@ -205,7 +204,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Combien de temps à l'avance faut-il envoyer sa demande ?",
-        a: "Le plus tôt possible : la voiture vient de Casablanca, et l'équipe doit vérifier que la livraison est possible à vos dates. Elle répond tous les jours, de 8 h à 22 h.",
+        a: "Le plus tôt possible : la voiture vient de Casablanca, et l'équipe doit vérifier qu'elle est disponible à vos dates, puis organiser la remise. Elle répond tous les jours, de 8 h à 22 h.",
       },
     ],
     related: ['marrakech', 'aeroport', 'maroc', 'suv', 'tarifs', 'conditions'],

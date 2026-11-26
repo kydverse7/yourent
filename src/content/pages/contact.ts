@@ -51,7 +51,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: 'La livraison ne coûte rien dans tout Casablanca ni à l’aéroport, 7j/7. Pour Mohammedia (léger supplément) ou Marrakech (sur demande), l’équipe confirme les conditions sur WhatsApp. Si vous descendez du train, la page [location de voiture à la gare Casa Voyageurs](route:casa-voyageurs) explique la remise ; si vous atterrissez, lisez plutôt la page [location de voiture à l’aéroport de Casablanca](route:aeroport).',
+            text: 'La livraison ne coûte rien dans tout Casablanca ni à l’aéroport Mohammed V, 7j/7, pas plus qu’à Marrakech et à l’aéroport Marrakech-Ménara. Pour Mohammedia, un léger supplément s’applique, et l’équipe en confirme le montant sur WhatsApp. Si vous descendez du train, la page [location de voiture à la gare Casa Voyageurs](route:casa-voyageurs) explique la remise ; si vous atterrissez, lisez plutôt la page [location de voiture à l’aéroport de Casablanca](route:aeroport).',
           },
         ],
       },

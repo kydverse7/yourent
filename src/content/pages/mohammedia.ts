@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Mohammedia est une ville de la côte atlantique, au nord-est de Casablanca (source : Wikipédia). Elle reste hors du périmètre de la livraison gratuite de Yourent, qui couvre tout Casablanca et l’aéroport Mohammed V. Yourent peut néanmoins vous livrer à Mohammedia, avec un léger supplément.',
+            text: 'Mohammedia est une ville de la côte atlantique, au nord-est de Casablanca (source : Wikipédia). Elle reste hors du périmètre de la livraison gratuite de Yourent autour de Casablanca, qui couvre toute la ville et l’aéroport Mohammed V. Yourent peut néanmoins vous livrer à Mohammedia, avec un léger supplément.',
           },
           {
             type: 'p',

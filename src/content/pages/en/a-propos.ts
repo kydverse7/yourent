@@ -64,7 +64,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Yourent delivers the car to your hotel, to Mohammed V airport or to the address of your choice, 7 days a week. Delivery is free anywhere in Casablanca and at the airport. There is no desk at the airport, so the team hands you the car on site, as explained on the [car rental at Casablanca airport](route:aeroport) page. Outside the city, Mohammedia is possible for a small extra charge, and delivery to Marrakech can be arranged on request: see [car rental in Marrakech](route:livraison-marrakech).',
+          text: 'Yourent delivers the car to your hotel, to Mohammed V airport or to the address of your choice, 7 days a week. Delivery is free anywhere in Casablanca and at the airport. There is no desk at the airport, so the team hands you the car on site, as explained on the [car rental at Casablanca airport](route:aeroport) page. Outside the city, delivery is also free in Marrakech and at Marrakech-Menara airport (see [car rental in Marrakech](route:livraison-marrakech)), and Mohammedia is possible for a small extra charge.',
         },
       ],
     },

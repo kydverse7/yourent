@@ -80,7 +80,7 @@ const page: LocalizedPage = {
             items: [
               "**Le carburant** reste à votre charge, comme les péages si vous prenez l'autoroute.",
               "**La caution** ne vous coûte rien si la voiture revient en bon état, mais il faut pouvoir la laisser au départ, par chèque, en espèces ou par empreinte de carte.",
-              "**La livraison hors de Casablanca** : gratuite en ville et à l'aéroport Mohammed V, elle donne lieu à un léger supplément à Mohammedia. Pour Marrakech, l'équipe confirme les conditions sur WhatsApp.",
+              "**La livraison** : gratuite à Casablanca, à l'aéroport Mohammed V, à Marrakech et à l'aéroport Marrakech-Ménara, elle donne lieu à un léger supplément à Mohammedia.",
               "**La durée** : avec 5 jours minimum, votre budget plancher correspond à cinq fois le tarif par jour du modèle.",
             ],
           },

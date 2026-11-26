@@ -57,7 +57,7 @@ const page: PageContent = {
     },
     {
       q: 'Is delivery free?',
-      a: 'Yes, anywhere in Casablanca and at Mohammed V airport, 7 days a week. Mohammedia is possible for a small extra charge. Delivery to Marrakech is arranged on request, with the conditions and any surcharge confirmed on WhatsApp: see [car rental in Marrakech](route:livraison-marrakech).',
+      a: 'Yes, anywhere in Casablanca and at Mohammed V airport, 7 days a week, and in Marrakech and at Marrakech-Menara airport too: see [car rental in Marrakech](route:livraison-marrakech). Mohammedia is possible for a small extra charge.',
     },
     {
       q: 'Can I pick up the car at Mohammed V airport?',

@@ -3,11 +3,11 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Car Rental Morocco: Casablanca from {minPrice} MAD/Day | Yourent',
   metaDescription:
-    'Rent a car in Morocco from Casablanca: free delivery in the city and at Mohammed V airport, Marrakech on request, from {minPrice} MAD/day, 5-day minimum.',
+    'Rent a car in Morocco from Casablanca: free delivery in the city, in Marrakech and at both airports, from {minPrice} MAD/day, 5-day minimum.',
   eyebrow: 'Touring Morocco',
   h1: 'Car rental in Morocco, starting from Casablanca',
   intro:
-    'Your car rental in Morocco starts in Casablanca: Yourent delivers free of charge in the city or at Mohammed V airport, from {minPrice} MAD a day, for 5 days or more. Send your request online and the team confirms on WhatsApp or by phone. Yourent is a single Casablanca agency with no branches in other cities; delivery to Marrakech is possible on request.',
+    'Your car rental in Morocco starts in Casablanca: Yourent delivers free of charge in the city or at Mohammed V airport, from {minPrice} MAD a day, for 5 days or more. Send your request online and the team confirms on WhatsApp or by phone. Yourent is a single Casablanca agency with no branches in other cities, but delivery is also free in Marrakech and at Marrakech-Menara airport.',
   breadcrumb: 'Rental in Morocco',
   vehicles: { sort: 'asc' },
   sections: [
@@ -48,8 +48,8 @@ const page: PageContent = {
             ],
             [
               'Marrakech and Marrakech-Menara airport (RAK)',
-              'On request',
-              'No Yourent branch there. Conditions and any surcharge are confirmed on WhatsApp before you book. See [car rental in Marrakech](route:livraison-marrakech).',
+              'Free',
+              'No Yourent branch there: the car comes from Casablanca and the meeting point is sent on WhatsApp. See [car rental in Marrakech](route:livraison-marrakech).',
             ],
             [
               'Another city',
@@ -144,7 +144,7 @@ const page: PageContent = {
           ordered: true,
           items: [
             'Enter your dates in the [car catalogue](/catalogue), and cars that are already taken drop off the list.',
-            'Send your request and say where you want the car: airport, hotel or an address in Casablanca, or Marrakech on request. Add your route if you already have one.',
+            'Send your request and say where you want the car: airport, hotel or an address in Casablanca, or in Marrakech. Add your route if you already have one.',
             'The team gets back to you on WhatsApp or by phone with the total and the deposit. Nothing is charged online, because you settle up with them directly.',
           ],
         },
@@ -160,7 +160,7 @@ const page: PageContent = {
         { type: 'pricing' },
         {
           type: 'p',
-          text: "The table shows each model's daily rate, followed by the rate that applies after 10 days. Fuel and motorway tolls come on top, as does any delivery surcharge outside Casablanca. The full breakdown is on our [car rental prices in Casablanca](route:tarifs) page.",
+          text: "The table shows each model's daily rate, followed by the rate that applies after 10 days. Fuel and motorway tolls come on top, as does any delivery charge for Mohammedia or another city. The full breakdown is on our [car rental prices in Casablanca](route:tarifs) page.",
         },
       ],
     },
@@ -172,11 +172,11 @@ const page: PageContent = {
   faq: [
     {
       q: 'Does Yourent have branches in other Moroccan cities?',
-      a: 'No. Yourent is a single agency in Casablanca. The car is handed over in Casablanca or at Mohammed V airport, free of charge, and it can be delivered to Marrakech on request.',
+      a: 'No. Yourent is a single agency in Casablanca. The car is handed over free of charge in Casablanca or at Mohammed V airport, and the same free delivery applies in Marrakech and at Marrakech-Menara airport.',
     },
     {
       q: 'Where do I pick up the car, and do you charge for delivery?',
-      a: 'At Mohammed V airport, at your hotel or at another address in Casablanca: all three are free. Delivery in Marrakech or at Marrakech-Menara airport is possible on request, and the team confirms the conditions and any surcharge on WhatsApp before you book.',
+      a: 'At Mohammed V airport, at your hotel or at another address in Casablanca: all three are free. Delivery in Marrakech or at Marrakech-Menara airport is free as well, while Mohammedia carries a small extra charge.',
     },
     {
       q: 'Can I drop the car off in Marrakech, Agadir or another city?',

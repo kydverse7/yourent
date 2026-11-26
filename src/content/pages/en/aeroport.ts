@@ -145,7 +145,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'For a business trip or an event, look at the [luxury car rental](route:luxe) selection. The price of each model is listed below.',
+          text: 'For a business trip or an event, look at the [luxury car rental](route:luxe) selection: our [luxury car rental at Casablanca airport](route:luxe-aeroport) page explains how a Mercedes or a Range Rover is handed over when you land. The price of each model is listed below.',
         },
       ],
     },
@@ -168,7 +168,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Landing at Marrakech-Menara (RAK) rather than Casablanca? Yourent has no branch there, but the car can be delivered on request: see [car rental in Marrakech](route:livraison-marrakech). And if you are staying in town without flying in, the same free delivery applies at your hotel: start from our [car rental in Casablanca](/) page.',
+          text: 'Landing at Marrakech-Menara (RAK) rather than Casablanca? Yourent has no branch there, but delivery to Marrakech-Menara airport is free as well: see [car rental in Marrakech](route:livraison-marrakech). And if you are staying in town without flying in, the same free delivery applies at your hotel: start from our [car rental in Casablanca](/) page.',
         },
       ],
     },
@@ -212,7 +212,7 @@ const page: PageContent = {
       a: 'The return place is agreed with the team at confirmation. Mention it in your request so they can answer on WhatsApp before you travel.',
     },
   ],
-  related: ['tarifs', 'conditions', 'suv', 'automatique', 'europe', 'maroc', 'livraison-marrakech'],
+  related: ['tarifs', 'conditions', 'suv', 'automatique', 'luxe-aeroport', 'europe', 'maroc', 'livraison-marrakech'],
 };
 
 export default page;

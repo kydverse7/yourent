@@ -57,7 +57,7 @@ const page: LocalizedPage = {
           { type: "pricing" },
           {
             type: "p",
-            text: "Vous hésitez avec d'autres modèles haut de gamme ? Notre [location de voiture de luxe à Casablanca](route:luxe) les compare tous.",
+            text: "Vous hésitez avec d'autres modèles haut de gamme ? Notre [location de voiture de luxe à Casablanca](route:luxe) les compare tous. Pour situer les Mercedes face aux autres berlines de la flotte, voyez la [location de berline à Casablanca](route:berline).",
           },
         ],
       },
@@ -77,7 +77,7 @@ const page: LocalizedPage = {
       },
       {
         q: "La Mercedes peut-elle être livrée à l'aéroport ou à l'hôtel ?",
-        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h. Une livraison reste aussi possible à Mohammedia, avec un léger supplément, et à Marrakech sur demande.",
+        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h, ainsi qu'à Marrakech et à l'aéroport Marrakech-Ménara. Une livraison reste aussi possible à Mohammedia, avec un léger supplément.",
       },
       {
         q: "Peut-on louer une Mercedes pour un mariage ou pour une seule journée ?",

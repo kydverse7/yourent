@@ -49,6 +49,7 @@ const page: LocalizedPage = {
               "**Confort et autoroute** : une berline comme la [Toyota Corolla](/catalogue/toyota-corolla) (hybride) pour les trajets quotidiens, car elle consomme moins sur la durée.",
               "**Famille et grands trajets** : un SUV diesel comme le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) ou le [Dacia Duster](/catalogue/dacia-duster), à comparer dans notre [location de SUV à Casablanca](route:suv).",
               "**Longue durée sans embrayage** : une [location de voiture automatique à Casablanca](route:automatique), plus reposante si vous roulez tous les jours en ville.",
+              "**Haut de gamme sur la durée** : Mercedes, Range Rover ou Touareg, avec leurs tarifs au-delà de 10 jours, sur la page [voiture de luxe en longue durée](route:luxe-longue-duree).",
             ],
           },
           {

@@ -21,6 +21,7 @@ import {
   LogOut,
   Settings,
   X,
+  ChartColumn,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useUIStore } from '@/stores/uiStore';
@@ -46,6 +47,7 @@ const navItems: NavItem[] = [
   { label: 'Paiements', href: '/paiements', icon: <Wallet size={18} />, roles: ['admin', 'agent', 'comptable'] },
   { label: 'Dépenses', href: '/depenses', icon: <Receipt size={18} />, roles: ['admin', 'agent', 'comptable'] },
   { label: 'Finances', href: '/finances', icon: <TrendingUp size={18} />, roles: ['admin', 'comptable'] },
+  { label: 'Statistiques', href: '/statistiques', icon: <ChartColumn size={18} />, roles: ['admin'] },
   { label: 'Paramètres', href: '/parametres', icon: <Settings size={18} />, roles: ['admin'] },
 ];
 
