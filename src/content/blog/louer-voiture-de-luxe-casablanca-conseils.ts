@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Louer une voiture de luxe à Casablanca demande les mêmes documents qu'une location classique, mais un budget et une caution plus élevés, et un peu plus d'attention au moment de la remise. Chez Yourent, sept modèles haut de gamme sont proposés, de la Mercedes CLA au Range Rover Sport, pour 5 jours minimum. Voici leurs prix réels, les conditions à remplir et les erreurs à éviter, notamment si vous pensez à un mariage ou à une soirée.`,
   excerpt: `Mercedes, Porsche Macan, Range Rover : les prix réels par jour, la caution, l'âge minimum, la durée de 5 jours et les vérifications à faire avant de louer une voiture de luxe à Casablanca.`,
   datePublished: '2026-11-26',
-  dateModified: '2026-11-26',
+  dateModified: '2026-11-27',
   sections: [
     {
       h2: `Ce qu'on appelle « voiture de luxe » en location`,
@@ -77,7 +77,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Pour un mariage, la solution consiste à réserver une période de 5 jours qui englobe la date, en la signalant dans la demande. La voiture sert alors aussi aux préparatifs, à l'accueil des proches ou aux jours qui suivent. Si vous cherchez un véhicule avec chauffeur, posez la question sur WhatsApp : le site présente la location du véhicule seul.`,
+          text: `Pour un mariage, la solution consiste à réserver une période de 5 jours qui englobe la date, en la signalant dans la demande. La voiture sert alors aussi aux préparatifs, à l'accueil des proches ou aux jours qui suivent. Si vous cherchez un véhicule avec chauffeur, posez la question sur WhatsApp : le site présente la location du véhicule seul. L'article [voiture de mariage à Casablanca](/blog/location-voiture-mariage-casablanca) explique comment organiser la semaine.`,
         },
         {
           type: 'p',
@@ -108,7 +108,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Chaque marque a sa page : [location de Mercedes à Casablanca](route:mercedes), [location de Porsche à Casablanca](route:porsche) et [location de Range Rover à Casablanca](route:range-rover).`,
+          text: `Chaque marque a sa page : [location de Mercedes à Casablanca](route:mercedes), [location de Porsche à Casablanca](route:porsche) et [location de Range Rover à Casablanca](route:range-rover). Les SUV haut de gamme sont comparés sur la page [location de SUV de luxe à Casablanca](route:suv-luxe), et deux comparatifs départagent les modèles proches : [Porsche Macan ou Range Rover Evoque](/blog/porsche-macan-ou-range-rover-evoque-casablanca) et [Range Rover Sport ou Volkswagen Touareg](/blog/range-rover-sport-ou-volkswagen-touareg-casablanca).`,
         },
       ],
     },

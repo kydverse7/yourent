@@ -110,7 +110,7 @@ const copy: Record<string, ModelCopy> = {
 
   "volkswagen-t-roc": {
     paragraphs: [
-      "Le Volkswagen T-Roc à louer à Casablanca est un SUV compact à l'essence, en boîte automatique. Plus haut qu'une berline mais plus court qu'un grand SUV, il convient à un couple ou à une petite famille qui veut une voiture facile en ville et à l'aise sur la route.",
+      "Le Volkswagen T-Roc à louer à Casablanca est un SUV compact à boîte automatique, proposé en essence ou en diesel selon l'exemplaire. Plus haut qu'une berline mais plus court qu'un grand SUV, il convient à un couple ou à une petite famille qui veut une voiture facile en ville et à l'aise sur la route.",
       "Louer un T-Roc à Casablanca a un avantage concret : sa taille compacte le rend simple à garer, et sa position haute donne une bonne visibilité dans le trafic. Pour aller à Marrakech ou à Rabat, il suffit à deux ou trois voyageurs avec leurs bagages. Il ne cherche pas à épater, mais c'est une valeur sûre à {price:volkswagen-t-roc} DH par jour.",
       "Comparez-le au [Dacia Duster](/catalogue/dacia-duster) si le budget prime : le Duster est plus spacieux et moins cher, mais il roule au diesel en boîte manuelle. Pour voyager à quatre avec des valises, le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) offre davantage d'espace, à {price:volkswagen-tiguan} DH par jour. La page [location de Volkswagen à Casablanca](route:volkswagen) présente le reste de la gamme.",
       "Le T-Roc existe en plusieurs exemplaires ; la recherche par dates du catalogue montre ceux qui sont libres sur votre période.",
@@ -118,7 +118,7 @@ const copy: Record<string, ModelCopy> = {
     faq: [
       {
         q: "Le T-Roc est-il en diesel ou en essence ?",
-        a: "Le T-Roc de la flotte fonctionne à l'essence, avec une boîte automatique.",
+        a: "La flotte compte des T-Roc à essence et des T-Roc diesel, tous en boîte automatique. Précisez votre préférence dans la demande.",
       },
       {
         q: "Quelle différence avec le Tiguan ?",
@@ -135,7 +135,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La location d'une Audi A3 à Casablanca vous donne une compacte premium : elle a l'allure d'une voiture soignée sans le gabarit d'une grande berline. Elle roule à l'essence avec une boîte automatique.",
       "Elle convient à un rendez-vous professionnel, ou à qui veut simplement une voiture plus raffinée qu'une citadine. À deux ou trois personnes, elle se prête bien à un trajet vers Rabat, Mohammedia ou Marrakech, alors qu'à quatre avec les valises, vous serez à l'étroit.",
-      "Son tarif est de {price:audi-a3} DH par jour, à comparer avec les {price:volkswagen-golf-8} DH de la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8). La Golf est plus polyvalente et existe dans les deux boîtes, tandis que l'A3 mise sur la finition et l'image de marque. Face à la [Mercedes CLA](/catalogue/mercedes-cla), à {price:mercedes-cla} DH, elle est plus sobre et moins chère.",
+      "Son tarif est de {price:audi-a3} DH par jour, à comparer avec les {price:volkswagen-golf-8} DH de la [Volkswagen Golf 8](/catalogue/volkswagen-golf-8). La Golf est plus polyvalente et existe dans les deux boîtes, tandis que l'A3 mise sur la finition et l'image de marque. Face à la [Mercedes CLA](/catalogue/mercedes-cla), à {price:mercedes-cla} DH, elle est plus sobre et moins chère. Les autres berlines sont réunies sur la page [location de berline à Casablanca](route:berline).",
       "L'A3 n'existe qu'en un exemplaire : la recherche par dates du catalogue vous dit s'il est libre. Les autres modèles de la marque sont sur la page [location d'Audi à Casablanca](route:audi).",
     ],
     faq: [
@@ -146,6 +146,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Peut-on voyager à quatre en Audi A3 ?",
         a: "Oui, elle a cinq places, mais le coffre et la banquette arrière restent compacts. Pour quatre voyageurs avec valises, un SUV comme le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) est plus confortable.",
+      },
+      {
+        q: "L'Audi A3 peut-elle être livrée à l'aéroport Mohammed V ?",
+        a: "Oui, sans frais, comme partout dans Casablanca. Indiquez votre vol dans la demande : l'équipe fixe le rendez-vous sur WhatsApp. La location dure 5 jours au minimum.",
       },
     ],
   },
@@ -189,6 +193,10 @@ const copy: Record<string, ModelCopy> = {
         q: "Le Sorento est-il en diesel et automatique ?",
         a: "Oui, celui de la flotte est un diesel en boîte automatique.",
       },
+      {
+        q: "Le Kia Sorento de la flotte a-t-il 7 places ?",
+        a: "Non, il a 5 places, comme tous les modèles de la flotte. Au-delà de cinq personnes, il faut prévoir deux voitures.",
+      },
     ],
   },
 
@@ -213,10 +221,10 @@ const copy: Record<string, ModelCopy> = {
 
   "audi-q3": {
     paragraphs: [
-      "Pour une location Audi Q3 à Casablanca, vous obtenez un SUV compact premium en diesel. Il existe en boîte automatique et en boîte manuelle selon l'exemplaire, donc précisez votre choix dans la demande.",
+      "Pour une location Audi Q3 à Casablanca, vous obtenez un SUV compact premium. Il existe en diesel ou en essence, en boîte automatique ou manuelle selon l'exemplaire : précisez votre choix dans la demande.",
       "Louer un Q3 convient à un couple, à un voyageur d'affaires ou à une petite famille, car il se gare facilement et reste plus statutaire qu'un T-Roc. Il fait aussi la route de Marrakech sans difficulté. Comptez {price:audi-q3} DH par jour.",
       "Face à l'[Audi A3](/catalogue/audi-a3), il apporte la hauteur et un coffre plus généreux, mais il coûte {price:audi-q3} DH contre {price:audi-a3} DH. Par rapport au [Porsche Macan](/catalogue/porsche-macan), il est nettement moins cher ({price:porsche-macan} DH pour le Macan). En revanche, face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il est plus compact, mais plus chic. Pour voir toute la gamme, ouvrez la page [location d'Audi à Casablanca](route:audi).",
-      "Il existe en plusieurs exemplaires ; la recherche par dates du catalogue montre ceux qui sont libres. Livré à l'hôtel ou à l'aéroport Mohammed V, il est prêt à rouler dès la remise des clés.",
+      "Il existe en plusieurs exemplaires ; la recherche par dates du catalogue montre ceux qui sont libres. Livré à l'hôtel ou à l'aéroport Mohammed V, il est prêt à rouler dès la remise des clés. Les autres SUV haut de gamme sont comparés sur la page [location de SUV de luxe à Casablanca](route:suv-luxe).",
     ],
     faq: [
       {
@@ -224,12 +232,12 @@ const copy: Record<string, ModelCopy> = {
         a: "Les deux existent dans la flotte ; l'équipe vous propose l'exemplaire libre sur vos dates qui correspond à votre préférence.",
       },
       {
-        q: "Le Q3 est-il diesel ?",
-        a: "Oui, le Q3 de la flotte est un diesel.",
+        q: "Le Q3 est-il diesel ou essence ?",
+        a: "Les deux existent dans la flotte, selon l'exemplaire. Précisez votre préférence dans la demande.",
       },
       {
         q: "Quelle différence entre le Q3 et le Porsche Macan ?",
-        a: "Le [Porsche Macan](/catalogue/porsche-macan) roule à l'essence et coûte {price:porsche-macan} DH par jour. Le Q3, de son côté, est un diesel au tarif plus modéré, {price:audi-q3} DH.",
+        a: "Le [Porsche Macan](/catalogue/porsche-macan) roule à l'essence et coûte {price:porsche-macan} DH par jour. Le Q3, de son côté, affiche un tarif plus modéré, {price:audi-q3} DH.",
       },
     ],
   },
@@ -261,7 +269,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "Pour une location Volkswagen Touareg à Casablanca, vous prenez le grand SUV de la flotte, au diesel et en boîte automatique. Il s'adresse à un groupe ou à une famille avec beaucoup de bagages. Il convient aussi à celui qui veut un SUV haut de gamme sans payer le prix d'un Range Rover Sport. Comptez {price:volkswagen-touareg} DH par jour.",
       "Le Touareg est le modèle le plus nombreux de la flotte. À l'aéroport, il avale valises et passagers, et l'autoroute vers Marrakech est à sa mesure. En ville, il se range avec un peu d'attention, mais sa position haute aide. La recherche par dates du catalogue montre les exemplaires libres sur votre période.",
-      "Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il offre un cran de plus en espace, pour un prix supérieur. Le [Range Rover Evoque](/catalogue/range-rover-evoque), à {price:range-rover-evoque} DH, joue plutôt la carte de l'image, tandis que le Touareg gagne en espace. Quant au [Range Rover Sport](/catalogue/range-rover-sport), il coûte {price:range-rover-sport} DH : le Touareg offre un gabarit proche pour un tarif bien plus bas.",
+      "Face au [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), il offre un cran de plus en espace, pour un prix supérieur. Le [Range Rover Evoque](/catalogue/range-rover-evoque), à {price:range-rover-evoque} DH, joue plutôt la carte de l'image, tandis que le Touareg gagne en espace. Quant au [Range Rover Sport](/catalogue/range-rover-sport), il coûte {price:range-rover-sport} DH : le Touareg offre un gabarit proche pour un tarif bien plus bas. Le comparatif [Range Rover Sport ou Volkswagen Touareg](/blog/range-rover-sport-ou-volkswagen-touareg-casablanca) détaille ce choix.",
     ],
     faq: [
       {
@@ -276,6 +284,10 @@ const copy: Record<string, ModelCopy> = {
         q: "Le Touareg est-il adapté aux longs trajets ?",
         a: "Oui, c'est un grand SUV diesel fait pour la route. Avant un départ de plusieurs centaines de kilomètres, demandez toutefois à l'équipe le kilométrage inclus.",
       },
+      {
+        q: "Peut-on louer le Touareg pour un week-end ?",
+        a: "Non. Le Touareg se loue 5 jours au minimum. Il est livré gratuitement à Casablanca et à l'aéroport Mohammed V.",
+      },
     ],
   },
 
@@ -283,7 +295,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La location d'un Range Rover Evoque à Casablanca vous met au volant du SUV compact de la marque britannique. Il roule au diesel avec une boîte automatique, et sa silhouette basse et urbaine le distingue des SUV plus carrés. On le choisit pour son image autant que pour son agrément, à {price:range-rover-evoque} DH par jour.",
       "Il convient à un couple ou à un voyageur d'affaires qui veut arriver quelque part avec une voiture qui se remarque. En ville, son gabarit reste maniable ; vers Marrakech, il fait aussi l'autoroute sans difficulté. Son coffre est correct, mais pas immense.",
-      "Face au [Range Rover Sport](/catalogue/range-rover-sport), l'Evoque coûte beaucoup moins, il est plus petit et plus facile à garer. Le [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, offre plus d'espace : l'Evoque sacrifie donc de la place au profit du prestige. Quant à l'[Audi Q3](/catalogue/audi-q3), à {price:audi-q3} DH, il est moins statutaire.",
+      "Face au [Range Rover Sport](/catalogue/range-rover-sport), l'Evoque coûte beaucoup moins, il est plus petit et plus facile à garer. Le [Volkswagen Touareg](/catalogue/volkswagen-touareg), à {price:volkswagen-touareg} DH, offre plus d'espace : l'Evoque sacrifie donc de la place au profit du prestige. Quant à l'[Audi Q3](/catalogue/audi-q3), à {price:audi-q3} DH, il est moins statutaire. Notre comparatif [Porsche Macan ou Range Rover Evoque](/blog/porsche-macan-ou-range-rover-evoque-casablanca) départage ces deux SUV compacts.",
       "Il n'y a qu'un exemplaire : la recherche par dates du catalogue vous dit s'il est libre. Pour voir le reste de la gamme, ouvrez la page [location de Range Rover à Casablanca](route:range-rover).",
     ],
     faq: [
@@ -294,6 +306,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Evoque ou Sport : lequel choisir ?",
         a: "L'Evoque convient à la ville et à un voyage à deux ou trois. Le [Sport](/catalogue/range-rover-sport), en revanche, répond mieux aux besoins d'une famille, de bagages ou de longues distances.",
+      },
+      {
+        q: "Peut-on louer le Range Rover Evoque pour un week-end ?",
+        a: "Non. L'Evoque se loue 5 jours au minimum, comme le reste de la flotte. Il n'existe qu'en un exemplaire : vérifiez vos dates dans le catalogue.",
       },
     ],
   },
@@ -375,7 +391,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La location d'un Range Rover Sport à Casablanca vous met au volant du modèle le plus haut de gamme de la flotte. C'est un grand SUV diesel, en boîte automatique, avec cinq places. Son tarif est de {price:range-rover-sport} DH par jour, ce qui le place en haut de la grille de l'agence.",
       "On le loue pour une arrivée marquante à l'aéroport Mohammed V ou pour un mariage. Il sert aussi aux voyages où la famille ou le groupe doit être à l'aise, ou simplement au plaisir de rouler dans un SUV de cette catégorie. L'autoroute vers Marrakech est à sa mesure. En ville, sa taille impose cependant de la prudence pour se garer.",
-      "Face au [Range Rover Evoque](/catalogue/range-rover-evoque), il est plus grand et beaucoup plus cher. Le [Volkswagen Touareg](/catalogue/volkswagen-touareg) n'a pas le prestige de la marque, mais il offre un gabarit comparable pour {price:volkswagen-touareg} DH par jour. Les autres modèles de la marque sont sur la page [location de Range Rover à Casablanca](route:range-rover).",
+      "Face au [Range Rover Evoque](/catalogue/range-rover-evoque), il est plus grand et beaucoup plus cher. Le [Volkswagen Touareg](/catalogue/volkswagen-touareg) n'a pas le prestige de la marque, mais il offre un gabarit comparable pour {price:volkswagen-touareg} DH par jour. Les autres modèles de la marque sont sur la page [location de Range Rover à Casablanca](route:range-rover), et les SUV haut de gamme sur la page [location de SUV de luxe à Casablanca](route:suv-luxe).",
       "Il n'existe qu'en deux exemplaires : vérifiez vos dates dans le catalogue. L'équipe confirme ensuite sur WhatsApp et livre la voiture à l'adresse de votre choix.",
     ],
     faq: [

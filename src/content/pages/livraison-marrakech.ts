@@ -116,7 +116,7 @@ const page: LocalizedPage = {
               [
                 'Une automatique pour la ville et la route',
                 '[Toyota Corolla](/catalogue/toyota-corolla) ({price:toyota-corolla} DH/jour), [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) ({price:volkswagen-t-roc} DH/jour)',
-                'Une berline hybride et un SUV compact essence, tous deux automatiques.',
+                'Une berline hybride et un SUV compact, tous deux automatiques.',
               ],
               [
                 'En famille, avec des valises',
@@ -132,7 +132,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Pour sortir de Marrakech à plusieurs avec des sacs, un SUV apporte une position de conduite plus haute et davantage de coffre : toute la gamme est sur notre page [location de SUV à Casablanca](route:suv). Ces voitures sont faites pour la route, pas pour le tout-terrain. Si votre programme comprend des pistes, demandez à l'équipe quel modèle convient avant de réserver.",
+            text: "Pour sortir de Marrakech à plusieurs avec des sacs, un SUV apporte une position de conduite plus haute et davantage de coffre : toute la gamme est sur notre page [location de SUV à Casablanca](route:suv). Ces voitures sont faites pour la route, pas pour le tout-terrain. Si votre programme comprend des pistes, demandez à l'équipe quel modèle convient avant de réserver. Les modèles de prestige, Mercedes, Range Rover ou Porsche Macan, peuvent aussi être demandés à Marrakech : ils sont présentés sur la page [location de voiture de luxe à Casablanca](route:luxe).",
           },
         ],
       },

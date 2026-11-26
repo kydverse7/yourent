@@ -57,7 +57,7 @@ const page: LocalizedPage = {
           { type: "pricing" },
           {
             type: "p",
-            text: "Vous hésitez avec d'autres modèles haut de gamme ? Notre [location de voiture de luxe à Casablanca](route:luxe) les compare tous.",
+            text: "Vous hésitez avec d'autres modèles haut de gamme ? Notre [location de voiture de luxe à Casablanca](route:luxe) les compare tous. Pour situer les Mercedes face aux autres berlines de la flotte, voyez la [location de berline à Casablanca](route:berline).",
           },
         ],
       },

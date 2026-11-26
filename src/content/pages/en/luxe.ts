@@ -40,7 +40,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'All seven have 5 seats and an automatic gearbox, so the choice comes down to size, style and budget.',
+          text: 'All seven have 5 seats and an automatic gearbox, so the choice comes down to size, style and budget. If you already know you want an SUV, the [luxury SUV rental in Casablanca](route:suv-luxe) page compares the premium ones side by side. If you would rather have a saloon, from the Toyota Corolla to the Mercedes E 220, see [sedan and saloon rental in Casablanca](route:berline).',
         },
       ],
     },
@@ -80,7 +80,11 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'For a business trip, the car can be waiting at your hotel or brought to you when you land, as our [car rental at Casablanca airport](route:aeroport) page explains. If you are looking for a car with a driver, ask on WhatsApp, because the site offers the car on its own.',
+          text: 'For a business trip, the car can be waiting at your hotel or brought to you when you land, as our [luxury car rental at Casablanca airport](route:luxe-aeroport) page explains. If you are looking for a car with a driver, ask on WhatsApp, because the site offers the car on its own.',
+        },
+        {
+          type: 'p',
+          text: 'Staying several weeks? The [long-term luxury car rental in Casablanca](route:luxe-longue-duree) page explains how the price is worked out by the week or by the month.',
         },
       ],
     },
@@ -165,7 +169,7 @@ const page: PageContent = {
       a: 'The site offers the car on its own, but the team answers on WhatsApp if you need a driver.',
     },
   ],
-  related: ['mercedes', 'range-rover', 'porsche', 'suv', 'tarifs'],
+  related: ['suv-luxe', 'luxe-aeroport', 'luxe-longue-duree', 'berline', 'mercedes', 'range-rover', 'porsche', 'suv'],
 };
 
 export default page;

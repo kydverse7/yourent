@@ -75,7 +75,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Les Volkswagen SUV sont-ils en diesel ?",
-        a: "Le Tiguan et le Touareg sont des diesels en boîte automatique. Le T-Roc, lui, roule à l'essence, également en boîte automatique.",
+        a: "Le Tiguan et le Touareg sont des diesels en boîte automatique. Le T-Roc existe en essence ou en diesel selon l'exemplaire, lui aussi en boîte automatique.",
       },
       {
         q: "Peut-on faire livrer la Volkswagen à l'aéroport ?",

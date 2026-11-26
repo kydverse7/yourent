@@ -106,19 +106,19 @@ const copy: Record<string, ModelCopy> = {
 
   "volkswagen-t-roc": {
     paragraphs: [
-      "Volkswagen T-Roc rental in Casablanca gets you a compact petrol SUV with an automatic gearbox. Taller than a saloon, shorter than a large SUV, it suits a couple or a small family who want a car that is easy in town and at ease on the road.",
+      "Volkswagen T-Roc rental in Casablanca gets you a compact SUV with an automatic gearbox, in petrol or diesel depending on the unit. Taller than a saloon, shorter than a large SUV, it suits a couple or a small family who want a car that is easy in town and at ease on the road.",
       'If you rent a Volkswagen T-Roc in Casablanca, the practical gain is its size: it parks without trouble, and the high seat gives good visibility in traffic. For Marrakech or Rabat, it holds the motorway well and leaves enough room for the luggage of two or three travellers. It does not try to impress: it is a safe bet, at {price:volkswagen-t-roc} MAD per day.',
-      "Compare it with the [Dacia Duster](/catalogue/dacia-duster) if budget comes first: the Duster is roomier and cheaper, but diesel and manual. If you travel as four with suitcases, the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) offers more room at {price:volkswagen-tiguan} MAD per day. The rest of the range is on our [Volkswagen rental in Casablanca](route:volkswagen) page.",
+      "Compare it with the [Dacia Duster](/catalogue/dacia-duster) if budget comes first: the Duster is roomier and cheaper, but it has a manual gearbox. If you travel as four with suitcases, the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) offers more room at {price:volkswagen-tiguan} MAD per day. The rest of the range is on our [Volkswagen rental in Casablanca](route:volkswagen) page.",
       'The fleet has several T-Rocs, and the date search in the catalogue shows which ones are free for your stay. The rental runs for at least 5 days.',
     ],
     faq: [
       {
         q: "Is the T-Roc diesel or petrol?",
-        a: "The T-Roc in the fleet runs on petrol, with an automatic gearbox.",
+        a: "Both exist in the fleet, depending on the unit, always with an automatic gearbox. State the fuel you prefer in your request, and the team tells you which T-Roc is free on your dates.",
       },
       {
         q: "How does it differ from the Tiguan?",
-        a: 'The [Tiguan](/catalogue/volkswagen-tiguan) is bigger, diesel, and better suited to a family with a lot of luggage. The T-Roc is more compact and easier to park.',
+        a: 'The [Tiguan](/catalogue/volkswagen-tiguan) is bigger, always diesel, and better suited to a family with a lot of luggage. The T-Roc is more compact and easier to park.',
       },
       {
         q: "Can I rent a Volkswagen T-Roc at Casablanca airport?",
@@ -130,9 +130,9 @@ const copy: Record<string, ModelCopy> = {
   "audi-a3": {
     paragraphs: [
       "Audi A3 rental in Casablanca gets you a premium compact that looks smart without the size of a large saloon. It runs on petrol with an automatic gearbox and drives precisely, in town and on the motorway.",
-      "It appeals to anyone with a business meeting in Casablanca or who simply wants a more refined car than a city car. For two or three people, it works well for a trip to Rabat, Mohammedia or Marrakech. With four and their suitcases, however, you will be cramped.",
-      'It costs {price:audi-a3} MAD per day and the [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) {price:volkswagen-golf-8} MAD. The Golf is more versatile and offers a choice of gearbox; the A3 has a more upmarket finish and image. Next to the [Mercedes CLA](/catalogue/mercedes-cla), it is more discreet and cheaper.',
-      "Few units of the A3 exist, so send your request with your dates as soon as possible.",
+      "People rent an Audi A3 in Casablanca for a business meeting, or simply to have a more refined car than a city car. For two or three people, it works well for a trip to Rabat, Mohammedia or Marrakech. With four and their suitcases, however, you will be cramped.",
+      'It costs {price:audi-a3} MAD per day and the [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) {price:volkswagen-golf-8} MAD. The Golf is more versatile and offers a choice of gearbox; the A3 has a more upmarket finish and image. Next to the [Mercedes CLA](/catalogue/mercedes-cla), it is more discreet and cheaper. All three sit with the other saloons on our [sedan and saloon rental in Casablanca](route:berline) page.',
+      "Few units of the A3 exist, so send your request with your dates as soon as possible. The rental runs for at least 5 days.",
     ],
     faq: [
       {
@@ -142,6 +142,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Can four people travel in an Audi A3?",
         a: "Yes, it has five seats, but the boot and the back seat stay compact. For four travellers with suitcases, an SUV like the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) is more comfortable.",
+      },
+      {
+        q: "Can the Audi A3 be delivered to Casablanca airport?",
+        a: "Yes. Delivery to Mohammed V airport is free, as it is anywhere in Casablanca. Give your flight number and arrival time in the request, and the team sends the meeting point on WhatsApp.",
       },
     ],
   },
@@ -171,9 +175,9 @@ const copy: Record<string, ModelCopy> = {
 
   "kia-sorento": {
     paragraphs: [
-      "Kia Sorento rental in Casablanca gets you the family SUV of the fleet: large, diesel, automatic, five comfortable seats and a real boot. It suits a family with luggage, a group heading to Marrakech or Agadir, or anyone who wants to sit high and drive calmly.",
+      "Kia Sorento rental in Casablanca gets you the family SUV of the fleet: large, diesel, automatic, five comfortable seats and a real boot. People rent a Kia Sorento for a family trip with luggage, a group drive to Marrakech or Agadir, or simply to sit high and drive calmly.",
       "In Casablanca, its size calls for a bit of care in narrow streets, but it is reassuring in dense traffic. On the motorway, it is stable and composed. It costs {price:kia-sorento} MAD per day.",
-      "Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), the Sorento puts space and comfort ahead of brand image. Next to the [Dacia Duster](/catalogue/dacia-duster), it is pricier ({price:dacia-duster} MAD for the Duster), but automatic and better finished. If you want a large SUV with more status, look at the [Volkswagen Touareg](/catalogue/volkswagen-touareg).",
+      "Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), the Sorento puts space and comfort ahead of brand image. Next to the [Dacia Duster](/catalogue/dacia-duster), it is pricier ({price:dacia-duster} MAD for the Duster), but automatic and better finished. If you want a large SUV with more status, look at the [Volkswagen Touareg](/catalogue/volkswagen-touareg). The whole range is on our [SUV rental in Casablanca](route:suv) page.",
       "It is offered in limited numbers, so book early for a holiday departure. In Casablanca, allow a little more time to park; on the road, its high position makes long drives less tiring.",
     ],
     faq: [
@@ -184,6 +188,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Is the Sorento diesel and automatic?",
         a: "Yes, the one in the fleet is a diesel with an automatic gearbox.",
+      },
+      {
+        q: "Can I rent a Kia Sorento for a weekend?",
+        a: "No. The minimum rental is 5 days, as for every car in the fleet. The Sorento is delivered free of charge in Casablanca and to Mohammed V airport.",
       },
     ],
   },
@@ -209,9 +217,9 @@ const copy: Record<string, ModelCopy> = {
 
   "audi-q3": {
     paragraphs: [
-      "Audi Q3 rental in Casablanca gets you a premium compact diesel SUV. It comes with an automatic or a manual gearbox depending on the car, so state your choice in the request.",
-      "It suits a couple, a business traveller or a small family wanting an SUV that is easy to park in Casablanca, with more status than a T-Roc. On the road to Marrakech, the diesel pulls easily, and the high position makes the trip less tiring. It costs {price:audi-q3} MAD per day.",
-      "Next to the [Audi A3](/catalogue/audi-a3), it adds height and a more generous boot for {price:audi-q3} MAD against {price:audi-a3} MAD. Next to the [Porsche Macan](/catalogue/porsche-macan), it is cheaper, more sensible and less sporty. Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), it is more compact but smarter.",
+      "Audi Q3 rental in Casablanca gets you a premium compact SUV. It comes in diesel or petrol, with an automatic or a manual gearbox, depending on the unit, so state your preference in the request.",
+      "People rent an Audi Q3 as a couple, on business or as a small family, when they want an SUV that is easy to park in Casablanca, with more status than a T-Roc. On the road to Marrakech, the high position makes the trip less tiring. It costs {price:audi-q3} MAD per day.",
+      "Next to the [Audi A3](/catalogue/audi-a3), it adds height and a more generous boot for {price:audi-q3} MAD against {price:audi-a3} MAD. Next to the [Porsche Macan](/catalogue/porsche-macan), it is cheaper, more sensible and less sporty. Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), it is more compact but smarter. The five premium SUVs are compared on our [luxury SUV rental in Casablanca](route:suv-luxe) page.",
       'The team delivers it to your hotel or to Mohammed V airport, free of charge.',
     ],
     faq: [
@@ -220,12 +228,16 @@ const copy: Record<string, ModelCopy> = {
         a: "Both exist in the fleet. The team offers a car that matches your preference and is free on your dates.",
       },
       {
-        q: "Is the Q3 diesel?",
-        a: "Yes, the Q3 in the fleet is a diesel.",
+        q: "Is the Audi Q3 diesel or petrol?",
+        a: "Both exist in the fleet, depending on the unit. State the fuel you prefer in your request, and the team tells you which Q3 is free on your dates.",
       },
       {
         q: "What is the difference between the Q3 and the Porsche Macan?",
-        a: "The [Porsche Macan](/catalogue/porsche-macan) is a sportier, pricier petrol. The Q3 is a more restrained diesel SUV at a more moderate rate.",
+        a: "The [Porsche Macan](/catalogue/porsche-macan) is a sportier, pricier petrol SUV. The Q3 is more restrained, at a more moderate rate, and comes in diesel or petrol depending on the unit.",
+      },
+      {
+        q: "What is the minimum rental for the Audi Q3?",
+        a: "Five days, as for every car in the fleet: there is no one-day or weekend rental. The rates table on this page shows the daily rate for 5 to 10 days and the rate after 10 days.",
       },
     ],
   },
@@ -256,8 +268,8 @@ const copy: Record<string, ModelCopy> = {
   "volkswagen-touareg": {
     paragraphs: [
       "Volkswagen Touareg rental in Casablanca gets you the large SUV of the fleet, diesel and automatic. It is for a group, a family with a lot of luggage, or anyone who wants an upmarket SUV without paying the price of a [Range Rover Sport](/catalogue/range-rover-sport). It costs {price:volkswagen-touareg} MAD per day.",
-      'It is one of the best-represented models in the fleet. At the airport, it takes plenty of suitcases; on the motorway to Marrakech, it is quiet and stable. In town, it needs a little care when parking, but its visibility helps.',
-      'Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), it offers a step up in space and comfort for a higher price. Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), at {price:range-rover-evoque} MAD, it is roomier, while the Evoque puts image first. Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper ({price:range-rover-sport} MAD for the Sport) and is plenty for most trips.',
+      'It is one of the best-represented models in the fleet, which helps if you want to rent a Volkswagen Touareg on fixed dates. At the airport, it takes plenty of suitcases; on the motorway to Marrakech, it is quiet and stable. In town, it needs a little care when parking, but its visibility helps.',
+      'Next to the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan), it offers a step up in space and comfort for a higher price. Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), at {price:range-rover-evoque} MAD, it is roomier, while the Evoque puts image first. Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper ({price:range-rover-sport} MAD for the Sport) and is plenty for most trips. The five premium SUVs are compared on our [luxury SUV rental in Casablanca](route:suv-luxe) page.',
     ],
     faq: [
       {
@@ -272,15 +284,19 @@ const copy: Record<string, ModelCopy> = {
         q: "Is the Touareg suitable for long trips?",
         a: 'That is one of its strengths: stable, quiet and comfortable. Before a long tour, check the included mileage with the team.',
       },
+      {
+        q: "What deposit is needed for the Touareg?",
+        a: "The rates table on this page shows the minimum when it is listed, and the team confirms the amount before you book. You leave it at pick-up, by cheque, in cash or by card imprint, and it comes back to you when the car is returned in good condition.",
+      },
     ],
   },
 
   "range-rover-evoque": {
     paragraphs: [
       "Range Rover Evoque rental in Casablanca gets you the British brand's compact SUV. It runs on diesel with an automatic gearbox, and its low, urban shape sets it apart from squarer SUVs. People choose it for its image as much as for the drive, at {price:range-rover-evoque} MAD per day.",
-      "It suits a couple or a business traveller who wants to arrive somewhere in a car that gets noticed. In Casablanca, its size stays manageable; towards Marrakech, it holds the road well and its high position is not tiring. Its boot is decent but not huge.",
-      "Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper, smaller and easier to park. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), at {price:volkswagen-touareg} MAD, it gives up space for prestige. Next to the [Audi Q3](/catalogue/audi-q3), it is pricier ({price:audi-q3} MAD for the Q3) and more prestigious.",
-      'The fleet has very few of them: send your request early.',
+      "People rent a Range Rover Evoque as a couple or on business, to arrive somewhere in a car that gets noticed. In Casablanca, its size stays manageable; towards Marrakech, it holds the road well and its high position is not tiring. Its boot is decent but not huge.",
+      "Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper, smaller and easier to park. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), at {price:volkswagen-touareg} MAD, it gives up space for prestige. Next to the [Audi Q3](/catalogue/audi-q3), it is pricier ({price:audi-q3} MAD for the Q3) and more prestigious. The five premium SUVs are compared on our [luxury SUV rental in Casablanca](route:suv-luxe) page.",
+      'The fleet has very few of them: send your request early. The rental runs for at least 5 days.',
     ],
     faq: [
       {
@@ -290,6 +306,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Evoque or Sport: which should I choose?",
         a: "The Evoque for town and a trip for two or three. The [Sport](/catalogue/range-rover-sport) for family, luggage and long distances.",
+      },
+      {
+        q: "Can the Range Rover Evoque be delivered to Casablanca airport?",
+        a: "Yes. Delivery to Mohammed V airport is free, as it is anywhere in Casablanca. Give your flight number and arrival time in the request, and the team sends the meeting point on WhatsApp.",
       },
     ],
   },
@@ -370,8 +390,8 @@ const copy: Record<string, ModelCopy> = {
   "range-rover-sport": {
     paragraphs: [
       "Range Rover Sport rental in Casablanca gets you the most upmarket model in the fleet: a large diesel SUV, automatic, five seats and comfort to match. It costs {price:range-rover-sport} MAD per day, the top of the agency's price list.",
-      'People rent it for a wedding, a trip where the family must travel at ease, or simply for the pleasure of driving an SUV of this class. On the motorway to Marrakech, it is at ease over long distances. In town, however, its size calls for caution when parking.',
-      "Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), it is bigger, more comfortable and much pricier. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), it brings the brand's prestige, not necessarily more usable space: if budget matters, the Touareg does almost as much.",
+      'People rent a Range Rover Sport in Casablanca for a wedding, a trip where the family must travel at ease, or simply for the pleasure of driving an SUV of this class. On the motorway to Marrakech, it is at ease over long distances. In town, however, its size calls for caution when parking.',
+      "Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), it is bigger, more comfortable and much pricier. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), it brings the brand's prestige, not necessarily more usable space: if budget matters, the Touareg does almost as much. The five premium SUVs are compared on our [luxury SUV rental in Casablanca](route:suv-luxe) page.",
       'There are very few in the fleet, so ask for your dates early. The team confirms on WhatsApp and delivers the car to the address of your choice.',
     ],
     faq: [
@@ -386,6 +406,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Is it suitable for a long trip?",
         a: 'Yes, that is one of its natural uses. Before you leave, ask the team how much mileage is included.',
+      },
+      {
+        q: "Can I rent a Range Rover Sport for a wedding day or a weekend?",
+        a: "Not for a single day or a weekend: the minimum rental is 5 days. For a wedding, book a period that covers the date and mention it in your request.",
       },
     ],
   },

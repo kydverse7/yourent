@@ -56,7 +56,7 @@ const page: PageContent = {
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'Looking at other premium models? Our [luxury car rental in Casablanca](route:luxe) page compares them all.',
+          text: 'Looking at other premium models? Our [luxury car rental in Casablanca](route:luxe) page compares them all. To set the three Mercedes against the other saloons, from the Toyota Corolla to the Audi A3, see [sedan and saloon rental in Casablanca](route:berline).',
         },
       ],
     },
@@ -87,7 +87,7 @@ const page: PageContent = {
       a: 'A valid ID (CIN or passport), a licence held for more than 2 years and proof of address, with an international permit accepted for foreign tourists. The details are on the [car rental requirements](route:conditions) page.',
     },
   ],
-  related: ['luxe', 'automatique', 'aeroport', 'range-rover', 'tarifs'],
+  related: ['luxe', 'berline', 'automatique', 'aeroport', 'range-rover', 'tarifs'],
 };
 
 export default page;

@@ -20,7 +20,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Each model has its own page with photos, specifications and the booking form. The T-Roc, petrol and automatic, opens the range at {price:volkswagen-t-roc} MAD per day: see [Volkswagen T-Roc rental in Casablanca](/catalogue/volkswagen-t-roc) to check your dates.',
+          text: 'Each model has its own page with photos, specifications and the booking form. The T-Roc, automatic and offered in petrol or diesel depending on the unit, opens the range at {price:volkswagen-t-roc} MAD per day: see [Volkswagen T-Roc rental in Casablanca](/catalogue/volkswagen-t-roc) to check your dates.',
         },
       ],
     },
@@ -52,7 +52,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Rates run from {minPrice} to {maxPrice} MAD per day: T-Roc {price:volkswagen-t-roc} MAD, Golf 8 {price:volkswagen-golf-8} MAD, Tiguan {price:volkswagen-tiguan} MAD, Touareg {price:volkswagen-touareg} MAD. After 10 days, the rate falls by itself, unless high season suspends the reduction. Comprehensive insurance with an excess covers all four.',
+          text: 'Rates run from {minPrice} to {maxPrice} MAD per day: T-Roc {price:volkswagen-t-roc} MAD, Golf 8 {price:volkswagen-golf-8} MAD, Tiguan {price:volkswagen-tiguan} MAD, Touareg {price:volkswagen-touareg} MAD. After 10 days, a lower rate applies automatically on most models, unless high season suspends it: the table gives the figure for each Volkswagen. Comprehensive insurance with an excess covers all four.',
         },
         { type: 'pricing' },
       ],
@@ -78,7 +78,7 @@ const page: PageContent = {
     },
     {
       q: 'Are the Volkswagen SUVs diesel?',
-      a: 'The Tiguan and the Touareg are diesels with an automatic gearbox, but the T-Roc is petrol, also automatic.',
+      a: 'The Tiguan and the Touareg are diesels with an automatic gearbox. The T-Roc is automatic too, and comes in diesel or petrol depending on the unit: state your preference in the request.',
     },
     {
       q: 'Can the Volkswagen be delivered to the airport?',
@@ -86,7 +86,7 @@ const page: PageContent = {
     },
     {
       q: 'What is the minimum rental period for a Volkswagen?',
-      a: 'You rent for 5 days at least, on every model, and the daily rate falls after 10 days.',
+      a: 'You rent for 5 days at least, on every model. For rentals of more than 10 days, the table shows the rate that applies to each Volkswagen.',
     },
   ],
   related: ['suv', 'automatique', 'longue-duree', 'aeroport', 'tarifs'],

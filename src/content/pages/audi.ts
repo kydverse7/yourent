@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "L'[Audi A3](/catalogue/audi-a3) est une compacte premium à l'essence, en boîte automatique. C'est aussi la plus petite et la moins chère des deux. L'[Audi Q3](/catalogue/audi-q3) est en revanche un SUV compact en diesel, avec une assise plus haute et plus de volume de coffre. Il existe en boîte automatique et en boîte manuelle selon l'exemplaire.",
+            text: "L'[Audi A3](/catalogue/audi-a3) est une compacte premium à l'essence, en boîte automatique. C'est aussi la plus petite et la moins chère des deux. L'[Audi Q3](/catalogue/audi-q3) est en revanche un SUV compact, proposé en diesel ou en essence selon l'exemplaire, avec une assise plus haute et plus de volume de coffre. Il existe en boîte automatique et en boîte manuelle selon l'exemplaire.",
           },
           {
             type: "p",
@@ -33,7 +33,7 @@ const page: LocalizedPage = {
             items: [
               "**Arrivée à l'aéroport Mohammed V** : pour une ou deux personnes avec peu de bagages, l'A3 suffit. Pour des valises plus nombreuses, prenez en revanche le Q3. Notre page [location de voiture à l'aéroport de Casablanca](route:aeroport) détaille la livraison.",
               "**Séjour à Casablanca** : l'A3 se faufile dans le centre et se gare plus facilement. Le Q3 offre une assise plus haute, utile pour sortir de la ville.",
-              "**Casablanca-Marrakech** : les deux font l'autoroute ; le Q3, en diesel, a le coffre le plus grand pour les valises.",
+              "**Casablanca-Marrakech** : les deux font l'autoroute ; le Q3 a le coffre le plus grand pour les valises.",
               "**Un rendez-vous professionnel** : l'A3 donne l'image d'une berline sobre et soignée.",
             ],
           },
@@ -66,7 +66,7 @@ const page: LocalizedPage = {
     faq: [
       {
         q: "Quelle est la différence entre l'Audi A3 et l'Audi Q3 ?",
-        a: "L'A3 est une berline compacte à l'essence, boîte automatique. Le Q3 est plutôt un SUV compact en diesel, plus haut et avec un coffre plus grand, proposé en automatique ou en manuelle.",
+        a: "L'A3 est une berline compacte à l'essence, boîte automatique. Le Q3 est plutôt un SUV compact, plus haut et avec un coffre plus grand, proposé en diesel ou en essence, en automatique ou en manuelle selon l'exemplaire.",
       },
       {
         q: "Peut-on choisir la boîte manuelle sur une Audi ?",
@@ -85,7 +85,7 @@ const page: LocalizedPage = {
         a: "Le conducteur doit avoir au moins 21 ans et un permis de plus de 2 ans. Nos [conditions de location de voiture](route:conditions) listent aussi les autres documents à présenter.",
       },
     ],
-    related: ["luxe", "suv", "volkswagen", "automatique", "tarifs"],
+    related: ['berline', 'suv-luxe', "luxe", "suv", "volkswagen", "automatique", "tarifs"],
   },
 };
 
