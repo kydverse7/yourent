@@ -11,7 +11,7 @@ const range = (a: number, b: number) => ({ '--a': `${a}%`, '--b': `${b}%` }) as 
  * Carte stylisée (pas à l'échelle) : la côte atlantique, Casablanca, Mohammedia au nord-est,
  * l'aéroport Mohammed V au sud, Marrakech hors cadre vers le sud.
  * Le tracé aéroport → Casablanca se dessine au défilement et une voiture le suit ; viennent ensuite
- * Mohammedia (avec supplément) et la route de Marrakech (sur demande).
+ * Mohammedia (avec supplément) et la route de Marrakech (livraison gratuite aussi).
  * Les noms sont du texte HTML posé sur le dessin : ils restent lisibles à toutes les tailles.
  */
 function MapDrawing() {
@@ -57,7 +57,7 @@ function MapDrawing() {
       </g>
       <rect x="0.5" y="0.5" width="399" height="419" rx="27.5" fill="none" stroke="rgba(255,255,255,0.08)" />
 
-      {/* Marrakech : route du sud, sur demande */}
+      {/* Marrakech : route du sud, livraison gratuite */}
       <path
         className="dmap-route"
         style={range(46, 54)}
@@ -120,7 +120,7 @@ export function DeliverySection({ locale }: { locale: Locale }) {
     { icon: Plane, name: t('home.mapAirport'), status: t('home.mapFree'), note: t('home.mapAirportNote'), gold: true },
     { icon: Building2, name: t('home.mapCasa'), status: t('home.mapFree'), note: t('home.mapCasaNote'), gold: true },
     { icon: MapPin, name: t('home.mapMohammedia'), status: t('home.mapSurcharge'), note: t('home.mapMohammediaNote') },
-    { icon: Route, name: t('home.mapMarrakech'), status: t('home.mapOnRequest'), note: t('home.mapMarrakechNote') },
+    { icon: Route, name: t('home.mapMarrakech'), status: t('home.mapFree'), note: t('home.mapMarrakechNote') },
   ];
 
   return (
@@ -174,7 +174,7 @@ export function DeliverySection({ locale }: { locale: Locale }) {
           </p>
           <p className="dmap-label" style={{ left: '50%', top: '88.5%', ...range(52, 58) }}>
             <strong>{t('home.mapMarrakech')}</strong>
-            <span>{t('home.mapOnRequest')}</span>
+            <span>{t('home.mapFree')}</span>
           </p>
         </div>
       </div>
