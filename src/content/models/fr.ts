@@ -195,7 +195,7 @@ const copy: Record<string, ModelCopy> = {
       },
       {
         q: "Le Kia Sorento de la flotte a-t-il 7 places ?",
-        a: "Le nombre de places est confirmé par l'équipe sur WhatsApp avant la réservation. Pour un groupe de six personnes ou plus, demandez-lui le modèle le plus adapté.",
+        a: "Non, le Kia Sorento de la flotte a 5 places. Pour un groupe de six personnes ou plus, il faut prévoir deux voitures : l'équipe vous conseille sur WhatsApp.",
       },
     ],
   },
