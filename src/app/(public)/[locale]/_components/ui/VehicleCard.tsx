@@ -5,6 +5,8 @@ import { t as tr, type Locale } from '@/lib/i18n/translations';
 import type { FleetModel } from '@/lib/seo/fleet';
 import { formatEurApprox } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../../catalogue/_lib/specLabels';
+import type { PhotoSet } from '../home/showcaseData';
+import { CinemaPhoto } from './CinemaPhoto';
 
 /** Données d'une carte, quelle que soit la source (flotte en cache ou catalogue filtré). */
 export type CardVehicle = {
@@ -55,6 +57,7 @@ export function VehicleCard({
   eager = false,
   sizes = DEFAULT_SIZES,
   note,
+  cinema = null,
 }: {
   vehicle: CardVehicle;
   locale: Locale;
@@ -69,6 +72,8 @@ export function VehicleCard({
   eager?: boolean;
   sizes?: string;
   note?: React.ReactNode;
+  /** Photo plein cadre (avec décor) à la place de la photo détourée : accueil, voir home/showcaseData.ts. */
+  cinema?: PhotoSet | null;
 }) {
   const t = (key: string) => tr(locale, key);
   const H = headingLevel;
@@ -90,8 +95,17 @@ export function VehicleCard({
 
   return (
     <article className="card lift group relative flex h-full flex-col overflow-hidden">
-      <div className="car-stage relative aspect-[10/7] overflow-hidden">
-        {vehicle.photo ? (
+      <div className={`car-stage relative aspect-[10/7] overflow-hidden ${cinema ? 'car-stage--photo' : ''}`}>
+        {cinema ? (
+          <CinemaPhoto
+            set={cinema}
+            alt={t('model.photoAlt').replace('{name}', name)}
+            sizes={sizes}
+            priority={priority}
+            className="car-photo"
+            imgClassName="lift-img"
+          />
+        ) : vehicle.photo ? (
           <Image
             src={vehicle.photo}
             alt={t('model.photoAlt').replace('{name}', name)}

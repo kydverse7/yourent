@@ -86,7 +86,9 @@ export function VehicleModelView({
   const included = [t('model.included1'), t('model.included2'), t('model.included3')];
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-x-10 xl:grid-cols-[minmax(0,1fr)_420px]">
+    /* Une colonne en mobile, mais bornée à la largeur de l'écran (minmax(0, 1fr)) : sans cela, la largeur
+       minimale du formulaire (deux champs de date côte à côte) élargissait la page de 33 px à 360 px. */
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-x-10 xl:grid-cols-[minmax(0,1fr)_420px]">
       {/* ── Photo et résumé ── */}
       <div className="min-w-0 space-y-5">
         <div className="car-stage relative aspect-[10/7] overflow-hidden rounded-[20px] border border-white/[0.08]">
@@ -196,7 +198,7 @@ export function VehicleModelView({
       </div>
 
       {/* ── Formulaire : ancre de la barre d'action et du bouton « Demander ce véhicule » ── */}
-      <aside id="reservation" className="scroll-mt-20 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+      <aside id="reservation" className="min-w-0 scroll-mt-20 lg:col-start-2 lg:row-span-2 lg:row-start-1">
         <div className="card p-5 sm:p-6 lg:sticky lg:top-24">
           <h2 className="flex items-center gap-2 text-xl font-bold text-cream">
             <Calendar className="h-5 w-5 text-gold" aria-hidden="true" /> {t('model.reservation')}

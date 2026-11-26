@@ -74,7 +74,8 @@ export const revalidate = 300;
  * L'ordre raconte la location comme une suite de scènes, le luxe en premier :
  * haut de page → vitrine épinglée (3 modèles) → galerie de luxe → chiffres → carte de livraison →
  * 3 étapes → économiques → berlines et SUV → engagements → guide en cartes → blog → agence → FAQ → appel final.
- * Tout le mouvement est en CSS, piloté par le défilement (src/app/site-motion.css).
+ * Tout le mouvement est en CSS, piloté par le défilement (src/app/site-motion.css) : chaque section entre
+ * puis recule selon sa variante (classes scene-*), les photos sont déclarées dans home/showcaseData.ts.
  */
 export default async function PublicHomePage({ params }: Props) {
   const { locale } = await params;
@@ -134,6 +135,7 @@ export default async function PublicHomePage({ params }: Props) {
         text={t('eco.subtitle')}
         more={{ href: getRoutePath('economique', locale) ?? '/catalogue', label: t('footer.link.economique') }}
         models={economic}
+        scene="scene scene-tilt cv-auto"
       />
       <VehicleGridSection
         locale={locale}
@@ -143,22 +145,23 @@ export default async function PublicHomePage({ params }: Props) {
         text={t('signature.subtitle')}
         more={{ href: '/catalogue', label: t('home.seeAll') }}
         models={sedans}
+        scene="scene scene-zoom scene-rule cv-auto"
       />
-      <div className="cv-auto">
+      <div className="cv-auto scene scene-curtain">
         <WhyCards locale={locale} vehicleCount={stats.vehicleCount} />
       </div>
-      <div className="cv-auto">
+      <div className="cv-auto scene scene-rule">
         <LandingGuideSection locale={locale} stats={stats} models={models} />
       </div>
       {articles.length > 0 && (
-        <div className="cv-auto">
+        <div className="cv-auto scene scene-zoom">
           <BlogTeasers locale={locale} articles={articles} />
         </div>
       )}
-      <div className="cv-auto">
+      <div className="cv-auto scene scene-tilt">
         <AgencySection locale={locale} />
       </div>
-      <div className="sec cv-auto">
+      <div className="sec cv-auto scene">
         <div className="lux-container">
           <Faq id="faq" headingId="home-faq" title={t('faq.title')} items={faqItems} openFirst={false} />
         </div>

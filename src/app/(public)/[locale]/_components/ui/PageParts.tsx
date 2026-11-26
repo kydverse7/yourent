@@ -1,9 +1,9 @@
 import type { CSSProperties, ReactNode } from 'react';
-import Image from 'next/image';
 import { ArrowRight, ChevronDown, ChevronRight, Clock, ShieldCheck, Star, Truck } from 'lucide-react';
 import Link from '@/lib/i18n/LocaleLink';
 import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { BUSINESS } from '@/lib/site';
+import { AMBIANCE, photoSrc, photoSrcSet } from '../home/showcaseData';
 import { formatBusinessHours } from '../landing/constants';
 import { BookButton, CallButton, FactsLine, hoursText, WhatsAppButton } from './actions';
 
@@ -215,22 +215,34 @@ export function TrustStrip({ locale, className = '' }: { locale: Locale; classNa
 }
 
 /* ═══ Bandeau final : titre générique, faits, Réserver / WhatsApp / Appeler, horaires ═══ */
+/** Bandeau final : photo portrait sous 768 px, paysage au-delà. */
+const AMBIANCE_MOBILE = '(max-width: 767.98px)';
+const AMBIANCE_SIZES = '(min-width: 1280px) 1200px, 100vw';
+
 export function CtaBand({ locale, minPrice }: { locale: Locale; minPrice: number }) {
   return (
     <section className="sec">
       <div className="lux-container">
         <div className="panel rv-zoom relative overflow-hidden px-5 py-14 text-center md:px-10 md:py-20">
-          {/* Décor : la mosquée Hassan II de nuit, chargée à l'approche, qui recule doucement au défilement. */}
+          {/* Décor : la mosquée Hassan II (crépuscule sur ordinateur, minaret de nuit en mobile), chargée à
+              l'approche, qui recule doucement au défilement. Photos déclarées dans home/showcaseData.ts. */}
           <div className="absolute inset-0" aria-hidden="true">
-            <Image
-              src="/image-casablanca-sombre.webp"
-              alt=""
-              fill
-              loading="lazy"
-              sizes="(min-width: 1280px) 1200px, 100vw"
-              className="px-zoom object-cover object-[78%_55%]"
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_0%,rgba(201,168,76,0.16),transparent_70%),linear-gradient(180deg,rgba(10,10,10,0.2),rgba(10,10,10,0.72))]" />
+            <picture className="cta-photo">
+              <source media={AMBIANCE_MOBILE} type="image/avif" srcSet={photoSrcSet(AMBIANCE.portrait, 'portrait', 'avif')} sizes="100vw" />
+              <source media={AMBIANCE_MOBILE} type="image/webp" srcSet={photoSrcSet(AMBIANCE.portrait, 'portrait', 'webp')} sizes="100vw" />
+              <source type="image/avif" srcSet={photoSrcSet(AMBIANCE.paysage, 'paysage', 'avif')} sizes={AMBIANCE_SIZES} />
+              {/* <img> et non next/image : fichiers déjà redimensionnés (scripts/export-photos.mjs) */}
+              <img
+                src={photoSrc(AMBIANCE.paysage)}
+                srcSet={photoSrcSet(AMBIANCE.paysage, 'paysage', 'webp')}
+                sizes={AMBIANCE_SIZES}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="px-zoom absolute inset-0 h-full w-full object-cover"
+              />
+            </picture>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_0%,rgba(201,168,76,0.16),transparent_70%),linear-gradient(180deg,rgba(10,10,10,0.35),rgba(10,10,10,0.78))]" />
           </div>
           <div className="relative">
             <h2 className="t-h2 mx-auto prose-col">{tr(locale, 'ui.ctaTitle')}</h2>

@@ -1,7 +1,12 @@
+import type { CSSProperties } from 'react';
+
 /**
  * Ligne d'horizon de Casablanca au trait : Twin Center, immeubles Art déco, tour de l'horloge,
- * mosquée Hassan II. Décor du haut de page : dessin vectoriel en ligne (aucune image à charger),
- * tracé au chargement puis emporté en parallaxe par le défilement (classe .hero-skyline).
+ * mosquée Hassan II. Décor du haut de page : dessin vectoriel en ligne (aucune image à charger).
+ *
+ * Mouvement (site-motion.css) : le trait se dessine au chargement (stroke-dashoffset), puis les fenêtres
+ * s'allument en cascade et un reflet doré court une fois le long du sol ; au défilement, l'horizon part
+ * en parallaxe. Sans animation (mouvement réduit), le dessin est entier et les fenêtres allumées.
  */
 const PATHS = [
   /* sol */
@@ -31,13 +36,30 @@ const PATHS = [
   'M1108 290V274H1200M1120 258C1132 250 1144 266 1156 258C1168 250 1180 266 1192 258',
 ];
 
+/** Fenêtres et lampes, allumées l'une après l'autre (ordre de --d) : Twin Center, Art déco, horloge, arcades, minaret. */
+const LIGHTS: [number, number][] = [
+  [322, 227], [384, 201], [322, 175], [384, 149], [322, 123], [384, 227], [322, 201], [384, 175], [322, 149], [384, 123],
+  [469, 222], [503, 200], [523, 222],
+  [700, 232], [700, 258],
+  [789, 279], [827, 279], [865, 279], [903, 279], [941, 279], [979, 279],
+  [1062, 164], [1062, 218], [1062, 256],
+];
+
 export function CasablancaSkyline({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 -4 1200 298" className={className} aria-hidden="true" focusable="false">
-      {PATHS.map((d) => (
-        <path key={d} d={d} pathLength={1} />
-      ))}
-      <circle cx="700" cy="200" r="8" pathLength={1} />
+      <g className="sky-lines">
+        {PATHS.map((d) => (
+          <path key={d} d={d} pathLength={1} />
+        ))}
+        <circle cx="700" cy="200" r="8" pathLength={1} />
+      </g>
+      <g className="sky-lights">
+        {LIGHTS.map(([x, y], index) => (
+          <rect key={`${x}-${y}`} x={x - 3} y={y - 3} width="6" height="6" rx="1" style={{ '--d': index } as CSSProperties} />
+        ))}
+      </g>
+      <path className="sky-glint" d="M0 290H1200" pathLength={1} />
     </svg>
   );
 }

@@ -12,67 +12,104 @@ import { Odometer } from '../motion/Odometer';
 import { BookButton, CallButton, FactsLine, RatingLink, WhatsAppButton } from '../ui/actions';
 import { MoreLink, SectionHeading } from '../ui/PageParts';
 import { cardFromFleet, VehicleCard } from '../ui/VehicleCard';
+import { CinemaPhoto } from '../ui/CinemaPhoto';
+import { BrandMarquee } from './BrandMarquee';
 import { CasablancaSkyline } from './CasablancaSkyline';
 import { HomeSearchCard } from './HomeSearchCard';
 import { MapEmbed } from './MapEmbed';
 import { ScrollRowControls } from './ScrollRowControls';
+import { HERO_MODEL, photoFor } from './showcaseData';
 
 const step = (index: number) => ({ '--in': index }) as CSSProperties;
 
-/* ═══ Haut de page : H1, faits, note Google, la voiture sur son plateau, recherche par dates ═══
+/* ═══ Haut de page : H1, faits, note Google, la voiture, recherche par dates, bandeau des marques ═══
  *
- * Mouvement : entrée en scène au chargement (titre, voiture, ligne de route, horizon tracé), puis,
- * au défilement, la voiture avance, l'horizon glisse en parallaxe et le titre s'efface (site-motion.css).
+ * Deux mises en scène, choisies par showcaseData.ts :
+ * - photo plein cadre (HERO_MODEL a une entrée dans MODEL_PHOTOS) : la photo occupe la droite de l'écran
+ *   (ordinateur) ou s'étend sous le titre (mobile), fondue dans le noir par des dégradés ; l'horizon de
+ *   Casablanca au trait court en bas, sur la ligne d'or ;
+ * - photo détourée (repli) : la voiture sur son plateau, l'horizon derrière elle.
+ *
+ * Entrée en scène au chargement (≤ 1,2 s, jamais masquée : le H1 et la photo LCP sont peints dès la première
+ * image) : la photo sort du noir en glissant, un reflet doré traverse le titre, la ligne d'or se trace,
+ * l'horizon se dessine et ses fenêtres s'allument. Au défilement, la scène recule (site-motion.css).
  */
 export function HomeHero({ locale, minPrice }: { locale: Locale; minPrice: number }) {
   const t = (key: string) => tr(locale, key);
+  const photo = photoFor(HERO_MODEL.slug);
   return (
-    <section className="hero">
-      <div>
-        <div className="lux-container hero-grid">
-          <div className="hero-head hero-head-out">
-            <p className="t-eyebrow hero-in">{t('home.heroEyebrow')}</p>
-            <h1 className="t-h1 hero-title mt-4">{t('hero.pageTitle')}</h1>
-            <div className="hero-in" style={step(1)}>
-              <FactsLine locale={locale} minPrice={minPrice} className="mt-5" />
-              <RatingLink locale={locale} className="mt-1" />
-            </div>
+    <section className={`hero ${photo ? 'hero--photo' : ''}`}>
+      <div className="lux-container hero-grid">
+        <div className="hero-head hero-head-out">
+          <p className="t-eyebrow hero-in">{t('home.heroEyebrow')}</p>
+          <h1 className="t-h1 hero-title mt-4">{t('hero.pageTitle')}</h1>
+          <div className="hero-in" style={step(1)}>
+            <FactsLine locale={locale} minPrice={minPrice} className="mt-5" />
+            <RatingLink locale={locale} className="mt-1" />
           </div>
+        </div>
 
-          <div className="hero-stage">
-            <CasablancaSkyline className="hero-skyline" />
-            <div className="hero-floor" aria-hidden="true" />
-            <div className="hero-road-wrap" aria-hidden="true">
-              <div className="hero-road" />
-            </div>
-            <div className="hero-car">
-              <div className="hero-car-in">
-                <div className="hero-car-flip">
-                  <Image
-                    src="/porshe-macan.png?v=2"
+        <div className="hero-stage">
+          {photo ? (
+            <div className={`hero-shot ${photo.facesLeft ? 'faces-left' : ''}`}>
+              <div className="hero-shot-px">
+                <div className="hero-shot-in">
+                  <CinemaPhoto
+                    set={photo}
                     alt={t('hero.imgAlt')}
-                    fill
                     priority
-                    fetchPriority="high"
-                    className="object-contain"
-                    sizes="(min-width: 1024px) 544px, (min-width: 640px) 544px, 100vw"
+                    className="hero-shot-pic"
+                    sizes="(min-width: 1024px) 64vw, 100vw"
+                    mobileSizes="100vw"
                   />
                 </div>
               </div>
+              <span className="hero-shot-shade" aria-hidden="true" />
+              <span className="hero-shot-fade" aria-hidden="true" />
             </div>
-          </div>
+          ) : (
+            <>
+              <CasablancaSkyline className="hero-skyline" />
+              <div className="hero-floor" aria-hidden="true" />
+              <div className="hero-road-wrap" aria-hidden="true">
+                <div className="hero-road" />
+              </div>
+              <div className="hero-car">
+                <div className="hero-car-in">
+                  <div className="hero-car-flip">
+                    <Image
+                      src={HERO_MODEL.cutout}
+                      alt={t('hero.imgAlt')}
+                      fill
+                      priority
+                      fetchPriority="high"
+                      className="object-contain"
+                      sizes="(min-width: 1024px) 544px, (min-width: 640px) 544px, 100vw"
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
 
-          <div className="hero-form">
-            <div className="hero-in" style={step(2)}>
-              <HomeSearchCard />
-            </div>
-            <div className="hero-in mt-4 grid grid-cols-2 gap-3 sm:flex" style={step(3)}>
-              <WhatsAppButton locale={locale} />
-              <CallButton locale={locale} />
-            </div>
+        <div className="hero-form">
+          <div className="hero-in" style={step(2)}>
+            <HomeSearchCard />
+          </div>
+          <div className="hero-in mt-4 grid grid-cols-2 gap-3 sm:flex" style={step(3)}>
+            <WhatsAppButton locale={locale} />
+            <CallButton locale={locale} />
           </div>
         </div>
       </div>
+
+      {/* Ligne d'or et, en mode photo, l'horizon de Casablanca posé dessus. */}
+      <div className="lux-container hero-horizon" aria-hidden="true">
+        {photo && <CasablancaSkyline className="hero-skyline hero-skyline--band" />}
+        <span className="hero-rule" />
+      </div>
+      <BrandMarquee locale={locale} />
     </section>
   );
 }
@@ -92,7 +129,7 @@ export function StatBand({ locale, minPrice }: { locale: Locale; minPrice: numbe
     { figure: String(BUSINESS.minRentalDays), label: t('home.statMinDays') },
   ];
   return (
-    <section aria-label={t('ui.trustAria')} className="lux-container pb-4 pt-2 lg:pb-8">
+    <section aria-label={t('ui.trustAria')} className="lux-container scene scene-wipe pb-4 pt-2 lg:pb-8">
       <ul className="stat-band">
         {stats.map(({ figure, label, href }) => (
           <li key={label} className="stat">
@@ -121,8 +158,11 @@ export function StatBand({ locale, minPrice }: { locale: Locale; minPrice: numbe
 }
 
 /* ═══ Suite de la flotte de luxe : galerie horizontale.
- * Ordinateur : section épinglée, la rangée glisse avec le défilement vertical.
- * Mobile et tablette : rangée à faire glisser du doigt (aimantée). ═══ */
+ * Ordinateur : section épinglée ; la rangée glisse d'exactement sa largeur de débordement, au pixel près
+ * de défilement vertical (hauteur de la section calculée en CSS à partir du nombre de cartes, --n),
+ * avec un temps d'arrêt avant et après : la dernière carte est entière à l'écran avant que la page reprenne.
+ * Mobile et tablette : rangée à faire glisser du doigt (aimantée).
+ * Les modèles qui ont une photo plein cadre (showcaseData.ts) l'affichent ; les autres gardent leur photo détourée. ═══ */
 export function LuxuryGallery({
   locale,
   models,
@@ -136,48 +176,51 @@ export function LuxuryGallery({
   const t = (key: string) => tr(locale, key);
   const luxePath = getRoutePath('luxe', locale) ?? '/catalogue';
   return (
-    <section className="hg" aria-labelledby="home-luxe-more">
-      <div className="hg-pin">
-        <div className="lux-container">
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 md:mb-8">
-            <div className="min-w-0">
-              <h3 id="home-luxe-more" className="font-display text-[1.75rem] leading-tight text-cream lg:text-[2.25rem]">
-                {t('home.luxeMore')}
-              </h3>
-              <p className="t-body prose-col mt-2">{t('home.luxeText')}</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <MoreLink href={luxePath}>{t('home.luxeAll')}</MoreLink>
-              <div className="hg-controls">
-                <ScrollRowControls targetId="home-luxe-row" prevLabel={t('aria.prevVehicle')} nextLabel={t('aria.nextVehicle')} />
+    <div className="hg-wrap">
+      <section className="hg" aria-labelledby="home-luxe-more" style={{ '--n': models.length } as CSSProperties}>
+        <div className="hg-pin">
+          <div className="lux-container">
+            <div className="hg-head mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 md:mb-8">
+              <div className="min-w-0">
+                <h3 id="home-luxe-more" className="font-display text-[1.75rem] leading-tight text-cream lg:text-[2.25rem]">
+                  {t('home.luxeMore')}
+                </h3>
+                <p className="t-body prose-col mt-2">{t('home.luxeText')}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <MoreLink href={luxePath}>{t('home.luxeAll')}</MoreLink>
+                <div className="hg-controls">
+                  <ScrollRowControls targetId="home-luxe-row" prevLabel={t('aria.prevVehicle')} nextLabel={t('aria.nextVehicle')} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="hg-view">
-            <ul id="home-luxe-row" className="snap-row hg-track">
-              {models.map((model) => (
-                <li key={model.slug}>
-                  <VehicleCard
-                    vehicle={cardFromFleet(model)}
-                    locale={locale}
-                    headingLevel="h4"
-                    sizes="(min-width: 1024px) 344px, (min-width: 640px) 42vw, 76vw"
-                    note={
-                      model.slug === newArrivalSlug ? (
-                        <span className="chip w-fit border-gold/40 text-gold-light">{t('newArrival.eyebrow')}</span>
-                      ) : undefined
-                    }
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="hg-rail" aria-hidden="true">
-            <span className="hg-bar" />
+            <div className="hg-view">
+              <ul id="home-luxe-row" className="snap-row hg-track">
+                {models.map((model) => (
+                  <li key={model.slug}>
+                    <VehicleCard
+                      vehicle={cardFromFleet(model)}
+                      locale={locale}
+                      headingLevel="h4"
+                      cinema={photoFor(model.slug)}
+                      sizes="(min-width: 1024px) 344px, (min-width: 640px) 42vw, 76vw"
+                      note={
+                        model.slug === newArrivalSlug ? (
+                          <span className="chip w-fit border-gold/40 text-gold-light">{t('newArrival.eyebrow')}</span>
+                        ) : undefined
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="hg-rail" aria-hidden="true">
+              <span className="hg-bar" />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -190,6 +233,7 @@ export function VehicleGridSection({
   text,
   more,
   models,
+  scene = 'scene',
 }: {
   locale: Locale;
   id: string;
@@ -198,10 +242,12 @@ export function VehicleGridSection({
   text: string;
   more: { href: string; label: string };
   models: FleetModel[];
+  /** Transition d'entrée et de sortie (site-motion.css, « Transitions entre les sections »). */
+  scene?: string;
 }) {
   if (models.length === 0) return null;
   return (
-    <section className="sec" aria-labelledby={id}>
+    <section className={`sec ${scene}`} aria-labelledby={id}>
       <div className="lux-container">
         <SectionHeading
           id={id}
@@ -233,24 +279,27 @@ export function ProcessSteps({ locale }: { locale: Locale }) {
   return (
     <section id="process" className="pin-steps scroll-mt-20" aria-labelledby="home-process">
       <div className="pin-steps-stage sec">
-        <div className="lux-container">
+        <div className="lux-container scene scene-tilt">
           <p className="t-eyebrow">{t('process.eyebrow')}</p>
           <h2 id="home-process" className="t-h2 prose-col mt-3">
             {t('process.title')}
           </h2>
-          <ol className="steps mt-10 lg:mt-14">
-            {(['s1', 's2', 's3'] as const).map((key, index) => (
-              <li key={key} className="step" style={{ '--i': index } as CSSProperties}>
-                <span className="step-num" aria-hidden="true">
-                  {index + 1}
-                </span>
-                <h3 className="font-display text-[1.625rem] leading-tight text-cream lg:text-[2rem]">
-                  {t(`process.${key}.title`)}
-                </h3>
-                <p className="t-body mt-2 max-w-[38ch]">{t(`process.${key}.body`)}</p>
-              </li>
-            ))}
-          </ol>
+          {/* Le rail (fond, remplissage, pointe lumineuse) est dessiné en CSS autour de la liste. */}
+          <div className="steps-wrap mt-10 lg:mt-14">
+            <ol className="steps">
+              {(['s1', 's2', 's3'] as const).map((key, index) => (
+                <li key={key} className="step" style={{ '--i': index } as CSSProperties}>
+                  <span className="step-num" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <h3 className="font-display text-[1.625rem] leading-tight text-cream lg:text-[2rem]">
+                    {t(`process.${key}.title`)}
+                  </h3>
+                  <p className="t-body mt-2 max-w-[38ch]">{t(`process.${key}.body`)}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
           <div className="mt-10 lg:mt-14">
             <BookButton locale={locale} label={t('hero.searchCta')} className="btn-shine" />
           </div>

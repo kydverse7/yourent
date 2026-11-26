@@ -14,7 +14,7 @@ import { WhatsAppIcon } from './ui/actions';
  * La classe html.io n'est posée que par ce script : sans JavaScript, ou en cas d'erreur, rien n'est masqué.
  * Aucun écouteur de défilement. Le MutationObserver suit les changements de page sans rechargement.
  */
-const MOTION_FALLBACK = `(function(){var d=document.documentElement;try{if(!('IntersectionObserver' in window)||(window.CSS&&CSS.supports&&CSS.supports('animation-timeline: view()'))||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('io');var s='.rv,.rv-side,.rv-zoom,.rv-group,.steps,.dmap,.odo,.draw-on-scroll',o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('is-in');o.unobserve(x.target)}})},{rootMargin:'0px 0px -10% 0px',threshold:0.08}),q=0,f=function(){q=0;document.querySelectorAll(s).forEach(function(n){if(!n.classList.contains('is-in'))o.observe(n)})},r=function(){if(!q)q=requestAnimationFrame(f)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();new MutationObserver(r).observe(d,{childList:true,subtree:true})}catch(e){d.classList.remove('io')}})();`;
+const MOTION_FALLBACK = `(function(){var d=document.documentElement;try{if(!('IntersectionObserver' in window)||(window.CSS&&CSS.supports&&CSS.supports('animation-timeline: view()'))||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('io');var s='.rv,.rv-side,.rv-zoom,.rv-group,.steps,.dmap,.odo,.draw-on-scroll,.scene',o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('is-in');o.unobserve(x.target)}})},{rootMargin:'0px 0px -10% 0px',threshold:0.08}),q=0,f=function(){q=0;document.querySelectorAll(s).forEach(function(n){if(!n.classList.contains('is-in'))o.observe(n)})},r=function(){if(!q)q=requestAnimationFrame(f)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f();new MutationObserver(r).observe(d,{childList:true,subtree:true})}catch(e){d.classList.remove('io')}})();`;
 
 /**
  * Cadre du site public. Composant serveur : seul le fournisseur de langue est client, avec quelques îlots
@@ -30,7 +30,9 @@ export function PublicLayoutShell({ children, locale }: { children: React.ReactN
       <div className={`relative flex min-h-screen flex-col ${display.variable}`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <script dangerouslySetInnerHTML={{ __html: MOTION_FALLBACK }} />
         <SiteHeader locale={locale} />
-        <main id="contenu" className="relative z-10 flex-1">
+        {/* overflow-x: clip : rien de ce qui bouge ou déborde (transitions, photos, rangées) n'élargit la page ;
+            clip, et non hidden, pour ne pas créer de conteneur de défilement (les scènes épinglées restent collantes). */}
+        <main id="contenu" className="relative z-10 flex-1 overflow-x-clip">
           {children}
         </main>
         <SiteFooter locale={locale} />

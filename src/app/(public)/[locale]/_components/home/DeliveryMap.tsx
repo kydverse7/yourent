@@ -10,7 +10,8 @@ const range = (a: number, b: number) => ({ '--a': `${a}%`, '--b': `${b}%` }) as 
 /*
  * Carte stylisée (pas à l'échelle) : la côte atlantique, Casablanca, Mohammedia au nord-est,
  * l'aéroport Mohammed V au sud, Marrakech hors cadre vers le sud.
- * Le tracé aéroport → Casablanca se dessine au défilement et une voiture le suit ; viennent ensuite
+ * Le tracé aéroport → Casablanca se dessine au défilement, une voiture le suit, puis un reflet doré le parcourt ;
+ * chaque ville apparaît avec un halo qui s'ouvre. Viennent ensuite
  * Mohammedia (avec supplément) et la route de Marrakech (livraison gratuite aussi).
  * Les noms sont du texte HTML posé sur le dessin : ils restent lisibles à toutes les tailles.
  */
@@ -85,17 +86,22 @@ function MapDrawing() {
         stroke="#e8c97a"
         strokeWidth="3"
       />
+      {/* reflet qui parcourt la route une fois tracée */}
+      <path className="dmap-glint" style={range(47, 60)} pathLength={1} d="M204 304C226 256 158 226 172 168" />
 
       {/* repères */}
+      <circle className="dmap-halo" style={range(22, 30)} cx="204" cy="304" r="12" />
       <g className="dmap-pin" style={range(22, 30)}>
         <circle cx="204" cy="304" r="11" fill="#0a0a0a" stroke="#e8c97a" strokeWidth="1.5" />
         <circle cx="204" cy="304" r="4" fill="#e8c97a" />
       </g>
+      <circle className="dmap-halo" style={range(42, 48)} cx="172" cy="168" r="17" />
       <g className="dmap-pin" style={range(42, 48)}>
         <circle cx="172" cy="168" r="17" fill="rgba(201,168,76,0.16)" />
         <circle cx="172" cy="168" r="11" fill="#0a0a0a" stroke="#e8c97a" strokeWidth="2" />
         <circle cx="172" cy="168" r="4.5" fill="#e8c97a" />
       </g>
+      <circle className="dmap-halo" style={range(51, 56)} cx="298" cy="96" r="9" />
       <g className="dmap-pin" style={range(51, 56)}>
         <circle cx="298" cy="96" r="8" fill="#0a0a0a" stroke="#d9dce1" strokeWidth="1.5" />
         <circle cx="298" cy="96" r="3" fill="#d9dce1" />
@@ -124,7 +130,7 @@ export function DeliverySection({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <section className="sec" aria-labelledby="home-delivery">
+    <section className="sec scene scene-rule cv-auto" aria-labelledby="home-delivery">
       <div className="lux-container grid gap-x-16 gap-y-7 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:grid-rows-[auto_1fr] lg:items-start">
         <div className="min-w-0 lg:self-end">
           <p className="t-eyebrow rv">{t('home.mapEyebrow')}</p>

@@ -1,0 +1,44 @@
+Photos du site public Yourent (public/photos)
+=============================================
+
+Photos libres de droits, usage commercial autorisé, attribution non obligatoire (crédits conservés ici).
+Fichiers recadrés, assombris et vignettés par scripts/export-photos.mjs (WebP et AVIF, 768 à 2560 px).
+Chemins déclarés dans src/app/(public)/[locale]/_components/home/showcaseData.ts.
+
+porsche-macan/          Porsche Macan S noir, 3/4 avant, route
+                        Auteur : NAM CZ, Unsplash, https://unsplash.com/photos/P11bcs0CfDU
+                        Licence Unsplash : https://unsplash.com/license
+
+range-rover-sport/      Range Rover Sport noir, 3/4 avant
+                        Auteur : Geancarlo Peruzzolo, Pexels,
+                        https://www.pexels.com/photo/black-range-rover-parked-on-gray-stone-pavement-14471686/
+                        Licence Pexels : https://www.pexels.com/license/
+
+mercedes-classe-e/      Mercedes Classe E (W214) grise, 3/4 avant, parking
+                        Auteur : Dextar Studio, Pexels,
+                        https://www.pexels.com/photo/a-mercedes-benz-e-class-parked-in-a-parking-garage-26690693/
+                        Licence Pexels
+
+volkswagen-touareg/     Volkswagen Touareg noir, 3/4 avant
+                        Auteur : David Moffatt, Unsplash, https://unsplash.com/photos/Ml7SI5BjduQ
+                        Licence Unsplash (plaque « STABLE » de concession, fictive)
+
+range-rover-evoque/     Range Rover Evoque, 3/4 avant (photo noir et blanc)
+                        Auteur : Mike Bird, Pexels, https://www.pexels.com/photo/range-rover-evoque-18231632/
+                        Licence Pexels
+
+audi-q3/                Audi Q3 Sportback gris, 3/4 avant
+                        Auteur : David Moffatt, Unsplash, https://unsplash.com/photos/-44rAoX5TzQ
+                        Licence Unsplash (plaque « STABLE » de concession, fictive)
+
+casablanca-crepuscule/  Mosquée Hassan II au crépuscule, Casablanca
+                        Auteur : Gabriel Garcia, Pexels,
+                        https://www.pexels.com/photo/architectural-photography-of-hassan-ii-mosque-2404046/
+                        Licence Pexels
+
+casablanca-nuit/        Minaret de la mosquée Hassan II de nuit, Casablanca
+                        Auteur : Meriem Jamil, Pexels,
+                        https://www.pexels.com/photo/hassan-ii-mosque-tower-at-night-in-casablanca-30463526/
+                        Licence Pexels
+
+Logos des marques (public/brand-logos.svg) : simple-icons 16.37.0, https://simpleicons.org, licence CC0 1.0.

@@ -7,13 +7,18 @@ import { t as tr, type Locale } from '@/lib/i18n/translations';
 import type { FleetModel } from '@/lib/seo/fleet';
 import { formatEurApprox } from '@/lib/site';
 import { fuelLabel, gearLabel } from '../../catalogue/_lib/specLabels';
+import { CinemaPhoto } from '../ui/CinemaPhoto';
+import { photoFor, type PhotoSet } from './showcaseData';
 
 /**
- * VITRINE DE LUXE — scène épinglée : une voiture à la fois, sur un plateau en perspective.
+ * VITRINE DE LUXE — scène épinglée : une voiture à la fois.
  *
- * La photo détourée de chaque modèle est mise en profondeur par le CSS seul (site-motion.css) :
- * perspective, rotation légère pilotée par le défilement, plateau au sol qui tourne, reflet, halo,
- * nom de la marque en très grand à l'arrière-plan, passage d'une voiture à l'autre.
+ * Deux rendus par modèle, choisis par home/showcaseData.ts :
+ * - photo plein cadre (avec son décor) : cadre qui déborde jusqu'au bord de l'écran, fondu dans le noir
+ *   côté texte ; la voiture suivante entre par un volet (clip-path), chaque photo avance lentement (zoom)
+ *   et glisse en parallaxe, avec une légère profondeur 3D ;
+ * - photo détourée (repli, si aucune photo n'est déclarée) : perspective, rotation légère pilotée par le
+ *   défilement, plateau au sol qui tourne, reflet, halo, nom de la marque en très grand à l'arrière-plan.
  * La scène est haute de `--stage-h × (1 + n × 0.8)` : son contenu reste épinglé sous l'en-tête pendant
  * que les voitures se succèdent. Sans animation-timeline, ou avec « mouvement réduit », elle n'est pas
  * épinglée : les voitures sont côte à côte (rangée à faire glisser en mobile).
@@ -26,6 +31,8 @@ export type ShowcaseModel = {
   word: string;
   /** Photo détourée. Sert aussi au reflet. */
   image: string | null;
+  /** Photo plein cadre : prioritaire sur la photo détourée. */
+  photo: PhotoSet | null;
   /** Hauteur du sol dans la photo (0 = haut, 1 = bas) : là où posent les roues. */
   floor?: number;
   /** Tarif par jour en dirhams ; 0 : le prix n'est pas affiché. */
@@ -59,6 +66,7 @@ export function showcaseFromFleet(model: FleetModel, locale: Locale): ShowcaseMo
     name: `${model.marque} ${model.modele}`,
     word: model.marque,
     image: model.photo,
+    photo: photoFor(model.slug),
     floor: FLOOR_BY_SLUG[model.slug],
     price: model.minTarif,
     specs: specs.join(' · '),
@@ -67,6 +75,8 @@ export function showcaseFromFleet(model: FleetModel, locale: Locale): ShowcaseMo
 }
 
 const SIZES = '(min-width: 1280px) 640px, (min-width: 1024px) 52vw, 92vw';
+/** Cadre photo : jusqu'au bord de l'écran sur ordinateur (≈ 62 % de la largeur), toute la largeur en mobile. */
+const PHOTO_SIZES = '(min-width: 1024px) 64vw, 100vw';
 
 export function LuxuryShowcase({
   locale,
@@ -117,36 +127,54 @@ export function LuxuryShowcase({
             {models.map((model, index) => {
               const eur = formatEurApprox(model.price, locale);
               return (
-                <li key={model.slug} className="showcase-item" style={{ '--i': index } as CSSProperties}>
+                <li
+                  key={model.slug}
+                  className={`showcase-item ${model.photo ? 'has-photo' : ''}`}
+                  style={{ '--i': index } as CSSProperties}
+                >
                   <div className="showcase-car">
-                    <div
-                      className="showcase-visual"
-                      style={{ '--floor': model.floor ?? 0.84, '--chars': Math.max(6, model.word.length) } as CSSProperties}
-                    >
-                      <span className="showcase-word" aria-hidden="true">
-                        {model.word}
-                      </span>
-                      <span className="showcase-floor" aria-hidden="true">
-                        <span className="showcase-ring" />
-                      </span>
-                      {model.image && (
-                        <>
-                          <span className="showcase-reflet" aria-hidden="true">
-                            <Image src={model.image} alt="" fill sizes={SIZES} loading="lazy" className="object-contain" />
-                          </span>
-                          <div className="showcase-media">
-                            <Image
-                              src={model.image}
-                              alt={t('model.photoAlt').replace('{name}', model.name)}
-                              fill
-                              sizes={SIZES}
-                              loading="lazy"
-                              className="object-contain"
-                            />
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    {model.photo ? (
+                      <div className={`showcase-shot ${model.photo.facesLeft ? 'faces-left' : ''}`}>
+                        <div className="showcase-shot-in">
+                          <CinemaPhoto
+                            set={model.photo}
+                            alt={t('model.photoAlt').replace('{name}', model.name)}
+                            sizes={PHOTO_SIZES}
+                            className="showcase-shot-pic"
+                          />
+                        </div>
+                        <span className="showcase-shot-shade" aria-hidden="true" />
+                      </div>
+                    ) : (
+                      <div
+                        className="showcase-visual"
+                        style={{ '--floor': model.floor ?? 0.84, '--chars': Math.max(6, model.word.length) } as CSSProperties}
+                      >
+                        <span className="showcase-word" aria-hidden="true">
+                          {model.word}
+                        </span>
+                        <span className="showcase-floor" aria-hidden="true">
+                          <span className="showcase-ring" />
+                        </span>
+                        {model.image && (
+                          <>
+                            <span className="showcase-reflet" aria-hidden="true">
+                              <Image src={model.image} alt="" fill sizes={SIZES} loading="lazy" className="object-contain" />
+                            </span>
+                            <div className="showcase-media">
+                              <Image
+                                src={model.image}
+                                alt={t('model.photoAlt').replace('{name}', model.name)}
+                                fill
+                                sizes={SIZES}
+                                loading="lazy"
+                                className="object-contain"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div className="showcase-info">
