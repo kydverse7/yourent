@@ -169,7 +169,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Comme la location dure au moins 5 jours, elle vise surtout les voyageurs qui gardent la voiture pendant leur séjour. Si votre voyage continue hors de la ville, notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca.",
+            text: "Comme la location dure au moins 5 jours, elle vise surtout les voyageurs qui gardent la voiture pendant leur séjour. Si votre voyage continue hors de la ville, notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca. Et si vous atterrissez à Marrakech plutôt qu'à Casablanca, une livraison à l'aéroport Marrakech-Ménara s'organise sur demande : voyez notre page [location de voiture à Marrakech](route:livraison-marrakech).",
           },
         ],
       },
@@ -183,7 +183,7 @@ const page: LocalizedPage = {
         ],
       },
       {
-        h2: 'La flotte disponible',
+        h2: "Les voitures à louer à l'aéroport Mohammed V",
         blocks: [{ type: 'vehicles' }],
       },
     ],
@@ -213,7 +213,7 @@ const page: LocalizedPage = {
         a: "Le lieu de restitution se convient avec l'équipe au moment de la confirmation. Précisez-le dès votre demande pour qu'elle vous réponde sur WhatsApp avant le départ.",
       },
     ],
-    related: ['tarifs', 'conditions', 'suv', 'automatique', 'contact', 'europe', 'marrakech'],
+    related: ['tarifs', 'conditions', 'suv', 'automatique', 'europe', 'marrakech', 'livraison-marrakech'],
   },
 };
 

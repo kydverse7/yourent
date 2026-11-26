@@ -65,9 +65,9 @@ const copy: Record<string, ModelCopy> = {
   "dacia-duster": {
     paragraphs: [
       "Dacia Duster rental in Casablanca costs {price:dacia-duster} MAD per day, the lowest rate for an SUV in the fleet. It runs on diesel and has a manual gearbox, which suits drivers comfortable with a clutch. In return, it offers space, a big boot and ground clearance that helps on country roads.",
-      'It suits a family wanting a road trip on a smaller budget than a large SUV, or friends heading to Essaouira or Marrakech.',
-      'The fleet has several of them, all with the same gearbox and fuel.',
-      "Next to the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc), the Duster is less refined and more rugged, but costs {price:dacia-duster} MAD per day against {price:volkswagen-t-roc} MAD. Next to the [Kia Sorento](/catalogue/kia-sorento), it lacks the automatic gearbox and the finish, but costs only {price:dacia-duster} MAD against {price:kia-sorento} MAD. In town, it is still a bit bulky: for downtown traffic, an [Opel Corsa](/catalogue/opel-corsa) is more practical.",
+      'People rent a Dacia Duster for a family road trip on a smaller budget than a large SUV, or for a drive to Essaouira or Marrakech with friends and bags. The other models are compared on our [SUV rental in Casablanca](route:suv) page.',
+      'The fleet has several of them, all with the same gearbox and fuel. The date search in the catalogue shows which ones are free for your stay.',
+      "Next to the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc), the Duster is roomier, less refined and cheaper, at {price:dacia-duster} MAD per day against {price:volkswagen-t-roc} MAD, but the T-Roc is automatic. The [Kia Sorento](/catalogue/kia-sorento) also adds an automatic gearbox and a better finish, for {price:kia-sorento} MAD. In town, the Duster is still a bit bulky: for downtown traffic, an [Opel Corsa](/catalogue/opel-corsa) is more practical.",
     ],
     faq: [
       {
@@ -77,6 +77,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Is the Duster suitable for a family of five?",
         a: 'Yes, it has five seats and a wide boot, so it suits a family on a tight budget.',
+      },
+      {
+        q: "Can I rent a Dacia Duster for a weekend?",
+        a: "No. The minimum rental is 5 days, as for every car in the fleet. The rates table on this page shows the daily rate for 5 to 10 days and the rate after 10 days.",
       },
     ],
   },
@@ -102,10 +106,10 @@ const copy: Record<string, ModelCopy> = {
 
   "volkswagen-t-roc": {
     paragraphs: [
-      "Volkswagen T-Roc rental in Casablanca gets you a compact petrol SUV with an automatic gearbox. Taller than a saloon, shorter than a large SUV, it suits a couple or a small family who want a car that is easy in town.",
-      'In the city, it parks without trouble and gives good visibility in traffic. For Marrakech or Rabat, it holds the motorway well and leaves enough room for the luggage of two or three travellers. It does not try to impress: it is a safe bet, at {price:volkswagen-t-roc} MAD per day.',
-      "Compare it with the [Dacia Duster](/catalogue/dacia-duster) if budget comes first: the Duster is roomier and cheaper, but diesel and manual. Compare it with the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) if you travel as four with suitcases, since the Tiguan offers more room at {price:volkswagen-tiguan} MAD per day.",
-      'The fleet has several units of this model.',
+      "Volkswagen T-Roc rental in Casablanca gets you a compact petrol SUV with an automatic gearbox. Taller than a saloon, shorter than a large SUV, it suits a couple or a small family who want a car that is easy in town and at ease on the road.",
+      'If you rent a Volkswagen T-Roc in Casablanca, the practical gain is its size: it parks without trouble, and the high seat gives good visibility in traffic. For Marrakech or Rabat, it holds the motorway well and leaves enough room for the luggage of two or three travellers. It does not try to impress: it is a safe bet, at {price:volkswagen-t-roc} MAD per day.',
+      "Compare it with the [Dacia Duster](/catalogue/dacia-duster) if budget comes first: the Duster is roomier and cheaper, but diesel and manual. If you travel as four with suitcases, the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) offers more room at {price:volkswagen-tiguan} MAD per day. The rest of the range is on our [Volkswagen rental in Casablanca](route:volkswagen) page.",
+      'The fleet has several T-Rocs, and the date search in the catalogue shows which ones are free for your stay. The rental runs for at least 5 days.',
     ],
     faq: [
       {
@@ -114,7 +118,11 @@ const copy: Record<string, ModelCopy> = {
       },
       {
         q: "How does it differ from the Tiguan?",
-        a: 'The [Tiguan](/catalogue/volkswagen-tiguan) is bigger, diesel, and better suited to a family with a lot of luggage. The T-Roc, on the other hand, is more compact and easier to park.',
+        a: 'The [Tiguan](/catalogue/volkswagen-tiguan) is bigger, diesel, and better suited to a family with a lot of luggage. The T-Roc is more compact and easier to park.',
+      },
+      {
+        q: "Can I rent a Volkswagen T-Roc at Casablanca airport?",
+        a: "Yes. The T-Roc is delivered free of charge to Mohammed V airport: give your flight number and arrival time in the request, and the team sends the meeting point on WhatsApp. Our [car rental at Casablanca airport](route:aeroport) page explains the handover.",
       },
     ],
   },
@@ -226,8 +234,8 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "Mercedes CLA rental in Casablanca gets you a compact four-door coupé, petrol and automatic, without the size of the large saloons. It appeals to anyone wanting a stylish car for a stay for two, an arrival at Mohammed V airport or a trip to Marrakech.",
       "Its low roofline has a downside: getting into the back is harder than in a classic saloon and the boot is average. It is made for two or three passengers. In town, its size stays reasonable. It costs {price:mercedes-cla} MAD per day.",
-      "Next to the [Audi A3](/catalogue/audi-a3), it has more presence and more style, for {price:mercedes-cla} MAD against {price:audi-a3} MAD. Next to the [Mercedes C 220](/catalogue/mercedes-c-220), it is cheaper ({price:mercedes-c-220} MAD for the C-Class), sportier and younger in look, but less roomy, especially for rear passengers.",
-      'It is the Mercedes with the most units in the fleet.',
+      "Next to the [Audi A3](/catalogue/audi-a3), it has more presence and more style, for {price:mercedes-cla} MAD against {price:audi-a3} MAD. Next to the [Mercedes C 220](/catalogue/mercedes-c-220), it is cheaper ({price:mercedes-c-220} MAD for the C-Class), sportier and younger in look, but less roomy, especially for rear passengers. The brand's three models are compared on our [Mercedes rental in Casablanca](route:mercedes) page.",
+      'It is the Mercedes with the most units in the fleet. If you plan to rent a Mercedes CLA on fixed dates, the date search in the catalogue shows which ones are free. The rental runs for at least 5 days.',
     ],
     faq: [
       {
@@ -237,6 +245,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Is the CLA roomy enough for four adults?",
         a: "It has five seats, but the back is tighter than in a classic saloon. For four adults with luggage, the [C 220](/catalogue/mercedes-c-220) or an SUV is more comfortable.",
+      },
+      {
+        q: "Can the Mercedes CLA be delivered to Casablanca airport?",
+        a: "Yes. Delivery to Mohammed V airport is free, as it is anywhere in Casablanca. Give your arrival time in the request, and the team sends the meeting point on WhatsApp.",
       },
     ],
   },
@@ -286,8 +298,8 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "Mercedes C 220 rental in Casablanca gets you the brand's classic saloon: diesel, automatic, understated and comfortable. It suits business travel, city stays in a smart saloon, and motorway drives to Rabat or Marrakech. It costs {price:mercedes-c-220} MAD per day.",
       "Its size stays reasonable in town, which sets it apart from the E-Class. In the back, two adults are comfortable, and the boot is big enough for a stay's luggage.",
-      'Next to the [Mercedes CLA](/catalogue/mercedes-cla), it is more classic, roomier and diesel, but pricier ({price:mercedes-cla} MAD for the CLA). Next to the [Mercedes E 220](/catalogue/mercedes-e-220), it is smaller and cheaper, with similar comfort on most trips.',
-      "The C-Class is offered in very few units, so ask for your dates early. Delivery is free to your hotel in Casablanca and to Mohammed V airport, for a two-week stay as well as a five-day trip.",
+      'Next to the [Mercedes CLA](/catalogue/mercedes-cla), it is more classic, roomier and diesel, but pricier ({price:mercedes-cla} MAD for the CLA). Next to the [Mercedes E 220](/catalogue/mercedes-e-220), at {price:mercedes-e-220} MAD, it is smaller and cheaper, with similar comfort on most trips.',
+      "The C-Class is offered in very few units, so if you want to rent a Mercedes C-Class on fixed dates, check them in the catalogue early. Delivery is free to your hotel in Casablanca and to Mohammed V airport, for a two-week stay as well as a five-day trip.",
     ],
     faq: [
       {
@@ -296,16 +308,20 @@ const copy: Record<string, ModelCopy> = {
       },
       {
         q: "C-Class or E-Class?",
-        a: "The C-Class is handier in town, while the [E-Class](/catalogue/mercedes-e-220) is bigger and more restful when travelling. Compare on the [Mercedes rental](route:mercedes) page.",
+        a: "The C-Class is handier in town, while the [E-Class](/catalogue/mercedes-e-220) is bigger and more restful when travelling. Compare on the [Mercedes rental in Casablanca](route:mercedes) page.",
+      },
+      {
+        q: "What is the minimum rental for the Mercedes C 220?",
+        a: "Five days, as for every car in the fleet. The rates table on this page shows the daily rate for 5 to 10 days and the rate after 10 days.",
       },
     ],
   },
 
   "mercedes-e-220": {
     paragraphs: [
-      "Mercedes E 220 rental in Casablanca gets you the large saloon of the fleet: diesel, automatic, very comfortable. People rent it for long drives, for meetings where image matters and for a comfortable start after landing at Mohammed V airport. It costs {price:mercedes-e-220} MAD per day.",
-      "On the motorway, it is the most restful of the Mercedes we offer. In the back, three people sit better than in a C-Class. In town, however, its length calls for caution in narrow streets and when parking.",
-      "Next to the [Mercedes C 220](/catalogue/mercedes-c-220), it brings space and presence, for a higher price. Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper and lower, with saloon comfort rather than SUV comfort.",
+      "Mercedes E 220 rental in Casablanca gets you the large saloon of the fleet: diesel, automatic, very comfortable. People rent a Mercedes E-Class for long drives, for meetings where image matters and for a comfortable start after landing at Mohammed V airport. It costs {price:mercedes-e-220} MAD per day.",
+      "On the motorway, it is the most restful of the Mercedes we offer. In the back, three people sit better than in a C-Class. In town, its length calls for care in narrow streets and when parking.",
+      "Next to the [Mercedes C 220](/catalogue/mercedes-c-220), it brings space and presence, for a higher price. Next to the [Range Rover Sport](/catalogue/range-rover-sport), it is much cheaper and lower, with saloon comfort rather than SUV comfort. The brand's three models are on our [Mercedes rental in Casablanca](route:mercedes) page.",
       "Only a very small number exist, so book early. Delivery is free to your hotel in Casablanca and to the airport, every day from 8 am to 10 pm.",
     ],
     faq: [
@@ -317,15 +333,19 @@ const copy: Record<string, ModelCopy> = {
         q: "Can I rent the E-Class for an event?",
         a: "Yes, it is rented like the other models. The rental starts at 5 days. Mention the occasion in your request: the team replies on WhatsApp.",
       },
+      {
+        q: "How old do I have to be to rent the Mercedes E-Class?",
+        a: "At least 21, with a licence held for more than 2 years. A valid ID, proof of address and a deposit are also required.",
+      },
     ],
   },
 
   "porsche-macan": {
     paragraphs: [
       "Porsche Macan rental in Casablanca gets you the sporty SUV of the fleet: petrol, automatic, five seats. It drives like a lively saloon rather than a tall SUV, which sets it apart from every other model on offer. It costs {price:porsche-macan} MAD per day.",
-      'People choose it for a specific occasion: a trip for two or a road like Casablanca to Marrakech. It is not meant to save money, so on a tight budget, look at the more sensible [Audi Q3](/catalogue/audi-q3).',
-      "Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), it is sportier and more dynamic; the Evoque is calmer and more about image. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), at {price:volkswagen-touareg} MAD, it is pricier and less roomy, but far more exciting to drive.",
-      "Several units are on offer, and delivery is to your hotel, the address of your choice or Mohammed V airport.",
+      'People rent a Porsche Macan in Casablanca for a specific occasion: a trip for two, a stay where the drive is part of the pleasure, or a road like Casablanca to Marrakech. It is not meant to save money, so on a tighter budget, look at the more sensible [Audi Q3](/catalogue/audi-q3), at {price:audi-q3} MAD per day.',
+      "Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), it is sportier and more dynamic; the Evoque is calmer and more about image. Next to the [Volkswagen Touareg](/catalogue/volkswagen-touareg), at {price:volkswagen-touareg} MAD, it is pricier and less roomy, but far more exciting to drive. Our [Porsche rental in Casablanca](route:porsche) page goes through its uses.",
+      "Several units are on offer. The rental lasts at least 5 days, and the Macan is delivered free to your hotel, to the address of your choice in Casablanca or to Mohammed V airport.",
     ],
     faq: [
       {
@@ -334,7 +354,15 @@ const copy: Record<string, ModelCopy> = {
       },
       {
         q: "Are there other Porsches in the fleet?",
-        a: 'No, the Macan is the only Porsche model on offer. The [Porsche rental](route:porsche) page gives more details.',
+        a: 'No, the Macan is the only Porsche model on offer. The [Porsche rental in Casablanca](route:porsche) page gives more details.',
+      },
+      {
+        q: "Can I rent the Porsche Macan for a weekend or a single day?",
+        a: "No. The minimum rental is 5 days, as for every car in the fleet. For an event, book a period that covers the date and mention it in your request.",
+      },
+      {
+        q: "What do I need to rent the Porsche Macan?",
+        a: "You must be at least 21, with a licence held for more than 2 years, a valid ID and proof of address. A deposit is left at pick-up, and the team confirms the amount before you book.",
       },
     ],
   },

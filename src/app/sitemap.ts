@@ -13,7 +13,7 @@ export const revalidate = 3600;
  * Date de dernière modification des pages dont le contenu est écrit dans le code.
  * À faire avancer quand ces textes changent réellement : jamais `new Date()`.
  */
-const CONTENT_LAST_MODIFIED = new Date('2026-11-05');
+const CONTENT_LAST_MODIFIED = new Date('2026-11-26');
 
 type PathsByLocale = Partial<Record<Locale, string>>;
 type Entry = MetadataRoute.Sitemap[number];

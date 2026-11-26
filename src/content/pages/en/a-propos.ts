@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Yourent Car Rental Agency in Casablanca | Yourent',
   metaDescription:
-    'Yourent car rental agency in Casablanca: {vehicleCount} cars, {modelCount} models from {fleetMin} MAD a day, rated 4.8 out of 5 on Google (170 reviews), open 7 days a week.',
+    'Yourent car rental agency in Casablanca: {vehicleCount} cars, {modelCount} models from {fleetMin} MAD a day, rated 4.8 out of 5 on Google (173 reviews), open 7 days a week.',
   eyebrow: 'About',
   h1: 'Yourent, car rental agency in Casablanca',
   intro:
@@ -42,11 +42,11 @@ const page: PageContent = {
       ],
     },
     {
-      h2: 'Google reviews: 4.8 out of 5 from 170 reviews',
+      h2: 'Google reviews: 4.8 out of 5 from 173 reviews',
       blocks: [
         {
           type: 'p',
-          text: "The agency's Google listing shows a rating of 4.8 out of 5 from 170 reviews (as of 5 November 2026). You can read the reviews directly on the [Yourent Google listing](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z), where the rating changes as new reviews come in.",
+          text: "The agency's Google listing shows a rating of 4.8 out of 5 from 173 reviews (as of 25 November 2026). You can read the reviews directly on the [Yourent Google listing](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z), where the rating changes as new reviews come in.",
         },
       ],
     },
@@ -64,7 +64,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Yourent delivers the car to your hotel, to Mohammed V airport or to the address of your choice, 7 days a week. Delivery is free anywhere in Casablanca and at the airport. There is no desk at the airport, so the team hands you the car on site, as explained on the [car rental Casablanca airport](route:aeroport) page.',
+          text: 'Yourent delivers the car to your hotel, to Mohammed V airport or to the address of your choice, 7 days a week. Delivery is free anywhere in Casablanca and at the airport. There is no desk at the airport, so the team hands you the car on site, as explained on the [car rental at Casablanca airport](route:aeroport) page. Outside the city, Mohammedia is possible for a small extra charge, and delivery to Marrakech can be arranged on request: see [car rental in Marrakech](route:livraison-marrakech).',
         },
       ],
     },
@@ -89,11 +89,11 @@ const page: PageContent = {
     },
     {
       q: 'What is the Yourent rating on Google?',
-      a: 'The listing showed 4.8 out of 5 from 170 reviews on 5 November 2026.',
+      a: 'The listing showed 4.8 out of 5 from 173 reviews on 25 November 2026.',
     },
     {
       q: 'Does Yourent have a desk at the airport?',
-      a: 'No. The agency keeps no office there, but the car is brought to you at Mohammed V airport at no charge.',
+      a: 'No. The agency has no office there, but the car is brought to you at Mohammed V airport at no charge.',
     },
     {
       q: 'How can I contact Yourent?',

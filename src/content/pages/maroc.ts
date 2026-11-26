@@ -8,7 +8,7 @@ const page: LocalizedPage = {
     eyebrow: 'Voyage au Maroc',
     h1: 'Location de voiture au Maroc au départ de Casablanca',
     intro:
-      "Votre location de voiture au Maroc commence à Casablanca : Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, avec livraison gratuite, dès {minPrice} DH par jour et pour 5 jours minimum. Vous envoyez votre demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent est une agence casablancaise, sans bureau dans les autres villes du pays.",
+      "Votre location de voiture au Maroc commence à Casablanca : Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, avec livraison gratuite, dès {minPrice} DH par jour et pour 5 jours minimum. Vous envoyez votre demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent est une agence casablancaise, sans bureau dans les autres villes du pays ; une livraison à Marrakech reste possible sur demande.",
     breadcrumb: 'Location au Maroc',
     vehicles: { sort: 'asc' },
     sections: [
@@ -21,7 +21,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "La voiture vous est livrée sans frais à l'aéroport Mohammed V, à votre hôtel ou à l'adresse de votre choix dans Casablanca, 7j/7. Vous partez ensuite vers Rabat, vers le sud ou pour un long séjour en famille. Pour une remise ailleurs, l'équipe indique sur WhatsApp ce qui est possible.",
+            text: "La voiture vous est livrée sans frais à l'aéroport Mohammed V, à votre hôtel ou à l'adresse de votre choix dans Casablanca, 7j/7. Vous partez ensuite vers Rabat, vers le sud ou pour un long séjour en famille. Hors de Casablanca, deux cas sont prévus : Mohammedia, avec un léger supplément, et Marrakech ou l'aéroport Marrakech-Ménara, sur demande et à des conditions que l'équipe confirme sur WhatsApp. Notre page [location de voiture à Marrakech](route:livraison-marrakech) explique comment cela se passe. Pour une autre ville, posez la question avant de réserver.",
           },
         ],
       },
@@ -76,7 +76,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "**La longue durée** vise les circuits de plusieurs semaines et les séjours d'été. Au-delà de 10 jours, le tarif par jour baisse automatiquement sur la plupart des modèles. Si votre séjour se compte en mois, voyez notre [location de voiture longue durée à Casablanca](route:longue-duree). Si vous vivez à l'étranger, notre page [location de voiture pour les MRE](route:mre) répond à vos questions.",
+            text: "**La longue durée** vise les circuits de plusieurs semaines et les séjours d'été. Au-delà de 10 jours, le tarif par jour baisse automatiquement sur la plupart des modèles. Si votre séjour se compte en mois, voyez notre [location de voiture longue durée à Casablanca](route:longue-duree). Si vous vivez à l'étranger, notre page [location de voiture pour les MRE](route:mre) répond à vos questions. Pour choisir le bon gabarit, lisez aussi [quelle voiture louer pour une famille ou un séjour MRE](/blog/quelle-voiture-louer-famille-mre).",
           },
         ],
       },
@@ -136,15 +136,15 @@ const page: LocalizedPage = {
     faq: [
       {
         q: "Yourent a-t-elle des agences dans d'autres villes du Maroc ?",
-        a: "Non. Yourent est une agence de Casablanca, si bien que la voiture se récupère à Casablanca ou à l'aéroport Mohammed V.",
+        a: "Non. Yourent est une agence de Casablanca : la voiture se récupère en ville ou à l'aéroport Mohammed V. Une livraison à Marrakech ou à l'aéroport Marrakech-Ménara est toutefois possible sur demande, à des conditions confirmées sur WhatsApp.",
       },
       {
         q: 'Peut-on rendre la voiture à Marrakech, à Agadir ou dans une autre ville ?',
-        a: "Cette option n'est pas décrite sur le site. Indiquez votre ville d'arrivée dans votre demande : l'équipe vous répond sur WhatsApp avant de confirmer la location.",
+        a: "Le lieu de restitution se convient avec l'équipe avant de confirmer la location. Indiquez votre ville d'arrivée dans votre demande : elle vous répond sur WhatsApp.",
       },
       {
         q: 'Où récupère-t-on la voiture, et la livraison est-elle payante ?',
-        a: "À l'aéroport Mohammed V, à votre hôtel ou à une autre adresse dans Casablanca. Dans ces trois cas, la livraison est gratuite et seule la location est facturée.",
+        a: "À l'aéroport Mohammed V, à votre hôtel ou à une autre adresse dans Casablanca. Dans ces trois cas, la livraison est gratuite et seule la location est facturée. À Mohammedia, un léger supplément s'applique ; à Marrakech, l'équipe confirme les conditions sur WhatsApp.",
       },
       {
         q: 'Combien coûte une location voiture au Maroc chez Yourent ?',
@@ -159,7 +159,7 @@ const page: LocalizedPage = {
         a: "Oui, si ce permis a plus de 2 ans. Le permis international est d'ailleurs accepté pour les touristes étrangers. Prévoyez aussi un passeport et un justificatif de domicile.",
       },
     ],
-    related: ['aeroport', 'longue-duree', 'suv', 'tarifs', 'conditions', 'marrakech', 'europe'],
+    related: ['aeroport', 'marrakech', 'livraison-marrakech', 'longue-duree', 'suv', 'tarifs', 'europe'],
   },
 };
 

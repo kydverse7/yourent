@@ -91,6 +91,11 @@ const LOCAL = {
     en: '/car-rental-casablanca-to-marrakech',
     ar: '/car-rental-casablanca-to-marrakech',
   },
+  /** Voiture livrée à Marrakech ou à l'aéroport Marrakech-Ménara, sur demande : Yourent n'y a pas d'agence. */
+  'livraison-marrakech': {
+    fr: '/location-voiture-marrakech',
+    en: '/car-rental-marrakech',
+  },
   europe: {
     fr: '/location-voiture-casablanca-depuis-france-europe',
     en: '/car-rental-casablanca-from-europe',

@@ -57,7 +57,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'La livraison est-elle gratuite ?',
-        a: 'Oui, dans tout Casablanca et à l’aéroport Mohammed V, 7j/7. En revanche, pour une autre ville, l’équipe indique les conditions sur WhatsApp.',
+        a: 'Oui, dans tout Casablanca et à l’aéroport Mohammed V, 7j/7. À Mohammedia, un léger supplément s’applique. À Marrakech et à l’aéroport Marrakech-Ménara, la livraison est possible sur demande, à des conditions que l’équipe confirme sur WhatsApp.',
       },
       {
         q: 'Peut-on récupérer la voiture à l’aéroport Mohammed V ?',
@@ -93,7 +93,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Peut-on rendre la voiture dans une autre ville ?',
-        a: 'Aucune règle n’est affichée sur le site : ce point se confirme avec l’équipe avant la réservation.',
+        a: 'Le lieu de restitution se convient avec l’équipe sur WhatsApp, avant de confirmer la réservation.',
       },
       {
         q: 'Quels sont les horaires de l’agence ?',

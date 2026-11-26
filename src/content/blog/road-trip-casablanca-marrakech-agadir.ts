@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Pour un road trip Casablanca, Marrakech, Agadir, tout s'enchaîne sur une seule autoroute, l'A3, longue de 429 km entre Casablanca et Agadir. Un SUV diesel ou une berline automatique est le choix le plus simple, avec de la place pour les bagages. Chez Yourent, la location démarre à 5 jours, ce qui convient à ce type de voyage.`,
   excerpt: `L'itinéraire Casablanca, Marrakech, Agadir par l'A3 et le choix de la voiture selon votre groupe : SUV diesel, berline automatique ou citadine, avec les fiches de la flotte.`,
   datePublished: '2026-11-05',
-  dateModified: '2026-11-05',
+  dateModified: '2026-11-26',
   sections: [
     {
       h2: `Quel est l'itinéraire d'un road trip de Casablanca à Marrakech puis Agadir ?`,
@@ -84,7 +84,7 @@ const article: Article = {
           type: 'list',
           items: [
             `**Le kilométrage inclus.** Il n'est pas affiché sur le site : l'équipe le précise sur WhatsApp. Sur environ 430 km d'autoroute à l'aller, la question compte donc.`,
-            `**Le retour dans une autre ville.** Si vous voulez rendre la voiture ailleurs qu'à Casablanca, demandez à l'équipe : ce cas n'est pas décrit sur le site.`,
+            `**Le retour dans une autre ville.** Si vous voulez rendre la voiture ailleurs qu'à Casablanca, dites-le dans votre demande : le lieu de restitution se convient avec l'équipe sur WhatsApp avant de confirmer.`,
             `**L'assurance.** Une assurance tous risques avec franchise couvre tous les véhicules, mais demandez le montant de la franchise avant de partir.`,
             `**Les documents.** Pièce d'identité (CIN ou passeport), permis de plus de 2 ans, justificatif de domicile et caution.`,
             `**La panne.** Un véhicule de remplacement est envoyé dans les plus brefs délais en cas de panne. Notez donc le numéro de l'agence avant de quitter Casablanca.`,
@@ -118,7 +118,7 @@ const article: Article = {
     },
     {
       q: `Peut-on rendre la voiture à Agadir ou à Marrakech ?`,
-      a: `Le retour dans une autre ville n'est pas décrit sur le site. L'équipe de Yourent le précise donc sur WhatsApp.`,
+      a: `Le lieu de restitution se convient avec l'équipe de Yourent sur WhatsApp, avant de confirmer la location. À l'inverse, si vous voulez recevoir la voiture à Marrakech, une livraison est possible sur demande : voyez la page [location de voiture à Marrakech](route:livraison-marrakech).`,
     },
     {
       q: `Combien de jours minimum pour louer chez Yourent ?`,

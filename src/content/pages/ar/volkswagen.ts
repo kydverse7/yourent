@@ -40,7 +40,7 @@ const page: PageContent = {
       ],
     },
     {
-      h2: 'سيارات Volkswagen المتوفرة للكراء',
+      h2: 'تأجير فولكسفاغن في الدار البيضاء: السيارات المتوفرة',
       blocks: [{ type: 'vehicles' }],
     },
     {
@@ -58,7 +58,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'إذا كنت تريد الحجم نفسه بصورة أكثر وجاهة، فانظر إلى [Audi Q3](/catalogue/audi-q3) أو إلى صفحة [كراء سيارات SUV](route:suv). في المقابل، تبقى [Dacia Duster](/catalogue/dacia-duster) الحل الأوفر بين سيارات SUV لميزانية أضيق. وإذا كنت تريد علبة أوتوماتيكية فقط، فإن صفحة [كراء سيارة أوتوماتيك](route:automatique) تفرز الأسطول بدلًا منك.',
+          text: 'إذا كنت تريد الحجم نفسه بصورة أكثر وجاهة، فانظر إلى [Audi Q3](/catalogue/audi-q3) في صفحة [كراء أودي](route:audi)، أو إلى صفحة [كراء سيارات SUV](route:suv). في المقابل، تبقى [Dacia Duster](/catalogue/dacia-duster) الحل الأوفر بين سيارات SUV لميزانية أضيق. وإذا كنت تريد علبة أوتوماتيكية فقط، فإن صفحة [كراء سيارة أوتوماتيك](route:automatique) تفرز الأسطول بدلًا منك.',
         },
       ],
     },
@@ -66,7 +66,7 @@ const page: PageContent = {
   faq: [
     {
       q: 'أي سيارة Volkswagen أختار لطريق الدار البيضاء - مراكش؟',
-      a: '[Tiguan](/catalogue/volkswagen-tiguan) و[Touareg](/catalogue/volkswagen-touareg) هما الأكثر راحة في هذا الطريق، بصندوق واسع، بينما تناسب T-Roc مسافرين أو ثلاثة.',
+      a: '[Tiguan](/catalogue/volkswagen-tiguan) و[Touareg](/catalogue/volkswagen-touareg) هما الأكثر راحة في هذا الطريق، بصندوق واسع، بينما تناسب T-Roc مسافرين أو ثلاثة. وتجد المسافة والأداء في صفحة [كراء السيارات من الدار البيضاء إلى مراكش](route:marrakech).',
     },
     {
       q: 'هل Golf 8 بعلبة سرعات أوتوماتيكية؟',

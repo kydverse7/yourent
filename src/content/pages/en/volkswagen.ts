@@ -5,7 +5,7 @@ const page: PageContent = {
   metaDescription:
     'Volkswagen rental in Casablanca from {minPrice} MAD/day: T-Roc, Golf 8, Tiguan or Touareg. Free delivery to your hotel and the airport, WhatsApp confirmation.',
   eyebrow: 'Volkswagen',
-  h1: 'Volkswagen rental in Casablanca: Touareg, Golf 8, Tiguan, T-Roc',
+  h1: 'Volkswagen rental in Casablanca: T-Roc, Golf 8, Tiguan, Touareg',
   intro:
     'Yourent offers Volkswagen rental in Casablanca with four models, from the T-Roc at {price:volkswagen-t-roc} MAD per day up to the Touareg at {price:volkswagen-touareg} MAD. Pick the model in the catalogue and send your dates; the team then confirms on WhatsApp or by phone. The car comes to your hotel, your address or Mohammed V airport. The minimum rental is 5 days.',
   breadcrumb: 'Volkswagen',
@@ -16,7 +16,11 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: "Volkswagen is the best-represented brand in Yourent's fleet. The [Golf 8](/catalogue/volkswagen-golf-8) is the versatile compact, available in diesel or petrol, with an automatic or manual gearbox depending on the car. The [T-Roc](/catalogue/volkswagen-t-roc), on the other hand, is the compact SUV, taller than a saloon without taking up much room. The [Tiguan](/catalogue/volkswagen-tiguan) offers more space, and the [Touareg](/catalogue/volkswagen-touareg) is the brand's large SUV.",
+          text: "Volkswagen is the best-represented brand in Yourent's fleet. The [Golf 8](/catalogue/volkswagen-golf-8) is the versatile compact, available in diesel or petrol, with an automatic or manual gearbox depending on the car. The [T-Roc](/catalogue/volkswagen-t-roc) is the compact SUV, taller than a saloon without taking up much room. The [Tiguan](/catalogue/volkswagen-tiguan) offers more space, and the [Touareg](/catalogue/volkswagen-touareg) is the brand's large SUV.",
+        },
+        {
+          type: 'p',
+          text: 'Each model has its own page with photos, specifications and the booking form. The T-Roc, petrol and automatic, opens the range at {price:volkswagen-t-roc} MAD per day: see [Volkswagen T-Roc rental in Casablanca](/catalogue/volkswagen-t-roc) to check your dates.',
         },
       ],
     },
@@ -35,7 +39,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'For an arrival at Mohammed V airport, a T-Roc or a Golf is enough for two people with two suitcases. For four people and their luggage, however, go for the Tiguan or the Touareg. During a stay in Casablanca, the Golf is the easiest to park. On the motorway to Marrakech, the Touareg rides more calmly than the T-Roc, especially in the back seats.',
+          text: 'For an arrival at Mohammed V airport, a T-Roc or a Golf is enough for two people with two suitcases. For four people and their luggage, go for the Tiguan or the Touareg. During a stay in Casablanca, the Golf is the easiest to park. On the motorway to Marrakech, the Touareg rides more calmly than the T-Roc, especially in the back seats.',
         },
       ],
     },
@@ -58,7 +62,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'If you want the same size with a more upmarket image, look at the [Audi Q3](/catalogue/audi-q3) or the [SUV rental in Casablanca](route:suv) page. On a tighter budget, however, the [Dacia Duster](/catalogue/dacia-duster) remains the most economical SUV. For an automatic gearbox only, the [automatic car rental](route:automatique) page sorts the fleet for you.',
+          text: 'If you want the same size with a more upmarket image, look at the [Audi Q3](/catalogue/audi-q3) or the [SUV rental in Casablanca](route:suv) page. On a tighter budget, the [Dacia Duster](/catalogue/dacia-duster) remains the most economical SUV. For an automatic gearbox only, the [automatic car rental](route:automatique) page sorts the fleet for you.',
         },
       ],
     },
@@ -66,7 +70,7 @@ const page: PageContent = {
   faq: [
     {
       q: 'Which Volkswagen should I choose for a Casablanca to Marrakech trip?',
-      a: 'The [Tiguan](/catalogue/volkswagen-tiguan) and the [Touareg](/catalogue/volkswagen-touareg) are the most comfortable for this trip, with a generous boot, while the T-Roc suits two or three travellers.',
+      a: 'The [Tiguan](/catalogue/volkswagen-tiguan) and the [Touareg](/catalogue/volkswagen-touareg) are the most comfortable for this trip, with a generous boot, while the [T-Roc](/catalogue/volkswagen-t-roc) suits two or three travellers.',
     },
     {
       q: 'Does the Golf 8 have an automatic gearbox?',

@@ -20,7 +20,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: "It suits drivers who want a treat during their stay but still need the boot of an SUV for a small family's suitcases.",
+          text: "It suits drivers who want a treat during their stay but still need the boot of an SUV for a small family's suitcases. To see the photos and check your dates, open the [Porsche Macan rental in Casablanca](/catalogue/porsche-macan) page.",
         },
       ],
     },
@@ -61,7 +61,7 @@ const page: PageContent = {
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'To see all the prestige cars at the agency, visit the [luxury car rental](route:luxe) page.',
+          text: 'To see all the prestige cars at the agency, visit the [luxury car rental in Casablanca](route:luxe) page.',
         },
       ],
     },
@@ -82,6 +82,10 @@ const page: PageContent = {
     {
       q: 'Can I book the Porsche in advance for an airport arrival?',
       a: 'Yes. Give your arrival day and time in the request, and the team confirms delivery at Mohammed V airport. You receive the exact meeting point on WhatsApp.',
+    },
+    {
+      q: 'What is the minimum rental period for the Porsche?',
+      a: 'Five days, as for every car in the fleet: there is no one-day or weekend rental, even for an event. The price table above shows the rate that applies after 10 days.',
     },
   ],
   related: ['luxe', 'range-rover', 'mercedes', 'suv', 'aeroport'],

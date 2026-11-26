@@ -17,7 +17,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: "p",
-            text: "Volkswagen est la marque la plus représentée dans la flotte de Yourent. La [Golf 8](/catalogue/volkswagen-golf-8) est la compacte polyvalente, disponible en diesel ou en essence, avec boîte automatique ou manuelle selon l'exemplaire. Le [T-Roc](/catalogue/volkswagen-t-roc) est le SUV compact, plus haut qu'une berline sans prendre beaucoup de place. Le [Tiguan](/catalogue/volkswagen-tiguan) monte ensuite d'un cran en espace, et le [Touareg](/catalogue/volkswagen-touareg) ferme la gamme en grand SUV.",
+            text: "Volkswagen est la marque la plus représentée dans la flotte de Yourent. La [Golf 8](/catalogue/volkswagen-golf-8) est la compacte polyvalente, disponible en diesel ou en essence, avec boîte automatique ou manuelle selon l'exemplaire. Le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) est le SUV compact, plus haut qu'une berline sans prendre beaucoup de place. Le [Tiguan](/catalogue/volkswagen-tiguan) monte ensuite d'un cran en espace, et le [Touareg](/catalogue/volkswagen-touareg) ferme la gamme en grand SUV.",
           },
         ],
       },

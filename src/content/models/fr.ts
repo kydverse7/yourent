@@ -82,6 +82,10 @@ const copy: Record<string, ModelCopy> = {
         q: "Quel âge faut-il pour louer un Dacia Duster ?",
         a: "Le conducteur doit avoir 21 ans minimum et un permis de plus de 2 ans, comme pour toutes les voitures de la flotte.",
       },
+      {
+        q: "Peut-on louer un Dacia Duster à Casablanca pour un week-end ?",
+        a: "Non : comme toute la flotte, le Duster se loue 5 jours au minimum. Il est en revanche livré sans frais dans Casablanca et à l'aéroport Mohammed V.",
+      },
     ],
   },
 
@@ -119,6 +123,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "Quelle différence avec le Tiguan ?",
         a: "Le [Tiguan](/catalogue/volkswagen-tiguan) est plus grand, en diesel, et mieux adapté à une famille avec beaucoup de bagages. Le T-Roc, de son côté, est plus compact et plus simple à garer.",
+      },
+      {
+        q: "Le T-Roc peut-il être livré à l'aéroport Mohammed V ?",
+        a: "Oui, sans frais, comme partout dans Casablanca. Indiquez votre vol et votre heure d'arrivée dans la demande : l'équipe fixe ensuite le rendez-vous sur WhatsApp. La location dure 5 jours au minimum.",
       },
     ],
   },
@@ -242,6 +250,10 @@ const copy: Record<string, ModelCopy> = {
         q: "La CLA est-elle assez spacieuse pour quatre adultes ?",
         a: "Elle a cinq places, mais l'arrière est plus juste que dans une berline classique. Pour quatre adultes avec bagages, la [Classe C 220](/catalogue/mercedes-c-220) ou un SUV offriront donc plus de place.",
       },
+      {
+        q: "Quelle est la durée minimale pour louer la Mercedes CLA ?",
+        a: "5 jours, comme pour toute la flotte. La voiture est livrée gratuitement à Casablanca et à l'aéroport Mohammed V.",
+      },
     ],
   },
 
@@ -302,6 +314,10 @@ const copy: Record<string, ModelCopy> = {
         q: "Classe C ou Classe E ?",
         a: "La Classe C se manie mieux en ville, alors que la [Classe E](/catalogue/mercedes-e-220) est plus grande, avec plus de place à l'arrière. Pour comparer, ouvrez la page [location de Mercedes à Casablanca](route:mercedes).",
       },
+      {
+        q: "Faut-il une caution pour la Classe C ?",
+        a: "Oui. Elle est demandée au départ, par chèque, en espèces ou par empreinte de carte, puis rendue au retour de la voiture en bon état. L'équipe en précise le montant avant la réservation.",
+      },
     ],
   },
 
@@ -309,7 +325,7 @@ const copy: Record<string, ModelCopy> = {
     paragraphs: [
       "La location d'une Mercedes Classe E 220 à Casablanca vous donne la grande berline de la flotte : diesel, boîte automatique. On la loue pour les longs trajets et pour les rendez-vous où l'image compte. Elle convient aussi aux arrivées à l'aéroport Mohammed V, quand on veut de la place dès la sortie du terminal. Comptez {price:mercedes-e-220} DH par jour pour cette Classe E.",
       "À l'arrière, trois personnes tiennent mieux que dans une Classe C. En ville, en revanche, sa longueur demande de la prudence dans les rues étroites et au moment de se garer.",
-      "Face à la [Mercedes Classe C 220](/catalogue/mercedes-c-220), elle apporte de l'espace et de la présence, mais elle coûte davantage. Le [Range Rover Sport](/catalogue/range-rover-sport) coûte plus cher encore ; la Classe E est le choix berline, le Sport le choix SUV.",
+      "Face à la [Mercedes Classe C 220](/catalogue/mercedes-c-220), elle apporte de l'espace et de la présence, mais elle coûte davantage. Le [Range Rover Sport](/catalogue/range-rover-sport) coûte plus cher encore ; la Classe E est le choix berline, le Sport le choix SUV. Les trois Mercedes de la flotte sont comparées sur la page [location de Mercedes à Casablanca](route:mercedes).",
       "Elle n'existe qu'en un exemplaire : la recherche par dates du catalogue vous dit si elle est libre. La livraison à l'hôtel ou à l'aéroport reste gratuite à Casablanca, tous les jours de 8h à 22h.",
     ],
     faq: [
@@ -347,6 +363,10 @@ const copy: Record<string, ModelCopy> = {
       {
         q: "À partir de quel âge peut-on louer le Macan ?",
         a: "Le Macan se loue dès 21 ans, avec un permis de plus de 2 ans. L'équipe précise par ailleurs la caution avant la réservation.",
+      },
+      {
+        q: "Peut-on louer le Macan pour une journée ou un week-end ?",
+        a: "Non. Le Macan se loue 5 jours au minimum, comme le reste de la flotte : prévoyez une période qui englobe votre date.",
       },
     ],
   },

@@ -1,22 +1,39 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'Car Rental Casablanca Airport, Free Delivery | Yourent',
+  metaTitle: 'Car Rental Casablanca Airport (CMN), Free Delivery | Yourent',
   metaDescription:
-    'Car rental at Casablanca airport: free delivery to Mohammed V (CMN), from {minPrice} MAD/day, rated 4.8/5 on Google. Request online, confirm on WhatsApp.',
+    'Car rental at Casablanca airport (CMN): car hire from {minPrice} MAD/day, delivered free on arrival at Mohammed V. 5-day minimum, rated 4.8/5 on Google.',
   eyebrow: 'Mohammed V Airport',
   h1: 'Car rental at Casablanca airport: delivery to Mohammed V (CMN)',
   intro:
-    'Yourent offers car rental at Casablanca airport with free delivery to Mohammed V (CMN), from {minPrice} MAD per day. Choose a car and your dates online; the team confirms on WhatsApp or by phone, then brings the car to the airport for your arrival. Rentals start at 5 days.',
+    'Yourent offers car rental at Casablanca airport with free delivery to Mohammed V (CMN), from {minPrice} MAD per day. Choose a car and your dates online; the team confirms on WhatsApp or by phone, and a team member hands you the keys when you land. Rentals start at 5 days.',
   breadcrumb: 'Mohammed V Airport',
   vehicles: { sort: 'asc' },
   sections: [
+    {
+      h2: 'Casablanca airport car rentals at a glance',
+      blocks: [
+        {
+          type: 'table',
+          head: ['Your question', 'The short answer'],
+          rows: [
+            ['How much does it cost?', 'From {minPrice} MAD per day, for a minimum of 5 days.'],
+            ['Is airport delivery charged?', 'No. It is free at Mohammed V airport and anywhere in Casablanca.'],
+            ['Is there a rental desk?', 'No. A team member hands you the car at the meeting point agreed on WhatsApp.'],
+            ['At what times?', 'The team works from 8 am to 10 pm, every day. Outside those hours, ask on WhatsApp before you book.'],
+            ['What do I need?', 'To be 21 or over, with a licence held for more than 2 years, a valid ID, proof of address and a deposit.'],
+            ['Do I pay online?', 'No. The online booking is a request, and you pay the team directly.'],
+          ],
+        },
+      ],
+    },
     {
       h2: 'Car rental at Casablanca airport: the car comes to you',
       blocks: [
         {
           type: 'p',
-          text: 'Yourent is a Casablanca agency based at N°25 Rue Ibnou Mounir, with no desk inside the terminal. For **car rental at Casablanca airport (Mohammed V)**, you book before you fly and collect the car at the meeting point agreed with the team.',
+          text: 'Yourent is a Casablanca agency based at N°25 Rue Ibnou Mounir, with no desk inside the terminal. For **car rental at Casablanca airport (Mohammed V)**, you book before you fly and collect the car at the meeting point agreed with the team. You never need to come to the agency.',
         },
         {
           type: 'p',
@@ -36,7 +53,7 @@ const page: PageContent = {
           ordered: true,
           items: [
             '**The online request.** On a car page or in the [car catalogue](/catalogue), enter your dates and the search hides cars that are already taken. Say that you want the handover at Mohammed V airport and give your arrival date and time.',
-            '**Confirmation by the team.** Nothing is paid online. The team then answers on WhatsApp or by phone to confirm the car, the dates and the amount, and you can ask your questions at this stage.',
+            '**Confirmation by the team.** Nothing is paid online. The team answers on WhatsApp or by phone to confirm the car, the dates and the amount, and you can ask your questions at this stage.',
             '**Handover on arrival.** You land and collect your luggage, then a team member gives you the car. The team sends you the exact meeting point on WhatsApp before you arrive.',
             '**Check and departure.** You show your documents, leave the deposit and check the condition of the car with the team before driving off.',
             '**The return.** At the end of the rental, bring the car back to the place agreed with the team. Your deposit is returned if the car is in good condition.',
@@ -44,7 +61,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Changing or cancelling is free if you tell the team at least 24 hours before pick-up. After that, however, fees may apply. The details are in the [car rental requirements](route:conditions).',
+          text: 'Changing or cancelling is free if you tell the team at least 24 hours before pick-up. After that, fees may apply. The details are in the [car rental requirements](route:conditions).',
         },
       ],
     },
@@ -75,7 +92,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'To rent a car at Casablanca airport, you must be at least 21 years old. Having the right papers with you also avoids delaying the handover, so bring:',
+          text: 'The driver must be at least 21. Having the right papers to hand also avoids delaying the handover, so bring:',
         },
         {
           type: 'list',
@@ -124,7 +141,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The airport is linked by motorway to Casablanca, Rabat and Marrakech. For the city and a small budget, a small car is enough. For long drives and families, however, an [SUV rental in Casablanca](route:suv) or a saloon offers more space. If you would rather not use a clutch after a flight, an [automatic car rental](route:automatique) is a good option.',
+          text: 'The airport is linked by motorway to Casablanca, Rabat and Marrakech. For the city and a small budget, a small car is enough: see our [cheap car rental in Casablanca](route:economique). For long drives and families, an [SUV rental in Casablanca](route:suv) or a saloon offers more space. If you would rather not use a clutch after a flight, an [automatic car rental](route:automatique) is a good option.',
         },
         {
           type: 'p',
@@ -139,6 +156,28 @@ const page: PageContent = {
         {
           type: 'p',
           text: 'On most models, the daily rate drops automatically after 10 days, although high season can suspend this. Airport delivery is free, so you pay only for the rental. All models and their terms are on the [car rental prices in Casablanca](route:tarifs) page.',
+        },
+      ],
+    },
+    {
+      h2: 'Is a rental car the right way out of the airport?',
+      blocks: [
+        {
+          type: 'p',
+          text: 'Because rentals start at 5 days, this service suits travellers who keep the car for their stay, not those who only need a ride into town. If your trip carries on beyond the city, our [car rental in Morocco](route:maroc) page explains how to set off from Casablanca, and the [Casablanca to Marrakech car rental](route:marrakech) page covers the drive south on the A3 motorway.',
+        },
+        {
+          type: 'p',
+          text: 'Landing at Marrakech-Menara (RAK) rather than Casablanca? Yourent has no branch there, but the car can be delivered on request: see [car rental in Marrakech](route:livraison-marrakech). And if you are staying in town without flying in, the same free delivery applies at your hotel: start from our [car rental in Casablanca](/) page.',
+        },
+      ],
+    },
+    {
+      h2: 'Flying in from the UK or Europe',
+      blocks: [
+        {
+          type: 'p',
+          text: 'Everything can be settled before you board. The request goes in online and the team confirms on WhatsApp, which leaves you time to check the rate and the deposit. Our [car rental in Casablanca from Europe](route:europe) page covers the licence, the currency and the deposit for visitors. Moroccans living abroad have their own page: [car rental for Moroccans living abroad](route:mre).',
         },
       ],
     },
@@ -161,7 +200,7 @@ const page: PageContent = {
       a: 'Send your flight number when you book, then message the team on WhatsApp if anything changes. For an arrival outside opening hours (8 am to 10 pm) or a long delay, they tell you what is possible.',
     },
     {
-      q: 'Which documents do I need at the airport?',
+      q: 'What do I need to hire a car at Casablanca airport?',
       a: 'You must be at least 21, with a valid ID (CIN or passport) and proof of address. You also need a driving licence held for more than 2 years; foreign tourists can use an international driving permit. A deposit is taken at pick-up, by cheque, cash or card imprint.',
     },
     {
@@ -173,7 +212,7 @@ const page: PageContent = {
       a: 'The return place is agreed with the team at confirmation. Mention it in your request so they can answer on WhatsApp before you travel.',
     },
   ],
-  related: ['tarifs', 'conditions', 'suv', 'automatique', 'contact'],
+  related: ['tarifs', 'conditions', 'suv', 'automatique', 'europe', 'maroc', 'livraison-marrakech'],
 };
 
 export default page;

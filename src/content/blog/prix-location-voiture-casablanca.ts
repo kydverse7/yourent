@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Combien coûte une location de voiture à Casablanca ? Cela dépend d'abord du modèle et de la durée : chez Yourent, la flotte va de {fleetMin} DH à {maxPrice} DH par jour, pour 5 jours minimum. Un tarif réduit s'applique automatiquement au-delà de 10 jours sur la plupart des modèles. Voici comment lire un devis et ce qui fait monter ou baisser la facture.`,
   excerpt: `Ce qui fait varier le prix d'une location à Casablanca : modèle, durée, boîte, caution, assurance. Avec les tarifs par jour de plusieurs modèles de la flotte Yourent.`,
   datePublished: '2026-11-05',
-  dateModified: '2026-11-05',
+  dateModified: '2026-11-26',
   sections: [
     {
       h2: `Combien coûte une location de voiture à Casablanca ?`,
@@ -63,7 +63,7 @@ const article: Article = {
             `**Le carburant.** Essence, diesel ou hybride. Il ne change pas le tarif de location lui-même, mais il pèse sur le coût d'un long trajet.`,
             `**La durée.** Voir plus haut : minimum de 5 jours, tarif réduit au-delà de 10 jours.`,
             `**La période.** Les prix affichés sont les tarifs en vigueur, et l'équipe confirme celui qui s'applique à vos dates, surtout en pleine saison. La disponibilité d'un modèle varie aussi avec les dates : la recherche par dates de la page catalogue exclut les véhicules déjà loués.`,
-            `**Les options et suppléments.** La livraison ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible mais avec un léger supplément. Pour toute autre demande, l'équipe précise le tarif sur WhatsApp.`,
+            `**Les options et suppléments.** La livraison ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible mais avec un léger supplément. À Marrakech, elle se fait sur demande, à des conditions que l'équipe confirme sur WhatsApp.`,
           ],
         },
       ],
@@ -116,7 +116,7 @@ const article: Article = {
     },
     {
       q: `La livraison de la voiture est-elle payante ?`,
-      a: `Non, elle ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible, mais avec un léger supplément.`,
+      a: `Non, elle ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible, mais avec un léger supplément. Pour Marrakech, l'équipe confirme les conditions sur WhatsApp.`,
     },
     {
       q: `Peut-on payer en ligne ?`,

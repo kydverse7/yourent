@@ -85,7 +85,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'La livraison est-elle comprise dans le prix ?',
-        a: 'Oui pour tout Casablanca et l’aéroport Mohammed V : aucun frais de livraison ne s’ajoute au tarif. Pour une autre ville, demandez les conditions à l’équipe sur WhatsApp.',
+        a: 'Oui pour tout Casablanca et l’aéroport Mohammed V : aucun frais de livraison ne s’ajoute au tarif. Un léger supplément s’applique à Mohammedia ; pour Marrakech, l’équipe confirme les conditions sur WhatsApp.',
       },
       {
         q: 'Peut-on louer pour moins de 5 jours ?',

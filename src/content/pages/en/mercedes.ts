@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Mercedes Rental Casablanca from {minPrice} MAD | Yourent',
   metaDescription:
-    'Mercedes rental in Casablanca: CLA, C-Class or E-Class from {minPrice} MAD/day. Free delivery to your hotel or the airport, online request, WhatsApp reply.',
+    'Mercedes rental in Casablanca: rent a CLA, C-Class or E-Class from {minPrice} MAD/day. Free delivery to your hotel or the airport, confirmed on WhatsApp.',
   eyebrow: 'Mercedes',
   h1: 'Mercedes rental in Casablanca: C-Class, E-Class and CLA',
   intro:
@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: "The [Mercedes CLA](/catalogue/mercedes-cla) is the entry point to the brand at Yourent: a compact four-door coupé, petrol and automatic, available in several units. The [C 220](/catalogue/mercedes-c-220), on the other hand, is the brand's classic saloon, in diesel. The [E 220](/catalogue/mercedes-e-220) is the biggest of the three, the one you book when ride comfort comes first.",
+          text: "The [Mercedes CLA](/catalogue/mercedes-cla) is the entry point to the brand at Yourent: a compact four-door coupé, petrol and automatic, available in several units. The [C 220](/catalogue/mercedes-c-220) is the brand's classic saloon, in diesel. The [E 220](/catalogue/mercedes-e-220) is the biggest of the three, the one you book when ride comfort comes first.",
         },
         {
           type: 'p',
@@ -25,14 +25,14 @@ const page: PageContent = {
       ],
     },
     {
-      h2: 'Which Mercedes to choose for your trip',
+      h2: 'Which Mercedes to rent for your trip',
       blocks: [
         {
           type: 'list',
           items: [
             '**Arriving at Mohammed V airport**: the CLA is enough for a solo traveller or a couple with two suitcases. Yourent delivers the car to the airport, as the [car rental Casablanca airport](route:aeroport) page explains.',
             '**A stay in Casablanca**: the C-Class is easier to park than an E-Class in Maarif or along the Corniche, while keeping the look of a proper saloon.',
-            '**Casablanca to Marrakech**: on the motorway, the diesel E-Class is the most restful for a long drive. The CLA, however, is livelier to drive, with a smaller boot.',
+            '**Casablanca to Marrakech**: on the motorway, the diesel E-Class is the most restful for a long drive. The CLA is livelier to drive, with a smaller boot.',
             '**An event or a dinner**: the E-Class has the presence of a big saloon, while the CLA looks younger and the C-Class more understated.',
           ],
         },
@@ -56,7 +56,7 @@ const page: PageContent = {
         { type: 'pricing' },
         {
           type: 'p',
-          text: 'Looking at other premium models? The [luxury car rental](route:luxe) page compares them all.',
+          text: 'Looking at other premium models? Our [luxury car rental in Casablanca](route:luxe) page compares them all.',
         },
       ],
     },
@@ -72,7 +72,11 @@ const page: PageContent = {
     },
     {
       q: 'Can I take a Mercedes to Marrakech?',
-      a: 'Yes, the motorway links Casablanca and Marrakech, and the E-Class is comfortable on it. Before you leave, however, ask the team on WhatsApp about included mileage.',
+      a: 'Yes, the motorway links Casablanca and Marrakech, and the E-Class is comfortable on it. Before you leave, ask the team on WhatsApp about included mileage. The route is described on our [Casablanca to Marrakech car rental](route:marrakech) page.',
+    },
+    {
+      q: 'Can I rent a Mercedes for one day or for a wedding?',
+      a: 'Not for a single day: the minimum rental is 5 days on every model. For a wedding, book a period that covers the date and mention the event in your request.',
     },
     {
       q: 'Can the Mercedes be delivered to the airport or my hotel?',

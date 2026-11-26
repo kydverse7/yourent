@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: "Location Mercedes Casablanca : Classe C, E, CLA | Yourent",
     metaDescription:
-      "Location Mercedes Casablanca : CLA, Classe C ou Classe E dès {minPrice} DH/jour. Livraison gratuite à l'hôtel ou à l'aéroport, réponse de l'équipe sur WhatsApp.",
+      "Location Mercedes Casablanca : CLA, Classe C ou Classe E dès {minPrice} DH/jour. Livraison gratuite à votre hôtel ou à l'aéroport, réponse sur WhatsApp.",
     eyebrow: "Mercedes",
     h1: "Location de Mercedes à Casablanca : Classe C, Classe E et CLA",
     intro:
@@ -73,11 +73,15 @@ const page: LocalizedPage = {
       },
       {
         q: "Puis-je prendre une Mercedes pour aller à Marrakech ?",
-        a: "Oui, l'autoroute relie Casablanca à Marrakech, et les trois modèles s'y prêtent. L'équipe précise le kilométrage inclus sur WhatsApp : demandez-le avant de partir.",
+        a: "Oui, l'autoroute relie Casablanca à Marrakech, et les trois modèles s'y prêtent. L'équipe précise le kilométrage inclus sur WhatsApp : demandez-le avant de partir. Le trajet est décrit sur notre page [location de voiture de Casablanca à Marrakech](route:marrakech).",
       },
       {
         q: "La Mercedes peut-elle être livrée à l'aéroport ou à l'hôtel ?",
-        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h. Une livraison à Mohammedia reste aussi possible, avec un léger supplément.",
+        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h. Une livraison reste aussi possible à Mohammedia, avec un léger supplément, et à Marrakech sur demande.",
+      },
+      {
+        q: "Peut-on louer une Mercedes pour un mariage ou pour une seule journée ?",
+        a: "Pas pour une seule journée : la location dure 5 jours minimum, quel que soit le modèle. Pour un mariage, réservez une période de 5 jours qui englobe la date et signalez-la dans votre demande.",
       },
       {
         q: "Quels documents faut-il pour louer une Mercedes ?",

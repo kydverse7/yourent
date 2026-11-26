@@ -50,7 +50,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Included mileage, the excess amount and returning in another city are not shown on the site, so the team tells you on WhatsApp before you book. There is no online payment: you pay the team directly.',
+          text: 'Included mileage and the excess amount are not shown on the site, so the team tells you on WhatsApp before you book. The return place is agreed with them in the same way, as is a delivery outside Casablanca: for a [rental car delivered to Marrakech](route:livraison-marrakech), for example, a surcharge may apply. There is no online payment: you pay the team directly.',
         },
       ],
     },
@@ -80,11 +80,11 @@ const page: PageContent = {
     },
     {
       q: 'Is there a lower price for a long rental?',
-      a: 'Yes. Most models get a lower daily rate from day 11. On some it stays the same, however, so the list shows both rates for each car.',
+      a: 'Yes. Most models get a lower daily rate from day 11. On some it stays the same, so the list shows both rates for each car.',
     },
     {
       q: 'Is delivery included in the price?',
-      a: 'You pay no delivery charge in Casablanca or at Mohammed V airport. For another city, ask the team for the terms on WhatsApp.',
+      a: 'You pay no delivery charge in Casablanca or at Mohammed V airport. Mohammedia carries a small extra charge, and delivery to Marrakech is arranged on request: the team confirms the conditions and any surcharge on WhatsApp.',
     },
     {
       q: 'Can I rent for fewer than 5 days?',

@@ -23,7 +23,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'WhatsApp works well for sending your dates, your flight or the delivery address. The team also answers there the questions the site does not settle (excess, included mileage, returning in another city) before you book.',
+          text: 'WhatsApp works well for sending your dates, your flight or the delivery address. The team also answers there the questions the site does not settle (excess, included mileage, return place, delivery outside Casablanca) before you book.',
         },
       ],
     },
@@ -50,7 +50,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'We deliver free of charge across Casablanca and at the airport, every day. If you arrive by train at Casa Voyageurs station, send the team your meeting point on WhatsApp. If you arrive by plane, see [car rental Casablanca airport](route:aeroport).',
+          text: 'We deliver free of charge across Casablanca and at the airport, every day. If you arrive by train at Casa Voyageurs station, send the team your meeting point on WhatsApp. If you arrive by plane, see [car rental at Casablanca airport](route:aeroport). For a delivery in Marrakech, possible on request, see [car rental in Marrakech](route:livraison-marrakech).',
         },
       ],
     },

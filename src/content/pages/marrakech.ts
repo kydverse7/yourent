@@ -8,7 +8,7 @@ const page: LocalizedPage = {
     eyebrow: 'Route de Marrakech',
     h1: "Location de voiture de Casablanca à Marrakech : départ en ville ou à l'aéroport",
     intro:
-      "Pour aller de Casablanca à Marrakech en voiture de location, Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, dès {minPrice} DH par jour et pour 5 jours minimum. La livraison y est gratuite ; vous envoyez la demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent n'a pas d'agence à Marrakech : vous prenez la voiture à Casablanca et vous rejoignez le sud par l'autoroute A3.",
+      "Pour aller de Casablanca à Marrakech en voiture de location, Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, dès {minPrice} DH par jour et pour 5 jours minimum. La livraison y est gratuite ; vous envoyez la demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent n'a pas d'agence à Marrakech : vous prenez la voiture à Casablanca et vous rejoignez le sud par l'autoroute A3, ou vous demandez une livraison sur place.",
     breadcrumb: 'Casablanca - Marrakech',
     vehicles: { sort: 'asc' },
     sections: [
@@ -23,8 +23,8 @@ const page: LocalizedPage = {
             type: 'list',
             items: [
               "**Le départ.** La livraison ne coûte rien à l'aéroport Mohammed V, à votre hôtel casablancais ou à l'adresse de votre choix en ville.",
-              "**Une remise à Marrakech.** Le site ne décrit pas cette option. Posez la question sur WhatsApp avant de réserver : l'équipe vous dira ce qui est possible.",
-              "**Un retour à Marrakech.** Là aussi, seule l'équipe peut répondre. Tant que vous n'avez pas sa réponse, prévoyez plutôt un aller-retour qui se termine à Casablanca.",
+              "**Une remise à Marrakech.** Elle est possible sur demande, en ville ou à l'aéroport Marrakech-Ménara. L'équipe confirme les conditions et l'éventuel supplément sur WhatsApp avant la réservation : notre page [location de voiture à Marrakech](route:livraison-marrakech) explique comment faire.",
+              "**Un retour à Marrakech.** Le lieu de restitution se convient avec l'équipe sur WhatsApp avant de confirmer. Tant que vous n'avez pas sa réponse, prévoyez plutôt un aller-retour qui se termine à Casablanca.",
               "**La durée.** Le minimum de 5 jours convient à un vrai séjour dans le sud, mais il exclut l'aller-retour dans la journée.",
             ],
           },
@@ -145,11 +145,11 @@ const page: LocalizedPage = {
     faq: [
       {
         q: 'Yourent a-t-elle une agence à Marrakech ?',
-        a: "Non. L'agence est à Casablanca : la location commence en ville ou à l'aéroport Mohammed V, et vous faites la route vers Marrakech vous-même.",
+        a: "Non. L'agence est à Casablanca : la location commence le plus souvent en ville ou à l'aéroport Mohammed V, et vous faites la route vers Marrakech vous-même.",
       },
       {
         q: 'Peut-on se faire livrer la voiture à Marrakech, ou l\'y rendre ?',
-        a: "Ces deux cas ne sont pas décrits sur le site. Indiquez-les dans votre demande : l'équipe vous répond sur WhatsApp avant toute confirmation.",
+        a: "La livraison à Marrakech et à l'aéroport Marrakech-Ménara est possible sur demande : l'équipe confirme les conditions et l'éventuel supplément sur WhatsApp. Le lieu de restitution, lui, se convient avec elle avant de confirmer.",
       },
       {
         q: 'Quelle autoroute prendre, et sur quelle distance ?',
@@ -164,7 +164,7 @@ const page: LocalizedPage = {
         a: "Non, car la location dure 5 jours au minimum. Le tarif démarre à {minPrice} DH par jour, et il baisse après 10 jours sur la plupart des modèles.",
       },
     ],
-    related: ['aeroport', 'maroc', 'suv', 'automatique', 'tarifs'],
+    related: ['livraison-marrakech', 'aeroport', 'maroc', 'suv', 'automatique', 'tarifs'],
   },
 };
 

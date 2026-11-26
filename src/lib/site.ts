@@ -24,7 +24,7 @@ export const BUSINESS = {
   hours: { opens: '08:00', closes: '22:00', display: '8h – 22h, 7j/7' },
   mapsUrl: 'https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z',
   /** Relevé sur la fiche Google le 2026-11-05 : à mettre à jour de temps en temps. */
-  googleRating: { value: 4.8, count: 170, asOf: '2026-11-05' },
+  googleRating: { value: 4.8, count: 173, asOf: '2026-11-25' },
   minRentalDays: 5,
   /** Âge minimum du conducteur, confirmé par le propriétaire le 2026-11-05. */
   minAge: 21,

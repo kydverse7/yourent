@@ -34,7 +34,7 @@ const LANGUAGES: { code: 'fr' | 'en' | 'ar'; flag: string; label: string }[] = [
 ];
 
 /* ── Colonnes de liens du pied de page ── */
-const FOOTER_RENTAL_KEYS: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'automatique', 'longue-duree', 'economique', 'maroc'];
+const FOOTER_RENTAL_KEYS: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'automatique', 'longue-duree', 'economique', 'maroc', 'livraison-marrakech'];
 const FOOTER_BRAND_KEYS: SeoRouteKey[] = ['mercedes', 'range-rover', 'porsche'];
 const FOOTER_INFO_KEYS: SeoRouteKey[] = ['tarifs', 'conditions', 'faq', 'a-propos', 'contact'];
 

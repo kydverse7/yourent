@@ -1,11 +1,11 @@
 import type { PageContent } from '../../types';
 
 const page: PageContent = {
-  metaTitle: 'Long Term Car Rental Casablanca, Monthly | Yourent',
+  metaTitle: 'Long-Term & Monthly Car Rental Casablanca | Yourent',
   metaDescription:
-    'Long-term car rental in Casablanca: monthly or several weeks, lower rate after 10 days on most models, from {minPrice} MAD/day. Free delivery in Casablanca.',
+    'Long-term car rental in Casablanca, for several weeks or by the month: lower daily rate after 10 days on most models, from {minPrice} MAD/day, free delivery.',
   eyebrow: 'Long-term',
-  h1: 'Long-term car rental in Casablanca',
+  h1: 'Long-term car rental in Casablanca, by the week or by the month',
   intro:
     'Yourent offers long-term car rental in Casablanca for several weeks or by the month, from {minPrice} MAD per day. On most models, the rate drops automatically after 10 days, and delivery is free in Casablanca and at Mohammed V airport. For an exact monthly price, the team answers on WhatsApp based on the model and your dates.',
   breadcrumb: 'Long-term',
@@ -20,7 +20,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'It suits several situations: a stay of several weeks, a work assignment, an internship or a summer at home for a Moroccan living abroad. If you need the car for months, discuss the monthly price with the team.',
+          text: 'It suits several situations: a stay of several weeks, a work assignment, an internship, or a summer back home, the subject of our [car rental for Moroccans living abroad](route:mre) page. If you need the car for months, discuss the monthly price with the team.',
         },
       ],
     },
@@ -66,12 +66,12 @@ const page: PageContent = {
             'Choose a car and enter your start and end dates in the catalogue: the search hides cars already taken at any point in the period.',
             'Send the online request, which involves no payment at this stage.',
             'The team confirms on WhatsApp or by phone and gives you the total amount and the deposit.',
-            'The car is delivered to your address, your hotel or [Mohammed V airport](route:aeroport), free of charge in Casablanca and at the airport.',
+            'The car is delivered to your address or your hotel, free of charge in Casablanca. If you are flying in, see our [car rental at Casablanca airport](route:aeroport) page.',
           ],
         },
         {
           type: 'p',
-          text: 'Documents to bring: valid ID (CIN or passport), a licence held for more than 2 years, proof of address. Visitors from abroad may instead use an international driving permit. The [car rental requirements](route:conditions) give the details.',
+          text: 'You must be at least 21. Bring a valid ID (CIN or passport), a licence held for more than 2 years and proof of address; visitors from abroad can show an international driving permit. The [car rental requirements](route:conditions) give the details.',
         },
       ],
     },
@@ -111,8 +111,12 @@ const page: PageContent = {
       a: 'The team sends you another car as quickly as possible. It also helps with the paperwork if there has been an accident.',
     },
     {
+      q: 'Can I extend a rental that has already started?',
+      a: 'Tell the team before your end date. An extension depends on whether the car is free, because it may be booked right after you.',
+    },
+    {
       q: 'Do I have to pay for the whole rental up front?',
-      a: 'No. The online booking is a request, with no payment. The way you pay is then agreed with the team, who explain it at confirmation on WhatsApp.',
+      a: 'The online booking is a request, with no payment. The way you pay is then agreed with the team, who explain it at confirmation on WhatsApp.',
     },
   ],
   related: ['tarifs', 'economique', 'suv', 'conditions', 'aeroport'],

@@ -101,21 +101,30 @@ const ECONOMIC_TARGETS = [
   { marque: 'dacia', modele: 'duster' },
 ];
 
-const HOME_META: Record<Locale, { title: string; description: (minPrice: number) => string }> = {
+/**
+ * Titre et description de l'accueil, qui porte les recherches générales (« location voiture Casablanca »,
+ * « rent a car Casablanca », « كراء السيارات الدار البيضاء »). L'aéroport a sa propre page : il ne figure
+ * donc plus dans le titre, seulement dans la description.
+ */
+const HOME_META: Record<Locale, { title: (minPrice: number) => string; description: (minPrice: number) => string }> = {
   fr: {
-    title: 'Location voiture Casablanca & aéroport Mohammed V | Yourent',
+    // Sans prix connu (base injoignable), le titre garde le mot-clé et l'argument de la livraison.
+    title: (minPrice) =>
+      minPrice > 0
+        ? `Location voiture Casablanca dès ${minPrice} DH/jour | Agence Yourent`
+        : 'Location voiture Casablanca, livraison gratuite | Yourent',
     description: (minPrice) =>
-      `Agence de location de voitures à Casablanca dès ${minPrice} DH/jour : citadines, SUV, Mercedes, Porsche. Livraison gratuite à l’aéroport Mohammed V, réservation en ligne.`,
+      `Agence de location de voitures à Casablanca (Maroc) : citadines, SUV, Mercedes, Porsche dès ${minPrice} DH/jour. Livraison gratuite en ville et à l’aéroport.`,
   },
   en: {
-    title: 'Car rental Casablanca & Mohammed V airport | Yourent',
+    title: () => 'Car Rental Casablanca: Rent a Car, Free Delivery | Yourent',
     description: (minPrice) =>
-      `Car rental agency in Casablanca from ${minPrice} MAD/day: city cars, SUVs, Mercedes, Porsche. Free delivery at Mohammed V airport, book online.`,
+      `Rent a car in Casablanca from ${minPrice} MAD/day: city cars, SUVs, Mercedes, Porsche. Car hire with free delivery to your hotel or Mohammed V airport.`,
   },
   ar: {
-    title: 'كراء وتأجير السيارات في الدار البيضاء ومطار محمد الخامس | Yourent',
+    title: () => 'كراء وتأجير السيارات في الدار البيضاء بتوصيل مجاني | Yourent',
     description: (minPrice) =>
-      `وكالة كراء وتأجير السيارات في الدار البيضاء ابتداءً من ${minPrice} درهم لليوم: سيارات المدينة والدفع الرباعي ومرسيدس وبورش. توصيل مجاني إلى مطار محمد الخامس وحجز عبر الإنترنت.`,
+      `وكالة تأجير السيارات في الدار البيضاء من ${minPrice} درهم في اليوم: سيارات مدينة وSUV ومرسيدس وبورش، مع توصيل مجاني داخل المدينة وإلى المطار وحجز عبر الإنترنت.`,
   },
 };
 
@@ -126,7 +135,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     locale,
     paths: samePathAllLocales('/'),
-    title: HOME_META[locale].title,
+    title: HOME_META[locale].title(stats.minPrice),
     description: HOME_META[locale].description(stats.minPrice),
   });
 }
