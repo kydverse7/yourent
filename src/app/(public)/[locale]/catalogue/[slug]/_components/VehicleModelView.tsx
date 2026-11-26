@@ -7,6 +7,7 @@ import { formatPrice } from '@/lib/format';
 import { useLocale } from '@/lib/i18n';
 import { BUSINESS } from '@/lib/site';
 import { categoryLabel, fuelLabel, gearLabel } from '../../_lib/specLabels';
+import { PublicToaster } from '../../../_components/PublicToaster';
 import { ModelDateSearch } from './ModelDateSearch';
 import PublicReservationForm from './PublicReservationForm';
 
@@ -234,6 +235,8 @@ export function VehicleModelView({
       </aside>
 
       {children && <div className="min-w-0 lg:col-start-1">{children}</div>}
+      {/* Notifications du formulaire : react-hot-toast n'est chargé que sur les fiches. */}
+      <PublicToaster />
     </div>
   );
 }

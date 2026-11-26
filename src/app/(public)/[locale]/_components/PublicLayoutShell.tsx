@@ -1,6 +1,7 @@
 import { LanguageProvider } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { BUSINESS } from '@/lib/site';
+import { clientMessages } from '@/lib/i18n/clientMessages';
 import { t as tr } from '@/lib/i18n/translations';
 import { MobileActionBar, SiteFooter, SiteHeader } from './layout/SiteChrome';
 import { WhatsAppIcon } from './ui/actions';
@@ -11,7 +12,7 @@ import { WhatsAppIcon } from './ui/actions';
  */
 export function PublicLayoutShell({ children, locale }: { children: React.ReactNode; locale: Locale }) {
   return (
-    <LanguageProvider locale={locale}>
+    <LanguageProvider locale={locale} messages={clientMessages(locale)}>
       <div className="relative flex min-h-screen flex-col" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <SiteHeader locale={locale} />
         <main id="contenu" className="relative z-10 flex-1">

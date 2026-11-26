@@ -68,7 +68,9 @@ export function PageHeader({
         {eyebrow && <p className="t-label mt-3 text-gold">{eyebrow}</p>}
         <h1 className={`${titleClass} ${eyebrow ? 'mt-2' : 'mt-3'}`}>{title}</h1>
         {intro && <div className="t-lead prose-col mt-4">{intro}</div>}
-        {actions && <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">{actions}</div>}
+        {actions && (
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap [&>*:first-child]:col-span-2">{actions}</div>
+        )}
         {facts && <div className="mt-5">{facts}</div>}
       </div>
       {aside}

@@ -1,8 +1,12 @@
 import { useSyncExternalStore } from 'react';
-import { format } from 'date-fns';
 
 const subscribeNever = () => () => {};
-const readToday = () => format(new Date(), 'yyyy-MM-dd');
+/** Date locale du visiteur au format AAAA-MM-JJ, sans bibliothèque de dates. */
+const readToday = () => {
+  const now = new Date();
+  const pad = (value: number) => String(value).padStart(2, '0');
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+};
 const readNothing = () => undefined;
 
 /**

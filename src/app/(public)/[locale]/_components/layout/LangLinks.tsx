@@ -104,9 +104,9 @@ export function LangMenu({ locale, label }: { locale: Locale; label: string }) {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-haspopup="true"
-        aria-label={label}
         className="inline-flex h-11 min-w-11 items-center justify-center gap-1 rounded-xl border border-white/10 px-2.5 text-sm font-bold text-cream transition-colors hover:border-gold/40"
       >
+        <span className="sr-only">{label} : </span>
         {current.short}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
       </button>

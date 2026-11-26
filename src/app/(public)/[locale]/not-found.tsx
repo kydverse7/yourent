@@ -13,10 +13,10 @@ export default function NotFound() {
     <div className="lux-container flex flex-col items-center gap-5 py-24 text-center">
       <meta name="robots" content="noindex" />
       <p className="text-5xl font-bold text-gold">404</p>
-      <h1 className="lux-title-sm text-cream">{labels.notFoundTitle}</h1>
-      <p className="lux-subtitle">{labels.notFoundBody}</p>
-      <Link href="/catalogue" className="btn-gold">
-        {labels.notFoundCta} <ArrowUpRight className="h-4 w-4" />
+      <h1 className="t-h1-page">{labels.notFoundTitle}</h1>
+      <p className="t-body prose-col">{labels.notFoundBody}</p>
+      <Link href="/catalogue" className="btn btn-primary">
+        {labels.notFoundCta} <ArrowUpRight className="h-5 w-5 rtl:-scale-x-100" />
       </Link>
     </div>
   );

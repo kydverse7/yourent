@@ -219,13 +219,13 @@ export function AgencySection({ locale }: { locale: Locale }) {
               {t('contact.title')} {t('contact.titleGold')}
             </h2>
             <p className="t-body prose-col mt-3">{t('contact.subtitle')}</p>
-            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {rows.map(({ icon: Icon, label, value, href, external, sub }) => (
-                <div key={label} className="flex gap-3">
+                <li key={label} className="flex gap-3">
                   <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
                   <div className="min-w-0">
-                    <dt className="t-label">{label}</dt>
-                    <dd className="mt-0.5 text-[0.9375rem] text-cream">
+                    <p className="t-label">{label}</p>
+                    <p className="mt-0.5 text-[0.9375rem] text-cream">
                       {href ? (
                         <a
                           href={href}
@@ -238,11 +238,11 @@ export function AgencySection({ locale }: { locale: Locale }) {
                         value
                       )}
                       {sub && <span className="mt-0.5 block text-sm text-cream-muted">{sub}</span>}
-                    </dd>
+                    </p>
                   </div>
-                </div>
+                </li>
               ))}
-            </dl>
+            </ul>
             <RatingLink locale={locale} className="mt-4" />
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
