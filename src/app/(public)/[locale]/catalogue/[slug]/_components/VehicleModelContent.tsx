@@ -315,7 +315,7 @@ export async function VehicleModelContent({
             { name },
           ]}
         />
-        <h1 className="t-h1-page mt-3">{tr(locale, 'model.h1').replace('{name}', name)}</h1>
+        <h1 className="t-h1-page page-title mt-3">{tr(locale, 'model.h1').replace('{name}', name)}</h1>
         <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-1 text-base text-cream-muted">
           {facts.map((fact, index) => (
             <li key={fact} className="flex items-center gap-2">
@@ -363,7 +363,7 @@ export async function VehicleModelContent({
           <InlineCta locale={locale} message={waMessage} />
 
           <section aria-labelledby="model-rates" className="cv-auto">
-            <h2 id="model-rates" className="t-h2">
+            <h2 id="model-rates" className="t-h2 rv-clip">
               {tr(locale, 'model.ratesTitle').replace('{name}', name)}
             </h2>
             <div className="card mt-5 px-4 sm:px-6">
@@ -403,7 +403,7 @@ export async function VehicleModelContent({
 
           {similar.length > 0 && (
             <section aria-labelledby="model-similar" className="cv-auto">
-              <h2 id="model-similar" className="t-h2 mb-5">
+              <h2 id="model-similar" className="t-h2 rv-clip mb-5">
                 {tr(locale, 'model.similarTitle')}
               </h2>
               <VehicleCards locale={locale} vehicles={similar} />

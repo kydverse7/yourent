@@ -156,10 +156,15 @@ export async function CatalogueView({ locale, params }: { locale: Locale; params
       )
     : null;
 
-  const [{ vehicles, total, brands }, stats] = await Promise.all([
+  const [{ vehicles: byPrice, total, brands }, stats] = await Promise.all([
     getGroupedVehicles(params, busyObjectIds),
     getFleetStats(),
   ]);
+  // Ordre par défaut : le haut de gamme en tête (du plus cher au moins cher), les modèles entièrement loués en dernier.
+  // Les autres tris (prix croissant, décroissant, nom) restent proposés par CatalogueTools.
+  const vehicles = [...byPrice].sort(
+    (a, b) => Number(b.countDispo > 0) - Number(a.countDispo > 0) || b.minTarif - a.minTarif,
+  );
   const subtitle = tp(locale, dateRange ? 'cat.subtitleDates' : 'cat.subtitle', total);
   const catalogueUrl = absoluteUrl(localePath(locale, '/catalogue'));
   const jsonLd = jsonLdString([
@@ -277,7 +282,7 @@ export async function CatalogueView({ locale, params }: { locale: Locale; params
           ) : (
             <>
               <CatalogueTools gridId="catalogue-grid" />
-              <ul id="catalogue-grid" className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+              <ul id="catalogue-grid" className="rv-cards grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
                 {vehicles.map((vehicle, index) => (
                   <li
                     key={vehicle.modelSlug}

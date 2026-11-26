@@ -64,7 +64,7 @@ export function HomeSearchCard() {
             : t('hero.searchMinHint').replace('{count}', String(MIN_RESERVATION_DAYS))}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+      <div className="grid grid-cols-2 gap-3">
         <label className="block min-w-0">
           <span className="mb-1.5 block text-sm font-medium text-cream-muted">{t('hero.searchDepart')}</span>
           <span className="relative block">
@@ -96,7 +96,7 @@ export function HomeSearchCard() {
             />
           </span>
         </label>
-        <button type="submit" className="btn btn-primary col-span-2 lg:col-span-1">
+        <button type="submit" className="btn btn-primary btn-shine col-span-2">
           {t('hero.searchCta')}
           <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
         </button>

@@ -8,7 +8,16 @@ import { useLocale } from '@/lib/i18n';
 import { BUSINESS } from '@/lib/site';
 import { InlineLangLinks } from './LangLinks';
 
-export type MenuItem = { href: string; label: string; anchor?: boolean };
+export type MenuItem = {
+  href: string;
+  label: string;
+  /** Ancre de l'accueil (/#faq) : lien simple, préfixé par la langue. */
+  anchor?: boolean;
+  /** Page qui n'existe que dans une autre langue (le blog, en français) : adresse telle quelle, avec hreflang. */
+  foreign?: 'fr';
+  /** Affiché dans la barre d'ordinateur à partir de 1280 px seulement (toujours présent dans le menu mobile). */
+  wide?: boolean;
+};
 
 function WhatsAppGlyph() {
   return (
@@ -86,7 +95,16 @@ export function MobileMenu({ items }: { items: MenuItem[] }) {
             <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {items.map((item) => (
                 <li key={item.href}>
-                  {item.anchor ? (
+                  {item.foreign ? (
+                    <a
+                      href={item.href}
+                      hrefLang={item.foreign}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-14 items-center text-lg font-semibold text-cream"
+                    >
+                      {item.label}
+                    </a>
+                  ) : item.anchor ? (
                     <a
                       href={lp(item.href)}
                       onClick={() => setOpen(false)}

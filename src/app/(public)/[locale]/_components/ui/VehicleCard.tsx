@@ -59,7 +59,7 @@ export function VehicleCard({
   vehicle: CardVehicle;
   locale: Locale;
   /** `p` : bande de cartes placée avant le premier H2 (ordre des titres). */
-  headingLevel?: 'h2' | 'h3' | 'p';
+  headingLevel?: 'h2' | 'h3' | 'h4' | 'p';
   variant?: 'full' | 'compact';
   /** Adresse de la fiche, sans langue (ajoutée par le lien). Par défaut, la fiche du modèle. */
   href?: string;
@@ -89,8 +89,8 @@ export function VehicleCard({
   const compact = variant === 'compact';
 
   return (
-    <article className="card group relative flex h-full flex-col overflow-hidden transition-colors hover:border-gold/40">
-      <div className="relative aspect-[10/7] bg-surface-2">
+    <article className="card lift group relative flex h-full flex-col overflow-hidden">
+      <div className="car-stage relative aspect-[10/7] overflow-hidden">
         {vehicle.photo ? (
           <Image
             src={vehicle.photo}
@@ -100,7 +100,7 @@ export function VehicleCard({
             priority={priority}
             fetchPriority={priority ? 'high' : undefined}
             loading={priority || eager ? 'eager' : 'lazy'}
-            className="object-contain p-2 sm:p-3"
+            className="lift-img object-contain p-2 sm:p-3"
           />
         ) : null}
         {category && <span className="chip absolute start-2.5 top-2.5">{category}</span>}
@@ -109,8 +109,8 @@ export function VehicleCard({
         )}
       </div>
 
-      <div className={`flex flex-1 flex-col ${compact ? 'gap-2 p-3.5 sm:p-4' : 'gap-3 p-4'}`}>
-        <H className={`${compact ? 'text-base' : 't-h3'} font-bold leading-snug text-cream`}>
+      <div className={`flex flex-1 flex-col ${compact ? 'gap-2 p-3.5 sm:p-4' : 'gap-3 p-4 sm:p-5'}`}>
+        <H className={`font-display ${compact ? 'text-[1.25rem]' : 'text-[1.5rem]'} leading-[1.1] text-cream`}>
           {compact ? (
             <LinkTag href={target} className={`${stretch} focus-visible:outline-none`}>
               <bdi>{name}</bdi>
@@ -127,7 +127,7 @@ export function VehicleCard({
           <p className="mt-auto pt-1">
             <span className="text-sm text-cream-muted">{t('ui.from')} </span>
             <span className="whitespace-nowrap">
-              <bdi className={compact ? 'text-lg font-extrabold text-gold-light' : 't-price'}>
+              <bdi className={compact ? 'font-display text-[1.375rem] leading-none text-gold-light' : 't-price'}>
                 {formatPrice(vehicle.minTarif, locale)}
               </bdi>
               <span className="text-sm text-cream-muted">{t('ui.perDay')}</span>

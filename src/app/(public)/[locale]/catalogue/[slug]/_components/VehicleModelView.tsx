@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useState, type CSSProperties, type ReactNode } from 'react';
 import Image from 'next/image';
 import { Calendar, Check, CircleDot, Fuel, Gauge, Users } from 'lucide-react';
 import { formatPrice } from '@/lib/format';
@@ -89,7 +89,7 @@ export function VehicleModelView({
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-x-10 xl:grid-cols-[minmax(0,1fr)_420px]">
       {/* ── Photo et résumé ── */}
       <div className="min-w-0 space-y-5">
-        <div className="relative aspect-[10/7] overflow-hidden rounded-2xl border border-white/[0.08] bg-surface-2">
+        <div className="car-stage relative aspect-[10/7] overflow-hidden rounded-[20px] border border-white/[0.08]">
           {selected.featuredPhoto ? (
             <Image
               src={selected.featuredPhoto}
@@ -98,7 +98,8 @@ export function VehicleModelView({
               priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, 100vw"
-              className="object-contain p-3 sm:p-6"
+              className="px object-contain p-3 sm:p-6"
+              style={{ '--px': '1rem' } as CSSProperties}
             />
           ) : null}
           {(category || selected.couleur) && (
@@ -122,7 +123,7 @@ export function VehicleModelView({
           </ul>
         )}
 
-        <ul className="flex flex-wrap gap-2">
+        <ul className="page-in flex flex-wrap gap-2" style={{ '--in': 1 } as CSSProperties}>
           {specs.map(({ icon: Icon, text }) => (
             <li key={text} className="chip min-h-10 px-3.5 text-sm">
               <Icon className="h-4 w-4 text-gold" aria-hidden="true" />

@@ -26,14 +26,17 @@ function TikTokIcon({ className }: { className?: string }) {
 
 function navItems(locale: Locale): MenuItem[] {
   const t = (key: string) => tr(locale, key);
-  return [
+  const items: MenuItem[] = [
     { href: '/catalogue', label: t('nav.catalogue') },
     { href: getRoutePath('aeroport', locale) ?? '', label: t('nav.aeroport') },
     { href: getRoutePath('tarifs', locale) ?? '', label: t('nav.tarifs') },
     { href: '/#process', label: t('nav.process'), anchor: true },
-    { href: '/#faq', label: t('nav.faq'), anchor: true },
+    /* Le blog n'existe qu'en français : depuis l'anglais et l'arabe, le lien l'annonce et ne prend pas de préfixe de langue. */
+    { href: '/blog', label: t('nav.blog'), foreign: locale === 'fr' ? undefined : 'fr' },
+    { href: '/#faq', label: t('nav.faq'), anchor: true, wide: true },
     { href: '/#contact', label: t('nav.contact'), anchor: true },
-  ].filter((item) => item.href);
+  ];
+  return items.filter((item) => item.href);
 }
 
 /**
@@ -65,18 +68,27 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           />
         </Link>
 
-        <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-6 text-[0.9375rem] lg:flex xl:gap-7">
-          {items.map((item) =>
-            item.anchor ? (
-              <a key={item.href} href={localePath(locale, item.href)} className="text-cream-muted transition-colors hover:text-gold">
+        <nav aria-label={t('aria.mainNav')} className="hidden items-center gap-5 text-[0.9375rem] lg:flex xl:gap-7">
+          {items.map((item) => {
+            /* « FAQ » ne s'affiche qu'à partir de 1280 px : la barre garde de l'air à 1024 px. */
+            const linkClass = `nav-link whitespace-nowrap text-cream-muted transition-colors hover:text-cream ${item.wide ? 'hidden xl:inline' : ''}`;
+            if (item.foreign) {
+              return (
+                <a key={item.href} href={item.href} hrefLang={item.foreign} className={linkClass}>
+                  {item.label}
+                </a>
+              );
+            }
+            return item.anchor ? (
+              <a key={item.href} href={localePath(locale, item.href)} className={linkClass}>
                 {item.label}
               </a>
             ) : (
-              <Link key={item.href} href={item.href} className="text-cream-muted transition-colors hover:text-gold">
+              <Link key={item.href} href={item.href} className={linkClass}>
                 {item.label}
               </Link>
-            ),
-          )}
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -95,12 +107,14 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <Phone className="h-5 w-5" aria-hidden="true" />
           </a>
           <LangMenu locale={locale} label={t('aria.langSelect')} />
-          <Link href="/catalogue" className="btn btn-primary hidden md:inline-flex">
+          <Link href="/catalogue" className="btn btn-primary btn-shine hidden md:inline-flex">
             {t('ui.book')}
           </Link>
           <MobileMenu items={items} />
         </div>
       </div>
+      {/* Filet doré : avancement de la lecture, piloté par le défilement (CSS seul). */}
+      <span className="scroll-progress" aria-hidden="true" />
     </header>
   );
 }

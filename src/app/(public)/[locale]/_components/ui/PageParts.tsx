@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import Image from 'next/image';
 import { ArrowRight, ChevronDown, ChevronRight, Clock, ShieldCheck, Star, Truck } from 'lucide-react';
 import Link from '@/lib/i18n/LocaleLink';
 import { t as tr, type Locale } from '@/lib/i18n/translations';
@@ -65,13 +66,26 @@ export function PageHeader({
     >
       <div className="min-w-0">
         <Breadcrumbs locale={locale} items={crumbs} />
-        {eyebrow && <p className="t-label mt-3 text-gold">{eyebrow}</p>}
-        <h1 className={`${titleClass} ${eyebrow ? 'mt-2' : 'mt-3'}`}>{title}</h1>
-        {intro && <div className="t-lead prose-col mt-4">{intro}</div>}
-        {actions && (
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap [&>*:first-child]:col-span-2">{actions}</div>
+        {eyebrow && <p className="t-eyebrow page-in mt-4">{eyebrow}</p>}
+        <h1 className={`${titleClass} page-title ${eyebrow ? 'mt-3' : 'mt-4'}`}>{title}</h1>
+        {intro && (
+          <div className="t-lead prose-col page-in mt-5" style={{ '--in': 1 } as CSSProperties}>
+            {intro}
+          </div>
         )}
-        {facts && <div className="mt-5">{facts}</div>}
+        {actions && (
+          <div
+            className="page-in mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap [&>*:first-child]:col-span-2"
+            style={{ '--in': 2 } as CSSProperties}
+          >
+            {actions}
+          </div>
+        )}
+        {facts && (
+          <div className="page-in mt-5" style={{ '--in': 3 } as CSSProperties}>
+            {facts}
+          </div>
+        )}
       </div>
       {aside}
     </header>
@@ -81,12 +95,14 @@ export function PageHeader({
 /* ═══ Titre de section : H2, texte facultatif, lien facultatif ═══ */
 export function SectionHeading({
   id,
+  eyebrow,
   title,
   text,
   action,
   center = false,
 }: {
   id?: string;
+  eyebrow?: string;
   title: ReactNode;
   text?: ReactNode;
   action?: ReactNode;
@@ -94,13 +110,14 @@ export function SectionHeading({
 }) {
   return (
     <div
-      className={`mb-6 flex flex-col gap-3 md:mb-8 ${center ? 'items-center text-center' : 'md:flex-row md:items-end md:justify-between'}`}
+      className={`mb-7 flex flex-col gap-3 md:mb-10 ${center ? 'items-center text-center' : 'md:flex-row md:items-end md:justify-between md:gap-8'}`}
     >
       <div className="min-w-0">
-        <h2 id={id} className="t-h2 prose-col">
+        {eyebrow && <p className="t-eyebrow rv mb-3">{eyebrow}</p>}
+        <h2 id={id} className="t-h2 prose-col rv-clip">
           {title}
         </h2>
-        {text && <p className={`t-body prose-col mt-2 ${center ? 'mx-auto' : ''}`}>{text}</p>}
+        {text && <p className={`t-body prose-col rv mt-3 ${center ? 'mx-auto' : ''}`}>{text}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </div>
@@ -123,11 +140,14 @@ export function Faq({
   items,
   id,
   headingId,
+  openFirst = true,
 }: {
   title?: string;
   items: { q: string; a: ReactNode }[];
   id?: string;
   headingId?: string;
+  /** Accueil : toutes les questions repliées (la page reste courte), les réponses restent dans le HTML. */
+  openFirst?: boolean;
 }) {
   if (items.length === 0) return null;
   return (
@@ -139,15 +159,12 @@ export function Faq({
       )}
       <div className={`${title ? 'mt-6' : ''} divide-y divide-white/[0.08] overflow-hidden rounded-2xl border border-white/[0.08] bg-surface`}>
         {items.map((item, index) => (
-          <details key={item.q} className="group" open={index === 0}>
+          <details key={item.q} className="group" open={openFirst && index === 0}>
             <summary className="flex min-h-14 cursor-pointer list-none items-start justify-between gap-4 px-4 py-4 transition-colors hover:bg-white/[0.02] sm:px-5 [&::-webkit-details-marker]:hidden">
               <h3 className="text-base font-semibold leading-snug tracking-normal text-cream">{item.q}</h3>
-              <ChevronDown
-                className="mt-0.5 h-5 w-5 shrink-0 text-gold transition-transform duration-200 group-open:rotate-180"
-                aria-hidden="true"
-              />
+              <ChevronDown className="acc-chevron mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
             </summary>
-            <div className="t-body prose-col px-4 pb-5 sm:px-5">{item.a}</div>
+            <div className="acc-body t-body prose-col px-4 pb-5 sm:px-5">{item.a}</div>
           </details>
         ))}
       </div>
@@ -202,16 +219,30 @@ export function CtaBand({ locale, minPrice }: { locale: Locale; minPrice: number
   return (
     <section className="sec">
       <div className="lux-container">
-        <div className="panel bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(201,168,76,0.14),transparent_70%)] px-5 py-10 text-center md:px-10 md:py-14">
-          <h2 className="t-h2 mx-auto prose-col">{tr(locale, 'ui.ctaTitle')}</h2>
-          <p className="t-body mx-auto mt-3 prose-col">{tr(locale, 'ui.ctaText')}</p>
-          <FactsLine locale={locale} minPrice={minPrice} className="mt-4 justify-center" />
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <BookButton locale={locale} />
-            <WhatsAppButton locale={locale} />
-            <CallButton locale={locale} />
+        <div className="panel rv-zoom relative overflow-hidden px-5 py-14 text-center md:px-10 md:py-20">
+          {/* Décor : la mosquée Hassan II de nuit, chargée à l'approche, qui recule doucement au défilement. */}
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src="/image-casablanca-sombre.webp"
+              alt=""
+              fill
+              loading="lazy"
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="px-zoom object-cover object-[78%_55%]"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_0%,rgba(201,168,76,0.16),transparent_70%),linear-gradient(180deg,rgba(10,10,10,0.2),rgba(10,10,10,0.72))]" />
           </div>
-          <p className="mt-5 text-sm text-cream-faint">{hoursText(locale)}</p>
+          <div className="relative">
+            <h2 className="t-h2 mx-auto prose-col">{tr(locale, 'ui.ctaTitle')}</h2>
+            <p className="t-body mx-auto mt-4 prose-col">{tr(locale, 'ui.ctaText')}</p>
+            <FactsLine locale={locale} minPrice={minPrice} className="mt-5 justify-center" />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <BookButton locale={locale} className="btn-shine btn-shine-scroll" />
+              <WhatsAppButton locale={locale} />
+              <CallButton locale={locale} />
+            </div>
+            <p className="mt-6 text-sm text-cream-muted">{hoursText(locale)}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -247,13 +278,13 @@ export function RelatedCards({
   if (items.length === 0) return null;
   return (
     <section>
-      <h2 className="t-h2">{title}</h2>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 className="t-h2 rv-clip">{title}</h2>
+      <ul className="rv-group mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
-              className="card group flex h-full min-h-14 items-center justify-between gap-3 px-4 py-3.5 transition-colors hover:border-gold/40"
+              className="card lift group flex h-full min-h-16 items-center justify-between gap-3 px-5 py-4"
             >
               <span className="min-w-0">
                 <span className="block font-semibold leading-snug text-cream">{item.label}</span>

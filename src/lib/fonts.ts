@@ -1,9 +1,20 @@
-import { Cairo, Inter } from 'next/font/google';
+import { Cairo, Instrument_Serif, Inter } from 'next/font/google';
 
 export const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+});
+
+/**
+ * Police de titrage du site public : Instrument Serif, un seul fichier (latin, graisse 400, ≈ 18 Ko).
+ * Sert aux titres, aux noms de modèle et aux grands chiffres ; en arabe, les lettres restent en Cairo.
+ */
+export const display = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-display',
 });
 
 /**

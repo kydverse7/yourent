@@ -161,24 +161,24 @@ export default async function SeoPage({ params }: Props) {
             lead ? (
               <Link
                 href={`/catalogue/${lead.slug}`}
-                className="card group hidden overflow-hidden transition-colors hover:border-gold/40 lg:block"
+                className="card lift group hidden overflow-hidden lg:block"
               >
-                <span className="relative block aspect-[10/7] bg-surface-2">
+                <span className="car-stage relative block aspect-[10/7] overflow-hidden">
                   <Image
                     src={lead.photo as string}
                     alt={t('model.photoAlt').replace('{name}', `${lead.marque} ${lead.modele}`)}
                     fill
                     sizes="460px"
-                    className="object-contain p-4"
+                    className="lift-img object-contain p-4"
                   />
                 </span>
                 <span className="flex items-baseline justify-between gap-3 px-5 py-4">
-                  <bdi className="font-bold text-cream">
+                  <bdi className="font-display text-[1.5rem] leading-none text-cream">
                     {lead.marque} {lead.modele}
                   </bdi>
                   {lead.minTarif > 0 && (
                     <span className="whitespace-nowrap text-sm text-cream-muted">
-                      {t('ui.from')} <bdi className="text-lg font-extrabold text-gold-light">{formatPrice(lead.minTarif, locale)}</bdi>
+                      {t('ui.from')} <bdi className="font-display text-[1.5rem] leading-none text-gold-light">{formatPrice(lead.minTarif, locale)}</bdi>
                       {t('ui.perDay')}
                     </span>
                   )}

@@ -263,7 +263,7 @@ export function SeoSections({
         return (
           <Fragment key={section.h2}>
             <section className={`scroll-mt-24 space-y-4 ${index >= 2 ? 'cv-auto' : ''}`} id={sectionId(title)}>
-              <h2 className="t-h2 prose-col">{title}</h2>
+              <h2 className="t-h2 prose-col rv-clip">{title}</h2>
               {section.blocks.map((block, blockIndex) => (
                 <BlockView key={blockIndex} block={block} locale={locale} tokens={tokens} vehicles={vehicles} />
               ))}

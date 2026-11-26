@@ -3,7 +3,23 @@ import type { FleetModel } from '@/lib/seo/fleet';
 /*
  * Choix des modèles mis en avant sur l'accueil, lus dans la flotte en cache (getFleetModels) :
  * aucune requête de plus, et les prix sont ceux de la base.
+ * Le luxe passe en premier : trois modèles dans la vitrine, les autres dans la galerie qui suit.
  */
+const SHOWCASE: [string, string][] = [
+  ['porsche', 'macan'],
+  ['range rover', 'sport'],
+  ['mercedes', 'e 220'],
+];
+
+const LUXURY: [string, string][] = [
+  ['range rover', 'evoque'],
+  ['volkswagen', 'touareg'],
+  ['mercedes', 'cla'],
+  ['mercedes', 'c 220'],
+  ['kia', 'sorento'],
+  ['audi', 'q3'],
+];
+
 const ECONOMIC: [string, string][] = [
   ['fiat', '500'],
   ['fiat', '500 cabriolet'],
@@ -18,19 +34,7 @@ const SEDANS_SUVS: [string, string][] = [
   ['toyota', 'corolla'],
 ];
 
-const LUXURY: [string, string][] = [
-  ['kia', 'sorento'],
-  ['porsche', 'macan'],
-  ['volkswagen', 'touareg'],
-  ['range rover', 'evoque'],
-  ['range rover', 'sport'],
-  ['mercedes', 'cla'],
-  ['mercedes', 'e 220'],
-  ['audi', 'q3'],
-  ['volkswagen', 'golf'],
-];
-
-/** Modèle présenté comme « nouvel arrivage » dans la rangée luxe. */
+/** Modèle présenté comme « nouvel arrivage » dans la galerie de luxe. */
 export const NEW_ARRIVAL: [string, string] = ['kia', 'sorento'];
 
 const nameOf = (model: FleetModel) => `${model.marque} ${model.modele}`.toLowerCase();
@@ -49,7 +53,13 @@ function pick(models: FleetModel[], used: Set<string>, [marque, modele]: [string
   return ranked[0];
 }
 
-function take(models: FleetModel[], used: Set<string>, targets: [string, string][], fill?: (model: FleetModel) => boolean, size = 4) {
+function take(
+  models: FleetModel[],
+  used: Set<string>,
+  targets: [string, string][],
+  fill?: (model: FleetModel) => boolean,
+  size = 4,
+) {
   const chosen: FleetModel[] = [];
   for (const target of targets) {
     const model = pick(models, used, target);
@@ -57,7 +67,7 @@ function take(models: FleetModel[], used: Set<string>, targets: [string, string]
     used.add(model.slug);
     chosen.push(model);
   }
-  // Modèle absent de la base : on complète avec les modèles les moins chers de la même gamme.
+  // Modèle absent de la base : on complète avec d'autres modèles de la même gamme.
   if (fill) {
     for (const model of models) {
       if (chosen.length >= size) break;
@@ -71,12 +81,15 @@ function take(models: FleetModel[], used: Set<string>, targets: [string, string]
 
 export function selectHomeModels(models: FleetModel[]) {
   const used = new Set<string>();
+  // Vitrine : si l'un des trois modèles manque, le plus cher des modèles restants (avec photo) le remplace.
+  const byPriceDesc = [...models].sort((a, b) => b.minTarif - a.minTarif);
+  const showcase = take(byPriceDesc, used, SHOWCASE, (model) => Boolean(model.photo), SHOWCASE.length);
+  const luxury = take(models, used, LUXURY);
   const economic = take(models, used, ECONOMIC, (model) => model.categorie === 'economique');
   const sedans = take(models, used, SEDANS_SUVS, (model) => model.categorie === 'berline' || model.categorie === 'suv');
-  const luxury = take(models, used, LUXURY);
   const newArrival = luxury.find((model) => {
     const name = nameOf(model);
     return name.includes(NEW_ARRIVAL[0]) && name.includes(NEW_ARRIVAL[1]);
   });
-  return { economic, sedans, luxury, newArrivalSlug: newArrival?.slug ?? null };
+  return { showcase, luxury, economic, sedans, newArrivalSlug: newArrival?.slug ?? null };
 }
