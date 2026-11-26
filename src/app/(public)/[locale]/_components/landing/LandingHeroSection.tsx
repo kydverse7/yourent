@@ -26,7 +26,7 @@ function BrandMarquee() {
 
 /* ─── Hero section ──────────────────────────────────── */
 /* Aucun élément du hero n'attend le JavaScript : l'image et le titre sont visibles dès le HTML. */
-export function LandingHeroSection({ vehicleCount, locale }: { vehicleCount: number; locale: Locale }) {
+export function LandingHeroSection({ locale }: { locale: Locale }) {
     const t = (key: string) => tr(locale, key);
     return (
       <section
@@ -35,13 +35,9 @@ export function LandingHeroSection({ vehicleCount, locale }: { vehicleCount: num
         {/* ── hero panel background ── */}
         <div className="absolute inset-x-3 md:inset-x-5 lg:inset-x-6 top-0 bottom-0 -z-10 rounded-[32px] border border-[rgba(201,168,76,0.12)] lp-hero-bg overflow-hidden">
           <div className="lp-hero-top-glow" aria-hidden="true" />
-          <div className="lp-hero-sweep" aria-hidden="true" />
-          <div className="lp-hero-side-glow-l" aria-hidden="true" />
-          <div className="lp-hero-side-glow-r" aria-hidden="true" />
-          <div className="lp-hero-grid pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
         </div>
 
-        <LandingHeroTopBar vehicleCount={vehicleCount} locale={locale} />
+        <LandingHeroTopBar locale={locale} />
 
         {/* ── Logo + H1 ── */}
         <LandingWordmark locale={locale} />

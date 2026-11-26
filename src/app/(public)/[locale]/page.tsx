@@ -267,7 +267,7 @@ export default async function PublicHomePage({ params }: Props) {
       <PublicLandingPage
         sliderBrands={sliderBrands}
         economicVehicles={economicVehicles}
-        hero={<LandingHeroSection vehicleCount={stats.vehicleCount} locale={locale} />}
+        hero={<LandingHeroSection locale={locale} />}
         signature={<LandingSignatureCollectionSection vehicles={signatureVehicles.slice(0, 4)} locale={locale} />}
         newArrival={<LandingNewArrivalSection vehicle={newArrivalVehicle ?? null} locale={locale} />}
         why={<LandingWhySection vehicleCount={stats.vehicleCount} locale={locale} />}

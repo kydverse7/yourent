@@ -153,7 +153,7 @@ export function CatalogueDateFilter({
             {active ? (
               <>
                 <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/10 px-4 py-2 text-xs font-bold text-gold">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_8px_rgba(201,168,76,0.8)] animate-pulse" aria-hidden="true" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
                   {format(new Date(du!), 'd MMM', { locale: dateLocale })}
                   <ArrowRight className="h-3 w-3" />
                   {format(new Date(au!), 'd MMM', { locale: dateLocale })}

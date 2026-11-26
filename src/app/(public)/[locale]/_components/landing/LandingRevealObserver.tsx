@@ -8,10 +8,9 @@ const DEFAULT_AMOUNT = 0.18;
 export function LandingRevealObserver() {
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>('.rv:not(.rv-in)');
-    if (!('IntersectionObserver' in window)) {
-      elements.forEach((element) => element.classList.add('rv-in'));
-      return;
-    }
+    if (!('IntersectionObserver' in window)) return;
+    // L'état caché n'existe qu'à partir d'ici : sans JavaScript, tout reste visible.
+    document.documentElement.classList.add('rv-ready');
 
     const observers = new Map<number, IntersectionObserver>();
     const observerFor = (amount: number) => {

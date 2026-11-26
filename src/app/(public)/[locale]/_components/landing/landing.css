@@ -46,10 +46,8 @@ html:has(:target) .lp-below-fold {
   transform: translateX(-50%);
   border-radius: 999px;
   background: radial-gradient(circle, rgba(201, 168, 76, 0.38), rgba(201, 168, 76, 0.09) 42%, transparent 68%);
-  filter: blur(38px);
   pointer-events: none;
   z-index: 1;
-  animation: lpTopGlowPulse 5.5s ease-in-out infinite;
 }
 
 @keyframes lpTopGlowPulse {
@@ -71,7 +69,6 @@ html:has(:target) .lp-below-fold {
   );
   pointer-events: none;
   z-index: 1;
-  animation: lpHeroSweep 10s ease-in-out infinite alternate;
 }
 
 @keyframes lpHeroSweep {
@@ -87,7 +84,6 @@ html:has(:target) .lp-below-fold {
   width: clamp(12rem, 24vw, 22rem);
   height: clamp(10rem, 22vh, 18rem);
   background: radial-gradient(circle, rgba(201, 168, 76, 0.1), transparent 68%);
-  filter: blur(32px);
   pointer-events: none;
   z-index: 0;
   border-radius: 999px;
@@ -100,7 +96,6 @@ html:has(:target) .lp-below-fold {
   width: clamp(10rem, 20vw, 18rem);
   height: clamp(8rem, 18vh, 14rem);
   background: radial-gradient(circle, rgba(180, 140, 40, 0.07), transparent 68%);
-  filter: blur(28px);
   pointer-events: none;
   z-index: 0;
   border-radius: 999px;
@@ -340,14 +335,12 @@ html:has(:target) .lp-below-fold {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
   padding-block: 0.85rem;
 }
 
 .lp-marquee-track {
   display: flex;
   width: max-content;
-  animation: lpMarquee 32s linear infinite;
 }
 
 .lp-marquee-item {
@@ -440,7 +433,6 @@ html:has(:target) .lp-below-fold {
   transform: translateX(-50%) translateY(-30%);
   border-radius: 999px;
   background: radial-gradient(circle, rgba(201, 168, 76, 0.22), transparent 68%);
-  filter: blur(40px);
   pointer-events: none;
   z-index: 0;
 }
@@ -467,7 +459,6 @@ html:has(:target) .lp-below-fold {
       rgba(var(--sl-r), var(--sl-g), var(--sl-b), 0.08) 0%, transparent 52%),
     radial-gradient(ellipse 65% 55% at 50% 112%, rgba(4,3,1,0.92) 0%, transparent 65%),
     linear-gradient(168deg, #0f0d0a 0%, #0b0a08 25%, #070709 60%, #060609 100%);
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
   border-radius: inherit;
   pointer-events: none;
   z-index: 0;
@@ -484,11 +475,8 @@ html:has(:target) .lp-below-fold {
   border-radius: 999px;
   background: radial-gradient(circle,
     rgba(var(--sl-r), var(--sl-g), var(--sl-b), 0.32), transparent 68%);
-  filter: blur(44px);
   pointer-events: none;
   z-index: 1;
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
-  animation: slOrbPulse 4.5s ease-in-out infinite;
 }
 
 @keyframes slOrbPulse {
@@ -506,10 +494,8 @@ html:has(:target) .lp-below-fold {
   border-radius: 999px;
   background: radial-gradient(circle,
     rgba(var(--sl-r), var(--sl-g), var(--sl-b), 0.16), transparent 68%);
-  filter: blur(40px);
   pointer-events: none;
   z-index: 0;
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
 }
 
 .lp-slider-orb-r {
@@ -521,10 +507,8 @@ html:has(:target) .lp-below-fold {
   border-radius: 999px;
   background: radial-gradient(circle,
     rgba(var(--sl-r), var(--sl-g), var(--sl-b), 0.12), transparent 68%);
-  filter: blur(36px);
   pointer-events: none;
   z-index: 0;
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
 }
 
 /* diagonal stripe texture */
@@ -555,8 +539,6 @@ html:has(:target) .lp-below-fold {
   border: 1px solid rgba(var(--sl-r), var(--sl-g), var(--sl-b), 0.14);
   pointer-events: none;
   z-index: 0;
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
-  animation: slScanPulse 4s ease-in-out infinite;
 }
 
 .lp-slider-scan::after {
@@ -580,7 +562,6 @@ html:has(:target) .lp-below-fold {
   height: clamp(60px, 8vw, 100px);
   pointer-events: none;
   z-index: 2;
-  transition: --sl-r 700ms ease, --sl-g 700ms ease, --sl-b 700ms ease;
 }
 
 .lp-slider-corner-tl {
@@ -605,18 +586,10 @@ html:has(:target) .lp-below-fold {
 .lp-car--enter { animation: lpCarIn 0.85s var(--rv-smooth) backwards; }
 .lp-car--exit { animation: lpCarOut 0.5s ease-in forwards; }
 
-@keyframes lpBrandIn {
-  from { opacity: 0; transform: translateX(60px) scale(0.95); filter: blur(10px); }
-}
-@keyframes lpBrandOut {
-  to { opacity: 0; transform: translateX(-40px) scale(0.95); filter: blur(8px); }
-}
-@keyframes lpCarIn {
-  from { opacity: 0; transform: translateX(120px) scale(0.78) rotateY(-18deg); filter: blur(24px) brightness(1.6); }
-}
-@keyframes lpCarOut {
-  to { opacity: 0; transform: translateX(-120px) scale(0.78) rotateY(18deg); filter: blur(24px) brightness(0.4); }
-}
+@keyframes lpBrandIn { from { opacity: 0; } }
+@keyframes lpBrandOut { to { opacity: 0; } }
+@keyframes lpCarIn { from { opacity: 0; transform: translateX(24px); } }
+@keyframes lpCarOut { to { opacity: 0; transform: translateX(-24px); } }
 
 /* brand tag pill */
 .lp-brand-tag {
@@ -1250,7 +1223,6 @@ html:has(:target) .lp-below-fold {
   position: absolute;
   inset: -20% 0;          /* extra height for parallax travel */
   z-index: 0;
-  will-change: transform;
 }
 
 .ct-parallax-img {
@@ -1260,14 +1232,9 @@ html:has(:target) .lp-below-fold {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  filter: saturate(0.12) brightness(0.18) contrast(1.15);
   transform: scale(1.08);
-  transition: filter 1.2s ease;
 }
 
-.ct-section:hover .ct-parallax-img {
-  filter: saturate(0.18) brightness(0.22) contrast(1.1);
-}
 
 /* ── Multi-layer overlays ── */
 .ct-overlay-gradient {
@@ -1297,18 +1264,6 @@ html:has(:target) .lp-below-fold {
   );
 }
 
-/* Film grain texture overlay */
-.ct-overlay-grain {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  pointer-events: none;
-}
 
 /* ── Filigrane "CASABLANCA" watermark (relative, below grid) ── */
 .ct-filigrane-wrap {
@@ -1391,7 +1346,6 @@ html:has(:target) .lp-below-fold {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: #c9a84c;
-  backdrop-filter: blur(12px);
 }
 
 .ct-eyebrow-dot {
@@ -1400,7 +1354,6 @@ html:has(:target) .lp-below-fold {
   border-radius: 50%;
   background: #c9a84c;
   box-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
-  animation: ct-pulse-dot 2.5s ease-in-out infinite;
 }
 
 @keyframes ct-pulse-dot {
@@ -1491,7 +1444,6 @@ html:has(:target) .lp-below-fold {
   border-radius: 14px;
   border: 1px solid rgba(201, 168, 76, 0.08);
   background: rgba(12, 10, 9, 0.55);
-  backdrop-filter: blur(20px);
   overflow: hidden;
   max-width: 420px;
 }
@@ -1574,8 +1526,6 @@ html:has(:target) .lp-below-fold {
   border-radius: 12px;
   border: 1px solid rgba(201, 168, 76, 0.06);
   background: rgba(12, 10, 9, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   text-decoration: none;
   display: block;
@@ -1800,8 +1750,6 @@ html:has(:target) .lp-below-fold {
   overflow: hidden;
   border: 1px solid rgba(201, 168, 76, 0.08);
   background: rgba(12, 10, 9, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   box-shadow:
     0 24px 80px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(201, 168, 76, 0.03) inset;
@@ -1910,7 +1858,6 @@ html:has(:target) .lp-below-fold {
   flex-shrink: 0;
   position: relative;
   box-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
-  animation: ct-pulse 2s ease-in-out infinite;
 }
 
 .ct-map-pulse::after {
@@ -1919,7 +1866,6 @@ html:has(:target) .lp-below-fold {
   inset: -4px;
   border-radius: 50%;
   border: 1.5px solid rgba(201, 168, 76, 0.3);
-  animation: ct-pulse-ring 2s ease-in-out infinite;
 }
 
 @keyframes ct-pulse {
@@ -2037,54 +1983,23 @@ html:has(:target) .lp-below-fold {
    L'état final est l'état normal de l'élément : une fois l'animation finie, plus aucun filtre
    ni transformation n'y reste. Sans JavaScript, le contenu reste visible.
 ═══════════════════════════════════════════════════════════ */
-@media (scripting: enabled) {
-  .rv:not(.rv-in):not(.rv-group),
-  .rv-group:not(.rv-in) .rv-item {
-    opacity: 0;
-  }
+/* État caché posé seulement quand le script est prêt (html.rv-ready) : sans lui, tout reste visible. */
+html.rv-ready .rv:not(.rv-in):not(.rv-group),
+html.rv-ready .rv-group:not(.rv-in) .rv-item {
+  opacity: 0;
 }
 
-.rv-in.rv-fade-up { animation: rvFadeUp 0.8s var(--rv-smooth) backwards; }
-.rv-in.rv-tilt-up { animation: rvTiltUp 1s var(--rv-smooth) backwards; }
-.rv-in.rv-slide-left { animation: rvSlideLeft 0.8s var(--rv-smooth) backwards; }
-.rv-in.rv-slide-right { animation: rvSlideRight 0.8s var(--rv-smooth) backwards; }
-.rv-in.rv-scale-up { animation: rvScaleUp 0.9s var(--rv-smooth) backwards; }
-.rv-in.rv-pop-in { animation: rvPopIn 0.7s var(--rv-spring) backwards; }
-.rv-in.rv-blur-fade { animation: rvBlurFade 0.9s var(--rv-smooth) backwards; }
-.rv-in.rv-draw-line { transform-origin: 0 50%; animation: rvDrawLine 1.4s var(--rv-smooth) backwards; }
-.rv-in.rv-sep-line { animation: rvSepLine 1s var(--rv-smooth) 0.3s backwards; }
-.rv-group.rv-in .rv-item { animation: rvCard 0.75s var(--rv-smooth) var(--rv-delay, 0s) backwards; }
-.rv-group.rv-in .rv-item-up { animation-name: rvItemUp; animation-duration: 0.7s; }
-
-@keyframes rvFadeUp { from { opacity: 0; transform: translateY(60px); filter: blur(8px); } }
-@keyframes rvTiltUp { from { opacity: 0; transform: translateY(80px) rotateX(12deg); filter: blur(10px); } }
-@keyframes rvSlideLeft { from { opacity: 0; transform: translateX(-80px); filter: blur(6px); } }
-@keyframes rvSlideRight { from { opacity: 0; transform: translateX(80px); filter: blur(6px); } }
-@keyframes rvScaleUp { from { opacity: 0; transform: scale(0.88); filter: blur(12px); } }
-@keyframes rvPopIn { from { opacity: 0; transform: scale(0.6); filter: blur(16px); } }
-@keyframes rvBlurFade { from { opacity: 0; transform: translateY(30px); filter: blur(16px); } }
-@keyframes rvDrawLine { from { opacity: 0; transform: scaleX(0); } }
-@keyframes rvSepLine { from { transform: scaleX(0); } }
-@keyframes rvCard { from { opacity: 0; transform: translateY(60px) scale(0.9) rotateX(15deg); filter: blur(8px); } }
-@keyframes rvItemUp { from { opacity: 0; transform: translateY(50px); filter: blur(8px); } }
-
-/* Anneau du compteur de la flotte */
-.hero-fleet-arc { animation: heroFleetArc 2.2s var(--rv-smooth) 0.5s backwards; }
-.hero-fleet-spark { opacity: 0.6; animation: heroFleetSpark 1.5s ease-out 1.2s backwards; }
-
-@keyframes heroFleetArc { from { stroke-dashoffset: 138.23; } }
-@keyframes heroFleetSpark {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+.rv-in:not(.rv-group),
+.rv-group.rv-in .rv-item {
+  animation: rvIn 300ms ease-out var(--rv-delay, 0s) backwards;
 }
+
+@keyframes rvIn { from { opacity: 0; transform: translateY(16px); } }
 
 /* Recherche par dates */
 .lp-days-chip { animation: lpDaysChip 0.25s var(--rv-spring) backwards; }
-.lp-connector { animation: lpConnector 1.8s ease-in-out infinite; }
 
 @keyframes lpDaysChip { from { opacity: 0; transform: translateY(-4px) scale(0.7); } }
-@keyframes lpConnector { 50% { transform: translateX(4px); } }
 
 @media (prefers-reduced-motion: reduce) {
   .rv,

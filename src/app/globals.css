@@ -97,25 +97,26 @@ body::before {
   outline-offset: 2px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  color: var(--text-primary);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-}
+/*
+ * Base dans la couche « base » : les utilitaires Tailwind (mt-4, space-y-4, hover:underline…) l'emportent.
+ * Les marges à zéro viennent déjà du preflight de Tailwind.
+ */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-primary);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
 
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .lux-container {
@@ -258,8 +259,8 @@ a {
 .bg-noir-sidebar\/95 { background-color: rgba(13, 13, 13, 0.95); }
 
 .text-cream { color: #f5f0e8; }
-.text-cream-muted { color: #a89880; }
-.text-cream-faint { color: #6b5e4e; }
+.text-cream-muted { color: var(--cream-muted, #a89880); }
+.text-cream-faint { color: var(--cream-faint, #6b5e4e); }
 
 .shadow-gold { box-shadow: 0 0 20px rgba(201, 168, 76, 0.2); }
 .shadow-gold-md { box-shadow: 0 0 30px rgba(201, 168, 76, 0.25); }
@@ -520,5 +521,326 @@ a {
 @media (max-width: 767px) {
   .btn-gold {
     min-height: 44px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SITE PUBLIC — jetons, typographie, boutons, surfaces.
+   Tout est sous .site-public (posé sur le <body> du site public) :
+   le tableau de bord garde son apparence.
+   Ni flou, ni backdrop-filter, ni animation infinie : le rendu mobile doit rester léger.
+══════════════════════════════════════════════════════════════ */
+.site-public {
+  --bg: #0a0a0a;
+  --surface: #111214;
+  --surface-2: #17181b;
+  --line: rgba(255, 255, 255, 0.08);
+  --silver: #d9dce1;
+  /* Texte secondaire 10:1, tertiaire 6,5:1 sur le fond. */
+  --text-secondary: #b9bdc4;
+  --text-muted: #8f959e;
+  --cream-muted: #b9bdc4;
+  --cream-faint: #8f959e;
+  --header-h: 64px;
+  font-family: var(--font-inter), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  background: var(--bg);
+}
+
+@media (min-width: 1024px) {
+  .site-public {
+    --header-h: 72px;
+  }
+}
+
+/* Un seul halo doré, statique, en haut de page (remplace la grille fixe et les quatre dégradés). */
+.site-public::before {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 600px;
+  opacity: 1;
+  background-image: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(201, 168, 76, 0.1), transparent 70%);
+  background-size: auto;
+  mask-image: none;
+}
+
+.site-public .lux-container {
+  width: min(100% - 2rem, 1200px);
+}
+
+/* Surfaces opaques : plus de flou derrière les panneaux. */
+.site-public .lux-panel,
+.site-public .lux-panel-muted,
+.site-public .lux-table-shell {
+  backdrop-filter: none;
+  background: var(--surface);
+  box-shadow: none;
+}
+.site-public .lux-panel {
+  border-radius: 16px;
+}
+.site-public .lux-panel::before {
+  content: none;
+}
+.site-public .lux-panel-muted {
+  border-radius: 12px;
+  border-color: var(--line);
+}
+
+.site-public .lux-eyebrow {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.site-public .lux-title-sm {
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+}
+
+.site-public .lux-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 68ch;
+}
+
+.site-public .btn-gold {
+  min-height: 48px;
+  border-radius: 12px;
+  background: #c9a84c;
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: none;
+  transition: background-color 150ms ease;
+}
+.site-public .btn-gold:hover {
+  transform: none;
+  filter: none;
+  background: #d6b65a;
+  box-shadow: none;
+}
+
+@layer components {
+  /* ── Typographie ── */
+  .t-h1 {
+    font-size: clamp(1.875rem, 1.25rem + 2.7vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #f5f0e8;
+  }
+  /* Pages SEO, fiches, blog : plafonné à 2,75 rem. */
+  .t-h1-page {
+    font-size: clamp(1.875rem, 1.25rem + 2.2vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #f5f0e8;
+  }
+  .t-h2 {
+    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: #f5f0e8;
+  }
+  .t-h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #f5f0e8;
+  }
+  @media (min-width: 1024px) {
+    .t-h3 {
+      font-size: 1.25rem;
+    }
+  }
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-secondary, #b9bdc4);
+  }
+  .t-lead {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--text-secondary, #b9bdc4);
+  }
+  @media (min-width: 1024px) {
+    .t-lead {
+      font-size: 1.125rem;
+    }
+  }
+  .t-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-secondary, #b9bdc4);
+  }
+  .t-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted, #8f959e);
+  }
+  .t-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #e8c97a;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Colonne de lecture : 68 caractères au plus. */
+  .prose-col {
+    max-width: 68ch;
+  }
+  /* Lien dans le texte : souligné, discret. */
+  .t-link {
+    color: #e8c97a;
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.4);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .t-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* ── Rythme vertical des sections : 48 px en mobile, 80 px à partir de 1024 px ── */
+  .sec {
+    padding-block: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .sec {
+      padding-block: 5rem;
+    }
+  }
+
+  /* ── Surfaces : 12 (champs, boutons), 16 (cartes), 24 (grands panneaux) ── */
+  .card {
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+    border-radius: 16px;
+    background: var(--surface, #111214);
+  }
+  .panel {
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+    border-radius: 24px;
+    background: var(--surface, #111214);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 1.75rem;
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+    border-radius: 999px;
+    background: var(--surface-2, #17181b);
+    color: var(--silver, #d9dce1);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .field {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    background: var(--surface-2, #17181b);
+    padding-inline: 0.875rem;
+    color: #f5f0e8;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .field:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+  }
+  .field:focus {
+    border-color: rgba(201, 168, 76, 0.6);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  }
+  .field[aria-invalid='true'] {
+    border-color: #f87171;
+  }
+
+  /* ── Boutons : trois variantes, 48 px de haut, texte 16 px en gras ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .btn svg {
+    flex-shrink: 0;
+  }
+  .btn-primary {
+    background: #c9a84c;
+    color: #120f09;
+  }
+  .btn-primary:hover {
+    background: #d6b65a;
+  }
+  .btn-wa {
+    background: #25d366;
+    color: #06240f;
+  }
+  .btn-wa:hover {
+    background: #3ddc7a;
+  }
+  .btn-secondary {
+    border-color: rgba(217, 220, 225, 0.35);
+    background: transparent;
+    color: #f5f0e8;
+  }
+  .btn-secondary:hover {
+    border-color: #d9dce1;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .btn-block {
+    width: 100%;
+  }
+}
+
+/* Contenu long : rendu à l'approche de l'écran, le texte reste dans le HTML. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* ── Arabe : ni espacement de lettres ni capitales, interligne plus aéré ── */
+[dir='rtl'] .site-public,
+.site-public [dir='rtl'] {
+  font-family: var(--font-inter), var(--font-arabic), system-ui, 'Segoe UI', Tahoma, sans-serif;
+  line-height: 1.75;
+}
+[dir='rtl'] .site-public *,
+.site-public [dir='rtl'] * {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-public *,
+  .site-public *::before,
+  .site-public *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -76,7 +76,7 @@ export function LandingSearchCard() {
     >
       {/* ── glass card shell ── */}
       <div
-        className="relative overflow-hidden rounded-[22px] border border-[rgba(201,168,76,0.14)] px-4 py-4 sm:px-6 sm:backdrop-blur-[24px]"
+        className="relative overflow-hidden rounded-[22px] border border-[rgba(201,168,76,0.14)] px-4 py-4 sm:px-6 "
         style={{
           background:
             'linear-gradient(180deg, rgba(20,17,11,0.86) 0%, rgba(11,10,8,0.92) 100%)',
@@ -101,7 +101,7 @@ export function LandingSearchCard() {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <span className="flex min-w-0 items-center gap-2 text-[0.6rem] font-extrabold uppercase tracking-[0.14em] text-[#c9a84c] sm:tracking-[0.2em]">
             <span
-              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a84c] shadow-[0_0_10px_rgba(201,168,76,0.8)] animate-pulse"
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a84c]"
               aria-hidden="true"
             />
             <span>{t('hero.searchLive')}</span>
@@ -146,7 +146,7 @@ export function LandingSearchCard() {
 
           {/* gold connector */}
           <span className="hidden h-12 items-center justify-center text-[#c9a84c]/70 sm:flex" aria-hidden="true">
-            <span className="lp-connector flex items-center">
+            <span className="flex items-center">
               <MoveRight className="h-4 w-4" />
             </span>
           </span>

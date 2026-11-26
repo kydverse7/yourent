@@ -15,7 +15,6 @@ import {
 import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { BUSINESS } from '@/lib/site';
 import { SOCIALS, formatBusinessHours } from './constants';
-import { LandingFiligrane } from './LandingFiligrane';
 import { rvDelay } from './reveal';
 import type { LandingStats } from './types';
 
@@ -70,7 +69,7 @@ export function LandingContactSection({ stats, locale }: { stats: LandingStats; 
       {/* ═══ Parallax background image ═══ */}
       <div className="ct-parallax-wrap" aria-hidden="true">
         <Image
-          src="/image-casablanca.jpg"
+          src="/image-casablanca-sombre.webp"
           alt={t('contact.imgAlt')}
           fill
           sizes="100vw"
@@ -79,7 +78,6 @@ export function LandingContactSection({ stats, locale }: { stats: LandingStats; 
         {/* Multi-layer overlays for cinematic depth */}
         <div className="ct-overlay-gradient" />
         <div className="ct-overlay-vignette" />
-        <div className="ct-overlay-grain" />
       </div>
 
       {/* ═══ Decorative top line ═══ */}
@@ -154,9 +152,7 @@ export function LandingContactSection({ stats, locale }: { stats: LandingStats; 
                       {/* decorative ring */}
                       <svg className="ct-glass-icon-ring" viewBox="0 0 40 40" aria-hidden="true">
                         <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(201,168,76,0.12)" strokeWidth="1" />
-                        <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(201,168,76,0.25)" strokeWidth="1" strokeDasharray="8 6" strokeLinecap="round">
-                          <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="20s" repeatCount="indefinite" />
-                        </circle>
+                        <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(201,168,76,0.25)" strokeWidth="1" strokeDasharray="8 6" strokeLinecap="round" />
                       </svg>
                     </div>
                     <div className="ct-glass-text">
@@ -255,8 +251,6 @@ export function LandingContactSection({ stats, locale }: { stats: LandingStats; 
           </div>
         </div>
 
-        {/* ═══ Filigrane "CASABLANCA" — SVG stroke-draw on scroll ═══ */}
-        <LandingFiligrane />
       </div>
 
       {/* ═══ Bottom decorative line ═══ */}

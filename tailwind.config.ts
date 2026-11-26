@@ -29,11 +29,23 @@ const config: Config = {
           muted:   '#1E1E1E',
           sep:     '#3A3A3A',
         },
+        /* Textes secondaires : beige dans le tableau de bord, gris argent sur le site public (variables posées par .site-public). */
         cream: {
           DEFAULT: '#F5F0E8',
-          muted:   '#A89880',
-          faint:   '#6B5E4E',
+          muted:   'var(--cream-muted, #A89880)',
+          faint:   'var(--cream-faint, #6B5E4E)',
           ghost:   '#3A3A3A',
+        },
+        /* Jetons du site public. */
+        surface: {
+          DEFAULT: '#111214',
+          2:       '#17181B',
+        },
+        line:   'rgba(255,255,255,0.08)',
+        silver: '#D9DCE1',
+        wa: {
+          DEFAULT: '#25D366',
+          ink:     '#06240F',
         },
       },
       fontFamily: {

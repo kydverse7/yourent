@@ -139,10 +139,9 @@ export function LandingEconomicFleetSection({ vehicles }: Props) {
                   className="eco-card-wrapper"
                   onClick={() => !isActive && setActive(i)}
                   style={{
-                    transform: `translateX(${pos * 60}%) scale(${isActive ? 1 : Math.max(0.72, 1 - absPos * 0.14)}) rotateY(${pos * -4}deg)`,
+                    transform: `translateX(${pos * 60}%) scale(${isActive ? 1 : Math.max(0.72, 1 - absPos * 0.14)})`,
                     zIndex: count - absPos,
                     opacity: absPos > 2 ? 0 : isActive ? 1 : 0.45,
-                    filter: isActive ? 'blur(0px)' : `blur(${absPos * 3}px)`,
                     cursor: isActive ? 'default' : 'pointer',
                   }}
                 >

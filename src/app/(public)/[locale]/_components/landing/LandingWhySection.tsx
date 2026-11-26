@@ -1,6 +1,5 @@
 import { Truck, ShieldCheck, CarFront, Headphones, Sparkles } from 'lucide-react';
 import { t as tr, type Locale } from '@/lib/i18n/translations';
-import { LandingCountUp } from './LandingCountUp';
 import { rvDelay } from './reveal';
 
 /* ── φ = 1.618 — golden ratio design notes ──
@@ -34,18 +33,14 @@ function advantagesFor(locale: Locale, vehicleCount: number): Advantage[] {
       titleKey: 'why.insurance.title',
       descKey: 'why.insurance.desc',
       labelKey: 'why.insurance.label',
-      counter: (
-        <>
-          <LandingCountUp target={100} suffix={t('why.insurance.stat')} />
-        </>
-      ),
+      counter: <>100{t('why.insurance.stat')}</>,
     },
     {
       icon: CarFront,
       titleKey: 'why.fleet.title',
       descKey: 'why.fleet.desc',
       labelKey: 'why.fleet.label',
-      counter: <LandingCountUp target={vehicleCount} />,
+      counter: <>{vehicleCount}</>,
     },
     {
       icon: Headphones,

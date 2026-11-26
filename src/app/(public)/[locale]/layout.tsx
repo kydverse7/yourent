@@ -55,7 +55,7 @@ export default async function PublicRootLayout({
 
   return (
     <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'} className={fontClasses}>
-      <body suppressHydrationWarning className="min-h-screen antialiased bg-noir-root text-cream">
+      <body suppressHydrationWarning className="site-public min-h-screen antialiased bg-noir-root text-cream">
         {/* File dataLayer créée tout de suite : les événements émis avant le chargement du tag y attendent.
             Le tag lui-même est chargé après la page (vitesse), sauf pour un visiteur venu d'une annonce
             (gclid, gbraid, wbraid…) : chargé aussitôt, avant qu'un changement de page n'efface l'identifiant du clic. */}

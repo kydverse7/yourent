@@ -124,7 +124,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
     <div className="relative min-h-screen flex flex-col" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(201,168,76,0.18),transparent_45%)]" />
 
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-noir-root/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-white/5 bg-[rgba(10,10,10,0.94)]">
         <div className="lux-container flex h-20 items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
             <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-gold/20 bg-gold/10 shadow-gold transition-transform duration-200 hover:rotate-2 hover:scale-105">
@@ -169,7 +169,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
                 <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
               </button>
               {langOpen && (
-                <div className="absolute end-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-2xl border border-white/10 bg-noir-root/95 opacity-100 shadow-xl backdrop-blur-xl transition-opacity duration-200 starting:opacity-0">
+                <div className="absolute end-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-2xl border border-white/10 bg-surface opacity-100 shadow-xl transition-opacity duration-200 starting:opacity-0">
                   {LANGUAGES.map((lang) => (
                     <button
                       key={lang.code}
@@ -214,7 +214,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Mobile fullscreen menu ── */}
       {menuOpen && (
-        <div className="fixed inset-0 z-[50] flex flex-col overflow-y-auto bg-noir-root/95 opacity-100 backdrop-blur-2xl transition-opacity duration-300 starting:opacity-0 md:hidden">
+        <div className="fixed inset-0 z-[50] flex flex-col overflow-y-auto bg-noir-root opacity-100 transition-opacity duration-300 starting:opacity-0 md:hidden">
           {/* Close button — large & gold */}
           <button
             onClick={() => setMenuOpen(false)}
