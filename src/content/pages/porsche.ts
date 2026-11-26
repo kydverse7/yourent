@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: "Location Porsche Casablanca : Macan dès {minPrice} DH | Yourent",
     metaDescription:
-      "Location Porsche Casablanca : Macan à {minPrice} DH par jour, SUV sportif en essence et boîte automatique, livré gratuitement à l'hôtel ou à l'aéroport Mohammed V.",
+      "Location Porsche Casablanca : Macan à {minPrice} DH par jour, SUV sportif essence à boîte automatique, livré gratuitement à votre hôtel ou à l'aéroport.",
     eyebrow: "Porsche",
     h1: "Location de Porsche à Casablanca : le SUV Macan",
     intro:
@@ -75,6 +75,10 @@ const page: LocalizedPage = {
       {
         q: "Le Porsche Macan convient-il pour Casablanca-Marrakech ?",
         a: "Oui, c'est un bon choix pour l'autoroute. Précisez toutefois votre trajet à la réservation, car le kilométrage inclus se vérifie auprès de l'équipe sur WhatsApp.",
+      },
+      {
+        q: "Peut-on louer le Porsche Macan pour un week-end ?",
+        a: "Non. Comme toute la flotte, le Macan se loue 5 jours au minimum : il n'y a pas de formule à la journée ni au week-end.",
       },
       {
         q: "Quelle caution faut-il pour le Macan ?",

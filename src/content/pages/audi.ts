@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: "Location Audi Casablanca : Q3 et A3 dès {minPrice} DH | Yourent",
     metaDescription:
-      "Location Audi Casablanca : A3 ou Q3 dès {minPrice} DH par jour, berline compacte ou SUV, livraison gratuite à l'hôtel ou à l'aéroport Mohammed V, devis sur WhatsApp.",
+      "Location Audi Casablanca : A3 ou Q3 dès {minPrice} DH par jour, berline compacte ou SUV. Livraison gratuite à votre hôtel ou à l'aéroport, devis sur WhatsApp.",
     eyebrow: "Audi",
     h1: "Location d'Audi à Casablanca : A3 et Q3",
     intro:

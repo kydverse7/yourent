@@ -10,14 +10,24 @@ import assuranceFranchiseLocationVoiture from './assurance-franchise-location-vo
 import roadTripCasablancaMarrakechAgadir from './road-trip-casablanca-marrakech-agadir';
 import mreReserverVoitureEte from './mre-reserver-voiture-ete';
 import eviterMauvaisesSurprisesLocationMaroc from './eviter-mauvaises-surprises-location-maroc';
+import louerVoitureCasablancaGuide from './louer-voiture-casablanca-guide';
+import locationVoitureAuMoisCasablanca from './location-voiture-au-mois-casablanca';
+import aeroportMarrakechMenaraVoitureLocation from './aeroport-marrakech-menara-voiture-location';
+import quelleVoitureLouerFamilleMre from './quelle-voiture-louer-famille-mre';
+import louerVoitureDeLuxeCasablancaConseils from './louer-voiture-de-luxe-casablanca-conseils';
 
 /** Articles du blog, en français pour l'instant. */
 export const ARTICLES: Article[] = [
+  louerVoitureCasablancaGuide,
   guideAeroportMohammedV,
   prixLocationVoitureCasablanca,
+  locationVoitureAuMoisCasablanca,
   cautionLocationVoitureMaroc,
   louerVoitureMarocPermisEtranger,
+  quelleVoitureLouerFamilleMre,
+  louerVoitureDeLuxeCasablancaConseils,
   aeroportMohammedVCentreVilleCasablanca,
+  aeroportMarrakechMenaraVoitureLocation,
   peagesCasablancaMarrakechRabat,
   conduireACasablanca,
   assuranceFranchiseLocationVoiture,

@@ -2,11 +2,11 @@ import type { LocalizedPage } from '../types';
 
 const page: LocalizedPage = {
   fr: {
-    metaTitle: 'Location voiture longue durée Casablanca | Yourent',
+    metaTitle: 'Location voiture longue durée Casablanca, au mois | Yourent',
     metaDescription:
-      "Location voiture longue durée Casablanca : au mois ou sur plusieurs semaines, tarif réduit après 10 jours sur la plupart des modèles, dès {minPrice} DH/jour.",
+      "Location de voiture longue durée ou mensuelle à Casablanca : tarif par jour réduit après 10 jours sur la plupart des modèles, dès {minPrice} DH/jour.",
     eyebrow: 'Longue durée',
-    h1: 'Location de voiture longue durée à Casablanca : semaines ou mois',
+    h1: 'Location de voiture longue durée à Casablanca, à la semaine ou au mois',
     intro:
       "Yourent propose la location de voiture longue durée à Casablanca, sur plusieurs semaines ou au mois, à partir de {minPrice} DH par jour. Sur la plupart des modèles, le tarif baisse automatiquement au-delà de 10 jours, et la livraison est gratuite à Casablanca et à l'aéroport Mohammed V. Pour un tarif précis au mois, l'équipe répond sur WhatsApp selon le modèle et les dates.",
     breadcrumb: 'Longue durée',
@@ -17,16 +17,16 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "Chez Yourent, la **location de voiture longue durée** n'est pas une formule à part : c'est la même location, simplement plus longue. La durée minimum reste de 5 jours. Entre 5 et 10 jours, vous payez le tarif par jour du catalogue. Dès 11 jours, un tarif réduit s'applique automatiquement sur la plupart des modèles, sans code ni négociation.",
+            text: "Chez Yourent, la **location de voiture longue durée** n'est pas une formule à part : c'est la même location, simplement plus longue. Ce n'est donc ni un leasing ni une LLD d'entreprise : vous fixez une date de début et une date de fin, comme pour toute location. La durée minimum reste de 5 jours. Entre 5 et 10 jours, vous payez le tarif par jour du catalogue. Dès 11 jours, un tarif réduit s'applique automatiquement sur la plupart des modèles, sans code ni négociation.",
           },
           {
             type: 'p',
-            text: "Cela convient à plusieurs situations, par exemple un séjour de plusieurs semaines, une mission professionnelle, un chantier ou un stage. Un Marocain résidant à l'étranger qui passe l'été au pays y trouve aussi son compte. Si votre durée se compte en mois, le tarif au mois se discute avec l'équipe.",
+            text: "Cela convient à plusieurs situations, par exemple un séjour de plusieurs semaines, une mission professionnelle, un chantier ou un stage. Un Marocain résidant à l'étranger qui passe l'été au pays y trouve aussi son compte, comme le détaille notre page [location de voiture pour les MRE](route:mre). Si votre durée se compte en mois, le tarif au mois se discute avec l'équipe.",
           },
         ],
       },
       {
-        h2: 'Combien coûte une location au mois à Casablanca',
+        h2: 'Location de voiture mensuelle à Casablanca : combien ça coûte',
         blocks: [
           {
             type: 'p',
@@ -35,7 +35,7 @@ const page: LocalizedPage = {
           { type: 'pricing' },
           {
             type: 'p',
-            text: "Pour un montant précis, écrivez à l'équipe sur WhatsApp avec le modèle souhaité, la date de début et la durée prévue. Elle vous répond avec le prix, la caution et ce qu'elle peut proposer.",
+            text: "Pour un montant précis, écrivez à l'équipe sur WhatsApp avec le modèle souhaité, la date de début et la durée prévue. Elle vous répond avec le prix, la caution et ce qu'elle peut proposer. Notre article [location de voiture au mois à Casablanca](/blog/location-voiture-au-mois-casablanca) déroule la méthode de calcul et les points à vérifier avant de s'engager sur plusieurs semaines.",
           },
         ],
       },
@@ -112,11 +112,15 @@ const page: LocalizedPage = {
         a: "L'équipe envoie un véhicule de remplacement dans les plus brefs délais. Après un accident, elle accompagne aussi le client dans les démarches.",
       },
       {
+        q: 'Peut-on prolonger une location en cours ?',
+        a: "Oui, si la voiture est encore libre après vos dates. Prévenez l'équipe sur WhatsApp avant la date de fin : elle confirme alors la prolongation et le montant.",
+      },
+      {
         q: "Faut-il payer toute la location à l'avance ?",
         a: "La réservation en ligne est une demande, sans paiement. Le règlement se fait ensuite avec l'équipe, qui en précise les modalités à la confirmation sur WhatsApp.",
       },
     ],
-    related: ['tarifs', 'economique', 'suv', 'conditions', 'aeroport'],
+    related: ['tarifs', 'economique', 'suv', 'mre', 'conditions', 'aeroport'],
   },
 };
 

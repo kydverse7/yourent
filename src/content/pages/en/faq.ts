@@ -16,6 +16,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
+            'The fleet and the search by dates: [car rental in Casablanca](/).',
             'Prices model by model: [car rental prices](route:tarifs).',
             'The detailed rules and the summary table: [car rental requirements](route:conditions).',
             'Delivery when you arrive: [car rental at Mohammed V airport](route:aeroport).',
@@ -40,7 +41,7 @@ const page: PageContent = {
     },
     {
       q: 'Is a foreign driving licence accepted?',
-      a: 'Foreign tourists may present an international driving permit. In other cases, however, ask the team to confirm before you book.',
+      a: 'Foreign tourists may present an international driving permit. In other cases, ask the team to confirm before you book.',
     },
     {
       q: 'What is the minimum age to rent?',
@@ -56,11 +57,11 @@ const page: PageContent = {
     },
     {
       q: 'Is delivery free?',
-      a: 'Yes, anywhere in Casablanca and at Mohammed V airport, 7 days a week. Delivery elsewhere depends on the terms the team gives you on WhatsApp.',
+      a: 'Yes, anywhere in Casablanca and at Mohammed V airport, 7 days a week. Mohammedia is possible for a small extra charge. Delivery to Marrakech is arranged on request, with the conditions and any surcharge confirmed on WhatsApp: see [car rental in Marrakech](route:livraison-marrakech).',
     },
     {
       q: 'Can I pick up the car at Mohammed V airport?',
-      a: 'Yourent delivers the car to the airport, but there is no desk on site. The exact meeting place is therefore confirmed with the team before you arrive, as [car rental Casablanca airport](route:aeroport) explains.',
+      a: 'Yourent delivers the car to the airport, but there is no desk on site. The exact meeting place is confirmed with the team before you arrive, as our [car rental at Casablanca airport](route:aeroport) page explains.',
     },
     {
       q: 'Are the cars insured?',
@@ -76,7 +77,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I cancel or change a booking?',
-      a: 'Yes, free of charge up to 24 hours before pick-up. Later than that, however, fees may apply.',
+      a: 'Yes, free of charge up to 24 hours before pick-up. Later than that, fees may apply.',
     },
     {
       q: 'How do I book a car?',
@@ -92,7 +93,7 @@ const page: PageContent = {
     },
     {
       q: 'Can I return the car in another city?',
-      a: 'Ask the team before you book, because the site does not set a rule on this.',
+      a: 'The return place is agreed with the team on WhatsApp before you confirm, so raise it when you send your request.',
     },
     {
       q: 'What are the agency opening hours?',

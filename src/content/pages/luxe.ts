@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location voiture luxe Casablanca dès {minPrice} DH | Yourent',
     metaDescription:
-      "Location voiture luxe Casablanca : Range Rover, Porsche, Mercedes dès {minPrice} DH/jour. Livraison gratuite à l'aéroport, note Google 4,8/5. Demande en ligne.",
+      "Location de voiture de luxe à Casablanca : Range Rover, Porsche Macan, Mercedes dès {minPrice} DH/jour. Livraison gratuite à l'hôtel ou à l'aéroport.",
     eyebrow: 'Voitures de prestige',
     h1: 'Location de voiture de luxe à Casablanca : Range Rover, Porsche, Mercedes',
     intro:
@@ -46,7 +46,7 @@ const page: LocalizedPage = {
         ],
       },
       {
-        h2: 'Prix : les voitures de luxe et leurs tarifs par jour',
+        h2: 'Prix de la location de voiture de luxe à Casablanca, modèle par modèle',
         blocks: [
           {
             type: 'p',
@@ -81,7 +81,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Pour un déplacement professionnel, la voiture peut vous attendre à votre hôtel ou à votre arrivée, comme l'explique notre page [location de voiture à l'aéroport de Casablanca](route:aeroport). Si vous cherchez plutôt un véhicule avec chauffeur, posez la question sur WhatsApp, car le site présente la location du véhicule seul.",
+            text: "Pour un déplacement professionnel, la voiture peut vous attendre à votre hôtel ou à votre arrivée, comme l'explique notre page [location de voiture à l'aéroport de Casablanca](route:aeroport). Si vous cherchez plutôt un véhicule avec chauffeur, posez la question sur WhatsApp, car le site présente la location du véhicule seul. Notre article [louer une voiture de luxe à Casablanca](/blog/louer-voiture-de-luxe-casablanca-conseils) passe en revue le budget, la caution et les erreurs les plus courantes.",
           },
         ],
       },
@@ -155,7 +155,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Peut-on se faire livrer une voiture de luxe à son hôtel ou à l'aéroport ?",
-        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. L'équipe vous donne le point de rendez-vous précis sur WhatsApp.",
+        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. L'équipe vous donne le point de rendez-vous précis sur WhatsApp. Pour une remise à Marrakech, elle confirme les conditions sur demande.",
       },
       {
         q: 'Quel âge faut-il pour louer une voiture de luxe à Casablanca ?',

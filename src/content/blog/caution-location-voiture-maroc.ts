@@ -8,7 +8,7 @@ const article: Article = {
   intro: `La caution de location de voiture est une somme que le loueur garde en garantie pendant la location. Chez Yourent, elle est demandée au départ, par chèque, espèces ou empreinte de carte, et son montant dépend du véhicule. Elle est ensuite rendue avec le véhicule, à condition qu'il revienne en bon état. Ce qui évite les litiges tient, en pratique, en quelques minutes à la remise des clés.`,
   excerpt: `À quoi sert la caution d'une location au Maroc, comment la verser, quand la récupérer, et les gestes à la remise de la voiture qui évitent un désaccord au retour.`,
   datePublished: '2026-11-05',
-  dateModified: '2026-11-05',
+  dateModified: '2026-11-26',
   sections: [
     {
       h2: `À quoi sert la caution d'une location de voiture ?`,
@@ -92,6 +92,23 @@ const article: Article = {
       ],
     },
     {
+      h2: `Location de voiture sans caution à Casablanca : est-ce possible ?`,
+      blocks: [
+        {
+          type: 'p',
+          text: `La recherche « location de voiture sans caution » revient souvent, et la réponse dépend du loueur. Chez Yourent, elle est simple : une caution est demandée pour tous les véhicules, de la citadine au SUV de prestige. Il n'existe pas de formule sans caution.`,
+        },
+        {
+          type: 'p',
+          text: `Ce qui est souple, c'est la manière de la laisser. Trois modes sont acceptés : le chèque, les espèces ou l'empreinte de carte. Une carte de crédit n'est donc pas indispensable. Si c'est le blocage d'une somme sur votre carte qui vous gêne, dites-le à l'équipe sur WhatsApp : elle vous indique le montant pour le modèle choisi et le mode de versement possible.`,
+        },
+        {
+          type: 'p',
+          text: `Quand une annonce promet une location sans caution, regardez ce qui la remplace : parfois une assurance complémentaire payante, une franchise plus élevée ou un paiement intégral d'avance. Posez la question par écrit, puis comparez le coût total, pas seulement le prix par jour.`,
+        },
+      ],
+    },
+    {
       h2: `Les conditions de location de Yourent, en bref`,
       blocks: [
         {
@@ -121,6 +138,10 @@ const article: Article = {
     {
       q: `Que faire si le loueur vous attribue une rayure déjà présente au départ ?`,
       a: `Comparez avec vos photos de départ et l'état des lieux signé. C'est pourquoi on photographie la voiture sous tous les angles avant de partir.`,
+    },
+    {
+      q: `Peut-on louer une voiture sans caution chez Yourent ?`,
+      a: `Non. Une caution est demandée au départ pour tous les véhicules. Elle peut être versée par chèque, en espèces ou par empreinte de carte, et elle est rendue au retour de la voiture en bon état.`,
     },
     {
       q: `La caution est-elle comprise dans le prix de la location ?`,

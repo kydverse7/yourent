@@ -35,7 +35,7 @@ const page: LocalizedPage = {
           {
             type: 'list',
             items: [
-              "**Petit budget** : le [Dacia Duster](/catalogue/dacia-duster), diesel à boîte manuelle, est le SUV le plus abordable de la flotte, et aussi l'un des plus nombreux.",
+              "**Petit budget** : la [location d'un Dacia Duster à Casablanca](/catalogue/dacia-duster) reste la moins chère de la gamme. Ce diesel à boîte manuelle est aussi l'un des SUV les plus nombreux de la flotte.",
               "**Urbain et compact** : le [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) et l'[Audi Q3](/catalogue/audi-q3) restent pratiques en ville comme sur autoroute.",
               "**Famille et long trajet** : le [Kia Sorento](/catalogue/kia-sorento), le [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) et le [Touareg](/catalogue/volkswagen-touareg) sont plus grands, diesel, à boîte automatique.",
               "**Premium** : le [Range Rover Evoque](/catalogue/range-rover-evoque), le [Porsche Macan](/catalogue/porsche-macan) et le [Range Rover Sport](/catalogue/range-rover-sport) visent le prestige. Voyez aussi notre [location de voiture de luxe à Casablanca](route:luxe).",
@@ -114,7 +114,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Quel SUV choisir pour partir en famille à Marrakech ?',
-        a: "Le Kia Sorento, le Volkswagen Tiguan et le Touareg sont les plus grands de la sélection, avec un coffre adapté aux valises. Tous trois ont 5 places et une boîte automatique.",
+        a: "Le Kia Sorento, le Volkswagen Tiguan et le Touareg sont les plus grands de la sélection, avec un coffre adapté aux valises. Tous trois ont 5 places et une boîte automatique. Pour l'itinéraire, voyez la [location de voiture de Casablanca à Marrakech](route:marrakech).",
       },
       {
         q: 'Peut-on louer un SUV en boîte automatique ?',

@@ -3,7 +3,7 @@ import type { PageContent } from '../../types';
 const page: PageContent = {
   metaTitle: 'Car Rental Requirements Casablanca: Age 21+ | Yourent',
   metaDescription:
-    'Car rental requirements in Casablanca: age 21, ID, licence held over 2 years, proof of address, deposit, insurance, free cancellation up to 24 hours before.',
+    'Car rental requirements in Casablanca: age 21, ID, licence held over 2 years, proof of address, deposit, insurance, free cancellation up to 24 h before.',
   eyebrow: 'Requirements',
   h1: 'Car Rental Requirements in Casablanca',
   intro:
@@ -23,7 +23,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'The minimum age to rent is 21. Foreign tourists may use an international driving permit. However, if your licence was issued abroad and you have no international permit, ask the team to confirm before you book.',
+          text: 'The minimum age to rent is 21. Foreign tourists may use an international driving permit. If your licence was issued abroad and you have no international permit, ask the team to confirm before you book.',
         },
       ],
     },
@@ -41,7 +41,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'You rent for 5 days or more. Beyond 10 days, the daily rate falls automatically on most models, although high season can suspend this. Included mileage and returning in another city are not on the site, so the team answers on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at your address, from 8 am to 10 pm, every day. The place where you return the car is agreed with the team.',
+          text: 'You rent for 5 days or more. Beyond 10 days, the daily rate falls automatically on most models, although high season can suspend this. The included mileage is not on the site, so the team gives it on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at your address in Casablanca, free of charge, from 8 am to 10 pm, every day. Outside the city, Mohammedia is possible for a small extra charge and Marrakech on request ([car rental in Marrakech](route:livraison-marrakech)). The place where you return the car is agreed with the team on WhatsApp before you confirm.',
         },
       ],
     },
@@ -81,7 +81,8 @@ const page: PageContent = {
             ['Deposit', 'Cheque, cash or card imprint, amount depends on the car'],
             ['Insurance', 'Comprehensive with an excess, amount given by the team'],
             ['Mileage', 'Given by the team before you book'],
-            ['Return in another city', 'Given by the team before you book'],
+            ['Delivery', 'Free in Casablanca and at Mohammed V airport; Mohammedia for a small extra charge; Marrakech on request'],
+            ['Return place', 'Agreed with the team on WhatsApp before you confirm'],
             ['Cancellation', 'Free up to 24 hours before pick-up'],
             ['Breakdown', 'Replacement car as soon as possible'],
           ],

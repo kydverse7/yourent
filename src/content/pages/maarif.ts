@@ -21,7 +21,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: 'Le plan et les avis clients sont sur la [fiche Google de Yourent](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z). La note Google atteint 4,8 sur 5 pour 170 avis, selon le relevé du 5 novembre 2026.',
+            text: 'Le plan et les avis clients sont sur la [fiche Google de Yourent](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z). La note Google atteint 4,8 sur 5 pour 173 avis, selon le relevé du 25 novembre 2026.',
           },
         ],
       },

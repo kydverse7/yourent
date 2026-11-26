@@ -13,7 +13,7 @@ const page: LocalizedPage = {
     vehicles: { maxPrice: 500, sort: 'asc' },
     sections: [
       {
-        h2: 'Location de voiture pas chère à Casablanca : les quatre modèles les moins chers',
+        h2: 'Les quatre voitures les moins chères à louer à Casablanca',
         blocks: [
           {
             type: 'p',
@@ -39,7 +39,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Chez Yourent, le prix affiché comprend la livraison gratuite à Casablanca et à l'aéroport Mohammed V, ainsi qu'une assurance tous risques avec franchise sur tous les véhicules. Le montant de cette franchise, lui, se demande à l'équipe sur WhatsApp avant la réservation.",
+            text: "Chez Yourent, le prix affiché comprend la livraison gratuite à Casablanca et à l'aéroport Mohammed V, ainsi qu'une assurance tous risques avec franchise sur tous les véhicules. Le montant de cette franchise, lui, se demande à l'équipe sur WhatsApp avant la réservation. Pour comprendre ce qui fait varier un tarif, lisez aussi notre article [combien coûte une location de voiture à Casablanca](/blog/prix-location-voiture-casablanca).",
           },
         ],
       },
@@ -65,6 +65,24 @@ const page: LocalizedPage = {
           {
             type: 'p',
             text: "Pour la comparaison avec un grand loueur, lisez notre page [agence locale ou loueur international à Casablanca](route:agence-vs-international). Les règles de Yourent figurent dans nos [conditions de location de voiture](route:conditions), dont l'âge minimum de 21 ans.",
+          },
+        ],
+      },
+      {
+        h2: "Location pas chère : ce qui s'ajoute au tarif par jour",
+        blocks: [
+          {
+            type: 'p',
+            text: "Un petit prix se juge sur le total. Voici ce qui vient en plus du tarif par jour chez Yourent, et ce qui n'en fait pas partie.",
+          },
+          {
+            type: 'list',
+            items: [
+              "**Le carburant** reste à votre charge, comme les péages si vous prenez l'autoroute.",
+              "**La caution** ne vous coûte rien si la voiture revient en bon état, mais il faut pouvoir la laisser au départ, par chèque, en espèces ou par empreinte de carte.",
+              "**La livraison hors de Casablanca** : gratuite en ville et à l'aéroport Mohammed V, elle donne lieu à un léger supplément à Mohammedia. Pour Marrakech, l'équipe confirme les conditions sur WhatsApp.",
+              "**La durée** : avec 5 jours minimum, votre budget plancher correspond à cinq fois le tarif par jour du modèle.",
+            ],
           },
         ],
       },
@@ -109,6 +127,10 @@ const page: LocalizedPage = {
       {
         q: 'Peut-on louer pour un jour ou un week-end ?',
         a: "Non, car il faut louer pour 5 jours au moins, même une petite citadine.",
+      },
+      {
+        q: 'Quelle est la voiture automatique la moins chère ?',
+        a: "Parmi les modèles de cette page, c'est la [Fiat 500 Cabriolet](/catalogue/fiat-500-cabriolet), à {price:fiat-500-cabriolet} DH par jour. Les autres voitures sans embrayage figurent sur la page [location de voiture automatique à Casablanca](route:automatique).",
       },
       {
         q: 'Faut-il une caution pour une petite voiture ?',

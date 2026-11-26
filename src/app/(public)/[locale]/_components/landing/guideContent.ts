@@ -47,16 +47,16 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
       ],
     },
     airport: {
-      h3: 'Location de voiture à l’aéroport Mohammed V : la livraison',
+      h3: 'Livraison à Casablanca, à l’aéroport Mohammed V et au-delà',
       paragraphs: ({ hours }) => [
         'Vous ne payez pas de frais de livraison à l’aéroport Mohammed V, pas plus que dans le reste de Casablanca. Yourent n’a pas de comptoir dans le terminal : le véhicule vient donc à vous, sur rendez-vous. Il peut aussi vous attendre à votre hôtel ou à votre domicile en ville, 7j/7.',
         `Donnez votre date et votre heure d’arrivée dans la demande, l’équipe vous indique ensuite le lieu de rendez-vous sur WhatsApp. Horaires de l’équipe : ${hours}. Si votre avion atterrit en dehors de ces horaires, posez la question avant de réserver.`,
-        'Hors de la ville, Mohammedia est possible avec un léger supplément. Pour le déroulé complet de l’arrivée, lisez notre page [location de voiture à l’aéroport de Casablanca](route:aeroport). Si vous venez de France ou d’un autre pays d’Europe, voyez aussi notre [location de voiture à Casablanca depuis la France et l’Europe](route:europe).',
-        'Votre voyage continue hors de la ville ? Notre page [location de voiture au Maroc](route:maroc) explique comment partir de Casablanca, et notre page [location de voiture de Casablanca à Marrakech](route:marrakech) détaille ce trajet. La voiture se récupère dans tous les cas à Casablanca ou à l’aéroport.',
+        'Pour le déroulé complet de l’arrivée, lisez notre page [location de voiture à l’aéroport de Casablanca](route:aeroport). Si vous venez de France ou d’un autre pays d’Europe, voyez aussi notre [location de voiture à Casablanca depuis la France et l’Europe](route:europe).',
+        'Hors de la ville, Mohammedia est possible avec un léger supplément. Une livraison à Marrakech ou à l’aéroport Marrakech-Ménara s’organise aussi sur demande : l’équipe en confirme les conditions sur WhatsApp, comme l’explique notre page [location de voiture à Marrakech](route:livraison-marrakech). Si vous préférez prendre le volant ici et descendre par l’autoroute, voyez la [location de voiture de Casablanca à Marrakech](route:marrakech) ; pour un circuit plus large, la [location de voiture au Maroc](route:maroc).',
       ],
     },
     ranges: {
-      h3: 'Quelle gamme choisir',
+      h3: 'Location auto à Casablanca : quelle gamme choisir',
       lead: ({ modelCount }) =>
         `${modelCount > 0 ? `La flotte compte ${modelCount} modèles, tous à 5 places.` : 'Tous nos modèles ont 5 places.'} Pour louer une voiture à Casablanca, le bon choix dépend surtout de vos trajets, de vos bagages et de la boîte de vitesses que vous préférez.`,
       price: (value) => `dès ${value} DH par jour`,
@@ -88,12 +88,12 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         },
         {
           key: 'longue-duree',
-          title: 'Longue durée',
+          title: 'Longue durée et au mois',
           text: 'Au-delà de 10 jours, le tarif réduit s’applique tout seul sur la plupart des modèles, sauf si la haute saison le suspend. Le prix affiché ici est le plus bas de ce palier.',
         },
       ],
       outro:
-        'Vous visez le haut de gamme ? Voyez notre [location de voiture de luxe à Casablanca](route:luxe), puis nos pages [location de Mercedes](route:mercedes), [location de Range Rover à Casablanca](route:range-rover) et [location de Porsche](route:porsche). Vous pouvez aussi comparer les prix modèle par modèle sur la page [prix de location de voiture à Casablanca](route:tarifs).',
+        'Vous visez le haut de gamme ? Voyez notre [location de voiture de luxe à Casablanca](route:luxe), puis nos pages [location de Mercedes](route:mercedes), [location de Range Rover à Casablanca](route:range-rover) et [location de Porsche](route:porsche). Avec un budget serré, commencez plutôt par la [location de voiture pas chère à Casablanca](route:economique). Vous pouvez aussi comparer les prix modèle par modèle sur la page [prix de location de voiture à Casablanca](route:tarifs).',
     },
     prepare: {
       h3: 'Ce qu’il faut prévoir pour votre location de voiture à Casablanca',
@@ -105,7 +105,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         '**Imprévus.** En cas de panne, un véhicule de remplacement part vers vous dans les plus brefs délais. Après un accident, l’équipe vous aide dans les démarches.',
       ],
       outro:
-        'Kilométrage, retour dans une autre ville : pour ces questions, l’équipe vous répond sur [WhatsApp](whatsapp). Le reste est détaillé dans nos [conditions de location de voiture](route:conditions).',
+        'Kilométrage, retour dans une autre ville : pour ces questions, l’équipe vous répond sur [WhatsApp](whatsapp). Le reste est détaillé dans nos [conditions de location de voiture](route:conditions), et notre [guide pour louer une voiture à Casablanca](/blog/louer-voiture-casablanca-guide) reprend chaque étape.',
     },
   },
 
@@ -115,19 +115,20 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
     intro: ({ vehicleCount, minPrice, minDays }) =>
       `Yourent offers car rental in Casablanca with ${vehicleCount > 0 ? `${vehicleCount} vehicles` : 'the whole fleet'}${minPrice > 0 ? `, from ${minPrice} MAD per day` : ''}, for a minimum of ${minDays} days. Send a request online; the team confirms by WhatsApp or phone, then the car is delivered to your hotel, to Mohammed V Airport or to the address you give.`,
     flow: {
-      h3: 'From online request to handover',
+      h3: 'Hire a car in Casablanca: from request to handover',
       paragraphs: [
-        'It starts with your dates. In the [car catalogue](/catalogue), the search removes cars already taken for that period, so you only see the ones you can actually rent. Open the page of the model that suits you, then send your request with your contact details.',
+        'It starts with your dates. In the [catalogue of cars to rent in Casablanca](/catalogue), the search removes cars already taken for that period, so you only see the ones you can actually rent. Open the page of the model that suits you, then send your request with your contact details.',
         'The request costs nothing, because the website takes no payment. A team member replies to confirm the vehicle, the amount and the handover location, and you then pay them directly.',
         'Travel plans often change, so you can modify or cancel free of charge up to 24 hours before pick-up. After that deadline, however, fees may apply.',
       ],
     },
     airport: {
-      h3: 'Car rental at Casablanca airport: delivery to Mohammed V',
+      h3: 'Delivery in Casablanca, at Mohammed V airport and beyond',
       paragraphs: ({ hours }) => [
         'There is no delivery fee at Mohammed V Airport, just as in the rest of Casablanca. Yourent has no desk in the terminal; instead, the car comes to you, by appointment. It can also be brought to your hotel or home in the city, 7 days a week.',
         `Give your arrival date and time in the request, and the team will send you the meeting point on WhatsApp. Team hours: ${hours}. If your flight lands outside these hours, however, ask before you book.`,
-        'Outside the city, Mohammedia is possible for a small extra charge. For a full account of the arrival, read our [car rental Casablanca airport page](route:aeroport).',
+        'For a full account of the arrival, read our [car rental at Casablanca airport](route:aeroport) page. If you are flying in from abroad, see also [car rental in Casablanca from Europe](route:europe).',
+        'Outside the city, Mohammedia is possible for a small extra charge. Delivery to Marrakech or Marrakech-Menara airport can be arranged on request, with the conditions and any surcharge confirmed on WhatsApp: see [car rental in Marrakech](route:livraison-marrakech). If you would rather collect the car here and drive south, our [Casablanca to Marrakech car rental](route:marrakech) page covers the route, and [car rental in Morocco](route:maroc) the wider tour.',
       ],
     },
     ranges: {
@@ -158,17 +159,17 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         },
         {
           key: 'luxe',
-          title: 'Luxury cars',
+          title: 'Luxury car rental',
           text: 'Mercedes CLA, C 220 and E 220, Porsche Macan, Range Rover Evoque and Sport, for a business meeting or a special occasion.',
         },
         {
           key: 'longue-duree',
-          title: 'Long-term rental',
+          title: 'Long-term and monthly rental',
           text: 'After 10 days, the lower rate applies automatically on most models, unless high season suspends it. The price shown here is the lowest at that level.',
         },
       ],
       outro:
-        'Looking for a specific make? See our [Mercedes rental](route:mercedes), [Range Rover rental](route:range-rover) and [Porsche rental](route:porsche) pages, or compare model by model on the [car rental prices in Casablanca](route:tarifs) page.',
+        'After a prestige car? See our [luxury car rental in Casablanca](route:luxe) page, then [Mercedes rental](route:mercedes), [Range Rover rental](route:range-rover) and [Porsche rental](route:porsche). On a budget, start with [cheap car rental in Casablanca](route:economique), or compare model by model on the [car rental prices in Casablanca](route:tarifs) page.',
     },
     prepare: {
       h3: 'What to prepare',
@@ -198,22 +199,23 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
       ],
     },
     airport: {
-      h3: 'كراء السيارات في مطار محمد الخامس: التوصيل',
+      h3: 'التوصيل إلى المطار وداخل الدار البيضاء وخارجها',
       paragraphs: ({ hours }) => [
         'لا تدفع أي رسوم توصيل إلى مطار محمد الخامس، كما هو الحال في باقي الدار البيضاء. ليس لدى Yourent مكتب داخل المطار، لذلك تأتي السيارة إليك بموعد مسبق. ويمكن أيضًا أن تصلك إلى فندقك أو مسكنك داخل المدينة، طوال أيام الأسبوع.',
         `اذكر تاريخ وصولك وساعته في الطلب، وسيحدد لك الفريق مكان اللقاء عبر واتساب. أوقات عمل الفريق: ${hours}. وإذا كانت طائرتك ستهبط خارج هذه الأوقات، فاسأل قبل الحجز.`,
-        'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط. لمعرفة تفاصيل الوصول كاملة، اقرأ صفحة [كراء السيارات في مطار محمد الخامس](route:aeroport).',
+        'خارج المدينة، يمكن التوصيل إلى المحمدية مقابل مبلغ إضافي بسيط، وإلى مراكش أو مطار مراكش المنارة عند الطلب، بشروط يؤكدها الفريق عبر واتساب قبل الحجز. ولمعرفة تفاصيل الوصول إلى الدار البيضاء بالطائرة، اقرأ صفحة [كراء السيارات في مطار محمد الخامس](route:aeroport).',
+        'هل تستمر رحلتك خارج المدينة؟ تشرح صفحة [كراء السيارات في المغرب](route:maroc) كيف تنطلق من الدار البيضاء، وتفصّل صفحة [كراء السيارات من الدار البيضاء إلى مراكش](route:marrakech) هذا الطريق وشروط التسليم في مراكش. أما مكان إرجاع السيارة فيُتفق عليه مع الفريق عبر واتساب قبل تأكيد الحجز.',
       ],
     },
     ranges: {
-      h3: 'كراء سيارة في الدار البيضاء: أي فئة تختار',
+      h3: 'تأجير سيارة في الدار البيضاء: أي فئة تختار',
       lead: ({ modelCount }) =>
         `${modelCount > 0 ? `يضم الأسطول ${modelCount} طرازًا، وكلها بخمسة مقاعد.` : 'كل طرازاتنا بخمسة مقاعد.'} يتوقف الاختيار المناسب أساسًا على رحلاتك وأمتعتك وعلبة السرعات التي تفضلها.`,
       price: (value) => `ابتداءً من ${value} درهم في اليوم`,
       items: [
         {
           key: 'economique',
-          title: 'سيارات مدينة اقتصادية',
+          title: 'سيارات اقتصادية رخيصة',
           text: 'Fiat 500 وOpel Corsa بعلبة سرعات يدوية: أقل الأسعار في الأسطول، وحجم يسهل ركنه في المدينة.',
         },
         {
@@ -228,7 +230,7 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         },
         {
           key: 'automatique',
-          title: 'علبة سرعات أوتوماتيكية',
+          title: 'سيارات أوتوماتيك',
           text: 'معظم الطرازات أوتوماتيكية. أما Golf 8 وAudi Q3 فمتوفرتان بالعلبتين، لذا حدد اختيارك في الطلب.',
         },
         {
@@ -238,12 +240,12 @@ export const GUIDE_CONTENT: Record<Locale, GuideContent> = {
         },
         {
           key: 'longue-duree',
-          title: 'الكراء طويل المدة',
+          title: 'الكراء لمدة طويلة وبالشهر',
           text: 'بعد 10 أيام، يُطبق السعر المخفض تلقائيًا في معظم الطرازات، ما لم يعلّقه موسم الذروة. والسعر المعروض هنا هو الأدنى في هذه الفئة.',
         },
       ],
       outro:
-        'هل تبحث عن علامة بعينها؟ اطلع على صفحات [كراء مرسيدس](route:mercedes) و[كراء رينج روفر](route:range-rover) و[كراء بورش](route:porsche)، أو قارن طرازًا بطراز في صفحة [أسعار كراء السيارات](route:tarifs).',
+        'هل تبحث عن فئة راقية؟ اطلع على صفحة [كراء السيارات الفاخرة](route:luxe)، ثم على صفحات [كراء مرسيدس](route:mercedes) و[كراء رينج روفر](route:range-rover) و[كراء بورش](route:porsche). ويمكنك أيضًا مقارنة الأسعار طرازًا بطراز في صفحة [أسعار كراء السيارات](route:tarifs).',
     },
     prepare: {
       h3: 'ما يجب تحضيره',

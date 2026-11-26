@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Pour un MRE, c'est-à-dire un Marocain résidant à l'étranger, le plus simple est de réserver la voiture de location avant le départ, avec ses dates de séjour. On peut alors se la faire livrer à l'aéroport Mohammed V ou à l'adresse du séjour. Chez Yourent, la livraison est gratuite à l'aéroport et dans tout Casablanca, et la location démarre à 5 jours. L'équipe confirme ensuite sur WhatsApp ; voici comment préparer la démarche.`,
   excerpt: `Réserver tôt, choisir les bonnes dates, préparer ses documents et se faire livrer la voiture à l'arrivée : le guide des MRE pour une location d'été à Casablanca.`,
   datePublished: '2026-11-05',
-  dateModified: '2026-11-05',
+  dateModified: '2026-11-26',
   sections: [
     {
       h2: `MRE : pourquoi réserver sa voiture de location avant de partir ?`,
@@ -36,7 +36,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `La livraison à l'aéroport Mohammed V ne coûte rien, comme partout dans Casablanca. Pour Mohammedia, elle reste possible, mais avec un léger supplément. L'équipe est joignable de 8h à 22h, 7j/7.`,
+          text: `La livraison à l'aéroport Mohammed V ne coûte rien, comme partout dans Casablanca. Pour Mohammedia, elle reste possible, mais avec un léger supplément ; pour Marrakech, elle s'organise sur demande. L'équipe est joignable de 8h à 22h, 7j/7.`,
         },
         {
           type: 'p',
@@ -79,7 +79,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `La page dédiée [location de voiture pour MRE à Casablanca](route:mre) rassemble le service. La page [tarifs de location de voiture](route:tarifs) donne la grille complète avec les cautions.`,
+          text: `La page dédiée [location de voiture pour MRE à Casablanca](route:mre) rassemble le service, et l'article [quelle voiture louer pour une famille ou un séjour MRE](/blog/quelle-voiture-louer-famille-mre) aide à choisir le modèle. La page [tarifs de location de voiture](route:tarifs) donne la grille complète avec les cautions.`,
         },
       ],
     },

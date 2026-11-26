@@ -22,8 +22,8 @@ const page: PageContent = {
           type: 'list',
           items: [
             "**Starting out.** Delivery is free at Mohammed V airport, at your Casablanca hotel or at any address you choose in the city.",
-            "**Handover in Marrakech.** The site doesn't describe this option, so ask on WhatsApp before you book.",
-            '**Returning the car in Marrakech.** Only the team can answer this one. Until you hear back, plan a round trip that ends in Casablanca.',
+            '**Handover in Marrakech.** Possible on request, in the city or at Marrakech-Menara airport: the team confirms the conditions and any surcharge on WhatsApp before you book. Our [car rental in Marrakech](route:livraison-marrakech) page explains how it works.',
+            '**Returning the car in Marrakech.** The return place is agreed with the team on WhatsApp before you confirm. Until you hear back, plan a round trip that ends in Casablanca.',
             "**Length of hire.** The 5-day minimum suits a proper stay in the south, but it rules out a same-day return.",
           ],
         },
@@ -144,11 +144,11 @@ const page: PageContent = {
   faq: [
     {
       q: 'Does Yourent have an agency in Marrakech?',
-      a: 'No. The agency is in Casablanca, so any trip to Marrakech starts there or at Mohammed V airport.',
+      a: 'No. The only agency is in Casablanca, so a trip to Marrakech normally starts there or at Mohammed V airport, where delivery is free.',
     },
     {
       q: 'Can the car be delivered to Marrakech, or returned there?',
-      a: "Neither option is described on the site. Mention it in your request, and the team will answer on WhatsApp before anything is confirmed.",
+      a: 'Delivery in Marrakech or at Marrakech-Menara airport is possible on request: the team confirms the conditions and any surcharge on WhatsApp before you book. The return place is agreed with them in the same way.',
     },
     {
       q: 'Which motorway do I take, and how far is it?',
@@ -163,7 +163,7 @@ const page: PageContent = {
       a: 'No, because the minimum rental is 5 days. Rates start at {minPrice} MAD per day and drop after 10 days on most models.',
     },
   ],
-  related: ['aeroport', 'maroc', 'suv', 'automatique', 'tarifs'],
+  related: ['livraison-marrakech', 'aeroport', 'maroc', 'suv', 'automatique', 'tarifs'],
 };
 
 export default page;

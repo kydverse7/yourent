@@ -99,7 +99,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Vous visez le sud dès l'atterrissage ? Notre page [Casablanca Marrakech en voiture](route:marrakech) présente l'itinéraire et les modèles adaptés. Et comme la location dure 5 jours minimum, gardez ce seuil en tête pour un court séjour.",
+            text: "Vous visez le sud dès l'atterrissage ? Notre page [Casablanca Marrakech en voiture](route:marrakech) présente l'itinéraire et les modèles adaptés. Si votre vol atterrit directement à Marrakech, une livraison à l'aéroport Marrakech-Ménara est possible sur demande, comme l'explique la page [location de voiture à Marrakech](route:livraison-marrakech). Et comme la location dure 5 jours minimum, gardez ce seuil en tête pour un court séjour.",
           },
         ],
       },

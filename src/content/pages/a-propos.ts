@@ -4,7 +4,7 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Agence de location de voiture à Casablanca, 4,8/5 | Yourent',
     metaDescription:
-      'Yourent, agence de location de voiture à Casablanca : {vehicleCount} véhicules, {modelCount} modèles dès {fleetMin} DH par jour, note Google 4,8 sur 170 avis, livraison gratuite.',
+      'Yourent, agence de location de voiture à Casablanca : {vehicleCount} véhicules, {modelCount} modèles dès {fleetMin} DH par jour, note Google 4,8 sur 173 avis, livraison gratuite.',
     eyebrow: 'À propos',
     h1: 'Agence de location de voiture à Casablanca : qui est Yourent',
     intro:
@@ -43,11 +43,11 @@ const page: LocalizedPage = {
         ],
       },
       {
-        h2: 'Avis Google : 4,8 sur 170 avis',
+        h2: 'Avis Google : 4,8 sur 173 avis',
         blocks: [
           {
             type: 'p',
-            text: 'La fiche Google de l’agence affiche une note de 4,8 sur 5 pour 170 avis, relevée le 5 novembre 2026. Les avis se lisent directement sur la [fiche Google de Yourent](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z). Cette note évolue toutefois avec chaque nouvel avis.',
+            text: 'La fiche Google de l’agence affiche une note de 4,8 sur 5 pour 173 avis, relevée le 25 novembre 2026. Les avis se lisent directement sur la [fiche Google de Yourent](https://www.google.com/maps/place/YouRent/@33.5820604,-7.6363812,17z). Cette note évolue toutefois avec chaque nouvel avis.',
           },
         ],
       },
@@ -90,7 +90,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Quelle est la note de Yourent sur Google ?',
-        a: 'La fiche Google affiche 4,8 sur 5 pour 170 avis, selon le relevé du 5 novembre 2026.',
+        a: 'La fiche Google affiche 4,8 sur 5 pour 173 avis, selon le relevé du 25 novembre 2026.',
       },
       {
         q: 'Yourent a-t-il un comptoir à l’aéroport ?',

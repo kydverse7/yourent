@@ -57,7 +57,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: 'Toutes les voitures de la flotte ont 5 places. Pour les trajets en famille et les bagages, un SUV est le choix courant : le Dacia Duster, le Volkswagen Tiguan ou le Kia Sorento. La page [location de SUV à Casablanca](route:suv) les compare. En ville, une boîte automatique est utile : la page [location de voiture automatique à Casablanca](route:automatique) liste ces modèles.',
+            text: 'Toutes les voitures de la flotte ont 5 places. Pour les trajets en famille et les bagages, un SUV est le choix courant : le Dacia Duster, le Volkswagen Tiguan ou le Kia Sorento. La page [location de SUV à Casablanca](route:suv) les compare. En ville, une boîte automatique est utile : la page [location de voiture automatique à Casablanca](route:automatique) liste ces modèles. Notre article [quelle voiture louer pour une famille ou un séjour MRE](/blog/quelle-voiture-louer-famille-mre) aide à choisir selon le nombre de passagers et de valises.',
           },
           { type: 'vehicles' },
         ],

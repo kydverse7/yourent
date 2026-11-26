@@ -106,7 +106,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Peut-on louer un Range Rover pour aller de Casablanca à Marrakech ?",
-        a: "Oui. Prévenez toutefois l'équipe de votre itinéraire à la réservation. Le kilométrage inclus n'est pas affiché sur le site ; elle vous le précise sur WhatsApp.",
+        a: "Oui. Prévenez toutefois l'équipe de votre itinéraire à la réservation. Le kilométrage inclus n'est pas affiché sur le site ; elle vous le précise sur WhatsApp. L'itinéraire est décrit sur la page [location de voiture de Casablanca à Marrakech](route:marrakech).",
       },
       {
         q: "Quelle caution faut-il prévoir pour un Range Rover ?",
