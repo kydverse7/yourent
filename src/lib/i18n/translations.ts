@@ -1,3 +1,5 @@
+import { SITE_UI } from './siteUi';
+
 export type Locale = 'fr' | 'en' | 'ar';
 
 const fr: Record<string, string> = {
@@ -960,7 +962,12 @@ const ar: Record<string, string> = {
   'confirmation.backCatalogue': 'العودة إلى الكتالوج',
 };
 
-export const translations: Record<Locale, Record<string, string>> = { fr, en, ar };
+/* Libellés ajoutés avec la refonte du site public (src/lib/i18n/siteUi.ts) : une clé définie ici l'emporte. */
+export const translations: Record<Locale, Record<string, string>> = {
+  fr: { ...SITE_UI.fr, ...fr },
+  en: { ...SITE_UI.en, ...en },
+  ar: { ...SITE_UI.ar, ...ar },
+};
 
 /** Translate a key for a given locale (server-safe). */
 export function t(locale: Locale, key: string): string {

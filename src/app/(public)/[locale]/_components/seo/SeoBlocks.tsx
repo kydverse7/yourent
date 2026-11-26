@@ -1,11 +1,14 @@
-import Image from 'next/image';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Fragment, type ReactNode } from 'react';
+import { ChevronDown } from 'lucide-react';
 import Link from '@/lib/i18n/LocaleLink';
-import type { Locale } from '@/lib/i18n/translations';
+import { formatPrice } from '@/lib/format';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import type { FleetModel } from '@/lib/seo/fleet';
 import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
 import { formatEurApprox } from '@/lib/site';
 import type { Block, FaqItem, Section } from '@/content/types';
+import { Faq, RelatedCards } from '../ui/PageParts';
+import { cardFromFleet, VehicleCard } from '../ui/VehicleCard';
 import { SEO_LABELS } from './seoLabels';
 
 export type TextTokens = {
@@ -34,8 +37,20 @@ export function plainText(text: string, tokens: TextTokens): string {
     .replace(/\*\*/g, '');
 }
 
-/** Affiche un texte avec ses liens [libellé](cible) et son gras **texte**. */
-function RichText({ text, locale, tokens }: { text: string; locale: Locale; tokens: TextTokens }) {
+/** Ancre d'un titre de section : lettres et chiffres, sans accents. */
+export function sectionId(text: string): string {
+  const slug = text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60);
+  return slug || 'section';
+}
+
+/** Affiche un texte avec ses liens [libellé](cible) et son gras **texte**. Liens soulignés (D16). */
+export function RichText({ text, locale, tokens }: { text: string; locale: Locale; tokens: TextTokens }) {
   const resolved = resolveTokens(text, tokens);
   const parts = resolved.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
 
@@ -45,20 +60,18 @@ function RichText({ text, locale, tokens }: { text: string; locale: Locale; toke
         const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
         if (link) {
           const [, label, target] = link;
-          const routePath = target.startsWith('route:')
-            ? getRoutePath(target.slice(6) as SeoRouteKey, locale)
-            : target;
+          const routePath = target.startsWith('route:') ? getRoutePath(target.slice(6) as SeoRouteKey, locale) : target;
           // Page absente dans cette langue : on garde le texte, sans lien cassé.
           if (!routePath) return <span key={index}>{label}</span>;
           if (/^https?:/.test(routePath)) {
             return (
-              <a key={index} href={routePath} target="_blank" rel="noopener noreferrer" className="text-gold underline-offset-4 hover:underline">
+              <a key={index} href={routePath} target="_blank" rel="noopener noreferrer" className="t-link">
                 {label}
               </a>
             );
           }
           return (
-            <Link key={index} href={routePath} className="text-gold underline-offset-4 hover:underline">
+            <Link key={index} href={routePath} className="t-link">
               {label}
             </Link>
           );
@@ -71,82 +84,50 @@ function RichText({ text, locale, tokens }: { text: string; locale: Locale; toke
   );
 }
 
-/**
- * Séparateur de milliers insécable : avec une espace simple, l'arabe (RTL) inverse
- * les groupes de chiffres et « 1 000 » s'affiche « 000 1 ».
- */
-function formatPrice(value: number): string {
-  return value.toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');
-}
-
 /** Équivalent indicatif, sous le prix en dirhams : les colonnes des tableaux gardent leur largeur. */
 export function EurHint({ mad, locale }: { mad: number; locale: Locale }) {
   const text = formatEurApprox(mad, locale);
-  return text ? <span className="block text-[10px] font-normal text-cream-faint sm:text-xs">{text}</span> : null;
+  return text ? <span className="block text-xs font-normal text-cream-faint sm:text-sm">{text}</span> : null;
 }
 
-export function VehicleCards({ locale, vehicles }: { locale: Locale; vehicles: FleetModel[] }) {
-  const labels = SEO_LABELS[locale];
-  const altSuffix = { fr: 'à louer à Casablanca', en: 'for rent in Casablanca', ar: 'للكراء في الدار البيضاء' }[locale];
-
+/** Grille de cartes compactes (2 colonnes dès 360 px). */
+export function VehicleCards({
+  locale,
+  vehicles,
+  headingLevel = 'h3',
+}: {
+  locale: Locale;
+  vehicles: FleetModel[];
+  headingLevel?: 'h2' | 'h3';
+}) {
   return (
-    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
       {vehicles.map((vehicle) => (
-        <Link key={vehicle.slug} href={`/catalogue/${vehicle.slug}`} className="group lux-panel block overflow-hidden">
-          <div className="relative h-52 bg-noir-root">
-            {vehicle.photo ? (
-              <Image
-                src={vehicle.photo}
-                alt={`${vehicle.marque} ${vehicle.modele} ${altSuffix}`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            ) : null}
-          </div>
-          <div className="p-5">
-            <h3 className="text-lg font-bold text-cream">{vehicle.marque} {vehicle.modele}</h3>
-            <div className="mt-3 flex items-end justify-between gap-3 border-t border-white/5 pt-3">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-cream-faint">{labels.from}</p>
-                <p className="text-xl font-bold text-gold">
-                  {formatPrice(vehicle.minTarif)} {labels.currency}
-                  <span className="text-xs font-normal text-cream-muted">{labels.perDay}</span>
-                  {formatEurApprox(vehicle.minTarif, locale) && (
-                    <span className="ms-1.5 whitespace-nowrap text-xs font-normal text-cream-faint">
-                      {formatEurApprox(vehicle.minTarif, locale)}
-                    </span>
-                  )}
-                </p>
-              </div>
-              {vehicle.countDispo === 0 ? (
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-cream-muted">
-                  {labels.unavailable}
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold">
-                  {labels.book} <ArrowUpRight className="h-4 w-4" />
-                </span>
-              )}
-            </div>
-          </div>
-        </Link>
+        <li key={vehicle.slug}>
+          <VehicleCard
+            vehicle={cardFromFleet(vehicle)}
+            locale={locale}
+            variant="compact"
+            headingLevel={headingLevel}
+            sizes="(min-width: 1280px) 280px, (min-width: 1024px) 30vw, 46vw"
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
-/* Tableaux sans largeur minimale : ils tiennent à 390 px, le texte revient à la ligne. */
-const TABLE_HEAD = 'bg-white/[0.04] text-[10px] uppercase tracking-[0.04em] text-cream-muted sm:text-xs sm:tracking-[0.1em]';
-const TABLE_HEAD_CELL = 'px-1 py-2.5 text-start align-bottom font-semibold min-[380px]:px-2 sm:px-4 sm:py-3';
-const TABLE_CELL = 'px-1 py-2.5 align-top min-[380px]:px-2 sm:px-4 sm:py-3';
+/* Tableaux en pleine largeur, sans largeur minimale : ils tiennent à 390 px, le texte revient à la ligne. */
+const TABLE_HEAD = 'bg-white/[0.04] text-xs uppercase tracking-[0.04em] text-cream-muted sm:tracking-[0.08em]';
+const TABLE_HEAD_CELL = 'px-2 py-3 text-start align-bottom font-semibold sm:px-4';
+const TABLE_CELL = 'px-2 py-3 align-top sm:px-4';
 
 function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetModel[] }) {
   const labels = SEO_LABELS[locale];
   return (
     <div>
-      <div className="overflow-x-auto rounded-2xl border border-white/8">
-        <table className="w-full text-start text-xs sm:text-sm">
+      <div className="overflow-x-auto rounded-2xl border border-white/[0.08]">
+        <table className="w-full text-start text-sm sm:text-[0.9375rem]">
           <thead className={TABLE_HEAD}>
             <tr>
               <th scope="col" className={TABLE_HEAD_CELL}>{labels.pricingModel}</th>
@@ -159,21 +140,23 @@ function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetMod
             {vehicles.map((vehicle) => (
               <tr key={vehicle.slug}>
                 <td className={`${TABLE_CELL} font-medium text-cream`}>
-                  <Link href={`/catalogue/${vehicle.slug}`} className="hover:text-gold">
-                    {vehicle.marque} {vehicle.modele}
+                  <Link href={`/catalogue/${vehicle.slug}`} className="t-link text-cream">
+                    <bdi>
+                      {vehicle.marque} {vehicle.modele}
+                    </bdi>
                   </Link>
                 </td>
                 <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>
-                  {formatPrice(vehicle.minTarif)} {labels.currency}
+                  <bdi>{formatPrice(vehicle.minTarif, locale)}</bdi>
                   <EurHint mad={vehicle.minTarif} locale={locale} />
                 </td>
                 <td className={`${TABLE_CELL} whitespace-nowrap text-cream-muted`}>
-                  {formatPrice(vehicle.minTarifLong)} {labels.currency}
+                  <bdi>{formatPrice(vehicle.minTarifLong, locale)}</bdi>
                   <EurHint mad={vehicle.minTarifLong} locale={locale} />
                 </td>
                 <td className={`${TABLE_CELL} text-cream-muted`}>
                   {vehicle.minCaution > 0 ? (
-                    <span className="whitespace-nowrap">{formatPrice(vehicle.minCaution)} {labels.currency}</span>
+                    <bdi className="whitespace-nowrap">{formatPrice(vehicle.minCaution, locale)}</bdi>
                   ) : (
                     labels.onRequest
                   )}
@@ -183,7 +166,7 @@ function PricingTable({ locale, vehicles }: { locale: Locale; vehicles: FleetMod
           </tbody>
         </table>
       </div>
-      <p className="mt-2 text-xs text-cream-faint">
+      <p className="mt-2 text-sm text-cream-faint">
         {labels.pricingNote}
         {vehicles.some((vehicle) => vehicle.highSeason) ? ` ${labels.pricingHighSeason}` : ''}
       </p>
@@ -205,14 +188,14 @@ function BlockView({
   switch (block.type) {
     case 'p':
       return (
-        <p className="leading-relaxed text-cream-muted">
+        <p className="t-body prose-col">
           <RichText text={block.text} locale={locale} tokens={tokens} />
         </p>
       );
     case 'list': {
       const Tag = block.ordered ? 'ol' : 'ul';
       return (
-        <Tag className={`space-y-2 ps-5 leading-relaxed text-cream-muted ${block.ordered ? 'list-decimal' : 'list-disc'} marker:text-gold`}>
+        <Tag className={`t-body prose-col space-y-2 ps-5 ${block.ordered ? 'list-decimal' : 'list-disc'} marker:text-gold`}>
           {block.items.map((item, index) => (
             <li key={index}>
               <RichText text={item} locale={locale} tokens={tokens} />
@@ -223,8 +206,8 @@ function BlockView({
     }
     case 'table':
       return (
-        <div className="overflow-x-auto rounded-2xl border border-white/8">
-          <table className="w-full text-xs sm:text-sm">
+        <div className="overflow-x-auto rounded-2xl border border-white/[0.08]">
+          <table className="w-full text-sm sm:text-[0.9375rem]">
             <thead className={TABLE_HEAD}>
               <tr>
                 {block.head.map((cell, index) => (
@@ -255,80 +238,108 @@ function BlockView({
   }
 }
 
+/**
+ * Sections H2 d'une page de contenu : un `id` par H2 (sommaire), encart d'action après la 2e section
+ * puis toutes les 4 sections, rendu différé à partir de la 3e (le texte reste dans le HTML).
+ */
 export function SeoSections({
   sections,
   locale,
   tokens,
   vehicles,
+  inlineCta,
 }: {
   sections: Section[];
   locale: Locale;
   tokens: TextTokens;
   vehicles: FleetModel[];
+  inlineCta?: ReactNode;
 }) {
   return (
     <>
-      {sections.map((section) => (
-        <section key={section.h2} className="space-y-4">
-          <h2 className="text-2xl font-bold text-cream">{resolveTokens(section.h2, tokens)}</h2>
-          {section.blocks.map((block, index) => (
-            <BlockView key={index} block={block} locale={locale} tokens={tokens} vehicles={vehicles} />
-          ))}
-        </section>
-      ))}
+      {sections.map((section, index) => {
+        const title = resolveTokens(section.h2, tokens);
+        const showCta = inlineCta && (index === 1 || (index > 1 && (index - 1) % 4 === 0)) && index < sections.length - 1;
+        return (
+          <Fragment key={section.h2}>
+            <section className={`scroll-mt-24 space-y-4 ${index >= 2 ? 'cv-auto' : ''}`} id={sectionId(title)}>
+              <h2 className="t-h2 prose-col">{title}</h2>
+              {section.blocks.map((block, blockIndex) => (
+                <BlockView key={blockIndex} block={block} locale={locale} tokens={tokens} vehicles={vehicles} />
+              ))}
+            </section>
+            {showCta && inlineCta}
+          </Fragment>
+        );
+      })}
     </>
   );
 }
 
-/** Questions visibles dans le HTML : les réponses sont toujours rendues, même repliées. */
+/** Sommaire des H2 : dépliant en mobile, colonne collante à partir de 1280 px. */
+export function SeoToc({ locale, sections, tokens }: { locale: Locale; sections: Section[]; tokens: TextTokens }) {
+  if (sections.length < 3) return null;
+  const items = sections.map((section) => {
+    const title = resolveTokens(section.h2, tokens);
+    return { id: sectionId(title), title };
+  });
+  const list = (
+    <ol className="space-y-1">
+      {items.map((item) => (
+        <li key={item.id}>
+          <a href={`#${item.id}`} className="block py-1.5 text-[0.9375rem] leading-snug text-cream-muted transition-colors hover:text-gold">
+            {item.title}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+  return (
+    <>
+      <details className="card group xl:hidden">
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 font-semibold text-cream [&::-webkit-details-marker]:hidden">
+          {tr(locale, 'ui.toc')}
+          <ChevronDown className="h-4 w-4 shrink-0 text-gold transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <nav aria-label={tr(locale, 'ui.toc')} className="px-4 pb-3">
+          {list}
+        </nav>
+      </details>
+      <nav aria-label={tr(locale, 'ui.toc')} className="hidden xl:sticky xl:top-28 xl:block">
+        <p className="t-label mb-2">{tr(locale, 'ui.toc')}</p>
+        {list}
+      </nav>
+    </>
+  );
+}
+
+/** Questions visibles dans le HTML : la première ouverte, les réponses toujours rendues même repliées. */
 export function SeoFaq({ locale, items, tokens }: { locale: Locale; items: FaqItem[]; tokens: TextTokens }) {
   if (items.length === 0) return null;
   return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-bold text-cream">{SEO_LABELS[locale].faqTitle}</h2>
-      <div className="space-y-3">
-        {items.map((item) => (
-          <details key={item.q} className="group lux-panel-muted px-5 py-2.5" open>
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-semibold text-cream">
-              {resolveTokens(item.q, tokens)}
-              <ChevronDown className="h-4 w-4 shrink-0 text-gold transition-transform group-open:rotate-180" />
-            </summary>
-            <p className="mt-1.5 pb-1.5 leading-relaxed text-cream-muted">
-              <RichText text={item.a} locale={locale} tokens={tokens} />
-            </p>
-          </details>
-        ))}
-      </div>
-    </section>
+    <Faq
+      title={SEO_LABELS[locale].faqTitle}
+      headingId="faq"
+      items={items.map((item) => ({
+        q: resolveTokens(item.q, tokens),
+        a: <RichText text={item.a} locale={locale} tokens={tokens} />,
+      }))}
+    />
   );
 }
 
 export function RelatedLinks({
   locale,
   items,
+  title,
 }: {
   locale: Locale;
   items: { key: SeoRouteKey; label: string }[];
+  title?: string;
 }) {
-  const links = items
-    .map((item) => ({ ...item, path: getRoutePath(item.key, locale) }))
-    .filter((item): item is typeof item & { path: string } => Boolean(item.path));
-  if (links.length === 0) return null;
-
-  return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-bold text-cream">{SEO_LABELS[locale].relatedTitle}</h2>
-      <div className="flex flex-wrap gap-2">
-        {links.map((link) => (
-          <Link
-            key={link.key}
-            href={link.path}
-            className="inline-flex min-h-11 items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:border-gold/30 hover:text-gold"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
+  const links = items.flatMap((item) => {
+    const href = getRoutePath(item.key, locale);
+    return href ? [{ href, label: item.label }] : [];
+  });
+  return <RelatedCards title={title ?? SEO_LABELS[locale].relatedTitle} items={links} />;
 }

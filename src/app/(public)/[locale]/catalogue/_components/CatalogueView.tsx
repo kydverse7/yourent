@@ -4,18 +4,19 @@ import { connectDB } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
 import { parseSearchDateRange } from '@/lib/utils';
 import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
-import { CalendarX2, Sparkles } from 'lucide-react';
+import { CalendarCheck, CalendarX2 } from 'lucide-react';
 import { t as tr, tp, type Locale } from '@/lib/i18n';
 import { localePath } from '@/lib/i18n/routing';
 import { getFleetStats } from '@/lib/seo/fleet';
-import { breadcrumbNode, BUSINESS_ID, businessNode, jsonLdString } from '@/lib/seo/jsonLd';
+import { breadcrumbNode, BUSINESS_ID, businessNode, jsonLdString, websiteNode } from '@/lib/seo/jsonLd';
 import { buildMetadata, samePathAllLocales } from '@/lib/seo/metadata';
-import type { SeoRouteKey } from '@/lib/seo/routes';
+import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
 import { absoluteUrl } from '@/lib/site';
-import { RelatedLinks } from '../../_components/seo/SeoBlocks';
-import { buildCatalogueMatch, normalizeFilterValue, pickReadable, queryGroupedCatalogue } from '../_lib/catalogueQuery';
-import { CatalogueInfiniteGrid } from './CatalogueInfiniteGrid';
+import { CtaBand, PageHeader, RelatedCards } from '../../_components/ui/PageParts';
+import { VehicleCard, type CardVehicle } from '../../_components/ui/VehicleCard';
+import { buildCatalogueMatch, normalizeFilterValue, pickReadable, queryGroupedCatalogue, type CatalogueModel } from '../_lib/catalogueQuery';
 import { CatalogueDateFilter } from './CatalogueDateFilter';
+import { CatalogueTools } from './CatalogueTools';
 
 const CATALOGUE_META: Record<Locale, { title: string; description: (minPrice: number) => string }> = {
   fr: {
@@ -47,10 +48,26 @@ export async function catalogueMetadata(locale: Locale, noindex: boolean): Promi
   });
 }
 
-const PAGE_SIZE = 24;
+/** Toute la flotte tient sur une page (moins de 30 modèles) : pas de chargement au défilement. */
+const PAGE_SIZE = 100;
 
-/** Pages proches de la première page de Google, liées depuis le catalogue. */
-const NEARBY_PAGES: SeoRouteKey[] = ['aeroport', 'luxe', 'range-rover', 'maroc'];
+/** Pages liées depuis le catalogue. */
+const NEARBY_PAGES: SeoRouteKey[] = ['aeroport', 'luxe', 'suv', 'economique', 'automatique', 'longue-duree', 'tarifs', 'maroc'];
+
+function toCard(model: CatalogueModel): CardVehicle {
+  return {
+    slug: model.modelSlug,
+    marque: model.marque,
+    modele: model.modele,
+    categorie: model.categorie,
+    places: model.places,
+    carburant: model.carburant,
+    boites: model.transmission ? [model.transmission] : [],
+    minTarif: model.minTarif,
+    available: model.countDispo > 0,
+    photo: model.featuredPhoto,
+  };
+}
 
 type BrandOption = {
   value: string;
@@ -117,7 +134,7 @@ async function getGroupedVehicles(
     }))
     .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 
-  return { vehicles: models, total, hasNext: total > PAGE_SIZE, brands };
+  return { vehicles: models, total, brands };
 }
 
 /**
@@ -139,13 +156,14 @@ export async function CatalogueView({ locale, params }: { locale: Locale; params
       )
     : null;
 
-  const [{ vehicles, total, hasNext, brands }, stats] = await Promise.all([
+  const [{ vehicles, total, brands }, stats] = await Promise.all([
     getGroupedVehicles(params, busyObjectIds),
     getFleetStats(),
   ]);
   const subtitle = tp(locale, dateRange ? 'cat.subtitleDates' : 'cat.subtitle', total);
   const catalogueUrl = absoluteUrl(localePath(locale, '/catalogue'));
   const jsonLd = jsonLdString([
+    websiteNode(locale),
     businessNode(locale, stats),
     {
       '@type': 'OfferCatalog',
@@ -188,102 +206,122 @@ export async function CatalogueView({ locale, params }: { locale: Locale; params
     ),
   ]);
 
+  const dateQuery = dateRange ? `?du=${dateRange.du}&au=${dateRange.au}` : '';
+  const shortDate = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
+  const brandChip =
+    'inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-4 text-[0.9375rem] font-semibold transition-colors';
+  const resetHref = localePath(
+    locale,
+    `/catalogue${selectedMarque ? `?marque=${encodeURIComponent(selectedMarque)}` : ''}${params.type ? `${selectedMarque ? '&' : '?'}type=${encodeURIComponent(params.type)}` : ''}`,
+  );
+
   return (
-    <div className="lux-container py-8 md:py-10">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <div className="lux-page-head mb-8">
-        <div className="space-y-2">
-          <span className="lux-eyebrow">
-            <Sparkles className="h-3.5 w-3.5" /> {tr(locale, 'cat.eyebrow')}
-          </span>
-          <h1 className="lux-title-sm">{tr(locale, 'cat.title')}</h1>
-          <p className="lux-subtitle">
-            {subtitle}
-          </p>
+      <div className="lux-container pb-6 pt-6 lg:pt-8">
+        <PageHeader
+          locale={locale}
+          crumbs={[{ name: tr(locale, 'nav.home'), path: '/' }, { name: tr(locale, 'cat.breadcrumb') }]}
+          title={tr(locale, 'cat.title')}
+          intro={subtitle}
+        />
+      </div>
+
+      <div className="lux-container pb-4">
+        {/* Filtres collants dans ce bloc seulement : ils ne recouvrent jamais le pied de page. */}
+        <div className="sticky top-16 z-20 -mx-4 border-b border-white/[0.06] bg-noir-root px-4 py-2 md:mx-0 md:px-0 lg:top-[72px]">
+          <CatalogueDateFilter params={params} du={dateRange?.du} au={dateRange?.au}>
+            {brands.length > 1 && (
+              <>
+                <a
+                  href={localePath(locale, buildFilterUrl(params, 'marque', undefined))}
+                  aria-current={!selectedMarque ? 'page' : undefined}
+                  className={`${brandChip} ${!selectedMarque ? 'border-gold bg-gold text-[#120f09]' : 'border-white/10 text-cream-muted hover:text-cream'}`}
+                >
+                  {tr(locale, 'cat.allBrands')}
+                </a>
+                {brands.map((brand) => (
+                  <a
+                    key={brand.value}
+                    href={localePath(locale, buildFilterUrl(params, 'marque', brand.value))}
+                    aria-current={selectedMarque === brand.value ? 'page' : undefined}
+                    className={`${brandChip} ${
+                      selectedMarque === brand.value ? 'border-gold bg-gold text-[#120f09]' : 'border-white/10 text-cream-muted hover:text-cream'
+                    }`}
+                  >
+                    {brand.label}
+                  </a>
+                ))}
+              </>
+            )}
+          </CatalogueDateFilter>
         </div>
 
-      </div>
-
-      {/* ── Sticky filter bar ── */}
-      <div className="top-20 z-20 -mx-2 [@media(min-height:600px)]:sticky rounded-2xl bg-noir-root/80 px-2 py-3 backdrop-blur-xl sm:-mx-0 sm:px-0">
-        {/* Date availability filter */}
-        <CatalogueDateFilter
-          params={params}
-          du={dateRange?.du}
-          au={dateRange?.au}
-        />
-
-        {/* Brand filter */}
-        {brands.length > 1 && (
-          <div className="lux-filter-bar mt-2">
-            <a
-              href={localePath(locale, buildFilterUrl(params, 'marque', undefined))}
-              className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                !selectedMarque
-                  ? 'bg-gold text-noir-root'
-                  : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
-              }`}
-            >
-              {tr(locale, 'cat.allBrands')}
-            </a>
-            {brands.map((brand) => (
-              <a
-                key={brand.value}
-                href={localePath(locale, buildFilterUrl(params, 'marque', brand.value))}
-                className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                  selectedMarque === brand.value
-                    ? 'bg-gold text-noir-root'
-                    : 'border border-white/8 bg-white/5 text-cream-muted hover:text-cream'
-                }`}
-              >
-                {brand.label}
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="mt-6">
-        {vehicles.length === 0 ? (
-          dateRange ? (
-            <div className="lux-panel flex flex-col items-center gap-4 py-24 text-center text-cream-muted">
-              <CalendarX2 className="h-10 w-10 text-gold/50" />
-              <p className="text-lg text-cream">{tr(locale, 'cat.datesEmpty')}</p>
-              <p className="max-w-md text-sm">{tr(locale, 'cat.datesEmptyHint')}</p>
-              <a
-                href={localePath(locale, `/catalogue${selectedMarque ? `?marque=${encodeURIComponent(selectedMarque)}` : ''}${params.type ? `${selectedMarque ? '&' : '?'}type=${encodeURIComponent(params.type)}` : ''}`)}
-                className="mt-2 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-gold transition-colors hover:bg-gold/20"
-              >
-                {tr(locale, 'cat.datesReset')}
-              </a>
-            </div>
+        <div className="mt-5">
+          {vehicles.length === 0 ? (
+            dateRange ? (
+              <div className="panel flex flex-col items-center gap-4 px-5 py-16 text-center">
+                <CalendarX2 className="h-10 w-10 text-gold/60" aria-hidden="true" />
+                <p className="t-h3">{tr(locale, 'cat.datesEmpty')}</p>
+                <p className="t-small max-w-md">{tr(locale, 'cat.datesEmptyHint')}</p>
+                <a href={resetHref} className="btn btn-secondary mt-2">
+                  {tr(locale, 'cat.datesReset')}
+                </a>
+              </div>
+            ) : (
+              <div className="panel px-5 py-16 text-center">
+                <p className="t-h3">{tr(locale, 'cat.empty')}</p>
+                <p className="t-small mt-2">{tr(locale, 'cat.emptyHint')}</p>
+              </div>
+            )
           ) : (
-            <div className="lux-panel py-24 text-center text-cream-muted">
-              <p className="text-lg">{tr(locale, 'cat.empty')}</p>
-              <p className="mt-2 text-sm">{tr(locale, 'cat.emptyHint')}</p>
-            </div>
-          )
-        ) : (
-          <CatalogueInfiniteGrid
-            initialVehicles={vehicles}
-            initialPage={1}
-            initialHasNext={hasNext}
-            total={total}
-            type={params.type}
-            marque={selectedMarque || undefined}
-            limit={PAGE_SIZE}
-            du={dateRange?.du}
-            au={dateRange?.au}
-          />
-        )}
+            <>
+              <CatalogueTools gridId="catalogue-grid" />
+              <ul id="catalogue-grid" className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+                {vehicles.map((vehicle, index) => (
+                  <li
+                    key={vehicle.modelSlug}
+                    data-name={`${vehicle.marque} ${vehicle.modele}`.toLowerCase()}
+                    data-price={vehicle.minTarif}
+                  >
+                    <VehicleCard
+                      vehicle={toCard(vehicle)}
+                      locale={locale}
+                      headingLevel="h2"
+                      priority={index === 0}
+                      eager={index < 3}
+                      sizes="(min-width: 1280px) 280px, (min-width: 1024px) 31vw, 46vw"
+                      href={dateQuery ? localePath(locale, `/catalogue/${vehicle.modelSlug}${dateQuery}`) : undefined}
+                      hardNavigation={Boolean(dateQuery)}
+                      note={
+                        dateRange ? (
+                          <p className="flex items-center gap-2 text-sm font-medium text-gold-light">
+                            <CalendarCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            {tr(locale, 'cat.availDates')
+                              .replace('{du}', shortDate(dateRange.du))
+                              .replace('{au}', shortDate(dateRange.au))}
+                          </p>
+                        ) : undefined
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="mt-12">
-        <RelatedLinks
-          locale={locale}
-          items={NEARBY_PAGES.map((key) => ({ key, label: tr(locale, `footer.link.${key}`) }))}
+      <div className="lux-container sec cv-auto">
+        <RelatedCards
+          title={tr(locale, 'ui.related')}
+          items={NEARBY_PAGES.flatMap((key) => {
+            const href = getRoutePath(key, locale);
+            return href ? [{ href, label: tr(locale, `footer.link.${key}`) }] : [];
+          })}
         />
       </div>
-    </div>
+      <CtaBand locale={locale} minPrice={stats.minPrice} />
+    </>
   );
 }

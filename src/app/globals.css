@@ -821,6 +821,10 @@ body::before {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
+/* Lien direct vers une section (/#faq) : il faut les vraies hauteurs pour tomber au bon endroit. */
+html:has(:target) .cv-auto {
+  content-visibility: visible;
+}
 
 /* ── Arabe : ni espacement de lettres ni capitales, interligne plus aéré ── */
 [dir='rtl'] .site-public,
