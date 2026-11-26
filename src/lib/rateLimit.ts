@@ -19,6 +19,8 @@ export const RATE_LIMITS = {
   publicReserve: { limit: 5, windowMs: 600_000, keyPrefix: 'rl:pub' },
   /** 10 req/min — upload */
   upload: { limit: 10, windowMs: 60_000, keyPrefix: 'rl:upl' },
+  /** 60 envois/min/visiteur — mesure d'audience du site public */
+  track: { limit: 60, windowMs: 60_000, keyPrefix: 'rl:trk' },
 } as const;
 
 type PresetName = keyof typeof RATE_LIMITS;

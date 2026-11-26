@@ -23,6 +23,7 @@ export default function robots(): MetadataRoute.Robots {
           '/paiements',
           '/parametres',
           '/reservations',
+          '/statistiques',
           '/vehicules',
           // Routes internes de la recherche par dates ou filtres : jamais une adresse publique.
           '/catalogue-recherche',

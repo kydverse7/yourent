@@ -19,8 +19,15 @@ const PRIVATE_PREFIXES = [
   '/paiements',
   '/parametres',
   '/reservations',
+  '/statistiques',
   '/vehicules',
 ];
+
+/**
+ * API publiques servies sans passer par l'authentification (ni lecture de session ni cookie) :
+ * la collecte de la mesure d'audience du site, appelée à chaque page vue.
+ */
+const PUBLIC_API_PATHS = new Set(['/api/public/track']);
 
 function isPrivatePath(pathname: string): boolean {
   return PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
@@ -100,6 +107,7 @@ function publicMiddleware(req: NextRequest) {
 }
 
 export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  if (PUBLIC_API_PATHS.has(req.nextUrl.pathname)) return NextResponse.next();
   if (isPrivatePath(req.nextUrl.pathname)) {
     return (authMiddleware as unknown as (r: NextRequest, e: NextFetchEvent) => Response | Promise<Response>)(
       req,
