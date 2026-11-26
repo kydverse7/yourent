@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useMemo, type ReactNode } from 'react';
 import { alternatePathname, localePath } from './routing';
-import { t as translate, tp as translatePlural, type Locale } from './translations';
+import type { Locale } from './translations';
 
 type LanguageContextValue = {
   locale: Locale;
@@ -15,18 +15,31 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-/** La langue vient de l'adresse : /, /en ou /ar. Changer de langue, c'est changer d'adresse. */
-export function LanguageProvider({ children, locale }: { children: ReactNode; locale: Locale }) {
+/**
+ * La langue vient de l'adresse : /, /en ou /ar. Changer de langue, c'est changer d'adresse.
+ * `messages` : les libellés de la langue de la page, choisis côté serveur (voir clientMessages) :
+ * le navigateur ne reçoit plus les trois langues dans son JavaScript.
+ */
+export function LanguageProvider({
+  children,
+  locale,
+  messages,
+}: {
+  children: ReactNode;
+  locale: Locale;
+  messages: Record<string, string>;
+}) {
   const setLocale = useCallback((next: Locale) => {
     const { pathname, search, hash } = window.location;
     window.location.assign(`${alternatePathname(pathname, next)}${search}${hash}`);
   }, []);
 
   const lp = useCallback((path: string) => localePath(locale, path), [locale]);
-  const t = useCallback((key: string) => translate(locale, key), [locale]);
+  const t = useCallback((key: string) => messages[key] ?? key, [messages]);
   const tp = useCallback(
-    (key: string, count: number) => translatePlural(locale, key, count),
-    [locale],
+    (key: string, count: number) =>
+      (messages[key] ?? key).replace(/\{s\}/g, count > 1 ? 's' : '').replace('{count}', String(count)),
+    [messages],
   );
 
   const value = useMemo(

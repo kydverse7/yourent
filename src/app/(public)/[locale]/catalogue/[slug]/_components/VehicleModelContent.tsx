@@ -1,23 +1,23 @@
 import { Metadata } from 'next';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
-import Link from '@/lib/i18n/LocaleLink';
 import { connectDB } from '@/lib/db';
 import { getModelCopy } from '@/content/models';
-import { t as tr, tp, type Locale } from '@/lib/i18n';
-import { localePath } from '@/lib/i18n/routing';
+import { t as tr, type Locale } from '@/lib/i18n';
 import { getFleetModels, getFleetStats, type FleetModel } from '@/lib/seo/fleet';
-import { breadcrumbNode, businessNode, carNode, faqNode, jsonLdString } from '@/lib/seo/jsonLd';
+import { breadcrumbNode, businessNode, carNode, faqNode, jsonLdString, websiteNode } from '@/lib/seo/jsonLd';
 import { buildMetadata, samePathAllLocales } from '@/lib/seo/metadata';
-import type { SeoRouteKey } from '@/lib/seo/routes';
+import { getRoutePath, type SeoRouteKey } from '@/lib/seo/routes';
 import { Vehicle } from '@/models/Vehicle';
 import { Agence } from '@/models/Agence';
 import { getVehicleDisplayPrice, resolveVehiclePricing, toModelSlug, type SearchDateRange } from '@/lib/utils';
 import { findBusyVehicleIds } from '@/services/vehicleAvailabilityService';
-import { Check, ChevronLeft, Sparkles } from 'lucide-react';
-import { EurHint, plainText, RelatedLinks, SeoFaq, SeoSections, VehicleCards, type TextTokens } from '../../../_components/seo/SeoBlocks';
-import { Breadcrumbs } from '../../../_components/seo/SeoShell';
+import { formatAmount, formatPrice } from '@/lib/format';
+import { BUSINESS } from '@/lib/site';
+import { EurHint, plainText, SeoFaq, SeoSections, VehicleCards, type TextTokens } from '../../../_components/seo/SeoBlocks';
 import { SEO_LABELS } from '../../../_components/seo/seoLabels';
+import { RatingLink } from '../../../_components/ui/actions';
+import { Breadcrumbs, CtaBand, InlineCta, RelatedCards } from '../../../_components/ui/PageParts';
 import { pickReadable } from '../../_lib/catalogueQuery';
 import { VehicleModelView, type Variant } from './VehicleModelView';
 
@@ -238,12 +238,6 @@ export async function VehicleModelContent({
   const longRate = highSeason ? minTarif : model.minTarifLong;
   const displayedPrice = dateRange ? positiveMin(variants.map((variant) => variant.tarifJour)) || minTarif : minTarif;
 
-  // Avec des dates, vraie navigation vers le catalogue filtré : voir CatalogueView.
-  const BackLink = dateRange ? 'a' : Link;
-  const backHref = dateRange
-    ? localePath(locale, `/catalogue?du=${dateRange.du}&au=${dateRange.au}`)
-    : '/catalogue';
-
   const labels = SEO_LABELS[locale];
   const copy = getModelCopy(slug, locale);
   const path = `/catalogue/${slug}`;
@@ -263,6 +257,7 @@ export async function VehicleModelContent({
 
   const breadcrumbLabel = tr(locale, 'cat.breadcrumb');
   const jsonLd = jsonLdString([
+    websiteNode(locale),
     businessNode(locale, stats),
     carNode(locale, model, name),
     breadcrumbNode(
@@ -279,62 +274,62 @@ export async function VehicleModelContent({
 
   const similar = findSimilarModels(fleetModels, model);
   const brandPage = BRAND_PAGES.find((brand) => slug.startsWith(`${brand.prefix}-`));
+  /* Pages liées : aéroport, marque, catégorie, tarifs, conditions. */
+  const CATEGORY_PAGES: Record<string, SeoRouteKey> = { economique: 'economique', suv: 'suv' };
+  const categoryPage = CATEGORY_PAGES[model.categorie];
   const related: { key: SeoRouteKey; label: string }[] = [
     { key: 'aeroport', label: tr(locale, 'model.linkAirport') },
     ...(brandPage
       ? [{ key: brandPage.key, label: tr(locale, 'model.linkBrand').replace('{brand}', brandPage.label) }]
       : []),
+    ...(categoryPage ? [{ key: categoryPage, label: tr(locale, `footer.link.${categoryPage}`) }] : []),
+    { key: 'tarifs', label: tr(locale, 'footer.link.tarifs') },
+    { key: 'conditions', label: tr(locale, 'footer.link.conditions') },
   ];
+  const relatedLinks = related.flatMap((item) => {
+    const href = getRoutePath(item.key, locale);
+    return href ? [{ href, label: item.label }] : [];
+  });
 
   const h2 = tr(locale, 'model.copyTitle')
     .replace('{article}', frenchArticle(model))
     .replace('{name}', name);
-  const included = [tr(locale, 'model.included1'), tr(locale, 'model.included2'), tr(locale, 'model.included3')];
   const statusLabel = dateRange ? tr(locale, 'model.unavailableDates') : tr(locale, 'model.rented');
+  const facts = [
+    ...(displayedPrice > 0 ? [tr(locale, 'ui.factFrom').replace('{price}', formatPrice(displayedPrice, locale))] : []),
+    tr(locale, 'ui.factMinDays').replace('{count}', String(BUSINESS.minRentalDays)),
+    ...(minCaution > 0 ? [tr(locale, 'ui.deposit').replace('{price}', formatPrice(minCaution, locale))] : []),
+  ];
+  const waMessage = tr(locale, 'model.waMessage').replace('{name}', name);
 
   return (
-    <div className="lux-container py-8 md:py-10">
+    <div className="lux-container pt-6 lg:pt-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
 
-      <Breadcrumbs
-        items={[
-          { name: labels.home, path: '/' },
-          { name: breadcrumbLabel, path: '/catalogue' },
-          { name },
-        ]}
-      />
-
-      <div className="mb-6 flex items-center justify-between gap-3">
-        <BackLink
-          href={backHref}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cream-muted transition-colors hover:text-gold"
-        >
-          <ChevronLeft className="h-4 w-4 rtl:rotate-180" /> {tr(locale, 'model.back')}
-        </BackLink>
-        <span className="hidden md:inline">
-          <span className="lux-eyebrow">
-            <Sparkles className="h-3.5 w-3.5" />{' '}
-            {variants.length > 1
-              ? tp(locale, 'model.countAvailable', variants.length)
-              : tr(locale, 'model.sheetLabel')}
-          </span>
-        </span>
-      </div>
-
-      <header className="mb-6 max-w-4xl space-y-3">
-        <h1 className="lux-title-sm text-cream">
-          {tr(locale, 'model.h1').replace('{name}', name)}
-        </h1>
-        {minTarif > 0 && (
-          <p className="lux-subtitle">
-            {tr(locale, 'model.intro').replace('{name}', name).replace('{price}', String(minTarif))}
-          </p>
-        )}
-        {variants.length === 0 && (
-          <p className="inline-flex rounded-full border border-gold/25 bg-gold/10 px-4 py-1.5 text-sm font-semibold text-gold">
-            {statusLabel}
-          </p>
-        )}
+      <header className="mb-6">
+        <Breadcrumbs
+          locale={locale}
+          items={[
+            { name: labels.home, path: '/' },
+            { name: breadcrumbLabel, path: '/catalogue' },
+            { name },
+          ]}
+        />
+        <h1 className="t-h1-page mt-3">{tr(locale, 'model.h1').replace('{name}', name)}</h1>
+        <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-1 text-base text-cream-muted">
+          {facts.map((fact, index) => (
+            <li key={fact} className="flex items-center gap-2">
+              {index > 0 && <span aria-hidden="true" className="text-gold">·</span>}
+              <span className={index === 0 ? 'font-semibold text-gold-light' : undefined}>{fact}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-1 flex flex-wrap items-center gap-x-4">
+          <RatingLink locale={locale} />
+          {variants.length === 0 && (
+            <span className="chip border-gold/40 text-gold-light">{statusLabel}</span>
+          )}
+        </div>
       </header>
 
       <VehicleModelView
@@ -342,81 +337,86 @@ export async function VehicleModelContent({
         variants={variants}
         fallbackUnit={fallbackUnit}
         modelSlug={slug}
-        modelMinTarif={displayedPrice}
         marque={marque}
         modele={modele}
         highSeason={highSeason}
         initialDu={dateRange?.du}
         initialAu={dateRange?.au}
-      />
+        intro={
+          minTarif > 0 ? (
+            <p className="t-body prose-col">
+              {tr(locale, 'model.intro').replace('{name}', name).replace('{price}', formatAmount(minTarif, locale))}
+            </p>
+          ) : undefined
+        }
+      >
+        <div className="space-y-12 pb-4 pt-4 lg:pt-6">
+          {copy && copy.paragraphs.length > 0 && (
+            <SeoSections
+              sections={[{ h2, blocks: copy.paragraphs.map((text) => ({ type: 'p' as const, text })) }]}
+              locale={locale}
+              tokens={tokens}
+              vehicles={[]}
+            />
+          )}
 
-      <div className="mt-12 space-y-12">
-        {copy && copy.paragraphs.length > 0 && (
-          <SeoSections
-            sections={[
-              { h2, blocks: copy.paragraphs.map((text) => ({ type: 'p' as const, text })) },
-            ]}
-            locale={locale}
-            tokens={tokens}
-            vehicles={[]}
-          />
-        )}
+          <InlineCta locale={locale} message={waMessage} />
 
-        <div className="grid gap-5 md:grid-cols-2">
-          <section className="lux-panel p-6 md:p-7">
-            <h2 className="text-2xl font-bold text-cream">
+          <section aria-labelledby="model-rates" className="cv-auto">
+            <h2 id="model-rates" className="t-h2">
               {tr(locale, 'model.ratesTitle').replace('{name}', name)}
             </h2>
-            <table className="mt-5 w-full text-sm">
-              <tbody className="divide-y divide-white/5">
-                <tr>
-                  <th scope="row" className="py-3 pe-4 text-start font-medium text-cream-muted">{labels.pricingShort}</th>
-                  <td className="py-3 text-end font-semibold text-cream">
-                    {minTarif} DH{labels.perDay}
-                    <EurHint mad={minTarif} locale={locale} />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" className="py-3 pe-4 text-start font-medium text-cream-muted">{labels.pricingLong}</th>
-                  <td className="py-3 text-end font-semibold text-cream">
-                    {longRate} DH{labels.perDay}
-                    <EurHint mad={longRate} locale={locale} />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row" className="py-3 pe-4 text-start font-medium text-cream-muted">{labels.pricingDeposit}</th>
-                  <td className="py-3 text-end font-semibold text-cream">
-                    {minCaution > 0 ? `${minCaution} DH` : labels.onRequest}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="mt-3 text-xs text-cream-faint">{labels.pricingNote}</p>
+            <div className="card mt-5 px-4 sm:px-6">
+              <table className="w-full text-[0.9375rem]">
+                <tbody className="divide-y divide-white/[0.06]">
+                  <tr>
+                    <th scope="row" className="py-3.5 pe-4 text-start font-medium text-cream-muted">{labels.pricingShort}</th>
+                    <td className="py-3.5 text-end font-semibold text-cream">
+                      <bdi>{formatPrice(minTarif, locale)}</bdi>
+                      {labels.perDay}
+                      <EurHint mad={minTarif} locale={locale} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="py-3.5 pe-4 text-start font-medium text-cream-muted">{labels.pricingLong}</th>
+                    <td className="py-3.5 text-end font-semibold text-cream">
+                      <bdi>{formatPrice(longRate, locale)}</bdi>
+                      {labels.perDay}
+                      <EurHint mad={longRate} locale={locale} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className="py-3.5 pe-4 text-start font-medium text-cream-muted">{labels.pricingDeposit}</th>
+                    <td className="py-3.5 text-end font-semibold text-cream">
+                      {minCaution > 0 ? <bdi>{formatPrice(minCaution, locale)}</bdi> : labels.onRequest}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-sm text-cream-faint">{labels.pricingNote}</p>
           </section>
 
-          <section className="lux-panel p-6 md:p-7">
-            <h2 className="text-2xl font-bold text-cream">{tr(locale, 'model.includedTitle')}</h2>
-            <ul className="mt-5 space-y-3 text-sm leading-relaxed text-cream-muted">
-              {included.map((item) => (
-                <li key={item} className="flex items-start gap-2.5">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {item}
-                </li>
-              ))}
-            </ul>
-          </section>
+          <div className="cv-auto">
+            <SeoFaq locale={locale} items={copy?.faq ?? []} tokens={tokens} />
+          </div>
+
+          {similar.length > 0 && (
+            <section aria-labelledby="model-similar" className="cv-auto">
+              <h2 id="model-similar" className="t-h2 mb-5">
+                {tr(locale, 'model.similarTitle')}
+              </h2>
+              <VehicleCards locale={locale} vehicles={similar} />
+            </section>
+          )}
+
+          <div className="cv-auto">
+            <RelatedCards title={labels.relatedTitle} items={relatedLinks} />
+          </div>
         </div>
+      </VehicleModelView>
 
-        <SeoFaq locale={locale} items={copy?.faq ?? []} tokens={tokens} />
-
-        {similar.length > 0 && (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-cream">{tr(locale, 'model.similarTitle')}</h2>
-            <VehicleCards locale={locale} vehicles={similar} />
-          </section>
-        )}
-
-        <RelatedLinks locale={locale} items={related} />
-      </div>
+      <CtaBand locale={locale} minPrice={stats.minPrice} />
     </div>
   );
 }

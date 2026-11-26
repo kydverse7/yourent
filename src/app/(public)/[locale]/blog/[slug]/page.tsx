@@ -3,13 +3,24 @@ import { notFound } from 'next/navigation';
 import { ARTICLES, findArticle } from '@/content/blog';
 import { loadPageContent } from '@/content/pages';
 import { getFleetModels, getFleetStats } from '@/lib/seo/fleet';
-import { BUSINESS_ID, breadcrumbNode, businessNode, faqNode, jsonLdString } from '@/lib/seo/jsonLd';
+import { t as tr } from '@/lib/i18n/translations';
+import { BUSINESS_ID, breadcrumbNode, businessNode, faqNode, jsonLdString, WEBSITE_ID, websiteNode } from '@/lib/seo/jsonLd';
 import { buildMetadata } from '@/lib/seo/metadata';
 import type { SeoRouteKey } from '@/lib/seo/routes';
 import { absoluteUrl } from '@/lib/site';
-import { plainText, RelatedLinks, resolveTokens, SeoFaq, SeoSections, type TextTokens } from '../../_components/seo/SeoBlocks';
-import { Breadcrumbs, SeoFinalCta } from '../../_components/seo/SeoShell';
+import {
+  plainText,
+  RelatedLinks,
+  resolveTokens,
+  RichText,
+  SeoFaq,
+  SeoSections,
+  SeoToc,
+  type TextTokens,
+} from '../../_components/seo/SeoBlocks';
 import { SEO_LABELS } from '../../_components/seo/seoLabels';
+import { Breadcrumbs, CtaBand, InlineCta, RelatedCards } from '../../_components/ui/PageParts';
+import { formatArticleDate, readingMinutes } from '../blogMeta';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -65,15 +76,18 @@ export default async function ArticlePage({ params }: Props) {
 
   const faq = article.faq.map((item) => ({ q: plainText(item.q, tokens), a: plainText(item.a, tokens) }));
   const jsonLd = jsonLdString([
+    websiteNode('fr'),
     businessNode('fr', stats),
     {
       '@type': 'Article',
       '@id': `${absoluteUrl(path)}#article`,
       headline: plainText(article.h1, tokens),
       description: plainText(article.metaDescription, tokens),
+      image: absoluteUrl('/image-casablanca.jpg'),
       datePublished: article.datePublished,
       dateModified: article.dateModified,
       inLanguage: 'fr',
+      isPartOf: { '@id': WEBSITE_ID },
       mainEntityOfPage: absoluteUrl(path),
       author: { '@id': BUSINESS_ID },
       publisher: { '@id': BUSINESS_ID },
@@ -90,45 +104,82 @@ export default async function ArticlePage({ params }: Props) {
     ...(faq.length > 0 ? [faqNode('fr', faq, path)] : []),
   ]);
 
-  const updated = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'UTC' }).format(
-    new Date(article.dateModified),
-  );
+  const updated = formatArticleDate(article.dateModified);
+  const minutes = readingMinutes(article);
+  // « À lire aussi » : trois autres articles, les plus récemment mis à jour.
+  const further = ARTICLES.filter((other) => other.slug !== article.slug)
+    .sort((a, b) => b.dateModified.localeCompare(a.dateModified))
+    .slice(0, 3);
 
   return (
-    <article className="lux-container py-8 md:py-10">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <Breadcrumbs
-        items={[
-          { name: labels.home, path: '/' },
-          { name: labels.blog, path: '/blog' },
-          { name: article.h1 },
-        ]}
-      />
-      <div className="max-w-3xl space-y-12">
-        <header className="space-y-4">
-          <h1 className="lux-title-sm text-cream">{resolveTokens(article.h1, tokens)}</h1>
-          <p className="text-sm text-cream-faint">{labels.updated} {updated}</p>
-          <p className="lux-subtitle">{plainText(article.intro, tokens)}</p>
-        </header>
-        <SeoSections sections={article.sections} locale="fr" tokens={tokens} vehicles={[]} />
-        <SeoFaq locale="fr" items={article.faq} tokens={tokens} />
-        {article.sources && article.sources.length > 0 && (
-          <section className="space-y-2 text-sm text-cream-muted">
-            <h2 className="text-lg font-semibold text-cream">{labels.sources}</h2>
-            <ul className="list-disc space-y-1 ps-5">
-              {article.sources.map((source) => (
-                <li key={source.url}>
-                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
-                    {source.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-        <RelatedLinks locale="fr" items={related} />
-        <SeoFinalCta locale="fr" title={labels.blogTitle} />
-      </div>
-    </article>
+      <article className="lux-container pt-6 lg:pt-8">
+        <div className="mx-auto max-w-[720px]">
+          <header>
+            <Breadcrumbs
+              locale="fr"
+              items={[
+                { name: labels.home, path: '/' },
+                { name: labels.blog, path: '/blog' },
+                { name: article.h1 },
+              ]}
+            />
+            <h1 className="t-h1-page mt-3">{resolveTokens(article.h1, tokens)}</h1>
+            <p className="mt-3 text-sm text-cream-faint">
+              {tr('fr', 'ui.updated').replace('{date}', updated)} · {tr('fr', 'ui.readingTime').replace('{count}', String(minutes))} ·{' '}
+              {tr('fr', 'ui.byTeam')}
+            </p>
+            <p className="mt-5 text-lg leading-relaxed text-cream">
+              <RichText text={article.intro} locale="fr" tokens={tokens} />
+            </p>
+          </header>
+
+          <div className="mt-8">
+            <SeoToc locale="fr" sections={article.sections} tokens={tokens} />
+          </div>
+
+          <div className="mt-10 space-y-12">
+            <SeoSections
+              sections={article.sections}
+              locale="fr"
+              tokens={tokens}
+              vehicles={[]}
+              inlineCta={<InlineCta locale="fr" />}
+            />
+            <div className="cv-auto">
+              <SeoFaq locale="fr" items={article.faq} tokens={tokens} />
+            </div>
+            {article.sources && article.sources.length > 0 && (
+              <section className="cv-auto">
+                <h2 className="t-h3">{labels.sources}</h2>
+                <ul className="t-small mt-3 list-disc space-y-1.5 ps-5">
+                  {article.sources.map((source) => (
+                    <li key={source.url}>
+                      <a href={source.url} target="_blank" rel="noopener noreferrer" className="t-link">
+                        {source.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-14 space-y-12">
+          <RelatedCards
+            title={tr('fr', 'ui.related')}
+            items={further.map((other) => ({
+              href: `/blog/${other.slug}`,
+              label: other.h1,
+              hint: tr('fr', 'ui.readingTime').replace('{count}', String(readingMinutes(other))),
+            }))}
+          />
+          <RelatedLinks locale="fr" items={related} />
+        </div>
+      </article>
+      <CtaBand locale="fr" minPrice={stats.minPrice} />
+    </>
   );
 }

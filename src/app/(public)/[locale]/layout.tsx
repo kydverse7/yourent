@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import { inter, notoArabic } from '@/lib/fonts';
+import { arabic, inter } from '@/lib/fonts';
 import { isLocale, isRtl, LOCALES } from '@/lib/i18n/routing';
 import { SITE_URL } from '@/lib/site';
 import { ADS_ID } from '@/lib/ads';
 import { Analytics } from './_components/Analytics';
 import { PublicLayoutShell } from './_components/PublicLayoutShell';
-import { PublicToaster } from './_components/PublicToaster';
 import '@/app/globals.css';
 
 export const viewport: Viewport = {
@@ -51,11 +50,11 @@ export default async function PublicRootLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const fontClasses = locale === 'ar' ? `${inter.variable} ${notoArabic.variable}` : inter.variable;
+  const fontClasses = locale === 'ar' ? `${inter.variable} ${arabic.variable}` : inter.variable;
 
   return (
     <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'} className={fontClasses}>
-      <body suppressHydrationWarning className="min-h-screen antialiased bg-noir-root text-cream">
+      <body suppressHydrationWarning className="site-public min-h-screen antialiased bg-noir-root text-cream">
         {/* File dataLayer créée tout de suite : les événements émis avant le chargement du tag y attendent.
             Le tag lui-même est chargé après la page (vitesse), sauf pour un visiteur venu d'une annonce
             (gclid, gbraid, wbraid…) : chargé aussitôt, avant qu'un changement de page n'efface l'identifiant du clic. */}
@@ -86,7 +85,6 @@ export default async function PublicRootLayout({
         </Script>
         <Analytics />
         <PublicLayoutShell locale={locale}>{children}</PublicLayoutShell>
-        <PublicToaster />
       </body>
     </html>
   );

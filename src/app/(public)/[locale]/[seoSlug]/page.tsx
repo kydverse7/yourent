@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import Link from '@/lib/i18n/LocaleLink';
+import { formatPrice } from '@/lib/format';
 import { loadPageContent } from '@/content/pages';
 import type { PageContent } from '@/content/types';
 import { isLocale } from '@/lib/i18n/routing';
-import type { Locale } from '@/lib/i18n/translations';
+import { t as tr, type Locale } from '@/lib/i18n/translations';
 import { filterFleet, getFleetModels, getFleetStats, type FleetModel } from '@/lib/seo/fleet';
 import {
   breadcrumbNode,
@@ -15,9 +18,20 @@ import {
 } from '@/lib/seo/jsonLd';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { allSeoParams, findRouteBySlug, getRoutePaths, type SeoRouteKey } from '@/lib/seo/routes';
-import { plainText, RelatedLinks, resolveTokens, SeoFaq, SeoSections, type TextTokens } from '../_components/seo/SeoBlocks';
-import { Breadcrumbs, SeoFinalCta, SeoHead } from '../_components/seo/SeoShell';
+import {
+  plainText,
+  RelatedLinks,
+  resolveTokens,
+  RichText,
+  SeoFaq,
+  SeoSections,
+  SeoToc,
+  VehicleCards,
+  type TextTokens,
+} from '../_components/seo/SeoBlocks';
 import { SEO_LABELS } from '../_components/seo/seoLabels';
+import { BookButton, CallButton, FactsLine, RatingLink, WhatsAppButton } from '../_components/ui/actions';
+import { CtaBand, InlineCta, PageHeader } from '../_components/ui/PageParts';
 
 type Props = { params: Promise<{ locale: string; seoSlug: string }> };
 
@@ -117,24 +131,91 @@ export default async function SeoPage({ params }: Props) {
     ...selection.map((model) => carNode(locale, model, `${model.marque} ${model.modele}`)),
   ]);
 
+  const lead = selection.find((model) => model.photo) ?? null;
+  const t = (key: string) => tr(locale, key);
+
   return (
-    <div className="lux-container py-8 md:py-10">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <Breadcrumbs items={[{ name: labels.home, path: '/' }, { name: content.breadcrumb }]} />
-      <div className="max-w-4xl">
-        <SeoHead
+      <div className="lux-container pt-6 lg:pt-8">
+        <PageHeader
           locale={locale}
+          crumbs={[{ name: labels.home, path: '/' }, { name: content.breadcrumb }]}
           eyebrow={content.eyebrow}
-          h1={resolveTokens(content.h1, tokens)}
-          intro={plainText(content.intro, tokens)}
+          title={resolveTokens(content.h1, tokens)}
+          intro={<RichText text={content.intro} locale={locale} tokens={tokens} />}
+          actions={
+            <>
+              <BookButton locale={locale} label={labels.catalogue} />
+              <WhatsAppButton locale={locale} />
+              <CallButton locale={locale} />
+            </>
+          }
+          facts={
+            <>
+              <FactsLine locale={locale} minPrice={tokens.minPrice} />
+              <RatingLink locale={locale} className="mt-1" />
+            </>
+          }
+          aside={
+            lead ? (
+              <Link
+                href={`/catalogue/${lead.slug}`}
+                className="card group hidden overflow-hidden transition-colors hover:border-gold/40 lg:block"
+              >
+                <span className="relative block aspect-[10/7] bg-surface-2">
+                  <Image
+                    src={lead.photo as string}
+                    alt={t('model.photoAlt').replace('{name}', `${lead.marque} ${lead.modele}`)}
+                    fill
+                    sizes="460px"
+                    className="object-contain p-4"
+                  />
+                </span>
+                <span className="flex items-baseline justify-between gap-3 px-5 py-4">
+                  <bdi className="font-bold text-cream">
+                    {lead.marque} {lead.modele}
+                  </bdi>
+                  {lead.minTarif > 0 && (
+                    <span className="whitespace-nowrap text-sm text-cream-muted">
+                      {t('ui.from')} <bdi className="text-lg font-extrabold text-gold-light">{formatPrice(lead.minTarif, locale)}</bdi>
+                      {t('ui.perDay')}
+                    </span>
+                  )}
+                </span>
+              </Link>
+            ) : undefined
+          }
         />
+
+        {selection.length > 0 && (
+          <div className="mt-10">
+            <VehicleCards locale={locale} vehicles={selection.slice(0, 4)} headingLevel="p" />
+          </div>
+        )}
+
+        <div className="mt-10 pb-4 xl:grid xl:grid-cols-[230px_minmax(0,1fr)] xl:gap-12">
+          <aside className="mb-8 xl:mb-0">
+            <SeoToc locale={locale} sections={content.sections} tokens={tokens} />
+          </aside>
+          <div className="min-w-0 space-y-12">
+            <SeoSections
+              sections={content.sections}
+              locale={locale}
+              tokens={tokens}
+              vehicles={selection}
+              inlineCta={<InlineCta locale={locale} />}
+            />
+            <div className="cv-auto">
+              <SeoFaq locale={locale} items={content.faq} tokens={tokens} />
+            </div>
+            <div className="cv-auto">
+              <RelatedLinks locale={locale} items={related} />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="mt-12 space-y-12">
-        <SeoSections sections={content.sections} locale={locale} tokens={tokens} vehicles={selection} />
-        <SeoFaq locale={locale} items={content.faq} tokens={tokens} />
-        <RelatedLinks locale={locale} items={related} />
-        <SeoFinalCta locale={locale} title={resolveTokens(content.h1, tokens)} />
-      </div>
-    </div>
+      <CtaBand locale={locale} minPrice={stats.minPrice} />
+    </>
   );
 }

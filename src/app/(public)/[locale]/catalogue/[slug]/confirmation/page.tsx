@@ -60,7 +60,7 @@ export default async function ConfirmationPage({
         </div>
 
         <span className="lux-eyebrow mb-5">{tr(locale, 'confirmation.eyebrow')}</span>
-        <h1 className="mb-3 text-3xl font-bold text-cream md:text-4xl">{tr(locale, 'confirmation.title')}</h1>
+        <h1 className="t-h1-page mb-3">{tr(locale, 'confirmation.title')}</h1>
         <p className="mx-auto mb-8 max-w-xl text-cream-muted">
           {tr(locale, 'confirmation.desc')}
         </p>
@@ -71,14 +71,14 @@ export default async function ConfirmationPage({
           <p className="text-cream text-sm font-semibold mb-2">
             {locale === 'en' ? 'Contact us on WhatsApp to confirm your reservation' : locale === 'ar' ? 'تواصلوا معنا عبر واتساب لتأكيد حجزكم' : 'Contactez-nous par WhatsApp afin de confirmer votre réservation'}
           </p>
-          <p className="text-cream-muted text-xs mb-4">
+          <p className="mb-4 text-sm text-cream-muted">
             {locale === 'en' ? 'We will respond as soon as possible.' : locale === 'ar' ? 'سنرد عليكم في أقرب وقت.' : 'Nous vous répondrons dans les plus brefs délais.'}
           </p>
           <a
             href={waUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 rounded-2xl bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#25D366]/20 transition-all hover:bg-[#20BD5A] hover:shadow-[#25D366]/30"
+            className="btn btn-wa"
           >
             <MessageCircle className="h-5 w-5" />
             {locale === 'en' ? 'Confirm on WhatsApp' : locale === 'ar' ? 'تأكيد عبر واتساب' : 'Confirmer sur WhatsApp'}
@@ -90,13 +90,13 @@ export default async function ConfirmationPage({
           <div className="space-y-3">
             <a
               href={`tel:+${waPhone}`}
-              className="flex items-center gap-3 justify-center text-cream hover:text-gold transition-colors"
+              className="flex min-h-11 items-center justify-center gap-3 text-cream transition-colors hover:text-gold"
             >
               <Phone className="w-4 h-4 text-gold" /> <bdi dir="ltr">+{waPhone}</bdi>
             </a>
             <a
               href={`mailto:${agence.email}`}
-              className="flex items-center gap-3 justify-center text-cream hover:text-gold transition-colors"
+              className="flex min-h-11 items-center justify-center gap-3 text-cream transition-colors hover:text-gold"
             >
               <Mail className="w-4 h-4 text-gold" /> {agence.email}
             </a>
@@ -105,9 +105,9 @@ export default async function ConfirmationPage({
 
         <Link
           href="/catalogue"
-          className="btn-gold"
+          className="btn btn-secondary"
         >
-          {tr(locale, 'confirmation.backCatalogue')} <ArrowRight className="h-4 w-4" />
+          {tr(locale, 'confirmation.backCatalogue')} <ArrowRight className="h-5 w-5 rtl:-scale-x-100" />
         </Link>
       </div>
     </div>

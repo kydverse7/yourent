@@ -9,10 +9,9 @@ export function PublicToaster() {
       position="top-right"
       toastOptions={{
         style: {
-          background: 'rgba(17,17,17,0.92)',
+          background: '#17181B',
           color: '#F5F0E8',
           border: '1px solid rgba(201,168,76,0.22)',
-          backdropFilter: 'blur(16px)',
           boxShadow: '0 18px 42px rgba(0,0,0,0.38)',
           borderRadius: '18px',
         },
