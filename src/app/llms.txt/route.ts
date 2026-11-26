@@ -21,7 +21,7 @@ export async function GET() {
 
   lines.push(`# ${BUSINESS.name}`, '');
   lines.push(
-    `> ${BUSINESS.name} est une agence de location de voitures à Casablanca (Maroc). Livraison gratuite dans tout Casablanca et à l'aéroport Mohammed V, 7j/7 ; livraison possible à Marrakech et à l'aéroport Marrakech-Ménara sur demande. Réservation en ligne par demande de disponibilité, confirmée par l'équipe sur WhatsApp ou par téléphone.`,
+    `> ${BUSINESS.name} est une agence de location de voitures à Casablanca (Maroc). Livraison gratuite dans tout Casablanca, à l'aéroport Mohammed V, à Marrakech et à l'aéroport Marrakech-Ménara, 7j/7 ; à Mohammedia avec un léger supplément. Réservation en ligne par demande de disponibilité, confirmée par l'équipe sur WhatsApp ou par téléphone.`,
     '',
   );
 
@@ -42,7 +42,7 @@ export async function GET() {
     '- Livraison gratuite dans tout Casablanca et à l\'aéroport Mohammed V (livraison à l\'hôtel, à l\'aéroport ou à l\'adresse choisie). Mohammedia : possible avec un léger supplément.',
   );
   lines.push(
-    '- Marrakech et aéroport Marrakech-Ménara : livraison possible sur demande, conditions et éventuel supplément confirmés sur WhatsApp avant la réservation. Yourent n\'a pas d\'agence à Marrakech : la voiture vient de Casablanca.',
+    '- Marrakech et aéroport Marrakech-Ménara : livraison gratuite, comme à Casablanca. Yourent n\'a pas d\'agence à Marrakech : la voiture vient de Casablanca, et le lieu de restitution se convient avec l\'équipe sur WhatsApp avant la réservation.',
   );
   lines.push(`- Âge minimum du conducteur : ${BUSINESS.minAge} ans.`);
   lines.push('- Documents : pièce d\'identité valide (CIN ou passeport), permis de plus de 2 ans, justificatif de domicile. Permis international accepté pour les touristes étrangers.');

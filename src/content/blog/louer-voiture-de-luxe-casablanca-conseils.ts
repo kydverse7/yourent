@@ -59,7 +59,7 @@ const article: Article = {
             `**La caution.** Elle dépend du véhicule et se laisse au départ, par chèque, en espèces ou par empreinte de carte. Elle vous revient au retour de la voiture en bon état, mais il faut pouvoir l'avancer.`,
             `**La franchise.** Chaque voiture est assurée tous risques, avec une franchise. Demandez-en le montant : sur un modèle haut de gamme, c'est la question la plus utile à poser.`,
             `**Le carburant.** Un grand SUV consomme plus qu'une citadine, et le plein reste à votre charge.`,
-            `**La livraison.** Elle est gratuite à Casablanca, à l'hôtel comme à l'aéroport Mohammed V. Pour Marrakech, l'équipe confirme les conditions sur WhatsApp.`,
+            `**La livraison.** Elle est gratuite à Casablanca, à l'hôtel comme à l'aéroport Mohammed V, et l'est aussi à Marrakech et à l'aéroport Marrakech-Ménara.`,
           ],
         },
         {

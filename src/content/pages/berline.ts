@@ -101,7 +101,7 @@ const page: LocalizedPage = {
         blocks: [
           {
             type: 'p',
-            text: "La berline vous est livrée à l'hôtel, à domicile ou à l'aéroport Mohammed V, sans frais, tous les jours de 8 h à 22 h. Une livraison est aussi possible à Mohammedia, avec un léger supplément, et à Marrakech sur demande.",
+            text: "La berline vous est livrée à l'hôtel, à domicile ou à l'aéroport Mohammed V, sans frais, tous les jours de 8 h à 22 h. La livraison est gratuite aussi à Marrakech et à l'aéroport Marrakech-Ménara ; à Mohammedia, elle est possible avec un léger supplément.",
           },
           {
             type: 'p',

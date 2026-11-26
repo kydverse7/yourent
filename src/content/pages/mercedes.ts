@@ -77,7 +77,7 @@ const page: LocalizedPage = {
       },
       {
         q: "La Mercedes peut-elle être livrée à l'aéroport ou à l'hôtel ?",
-        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h. Une livraison reste aussi possible à Mohammedia, avec un léger supplément, et à Marrakech sur demande.",
+        a: "Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8h à 22h, ainsi qu'à Marrakech et à l'aéroport Marrakech-Ménara. Une livraison reste aussi possible à Mohammedia, avec un léger supplément.",
       },
       {
         q: "Peut-on louer une Mercedes pour un mariage ou pour une seule journée ?",

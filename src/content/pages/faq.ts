@@ -57,7 +57,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'La livraison est-elle gratuite ?',
-        a: 'Oui, dans tout Casablanca et à l’aéroport Mohammed V, 7j/7. À Mohammedia, un léger supplément s’applique. À Marrakech et à l’aéroport Marrakech-Ménara, la livraison est possible sur demande, à des conditions que l’équipe confirme sur WhatsApp.',
+        a: 'Oui, dans tout Casablanca et à l’aéroport Mohammed V, 7j/7, ainsi qu’à Marrakech et à l’aéroport Marrakech-Ménara. À Mohammedia, un léger supplément s’applique.',
       },
       {
         q: 'Peut-on récupérer la voiture à l’aéroport Mohammed V ?',

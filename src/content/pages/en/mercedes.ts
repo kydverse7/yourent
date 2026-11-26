@@ -80,7 +80,7 @@ const page: PageContent = {
     },
     {
       q: 'Can the Mercedes be delivered to the airport or my hotel?',
-      a: 'Yes. Yourent delivers free of charge anywhere in Casablanca and at Mohammed V airport, every day from 8 am to 10 pm. Delivery to Mohammedia is possible for a small extra fee.',
+      a: 'Yes. Yourent delivers free of charge anywhere in Casablanca and at Mohammed V airport, every day from 8 am to 10 pm, as well as in Marrakech and at Marrakech-Menara airport. Delivery to Mohammedia is possible for a small extra fee.',
     },
     {
       q: 'Which documents do I need to rent a Mercedes?',

@@ -58,7 +58,7 @@ const article: Article = {
             `**Le tarif.** Comptez au moins cinq fois le tarif par jour du modèle, puisque la location dure 5 jours minimum.`,
             `**La caution.** Elle dépend du véhicule et se laisse au départ, par chèque, en espèces ou par empreinte de carte. Elle vous revient au retour de la voiture en bon état : prévoyez-la dans votre trésorerie de la semaine.`,
             `**Le carburant.** Il reste à votre charge.`,
-            `**La livraison.** Elle est gratuite dans tout Casablanca, au domicile comme à l'hôtel. Pour une fête à Mohammedia, un léger supplément s'applique ; pour Marrakech, l'équipe confirme les conditions sur WhatsApp.`,
+            `**La livraison.** Elle est gratuite dans tout Casablanca, au domicile comme à l'hôtel. Pour une fête à Mohammedia, un léger supplément s'applique ; à Marrakech, la livraison est gratuite elle aussi.`,
           ],
         },
         {

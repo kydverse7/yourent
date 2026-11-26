@@ -41,7 +41,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'You rent for 5 days or more. Beyond 10 days, the daily rate falls automatically on most models, although high season can suspend this. The included mileage is not on the site, so the team gives it on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at your address in Casablanca, free of charge, from 8 am to 10 pm, every day. Outside the city, Mohammedia is possible for a small extra charge and Marrakech on request ([car rental in Marrakech](route:livraison-marrakech)). The place where you return the car is agreed with the team on WhatsApp before you confirm.',
+          text: 'You rent for 5 days or more. Beyond 10 days, the daily rate falls automatically on most models, although high season can suspend this. The included mileage is not on the site, so the team gives it on WhatsApp before you book. Delivery takes place at your hotel, at Mohammed V airport or at your address in Casablanca, free of charge, from 8 am to 10 pm, every day. Outside the city, delivery is also free in Marrakech and at Marrakech-Menara airport ([car rental in Marrakech](route:livraison-marrakech)), and Mohammedia is possible for a small extra charge. The place where you return the car is agreed with the team on WhatsApp before you confirm.',
         },
       ],
     },
@@ -81,7 +81,7 @@ const page: PageContent = {
             ['Deposit', 'Cheque, cash or card imprint, amount depends on the car'],
             ['Insurance', 'Comprehensive with an excess, amount given by the team'],
             ['Mileage', 'Given by the team before you book'],
-            ['Delivery', 'Free in Casablanca and at Mohammed V airport; Mohammedia for a small extra charge; Marrakech on request'],
+            ['Delivery', 'Free in Casablanca, at Mohammed V airport, in Marrakech and at Marrakech-Menara airport; Mohammedia for a small extra charge'],
             ['Return place', 'Agreed with the team on WhatsApp before you confirm'],
             ['Cancellation', 'Free up to 24 hours before pick-up'],
             ['Breakdown', 'Replacement car as soon as possible'],

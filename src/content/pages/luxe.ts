@@ -155,7 +155,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Peut-on se faire livrer une voiture de luxe à son hôtel ou à l'aéroport ?",
-        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. L'équipe vous donne le point de rendez-vous précis sur WhatsApp. Pour une remise à Marrakech, elle confirme les conditions sur demande.",
+        a: "Oui. La livraison est gratuite à Casablanca, à l'hôtel comme à l'adresse de votre choix, et à l'aéroport Mohammed V. Elle l'est aussi à Marrakech et à l'aéroport Marrakech-Ménara. L'équipe vous donne le point de rendez-vous précis sur WhatsApp.",
       },
       {
         q: 'Quel âge faut-il pour louer une voiture de luxe à Casablanca ?',

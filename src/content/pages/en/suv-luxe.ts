@@ -104,7 +104,7 @@ const page: PageContent = {
         {
           type: 'list',
           items: [
-            '**Delivery**: free in Casablanca, to your hotel or your address, and at Mohammed V airport. The [luxury car rental at Casablanca airport](route:luxe-aeroport) page describes the handover on arrival. For Marrakech, delivery is on request: see [car rental in Marrakech](route:livraison-marrakech).',
+            '**Delivery**: free in Casablanca, to your hotel or your address, and at Mohammed V airport. The [luxury car rental at Casablanca airport](route:luxe-aeroport) page describes the handover on arrival. Delivery is free in Marrakech and at Marrakech-Menara airport too: see [car rental in Marrakech](route:livraison-marrakech).',
             '**Rental period**: 5 days minimum, with no one-day or weekend option. For several weeks, read the [long-term luxury car rental](route:luxe-longue-duree) page.',
             '**Driver**: at least 21, with a licence held for more than 2 years, a valid ID (CIN or passport) and proof of address. Foreign visitors can show an international driving permit.',
             '**Deposit**: left at pick-up, by cheque, in cash or by card imprint, and returned to you when the car comes back in good condition.',
@@ -144,7 +144,7 @@ const page: PageContent = {
     },
     {
       q: 'Can the SUV be delivered to the airport or my hotel?',
-      a: 'Yes, free of charge, anywhere in Casablanca and at Mohammed V airport, every day from 8 am to 10 pm. Delivery to Marrakech is possible on request, on terms confirmed on WhatsApp.',
+      a: 'Yes, free of charge, anywhere in Casablanca and at Mohammed V airport, every day from 8 am to 10 pm, as well as in Marrakech and at Marrakech-Menara airport.',
     },
   ],
   related: ['luxe', 'range-rover', 'porsche', 'suv', 'luxe-aeroport', 'berline'],

@@ -63,7 +63,7 @@ const article: Article = {
             `**Le carburant.** Essence, diesel ou hybride. Il ne change pas le tarif de location lui-même, mais il pèse sur le coût d'un long trajet.`,
             `**La durée.** Voir plus haut : minimum de 5 jours, tarif réduit au-delà de 10 jours.`,
             `**La période.** Les prix affichés sont les tarifs en vigueur, et l'équipe confirme celui qui s'applique à vos dates, surtout en pleine saison. La disponibilité d'un modèle varie aussi avec les dates : la recherche par dates de la page catalogue exclut les véhicules déjà loués.`,
-            `**Les options et suppléments.** La livraison ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible mais avec un léger supplément. À Marrakech, elle se fait sur demande, à des conditions que l'équipe confirme sur WhatsApp.`,
+            `**Les options et suppléments.** La livraison ne coûte rien à Casablanca, à l'aéroport Mohammed V, à Marrakech ni à l'aéroport Marrakech-Ménara. À Mohammedia, elle reste possible mais avec un léger supplément.`,
           ],
         },
       ],
@@ -116,7 +116,7 @@ const article: Article = {
     },
     {
       q: `La livraison de la voiture est-elle payante ?`,
-      a: `Non, elle ne coûte rien à Casablanca ni à l'aéroport Mohammed V. À Mohammedia, elle reste possible, mais avec un léger supplément. Pour Marrakech, l'équipe confirme les conditions sur WhatsApp.`,
+      a: `Non, elle ne coûte rien à Casablanca ni à l'aéroport Mohammed V, pas plus qu'à Marrakech ou à l'aéroport Marrakech-Ménara. À Mohammedia, elle reste possible, mais avec un léger supplément.`,
     },
     {
       q: `Peut-on payer en ligne ?`,

@@ -100,7 +100,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The car is delivered to your hotel, your address or Mohammed V airport, free of charge, every day from 8 am to 10 pm. If you want a Mercedes waiting when you land, the [luxury car rental at Casablanca airport](route:luxe-aeroport) page explains the handover. Delivery is also possible to Mohammedia, for a small extra charge, and to Marrakech on request.',
+          text: 'The car is delivered to your hotel, your address or Mohammed V airport, free of charge, every day from 8 am to 10 pm. If you want a Mercedes waiting when you land, the [luxury car rental at Casablanca airport](route:luxe-aeroport) page explains the handover. Delivery is free in Marrakech and at Marrakech-Menara airport too, and possible to Mohammedia for a small extra charge.',
         },
         {
           type: 'p',

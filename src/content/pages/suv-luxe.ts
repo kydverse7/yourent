@@ -105,7 +105,7 @@ const page: LocalizedPage = {
           {
             type: 'list',
             items: [
-              "**Livraison** : gratuite à Casablanca, à l'hôtel comme à domicile, et à l'aéroport Mohammed V. La page [voiture de luxe à l'aéroport de Casablanca](route:luxe-aeroport) décrit la remise à l'arrivée. Pour Marrakech, la livraison se fait sur demande : voyez la [location de voiture à Marrakech](route:livraison-marrakech).",
+              "**Livraison** : gratuite à Casablanca, à l'hôtel comme à domicile, et à l'aéroport Mohammed V. La page [voiture de luxe à l'aéroport de Casablanca](route:luxe-aeroport) décrit la remise à l'arrivée. La livraison est gratuite aussi à Marrakech et à l'aéroport Marrakech-Ménara : voyez la [location de voiture à Marrakech](route:livraison-marrakech).",
               "**Durée** : 5 jours minimum, sans formule à la journée ni au week-end. Pour plusieurs semaines, lisez la page [voiture de luxe en longue durée](route:luxe-longue-duree).",
               "**Conducteur** : 21 ans minimum et un permis de plus de 2 ans, avec une pièce d'identité valide et un justificatif de domicile.",
               "**Caution** : elle se laisse au départ, par chèque, en espèces ou par empreinte de carte, et vous revient au retour de la voiture en bon état.",
@@ -145,7 +145,7 @@ const page: LocalizedPage = {
       },
       {
         q: "Le SUV peut-il être livré à l'aéroport ou à mon hôtel ?",
-        a: "Oui, gratuitement, dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8 h à 22 h. Une livraison à Marrakech est possible sur demande, à des conditions confirmées sur WhatsApp.",
+        a: "Oui, gratuitement, dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8 h à 22 h, ainsi qu'à Marrakech et à l'aéroport Marrakech-Ménara.",
       },
     ],
     related: ['luxe', 'range-rover', 'porsche', 'suv', 'luxe-aeroport', 'berline'],

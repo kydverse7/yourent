@@ -66,7 +66,7 @@ const article: Article = {
         },
         {
           type: 'p',
-          text: `Hors de Casablanca, Yourent livre à Mohammedia avec un léger supplément, et à Marrakech sur demande, à des conditions confirmées sur WhatsApp. Si vous hésitez entre une agence casablancaise et une grande enseigne, notre comparatif [agence locale ou loueur international](route:agence-vs-international) liste ce qu'il faut regarder.`,
+          text: `Hors de Casablanca, Yourent livre gratuitement à Marrakech et à l'aéroport Marrakech-Ménara ; à Mohammedia, la livraison est possible avec un léger supplément. Si vous hésitez entre une agence casablancaise et une grande enseigne, notre comparatif [agence locale ou loueur international](route:agence-vs-international) liste ce qu'il faut regarder.`,
         },
       ],
     },
@@ -197,7 +197,7 @@ const article: Article = {
     },
     {
       q: `Peut-on se faire livrer la voiture à son hôtel ?`,
-      a: `Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8 h à 22 h. Une livraison à Mohammedia est possible avec un léger supplément, et à Marrakech sur demande.`,
+      a: `Oui. Yourent livre gratuitement dans tout Casablanca et à l'aéroport Mohammed V, tous les jours de 8 h à 22 h, ainsi qu'à Marrakech et à l'aéroport Marrakech-Ménara. À Mohammedia, la livraison est possible avec un léger supplément.`,
     },
     {
       q: `Peut-on louer une voiture à Casablanca avec un permis étranger ?`,

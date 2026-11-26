@@ -118,7 +118,7 @@ const article: Article = {
     },
     {
       q: `Peut-on rendre la voiture à Agadir ou à Marrakech ?`,
-      a: `Le lieu de restitution se convient avec l'équipe de Yourent sur WhatsApp, avant de confirmer la location. À l'inverse, si vous voulez recevoir la voiture à Marrakech, une livraison est possible sur demande : voyez la page [location de voiture à Marrakech](route:livraison-marrakech).`,
+      a: `Le lieu de restitution se convient avec l'équipe de Yourent sur WhatsApp, avant de confirmer la location. À l'inverse, si vous voulez recevoir la voiture à Marrakech, la livraison y est gratuite, en ville comme à l'aéroport Marrakech-Ménara : voyez la page [location de voiture à Marrakech](route:livraison-marrakech).`,
     },
     {
       q: `Combien de jours minimum pour louer chez Yourent ?`,

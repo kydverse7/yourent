@@ -4,11 +4,11 @@ const page: LocalizedPage = {
   fr: {
     metaTitle: 'Location voiture Maroc : Casablanca dès {minPrice} DH | Yourent',
     metaDescription:
-      "Location voiture Maroc au départ de Casablanca : livraison gratuite en ville et à l'aéroport Mohammed V, dès {minPrice} DH/jour, note Google 4,8/5.",
+      "Location voiture Maroc au départ de Casablanca : livraison gratuite en ville, à Marrakech et dans leurs aéroports, dès {minPrice} DH/jour, note Google 4,8/5.",
     eyebrow: 'Voyage au Maroc',
     h1: 'Location de voiture au Maroc au départ de Casablanca',
     intro:
-      "Votre location de voiture au Maroc commence à Casablanca : Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, avec livraison gratuite, dès {minPrice} DH par jour et pour 5 jours minimum. Vous envoyez votre demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent est une agence casablancaise, sans bureau dans les autres villes du pays ; une livraison à Marrakech reste possible sur demande.",
+      "Votre location de voiture au Maroc commence à Casablanca : Yourent vous remet le véhicule en ville ou à l'aéroport Mohammed V, avec livraison gratuite, dès {minPrice} DH par jour et pour 5 jours minimum. Vous envoyez votre demande en ligne, puis l'équipe confirme sur WhatsApp ou par téléphone. Yourent est une agence casablancaise, sans bureau dans les autres villes du pays ; elle livre toutefois gratuitement à Marrakech et à l'aéroport Marrakech-Ménara.",
     breadcrumb: 'Location au Maroc',
     vehicles: { sort: 'asc' },
     sections: [
@@ -21,7 +21,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "La voiture vous est livrée sans frais à l'aéroport Mohammed V, à votre hôtel ou à l'adresse de votre choix dans Casablanca, 7j/7. Vous partez ensuite vers Rabat, vers le sud ou pour un long séjour en famille. Hors de Casablanca, deux cas sont prévus : Mohammedia, avec un léger supplément, et Marrakech ou l'aéroport Marrakech-Ménara, sur demande et à des conditions que l'équipe confirme sur WhatsApp. Notre page [location de voiture à Marrakech](route:livraison-marrakech) explique comment cela se passe. Pour une autre ville, posez la question avant de réserver.",
+            text: "La voiture vous est livrée sans frais à l'aéroport Mohammed V, à votre hôtel ou à l'adresse de votre choix dans Casablanca, 7j/7. Vous partez ensuite vers Rabat, vers le sud ou pour un long séjour en famille. Hors de Casablanca, deux cas sont prévus : Marrakech et l'aéroport Marrakech-Ménara, où la livraison est gratuite elle aussi, et Mohammedia, avec un léger supplément. Notre page [location de voiture à Marrakech](route:livraison-marrakech) explique comment cela se passe. Pour une autre ville, posez la question avant de réserver.",
           },
         ],
       },
@@ -136,7 +136,7 @@ const page: LocalizedPage = {
     faq: [
       {
         q: "Yourent a-t-elle des agences dans d'autres villes du Maroc ?",
-        a: "Non. Yourent est une agence de Casablanca : la voiture se récupère en ville ou à l'aéroport Mohammed V. Une livraison à Marrakech ou à l'aéroport Marrakech-Ménara est toutefois possible sur demande, à des conditions confirmées sur WhatsApp.",
+        a: "Non. Yourent est une agence de Casablanca : la voiture se récupère en ville ou à l'aéroport Mohammed V. La voiture peut toutefois vous être livrée gratuitement à Marrakech ou à l'aéroport Marrakech-Ménara.",
       },
       {
         q: 'Peut-on rendre la voiture à Marrakech, à Agadir ou dans une autre ville ?',
@@ -144,7 +144,7 @@ const page: LocalizedPage = {
       },
       {
         q: 'Où récupère-t-on la voiture, et la livraison est-elle payante ?',
-        a: "À l'aéroport Mohammed V, à votre hôtel ou à une autre adresse dans Casablanca. Dans ces trois cas, la livraison est gratuite et seule la location est facturée. À Mohammedia, un léger supplément s'applique ; à Marrakech, l'équipe confirme les conditions sur WhatsApp.",
+        a: "À l'aéroport Mohammed V, à votre hôtel ou à une autre adresse dans Casablanca. Dans ces trois cas, la livraison est gratuite et seule la location est facturée. Elle l'est aussi à Marrakech et à l'aéroport Marrakech-Ménara ; à Mohammedia, un léger supplément s'applique.",
       },
       {
         q: 'Combien coûte une location voiture au Maroc chez Yourent ?',

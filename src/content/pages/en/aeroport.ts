@@ -168,7 +168,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'Landing at Marrakech-Menara (RAK) rather than Casablanca? Yourent has no branch there, but the car can be delivered on request: see [car rental in Marrakech](route:livraison-marrakech). And if you are staying in town without flying in, the same free delivery applies at your hotel: start from our [car rental in Casablanca](/) page.',
+          text: 'Landing at Marrakech-Menara (RAK) rather than Casablanca? Yourent has no branch there, but delivery to Marrakech-Menara airport is free as well: see [car rental in Marrakech](route:livraison-marrakech). And if you are staying in town without flying in, the same free delivery applies at your hotel: start from our [car rental in Casablanca](/) page.',
         },
       ],
     },

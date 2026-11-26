@@ -17,7 +17,7 @@ const fr: Record<string, string> = {
 
   /* ── Footer ─────────────────────────────── */
   'footer.desc':
-    'Agence de location de voitures à Casablanca, Maroc. Citadines, berlines, SUV et voitures de luxe, livrés gratuitement à Casablanca et à l’aéroport Mohammed V. Livraison à Marrakech sur demande.',
+    'Agence de location de voitures à Casablanca, Maroc. Citadines, berlines, SUV et voitures de luxe, livrés gratuitement à Casablanca, à l’aéroport Mohammed V, à Marrakech et à l’aéroport Marrakech-Ménara.',
   'footer.heading.rentals': 'Location',
   'footer.heading.brands': 'Marques et flotte',
   'footer.heading.info': 'Infos pratiques',
@@ -168,7 +168,7 @@ const fr: Record<string, string> = {
     "Il faut avoir au moins 21 ans et présenter une pièce d’identité valide (CIN ou passeport), un permis de conduire de plus de 2 ans et un justificatif de domicile. Pour les touristes étrangers, le permis international est accepté.",
   'faq.q2': 'La livraison est-elle incluse, et où livrez-vous ?',
   'faq.a2':
-    "Oui, la livraison est gratuite dans tout Casablanca et à l’aéroport Mohammed V. Nous livrons aussi à Mohammedia, avec un léger supplément, et à Marrakech ou à l’aéroport Marrakech-Ménara sur demande : l’équipe confirme alors les conditions sur WhatsApp.",
+    "Oui, la livraison est gratuite dans tout Casablanca, à l’aéroport Mohammed V, à Marrakech et à l’aéroport Marrakech-Ménara. Nous livrons aussi à Mohammedia, avec un léger supplément.",
   'faq.q3': 'Quelle est la durée minimum de location ?',
   'faq.a3':
     "La durée minimum est de 5 jours : il n’y a pas de location à la journée ni au week-end. Au-delà de 10 jours, un tarif réduit s’applique automatiquement sur la plupart des modèles.",
@@ -336,7 +336,7 @@ const en: Record<string, string> = {
 
   /* ── Footer ─────────────────────────────── */
   'footer.desc':
-    'Car rental agency in Casablanca, Morocco. City cars, saloons, SUVs and luxury cars. Free delivery in Casablanca and at Mohammed V Airport, Marrakech on request.',
+    'Car rental agency in Casablanca, Morocco. City cars, saloons, SUVs and luxury cars. Free delivery in Casablanca, at Mohammed V Airport, in Marrakech and at Marrakech-Menara Airport.',
   'footer.heading.rentals': 'Rentals',
   'footer.heading.brands': 'Makes and fleet',
   'footer.heading.info': 'Practical info',
@@ -489,7 +489,7 @@ const en: Record<string, string> = {
     'You must be at least 21 years old. You also need a valid ID (CIN or passport), a driving licence held for more than 2 years and proof of address. For foreign tourists, an international driving permit is accepted.',
   'faq.q2': 'Is delivery included, and where do you deliver?',
   'faq.a2':
-    'Yes, delivery is free throughout Casablanca and at Mohammed V Airport. We also deliver to Mohammedia for a small additional fee, and to Marrakech or Marrakech-Menara airport on request: the team confirms the conditions and any surcharge on WhatsApp.',
+    'Yes, delivery is free throughout Casablanca, at Mohammed V Airport, in Marrakech and at Marrakech-Menara airport. We also deliver to Mohammedia for a small additional fee.',
   'faq.q3': 'What is the minimum rental duration?',
   'faq.a3':
     'The minimum rental is 5 days. From day 11, a lower rate applies automatically on most models, unless high season suspends it.',
@@ -657,7 +657,7 @@ const ar: Record<string, string> = {
 
   /* ── Footer ─────────────────────────────── */
   'footer.desc':
-    'وكالة كراء وتأجير السيارات في الدار البيضاء، المغرب. سيارات مدينة وسيدان وSUV وسيارات فاخرة، مع توصيل مجاني في الدار البيضاء وإلى مطار محمد الخامس، وتوصيل إلى مراكش عند الطلب.',
+    'وكالة كراء وتأجير السيارات في الدار البيضاء، المغرب. سيارات مدينة وسيدان وSUV وسيارات فاخرة، مع توصيل مجاني في الدار البيضاء وإلى مطار محمد الخامس، وفي مراكش وإلى مطار مراكش المنارة.',
   'footer.heading.rentals': 'الكراء',
   'footer.heading.brands': 'العلامات والأسطول',
   'footer.heading.info': 'معلومات عملية',
@@ -809,7 +809,7 @@ const ar: Record<string, string> = {
     'يجب أن يكون عمرك 21 سنة على الأقل. كما تحتاج إلى وثيقة هوية سارية (البطاقة الوطنية أو جواز السفر)، ورخصة سياقة مضى عليها أكثر من سنتين، وإثبات السكن. وبالنسبة إلى السياح الأجانب، تُقبل الرخصة الدولية.',
   'faq.q2': 'هل توصيل السيارة مشمول في السعر؟',
   'faq.a2':
-    'نعم، التوصيل مجاني في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس. كما نوصل إلى المحمدية مقابل مبلغ إضافي بسيط، وإلى مراكش أو مطار مراكش المنارة عند الطلب، بشروط يؤكدها الفريق على واتساب قبل الحجز.',
+    'نعم، التوصيل مجاني في جميع أنحاء الدار البيضاء وإلى مطار محمد الخامس، وكذلك في مراكش وإلى مطار مراكش المنارة. كما نوصل إلى المحمدية مقابل مبلغ إضافي بسيط.',
   'faq.q3': 'ما أقل مدة للكراء؟',
   'faq.a3':
     'أقل مدة هي 5 أيام. وابتداءً من اليوم الحادي عشر، يُطبَّق سعر مخفض تلقائيًا في معظم الطرازات، ما لم يعلّقه موسم الذروة.',

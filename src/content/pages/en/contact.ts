@@ -50,7 +50,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'We deliver free of charge across Casablanca and at the airport, every day. If you arrive by train at Casa Voyageurs station, send the team your meeting point on WhatsApp. If you arrive by plane, see [car rental at Casablanca airport](route:aeroport). For a delivery in Marrakech, possible on request, see [car rental in Marrakech](route:livraison-marrakech).',
+          text: 'We deliver free of charge across Casablanca and at the airport, every day. If you arrive by train at Casa Voyageurs station, send the team your meeting point on WhatsApp. If you arrive by plane, see [car rental at Casablanca airport](route:aeroport). Delivery is free in Marrakech and at Marrakech-Menara airport as well: see [car rental in Marrakech](route:livraison-marrakech).',
         },
       ],
     },
