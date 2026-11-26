@@ -146,7 +146,7 @@ const page: LocalizedPage = {
           },
           {
             type: 'p',
-            text: "Pour un déplacement professionnel ou un événement, voyez plutôt notre [location de voiture de luxe à Casablanca](route:luxe). Le tarif de chaque modèle figure ci-dessous.",
+            text: "Pour un déplacement professionnel ou un événement, voyez plutôt la page [voiture de luxe à l'aéroport de Casablanca](route:luxe-aeroport). Le tarif de chaque modèle figure ci-dessous.",
           },
         ],
       },

@@ -15,6 +15,9 @@ import locationVoitureAuMoisCasablanca from './location-voiture-au-mois-casablan
 import aeroportMarrakechMenaraVoitureLocation from './aeroport-marrakech-menara-voiture-location';
 import quelleVoitureLouerFamilleMre from './quelle-voiture-louer-famille-mre';
 import louerVoitureDeLuxeCasablancaConseils from './louer-voiture-de-luxe-casablanca-conseils';
+import porscheMacanOuRangeRoverEvoqueCasablanca from './porsche-macan-ou-range-rover-evoque-casablanca';
+import rangeRoverSportOuVolkswagenTouaregCasablanca from './range-rover-sport-ou-volkswagen-touareg-casablanca';
+import locationVoitureMariageCasablanca from './location-voiture-mariage-casablanca';
 
 /** Articles du blog, en français pour l'instant. */
 export const ARTICLES: Article[] = [
@@ -26,6 +29,9 @@ export const ARTICLES: Article[] = [
   louerVoitureMarocPermisEtranger,
   quelleVoitureLouerFamilleMre,
   louerVoitureDeLuxeCasablancaConseils,
+  porscheMacanOuRangeRoverEvoqueCasablanca,
+  rangeRoverSportOuVolkswagenTouaregCasablanca,
+  locationVoitureMariageCasablanca,
   aeroportMohammedVCentreVilleCasablanca,
   aeroportMarrakechMenaraVoitureLocation,
   peagesCasablancaMarrakechRabat,

@@ -16,7 +16,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The [Audi A3](/catalogue/audi-a3) is a compact saloon, petrol and automatic. It is the smaller and cheaper of the two, and it suits town driving. The [Audi Q3](/catalogue/audi-q3), on the other hand, is a compact diesel SUV with a higher seat and more boot space. It comes with an automatic or a manual gearbox depending on the car.',
+          text: 'The [Audi A3](/catalogue/audi-a3) is a compact saloon, petrol and automatic. It is the smaller and cheaper of the two, and it suits town driving. The [Audi Q3](/catalogue/audi-q3), on the other hand, is a compact SUV with a higher seat and more boot space. It comes in diesel or petrol, with an automatic or a manual gearbox, depending on the unit.',
         },
         {
           type: 'p',
@@ -32,7 +32,7 @@ const page: PageContent = {
           items: [
             '**Arriving at Mohammed V airport**: for one or two people with little luggage, the A3 is enough. For more suitcases, however, take the Q3. The car is delivered to the airport, as the [car rental Casablanca airport](route:aeroport) page explains.',
             '**A stay in Casablanca**: the A3 is easier to park in the centre, while the Q3 offers more space for leaving the city.',
-            '**Casablanca to Marrakech**: the diesel Q3 suits a long motorway drive, but the petrol A3 is fine for two people.',
+            '**Casablanca to Marrakech**: the Q3 suits a long motorway drive, and you can ask for a diesel unit if one is free on your dates. The petrol A3 is fine for two people.',
             '**A business meeting**: the A3 looks smart and discreet, without being showy.',
           ],
         },
@@ -57,7 +57,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Next to the A3, the [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) costs about the same and the [Mercedes CLA](/catalogue/mercedes-cla) is a premium step up. Next to the Q3, the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) is cheaper and the [Porsche Macan](/catalogue/porsche-macan) much sportier. For a full overview, see the [luxury car rental](route:luxe) page.',
+          text: 'Next to the A3, the [Volkswagen Golf 8](/catalogue/volkswagen-golf-8) costs about the same and the [Mercedes CLA](/catalogue/mercedes-cla) is a premium step up. Next to the Q3, the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) is cheaper and the [Porsche Macan](/catalogue/porsche-macan) much sportier. The A3 sits with the other saloons on the [sedan and saloon rental in Casablanca](route:berline) page, and the Q3 with the Macan and the Range Rovers on the [luxury SUV rental in Casablanca](route:suv-luxe) page. For a full overview, see the [luxury car rental](route:luxe) page.',
         },
       ],
     },
@@ -65,11 +65,11 @@ const page: PageContent = {
   faq: [
     {
       q: 'What is the difference between the Audi A3 and the Audi Q3?',
-      a: 'The A3 is a petrol compact saloon with an automatic gearbox. The Q3, however, is a compact diesel SUV, taller with a bigger boot, and it comes in automatic or manual.',
+      a: 'The A3 is a petrol compact saloon with an automatic gearbox. The Q3, however, is a compact SUV, taller with a bigger boot. It comes in diesel or petrol, automatic or manual, depending on the unit.',
     },
     {
       q: 'Can I choose a manual gearbox on an Audi?',
-      a: 'Only the Q3 comes with both gearboxes; the A3 is automatic only. State the gearbox you want in your request.',
+      a: 'Only the Q3 comes with both gearboxes; the A3 is automatic only. State the gearbox and the fuel you want in your request, and the team tells you which unit is free on your dates.',
     },
     {
       q: 'Can the Audi be delivered to the airport?',
@@ -80,7 +80,7 @@ const page: PageContent = {
       a: 'It depends on the Audi you choose and is paid at pick-up by cheque, in cash or by card imprint. It comes back to you when the car returns in good condition.',
     },
   ],
-  related: ['luxe', 'suv', 'volkswagen', 'automatique', 'tarifs'],
+  related: ['berline', 'suv-luxe', 'luxe', 'suv', 'volkswagen', 'automatique', 'tarifs'],
 };
 
 export default page;

@@ -115,7 +115,7 @@ const page: PageContent = {
             [
               'An automatic for town and motorway',
               '[Toyota Corolla](/catalogue/toyota-corolla) ({price:toyota-corolla} MAD/day), [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) ({price:volkswagen-t-roc} MAD/day)',
-              'A hybrid saloon and a compact petrol SUV, both automatic.',
+              'A hybrid saloon and a compact SUV, petrol or diesel depending on the unit. Both are automatic.',
             ],
             [
               'A family with suitcases',

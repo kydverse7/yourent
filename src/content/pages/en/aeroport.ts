@@ -145,7 +145,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'For a business trip or an event, look at the [luxury car rental](route:luxe) selection. The price of each model is listed below.',
+          text: 'For a business trip or an event, look at the [luxury car rental](route:luxe) selection: our [luxury car rental at Casablanca airport](route:luxe-aeroport) page explains how a Mercedes or a Range Rover is handed over when you land. The price of each model is listed below.',
         },
       ],
     },
@@ -212,7 +212,7 @@ const page: PageContent = {
       a: 'The return place is agreed with the team at confirmation. Mention it in your request so they can answer on WhatsApp before you travel.',
     },
   ],
-  related: ['tarifs', 'conditions', 'suv', 'automatique', 'europe', 'maroc', 'livraison-marrakech'],
+  related: ['tarifs', 'conditions', 'suv', 'automatique', 'luxe-aeroport', 'europe', 'maroc', 'livraison-marrakech'],
 };
 
 export default page;

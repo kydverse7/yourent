@@ -37,7 +37,7 @@ const page: PageContent = {
             '**On a budget**: the [Dacia Duster](/catalogue/dacia-duster), a manual diesel, is the most affordable SUV in the fleet and one of the most numerous.',
             '**Urban and compact**: the [Volkswagen T-Roc](/catalogue/volkswagen-t-roc) and the [Audi Q3](/catalogue/audi-q3), handy in town and on the motorway.',
             '**Family and long drives**: the [Kia Sorento](/catalogue/kia-sorento), the [Volkswagen Tiguan](/catalogue/volkswagen-tiguan) and the [Touareg](/catalogue/volkswagen-touareg), which are larger, diesel and automatic.',
-            '**Premium**: the [Range Rover Evoque](/catalogue/range-rover-evoque), the [Porsche Macan](/catalogue/porsche-macan) and the [Range Rover Sport](/catalogue/range-rover-sport), if you want prestige. See also the [luxury car rental](route:luxe) page.',
+            '**Premium**: the [Range Rover Evoque](/catalogue/range-rover-evoque), the [Porsche Macan](/catalogue/porsche-macan) and the [Range Rover Sport](/catalogue/range-rover-sport), if you want prestige. They are compared with the Touareg and the Audi Q3 on the [luxury SUV rental in Casablanca](route:suv-luxe) page.',
           ],
         },
         {
@@ -74,7 +74,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Most SUVs in the fleet run on diesel, which is more economical over long distances. The T-Roc and the Macan, however, are petrol. As for gearboxes, the Duster is manual, the other SUVs are automatic, and the Audi Q3 comes in both versions, confirmed when you book. The automatic models are grouped on the [automatic car rental](route:automatique) page.',
+          text: 'Most SUVs in the fleet run on diesel, which is more economical over long distances. The Macan, however, is petrol, and the T-Roc and the Audi Q3 come in diesel or petrol depending on the unit. As for gearboxes, the Duster is manual and the other SUVs are automatic, except the Audi Q3, which comes with either gearbox depending on the unit. State your preference in the request, and the team confirms it when you book. The automatic models are grouped on the [automatic car rental](route:automatique) page.',
         },
       ],
     },
@@ -124,7 +124,7 @@ const page: PageContent = {
       a: 'You rent an SUV for 5 days at least. For rentals over 10 days, the table on this page gives the rate for each SUV.',
     },
   ],
-  related: ['automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],
+  related: ['suv-luxe', 'automatique', 'luxe', 'tarifs', 'aeroport', 'longue-duree'],
 };
 
 export default page;

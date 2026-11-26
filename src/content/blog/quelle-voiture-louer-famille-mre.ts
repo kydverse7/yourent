@@ -8,7 +8,7 @@ const article: Article = {
   intro: `Pour une famille, la bonne voiture de location se choisit dans cet ordre : le nombre de passagers, le volume des valises, puis les kilomètres prévus. Le nombre de places figure sur la fiche de chaque modèle ; ensuite, ce sont le coffre, la boîte de vitesses et le carburant qui font la différence. Un SUV diesel comme le Dacia Duster ou le Kia Sorento convient à la plupart des séjours en famille, tandis qu'une berline hybride suffit à trois. Voici comment trancher, modèle par modèle.`,
   excerpt: `Passagers, valises, boîte de vitesses, carburant et durée du séjour : la méthode pour choisir une voiture de location en famille ou pour des vacances MRE, avec les modèles à comparer.`,
   datePublished: '2026-11-26',
-  dateModified: '2026-11-26',
+  dateModified: '2026-11-27',
   sections: [
     {
       h2: `Commencez par compter : passagers, valises, kilomètres`,
@@ -89,7 +89,7 @@ const article: Article = {
       blocks: [
         {
           type: 'p',
-          text: `Sur un mois de vacances, le carburant pèse dans le budget. Les SUV familiaux de la flotte, Duster, Tiguan, Sorento et Touareg, roulent au diesel. La Toyota Corolla est hybride, et le T-Roc fonctionne à l'essence.`,
+          text: `Sur un mois de vacances, le carburant pèse dans le budget. Les SUV familiaux de la flotte, Duster, Tiguan, Sorento et Touareg, roulent au diesel. La Toyota Corolla est hybride, et le T-Roc existe en essence ou en diesel selon l'exemplaire.`,
         },
         {
           type: 'p',

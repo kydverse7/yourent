@@ -59,7 +59,7 @@ const page: LocalizedPage = {
           },
           {
             type: "p",
-            text: "Pour comparer tous les SUV de la flotte, du Dacia Duster aux modèles premium, voyez notre [location de SUV à Casablanca](route:suv). Notre [location de voiture de luxe à Casablanca](route:luxe) réunit les Range Rover, les Mercedes et le Macan.",
+            text: "Pour comparer tous les SUV de la flotte, du Dacia Duster aux modèles premium, voyez notre [location de SUV à Casablanca](route:suv). Notre [location de voiture de luxe à Casablanca](route:luxe) réunit les Range Rover, les Mercedes et le Macan, et la page [location de SUV de luxe à Casablanca](route:suv-luxe) compare les cinq SUV haut de gamme. Vous hésitez avec le Touareg ? Lisez notre comparatif [Range Rover Sport ou Volkswagen Touareg](/blog/range-rover-sport-ou-volkswagen-touareg-casablanca).",
           },
         ],
       },

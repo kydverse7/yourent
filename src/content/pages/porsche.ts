@@ -62,7 +62,7 @@ const page: LocalizedPage = {
           { type: "pricing" },
           {
             type: "p",
-            text: "Pour voir toutes les voitures de prestige de l'agence, consultez notre [location de voiture de luxe à Casablanca](route:luxe). Si vous comparez d'abord les grands SUV, notre [location de Range Rover à Casablanca](route:range-rover) vous aidera.",
+            text: "Pour voir toutes les voitures de prestige de l'agence, consultez notre [location de voiture de luxe à Casablanca](route:luxe). Si vous comparez d'abord les grands SUV, notre [location de Range Rover à Casablanca](route:range-rover) vous aidera. Les cinq SUV haut de gamme sont comparés sur la page [location de SUV de luxe à Casablanca](route:suv-luxe), et notre comparatif [Porsche Macan ou Range Rover Evoque](/blog/porsche-macan-ou-range-rover-evoque-casablanca) départage ces deux modèles.",
           },
         ],
       },

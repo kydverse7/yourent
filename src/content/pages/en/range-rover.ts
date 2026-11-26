@@ -33,7 +33,7 @@ const page: PageContent = {
         },
         {
           type: 'p',
-          text: 'To compare with the rest of the fleet, from the Dacia Duster to the premium models, see the [SUV rental in Casablanca](route:suv) page.',
+          text: 'Both Range Rovers are set against the Macan, the Touareg and the Audi Q3 on the [luxury SUV rental in Casablanca](route:suv-luxe) page. To compare with the rest of the fleet, from the Dacia Duster upwards, see the [SUV rental in Casablanca](route:suv) page.',
         },
       ],
     },
@@ -60,7 +60,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'The daily rate runs from {minPrice} to {maxPrice} MAD depending on the model. It falls automatically after 10 days, except when high season suspends the reduction. Both Range Rovers come with comprehensive insurance, with an excess. The deposit, taken at pick-up, depends on the car; the table gives its minimum amount.',
+          text: 'The daily rate runs from {minPrice} to {maxPrice} MAD depending on the model. For rentals of more than 10 days, the table shows the rate that applies to each model. Both Range Rovers come with comprehensive insurance, with an excess. The deposit, taken at pick-up, depends on the car; the table gives its minimum amount.',
         },
         { type: 'pricing' },
       ],
@@ -88,7 +88,7 @@ const page: PageContent = {
       a: 'Yes, we bring it free of charge to your hotel or any Casablanca address, and to Mohammed V airport. Handovers run from 8 am to 10 pm, 7 days a week.',
     },
   ],
-  related: ['suv', 'luxe', 'mercedes', 'porsche', 'tarifs'],
+  related: ['suv-luxe', 'luxe', 'suv', 'mercedes', 'porsche', 'tarifs'],
 };
 
 export default page;

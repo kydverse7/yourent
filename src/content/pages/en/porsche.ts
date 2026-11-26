@@ -29,7 +29,7 @@ const page: PageContent = {
       blocks: [
         {
           type: 'p',
-          text: 'Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), the Macan is more dynamic to drive. The [Audi Q3](/catalogue/audi-q3) is of similar size but costs less: {price:audi-q3} MAD per day against {price:porsche-macan} MAD. If you mostly want space on a tighter budget, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) is a big SUV at {price:volkswagen-touareg} MAD.',
+          text: 'Next to the [Range Rover Evoque](/catalogue/range-rover-evoque), the Macan is more dynamic to drive. The [Audi Q3](/catalogue/audi-q3) is of similar size but costs less: {price:audi-q3} MAD per day against {price:porsche-macan} MAD. If you mostly want space on a tighter budget, the [Volkswagen Touareg](/catalogue/volkswagen-touareg) is a big SUV at {price:volkswagen-touareg} MAD. The [luxury SUV rental in Casablanca](route:suv-luxe) page puts these premium SUVs side by side.',
         },
       ],
     },
@@ -88,7 +88,7 @@ const page: PageContent = {
       a: 'Five days, as for every car in the fleet: there is no one-day or weekend rental, even for an event. The price table above shows the rate that applies after 10 days.',
     },
   ],
-  related: ['luxe', 'range-rover', 'mercedes', 'suv', 'aeroport'],
+  related: ['suv-luxe', 'luxe', 'range-rover', 'mercedes', 'suv', 'aeroport'],
 };
 
 export default page;
